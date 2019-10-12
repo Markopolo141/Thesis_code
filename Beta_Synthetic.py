@@ -22,17 +22,24 @@ d=1.0 #data width is one for beta distribution
 print "Computing Beta data Experiment"
 print " for sample budget per strata of [10,50,100,150] ---"
 
+
+Hoeffding_union_method =	Adapto_sampling(Hoeffding_selection)
+Audibert_union_method =		Adapto_sampling(Audibert_selection)
+Maurer_union_method =		Adapto_sampling(Maurer_selection)
+Burgess_union_method =		Adapto_sampling(Burgess_selection)
+Random_union_method =		Adapto_sampling(Random_selection)
+
 #open csv file
 with open("Beta_Synthetic.csv","w") as f:
 
 	#for each sample budget
-	for mperN in [10,50,100,150]:
+	for mperN in [10,50]:#,100,150]:
 		print mperN
 
 		#data holding for the errors
-		sampling_errors = [[],[],[],[],[],[],[]]
+		sampling_errors = [list() for i in range(12)] #[[],[],[],[],[],[],[]]
 		
-		iterator = range(5000)
+		iterator = range(1000)
 		if tqdm_enabled:
 			iterator = tqdm(iterator)
 		for trial in iterator: #iterate a large number of times
@@ -85,6 +92,20 @@ with open("Beta_Synthetic.csv","w") as f:
 			cvals = copy(vals)
 			sampling_errors[6].append(abs(mean-super_castro_small(cvals,m)))
 
+
+			cvals = copy(vals)
+			sampling_errors[7].append(abs(mean-Hoeffding_union_method(cvals,m,d)))
+			cvals = copy(vals)
+			sampling_errors[8].append(abs(mean-Audibert_union_method(cvals,m,d)))
+			cvals = copy(vals)
+			sampling_errors[9].append(abs(mean-Maurer_union_method(cvals,m,d)))
+			cvals = copy(vals)
+			sampling_errors[10].append(abs(mean-Burgess_union_method(cvals,m,d)))
+			cvals = copy(vals)
+			sampling_errors[11].append(abs(mean-Random_union_method(cvals,m,d)))
+
+
+
 		#sorting the sampling errors for quartile reporting
 		sampling_errors = [sorted(s) for s in sampling_errors]
 
@@ -92,8 +113,10 @@ with open("Beta_Synthetic.csv","w") as f:
 		f.write("{} sample budget per strata\n".format(mperN))
 		f.write(",SEBM*,SEBM,SEBM-W,simple,simple-w,Ney,Ney-W\n")
 		for p in [0.09,0.25,0.5,0.75,0.91]:
-			pp = [p]+[s[int(len(s)*p)] for s in sampling_errors]
-			f.write("{} percentile,{},{},{},{},{},{},{}\n".format(*pp))
+			pp = [s[int(len(s)*p)] for s in sampling_errors]
+			f.write("{} percentile,".format(p))
+			f.write((",".join(["{}" for ppp in pp])).format(*pp))
+			f.write("\n")
 
 print "Finished Experiment"
 

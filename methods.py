@@ -4,7 +4,7 @@
 # The Implementation of all the sampling methods used for the synthetic data experiments
 # and some utility functions
 
-from random import shuffle,choice
+from random import shuffle,choice,randint
 from math import floor,factorial,log,sqrt
 
 '''given an array of numbers a, scale thoes numbers to closest integers such as to sum to integer v'''
@@ -271,7 +271,7 @@ def burgess_ideal_small(vals,m,d):
 
 
 '''
-The SEBM method with replacement:
+The SEBM method without replacement:
 calculates the variance of the strata, and then iteratively allocates the budget to iteratively minimise SEBB
 '''
 def burgess(vals,m,d,r=0.5):
@@ -328,7 +328,7 @@ def burgess(vals,m,d,r=0.5):
 
 
 '''
-The SEBM method without replacement:
+The SEBM method with replacement:
 calculates the variance of the strata, and then iteratively allocates the budget to iteratively minimise SEBB
 '''
 def burgess_small(vals,m,d,r=0.5):
@@ -408,34 +408,113 @@ def Random_selection(m,v,n,t):
 	return randint(0,len(m)-1)
 
 
-def adaptable_bound_small(N,ni,Ni,var,d,r):
-	sumN = sum(Ni)
-	onN = 0
-	max1 = 0
-	var1 = 0
-	d1 = 0
-	log6r = log(6/r)
-	log3r = log(3/r)
-	log2r = log(2/r)
-	logN = log(N)
-	log2 = log(2)
-	d2 = d*d;
-	for i in range(N):
-		tau = Ni[i]*1.0/sumN
-		OS = OmegaSmall(ni[i],Ni[i])
-		PS = PsiSmall(ni[i],Ni[i])
-		onN += PS*OS*tau**2
-		max1 = max(max1,PS*PS*tau**2)
-		var1 += PS*((ni[i]-1)*var[i]*1.0/ni[i])*tau**2
-		d1 += OS*tau**2
-	A = [0]
-	A[0] = (d2*4.0/(17))*log6r*d1 + log6r*(sqrt(2*var1 + (log6r+logN)*d2*onN/log2 + log3r*d2*max1) + sqrt(log3r*d2*max1))**2
-	return sqrt(min(A))
-
 '''
 blah
 '''
-def Maurer_and_pontil_sampling(vals,m,d,r=0.5):
+def Adapto_sampling(sample_method):
+	def inner(vals,m,d,r=0.5):
+		Ni = [len(v) for v in vals]
+		N = len(Ni)
+		ni = [0 for i in range(N)]
+		s = [0.0 for i in range(N)]
+		s2 = [0.0 for i in range(N)]
+		var = [0.0 for i in range(N)]
+		samples = 0
+		# seed with minimum initial two samples (if possible) for all strata
+		for i in range(N): #strata i
+			for p in range(2):
+				v = choice(vals[i])
+				s[i]+=v
+				s2[i]+=v*v
+				ni[i]+=1
+				if ni[i]>1:
+					var[i] = (s2[i] - s[i]**2*1.0/ni[i])/(ni[i]-1)
+				samples+=1
+		while samples < m:
+			var = [abs(vv) for vv in var]
+			maxi = sample_method(s,var,ni,r)
+			#take the best sample
+			v = choice(vals[maxi])
+			s[maxi]+=v
+			s2[maxi]+=v*v
+			ni[maxi]+=1
+			var[maxi] = (s2[maxi] - s[maxi]**2*1.0/ni[maxi])/(ni[maxi]-1)
+			samples += 1
+		#return the stratafied average from the samples
+		ss = 0.0
+		for i in range(N):
+			ss += s[i]*Ni[i]/ni[i]
+		ss /= sum(Ni)
+		return ss
+	return inner
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+Computes the altered SEBB for sampling without replacement:
+N = integer, the number of strata
+ni = array of integers, how much each strata is allready sampled
+Ni = array of integers, the size of each strata
+var = array of floats, the sample variance of each strata as sampled
+d = float, the width of the population datas
+r = float, the confidence level of the bound
+'''
+#OmegaBig = lambda n,N: sum([1.0/(k**2) for k in range(n,N)])
+#PsiBig = lambda n,N: N*sum([1.0/(k**2*(k+1)) for k in range(n,N)])
+OmegaBig = lambda n,N: (n+1)*(1-n*1.0/N)*1.0/(n**2)
+PsiBig = lambda n,N: (N+1.0-n)/(n**2)
+OmegaSmall = lambda n,N: 1.0/n
+PsiSmall = lambda n,N: 1.0/n
+def altered_burgess_bound(N,ni,Ni,var,d,r):
+	sumN = sum(Ni)
+	onN = [0 for i in range(2)]
+	max1 = [0 for i in range(2)]
+	var1 = [0 for i in range(2)]
+	d1 = [0 for i in range(2)]
+	log6r = log(6/r)
+	log3r = log(3/r)
+	log2r = log(2/r)
+	log6Nr = log(6*N/r)
+	d2 = d*d;
+	for i in range(N):
+		tau = Ni[i]*1.0/sumN
+		OB = OmegaBig(ni[i],Ni[i])
+		OS = OmegaSmall(ni[i],Ni[i])
+		PB = PsiBig(ni[i],Ni[i])
+		PS = PsiSmall(ni[i],Ni[i])    #TODO!!
+		onN[0] += PB*min(OB,OS)*tau**2
+		onN[1] += PS*min(OB,OS)*tau**2
+		max1[0] = max(max1[0],PB*min(PB,PS)*tau**2)
+		max1[1] = max(max1[1],PS*min(PB,PS)*tau**2)
+		var1[0] += PB*((ni[i]-1)*var[i]*1.0/ni[i])*tau**2
+		var1[1] += PS*((ni[i]-1)*var[i]*1.0/ni[i])*tau**2
+		d1[0] += OB*tau**2
+		d1[1] += OS*tau**2
+	A = [0,0]
+	A[0] = (d2*4.0/(17))*log6r*d1[0] + log6r*(sqrt(2*var1[0] + log6Nr*d2*onN[0] + log3r*d2*max1[0]) + sqrt(log3r*d2*max1[0]))**2
+	A[1] = (d2*4.0/(17))*log6r*d1[1] + log6r*(sqrt(2*var1[1] + log6Nr*d2*onN[1] + log3r*d2*max1[1]) + sqrt(log3r*d2*max1[1]))**2
+	return sqrt(min(A))
+
+
+
+'''
+The SEBM method without replacement:
+calculates the variance of the strata, and then iteratively allocates the budget to iteratively minimise SEBB
+'''
+def burgess(vals,m,d,r=0.5):
 	Ni = [len(v) for v in vals]
 	N = len(Ni)
 	ni = [0 for i in range(N)]
@@ -446,22 +525,26 @@ def Maurer_and_pontil_sampling(vals,m,d,r=0.5):
 	# seed with minimum initial two samples (if possible) for all strata
 	for i in range(N): #strata i
 		for p in range(2):
-			v = choice(vals[i])
-			s[i]+=v
-			s2[i]+=v*v
-			ni[i]+=1
-			if ni[i]>1:
-				var[i] = (s2[i] - s[i]**2*1.0/ni[i])/(ni[i]-1)
-			samples+=1
+			if ni[i]<Ni[i] or Ni[i]==-1:
+				v = vals[i].pop()
+				s[i]+=v
+				s2[i]+=v*v
+				ni[i]+=1
+				if ni[i]>1:
+					var[i] = (s2[i] - s[i]**2*1.0/ni[i])/(ni[i]-1)
+				samples+=1
 	advantage = [0.0 for i in range(N)]
 	while samples < m:
 		#calculate the bound as it exists:
-		bound = burgess_bound_small(N,ni,Ni,var,d,r)
+		bound = altered_burgess_bound(N,ni,Ni,var,d,r)
 		#calculate the advantages possible
 		for i in range(N):
-			ni[i]+=1
-			advantage[i] = bound-burgess_bound_small(N,ni,Ni,var,d,r)
-			ni[i]-=1
+			if ni[i]<Ni[i] or Ni[i]==-1:
+				ni[i]+=1
+				advantage[i] = bound-altered_burgess_bound(N,ni,Ni,var,d,r)
+				ni[i]-=1
+			else:
+				advantage[i]=-float("inf")
 		#detect the sample that maximises advantage
 		maxi=0
 		maxadvantage=-float("inf")
@@ -470,7 +553,7 @@ def Maurer_and_pontil_sampling(vals,m,d,r=0.5):
 				maxi = i
 				maxadvantage = advantage[i]
 		#take the best sample
-		v = choice(vals[maxi])
+		v = vals[maxi].pop()
 		s[maxi]+=v
 		s2[maxi]+=v*v
 		ni[maxi]+=1
@@ -482,10 +565,5 @@ def Maurer_and_pontil_sampling(vals,m,d,r=0.5):
 		ss += s[i]*Ni[i]/ni[i]
 	ss /= sum(Ni)
 	return ss
-
-
-
-
-
 
 
