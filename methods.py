@@ -33,7 +33,7 @@ def scale_array(a,v):
 SIMPLE sampling method - without replacement
 given the stratified population data values, jumbles them together and takes the average of the first m
 '''
-def simple(vals,m):
+def simple(vals,m,d):
 	vals = sum(vals,[])
 	shuffle(vals)
 	return sum(vals[0:m])*1.0/m
@@ -43,7 +43,7 @@ def simple(vals,m):
 SIMPLE sampling method - with replacement
 given the stratified population data values, jumbles them together and takes the average of m of them chosen randomly with replacement
 '''
-def simple_small(vals,m):
+def simple_small(vals,m,d):
 	vals = sum(vals,[])
 	return sum([choice(vals) for i in range(m)])*1.0/m
 
@@ -53,7 +53,7 @@ NEYMAN sampling method - with replacement
 given the stratified data, computes the variance of the strata, and allocates samples per strata (above atleast 1 sample) according to the variance
 computes the mean by sampling with replacement of thoes strata per thoes allocations
 '''
-def super_castro_small(vals,m):
+def super_castro_small(vals,m,d):
 	lengths = [len(v) for v in vals]
 	sumN = sum([len(v) for v in vals])
 	meanvals = [sum(vals[i])*1.0/len(vals[i]) for i in range(len(vals))]
@@ -71,7 +71,7 @@ given the stratified data, computes the variance of the strata, and tries to all
 if the any strata would be oversampled, it clips the samples of that strata to its maximum and reallocates remaining samplings among the remainder
 computes the mean by sampling without replacement of thoes strata per thoes allocations
 '''
-def super_castro(vals,m):
+def super_castro(vals,m,d):
 	lengths = [len(v) for v in vals]
 	sumN = sum([len(v) for v in vals])
 	meanvals = [sum(vals[i])*1.0/len(vals[i]) for i in range(len(vals))]
@@ -382,15 +382,21 @@ def burgess_small(vals,m,d,r=0.5):
 
 
 def Hoeffding_selection(m,v,n,t):
-	vector = [m[i]+sqrt(log(1.0/t)/(2*n[i])) for i in range(len(m))]
+	vector = [
+		sqrt(log(1.0/t)/(2*n[i]))
+		 - sqrt(log(1.0/t)/(2*(n[i]+1))) for i in range(len(m))]
 	return vector.index(max(vector))
 
 def Audibert_selection(m,v,n,t):
-	vector = [m[i] + sqrt(v[i]*log(3.0/t)/(2*n[i])) + 3*log(3.0/t)/(2*n[i]) for i in range(len(m))]
+	vector = [
+		sqrt(v[i]*log(3.0/t)/(2*n[i])) + 3*log(3.0/t)/(2*n[i])
+		-(sqrt(v[i]*log(3.0/t)/(2*(n[i]+1))) + 3*log(3.0/t)/(2*(n[i]+1))) for i in range(len(m))]
 	return vector.index(max(vector))
 
 def Maurer_selection(m,v,n,t):
-	vector = [m[i] + sqrt(2*v[i]*log(2.0/t)/(n[i])) + 7*log(2.0/t)/(3*(n[i]-1)) for i in range(len(m))]
+	vector = [
+		sqrt(2*v[i]*log(2.0/t)/(n[i])) + 7*log(2.0/t)/(3*(n[i]-1))
+		-(sqrt(2*v[i]*log(2.0/t)/(n[i]+1)) + 7*log(2.0/t)/(3*(n[i]))) for i in range(len(m))]
 	return vector.index(max(vector))
 
 def Burgess_selection(m,v,n,t):
@@ -398,10 +404,16 @@ def Burgess_selection(m,v,n,t):
 	vector = []
 	for i in range(len(m)):
 		a = 1.0
-		if n[i]*(1-v[i])>1:
-			a = min(a, m[i] + (1.0/sqrt(n[i]))*((3.0/5)*sqrt(min(1.0,v[i]+25.0/n[i]))+(1.0/log(n[i]*(1-v[i])))**4))
-		a = min(a, m[i]+sqrt(2*log(1.0/t)/n[i]))
+		#if n[i]*(1-v[i])>1:
+		a = min(a, (1.0/sqrt(n[i]))*((3.0/5)*sqrt(min(1.0,v[i]+25.0/n[i]))+(1.0/log(max(1.000001,n[i]*(1-v[i]))))**4))
+		a = min(a, sqrt(2*log(1.0/t)/n[i]))
 		vector.append(a)
+	for i in range(len(m)):
+		a = 1.0
+		#if (n[i]+1)*(1-v[i])>1:
+		a = min(a, (1.0/sqrt(n[i]+1))*((3.0/5)*sqrt(min(1.0,v[i]+25.0/(n[i]+1)))+(1.0/log(max(1.000001,(n[i]+1)*(1-v[i]))))**4))
+		a = min(a, sqrt(2*log(1.0/t)/(n[i]+1)))
+		vector[i] -= a
 	return vector.index(max(vector))
 
 def Random_selection(m,v,n,t):

@@ -29,17 +29,39 @@ Maurer_union_method =		Adapto_sampling(Maurer_selection)
 Burgess_union_method =		Adapto_sampling(Burgess_selection)
 Random_union_method =		Adapto_sampling(Random_selection)
 
+
+
+
+methods_list = [
+("SEBM*",burgess_ideal),
+("SEBM",burgess),
+("Ney",super_castro),
+("Simple",simple),
+("SEBM**",burgess_ideal_small),
+("SEBM-W",burgess_small),
+("Ney-W",super_castro_small),
+("Hoeffding",Hoeffding_union_method),
+("Audibert",Audibert_union_method),
+("Maurer",Maurer_union_method),
+("Burgess",Burgess_union_method),
+("Random",Random_union_method),
+("Simple-W",simple_small)
+]
+
+methods_keys = [a[0] for a in methods_list]
+methods_list = {a:b for a,b in methods_list}
+
 #open csv file
 with open("Beta_Synthetic.csv","w") as f:
 
 	#for each sample budget
-	for mperN in [10,50]:#,100,150]:
+	for mperN in [10,50,100,150]:
 		print mperN
 
 		#data holding for the errors
-		sampling_errors = [list() for i in range(12)] #[[],[],[],[],[],[],[]]
+		sampling_errors = [list() for i in range(len(methods_list.keys()))] #[[],[],[],[],[],[],[]]
 		
-		iterator = range(1000)
+		iterator = range(5000)
 		if tqdm_enabled:
 			iterator = tqdm(iterator)
 		for trial in iterator: #iterate a large number of times
@@ -64,45 +86,9 @@ with open("Beta_Synthetic.csv","w") as f:
 			collected_vals = sum(vals,[])
 			mean = sum(collected_vals)*1.0/len(collected_vals)
 
-			#calculate error in using SEBM* method
-			cvals = copy(vals)
-			sampling_errors[0].append(abs(mean-burgess_ideal(cvals,m,d)))
-
-			#calculate error in using SEBM method
-			cvals = copy(vals)
-			sampling_errors[1].append(abs(mean-burgess(cvals,m,d)))
-
-			#calculate error in using SEBM method with replacement
-			cvals = copy(vals)
-			sampling_errors[2].append(abs(mean-burgess_small(cvals,m,d)))
-
-			#calculate error in using simple sampling method without replacement
-			cvals = copy(vals)
-			sampling_errors[3].append(abs(mean-simple(cvals,m)))
-
-			#calculate error in using simple sampling method with replacement
-			cvals = copy(vals)
-			sampling_errors[4].append(abs(mean-simple_small(cvals,m)))
-
-			#calculate error in using Neyman sampling method with replacement
-			cvals = copy(vals)
-			sampling_errors[5].append(abs(mean-super_castro(cvals,m)))
-
-			#calculate error in using Neyman sampling method without replacement
-			cvals = copy(vals)
-			sampling_errors[6].append(abs(mean-super_castro_small(cvals,m)))
-
-
-			cvals = copy(vals)
-			sampling_errors[7].append(abs(mean-Hoeffding_union_method(cvals,m,d)))
-			cvals = copy(vals)
-			sampling_errors[8].append(abs(mean-Audibert_union_method(cvals,m,d)))
-			cvals = copy(vals)
-			sampling_errors[9].append(abs(mean-Maurer_union_method(cvals,m,d)))
-			cvals = copy(vals)
-			sampling_errors[10].append(abs(mean-Burgess_union_method(cvals,m,d)))
-			cvals = copy(vals)
-			sampling_errors[11].append(abs(mean-Random_union_method(cvals,m,d)))
+			for ii,k in enumerate(methods_keys):
+				cvals = copy(vals)
+				sampling_errors[ii].append(abs(mean-methods_list[k](cvals,m,d)))
 
 
 
@@ -111,7 +97,7 @@ with open("Beta_Synthetic.csv","w") as f:
 
 		#write csv entry, using rough quartile reporting
 		f.write("{} sample budget per strata\n".format(mperN))
-		f.write(",SEBM*,SEBM,SEBM-W,simple,simple-w,Ney,Ney-W\n")
+		f.write(",{}\n".format(",".join(methods_keys)))
 		for p in [0.09,0.25,0.5,0.75,0.91]:
 			pp = [s[int(len(s)*p)] for s in sampling_errors]
 			f.write("{} percentile,".format(p))
