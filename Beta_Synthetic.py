@@ -37,6 +37,7 @@ methods_list = [
 ("SEBM",burgess),
 ("Ney",super_castro),
 ("Simple",simple),
+("SECM",altered_burgess_small),
 ("SEBM**",burgess_ideal_small),
 ("SEBM-W",burgess_small),
 ("Ney-W",super_castro_small),

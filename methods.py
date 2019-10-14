@@ -483,8 +483,9 @@ def Adapto_sampling(sample_method):
 
 
 
+
 '''
-Computes the altered SEBB for sampling without replacement:
+Computes the SECB for sampling with replacement:
 N = integer, the number of strata
 ni = array of integers, how much each strata is allready sampled
 Ni = array of integers, the size of each strata
@@ -492,41 +493,23 @@ var = array of floats, the sample variance of each strata as sampled
 d = float, the width of the population datas
 r = float, the confidence level of the bound
 '''
-#OmegaBig = lambda n,N: sum([1.0/(k**2) for k in range(n,N)])
-#PsiBig = lambda n,N: N*sum([1.0/(k**2*(k+1)) for k in range(n,N)])
-OmegaBig = lambda n,N: (n+1)*(1-n*1.0/N)*1.0/(n**2)
-PsiBig = lambda n,N: (N+1.0-n)/(n**2)
-OmegaSmall = lambda n,N: 1.0/n
-PsiSmall = lambda n,N: 1.0/n
-def altered_burgess_bound(N,ni,Ni,var,d,r):
+def altered_burgess_bound_small(N,ni,Ni,var,d,r):
 	sumN = sum(Ni)
-	onN = [0 for i in range(2)]
-	max1 = [0 for i in range(2)]
-	var1 = [0 for i in range(2)]
-	d1 = [0 for i in range(2)]
-	log6r = log(6/r)
-	log3r = log(3/r)
-	log2r = log(2/r)
-	log6Nr = log(6*N/r)
+	onN = 0
+	max1 = 0
+	var1 = 0
+	d1 = 0
+	log6Nr = log(N*6.0/r)/2
+	log3r = log(3.0/r)/2
 	d2 = d*d;
 	for i in range(N):
 		tau = Ni[i]*1.0/sumN
-		OB = OmegaBig(ni[i],Ni[i])
 		OS = OmegaSmall(ni[i],Ni[i])
-		PB = PsiBig(ni[i],Ni[i])
-		PS = PsiSmall(ni[i],Ni[i])    #TODO!!
-		onN[0] += PB*min(OB,OS)*tau**2
-		onN[1] += PS*min(OB,OS)*tau**2
-		max1[0] = max(max1[0],PB*min(PB,PS)*tau**2)
-		max1[1] = max(max1[1],PS*min(PB,PS)*tau**2)
-		var1[0] += PB*((ni[i]-1)*var[i]*1.0/ni[i])*tau**2
-		var1[1] += PS*((ni[i]-1)*var[i]*1.0/ni[i])*tau**2
-		d1[0] += OB*tau**2
-		d1[1] += OS*tau**2
-	A = [0,0]
-	A[0] = (d2*4.0/(17))*log6r*d1[0] + log6r*(sqrt(2*var1[0] + log6Nr*d2*onN[0] + log3r*d2*max1[0]) + sqrt(log3r*d2*max1[0]))**2
-	A[1] = (d2*4.0/(17))*log6r*d1[1] + log6r*(sqrt(2*var1[1] + log6Nr*d2*onN[1] + log3r*d2*max1[1]) + sqrt(log3r*d2*max1[1]))**2
-	return sqrt(min(A))
+		PS = PsiSmall(ni[i],Ni[i])
+		onN += PS*OS*tau**2
+		max1 = max(max1,PS*PS*tau**2)
+		var1 += PS*((ni[i]-1)*var[i]*1.0/ni[i])*tau**2
+	return sqrt(3.0/r)*(sqrt(var1 + log6Nr*d2*onN + log3r*d2*max1) + sqrt(log3r*d2*max1))
 
 
 
@@ -534,7 +517,7 @@ def altered_burgess_bound(N,ni,Ni,var,d,r):
 The SEBM method without replacement:
 calculates the variance of the strata, and then iteratively allocates the budget to iteratively minimise SEBB
 '''
-def burgess(vals,m,d,r=0.5):
+def altered_burgess_small(vals,m,d,r=0.5):
 	Ni = [len(v) for v in vals]
 	N = len(Ni)
 	ni = [0 for i in range(N)]
@@ -556,12 +539,12 @@ def burgess(vals,m,d,r=0.5):
 	advantage = [0.0 for i in range(N)]
 	while samples < m:
 		#calculate the bound as it exists:
-		bound = altered_burgess_bound(N,ni,Ni,var,d,r)
+		bound = altered_burgess_bound_small(N,ni,Ni,var,d,r)
 		#calculate the advantages possible
 		for i in range(N):
 			if ni[i]<Ni[i] or Ni[i]==-1:
 				ni[i]+=1
-				advantage[i] = bound-altered_burgess_bound(N,ni,Ni,var,d,r)
+				advantage[i] = bound-altered_burgess_bound_small(N,ni,Ni,var,d,r)
 				ni[i]-=1
 			else:
 				advantage[i]=-float("inf")
