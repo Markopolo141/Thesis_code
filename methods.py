@@ -381,25 +381,32 @@ def burgess_small(vals,m,d,r=0.5):
 
 
 
-def Hoeffding_selection(m,v,n,t):
+def Hoeffding_selection(m,v,n,t,Ni):
+	SNi = sum(Ni)
 	vector = [
 		sqrt(log(1.0/t)/(2*n[i]))
 		 - sqrt(log(1.0/t)/(2*(n[i]+1))) for i in range(len(m))]
+	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return vector.index(max(vector))
 
-def Audibert_selection(m,v,n,t):
+def Audibert_selection(m,v,n,t,Ni):
+	SNi = sum(Ni)
 	vector = [
 		sqrt(v[i]*log(3.0/t)/(2*n[i])) + 3*log(3.0/t)/(2*n[i])
 		-(sqrt(v[i]*log(3.0/t)/(2*(n[i]+1))) + 3*log(3.0/t)/(2*(n[i]+1))) for i in range(len(m))]
+	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return vector.index(max(vector))
 
-def Maurer_selection(m,v,n,t):
+def Maurer_selection(m,v,n,t,Ni):
+	SNi = sum(Ni)
 	vector = [
 		sqrt(2*v[i]*log(2.0/t)/(n[i])) + 7*log(2.0/t)/(3*(n[i]-1))
 		-(sqrt(2*v[i]*log(2.0/t)/(n[i]+1)) + 7*log(2.0/t)/(3*(n[i]))) for i in range(len(m))]
+	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return vector.index(max(vector))
 
-def Burgess_selection(m,v,n,t):
+def Burgess_selection(m,v,n,t,Ni):
+	SNi = sum(Ni)
 	v = [v[i]*n[i]*1.0/(n[i]-1) for i in range(len(m))]
 	vector = []
 	for i in range(len(m)):
@@ -414,9 +421,10 @@ def Burgess_selection(m,v,n,t):
 		a = min(a, (1.0/sqrt(n[i]+1))*((3.0/5)*sqrt(min(1.0,v[i]+25.0/(n[i]+1)))+(1.0/log(max(1.000001,(n[i]+1)*(1-v[i]))))**4))
 		a = min(a, sqrt(2*log(1.0/t)/(n[i]+1)))
 		vector[i] -= a
+	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return vector.index(max(vector))
 
-def Random_selection(m,v,n,t):
+def Random_selection(m,v,n,t,Ni):
 	return randint(0,len(m)-1)
 
 
@@ -444,7 +452,7 @@ def Adapto_sampling(sample_method):
 				samples+=1
 		while samples < m:
 			var = [abs(vv) for vv in var]
-			maxi = sample_method(s,var,ni,r)
+			maxi = sample_method(s,var,ni,r,Ni)
 			#take the best sample
 			v = choice(vals[maxi])
 			s[maxi]+=v

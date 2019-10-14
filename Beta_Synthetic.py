@@ -55,13 +55,13 @@ methods_list = {a:b for a,b in methods_list}
 with open("Beta_Synthetic.csv","w") as f:
 
 	#for each sample budget
-	for mperN in [10,50,100,150]:
+	for mperN in [10,50]:#,100,150]:
 		print mperN
 
 		#data holding for the errors
 		sampling_errors = [list() for i in range(len(methods_list.keys()))] #[[],[],[],[],[],[],[]]
 		
-		iterator = range(5000)
+		iterator = range(100)
 		if tqdm_enabled:
 			iterator = tqdm(iterator)
 		for trial in iterator: #iterate a large number of times
