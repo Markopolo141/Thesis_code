@@ -1,0 +1,306 @@
+\section{Related Work}
+\label{cha:solutions}
+At the begging of each chapter, please introduce the motivation and high-level
+picture of the chapter. You also have to introduce sections in the
+chapter. \\
+
+
+\subsection{VCG}
+
+One of the elements of an electricity system is the bidding, and there is no loss for different strategies under these systems.
+and in the context of stragegic bidding the system will fall into a less than optimal situation.
+and it may beg the question as to what state the system under manipulation will fall into, and if potentially we could design the best possible lowest-common denominator system from the start.
+
+one avenue of investigation that takes this approach to analysing the worst possible case under manipulation is called `Mechanism Design'.
+which famously won some people the nobel prize.
+
+particularly mechanim design broadly analyses the situation between multiple parties where each party has different preferences over the possible outcomes, and reported preferences over the outcomes.
+mechanism design then poses the question what systems can be put inplace to ensure the best (considered broadly and/or variously) outcome in the context of stragegic reporting.
+
+one of the primary contexts into which Mechanism Design has been historically considered is in the context of voting. -- is it possible to strategically vote, and by misrepresenting your preferences gain a better outcome for yourself?
+
+And is it possible to design an appealing system where the answer to this question is invariably `no'.
+
+There are many famous theorems (many of them strongly Negative - arrow and satherswaite) that apply broadly to these kinds of questions.
+
+however more particularly than the voting context, Mechanism design also oftend covers situations where an outcome is implemented in the context of transferrable utility (ie. money), and where outcomes are reported by their utility - than by transitive preference.
+In this situation the potential outcomes discussed involve not only the utility of the outcome to each player but usually in addition to the utility transferred/taken from him/her.
+
+$$insert equation$$
+
+this condition is often referred to as Linearity (CHECK).
+
+Among all the possible mechanisms that allocate outcomes and transferrs between parties, a historic mechanism called VCG is most famous.
+
+
+\begin{itemize}
+    \item let $I$ be the set of agents participating
+    \item let $n=|I|$ be the number of agents
+    \item let $O$ be the set of possible outcomes
+    \item let $v_i(o)$ denote the \textit{true} value to $i$ of outcome $o\in O$
+    \item let $\hat{v}_i(o)$ denote the \textit{reported} value to $i$ of outcome $o\in O$
+    \item let $o^*$ denote the socially optimal outcome, according to reported evaluations, ie $$o^*=\argmax_{o\in O}\sum_{i\in I}\hat{v}_i(o)$$
+    \item let $o^*_{-i}$ denote the outcome that maximises payoff amoung agents other than $i$ according to reports, ie, $$o^*_{-i}=\argmax_{o\in O}\sum_{i\in I\setminus\{i\}}\hat{v}_i(o)$$
+\end{itemize}
+
+A groves mechanism chooses an outcome $o^*$ and defines a transfer $T_i$ to each agent $$T_i=\sum_{j\in I\setminus\{i\}}\hat{v}_j(o^*) - C_{-i}$$
+where $C_{-i}$ is any value that is independent of $i$'s reported preferences.
+
+VCG is a groves mechanism where $C_{-i}=\sum_{j\in I\setminus\{i\}}\hat{v}_j(o^*_{-i})$.
+
+Fundamentally the VCG mechanism allocates the socially optimal outcome (ie. \textit{pareto-optimal}), and payments between inviduals in a way that is \textit{incentive compatable}, \textit{indivually rational}, but is not \textit{budget-balanced}.
+And is particularly proven to be optimal in the context of unrestricted player preferences.
+
+And this system might be considered very fine method for allocating a physical outcome on an electricity network and allocation of payments between participants; and this topic has had some exploration \cite{SESSA2017189, 8264596} (MORE CITES POSSIBLE).
+
+One of the fundamental problems of applying VCG to electricity networks is the budget-surplus that often results and where this money should go, particularly that if the money should go back into the participants in the network then it would destroy the incentive compatability that was essential to the scheme in the first place.
+
+Unfortunatly it is also proven that incentive compatability, unrestricted player preferences, individual rationality, and pareto-optimality are an impossible combination.
+
+There are several methods which have been developed to handle this issue
+\begin{enumerate}
+    \item adding extra elements into consideration, such as baysean priors on preferences, and reducing incentive compatability to baysean incentive compatability (see section on bargaining)
+    \item By throwing away consideration on the unrestrictedness of the player preferences, and by moving to other groves mechanisms which allow some redistribution of the surplus
+    \item by sacrificing pareto-optimality in the choice of the social outcome while keeping budget balance and incentive compatability
+\end{enumerate}
+
+particularly the first is probably most interesting for our considerations, and is the source of the d'AVGA mechanism which allocates redistribution of the surplus bassed on baysean priors on player preferences.
+The addition of baysean priors also has links to bargaining, particularly with the work of Meyerson, and his bargaining games.
+Which in turn have been extened (by himself) to coalitional games, and also through some of his work to Harsanyi games. (CITE)
+Particularly through the introduction of baysean considerations other schemes can redily be made to be incentive compatable.
+
+However there are certain issues with supposing accurately known baysean priors (particularly if they are learnt from past behavior).
+
+The second avenue involves the use of knowledge (or the imposition of restraints) on the possible preferences of players.
+This avenue often goes under the description of VCG redistribution, and there has been significant discussion about this particular avenue.
+Originally the first to propose this scheme was Ruggiero Cavallo \cite{Cavallo:2006:ODM:1160633.1160790}, particularly in the context of allocating a single physical object exclusively to one party.
+this game `All-Or-Nothing' games (AON) --- where any party's not recieving the object has known utility of zero --- has a better-than-VCG allocation mechanism.
+Cavallo, discussed this allocation mechanism and then consideres the associations and implications for the potential design of other allocation mechanisms where information (or constraints) are known about the players true preferences.
+
+The design of redistribution systems has since seen some more development, from redistribution systems in the context of other situations and games.
+But, it is generally known that designing optimal (non-linear) redistribution systems is a hard task, and even neural networks have been employed to construct such systems \cite{DBLP:conf/atal/ManishaJG18}.
+
+However it is known that these systems will (by construction) almost always produce some budget surplus.
+
+A tertiary avenue to dealing with the problem is to throw away the pareto-optimality of outcome selection.
+Probably one of the first people to think of this process way Boi Faltings \cite{10.1007/978-3-642-25510-6_14}
+Who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups, where the VCG outcome from the first group is selected irrespective of the preferencs in the second group.
+and where the second group recieves the budget surplus from the VCG mechanism applied to the first group.
+This rather genius mechanism is the subject of a patent in the US (CITE), and constitutes a budget balanced VCG-type mechanism.
+which can be made a little bit more baysean regular by randomy selecting the `sink', and splitting the budget surplus between the parties evenly without knowledge of who will be selected.\cite{10.1007/978-3-642-25510-6_14}
+
+particularly this method selecting a non-pareto optimal outcome has been the subject of investigation, and the process is proven to nessisarily need a sink.
+and that there are different ways to select an appropriate sink randomly \cite{NATH2019673}.
+
+What is particularly interesting is that various VCG type mechanisms can potentially be scaled up, leading to `effectively' the impossible combination \cite{NATH2019673}.
+
+There are several objections (and unanswered questions) to VCG as applied to electricity networks and more generally, and reasons why it has been seldom implemented in practice.\cite{journals/ior/Rothkopf07}\cite{Ausubel2006}
+Though it has been proposed (and presumably implemented) in the context of cooperative multi-agent reinforcing (CITE-NASA)
+
+Particularly it is not very obvious that VCG type payments are nessisarily economically reasonable payments between competitive parties, but much more payments between parties with incentives that are made to cooperate.
+
+And although incentive compatability is a noble objective in mechanism design, it is still subject to strategic manipulation, particularly in the context of the forming of coalitions.
+
+Coalition strategy proofness, has been proven to be quite generally a difficult concept to design, and in some cases has categorically proven to be impossible \cite{10.2307/2297048} without further elements, such as private information transfer and uncertainty.
+Although there has been some effort in designing and analysing the occurance of coalition proof mechanisms, these remain difficult.
+
+One of the considerations of using VCG is how it is to be constructed as a mechanism in the context of an electricity system.
+and different people have published different ways to instigate such a system.
+fundamentally, it involves the question of what the network should be considered to be in the absense of a particular player.
+The solving of optimal utility is a classical OPF problem, and is it to be the case that the system would have to be solved to OPF for each of $n$ players?
+This is a disadvantage of LMP, but not nearly as much as a disadvantage over Shapley Mechanisms.
+
+If we discount the benefit of incentive compatability, then the fundamental question remains: how much \textit{should} (above other considerations) electrical participants be credited/debited according to their immediate influence apon others relative to their hypothetical absense.
+
+In the following sections we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
+
+
+\subsection{Bargaining and Game Theory}
+
+One component of analysis that is completely missing from VCG is any specific consideration of `who can do what', and instead there is only recorded preferences over all-possible outcomes.
+
+One of the most historic classes which involves an allocation which specifies distinct actions for individuals is bargaining solutions.
+particularly Nash bargaining and the disagreement outcome.
+
+of solution concepts is `bargaining' - which serves as the perspective from which our investigation extends.\\
+
+A bargaining solution concept applies in a situation where there are a number of parties (or agents) and a space of possible agreements which those agents can reach (and value differently) between themselves.
+A bargaining solution concept identifies an outcome which the agents `will' (or `should') agree upon.
+Perhaps the most famous bargaining solution concept is called the Nash-bargaining solution concept.
+
+Nash bargaining was introduced \cite{nash1} as an axiomatic approach to predict the result of individuals who are bargaining over potential outcomes.
+It is defined over a convex compact set of potential outcomes $F$ (which might coincide with power-flows and fiscal payments on an electricity network) 
+where each of the players $P=\{p_1,p_2,\dots\}$ value the outcomes differently with utilities $u_{p\in P}(f)$ for $f\in F$.
+Additionally there is a privileged outcome called the `disagreement' outcome $d$ which represents the event of the negotiation between the players breaking down.
+
+Nash identified that in this case there is a unique solution satisfying some very intuitive axioms:
+\begin{itemize}
+\item \textit{Invariant to affine transformations}: that the solution should not change if the utilities of either players are scaled (by some positive factor) or offset, ie that they are invariant under the set of affine transformations that might also represent their relative preferences.
+\item \textit{Pareto optimality}: That the solution will not be inferior to any other point with respect to the preferences of all players.
+\item \textit{Independence of irrelevant alternatives}: If any subset of potential outcomes does not feature the solution point then it could be removed without affecting the solution.
+\item \textit{Symmetry}: The solution is invariant with regards to the ordering of the players.
+\end{itemize}
+This solution maximizes the product of utilities above the utility of the disagreement point:\cite{book1}
+\begin{equation}\label{nash-product}\text{nash}(F,d) = \argmax_{(f\ge d)\in F}\prod_{p\in P}(u_p(f)-u_p(d))\end{equation}
+In this way the Nash-bargaining-solution can be seen as a simple solution concept, whereby the participants report their valuations over potential outcomes, 
+and a Pareto-optimal outcome is determined which maximizes the product of those utilities above the disagreement outcome.
+
+In many cases of physical bargaining (which might involve alternating offers etc.) the `disagreement outcome' is often naturally dictated by the context of the bargaining process - 
+such as the event of quitting in the context of a wage-negotiation or of walking-away from a potential sale
+- It can be seen as the point of `threat' from which the bargaining process occurs.\cite{nash2}
+
+One objection to the Nash bargaining solution is that it may not be considered natural or a reliable description of real-world bargaining.
+Although there do exist some evolutionary models suggesting that in some social dynamics Nash bargaining might emerge in a social situation \cite{articlechoakihiko}, there exists discussion and experimental work finding that real behavior between humans exhibits some ambiguity \cite{KROLL2014261}, even in the case when the disagreement point is naturally given by the setting.
+
+However in other cases (such as in an electricity network) a singular disagreement outcome is not very clearly given by the context.
+And so if a bargaining-type solution concept is utilized then a disagreement outcome must be chosen `endogenously' from the set of possible outcomes $F$.
+How to do this?
+
+In John Nash's paper ``\textit{Two-person cooperative games}"\cite{nash2}, He explicitly addresses the consideration of the agents choosing a disagreement point between themselves in the bargaining process. However it is important to note that there are many possible bargaining solutions\cite{smorodinsky,tempered} which relate to different axioms,
+ and also different methods of choosing a disagreement outcome.\cite{bozbay,alter_bargaining1,tale1}
+
+\fix{Add much more info on endogenous disagrement point} 
+
+Notwithstanding, Nash's solution concept has a very simple form in the case of two-player games where utility is transferable (TU), equivalent to the sometimes called the `coco-value' \cite{kalai1,Kalai2010}.
+Which in-turn also has a well-studied extension to many players (which we are primarily interested in) which has been called `the Value'.\cite{values1,values2,values3}
+
+
+\subsection{Cooperative Game Theory}
+
+The idea that people (collectively) should be afforded atleast what they could achieve by themself is most directly articulated by the \textit{Core} of cooperative game theory.
+
+In this section we will detail only some of the parts of the theory of cooperative games which bear relevance and apon the quetions of distribution that we raise.
+
+The basic elements of a classic cooperative game is that there is a set of players or individuals $N=\{1,2,\dots n\}$ and a function $v: S\subseteq N \rightarrow \mathbb{R}$ with $v(\emptyset)=0$ called the \textit{characteristic function}.
+The characteristic function identifies in some sense the `worth' of any group of players (a `coalition') which might be interpreted in terms of utility or monetary value.
+One aim in cooperative game theory is to evaluate schemes (or `solution concepts') which split the wealth achieved if everybody cooperated (that is $v(N)$) between all the players.
+
+However this kind of formulation does beg the question how the characteristic function should be determined.
+%, and they encode information that there is a set of players and a notion of how much each subset of players `is worth'.
+
+\begin{displayquote}
+The idea is to capture in a single numerical index the potential \underline{worth} of each coalition of players.
+...
+
+With the characteristic function in hand, all questions of tactics, information, physical transactions, etc., are left behind. The characteristic function is primarily a device for dividing the difficulties -- for eliminating as many distractions as possible in preparation for the confrontation with the indeterminancy of what we have called the ``n-person problem''. Engrossed with this problem, many authors writing after von Neumann and Morgenstern have begun by basing their solution concepts on the characteristic function above, with no initial concern for the concrete rules of the game, in strategic or extensive form.
+
+Unfortunately, not all games admit a clean separation between strategic and coalitional questions, and for those that do not the characteristic function approach must be modified or abandoned.\cite{ShapleySchubikCharacteristicFunction}
+\end{displayquote}
+
+However some games do admit a clean separation between strategic and coalitional questions.
+For instance, if there is a situation where the Characteristic function identifies the amount of utility/money/etc that members of a coalition could and unambiguously would, achieve by working by themself.
+
+In this context, If the most amount of money that can be achieved is gained by everbody working together then the idea that this should be executed and that each member or possible group should be given more than they could feasibily get by themselves is a condition best described by the core:
+
+\subsubsection{the Core}
+
+Particularly, the core is an example solution concept for cooperative games:
+
+$$ C(v) = \left\{x\in\mathbb{R}^n : \sum_{i\in N}x_i=v(N); \sum_{i\in S}x_i \ge v(S), \forall S\in N \right\}$$
+
+The core is the set of possible allocations such that the sum of them equals what can be achieved by everybody working together (the worth of the `grand coalition' - $v(N)$) and such that for any group of individuals, the sum allocated to thoes individuals is greater than what they could achieve by working by themself.
+
+The allocations that belong to the Core have a sense of being stable - in that no coalition would have an incentive to split from the cooperative engagement to get a better payoff. One major drawback about the core is that it does not determine a unique outcome, but potentially a range of outcomes or perhaps none at all.
+
+Indeed the Core may be empty, and there are modifications to the Core concept which remedy this problem.
+When no Core solutions exist, then straightforwardly no solution can posess the same kind of stability, however there is perhaps allocations that minimise this shortcomming.
+particularly the \textit{least-core} solution concept.
+
+The least-core solution concept is a particular instance of the \textit{strong $\epsilon$ core} which is defined as follows:
+$$ C_\epsilon(v) = \left\{x\in\mathbb{R}^n : \sum_{i\in N}x_i=v(N); \sum_{i\in S}x_i \ge v(S)-\epsilon, \forall S\in N \right\}$$
+The strong $\epsilon$ core is the set of allocations in which each coalition is allocated atleast their value minus some constant $\epsilon$.
+In this way some coalitions might be shortchanged, but only by atmost a constant factor $\epsilon$.
+The strong $\epsilon$ core can be defined for positive and negative $\epsilon$ values, it will certainly be non-empty for very large and positive $\epsilon$ values and certainly be empty for very large and negative $\epsilon$ values.
+In this way we can consider the limiting case between these two, the smallest value of $\epsilon$ in which the strong $\epsilon$ core is non-empty - and this is the least-core.\cite{doi:10.1287/moor.4.4.303}
+The least-core is therefore always non-empty and may even identify a singular solution. point; that can be said to minimum `dissatisfaction' between the groups.
+
+The core is probably an intuitive solution concept in the context where the characteristic function identifies the `worth' of individuals and groups `by-themself' and the dynamics are driven by this isolation mechanic.
+However in other cases the `worth' identified by the characteristic function is in the context of cooperation with the others, or perhaps otherwise.
+And in this context the Core is not the only solution concept worth considering.
+
+\subsubsection{The Shapley Value}
+
+The \textit{Shapley value} is another specific and well known solution concept in cooperative game theory.
+Particularly the Shapley value allocates to each individual the average contribution he/she would add across the possible coalitions to which he/she could join.
+
+So particularly, if for any coalition $S$ which does not include player $i$, $i$'s marginal contribution is $v(S\cup\{i\}) - v(S)$. If we average such contributions for coalitions of size $k$:
+\begin{equation}\label{eq:shapley_value2}
+\hat{v}_{i,k} = \frac{1}{\binom{n-1}{k}}\sum_{S\subset N\setminus \{ i\} , |S|=k} %\frac{(n-|S|-1)!\,|S|!}{(n-1)!}
+(v'(S\cup\{i\})-v'(S))
+\end{equation}
+Then we have the average marginal contribution of player $i$ to coalitions of size $k$, and if we average this over coalitions of different size, we get the Shapley value:
+\begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
+The Shapley value is an averaging over a players marginal contributions, which is obviously a unique allocation for any cooperative game.
+
+The Shapley value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
+So for instance, if we let $\pi(N)$ denote the set of all ordered permutations of the player set $N$ and if we denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the shapley value can be expressed as the average marginal contribution across orderings, \cite{weber_1988}:
+\begin{equation}
+    \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
+\end{equation}
+
+The Shapley value has perhaps some moral intuition behind it - rewarding each person in proportion to what they would add across any ordering that the coalition could form.
+But more than that, the Shapley value has been derived from different sets of quite intuitive axioms.
+For instance:
+
+\begin{itemize}
+\item	\textbf{Efficiency}: That the total dividend is broken up, $\sum_i\varphi(\langle N,v\rangle)_i = v(N)$
+\item	\textbf{Symmetry}: If two players $i$ and $j$ are substitutes and contribute the same to all coalitions, such that if $v(S\cup i)=v(S\cup j)~~\forall S\subseteq N\setminus\{i,j\}$, then $\varphi(\langle N,v\rangle)_i = \varphi(\langle N,v\rangle)_j$
+\item	\textbf{Dummy Player}: If a player $i$ is a dummy player if the amount that $i$ contributes to any coalition is the amount that $i$ is able to achieve alone (i.e.\ $v(S\cup \{i\})-v(S)=v(\{i\})~~\forall S\subseteq N\setminus\{i\}$) then $\varphi(\langle N,v\rangle)_i=v(\{i\})$
+\item	\textbf{Additivity}: That for any two games, the imputation for the two together is the sum of the imputations in each, for any $v_1$ and $v_2$, $\varphi(\langle N,v_1+v_2\rangle)=\varphi(\langle N,v_1 \rangle) + \varphi(\langle N,v_2\rangle)$
+\end{itemize}
+
+These axioms might seem pretty reasonable and lead uniquely to the Shapley value allocation, and these are not the only set of axioms sufficient to derive the shapley value either.
+
+This raises the question of when the Shapley value is in the Core? - and therefore has that particular stability that would disincentivise any subset from leaving.
+One example case in which the Shapley Value is always in the core is in the context of Convex cooperative games:
+A cooperative game is \textit{convex} iff:
+\begin{equation}
+    \forall S,T\subset N \quad v(S\cup T) \ge v(S)+v(T)-v(S\cap T)
+\end{equation}
+
+\subsubsection{Applications to Electricity Systems}
+
+Shapley value concepts are increasingly being considered as a mechanism for pricing in the various facets of electricity system operation.
+
+Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \cite{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \cite{WU2017384} and community/small networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965}.
+
+In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
+In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
+Which may or may-not coincide with the Core and its coalitional stability property.
+in Chapter \ref{} we compare -an- application of the Shapley value applied to electricity systems against other allocation methods.
+
+There exist other solution concepts in the context of cooperative game theory, such as the Kernel and Neucleolus. and we have only touched the surface of cooperative game theory only enough for it to be relevant for our purposes.
+The interested reader is encouraged to read more from sources \ref{} and \ref{} and \ref{}.
+
+\subsection{Economic Perspectives}
+
+\begin{displayquote}
+ Concerns about exploitation often take the form of unfair economic exchange. Attempts to specify the principles that render an exchange fair or unfair can be traced back at least as far as Aristotle, who argued that a just exchange will embody a kind of reciprocity such that the values of the goods exchanged are proportional (Nicomachean Ethics, Book V, Part V). But while the notion of proportionality is intuitively appealing, it is somewhat unclear precisely what Aristotle had in mind by it, or what the most defensible explication of the idea would be. To borrow Aristotle’s own example, if a shoemaker and a builder trade, how many pairs of shoes is proportional to a single house?
+
+In the writings of St. Thomas Aquinas, we find the beginnings of a much more sophisticated and promising approach to questions such as this. In his Summa Theologiae, Aquinas sought to answer the question of “whether a man may lawfully sell a thing for more than it is worth?” The “worth” of a thing, for Aquinas, was its just price. And the just price, according to Aquinas, appears to have been simply the prevailing market price (Summa Theologiae, part 2, second part, question 77; see also de Roover 1958 and Friedman 1980). Rather than relying on some fixed notion of proportionality, Aquinas’ just price will be responsive to considerations of supply and demand. But not just any price that two individuals mutually agree upon will be deemed just on Aquinas’ standard. Thus, a seller who takes advantage of fraud, or a temporary monopoly, to charge an excessive price for an item would be acting unjustly, insofar as his price is in excess of the price at which similar goods typically sell in the relevant market. But Aquinas saw nothing inherently sinful in selling a good for more than one paid for it, or with charging enough to earn a profit, or to compensate for risks involved in the productive process. Seeking profit for its own sake may involve a certain sort of “debasement”, but profit can also be sought in order to fulfill necessary or even virtuous ends.
+
+Later Scholastics would devote considerable attention to developing and refining the notion of the just price. Of special concern was the price attached to the lending of money, or interest. Since the founding of the Catholic church, it was widely regarded as sinful for lenders to charge interest on their loans, and so-called “usury” was prohibited by canon and often by secular law. Much of the concern regarding usury seems to have been driven by the idea that the charging of interest involves an inequitable exchange—lenders give something to borrowers, but demand back more than they have given. But Aquinas seems to have been particularly concerned that borrowers would often be driven to take out loans out of necessity, and thus that their consent to the exchange is not fully voluntary (Summa Theologiae, part 2, second part, question 78).
+
+The much later natural law theorist John Locke also took up questions regarding just and unjust prices, not in either of his well-known treatises on government but in a lesser known tract titled, Venditio. Locke, even more explicitly than Aquinas, saw the just price as being equivalent to “the market price at the place where he sells” (Locke 1661: 340). The relativity of the just price to the particular market in which the transaction takes place is important. For Locke argued that if two ships sailed laden with corn, one to Dunkirk where there is a near famine taking place, and the other to Ostend where normal conditions obtain, it would not be unjust for the merchant to sell at a significantly higher price in the former location than in the latter (so long as the higher price is one that the buyers can afford). If the merchant did not charge a higher price, Locke argued, then two problems would result. First, it is likely that the merchant’s goods would simply be bought by speculators and resold on a secondary market, thereby simply redirecting the profit into somebody else’s hands without doing anything to improve the situation of buyers. And second, if merchants cannot charge a high price in “good” markets to cover their losses in “bad” ones, they will soon operate at a net loss and this will, Locke claims, “quickly put an end to merchandising” (Locke 1661: 342).
+
+What would be unjust would be for the merchant to sell an item to a particular individual for a price higher than the general market rate as might happen, for instance, if that individual is in particular distress. Thus, Locke holds, if anchors typically sell for a certain price, say 100 pounds, then it would be unjust (exploitative) to charge the captain of a distressed ship 5000 pounds for an anchor, simply because one knows he will be compelled to pay it. The just price is the going market rate, where that rate is determined by the general features of supply and demand, and not the particular needs or vulnerabilities of any particular buyer or seller.
+
+https://plato.stanford.edu/entries/exploitation/
+\end{displayquote}
+
+In this way what is considered exploitation and unfair trade, in defined in contrast to the value that is fetched in normative market circumstance.
+the question then becomes how to formulate this normative market circumstance.
+
+Various Economic models and market simulations can be done to address such questions.
+however one of the most notable economoic paradigms is that of economoic marginalism.
+
+The theory of Value, has a long history with a notable waystation being Marxist labor theory of value. since then.....
+
+\subsection{Summary}
+Summary what you discussed in this chapter, and mention the story in next
+chapter. Readers should roughly understand what your thesis takes about by only reading
+words at the beginning and the end (Summary) of each chapter.
+
+
+
+

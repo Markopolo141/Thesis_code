@@ -1,0 +1,424 @@
+
+\newpage
+
+\section{Stratified Sampling by a Stratified Probability Bound}\label{section:SEBB}
+
+In the previous section we considered different possible EBBs as a means of yielding different methods of choosing samples in the context of stratified random sampling.
+This process proceeds by binding EBBs together using union bounds to create a bound on the Stratified sample mean error (via with Theorem \ref{triangle_theorem1}).
+Which is sequentially minimised by choosing additional samples.
+
+However in considering this process, and also the weakness of union bounds, it was discovered that there was a way to more directly create an empirical (ie. depending on sample variances) concentration inequality specifically for stratified random sampling; which could then serve as a basis for choosing samples
+
+We note that the derivation in this section gets rather difficult, and we understand that the result is a concentration inequality that is complex and tailored for a specific application, and as such, is the only one of its kind.
+
+The resulting concentration inequality gives an analytic bound on the error of the stratified mean explicitly considering the sample variance, data widths, sample number, and any additional weights of all of the strata; including factors specifically for any strata sampled with and/or without replacement.
+
+The derivation involves and utilises much of the same components of the previous section and an additional martingale theorem specifically for any any strata sampled without replacement.
+
+\subsection{A new probability bound for Stratified Sampling (SEBB)}
+
+To begin the derivation of our new concentration inequality for stratified random sampling, we utilize and build apon some of the results of the previous section.
+
+
+To begin with we need to consider three upper bounds for various moment generating functions.
+The first of which has already been given in the previous section, and is Hoeffding's lemma - Lemma \ref{Hoeffdings_lemma_lemma}.
+The other two are strongly related to Theorems \ref{hoeffdings1} and \ref{sample_squares} respectively.
+These two theorems derive an upper bound on the moment generating function and then minimise them with the free parameter to form a concentration inequality.
+However the usefull part here is to simplify thoes same upper bounds on the moment generating function into an exponential of a quadratic. as we will see.
+
+
+
+
+The second lemma is very much like Hoeffding's Lemma, except it involves additional information about the variance of the random variable.
+The proof of this result is included because it is useful in explaining our own approach.
+
+\begin{lemma}\label{expectation1}
+For a random variable $X$ that is bounded on an interval $a\le X\le b$ with $D=b-a$ and variance $\sigma^2$, and any $s>0$:
+\[
+\E\left[\exp(s(X-\E[x]))\right] 
+\le\exp\left(\left(\frac{D^2}{17}+\frac{\sigma^2}{2}\right)s^2\right)
+\nonumber
+\]
+\end{lemma}
+\begin{proof}
+We assume without loss of generality that $X$ is centered to have a mean of zero.
+Then we construct an upper bound for $\E\left[\exp(sX)\right]$ in terms of $D$ by a parabola over $\exp(sX)$ for the permitted values of $X$ in the same way as in the proof of Theorem \ref{hoeffdings1}. By Lemma \ref{thm:parabola} there exists an $\alpha,\beta,\gamma$ such that $\alpha s^2X^2+\beta sX+\gamma\ge \exp(sX)$, and for all $a\le X\le b$, hence:
+\[
+E\left[\exp(sX)\right] \le \E[\alpha s^2X^2+\beta sX+\gamma] = \alpha s^2\E[X^2]+\gamma = \alpha s^2\sigma^2+\gamma
+\nonumber\]
+Where it follows that:
+\begin{equation}\label{eqn:intermediate_lemma3.5}
+E\left[\exp(sX)\right] \le\left(\frac{\sigma^2}{b^2}\exp\left(s\left(b+\frac{\sigma^2}{b}\right)\right) + 1\right)\exp\left(-\frac{s\sigma^2}{b}\right)\left(\frac{\sigma^2}{b^2} + 1\right)^{-1}.
+\nonumber 
+\end{equation}
+This relationship is exactly as in Theorem \ref{hoeffdings1}, now we do something slightly different - the expression in \eqref{eqn:intermediate_lemma3.5} is monotonically increasing with $b$, and $D>b$, therefore substituting $D$ for $b$ gives:
+\begin{equation}\label{eq:part1}
+\log(E\left[\exp(sX)\right]) \le \log\left(\frac{\sigma^2}{D^2}\exp\left(s\left(D+\frac{\sigma^2}{D}\right)\right) + 1\right)-\frac{s\sigma^2}{D} - \log\left(\frac{\sigma^2}{D^2} + 1\right)
+\end{equation}
+Because it is true that for any $\kappa,x\ge 0$, that: 
+\begin{equation}\label{eq:part2}
+\log(\kappa\exp(x)+1)\le\log(\kappa+1)+\frac{x\kappa}{\kappa+1}+x^2\frac{\frac{1}{17}+\frac{\kappa}{2}}{(\kappa+1)^2}
+\end{equation}
+Thus letting $\kappa=\frac{\sigma^2}{D^2}$ and $x=s(D+\sigma^2/D)$ if follows that:
+\begin{equation}\label{eq:part3}
+\log(E\left[\exp(sX)\right]) \le \left(\frac{D^2}{17}+\frac{\sigma^2}{2}\right)s^2\qedhere
+\end{equation}
+\end{proof}
+
+We note that this process of fitting a parabola over the exponential function is exactly the same process as used to derive Bennett's inequality (Theorem \ref{hoeffdings1}).
+But that this form of the bound on the moment generating function is a weakened result of that same approach.
+
+The third lemma that we present, is similar to the first two, however this time we consider the random variable $X^2$ instead of $X$, and present a weakened bound on the moment generating function of it via a similar process as was used to derive Theorem \ref{sample_squares}: 
+
+\begin{lemma}\label{expectation2}
+Let $X$ be a random variable of finite support on an interval $a\le X\le b$, with $D=b-a$ and variance $\sigma^2 = \E[(X-\E[x])^2] = \E[X^2]-\E[X]^2$. Then for any $q>0$:
+$$\E[\exp(q(\sigma^2-(X-\E[X])^2))] \le \exp\left(\frac{1}{2}\sigma^2q^2D^2\right)$$
+\end{lemma}
+\begin{proof}
+We assume without loss of generality (and for ease of presentation) that X is centered to have a mean of zero.
+We construct an upper bound for $\E\left[\exp(-qX^2)\right]$ in terms of $D$ by a parabola over $\exp(-qX^2)$ for the permitted values of $X$.
+
+For an $\alpha,\gamma$ such that $\alpha X^2+\gamma\ge \exp(-qX^2)$ then:
+$$ \E[\exp(-qX^2)] \le \alpha \sigma^2 + \gamma.$$
+If $d=\max(b,-a)$ we can choose $\gamma=1$ and $\alpha=(\exp(-q d^2)-1)d^{-2}$ (see figure \ref{fig:graph111}), Thus:
+\begin{align*}
+\E[\exp(-q X^2)] &\le \frac{\sigma^2}{d^2}\exp(-q d^2)-\frac{\sigma^2}{d^2} + 1\le \frac{\sigma^2}{D^2}\exp(-q D^2)-\frac{\sigma^2}{D^2} + 1 \\
+&\le \exp\left(\log\left(\frac{\sigma^2}{D^2}\exp(-q D^2)-\frac{\sigma^2}{D^2} + 1\right)\right)
+\end{align*}
+Given that for any $0\le \kappa \le 0.5$ and $x\le 0$ that: $$\log\left(\kappa\exp(x)-\kappa + 1\right) \le \kappa x+\frac{1}{2}\kappa(1-\kappa)x^2$$
+Letting $\kappa=\frac{\sigma^2}{D^2}$ and $x=-qD^2$, which is valid by Popoviciu's inequality (\cite{zbMATH05780164}) $\sigma^2\le D^2/4$, then:
+$$ \E[\exp(-q X^2)] \le \exp\left(\frac{1}{2}\sigma^2q^2(D^2-\sigma^2)-\sigma^2q\right) \le \exp\left(\frac{1}{2}\sigma^2q^2D^2-\sigma^2q\right)$$
+and the result follows by multiplying by $\exp(q\sigma^2)$.
+\end{proof}
+
+The three inequalities above, Lemmas \ref{hoeffdings_lemma_lemma},\ref{expectation1} and \ref{expectation2}, are used in the derivation of our stratified sampling concentration inequality in Section~\ref{sec:constructing}. One of the primary reasons for utilizing these weakened bounds on the moment generating function is that they make the subsequent mathematics far more tractable.
+However in order to use these moment generating functions we need to explicitly describe the difference between the moment generating functions of individual random variables (which these are) and the moment generating function of the sample mean of them.
+
+\subsubsection{The Moment Generating Function of Sample Means}\label{sec:without_replacement}
+
+In order to use the previous bonds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
+To do this we state three further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second and third (Lemma~\ref{hoeffdings_reduction} and Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
+
+We first state a lemma that essentially is a formalisation of the process we are familiar with in the last section (see Lemma \ref{chernoff1}):
+
+\begin{lemma}[Replacement Bound]\label{martingale1}
+Let $X$ be a random variable that is bounded $a\le X\le b$ with a mean of zero, with $D=b-a$ and variance $\sigma^2$.
+Let $\chi_m = \frac{1}{m}\sum_{i=1}^mX_i$ be the average of $m$ independently drawn (with replacement) samples of this random variable.
+If there exists an $\alpha, \beta \ge 0$ such that for any $s>0$ that $\E[\exp(sX)]\le\exp((\alpha D^2 +\beta \sigma^2) s^2)$ then:
+$$\textstyle\E[\exp(s\chi_m)]\le\exp(\alpha s^2D^2\frac{1}{m} +\beta s^2\sigma^2 \frac{1}{m}) = \exp((\alpha D^2{\Omega}_m^n +\beta\sigma^2 {\Psi}_m^n)s^2)$$
+where ${\Omega}_m^n = {\Psi}_m^n = \frac{1}{m}$
+\end{lemma}
+\begin{proof} 
+By the independence of samples, we have:
+\[\E[\exp(s\chi_m)]=\E\left[\exp\left(\frac{s}{m}\sum_{i=1}^mX_i\right)\right]=\prod_{i=1}^m\E\left[\exp\left(\frac{s}{m}X\right)\right]\] 
+Thus:
+\[\E[\exp(s\chi_m)] \le \exp\left(\frac{s^2}{m^2}\sum_{i=1}^m\left(\alpha D^2 +\beta \sigma^2\right) \right) \qedhere\]
+\end{proof}
+
+%The requirement that the mean of the random variable is zero is useful as further derivations are applied to random variables which are shifted such as to have a mean of zero ie. $X-\E[X]$.
+Technically all the inequalities thus far are sufficient for all the further derivations that we conduct to derive our concentration in equality for stratified sampling - in Section \ref{sec:constructing}. 
+However, for the case of sampling without replacement, there is an alternative result that can be directly substituted, given in Lemma~\ref{martingale0}, below, which can be tighter in certain cases.
+Before this, particular note must be made that the inequality above, Lemma~\ref{martingale1} can be used in the context of either sampling with or without replacement.
+In contrast, Lemma~\ref{martingale0} can only be used when sampling without replacement. 
+This distinction was shown to be true by Hoeffding \cite{hoeffding1}, and is rooted in an already presented Lemma \ref{hoeffdings_reduction}.
+
+We now state Lemma~\ref{martingale0}, an inequality regarding the moment generating function of the average of samples taken specifically \textit{without replacement}.
+When the sampling takes place without replacement the inequality of Lemma~\ref{martingale1} can potentially be tightened to take advantage of the finite size of the population.
+This inequality extends an important martingale inequality from \cite{bardenet2015}:
+
+\begin{lemma}[Martingale Bound]\label{martingale0}
+For finite data $x_1,x_2,\dots x_n$ that is bounded $a\le x_i\le b$, and has a mean of zero and variance $\sigma^2=\frac{1}{n}\sum_{i=1}^nx_i^2$, denote $X_1,X_2,\dots,X_n$ the random variables corresponding to the data sequentially drawn randomly without replacement, and $\chi_m$ the average of the first $m$ of them.
+If for any random variable $Z$ with a mean of zero such that $a\le Z\le b$ and $D=b-a$, with variance $\sigma_Z^2$ that there exists an $\alpha, \beta \ge 0$ such that for any $s>0$ that $\E[\exp(sZ)]\le\exp((\alpha D^2 +\beta \sigma_Z^2) s^2)$ then:
+\begin{align*}\E[\exp(s\chi_m)]&\le\exp\left(\alpha s^2D^2\sum_{k=m}^{n-1}\frac{1}{k^2} +\beta s^2\sigma^2 \sum_{k=m}^{n-1}\frac{n}{k^2(k+1)}\right)\\ &\le \exp((\alpha D^2\bar{\Omega}_m^n +\beta\sigma^2 \bar{\Psi}_m^n)s^2)\end{align*}
+where $\bar{\Omega}_m^n = \sum_{k=m}^{n-1}\frac{1}{k^2}\approx \frac{(m+1)(1-m/n)}{m^2}$ and $\bar{\Psi}_m^n = \sum_{k=m}^{n-1}\frac{n}{k^2(k+1)}\approx \frac{n+1-m}{m^2}$.
+\end{lemma}
+\begin{proof}
+Observe that:
+\begin{align*}
+\chi_m 
+& =\frac{1}{m}\sum_{i=1}^{m}X_i = \chi_{m+1}+\frac{1}{m}(\chi_{m+1}-X_{m+1})\\
+& =(\chi_m-\chi_{m+1})+(\chi_{m+1}-\chi_{m+2}) + \dots + (\chi_{n-1}-\chi_n)\\
+& =\frac{1}{m}(\chi_{m+1}-X_{m+1})+\frac{1}{m+1}(\chi_{m+2}-X_{m+2}) + \dots + \frac{1}{n-1}(\chi_n-X_n).
+\end{align*} 
+Then because:
+$$\exp(s\chi_m)=\prod_{k=m}^{n-1}\exp\left(\frac{s}{k}(\chi_{k+1}-X_{k+1})\right),$$
+we also have that: 
+$$\E[\exp(s\chi_m)]=\E\left[\prod_{k=m}^{n-1}\E\left[\exp\left(\frac{s}{k}(\chi_{k+1}-X_{k+1})\right)|\chi_{k+1}\dots \chi_n\right]\right]$$
+by repeated application of the Law of total expectation. 
+Since:
+$$\E[X_{k+1}|\chi_{k+1}\dots \chi_n]=\chi_{k+1},$$ 
+then $\chi_{k+1}-X_{k+1}$ is a random variable with a mean of zero bounded within width $D$, and it also has a variance given by: 
+\begin{equation}\label{approx1} 
+\sigma_{k+1}^2 = \frac{n\sigma^2-\sum_{j=k+1}^nX_j^2}{n-(n-k-1)} - \chi_k^2 \le \frac{n\sigma^2}{k+1}
+\end{equation}
+by application of Lemma~\ref{variance1}. 
+Therefore: 
+\[\E[\exp(s\chi_m)]\le\exp\left(\sum_{k=m}^{n-1}\left(\alpha D^2 +\beta \frac{n\sigma^2}{k+1}\right) \frac{s^2}{k^2}\right)\qedhere\]
+\end{proof}
+
+
+This martingale result relates the moment generating function bound of the average of finite variables relative to their mean, to the moment generating function bounds of the  differences of the incremental averages relative to their mean. 
+We note that this result could potentially be made much stronger by working around the use of Equation~\eqref{approx1}, but this comes at a cost of increased mathematical complexity.
+
+Since Lemmas~\ref{martingale0} and~\ref{martingale1} share a common form, and because of Hoeffding's reduction (Lemma~\ref{hoeffdings_reduction}), 
+all the derivations that follow that invoke Lemma~\ref{martingale1} have direct analogues using Lemma~\ref{martingale0} for the context of sampling without replacement.
+Note, however, that the bound without replacement (Lemma~\ref{martingale0}) may or may not be tighter than the bound with replacement (Lemma~\ref{martingale1}). However, the process of substituting one for the other can be done judiciously on a case-by-case basis to create the tightest possible bound.
+All the numerical results in Section \ref{} (that are relevant to sampling without replacement) have been produced with this judicious choice conducted.
+
+\subsection{The Stratified Finite Empirical Bernstein Bound and Sampling Method}
+\label{sec:constructing}
+
+This section contains our primary derivation: 
+we derive a novel probability bound for the error of the stratified random sampling estimate, 
+and use it to define a sequential stratified sampling algorithm. 
+Before this, we begin by precisely defining the context of our derivations, to which our bound applies.
+
+\begin{definition}[Problem context]\label{def:ProblemContext}\hspace{1cm}\\
+\begin{itemize}
+    \item Let a population consist of $n$ number of strata of finite data points,
+    \item where $n_i$ is the total number of data points in the $i$th stratum.
+    \item All values in a stratum are bound within a finite support of width $D_i$.
+    \item the mean of the $i$th stratum is $\mu_i$, and its variance $\sigma_i^2$.
+    \item the random variables corresponding to the samples drawn from the $i$ stratum are:\\ $X_{i,1},X_{i,2},\dots,X_{i,n_i}$
+    \item for each stratum $m_i$ samples are taken
+    \item forming the sample mean of each stratum: $\chi_{i,m_i}= \frac{1}{m_i}\sum_{j=1}^{m_i}X_{i,j}$
+    \item the biased sample variance of each stratum: $\hat{\sigma}_i^2=\frac{1}{m_i}\sum_j^{m_i}(X_{i,j}-\chi_{i,m_i})^2$
+    \item the unbiased sample variance of each stratum: $\doublehat{\sigma}_i^2 = m_i\hat{\sigma}_i^2/(m_i-1)$
+    \item we consider the average of the means of the strata as weighted by constant positive factors $\{\tau_i \}_{i\in \{1,\dots,n\}}$
+    \item And throughout the derivation we also use temporary arbitrary positive variables $\{\theta_i \}_{i\in \{1,\dots,n\}}$
+\end{itemize}
+\end{definition}
+
+Given this context, the following two subsections contain the derivation of the stratified empirical Berstein bound (SEBB) and the sequential sampling method (SEBM), respectively. 
+
+
+
+\subsubsection{Bound derivation}
+The bound is now developed in four theorems, 
+which build on each other in sequence:
+\begin{enumerate}
+    \item Theorem~\ref{thm:1} develops a concentration inequality for the error in the stratified population mean estimate $\sum_{i=1}^n\tau_i\chi_{i,m_i}$ in the context of the knowledge of stratum variances.
+    \item Theorem~\ref{thm:2} is a concentration inequality of the difference between the stratum variances and sample variances in the context the sum of knowledge of the squared stratum mean errors.
+    \item Theorem~\ref{thm:3} is an inequality directly that binds the sum of sample squared stratum mean errors.
+    \item Theorem~\ref{thm:SEBM_bound} combines the three previous theorems together using two union bounds to create a concentration inequality for the error in the stratified population mean estimate given the sample variances.
+\end{enumerate}
+
+In a similar way to what was done in the previous section, to derive an Empirical Bernstein Bound we begin with a derivation of a probability bound on the error of the sample mean of a random variable in terms of the random variable's variance.
+In the previous section the bound in question was the venerable Bennett's inequality (Theorem \ref{hoeffdings1}) however in this section we consider a more relaxed and similar version of it which is more easy for us to manipulate, and in this case the random variable in question is the weighted mean $\sum_{i=1}^n\tau_i\chi_{i,m_i}$.
+
+This is probability bound on the absolute error of the weighted stratified sample means about the weighted strata means, which we call a variance-assisted SEBB (stratified empirical Bernstein bound).
+
+
+\begin{theorem}[Variance-assisted SEBB]\label{thm:1}
+Assuming the context given in Definition~\ref{def:ProblemContext}, and let $\Omega_{m_i}^{n_i}$ and $\Psi_{m_i}^{n_i}$ be given as in Lemma~\ref{martingale1}, then:
+\begin{equation}\label{eq1} \pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge \sqrt{4\log(2/t)\sum_{i=1}^n\left(\frac{1}{17}D_i^2\Omega_{m_i}^{n_i}+\frac{1}{2}\sigma_i^2\Psi_{m_i}^{n_i}\right)\tau_i^2}\right)\le t \end{equation}
+\end{theorem}
+\begin{proof}
+In a similar was as per Lemma~\ref{chernoff1} we consider a bound for the weighted mean by the moment generating function of the stratum means:
+\begin{align*} \pr\left(\sum_{i=1}^n\tau_i\chi_{i,m_i}-\sum_{i=1}^n\tau_i\mu_i\ge t\right)
+&\le\E\left[\exp\left(\sum_{i=1}^n\tau_is\left(\chi_{i,m_i}-\mu_i\right)\right)\right]\exp(-st)\\
+&= \prod_{i=1}^n\E\left[\exp\left(\tau_is\left(\chi_{i,m_i}-\mu_i\right)\right)\right]\exp(-st) 
+\end{align*}
+This involves the assumption that the sampling -between- the strata is independent.
+This form is sufficient for Lemma~\ref{martingale1} with Lemma~\ref{expectation1} to apply, resulting in a double-sided tail bound:
+$$ \pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge t\right)\le 2\exp\left(\sum_{i=1}^n\left(\frac{1}{17}D_i^2\Omega_{m_i}^{n_i}+\frac{1}{2}\sigma_i^2\Psi_{m_i}^{n_i}\right)\tau_i^2s^2 - st\right) $$
+Minimizing with respect to $s$ and rearranging gives result.
+\end{proof}
+
+This particular bound assumes knowledge of the variances of the strata, and will be used as a tool for selecting samples primarily for comparison with other sampling methods (such as Neyman sampling) in Section \ref{}.
+
+It is a concentration inequality for the weighted stratum means, leading to the more general question of what the weights should be. In most cases, the weights $\tau_i$ can be considered as the probability weights $\tau_i=n_i/(\sum_{j=1}^nn_j)$ of standard stratified sampling.
+In this context this probability bound can be used as-is for a measure of uncertainty in stratified random sampling if the true variances (or alternatively, upper bounds on the true variances) of the strata are known.
+However the weights can be assigned differently - and we will investigate such a case for the Shapley Value in section \ref{}.
+
+The bound depends on a weighted sum of strata variances $ \sum_{i=1}^n \sigma_i^2 \Psi_{m_i}^{n_i} \tau_i^2 $, and in most situations these values aren't known.
+Hence to use this inequality we need to consider the probable error between the weighted sum of strata variances and the weighted sum of strata sample variances.
+
+And to craft such a probability bound on that error we develop a probability bound for the error estimate of the sum of variances (as weighted by arbitrary $\theta_i$), as follows:
+
+\begin{theorem}\label{thm:2}
+Assuming the context given in Definition~\ref{def:ProblemContext}.
+Then with $\Psi_{m_i}^{n_i}$ per Lemma~\ref{martingale1}:
+\begin{equation}\label{eq2} \pr\left(\sum_{i=1}^n\theta_i(\sigma_i^2-\hat{\sigma}_i^2 - (\mu_i - \chi_{i,m_i})^2)\ge \sqrt{2\log(1/y)\sum_{i=1}^n\sigma_i^2\theta_i^2D_i^2\Psi_{m_i}^{n_i}}\right) \le y \end{equation}
+\end{theorem}
+
+
+\begin{proof}
+To create a probability bound for the sum of variances (weighted by arbitrary positive $\theta_i$), we consider the average square of samples about the strata means. 
+Applying Lemma~\ref{chernoff1} gives:
+\begin{align*} 
+\pr&\left(\sum_{i=1}^n\theta_i(\sigma_i^2-\frac{1}{m_i}\sum_{j=1}^{m_i}(X_{i,j}-\mu_i)^2)\ge y\right) \\
+&\le \E\left[\exp\left(\sum_{i=1}^ns\theta_i\left(\sigma^2-\frac{1}{m_i}\sum_{j=1}^{m_i}(X_{i,j}-\mu_i)^2\right)\right)\right]\exp(-sy)\\
+& \le \exp(-sy)\prod_{i=1}^n\E\left[\exp\left(\frac{s\theta_i}{m_i}\sum_{j=1}^{m_i}(\sigma^2-(X_{i,j}-\mu_i)^2)\right)\right] 
+\end{align*}
+And this reason is by the assumption of the independence of the sampling -between- the strata. 
+This resulting form is sufficient for Lemma~\ref{martingale1} with Lemma~\ref{expectation2} to apply, giving:
+$$ \pr\left(\sum_{i=1}^n\theta_i(\sigma_i^2-\frac{1}{m_i}\sum_{j=1}^{m_i}(X_{i,j}-\mu_i)^2)\ge y\right) \le \exp\left(\frac{1}{2}\sum_{i=1}^n\sigma_i^2\theta_i^2s^2D_i^2\Psi_{m_i}^{n_i}-sy\right)$$
+Minimizing with respect to $s$, rearranging, and applying Lemma \ref{variance1} gives result.
+\end{proof}
+
+This inequality gives the probability bound between the arbitrarily (by $\theta_i$) weighted variances of the strata and also the same weighted (biased estimator) sample variances.
+However it also additionally involves the weighted square error of the sample means as a complicating factor.
+Now, although the weighted square error of the sample means may go to zero quickly as additional samples are taken, we nonetheless need to develop another probability bound to incorporate the specific consideration of it. The following probability inequality bounds the weighted square error of the sample means:
+
+\begin{theorem}\label{thm:3}
+Assuming the context given in Definition~\ref{def:ProblemContext}.
+Then with $\Omega_{m_i}^{n_i}$ as in Lemma~\ref{martingale1}:
+\begin{equation}\label{eq1.5} \pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge \frac{\log(2n/r)}{2}\sum_{i=1}^n\theta_iD_i^2\Omega_{m_i}^{n_i}\right) \le r \end{equation}
+\end{theorem}
+\begin{proof}
+We consider the weighted square error of the sample means, and by probability complimentarity we know:
+$$ \pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) = 1-\pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 < r\right) $$
+
+As the probability that sum of any random variables is less than $r$ is obviously greater than the probability that those random variables individual are all less than specific values that sum to $r$ hence, for $r_i$ such that $\sum r_i=r$:
+
+$$ \pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\pr\left(\theta_i(\mu_i - \chi_{i,m_i})^2 < r_i\right) $$
+hence by probability complimentarities again:
+$$\pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\left(1-\pr\left(\mu_i - \chi_{i,m_i} \ge \sqrt{\frac{r_i}{\theta_i}}\right) - \pr\left( \chi_{i,m_i}-\mu_i \ge \sqrt{\frac{r_i}{\theta_i}}\right)\right),$$
+
+And this is exactly the form which we want, in terms of the products of the error in each of the strata sample means.
+Thus we can apply Lemma~\ref{chernoff1} together with Lemmas~\ref{martingale1} and~\ref{Hoeffdings_lemma_lemma}, which gives:
+$$ 
+\pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\left(1-2\exp\left(-\frac{2r_i}{\theta_iD_i^2\Omega_{m_i}^{n_i}}\right)\right)
+$$
+Next, choosing $r_i$ to minimize the right hand side of this expression gives:
+$$
+r_i = \frac{r\theta_iD_i^2\Omega_{m_i}^{n_i}}{\sum_j \theta_jD_j^2\Omega_{m_j}^{n_j}}
+$$
+In this context, we therefore deduce that:
+$$ 
+\pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\left(1-2\exp\left( \frac{-2r}{\sum_j\theta_j D_j^2\Omega_{m_j}^{n_j}}\right)\right)
+$$
+Using the fact that $\log(1-(1-\exp(x))^n)\le x+\log(n)$ for any negative $x$, and rearranging, gives the required result.
+\end{proof}
+
+This theorem directly bounds the weighted square errors of the sample means independently of any other specifically unknown factors.
+In the next, and final, step we combine all the inequalities of Equations~\eqref{eq1}, \eqref{eq2} and~\eqref{eq1.5} from Theorems \ref{thm:1}, \ref{thm:2} and \ref{thm:3} together, to complete our derivation of a probability bound for the error in stratified sampling - our SEBB.
+
+
+\begin{theorem}[Stratified Empirical Bernstein Bound (SEBB)]\label{thm:SEBM_bound}
+Assuming the context given in Definition~\ref{def:ProblemContext}.
+Then with $\Omega_{m_i}^{n_i},\Psi_{m_i}^{n_i}$ per Lemma~\ref{martingale1}:
+\begin{equation}\label{big_equation}
+%\p\left(\frac{\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|}{\sqrt{\log(6/p)}}\ge \sqrt{\begin{matrix*}[l]\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_i^2\tau_i^2 \\ +\begin{pmatrix*}[l]\sqrt{\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right)} \\ +\sqrt{\begin{matrix*}[l]2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i \\ + \log(6n/p)\sum_i\tau_i^2D_i^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\ +\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right)\end{matrix*}} \end{pmatrix*}^2\end{matrix*}}\right)
+%\le p 
+%\end{equation}
+%\begin{equation}\label{big_equation_alternate}
+\pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right| 
+\ge \sqrt{\log(6/p)\left( \alpha
++ \left(\sqrt{\beta} 
++ \sqrt{\gamma}\right)^2\right) } \right)
+\le p 
+\end{equation}
+where:
+\begin{align*}
+\alpha=&\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_i^2\tau_i^2 \\
+\beta=&\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right) \\
+\gamma=& 2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i
++ \log(6n/p)\sum_i\tau_i^2D_i^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad~+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right).
+\end{align*}
+
+
+%$$
+%\alpha_{m_i}^{n_i}
+%=\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_i^2\tau_i^2 
+%$$
+%$$
+%\beta_{m_i}^{n_i}
+%=\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right) 
+%$$
+%and
+%\begin{align*}
+%\gamma_{m_i}^{n_i}
+%= 2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i
+%&+ \log(6n/p)\sum_i\tau_i^2D_i^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i}  \\
+%&+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right)
+%\end{align*}
+\end{theorem}
+
+
+\begin{proof}
+By widening the bound of Equation~\eqref{eq2} we get:
+$$
+\pr\left(\begin{matrix*}[l]\sum_{i=1}^n\theta_i\sigma_i^2-\sum_{i=1}^n\theta_i(\hat{\sigma}_i^2+(\mu_i - \chi_{i,m_i})^2)\ge \\ \quad\quad\quad\quad\quad \sqrt{2\log(1/y)(\max_i\theta_iD_i^2\Psi_{m_i}^{n_i})\sum_{i=1}^n\theta_i\sigma_i^2}\end{matrix*}\right) \le y.
+$$
+Completing the square gives for $\sqrt{\sum_{i=1}^n\theta_i\sigma_i^2}$ gives:
+$$
+\pr\left(\sqrt{\sum_{i=1}^n\theta_i\sigma_i^2} \ge \begin{matrix*}[l]\quad\sqrt{\begin{matrix*}[l]\sum_{i=1}^n\theta_i(\hat{\sigma}_i^2+(\mu_i - \chi_{i,m_i})^2)\\ ~ + \frac{\log(1/y)}{2}\left(\max_i\theta_iD_i^2\Psi_{m_i}^{n_i}\right)\end{matrix*}} \\  +\sqrt{\frac{\log(1/y)}{2}\left(\max_i\theta_iD_i^2\Psi_{m_i}^{n_i}\right)}\end{matrix*}\right) \le y. 
+$$
+Combining with Equation~\eqref{eq1.5} with a union bound (Lemma~\ref{prob_union}) gives:
+\begin{equation}\label{eq:sum_variance_bound_equation}
+\pr\left(\sqrt{\sum_{i=1}^n\theta_i\sigma_i^2} \ge \begin{matrix*}[l]\quad\sqrt{\begin{matrix*}[l]\sum_{i=1}^n\theta_i\hat{\sigma}_i^2+ \frac{\log(2n/r)}{2}\sum_i\theta_iD_i^2\Omega_{m_i}^{n_i} \\ ~+ \frac{\log(1/y)}{2}\left(\max_i\theta_iD_i^2\Psi_{m_i}^{n_i}\right)\end{matrix*}} \\ +\sqrt{\frac{\log(1/y)}{2}\left(\max_i\theta_iD_i^2\Psi_{m_i}^{n_i}\right)}\end{matrix*}\right) \le y+r ,
+\end{equation}
+which is a bound for the weighted sum variances in terms of the sample variances.
+Letting $\theta_i = \frac{1}{2}\tau_i^2\Psi_{m_i}^{n_i}$ and combining with \eqref{eq1} with a union bound (Lemma~\ref{prob_union}), 
+and then assigning $ r=t=y=p/3 $ and rewriting in terms of unbiased sample variance, gives the result.
+\end{proof}
+
+This completes the derivation.
+In Equation \eqref{big_equation} of Theorem~\ref{thm:SEBM_bound}, we have a concentration inequality for the sum of weighted strata sample mean errors relative to the sample variances. 
+In this context, the weights $\tau_i$ are flexible but would naturally be probability weights proportional to strata size,  $\tau_i=n_i/(\sum_{j=1}^nn_j)$, 
+in which case the inequality provides a concentration of measure in stratified random sampling.\\
+
+
+
+In this and the previous section we have proposed two different methods of developing concentration inequalities for the error of the stratified sampling mean estimate.
+In Section \ref{section:old_statistics} we outlined how different EBBs could be bound together to create a bound for the error in stratified sampling via Theorem \ref{triangle_theorem2} (and we also developed our own numerical EBB).
+And in this section we built a bound directly and specifically for stratified sampling mean estimate in Theorem \ref{thm:SEBM_bound}.
+
+It is evident that for any probability bound for the error of our stratified sampling mean estimate, it is possible to choose additional samples from strata to minimise the expression.
+And it is expected that the better and more tight the bound, the more likely it will be the case that iteratively choosing samples to minimise the bound will infact produce better estimate of the population mean in practice.
+One of the best ways of testing this hypothesis is with actual data, where divergent sets of synthetic data can be generated (with their mean calculated exactly) and the different methods of sampling tested to see how well they estimate the known means.
+
+And this is the approach that is taken in the next section, where we compare the accuracy attained via process of minimising the different probability bounds developed in this chapter.
+
+But before we leave this section, we also (for good measure) consider another strongly related bound on the error in stratified sampling.
+particularly since the last Theorem \ref{thm:SEBM_bound} ultimately builds apon Theorem \ref{thm:1} which was the embodiment of a simplification of Bennett's inequality per Lemma \ref{expectation1}.
+And since we will compare against Neyman sampling which is conceptually built apon the minimisation of Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) we will also consider and compare against a empirical Chebyshev's inequality for stratified sampling.
+
+
+
+\begin{theorem}[Stratified Empirical Chebyshev Bound (SECB)]\label{thm:SECM_bound}
+Assuming the context given in Definition~\ref{def:ProblemContext}.
+Then with $\Omega_{m_i}^{n_i},\Psi_{m_i}^{n_i}$ per Lemma~\ref{martingale1}:
+\begin{equation}\label{another_big_equation}
+\pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right| 
+\ge \sqrt{\frac{3}{p}}\left(
+\sqrt{\alpha+\beta} 
++ \sqrt{\beta}\right)  \right)
+\le p 
+\end{equation}
+
+where:
+\begin{align*}
+\alpha=&\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i+ \frac{\log(6n/p)}{2}\sum_i\tau_i^2\Psi_{m_i}^{n_i}D_i^2\Omega_{m_i}^{n_i} \\
+\beta=&\frac{\log(3/p)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)
+\end{align*}
+
+\end{theorem}
+\begin{proof}
+
+We can use Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) for the strata sample estimator giving:
+$$ \p\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge \frac{1}{\sqrt{k}}\sqrt{\text{Var}\left(\sum_{i=1}^n\tau_i\chi_{i,m_i}\right)}\right) \le k $$
+Which is a probability bound for the error of the stratum mean estimator in terms of its variance.
+Whereby we can assume the independence of the sampling between the strata and sampling with replacement, giving the decomposition of the variance of the estimator (in a similar process to Equation \ref{eq:variance_decomposition_for_strata_mean}), giving:
+$$ \text{Var}\left(\sum_{i=1}^n\tau_i\chi_{i,m_i}\right) = \sum_{i=1}^n\tau_i^2\text{Var}(\chi_{i,m_i}) =  \sum_{i=1}^n\frac{\tau_i^2\sigma_i^2}{m_i} $$
+Hence:
+$$ \p\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge \frac{1}{\sqrt{k}}\sqrt{\sum_{i=1}^n\Psi_{m_i}^{n_i}\tau_i^2\sigma_i^2}\right) \le k $$
+Which is a Chebyshev type inequality for the error of the stratum mean estimator in terms of a sum of the stratum variances - and is very analogous to Equation \ref{eq1} of Theorem \ref{thm:1}.
+And since equation \ref{eq:sum_variance_bound_equation} (from the previous proof) is a general bound for an arbitrary sum of the stratum variances we can combine with it (in the case of setting $\theta_i = \tau_i^2\Psi_{m_i}^{n_i}$) by a union bound (Lemma~\ref{prob_union}), giving:
+
+$$
+\pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right| \ge \frac{1}{\sqrt{k}}\left( \begin{matrix*}[l]\quad\sqrt{\begin{matrix*}[l]\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}\hat{\sigma}_i^2+ \frac{\log(2n/r)}{2}\sum_i\tau_i^2\Psi_{m_i}^{n_i}D_i^2\Omega_{m_i}^{n_i} \\ ~+ \frac{\log(1/y)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)\end{matrix*}} \\ +\sqrt{\frac{\log(1/y)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)}\end{matrix*}\right)\right) \le y+r+k,
+$$
+
+And setting $ r=k=y=p/3 $ and rewriting in terms of unbiased sample variance, gives the result.
+
+\end{proof}
+
+
+We particularly consider this extra bound as a half-way-horse between the technique that is minimising our more thoroughly developed SEBM (per Theorem \ref{}) and the method we are comparing against - particularly Neyman sampling.
+We note that like Neyman sampling, that this bound works most effectively in the context of choosing samples with replacement.
+In the next section we will compare how all these methods work in actually sampling stratified data.
+

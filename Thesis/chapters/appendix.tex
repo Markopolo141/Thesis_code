@@ -1,0 +1,172 @@
+\appendix
+
+
+\section{Some Continuity and Monotonicity properties of the GNK value}
+
+From inspection of equations \ref{knvalue1} and \ref{da_value_eq} it defined that the GNK value is a summation over maximum of minimum terms and it should be rather evident that there is present some nice continuity properties:
+
+\begin{theorem}[GNK continuous with utilities]
+For utility functions $u_i(x,y)$ if we consider any bounded perturbations $\epsilon \Delta_i(x,y)$ then the GNK value is continuous with $\epsilon$.
+\end{theorem}
+\begin{proof}
+To demonstrate that the GNK value is continuous with change in utility functions we consider that for all $(x,y)\in A$ we consider any set of utility perturbating functions $\Delta_i(x,y)$ with a magnitude $\max_{(x,y)\in A, i\in N}|\Delta_i(x,y)| = d$.
+For any coalition $S$, if we consider that advantage $v(S)$ with the original utility functions as $v_u(S)$ and with the perturbed utility function multiplied by a parameter $\epsilon$ as $v_{u+\epsilon \Delta}(S)$ then we can realise that:
+$$-n\epsilon d \le v_u(S)-v_{u+\epsilon \Delta}(S) \le n\epsilon d$$
+Therefore for any individual $i\in N$ the average over the advantage terms $v(S)$ for coalitions which include $i$ of size $k$ is similarly bounded.
+$$-n\epsilon d \le \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_u(S)-\frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_{u+\epsilon \Delta}(S) \le n\epsilon d$$
+Therefore the average of these terms over sizes $k=1\dots n$ is also bounded.
+$$-n\epsilon d \le \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_u(S)-\frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_{u+\epsilon \Delta}(S) \le n\epsilon d$$
+Which is the difference in the GNK value for an individual $i$ between the perturbed and unperturbed utility function.
+Thus for any prospective utility perturbation $\Delta$ with a magnitude $d$ there is a $\delta$ ($=n\epsilon d$) such that there exists a perturbation factor $\epsilon$, such that if the utility functions are $\epsilon$ perturbed then the GNK value is $\delta$ bounded.
+\end{proof}
+
+The monotonicity properties that the GNK value has are partially inherited from its relation to the Shapley value.
+
+\begin{theorem}[GNK is monotonic]\label{thm:monotonicity}
+If we consider advantage functions $v$ and $v'$ and the GNK value with those advantage function $\varphi^v_i$ and $\varphi^{v'}_i$.
+Then for any individual $i\in N$, if all coalitions $S$ such that $i\in S$ it is true that $v'(S)\ge v(S)$ then $\varphi^{v'}_i \ge \varphi^v_i$.
+\end{theorem}
+\begin{proof}
+$$\varphi^v_i = \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v(S) \le \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v'(S) =\varphi^{v'}_i$$
+\end{proof}
+
+The question then becomes about what changes in utility functions and network constraints bring about this kind of monotonicity. The most direct case is shift invariance, which is inherited from nash bargaining roots \cite{nash2} and directly stated as an axiom in the case of the `coco' value \cite{kalai1}.
+
+\begin{theorem}[GNK is shift invariant]
+For any two utility profiles $u^1_i(x,y)$ and $u^2_i(x,y)$, and GNK defined by these utility profiles $\varphi_i^1$ and $\varphi_i^2$.
+Then for any individual $i\in N$, if $u_i^2(x,y) = u_i^1(x,y)+c$ for some constant $c$, and for all $j\neq i$ that $u^2_i(x,y) = u^1_i(x,y)$, then $\varphi_i^2 = \varphi_i^1+c$ 
+\end{theorem}
+\begin{proof}
+If we consider advantage functions $v_1$ and $v_2$ defined by utility functions $u_i(x,y)^1$ and $u_i(x,y)^2$ then for any coalition $S$ including individual $i$:
+\begin{align}
+v_2(S) = &
+\frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}} \left[
+\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y)+c - \sum_{i\in N\setminus S}u_i^2(x,y)\right)\right]\nonumber\\
+& +
+\frac{1}{2}\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}} \left[
+\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y)+c - \sum_{i\in N\setminus S} u_i^2(x,y) \right) \right]\nonumber\\
+&= v_1(S)+c\nonumber
+\end{align}
+The above step simply brings the additive constant out the front of the max and min terms.
+Therefore for every coalition $S$ which includes individual $i$ of size $k$, $v_2(S)=v_1(S)+c$, therefore the average of these values over such coalitions has a similar relation.
+$$\frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_2(S) = \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_1(S) + c$$
+therefore the average of these averages over sizes of coaltions $k=1\dots n$ is again similar:
+$$\frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_2(S) = \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_2(S) + c$$
+which is to say that $\varphi_i^2 = \varphi_i^2+c$.
+\end{proof}
+
+Shift invariance is important but not particularly interesting property.
+So instead we also consider a very similar monotonicity property with regards to any utility perturbation that non-decreases a player's utility.
+
+\begin{theorem}[GNK is monotonic with increasing player utility]
+For any two utility profiles $u^1_i(x,y)$ and $u^2_i(x,y)$, and GNK values defined by these utility profiles: $\varphi_i^1$ and $\varphi_i^2$.
+Then for any individual $i\in N$, if $u_i^2(x,y) = u_i^1(x,y)+f(x,y)$ for some non-negative function $f$, and for all $j\neq i$ that $u^2_i(x,y) = u^1_i(x,y)$, then $\varphi_i^2 \ge \varphi_i^1$ 
+\end{theorem}
+\begin{proof}
+If we consider advantage functions $v_1$ and $v_2$ defined by utility functions $u_i(x,y)^1$ and $u_i(x,y)^2$ then for any coalition $S$ including individual $i$:
+\begin{align}
+v_2(S) = &
+\frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}} \left[
+\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y)+f(x,y) - \sum_{i\in N\setminus S}u_i^2(x,y)\right)\right]\nonumber\\
+& +
+\frac{1}{2}\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}} \left[
+\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y)+f(x,y) - \sum_{i\in N\setminus S} u_i^2(x,y) \right) \right]\nonumber\\
+&= v_1(S)+c\nonumber
+\end{align}
+If we pull out the inner maximisation and minimisation for the perturbed and unperturbed problems respectively, ie:
+$$ g_1(y) = 
+\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y)+f(x,y) - \sum_{i\in N\setminus S}u_i^2(x,y)\right)
+$$
+$$g_2(y) = 
+\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y) - \sum_{i\in N\setminus S}u_i^2(x,y)\right) $$
+$$h_1(x) = 
+\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y)+f(x,y) - \sum_{i\in N\setminus S} u_i^2(x,y) \right)$$
+$$h_2(x) = 
+\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}}
+	\left(\sum_{i\in S} u^1_i(x,y) - \sum_{i\in N\setminus S} u_i^2(x,y) \right)$$
+
+Now since $f(x,y)$ is non-negative therefore $g_1(y) \ge g_2(y)$ and $h_1(x) \ge h_2(x)$ irrespective of $x$ and $y$.
+therefore
+$$\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}}g_1(y) \ge \min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}}g_2(y)$$
+$$\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}}h_1(x) \ge \max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}}h_2(x)$$
+
+and $$v_2(S) \ge v_1(S)$$
+And the result that $\varphi_i^2 \ge \varphi_i^1$ follows by monotonicity (theorem \ref{thm:monotonicity}).
+\end{proof}
+
+
+
+\section{Some associated Concentration Inequalities}\label{Appendix:more_concentration}
+
+\begin{theorem}\label{hoeffdings_inequality22}
+Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
+\begin{equation}\p(\hat{\mu}-\mu\ge t)\le \left( \frac{b}{b-a}\left(\frac{b(a-t)}{a(b-t)}\right)^{\frac{a-t}{b-a}} -\frac{a}{b-a}\left(\frac{b(a-t)}{a(b-t)}\right)^{\frac{b-t}{b-a}}  \right)^n
+\end{equation}
+\end{theorem}
+\begin{proof}
+Similar to the proof in Theorem \ref{hoeffdings_inequality} we follow the same steps except do not apply Equation \ref{Hoeffdings_lemma}, leading to:
+$$ \p(\hat{\mu}\ge t) \le \left(\frac{b\exp(sa) - a\exp(sb)}{\exp(st)(b-a)}\right)^n $$
+And minimising with respect to $s$ 
+%occurs at, which 
+yields the required result.
+%$$ s = \frac{1}{b-a}\log\left(\frac{b(a - t)}{a(b - t)}\right) $$
+\end{proof}
+This concentration inequality is more powerful but more ugly and difficult to manipulate, it is also more commonly stated for variable $X$ with non-zero mean and bounded $0<X<1$:
+
+\begin{theorem}[Also called Hoeffding's inequality]\label{hoeffdings_inequality23}
+Let $X$ be a real-valued random variable that is bounded $0\le X\le 1$, with mean $\mu$. Then for $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
+\begin{equation}\p(\hat{\mu}-\mu\ge t)\le \left[\left(\frac{1-\mu}{1-t-\mu}\right)^{1-t-\mu}  \left(\frac{\mu}{t+\mu}\right)^{t+\mu}\right]^n
+\end{equation}
+\end{theorem}
+Which follows directly from the substitution $a=-\mu$ and $b=1-\mu$.
+
+Theorems \ref{hoeffdings_inequality22} and \ref{hoeffdings_inequality23} will not be used for further derivation, but to illustrate the point that 
+
+
+
+\section{Efron-Stein inequality for the Sample Variance}
+
+It is to be noted that one way to derive a concentration inequality for the variance is to use Chebyshev's inequality for the sample variance itself.
+Consider that if $\hat{\sigma}^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-\mu)^2$ where $\mu = \frac{1}{n}\sum_{i=1}^nx_i$ is the sample mean, then:
+
+$$\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \frac{\text{Var}(\hat{\sigma}^2)}{k^2}$$
+which gives us a pretty straightforward error on the sample variance if we can bound $\text{Var}(\hat{\sigma}^2)$
+
+Now since, $\hat{\sigma}^2$ is a general function of the samples $x_1,\dots,x_n$ we can apply Efron-Stein inequality to bound it.
+The Efron-Stein inequality bounds the variance of a function of random variables by the sum of variances about each of those parameter variables.
+
+\begin{theorem}[Efron-Stein inequality]
+If $f$ is a function of $n$ random variables $x_1,x_2,\dots,x_n$, let $x'_1,x'_2,\dots,x'_n$ be independent copies of the same variables, letting $Z=f(x_1,x_2,\dots,x_n)$ and $Z'_i=f(x_1,x_2,\dots,x_{i-1},x'_i,x_{i+1},\dots,x_n)$
+then:
+$$ \text{Var}(Z) \le \frac{1}{2}\sum_{i=1}^n\E[(Z-Z'_i)^2]$$
+\end{theorem}
+
+Applying the Efron-Stein inequality to the function $\hat{\sigma}^2$ gives:
+$$\text{Var}(\hat{\sigma}^2)\le \frac{5-n}{n(n-1)}\sigma^2 + \frac{1}{n}\mu_4 $$
+where $\mu_4$ is the forth central moment.
+
+Therefore there are two primary options, we can eliminate the first term, or we can half reduce the second.
+For the first option, the $\sigma^2$ coefficient is non-positive for $n\ge 5$, therefore for $n\ge 5$ that:
+$$\text{Var}(\hat{\sigma}^2)\le \frac{1}{n}\mu_4 $$ and given that if the variables $x_1,\dots,x_n$ are bounded $a\le X\le b$ with $D=b-a$ then
+$\mu_4\le \frac{D^4}{16}$ and hence:
+\begin{equation}\label{appendix_eq_1}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \frac{D^4}{16nk^2}\end{equation}
+
+
+For the second option, since $\mu_4=\E[(X-\mu)^4]\le D^2\E[(X-\mu)^2]=D^2\sigma^2$ hence:
+$$\text{Var}(\hat{\sigma}^2)\le \frac{5-n}{n(n-1)}\sigma^2 + \frac{1}{n}\mu_4 \le \left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\sigma^2$$
+hence:
+\begin{equation}\label{appendix_eq_2}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\frac{\sigma^2}{k^2}
+\end{equation}
+
+Therefore combining these two expressions \ref{appendix_eq_1} and \ref{appendix_eq_2} becomes:
+
+\begin{equation}\label{appendix_eq_3}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \min\left(\left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\frac{\sigma^2}{k^2},\frac{D^4}{16nk^2}\right)
+\end{equation}
+Which is valid for $n\ge 5$.

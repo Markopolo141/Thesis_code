@@ -1,0 +1,80 @@
+
+\section{THE PLAN PLAN}
+
+
+\subsection{The problem of Energy Allocation}
+The purpose of the introductory chapter is to outline the nature of power\&money allocation mechanisms in electricity systems that are orientated toward supplying consumer demand from industrial generators, and that thoes mechanisms are ill equipped to handle the emerging situation where consumers are increasingly supplying their own and their neighbour's electrical energy.
+
+\subsubsection{The NEM}
+outlines the function and operation of the National Energy Market and the structure of the current system, and how consumers that generate power ('prosumers') are treated under the current system.
+
+\subsubsection{Decentralisation and Auction Mechanisms}
+gives some recent history and back-drop to the NEM structure, providing differences in market structure between Australian Eastern and Western Australian energy systems, and in the context of many other countries process of setting up decentralised market systems, a process that occured throughout the 80's and 90's.
+
+\subsubsection{Consumer Suppliers}
+Outlines the complications and proliferation of ideas surrounding the incorporation of prosumers and network-aware consumers into existing structures and energy markets, such as demand-response programs, virtual power-plants, and feed-in tarifs.
+
+\subsubsection{Extended Bidding Schemes}
+blah
+
+\subsection{The Question of allocation}
+The chapter gives a conceptual outline of the approaches to the fundamental question of how resources (money and/or electrical power) can-or-should be allocated in *any* system.
+
+\subsubsection{The Philosophical 'should'}
+A preface addressing the essential philosophical nature of the question, and associated ideals that people may or may not hold in regarding the distribution of resources in any given system or enterprise.
+
+\subsubsection{Bargaining}
+Switches the question into one of what ideally 'would' (rather than 'should') occur in the context of resource distribution, particularly between small numbers of participants, outlines idealised and mathematical ideas about Game Theory and bargaining, particularly of Nash and Harsanyi solution concepts.
+
+\subsubsection{Cooperative Schemes}
+Outlines ideas of cooperative game theory surrounding the
+distribution of resources between many parties, including such concepts as the Shapley Value, Core and Neucleolus; also touches on NTU schemes.
+
+\subsubsection{Considerations of Mechanism Design}
+Gives an overview of key ideas and results in the complicated field of Mechanism Design, particularly outlining ideas and considerations of Incentive Compatability (IC) and individual rationality (IR), highlights the principal VC-type mechanisms as a special and potentially unrealistic mechanism, but also highlights how weaker concepts (such as Baysean incentive compatibility) can be applied to bargaining ideas (such as the work of Roger Myerson), implementation theory
+
+\subsubsection{Economic Perspectives}
+Gives some history to the ideas surrounding value in an economic context, and particularly outlined is the history of the (Marxist) labor theory of value and neo-liberal marginalism principles. gives some outline of how these ideas square up with Auction Design and how they are proposed to extend to distribution energy markets as Locational Marginal Pricing principles (LMP)
+
+\subsubsection{Alternative approaches}
+Gives an overview of other left-over and alternative ideas surrounding bargaining solutions and resource allocation (including egalitarian solutions, and alternative descriptions of bargaining processes)
+
+\subsection{A new solution}
+The GNK value - gives the description of the primary solution concept that is developed throughout the PhD, the 'Generalised Neyman \& Kohlberg value'
+
+\subsubsection{Summary Statement \& Derivation}
+Gives in a most direct fashion the solution concept as simple and direct as possible, appealing-to and extending-from multiple of the ideas given in the previous chapter.
+
+\subsubsection{Discussion of the New Solution}
+Gives some further elaboration to the nature and paradigm of the solution. and how relates to and also differs from other concepts
+
+\subsubsection{Computability}
+Addresses the Issues associated with the computability of the GNK value, outlining the extreme difficulty and also proposing an avenue of successful solution, through sampling techniques and a simplification in structure; discusses the nature of the simplification.
+
+\subsubsection{Merits \& Deficits}
+Compares the pros\&cons of the GNK value primarily over LMP particularly as computed across a variety of randomly generated synthetic various large scale electricity networks. points of comparison are made assessing the GNK value as appropriate for application for electricity networks.
+
+\subsubsection{Alterations}
+Gives an outline of slight alternative formulations of the GNK value that may be more palatable depending on philosophical perspective.
+
+\subsection{Sampling Processes}
+discusses the methods that were created and evaluated to sample and solve the GNK value for large-scale networks
+
+\subsubsection{The complexity problem of the Shapley Value}
+Gives an overview of the processes that have been used to solve the shapley value approximately
+
+\subsubsection{Probability Bounds}
+Gives a background on the development of probability bounds associated with sampling - such as Hoeffding's inequality - and how they relate to processes in probability theory, such as Chernoff, Entropic methods and probability unions.
+
+\subsubsection{A new probability bound for Stratified Sampling (SEBB)}
+Gives the full development of a novel probability bound that is applicable for stratified random sampling
+
+\subsubsection{A new method of Stratified Sampling (SEBM)}
+Gives the outline of the method of sampling to minimise this new probability bound, and the success it brings in the context of sampling synthetic data.
+
+\subsubsection{The Importance of the method}
+Outlines the material relevance of this new method to wider studies, and illustrates this by addresses the potential for its use in calculating the GNK value.
+
+\subsection{Conclusions}
+Gives an overview of the arguments surrounding allocation of resources potentially relevant to electricity systems (Money \& Power), summarizes the development of novel techniques throughout the PhD, gives a brief description of the value of the necessity and value of the contribution; and makes concluding statements.
+

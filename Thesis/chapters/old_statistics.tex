@@ -1,0 +1,486 @@
+\section{Stratified Sampling by Unstratified Probability Bounds}\label{section:old_statistics}
+
+In considering appropriate concentration inequalities, one of the more recent and interesting kinds of concentration inequalities, are sometimes called \textit{empirical Bernstein bounds} (EBB).
+These are probability bounds describing the likely difference of a sample mean from the population mean in terms of the \textit{sample} variance.
+
+Some of the first EBBs given in literature are:
+
+\begin{theorem}[\cite{Maurer50empiricalbernstein}]\label{MandPsEBB}
+Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with $D=b-a$.  Then for $x_1,x_2,\dots,x_n$ independent samples of $X$ the mean $\hat{\mu}=\frac{1}{n}\sum_{i=1}^nx_i$ and sample variance $\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(x_i-\hat{\mu})^2 $ are probability bounded by $y$ for any $y>0$:
+\begin{equation}\label{maurersbound} 
+    \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(2/t)}{n}}+\frac{7D\log(2/t)}{3(n-1)}\right)\le t
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[\cite{10.1007/978-3-540-75225-7_15}]
+In exactly the same context as in Theorem \ref{MandPsEBB}
+\begin{equation}
+    \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(3/t)}{2n}} + \frac{3D\log(3/t)}{2n}\right) \le t.
+    \end{equation}
+\end{theorem}
+
+These inequalities share a lot of similarity with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper}) in that they are bounds specifically developed in the context of sampling a random variable which is bounded in a domain of width $D$,
+However these inequalities depart from Hoeffding's inequality in that they specifically reference variance information, but unlike Chebyshev's inequality do not assume knowledge of the variance itself, but only its estimator, the sample variance $\hat{\sigma}^2$. And can give tighter probability bounds particular when the sample variance $\hat{\sigma}^2$ is small.
+
+In this section we show how deriving (and subsequently minimising) inequalities such as these will allows for us to conduct stratified sampling in a single stage, rather than in two (as is nessisary in Neyman sampling).
+
+The derivation of these inequalities also assume that the values that the samples take are probabilistically independently from each other.  This most naturally corresponds to the schema of sampling \textit{with} replacement, rather than sampling \textit{without} replacement.
+In the next Section \ref{} we will consider probability bounds specifically developed for sampling without replacement. However it is sufficient to note that all these probability bounds also hold in the case of sampling without replacement; but the converse is not nessisarily true. 
+This is due to a result shown by \cite{hoeffding1}:
+
+\begin{lemma}[Hoeffding's reduction]\label{hoeffdings_reduction}
+let $X=(x_1,\dots,x_n)$ be a finite population of $n$ real points, let $X_1,\dots,X_n$ denote random samples without replacement from $X$ and $Y_1,\dots,Y_n$ denote random samples with replacement from $X$. 
+If $f:\mathbb{R}\rightarrow\mathbb{R}$ is continuous and convex, then:
+$$\textstyle \E\left[f\left(\sum_{i=1}^nX_i\right)\right]\le\E\left[f\left(\sum_{i=1}^nY_i\right)\right] $$
+\end{lemma}
+
+Using the continuous and convex function $f(x)=\exp(sx)$ it can be seen via the construction of Chernoff bounds (Theorem \ref{chernoff1}) that this result implies that all Chernoff bounds developed for sampling with replacement also hold for sampling without replacement.
+
+But regardless of whether sampling is done with or without replacement, in the context of stratified sampling, inequalities such as EBBs cannot be directly minimised in quite the same way as Chebyschev's inequality can since the population mean itself does not have a sample variance, but only that the samples of the strata have means and sample variances.
+
+\subsection{Stratified Sampling via EBBs and the Sequential Unions}
+
+To create a bound for the error of our stratified mean estimator from EBBs we need to use probability unions to bind them together:
+
+\begin{theorem}\label{triangle_theorem1}
+If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
+If the error in the sample mean of a stratum is bounded by an Empirical Bernstein Bound:
+$\quad \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t $\\
+Then the error in our stratified estimation is probability bounded:
+$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/m)\right)\le t $$
+\end{theorem}
+\begin{proof}
+We begin by considering that the stratified mean estimate is given by:
+$$ \hat{\mu} = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} \hat{\mu}_i ~~~~~~~\text{and thus:}~~~~~~~ \hat{\mu}-\mu = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} (\hat{\mu}_i-\mu_i)$$
+Thence because we can scale (by positive factor) the inside of the EBB inequality (for any $j\in\{1,\dots, m\}$):
+\begin{equation}\label{equation_partial_union1} \p\left(\frac{N_j}{\sum_kN_k}(\hat{\mu}_j-\mu_j) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\right) \le t \end{equation}
+adding identical terms to both sides of the inner inequality gives:
+\begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
+now since equation \ref{equation_partial_union1} also holds for any $l\in\{1,\dots, m\}$ other $j$ then:
+$$ \p\left(\frac{N_l}{\sum_kN_k}(\hat{\mu}_l-\mu_l) \ge \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t)\right) \le t $$
+hence by adding terms to both sides of the inner inequality:
+\begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
+Applying probability union (lemma \ref{prob_union}) to equations \ref{equation_partial_union2} and \ref{equation_partial_union3} gives:
+$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
+Repeating this process of taking equation \ref{equation_partial_union1} for a new index, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, ultimately gives:
+$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le mt $$
+And scaling $t$ gives result.
+\end{proof}
+
+The result of this proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata - which is exactly what we are looking for.
+We can apply this theorem with our choice of EBB to create a bound for the stratified mean error, which we can then seek to minimise.
+
+What is worth noting is that this process of binding EBBs together by a series of probability unions is expected to result in a rather weak bound, as probability unions are not very strong.
+And that this weakness is expected to increase with larger numbers of strata (ie. larger $m$) as there are more probability unions needed to bind it together.
+
+If we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then we can conduct a similar procedure, and utilize the triangle inequality - as done by \cite{2013arXiv1306.4265M}.
+
+\begin{theorem}\label{triangle_theorem2}
+In exactly the same context as theorem \ref{triangle_theorem1}, that:
+$$ \p\left(|\hat{\mu}-\mu| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/2m)\right)\le t $$
+\end{theorem}
+\begin{proof}
+If $ \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t$ then
+$ \p(|\hat{\mu}_i-\mu_i| \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le 2t$.\\
+Then by repeated application of probability unions (similar to that process used in the proof of theorem \ref{triangle_theorem1}) we get:
+\begin{equation}\label{partial_equation_part11} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k} |\hat{\mu}_i-\mu_i| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t) \right) \le 2mt \end{equation}
+Now, via the triangle inequality:
+$$\hat{\mu}-\mu = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} (\hat{\mu}_i-\mu_i) ~~~~~~~~~~\text{implies}~~~~~~~~~~ |\hat{\mu}-\mu| \le \sum_{i=1}^m\frac{N_i}{\sum_kN_k} |\hat{\mu}_i-\mu_i| $$
+then $ \p(|\hat{\mu}-\mu| > \sum_{i=1}^m\frac{N_i}{\sum_kN_k}|\hat{\mu}_i-\mu_i|) \le 0 $ and by probability union with \eqref{partial_equation_part11}:
+$$ \p\left(|\hat{\mu}-\mu| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le 2mt $$
+And the result follows by scaling $t$.
+\end{proof}
+
+We give this second theorem in addition to the first make clear, that sampling to minimise either the error, or the absolute error essentially amounts to minimising the same target in this context.
+And also to illustrate exactly how weak probability unions are.
+
+The triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} we are effectively developing a bound assuming all the errors of the estimates of the strata are additive - which is positively the worst case.
+Whereas we know that (or can possibly assume) that the errors in the strata estimates are actually independant of each other, and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
+Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following Section \ref{}.
+
+However in this section, it is by these bounds that we can bind together EBB's of our choice to create a bound for the error of the stratified estimate - which we can then sample to minimise.
+
+In this Section we develop a novel EBB derived from numerical computations, and compare it as a stratified sample mechanism against stratified sampling done with Maurer and Pontil's EBB and Audibert et.al's EBB, and also Neyman sampling in Chapter \ref{}.
+
+We will also consider various EBBs in the context of Upper Confidence Bound (UCB) method of bandit algorithm in subsection \ref{}.
+
+\subsection{Challenge: To derive a stronger EBB}
+
+EBBs have been used as a method of generating confidence bounds for the mean, and an outstanding task is to see how much these techniques can be sharpened.
+Given this challenge, we take inspiration and extend the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
+Specifically, we use two Chernoff bounds, for the sample mean and the mean of sample squares, which are fused using a probability union (Theorem \ref{prob_union}) and variance decomposition (Theorem \ref{variance1}),
+to create a novel probability bound for the sample variance, which is then used to derive our novel EBB.
+
+
+
+%Our EBB tightens existing bounds by incorporating a combination of bounds on the variation of the sample variance.
+%However, due to its analytic intractability, we complete the derivation by discussing how to numerically implement the bound.
+%The evaluations in section \ref{} show that our EBB significantly tightens existing bounds. 
+%Specifically, our EBB can shrink the best existing EBBs by about a third. This represents half of the distance between the best existing EBBs and an unattainable Bernstein bound constructed with perfect variance information.
+%Moreover, we demonstrate the use of our novel EBB in an \textit{upper-confidence bound} (UCB) multi-armed bandit (MAB) algorithm in section \ref{}.  
+%Results from a set of MABs show that using our bound in a UCB algorithm outperforms existing approaches, by producing comparable or lower expected regret than employing other existing bounds, including state-of-the-art EBBs.
+
+
+
+% In addition, concentration inequalities that describe sampling without replacement can give additional tightening over those that assume sampling with replacement. This refinement was first demonstrated in \cite{serfling1974} with a martingale argument.
+% More recently, this result was improved with a reverse martingale argument and used to extend M\&P's EBB to the case of sampling without replacement \cite{bardenet2015}.
+% Furthermore, if small sample sizes are assumed, then it may be possible to derive perfectly tight %ideal 
+% concentration inequalities in some circumstances, and there do exist some computational methods to derive these perfect bounds more generally \cite{OUQ1,doi:10.1137/13094712X}.
+% However, in this paper we focus on refining bounds in the case of sampling with replacement in the context of large numbers of samples.
+
+
+\subsubsection{Derivation and numerical implementation}
+\label{derivation}
+In this section, we derive two Chernoff bounds, 
+for the sample mean and the mean of sample squares, (Theorem~\ref{sample_squares} and Lemma~\ref{variance2}, respectively). 
+These are fused using a probability union and variance decomposition, defined above, to derive a bound for the sample variance. 
+This bound is then used to derive our new EBB, as presented in Theorem~\ref{ebb1}.
+
+Our first probability bound is a Chernoff bound on the sample mean called \textit{Bennett's inequality}. 
+This bound is not new and was derived by \cite{hoeffding1} and \cite{10.2307/2282438} and has subsequently been a subject of discussion and many further developments; it is known to be quite strong \cite{Bentkus08boundsfor,Pinelis2014,zbMATH00812598}; 
+We state the theorem \ref{hoeffdings1} whose proof involves the use of an intermediate theorem \ref{thm:parabola}.
+
+\begin{theorem}[Bennett's inequality]\label{hoeffdings1}
+Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$. 
+Then for $t>0$, the mean $\hat{\mu}$ of $n$ samples of $X$ is probability bounded by:
+\begin{equation}\label{eq_no2}\p(\hat{\mu}\ge t)\le H_1^n\left(\frac{\sigma^2}{b^2},\frac{t}{b}\right),
+\end{equation}
+where:
+\begin{equation*}
+H_1^n\left(\frac{\sigma^2}{b^2},\frac{t}{b}\right) =
+\left(\left(\frac{\frac{\sigma^2}{b^2}}{\frac{\sigma^2}{b^2}+\frac{t}{b}}\right)^{\frac{\sigma^2}{b^2}+\frac{t}{b}}
+\left(1-\frac{t}{b}\right)^{\frac{t}{b}-1}\right)^{\frac{n}{\frac{\sigma^2}{b^2}+1}}
+\end{equation*}
+\end{theorem}
+\begin{proof}As random variable X is bounded $a\le X\le b$, for any $s>0$, by Lemma \ref{thm:parabola}, there exist parameters $\alpha,\beta,\gamma$ such that, $\alpha s^2X^2+\beta sX+\gamma\ge \exp(sX)$ is always satisfied, hence for these we have:
+$$\E\left[\exp(sX)\right] \le \E[\alpha s^2X^2+\beta sX+\gamma] \le \alpha s^2\E[X^2]+\gamma \le \alpha  s^2\sigma^2+\gamma$$
+$$ \le (\sigma^2\exp(sb) + b^2\exp(-s\sigma^2/b))(\sigma^2 + b^2)^{-1}$$
+Hence by application of lemma \ref{chernoff1}:\\
+$$\p(\hat{\mu}\ge t) \;\le\; (\sigma^2\exp(sb) + b^2\exp(-s\sigma^2/b))^n((\sigma^2 + b^2)\exp(st))^{-n}$$
+minimising with respect to $s$ completes the proof, minimum $s$ occurs at:
+$$ s = \frac{b}{\sigma^2 + b^2}\log\left(\frac{b(\sigma^2 + tb)}{\sigma^2(b-t)}\right) $$
+\end{proof}
+
+\begin{lemma}[Parabola Fitting]\label{thm:parabola}
+For $b>0$, $a<b$ and $z>0$, there exists an $\alpha,\beta,\gamma$ such that: $\alpha x^2+\beta x+\gamma\ge \exp(x)$ for all $a\le x\le b$, and:
+$$z\alpha+\gamma = (z\exp(b) + b^2\exp(-z/b))(z + b^2)^{-1}$$
+\end{lemma}
+\begin{proof}
+A example parabola $\alpha x^2+\beta x+\gamma$ which that satisfies these requirements tangentially touches the exponential curve at one point (at $x=f<b$) and intersects it at another (at $x=b$), as illustrated in Figure \ref{fig:graph1}.
+Thus the parabola's intersection at $x=b$ and its tangential intersection at $x=f$ can be written in matrix algebra:
+$$
+\begin{bmatrix}
+    \alpha \\
+    \beta \\
+	\gamma
+\end{bmatrix}
+=
+\begin{bmatrix}
+    b^2 & b & 1 \\
+    f^2 & f & 1 \\
+	2f  & 1 & 0
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+    \exp(b) \\
+    \exp(f) \\
+	\exp(f)
+\end{bmatrix}$$
+This gives our parabola parameters $\alpha,\beta,\gamma$, in terms of $f$ and $b$, hence:
+$$z\alpha+\gamma = (((z+fb-b)(f-b-1)-b)e^f+(f^2+z)e^b)(b-f)^{-2}$$
+Minimizing with respect to $f$ occurs at $f=\frac{-z}{b}$ and gives the result.
+\end{proof}
+
+The reason for the separation of Bennet's inequality into two parts is that we will reuse the Lemma to derive a weaker but more mathematically manipulatable inequality later (as theorem \ref{}).
+In our statement of Bennet's inequality the assumption that the mean is zero can be used without a loss of generality, in exactly the same way as we did with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper}).
+And so, Bennett's inequality gives us a probability bound for the difference of the sample mean from the true mean, given the variance - in a similar way as does Chebyshev's inequality.
+The fundamental difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a line over the exponential function.
+Additionally the derivation of Hoeffdings inequality (per Theorem \ref{Hoeffdings_inequality_proper}) is built with a mathematically simplifying assumption that is not nessisary - but can be conducted without it as Theorem \ref{} in the Appendix \ref{}.
+
+As already stated, the variance is often unknown in practice, but can only be estimated via the sample variance statistic. And so we sought to derive a bound for the error between the sample variance and the variance. To do this we derived a concentration inequality for the sample squares to use in conjunction with the variance decomposition Lemma \ref{variance1}.
+We derived the following concentration inequality (which we note, appears to be novel):
+
+\begin{lemma}[Sample square bound]\label{sample_squares}
+Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$, if $d=\max(b,-a)$ then for $y>0$, the mean of sample squares $\hat{\sigma}_0^2=\frac{1}{n}\sum_ix_i^2$ is probability bounded:
+\begin{equation}\label{equation_squares}\p(\sigma^2 - \hat{\sigma}_0^2> y) \le H_2^n\left(\frac{\sigma^2}{d^2},\frac{y}{d^2}\right),
+\end{equation}
+where:
+\begin{align*} H_2^n\left(\frac{\sigma^2}{d^2},\frac{y}{d^2}\right) = \left(
+\left(\frac{1-\frac{\sigma^2}{d^2}}{1+\frac{y}{d^2}-\frac{\sigma^2}{d^2}}\right)^{1+\frac{y}{d^2}-\frac{\sigma^2}{d^2}}
+\left(\frac{\frac{\sigma^2}{d^2}}{\frac{\sigma^2}{d^2}-\frac{y}{d^2}}\right)^{\frac{\sigma^2}{d^2}-\frac{y}{d^2}}
+\right)^n
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+There exist parameters $\alpha,\gamma$ such for all $a\le X\le b$ that $\alpha X^2 + \gamma \ge \exp(-qX^2)$ whence:\\
+$$\E[\exp(-qX^2)] \le \E[\alpha x^2 +\gamma] \le \alpha\sigma^2 + \gamma $$
+With $d=\max(b,-a)$, we choose (see Fig \ref{fig:graph111}) $\alpha=(\exp(-qd^2)-1)d^{-2}$ and $\gamma=1$\\
+Then applying lemma \ref{chernoff1} to the mean of the negated sample squares gives:\\
+$$
+\p(-\hat{\sigma}_0^2\ge t) \le \left(\frac{\sigma^2}{d^2}\exp(-qd^2)+1-\frac{\sigma^2}{d^2}\right)^n\exp(-qnt) 
+$$
+Substituting $t$ for $y-\sigma^2$ and minimizing with $q$ completes the proof, minimum $q$ occurs at:
+$$ q = \frac{1}{d^2}\log\left(\frac{\sigma^2(-\sigma^2 + d^2 + y)}{(\sigma^2-d^2)(y-\sigma^2)}\right) $$
+\end{proof}
+
+
+It is worth noting that we choose to restrict the application of this inequality (and thence the domain of function $H_2^n$) to cases which are sensible for it to be applied:
+(i) it is defined for $a<0<b$ (because otherwise the mean could not be zero), and (ii) $\sigma^2\le-ab\le (b-a)^2/4$ by Popoviciu's inequality (see \cite{zbMATH05780164}) as it is not possible for the variance to be larger given the width of the data bounds. It is important that we carried these domain restrictions with the analysis.
+
+Since the Theorem \ref{sample_squares} is derived from a fundamentally similar process to Bennet's inequality we expect it to have similarly strong properties.
+
+\begin{figure}[b]%
+\centering
+\parbox{2.5in}{
+
+\begin{tikzpicture}[scale=0.8]
+\draw[->] (-3.5,0) -- (2,0) node[anchor=north] {$x$};
+\draw[->] (0,0) -- (0,4) node[anchor=east] {};
+\draw[smooth, domain=-3.5:2.0, color=black, line width=0.20mm] 
+    plot (\x,{e^(\x)/2}) node [right] {\footnotesize $e^x$};
+\draw[smooth, domain=-3.5:2.0, color=red, line width=0.20mm] 
+    plot (\x,{(0.316137167001903*\x*\x + 1.39988395124422*\x + 1.67055451771745)/2}) node [right] {\footnotesize $\alpha x^2+\beta x+\gamma$};
+\draw (1.5,-0.1) -- (1.5,{e^(1.5)/2});
+\draw (-2,-0.1) -- (-2,{e^(-2)/2});
+\draw (-2.5,-0.1) -- (-2.5,0);
+\draw[black,fill] (1.5,{e^(1.5)/2}) circle (0.25mm);
+\draw[black,fill] (-2,{e^(-2)/2}) circle (0.25mm);
+\draw	(-2.5,-0.25) node{{\scriptsize $a$}}
+		(-2,-0.25) node{{\scriptsize $f$}}
+		(1.5,-0.25) node{{\scriptsize $b$}};
+\end{tikzpicture}
+
+\caption{A parabola parametarised by touching and intercepting points $f,b$ above an exponential curve for all $a\le x\le b$}%
+\label{fig:graph1}}%
+\qquad
+\begin{minipage}{2.5in}%
+
+\begin{tikzpicture}[scale=1.25]
+\draw[->] (-2.2,0) -- (2.2,0) node[anchor=north] {$x$};
+\draw[->] (0,0) -- (0,1.5) node[anchor=east] {};
+\draw[smooth, domain=-2.0:2.0, color=black, line width=0.20mm] 
+    plot (\x,{e^(-(\x*\x))}) node [above] {\footnotesize $e^{-qx^2}$};
+\draw[smooth, domain=-1.8:1.8, color=red, line width=0.20mm] 
+    plot (\x,{-0.4825*\x*\x+1}) node [right] {\footnotesize $g(x)$};
+\draw (1.3,-0.1) -- (1.3,{e^(-1.3*1.3)});
+\draw (-1,-0.1) -- (-1,{e^(-1*1)});
+\draw	(-1,-0.25) node{{\scriptsize $a$}}
+		(1.3,-0.25) node{{\scriptsize $b$}};
+\end{tikzpicture}
+
+\caption{$g(x)=(e^{-qd^2}-1)d^{-2}x^2+1$ over function $f(x)=e^{-qx^2}$ for all $a\le x\le b$ where $d=\max(b,-a)$}%
+\label{fig:graph111}%
+\end{minipage}%
+\end{figure}
+
+
+
+At this point, we have a probability bound on the mean squared (Theorem \ref{hoeffdings1}) 
+and a probability bound on the sample squares (Lemma \ref{sample_squares}). With these in hand, we use lemma \ref{variance1} to create a bound on the sample variance, as follows.
+
+
+\begin{theorem}[Sample Variance Bound]\label{variance2}
+For a random variable that is bounded $a\le X\le b$ with variance $\sigma^2$ and a mean of zero, if $d=\max(b,-a)$ then for $w>0$, the sample variance $\hat{\sigma}^2$ of $n$ samples is probability bounded by:
+\begin{equation}\label{eq_no8}
+\p(\sigma^2 - \hat{\sigma}^2 > w) \le H_3^n(a,b,w,\sigma^2),
+\end{equation}
+where:
+\begin{align*} H_3^n(a,b,w,\sigma^2) =\min_{\phi\in[0,1]}
+\begin{Bmatrix}
+	H_1^n\left(\frac{\sigma^2}{b^2},\frac{\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b}\right)\\
+	+H_1^n\left(\frac{\sigma^2}{a^2},\frac{-\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{a}\right)\\
+	+H_2^n\left(\frac{\sigma^2}{d^2},\frac{(1-\phi)(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}{d^2}\right)
+\end{Bmatrix}\end{align*}
+\end{theorem}
+\begin{proof}By Lemmas \ref{sample_squares} and \ref{variance1}:
+\begin{equation}\label{eq_no44}\p\left(\sigma^2 - \hat{\sigma}^2 > \frac{n}{n-1}\left(\hat{\mu}^2+y- \frac{1}{n}\sigma^2\right)\right) 
+\le H_2^n\left(\frac{\sigma^2}{d^2},\frac{y}{d^2}\right)\end{equation}
+By inspection of equation \ref{eq_no2} we can convert to a double-sided version:
+\begin{equation}\label{eq_no1}\p(\hat{\mu}^2\ge r^2)= \p(\hat{\mu}\ge r)+\p(\hat{\mu}\le -r) \le H_1^n\left(\frac{\sigma^2}{b^2},\frac{r}{b}\right) + H_1^n\left(\frac{\sigma^2}{a^2},\frac{-r}{a}\right) \end{equation}
+Also, by manipulating the inner inequality of this equation: \begin{equation}\label{eq_no33}\p\left(\frac{n}{n-1}\left(\hat{\mu}^2+y-\frac{1}{n}\sigma^2\right)\ge \frac{n}{n-1}\left(r^2+y-\frac{1}{n}\sigma^2\right)\right) \le H_1^n\left(\frac{\sigma^2}{b^2},\frac{r}{b}\right)+H_1^n\left(\frac{\sigma^2}{a^2},\frac{-r}{a}\right)\end{equation}
+Applying lemma \ref{prob_union} to the equations \ref{eq_no33} and \ref{eq_no44} gives:
+$$\p\left(\sigma^2 - \hat{\sigma}^2 > \frac{n}{n-1}\left(r^2+y-\frac{1}{n}\sigma^2\right)\right) \le H_2^n\left(\frac{\sigma^2}{d^2},\frac{y}{d^2}\right)+H_1^n\left(\frac{\sigma^2}{b^2},\frac{r}{b}\right)+H_1^n\left(\frac{\sigma^2}{a^2},\frac{-r}{a}\right)$$
+For a choice of parameter $w=\frac{n}{n-1}\left(r^2+y-\frac{1}{n}\sigma^2\right)$ there is a range of possible $r,y>0$ which we can parameterise by value $\phi$, such that $0\le\phi\le 1$:
+$$y(\phi) = (1-\phi)\left(\frac{n-1}{n}w+\frac{1}{n}\sigma^2\right) \quad\text{and}\quad
+r(\phi)^2 = \phi\left(\frac{n-1}{n}w+\frac{1}{n}\sigma^2\right)$$
+Thus:
+$$\p\left(\sigma^2 - \hat{\sigma}^2 > w\right) 
+\le H_2^n\left(\frac{\sigma^2}{d^2},\frac{y(\phi)}{d^2}\right) 
+  + H_1^n\left(\frac{\sigma^2}{b^2},\frac{r(\phi)}{b}\right) + H_1^n\left(\frac{\sigma^2}{a^2},\frac{-r(\phi)}{a}\right)$$
+The result of this proof follows by taking the minimum over $\phi$.
+\end{proof}
+
+The use of this Theorem \ref{variance2} (and thus implicitly the domain of function $H_3^n$) is subject to the same restrictions as Lemma \ref{sample_squares} (and its domain as $H_2^n$); specifically that it is defined for $a<0$ and $b>0$ and for $\sigma^2\le-ab$; as otherwise the configuration is senseless.
+
+The development of this theorem for the bound of the error of the sample mean is derived from two strong concentration inequalities and a single probability union. The question then is how much that probability union manages to weaken the result.
+
+Although the minimisation with $\phi$ is not very tractable, it can be conducted quickly for any situation on a computer via a parameter sweep.
+Any lack of resolution on this sweep would not hamper the analytical accuracy of it as a bound - as an improper sweep could only be larger then what is possible.
+
+To compare this bound against others, we cannot compare as-is, because we dont know $a$ and $b$ quite so much as we know that the data is bounded within a width of $D=b-a$.
+To directly compare this bound against others we susequently take the worst case $a,b$ consistent with a given $D$ and also $\sigma^2\le-ab$. And this process creates a bound which is directly comparable to other bounds such as Hoeffding's inequality among others.
+
+From this action the resulting form of the bound is as follows:
+
+\begin{theorem}[Sample Variance Bound]\label{variance22}
+For a random variable that is bounded $a\le X\le b$ with variance $\sigma^2$, then for $w>0$, the sample variance $\hat{\sigma}^2$ of $n$ samples is probability bounded by:
+
+\begin{equation}\label{eq_no9}
+\p(\sigma^2 - \hat{\sigma}^2 > w) \le \max_{b\in[D/2,{D}/{2}+\sqrt{{D^2}/{4}-\sigma^2}]}\min_{\phi\in[0,1]}
+\begin{Bmatrix}
+	H_1^n\left(\frac{\sigma^2}{b^2},\frac{\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b}\right)\\
+	+H_1^n\left(\frac{\sigma^2}{(b-D)^2},\frac{-\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b-D}\right)\\
+	+H_2^n\left(\frac{\sigma^2}{\max(b,D-b)^2},\frac{(1-\phi)(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}{\max(b,D-b)^2}\right)
+\end{Bmatrix}\end{equation}
+\end{theorem}
+
+The computational maximisation with respect to $b$ can also be done via parameter sweep.
+Though this parameter sweep on $b$ may not necessarily respecting analytical accuracy (since it is a maximisation, not a minimisation), we convert to this form only for the purposes of broad comparison with other bounds on the variance.
+
+It is good to stop here to compare against other probability bounds for the error of the sample variance.
+Particularly the bound on the variance developed by using Entropy method (as found in \cite{MR2245497} and used in \cite{Maurer50empiricalbernstein})
+
+\begin{equation}\label{eq:fe} 
+\p(\sigma^2 - \hat{\sigma}^2>w) \le \exp\left(\frac{-(n-1)w^2}{2\sigma^2D^2}\right) 
+\end{equation}
+
+And it is also possible to create a bound for the variance using the Efron-Stein method (\cite{X}) with Chebyshev's inequality (for derivation see Appendix \ref{X}), as:
+
+\begin{equation}\label{eq:efron_stein_eq}\p\left(\sigma^2-\hat{\sigma}^2\ge k\right)\le\frac{5-n}{n(n-1)}\sigma^2 + \frac{D^4}{16nk^2}\end{equation}
+
+And the strength of these bounds for the variance against our bound can be graphically compared as per Figure \ref{fig:variance_graph1}.
+From this graph we see that our bound performs better at creating lighter tail bounds for the sample variance estimator but that different methods work better-or-worse in different regions - as divergent methods produce differing results.
+
+\input{figs/variance_graph.tex}
+
+
+Because of this plurality, it is always possible to use the minima of several different variance bounds together, so in constructing our EBB, we took the minima of all three.
+
+
+And so by Theorem \ref{hoeffdings1}, we have a bound for the sample mean given the variance, and in Theorem \ref{variance2} we have a probability bound for the error of the sample variance from the variance (in conjunction with the minima of the other two bounds on the variance). The task to create a new Empirical Bernstein Bound is bind these two together.
+
+We used a method of combining these two to create a bound for the sample mean given the sample variance, by a theorem that embodies a process slightly improved from that followed by \cite{Maurer50empiricalbernstein}. 
+
+Before beginning this theorem, we need to introduce some notation.
+For a function $f$ with ordered inputs, we denote the inverse of $f$ with respect to its $i${th} input (counting from one) as $f^{-(i)}$, assuming it exists.
+We summarily denote probability bounds on the differences of the sample mean from the mean, and the sample variance from the variance, by
+$\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\sigma^2,w)$, respectively.
+And note that functions $h$ and $f$ may have additional arguments not limited to $\sigma^2$ and $t$, and $\sigma^2$ and $w$, respectively; but that these are not considered in the theorem and proof for brevity.
+
+\begin{theorem}[Essential EBB]\label{ebb1} 
+Assume $f^{-(2)}$ and $h^{-(2)}$ both exist, and also if $h^{-(2)}$ is monotonically increasing in its first argument, so that we can define:
+\[
+z(\sigma^2,w) = \sigma^2-f^{-(2)}\left(\sigma^2,w\right)
+\]
+If $z^{-(1)}$ exists and is monotonic increasing in its first argument, then for any $x\in[0,y]$, the following relationship holds:
+\[
+\p\left(\hat{\mu}-\mu>h^{-(2)}\left(z^{-(1)}\left(\hat{\sigma}^2,y-x\right),x\right)\right)
+\le y
+\]
+\end{theorem}
+%
+\begin{proof}
+Substituting $w$ for $f^{-2}(\sigma^2,w)$ gives:
+%$\p(\sigma^2-\hat{\sigma}^2>f^{-2}(\sigma^2,w))\le w$\\
+%$\p(z(\sigma^2,w)>\hat{\sigma}^2)\le w$\\
+%$\p(\sigma^2>z^{-1}(\hat{\sigma}^2,w))\le w$\\
+%$\p(h^{-2}(\sigma^2,t)>h^{-2}(z^{-1}(\hat{\sigma}^2,w),t))\le w$\\
+\begin{align*}
+w & \ge \p\left(\sigma^2-\hat{\sigma}^2>f^{-(2)}\left(\sigma^2,w\right)\right)\\
+ & \ge \p\left(z\left(\sigma^2,w\right)>\hat{\sigma}^2\right)\\
+ & \ge \p\left(\sigma^2>z^{-(1)}\left(\hat{\sigma}^2,w\right)\right)\\
+ & \ge \p\left(h^{-2}\left(\sigma^2,t\right)>h^{-(2)}\left(z^{-(1)}\left(\hat{\sigma}^2,w\right),t\right)\right)
+\end{align*}
+% $w  \ge \p(\sigma^2-\hat{\sigma}^2>f^{-2}(\sigma^2,w))$\\
+% \-\hspace{4mm}$\ge \p(z(\sigma^2,w)>\hat{\sigma}^2)$\\
+% \-\hspace{4mm}$\ge \p(\sigma^2>z^{-1}(\hat{\sigma}^2,w))$\\
+% \-\hspace{4mm}$\ge \p(h^{-2}(\sigma^2,t)>h^{-2}(z^{-1}(\hat{\sigma}^2,w),t))$\\
+Substituting $t$ for $h^{-(2)}(\sigma^2,t)$ gives:
+\[
+\p\left(\hat{\mu}-\mu>h^{-(2)}\left(\sigma^2,t\right)\right)
+\le t.
+\]
+Applying probability union (lemma \ref{prob_union}) gives:\\
+\[
+\p\left(\hat{\mu}-\mu>h^{-(2)}\left(z^{-(1)}\left(\hat{\sigma}^2,w\right),t\right)\right)
+\le t+w.
+\]
+Letting $y=t+w$ and $x=y-w$ completes the proof.
+\end{proof}
+
+The result of this Theorem is an Empricial Bernstein Bound. And our novel EBB is completed by substituting  $h(\sigma^2,t)=H_1^n\left(\sigma^2/b^2,t/b\right)$ (from Theorem \ref{hoeffdings1}) and $f(\sigma^2,w)=H_3^n\left(a,b,w,\sigma^2\right)$ (from Theorem \ref{variance2}) into Theorem \ref{ebb1}.
+In this process care must be taken in applying this theorem that all the assumptions hold, the necessary inverses exist, and the domains of the functions are propagated through the analysis.
+
+
+
+
+\subsubsection{Numerical Implementation}
+\label{numerical-implementation}
+Analytically solving this new EBB is challenging, however it is possible to evaluate it to arbitrary accuracy using numerical techniques.
+This section provides a high-level description of a process that was used for calculating our EBB.
+
+This calculation is composed of three primary parts:
+(i) the computation of function $f(\sigma^2,w)=H_3^n(a,b,y,\sigma^2)$;
+(ii) verifying that the assumptions of Theorem \ref{ebb1} hold for $h(\sigma^2,t)=H_1$ and $f(\sigma^2,w)=H_3$, and;
+(iii) calculating the subsequent result of Theorem \ref{ebb1}.
+
+First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) is the solution to an optimization problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
+Despite its complexity, a solution can be found quickly using a single variable parameter sweep.
+
+Second, it is necessary to verify the assumptions that $h^{-(2)}$, $f^{-(2)}$ and $z^{-(1)}$ exist and that $z^{-(1)}$ and $f^{-(2)}$ are monotonically increasing in their first argument.
+It is easy to note that $h(\sigma^2,t)=H_1^n\left(\sigma^2/b^2,t/b\right)$ is a closed-form function that is monotonically decreasing from $1$ to $0$ on the second argument, so $h^{-(2)}$ exists and is monotonically increasing in its first argument.  However the remaining of these assumptions are more difficult to verify.
+For any function, the values that the function takes can be plotted as an array of points and the values that the inverse of that function takes can be determined by conducting coordinate swaping on those points.
+The values of $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ were computed and were seen to be monotonically decreasing in its second argument confirming that $f^{-(2)}$ exists.
+The function $z(\sigma^2,w)=\sigma^2-f^{-(2)}\left(\sigma^2,w\right)$ is then a manipulation on the coordinate swapped points of $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$.
+By coordinate swapping again, $z^{-(1)}$ was seen to be a regular function monotonically increasing on its first argument, hence satisfying assumptions.
+
+
+Third, to numerically calculate the result of Theorem \ref{ebb1} the functions $h^{-(2)}$ and $z^{-(1)}$ were numerically evaluated by direct parameter searches and then composed as:
+$h^{-(2)}(z^{-(1)}(\hat{\sigma}^2,y-x),x)$ - which is the inner part of the expression of the new EBB parameterised by $x$ explicitly and also $a,b$ implicitly.
+%
+However we typically don't know the values of $a$ and $b$, but instead know the mean is somewhere within a finite interval of width $D=b-a$.
+So in a similar way as was handled by introduction of Theorem \ref{variance22}, we took the worst case values of $a$ and $b$ consistent with a given $D$, 
+and then took the best $x\in[0,y]$ subject to all other bounds.
+In short, the numerical process involved a series of coordinate manipulations to conduct inversions and some mundane parameter searches.\footnote{sourcecode available at:\\\url{https://github.com/Markopolo141/Engineered-Empirical-Bernstein-Bound}}
+
+\subsection{Comparison to existing bounds}\label{evaluation}
+By being able to numerically evaluate our EBB, we were abel to compare the strength of our results against existing concentration bounds, particularly our EBB is compared to Maurer and Pontil's EBB and, Bennett's inequality with perfect variance information.
+
+We compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB, 
+given by:
+\begin{equation}\label{maurersbound} \p\left(\mu-\hat{\mu}>\sqrt{\frac{2\hat{\sigma}^2\log(2/y)}{n}}+\frac{7D\log(2/y)}{3(n-1)}\right)<y. \end{equation}
+We felt that it would be fair to compare our EBB to Maurer and Pontil's EBB if they had applied Popoviciu's inequality as a domain restriction and carried it through their derivation, as we did to our own EBB. 
+Specifically, this is the domain where:
+\[ \frac{1}{2}>\frac{\sqrt{\hat{\sigma}^2}}{D}+\sqrt{\frac{2\log(2/y)}{n-1}} \]
+We plotted the improvement our EBB offers in this domain, as shown in Figure \ref{biggraph3}. 
+In this plot, a probability 0.5 bound is shown to shrink by approximately one third.
+But that generally, we observed that our refinement of M\&P's EBB was expectedly uniformly tighter across a large range of values.
+
+
+\input{figs/ebb_strength.tex}
+
+
+Secondly, a comparison is made of the further improvement in confidence over our EBB that might be achieved with perfect information about the variance; specifically that, Bennett's inequality is used assuming $\hat{\sigma}^2=\sigma^2$. 
+This improvement is plotted in Figure \ref{biggraph4}, which shows that when the variance is small, uncertainty about the variance is the most detrimental to an EBB, such as ours.
+However, in general, going from our EBB to perfect variance information shrinks the bounds by about another third.
+
+In this way (although the results are loose) we can witness that our EBB provides approximately a half-way mark from existing state-of-the-art EBBs to an impossible ideal of having perfect variance information.
+
+The purpose of developing a novel EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value).
+The performance of this new EBB offers (against others) in the context of choosing samples for stratified Stratified Sampling is considered in Section \ref{section:statistics_results}.
+
+
+%Within this context, finite-sample \textit{concentration inequalities} are used to place bounds on 
+%the variation of sample statistics around their population values.
+%Such bounds are applied in a range of data science contexts for a variety of prediction, machine learning and hypothesis testing tasks, including:
+%change detection \cite{KiferShaiGehrke2004,8000571} 
+%and classification \cite{Zia-UrRehman2012} in data streams;
+%outlier analysis in large databases \cite{Aggarwal2015};
+%online optimisation \cite{FlaxmanKalaiMcMahan2005,AgarwalDekelXiao2010}; and, of most relevance to this paper, 
+%online prediction and learning problems \cite{Cesa-BianchiLugosi2006,%Maron1997,
+%Mnih:2008:EBS:1390156.1390241,DBLP:conf/aaai/ThomasTG15,Maurer50empiricalbernstein},
+%particularly in settings with \textit{bandit feedback} \cite{AuerCesa-BianchiEtal_SIAM2003,AudibertBubeck_COLT2009,Tran-ThanhChapmanRJ_AAAI2009}. 
+% Bandit feedback describes settings where a decision-maker wishes to learn about a system, and to do this, chooses samples from a set of actions and receives feedback regarding their chosen actions only, in the form of a realization of a random variable. 
+%Specifically, the decision-maker does not see how the system would have responded, if they had chosen a different action.
+%
+
