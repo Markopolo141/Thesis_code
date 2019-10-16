@@ -16,37 +16,40 @@
     		ymajorgrids,
     		minor y tick num=1,
     		yminorgrids,
-    		xtick={1,2,3,4,5,6,7},
+    		xtick={1,2,3,4,5,6,7,8,9,10},
     		xticklabels={
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM*}}}, 
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SECM-W}}}, 
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM**}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM-W}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney-W}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim-W}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Hoeffding}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Audibert}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Maurer}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Burgess}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Random}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Simple-W}}},
     			},
     		]
-% -- Ney-W
-\addplot [boxplot prepared={lower whisker=0.000868268156276,lower quartile=0.00247516538173,median=0.00560261567637,upper quartile=0.00920792713922,upper whisker=0.0150914591398 }] coordinates {};
-% -- SEBM*
-\addplot [boxplot prepared={lower whisker=0.000643033563673,lower quartile=0.00178939262246,median=0.0037298302726,upper quartile=0.00671285345258,upper whisker=0.010451122862 }] coordinates {};
-% -- method7
-\addplot [boxplot prepared={lower whisker=0.00106993660868,lower quartile=0.0030669777581,median=0.00678644130803,upper quartile=0.0112649877974,upper whisker=0.0170055283772 }] coordinates {};
-% -- simple
-\addplot [boxplot prepared={lower whisker=0.000802086305218,lower quartile=0.00271432349285,median=0.00579591859131,upper quartile=0.010353171288,upper whisker=0.0154775918225 }] coordinates {};
-% -- simple-w
-\addplot [boxplot prepared={lower whisker=0.0015379329735,lower quartile=0.00398489401168,median=0.00849915264286,upper quartile=0.0145171612359,upper whisker=0.0223484086136 }] coordinates {};
-% -- SEBM
-\addplot [boxplot prepared={lower whisker=0.000591087906561,lower quartile=0.00174679713669,median=0.00377784676855,upper quartile=0.00705805994501,upper whisker=0.0104845585302 }] coordinates {};
-% -- method8
-\addplot [boxplot prepared={lower whisker=0.00109903191703,lower quartile=0.003150478099,median=0.00665353737327,upper quartile=0.0109642107165,upper whisker=0.0164109958278 }] coordinates {};
-% -- method9
-\addplot [boxplot prepared={lower whisker=0.00114187036898,lower quartile=0.00281881592775,median=0.00620215431886,upper quartile=0.0109339952731,upper whisker=0.0159485448279 }] coordinates {};
+% -- SECM-W
+\addplot [boxplot prepared={lower whisker=0.00203711817479,lower quartile=0.00590714931702,median=0.0126957428186,upper quartile=0.0216502921928,upper whisker=0.0339253899173 }] coordinates {};
+% -- SEBM**
+\addplot [boxplot prepared={lower whisker=0.00195105293753,lower quartile=0.00579327577325,median=0.0119512053277,upper quartile=0.0209721064657,upper whisker=0.0319103845748 }] coordinates {};
 % -- SEBM-W
-\addplot [boxplot prepared={lower whisker=0.000959329670563,lower quartile=0.00252857893946,median=0.00584514687746,upper quartile=0.00965517875034,upper whisker=0.0149643265607 }] coordinates {};
-% -- Ney
-\addplot [boxplot prepared={lower whisker=0.000507165540225,lower quartile=0.0016778051594,median=0.00373851769891,upper quartile=0.00639745066441,upper whisker=0.0101178305894 }] coordinates {};
+\addplot [boxplot prepared={lower whisker=0.00214321028201,lower quartile=0.00601160251813,median=0.0124363175098,upper quartile=0.0212232972856,upper whisker=0.033180153486 }] coordinates {};
+% -- Ney-W
+\addplot [boxplot prepared={lower whisker=0.00205089432254,lower quartile=0.00572207687956,median=0.0116932754283,upper quartile=0.0207321361345,upper whisker=0.0316086258607 }] coordinates {};
+% -- Hoeffding
+\addplot [boxplot prepared={lower whisker=0.00204855603277,lower quartile=0.00590792248556,median=0.0123188066961,upper quartile=0.0215342168159,upper whisker=0.0339059739931 }] coordinates {};
+% -- Audibert
+\addplot [boxplot prepared={lower whisker=0.00197716643965,lower quartile=0.00580743977862,median=0.0126351819423,upper quartile=0.0215678269509,upper whisker=0.0346573104751 }] coordinates {};
+% -- Maurer
+\addplot [boxplot prepared={lower whisker=0.00204915265935,lower quartile=0.00588924949337,median=0.0125159072736,upper quartile=0.0223133553934,upper whisker=0.0347450423664 }] coordinates {};
+% -- Burgess
+\addplot [boxplot prepared={lower whisker=0.00208350815087,lower quartile=0.00597848454177,median=0.0128126936436,upper quartile=0.0219542739196,upper whisker=0.0336397274961 }] coordinates {};
+% -- Random
+\addplot [boxplot prepared={lower whisker=0.00248342203622,lower quartile=0.00688208349805,median=0.0144683105789,upper quartile=0.0250518713876,upper whisker=0.0383944963878 }] coordinates {};
+% -- Simple-W
+\addplot [boxplot prepared={lower whisker=0.0031217187683,lower quartile=0.00863729366985,median=0.0187203946103,upper quartile=0.032091144832,upper whisker=0.0482844458999 }] coordinates {};
 				\end{axis}
 			\end{tikzpicture}}%
 \hfill\resizebox{0.48\textwidth}{!}{\begin{tikzpicture}[]
@@ -63,37 +66,40 @@
     		ymajorgrids,
     		minor y tick num=1,
     		yminorgrids,
-    		xtick={1,2,3,4,5,6,7},
+    		xtick={1,2,3,4,5,6,7,8,9,10},
     		xticklabels={
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM*}}}, 
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SECM-W}}}, 
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM**}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM-W}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney-W}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim-W}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Hoeffding}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Audibert}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Maurer}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Burgess}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Random}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Simple-W}}},
     			},
     		]
-% -- Ney-W
-\addplot [boxplot prepared={lower whisker=0.00216092352634,lower quartile=0.00587864699947,median=0.0120494046122,upper quartile=0.0213596017227,upper whisker=0.033128028189 }] coordinates {};
-% -- SEBM*
-\addplot [boxplot prepared={lower whisker=0.00203716290541,lower quartile=0.00547201157024,median=0.0123185839745,upper quartile=0.0206325889775,upper whisker=0.0303801520647 }] coordinates {};
-% -- method7
-\addplot [boxplot prepared={lower whisker=0.00247542123779,lower quartile=0.00666004516476,median=0.0137039589113,upper quartile=0.0239371788664,upper whisker=0.0366694233465 }] coordinates {};
-% -- simple
-\addplot [boxplot prepared={lower whisker=0.00261356546177,lower quartile=0.00798718603649,median=0.0173854015403,upper quartile=0.0298496933151,upper whisker=0.0453400709214 }] coordinates {};
-% -- simple-w
-\addplot [boxplot prepared={lower whisker=0.00313617284686,lower quartile=0.0089033696748,median=0.0183603010938,upper quartile=0.0322698204303,upper whisker=0.0477649161578 }] coordinates {};
-% -- SEBM
-\addplot [boxplot prepared={lower whisker=0.00201245852815,lower quartile=0.00579183845059,median=0.0116735275765,upper quartile=0.0202714757007,upper whisker=0.0304821162343 }] coordinates {};
-% -- method8
-\addplot [boxplot prepared={lower whisker=0.00275638507381,lower quartile=0.00675076539593,median=0.0137755501242,upper quartile=0.024364781571,upper whisker=0.0374459630086 }] coordinates {};
-% -- method9
-\addplot [boxplot prepared={lower whisker=0.00192646196912,lower quartile=0.00562697683325,median=0.0134912560958,upper quartile=0.0243138885864,upper whisker=0.0387568848214 }] coordinates {};
+% -- SECM-W
+\addplot [boxplot prepared={lower whisker=0.000873614811035,lower quartile=0.00256230207769,median=0.00549196590068,upper quartile=0.00947419398793,upper whisker=0.0146663481198 }] coordinates {};
+% -- SEBM**
+\addplot [boxplot prepared={lower whisker=0.000910092361617,lower quartile=0.00250624851109,median=0.00542288378302,upper quartile=0.00938662860078,upper whisker=0.0145620218616 }] coordinates {};
 % -- SEBM-W
-\addplot [boxplot prepared={lower whisker=0.00202643913621,lower quartile=0.00577454391712,median=0.0123628144304,upper quartile=0.021287205955,upper whisker=0.0326767513877 }] coordinates {};
-% -- Ney
-\addplot [boxplot prepared={lower whisker=0.00192817490309,lower quartile=0.00527187111409,median=0.0115747474298,upper quartile=0.0197791240843,upper whisker=0.0302945499881 }] coordinates {};
+\addplot [boxplot prepared={lower whisker=0.000951411349914,lower quartile=0.00260844954482,median=0.00549365633573,upper quartile=0.00959589925114,upper whisker=0.0149751426419 }] coordinates {};
+% -- Ney-W
+\addplot [boxplot prepared={lower whisker=0.000887479040566,lower quartile=0.00247214781011,median=0.00542124962027,upper quartile=0.00939389449743,upper whisker=0.0141671187264 }] coordinates {};
+% -- Hoeffding
+\addplot [boxplot prepared={lower whisker=0.000966512003819,lower quartile=0.00267673077629,median=0.00555753121815,upper quartile=0.00956064483231,upper whisker=0.0145705059888 }] coordinates {};
+% -- Audibert
+\addplot [boxplot prepared={lower whisker=0.000939560847084,lower quartile=0.00256020151103,median=0.00546386150453,upper quartile=0.00973905959264,upper whisker=0.0151597017036 }] coordinates {};
+% -- Maurer
+\addplot [boxplot prepared={lower whisker=0.000923515948706,lower quartile=0.00260380941632,median=0.00561513487346,upper quartile=0.00984308947158,upper whisker=0.0145168898968 }] coordinates {};
+% -- Burgess
+\addplot [boxplot prepared={lower whisker=0.000880018992369,lower quartile=0.00265879716358,median=0.00558553639166,upper quartile=0.00957392266325,upper whisker=0.0150260400173 }] coordinates {};
+% -- Random
+\addplot [boxplot prepared={lower whisker=0.00100378500126,lower quartile=0.00292551330324,median=0.00614395616333,upper quartile=0.0106715749674,upper whisker=0.0161770606241 }] coordinates {};
+% -- Simple-W
+\addplot [boxplot prepared={lower whisker=0.00132457947878,lower quartile=0.00382970607309,median=0.00806642336181,upper quartile=0.0139247953938,upper whisker=0.0218688980015 }] coordinates {};
 				\end{axis}
 			\end{tikzpicture}}
 \\
@@ -111,37 +117,40 @@
     		ymajorgrids,
     		minor y tick num=1,
     		yminorgrids,
-    		xtick={1,2,3,4,5,6,7},
+    		xtick={1,2,3,4,5,6,7,8,9,10},
     		xticklabels={
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM*}}}, 
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SECM-W}}}, 
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM**}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM-W}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney-W}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim-W}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Hoeffding}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Audibert}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Maurer}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Burgess}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Random}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Simple-W}}},
     			},
     		]
-% -- Ney-W
-\addplot [boxplot prepared={lower whisker=0.00216092352634,lower quartile=0.00587864699947,median=0.0120494046122,upper quartile=0.0213596017227,upper whisker=0.033128028189 }] coordinates {};
-% -- SEBM*
-\addplot [boxplot prepared={lower whisker=0.00203716290541,lower quartile=0.00547201157024,median=0.0123185839745,upper quartile=0.0206325889775,upper whisker=0.0303801520647 }] coordinates {};
-% -- method7
-\addplot [boxplot prepared={lower whisker=0.00247542123779,lower quartile=0.00666004516476,median=0.0137039589113,upper quartile=0.0239371788664,upper whisker=0.0366694233465 }] coordinates {};
-% -- simple
-\addplot [boxplot prepared={lower whisker=0.00261356546177,lower quartile=0.00798718603649,median=0.0173854015403,upper quartile=0.0298496933151,upper whisker=0.0453400709214 }] coordinates {};
-% -- simple-w
-\addplot [boxplot prepared={lower whisker=0.00313617284686,lower quartile=0.0089033696748,median=0.0183603010938,upper quartile=0.0322698204303,upper whisker=0.0477649161578 }] coordinates {};
-% -- SEBM
-\addplot [boxplot prepared={lower whisker=0.00201245852815,lower quartile=0.00579183845059,median=0.0116735275765,upper quartile=0.0202714757007,upper whisker=0.0304821162343 }] coordinates {};
-% -- method8
-\addplot [boxplot prepared={lower whisker=0.00275638507381,lower quartile=0.00675076539593,median=0.0137755501242,upper quartile=0.024364781571,upper whisker=0.0374459630086 }] coordinates {};
-% -- method9
-\addplot [boxplot prepared={lower whisker=0.00192646196912,lower quartile=0.00562697683325,median=0.0134912560958,upper quartile=0.0243138885864,upper whisker=0.0387568848214 }] coordinates {};
+% -- SECM-W
+\addplot [boxplot prepared={lower whisker=0.000636850883585,lower quartile=0.001758421023,median=0.00380445489544,upper quartile=0.00670922210984,upper whisker=0.0102776964 }] coordinates {};
+% -- SEBM**
+\addplot [boxplot prepared={lower whisker=0.000632386155924,lower quartile=0.00176154976274,median=0.00379949013741,upper quartile=0.00671829236954,upper whisker=0.0103315144235 }] coordinates {};
 % -- SEBM-W
-\addplot [boxplot prepared={lower whisker=0.00202643913621,lower quartile=0.00577454391712,median=0.0123628144304,upper quartile=0.021287205955,upper whisker=0.0326767513877 }] coordinates {};
-% -- Ney
-\addplot [boxplot prepared={lower whisker=0.00192817490309,lower quartile=0.00527187111409,median=0.0115747474298,upper quartile=0.0197791240843,upper whisker=0.0302945499881 }] coordinates {};
+\addplot [boxplot prepared={lower whisker=0.000680754753892,lower quartile=0.00185837687059,median=0.00386209609049,upper quartile=0.00658796718008,upper whisker=0.00995840759784 }] coordinates {};
+% -- Ney-W
+\addplot [boxplot prepared={lower whisker=0.000657938325888,lower quartile=0.0017444987029,median=0.0037713834643,upper quartile=0.00656878044395,upper whisker=0.0101006080514 }] coordinates {};
+% -- Hoeffding
+\addplot [boxplot prepared={lower whisker=0.000649029201759,lower quartile=0.0018278581662,median=0.00385518249136,upper quartile=0.00664697484699,upper whisker=0.0103246816298 }] coordinates {};
+% -- Audibert
+\addplot [boxplot prepared={lower whisker=0.000619859954485,lower quartile=0.00180976489989,median=0.00396390201518,upper quartile=0.00688077381745,upper whisker=0.0105260370656 }] coordinates {};
+% -- Maurer
+\addplot [boxplot prepared={lower whisker=0.000680406278875,lower quartile=0.00193778416988,median=0.00401502678431,upper quartile=0.00701666928955,upper whisker=0.0103290413186 }] coordinates {};
+% -- Burgess
+\addplot [boxplot prepared={lower whisker=0.000594144270816,lower quartile=0.00177108325136,median=0.0039677038012,upper quartile=0.00689698780572,upper whisker=0.0104024014189 }] coordinates {};
+% -- Random
+\addplot [boxplot prepared={lower whisker=0.00074150837092,lower quartile=0.00207314536165,median=0.00436685107489,upper quartile=0.00747350995688,upper whisker=0.0113332527557 }] coordinates {};
+% -- Simple-W
+\addplot [boxplot prepared={lower whisker=0.00105915507933,lower quartile=0.00270478575028,median=0.00575982393074,upper quartile=0.0100186063529,upper whisker=0.0154659123488 }] coordinates {};
 				\end{axis}
 			\end{tikzpicture}}%
 \hfill\resizebox{0.48\textwidth}{!}{\begin{tikzpicture}[]
@@ -158,37 +167,40 @@
     		ymajorgrids,
     		minor y tick num=1,
     		yminorgrids,
-    		xtick={1,2,3,4,5,6,7},
+    		xtick={1,2,3,4,5,6,7,8,9,10},
     		xticklabels={
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM*}}}, 
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SECM-W}}}, 
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM**}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{SEBM-W}}},
     			\STAB{\rotatebox[origin=c]{90}{\textsc{Ney-W}}},
-    			\STAB{\rotatebox[origin=c]{90}{\textsc{Sim-W}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Hoeffding}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Audibert}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Maurer}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Burgess}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Random}}},
+    			\STAB{\rotatebox[origin=c]{90}{\textsc{Simple-W}}},
     			},
     		]
-% -- Ney-W
-\addplot [boxplot prepared={lower whisker=0.00216092352634,lower quartile=0.00587864699947,median=0.0120494046122,upper quartile=0.0213596017227,upper whisker=0.033128028189 }] coordinates {};
-% -- SEBM*
-\addplot [boxplot prepared={lower whisker=0.00203716290541,lower quartile=0.00547201157024,median=0.0123185839745,upper quartile=0.0206325889775,upper whisker=0.0303801520647 }] coordinates {};
-% -- method7
-\addplot [boxplot prepared={lower whisker=0.00247542123779,lower quartile=0.00666004516476,median=0.0137039589113,upper quartile=0.0239371788664,upper whisker=0.0366694233465 }] coordinates {};
-% -- simple
-\addplot [boxplot prepared={lower whisker=0.00261356546177,lower quartile=0.00798718603649,median=0.0173854015403,upper quartile=0.0298496933151,upper whisker=0.0453400709214 }] coordinates {};
-% -- simple-w
-\addplot [boxplot prepared={lower whisker=0.00313617284686,lower quartile=0.0089033696748,median=0.0183603010938,upper quartile=0.0322698204303,upper whisker=0.0477649161578 }] coordinates {};
-% -- SEBM
-\addplot [boxplot prepared={lower whisker=0.00201245852815,lower quartile=0.00579183845059,median=0.0116735275765,upper quartile=0.0202714757007,upper whisker=0.0304821162343 }] coordinates {};
-% -- method8
-\addplot [boxplot prepared={lower whisker=0.00275638507381,lower quartile=0.00675076539593,median=0.0137755501242,upper quartile=0.024364781571,upper whisker=0.0374459630086 }] coordinates {};
-% -- method9
-\addplot [boxplot prepared={lower whisker=0.00192646196912,lower quartile=0.00562697683325,median=0.0134912560958,upper quartile=0.0243138885864,upper whisker=0.0387568848214 }] coordinates {};
+% -- SECM-W
+\addplot [boxplot prepared={lower whisker=0.000695554212997,lower quartile=0.00198255695079,median=0.00414898985951,upper quartile=0.00736703210091,upper whisker=0.0112916958641 }] coordinates {};
+% -- SEBM**
+\addplot [boxplot prepared={lower whisker=0.000725448205883,lower quartile=0.00198498542637,median=0.0041411778437,upper quartile=0.00732886195779,upper whisker=0.0110886274658 }] coordinates {};
 % -- SEBM-W
-\addplot [boxplot prepared={lower whisker=0.00202643913621,lower quartile=0.00577454391712,median=0.0123628144304,upper quartile=0.021287205955,upper whisker=0.0326767513877 }] coordinates {};
-% -- Ney
-\addplot [boxplot prepared={lower whisker=0.00192817490309,lower quartile=0.00527187111409,median=0.0115747474298,upper quartile=0.0197791240843,upper whisker=0.0302945499881 }] coordinates {};
+\addplot [boxplot prepared={lower whisker=0.000708781340772,lower quartile=0.00198244734804,median=0.00425386140966,upper quartile=0.00732022901583,upper whisker=0.0110975018936 }] coordinates {};
+% -- Ney-W
+\addplot [boxplot prepared={lower whisker=0.000680202868957,lower quartile=0.00196278935024,median=0.00412493148609,upper quartile=0.00709093376861,upper whisker=0.0107408704413 }] coordinates {};
+% -- Hoeffding
+\addplot [boxplot prepared={lower whisker=0.00072940214243,lower quartile=0.00206401786263,median=0.00427698069032,upper quartile=0.00733172730087,upper whisker=0.0111012332943 }] coordinates {};
+% -- Audibert
+\addplot [boxplot prepared={lower whisker=0.000678144189209,lower quartile=0.00197572116726,median=0.00425371935053,upper quartile=0.00739565786963,upper whisker=0.0111405481859 }] coordinates {};
+% -- Maurer
+\addplot [boxplot prepared={lower whisker=0.000684942688896,lower quartile=0.00197564164736,median=0.00423464735309,upper quartile=0.00736008521673,upper whisker=0.011163411167 }] coordinates {};
+% -- Burgess
+\addplot [boxplot prepared={lower whisker=0.000695812933667,lower quartile=0.00207636294946,median=0.00441237771718,upper quartile=0.00747955376518,upper whisker=0.0113809883159 }] coordinates {};
+% -- Random
+\addplot [boxplot prepared={lower whisker=0.00077631033941,lower quartile=0.00213655732248,median=0.00437079559763,upper quartile=0.0076219790009,upper whisker=0.0117195421434 }] coordinates {};
+% -- Simple-W
+\addplot [boxplot prepared={lower whisker=0.00111938420481,lower quartile=0.0029603125937,median=0.00620114735116,upper quartile=0.0108178633571,upper whisker=0.0163350304413 }] coordinates {};
 				\end{axis}
 			\end{tikzpicture}}\\
     \caption{The distribution of numerical absolute errors across 5000 rounds of beta-distributed data, for different methods of stratified sampling, for a sample budget of $50N$ and $100N$ samples where $N$ number of strata. Whiskers show the 9th and 91st percentiles.}

@@ -11,6 +11,7 @@ with open("Beta_Synthetic.csv","r") as f:
 lines = [l.strip() for l in lines]
 
 data = {}
+data_headers = []
 
 #import pdb
 #pdb.set_trace()
@@ -28,6 +29,8 @@ while (li<len(lines)):
 			look = protected_list_lookup(headers,ii,'method{}'.format(ii))
 			if (data[mperN].get(look) is None):
 				data[mperN][look] = []
+			if look not in data_headers:
+				data_headers.append(look)
 			data[mperN][look].append(d)
 		li += 1
 
@@ -35,9 +38,10 @@ print data
 
 for k in data.keys():
 	print k
-	for kk in data[k].keys():
+	for kk in data_headers: #data[k].keys():
 		print "% -- {}".format(kk)
-		print "\\addplot [boxplot prepared={{lower whisker={},lower quartile={},median={},upper quartile={},upper whisker={} }}] coordinates {{}};".format(*(data[k][kk]))
+		if kk in data[k].keys():
+			print "\\addplot [boxplot prepared={{lower whisker={},lower quartile={},median={},upper quartile={},upper whisker={} }}] coordinates {{}};".format(*(data[k][kk]))
 
 print "Finished Experiment"
 

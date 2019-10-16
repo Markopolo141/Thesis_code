@@ -514,10 +514,10 @@ def altered_burgess_bound_small(N,ni,Ni,var,d,r):
 
 
 '''
-The SEBM method without replacement:
+The SECM method without replacement:
 calculates the variance of the strata, and then iteratively allocates the budget to iteratively minimise SEBB
 '''
-def altered_burgess_small(vals,m,d,r=0.5):
+def altered_burgess(vals,m,d,r=0.5):
 	Ni = [len(v) for v in vals]
 	N = len(Ni)
 	ni = [0 for i in range(N)]
@@ -568,5 +568,65 @@ def altered_burgess_small(vals,m,d,r=0.5):
 		ss += s[i]*Ni[i]/ni[i]
 	ss /= sum(Ni)
 	return ss
+
+
+
+
+
+'''
+The SECM method with replacement:
+calculates the variance of the strata, and then iteratively allocates the budget to iteratively minimise SEBB
+'''
+def altered_burgess_small(vals,m,d,r=0.5):
+	Ni = [len(v) for v in vals]
+	N = len(Ni)
+	ni = [0 for i in range(N)]
+	s = [0.0 for i in range(N)]
+	s2 = [0.0 for i in range(N)]
+	var = [0.0 for i in range(N)]
+	samples = 0
+	# seed with minimum initial two samples (if possible) for all strata
+	for i in range(N): #strata i
+		for p in range(2):
+			v = choice(vals[i])
+			s[i]+=v
+			s2[i]+=v*v
+			ni[i]+=1
+			if ni[i]>1:
+				var[i] = (s2[i] - s[i]**2*1.0/ni[i])/(ni[i]-1)
+			samples+=1
+	advantage = [0.0 for i in range(N)]
+	while samples < m:
+		#calculate the bound as it exists:
+		bound = altered_burgess_bound_small(N,ni,Ni,var,d,r)
+		#calculate the advantages possible
+		for i in range(N):
+			ni[i]+=1
+			advantage[i] = bound-altered_burgess_bound_small(N,ni,Ni,var,d,r)
+			ni[i]-=1
+		#detect the sample that maximises advantage
+		maxi=0
+		maxadvantage=-float("inf")
+		for i in range(N):
+			if advantage[i] > maxadvantage:
+				maxi = i
+				maxadvantage = advantage[i]
+		#take the best sample
+		v = choice(vals[maxi])
+		s[maxi]+=v
+		s2[maxi]+=v*v
+		ni[maxi]+=1
+		var[maxi] = (s2[maxi] - s[maxi]**2*1.0/ni[maxi])/(ni[maxi]-1)
+		samples += 1
+	#return the stratafied average from the samples
+	ss = 0.0
+	for i in range(N):
+		ss += s[i]*Ni[i]/ni[i]
+	ss /= sum(Ni)
+	return ss
+
+
+
+
 
 

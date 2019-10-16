@@ -36,41 +36,44 @@ How should we model ideal competition? In the two player case, existing bargaini
 The question then is how to extend this idealisation to an arbitrary number of n-players?
 
 For instance, In the context of nash bargaining with endogenous disagreement point, the disagreement point was interpreted as a unique point defined by a nash-equilibrium of strategies.
-But if we directly extend the 2-player process to 3 or more players, then there isnt a distinctly defined or unique nash equilibrium in a game of 3+ players.
+But if we directly extend the 2-player process to 3 or more players we encounter a problem as there isnt always a unique minimax equilibrium in a game of 3+ players.
 And so having a nash disagreement point becomes ambiguous.
 
-While it may well be possible to define one of thoes possible nash equilibria in a 3+ person game as being the disagreement point. or perhaps privilage some other measure to that position.
-However our recourse is to instead consider all the possible divisions of players between two groups and then consider all the 2-player nash equilibrium points between them. And then to integrate this information via the shapley value to form a unique outcome.
+While it may well be possible to declare one of thoes possible nash equilibria in a 3+ person game as being the disagreement point, or otherwise privilage some other measure to that position.
+Our recourse is instead to consider all the possible divisions of players between two groups and then consider all the 2-player nash equilibrium points between them. And then to integrate this information via the Shapley value to form a unique outcome.
 
-This was the process discovered by Harsanyi in 195X. and we extend it here.
+In the following subsections we give all the details of this process. Particularly we note that this question of how to reasonably extend bargaining solution concepts to multiple players has a history.
+And that our approach was first discovered by Harsanyi in 195X, and our work extends it.
 
-So far as we know Harsanyi's solution concept of this kind has never been applied to electricity networks, particularly as there is a problem in doing so.
-That in electricity networks the mutual actions of participants are limited, not everybody can do any combination of specific actions, (such as might overload power lines etc)
-And so this limitation on mutual actions forms a generalized game, and unfortunately in the context of a generalized game there is no necessarily unique minimax point between two players.
-And a remedy is needed in order to make the application.
+So far as we know, Harsanyi's solution concept has never been applied to electricity networks, particularly as there exists a particular problem in doing so.
+The details of this problem and its remedy are spelled out in following subsections.
+But briefly, that in electricity networks the mutual actions of participants are limited, as not everybody can do any combination of specific actions, (such as might overload power lines etc.)
+And these limitation on the space of possible mutual actions is best modelled by a generalized noncooperative game, and unfortunately in the context of such a generalized game there is no necessarily unique minimax point between two players.
+Our principle and novel development in this context is the provision of a remedy, such that Harsanyi's solution can then be applied.
 
-The remedy that is proposed is to take the expected outcome on a coin-flip on who chooses actions in the minimax strategies - as we shall see. this -much more directly- is unique minimax outcome, that satisfies the application and leads to a coherent outcome.
+The remedy is to take the expected outcome on a coin-flip on who chooses actions first in the minimax strategies - as we shall see. And this turns out to be a unique minimax outcome, that satisfies all required properties and leads to a coherent outcome.
 
-The resultad solution concept we call the \textit{Generalized Neymann and Kohlberg Value} or the \textit{GNK value} for short.
-as Harsanyi's solution was in-part axiomatically derived by Neynamm and Kohlberg.
-And it is a solution concept for TU normal form generalized non-cooperative games.
-Which is straightforwardly extensible to many contexts, but particularly we focus on OPF.
+The resulting outcome we call the \textit{Generalized Neymann and Kohlberg Value} or the \textit{GNK value} for short.
+as Harsanyi's solution was axiomatically derived by Neynamm and Kohlberg.
+This solution concept is shown to apply for all transferrable utility (TU) normal form generalized non-cooperative games.
+And which therefore is straightforwardly extensible to many contexts, but particularly we focus on the case of Optimal Power Flow (OPF).
 
 \section{Deriving the GNK value}\label{the_value_def2}
 
 We begin by presenting the axiomatic foundations of the GNK value, starting from the same point as Neyman and Kohlberg~\cite{value2}.
-We then define the \emph{threat} or \emph{advantage} of a coalition $v(S)$ in the context of a \textit{generalized non-cooperative game} (which is a key point of novelty in our solution concept) which defines the GNK value.
-And then we clarify how the GNK value relates to other prominent solution concepts in non-cooperative games.
+Identifying the GNK value to be the integration of \emph{threat} values between possible coalitions; defined via Shapley value axioms.
 
+We then define the \emph{threat} or \emph{advantage} of a coalition $v(S)$ in the context of a \textit{generalized non-cooperative game} (which is our key point of novelty in the solution concept) which defines the GNK value.
+And then we clarify how the GNK value relates to other prominent solution concepts in non-cooperative games.
 
 \subsection{Axiomatic foundations and the \textit{Value}}\label{the_value_def}
 
 There have been many attempts to answer the question of what cooperative outcome \textit{should} occur in the context of a non-cooperative TU game.
 One well known answer is the \textit{Nash bargaining solution} between two players \cite{nash2}, which Harsanyi \cite{values3} extended to arbitrary numbers of players.
-Building on this, Harsanyi's solution was derived from a simple set of axioms by Neyman and Kohlberg (N\&K)~\cite{value2}; 
+Building on this, Harsanyi's solution was derived from a simple set of axioms by Neyman and Kohlberg ~\cite{value2}; 
 our axiomatic derivation of a value for games with generalized action spaces mirrors the steps in theirs.
 
-We begin by considering N\&K's \textit{coalitional game of threats} \cite{KOHLBERG2018139}, 
+We begin by considering Neyman and Kohlberg's \textit{coalitional game of threats} \cite{KOHLBERG2018139}, 
 which is a coalitional game defined by a pair $\langle N,v \rangle$ in which:
 \begin{itemize}
 \item	$N=\{1,\dots,n\}$ is a finite set of \textit{players} or \textit{agents}, and
@@ -82,7 +85,7 @@ v(S)=-v(N\setminus S) \label{myeq2} \quad \forall S\subseteq N.
 The intuition for \eqref{myeq2} is that the characteristic function in this game is an measure of the strength of the bargaining position that a coalition, $S$, has over its complement, $N\setminus S$, to be expressed in terms of ``threat'' or ``advantage'' in the underlying non-cooperative game.
 This contrasts against classical cooperative game theory games, where the characteristic function $v(\emptyset)=0$ and equation \ref{myeq2} does not generally hold.
 
-N\&K's key result was to prove that if $\mathbb{D}$ is the set of all such games, then there exists a unique mapping $\varphi:\mathbb{D}\rightarrow\mathbb{R}^n$ that satisfies the following four axioms:
+Neyman and Kohlberg's key result was to prove that if $\mathbb{D}$ is the set of all such games, then there exists a unique mapping $\varphi:\mathbb{D}\rightarrow\mathbb{R}^n$ that satisfies the following four axioms:
 
 \begin{itemize}
 \item	\textbf{Efficiency}: $\sum_i\varphi(\langle N,v\rangle)_i = v(N)~~~~~\refstepcounter{equation}(\theequation)\label{myeq}$
@@ -98,7 +101,7 @@ Letting agent $i$'s element of $\varphi$ be denoted by $\varphi_i$, this mapping
 = \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v(S) 
 \end{equation}
 Where $v_{i,k}$ is the average value of $v(S)$ for all coalitions of size $k$ that include $i$.
-This mapping gives a distribution of the total surplus $v(N)$ among the players, and N\&K appropriately call this unique mapping the `Shapley Value' of the game of threats \cite{KOHLBERG2018139} as it mirrors the classic \textit{Shapley value} of cooperative game theory~\cite{Shapley1953a}.
+This mapping gives a distribution of the total surplus $v(N)$ among the players, and Neyman and Kohlberg appropriately call this unique mapping the `Shapley Value' of the game of threats \cite{KOHLBERG2018139} as it mirrors the classic \textit{Shapley value} of cooperative game theory~\cite{Shapley1953a}.
 
 Indeed they have shown that for any game of threats $\langle N,v\rangle$ there is a cooperative game $\langle N,v'\rangle$ where the two Shapley values are the same \cite{KOHLBERG2018139}.
 It is possible to map a game of threats $v$ to a cooperative game $v'$ via relation:
@@ -115,9 +118,12 @@ Which identifies the Shapley value of a player in a cooperative game as its aver
 (v'(S\cup\{i\})-v'(S))
 \end{equation}
 \begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
+These multiple formulations of the Shapley value will be useful to us in Section \ref{} where we use these expressions in different methods of sampling the GNK value.
+
 
 \subsection{Threats in games with general action spaces}\label{the_value_def3}
-In this section we define the \emph{threat} or \emph{advantage} of a coalition $v(S)$, in the context of a \textit{generalized non-cooperative game}.
+The previous section left undefined the \emph{threat} or \emph{advantage} of a coalition $v(S)$.
+And in this subsection we define $v(S)$, in the context of a \textit{generalized non-cooperative game}.
 A generalized non-cooperative game is a game where the strategies available to one player may be restricted by the strategy choice of others.
 Such games were introduced by Debreu in 1952 \cite{Debreu01101952} and the problem of finding equilibria in such games has been a topic of further research \cite{Facchinei2007,fischer2014,DutangSurvey}.
 
@@ -159,19 +165,19 @@ is the sum of payoffs that the coalition $S$ receives,
 minus the sum of payoffs that the complement $N\setminus S$ receives, 
 under the joint strategy $(x,y)\in A$, we call this the \textit{payoff advantage} to $S$.
 
-The first line of $v(S)$ in~\eqref{knvalue1} is half the payoff advantage achieved if, the players in $S$ collectively choose their strategies to maximize the payoff advantage to $S$ knowing that then the players in $N\setminus S$ will subsequently choose their strategies to minimize it - and this constitutes a bilevel optimization.
+The first line of $v(S)$ in~\eqref{knvalue1} is half the payoff advantage achieved if, the players in $S$ collectively choose their strategies to maximize the payoff advantage to $S$ knowing that then the players in $N\setminus S$ will subsequently choose their strategies to minimize it - and this constitutes a bilevel optimization problem.
 Then the second line of~\eqref{knvalue1} is an additional half of the payoff advantage achieved if the ordering of choice were reversed, with $N\setminus S$ choosing first.
-In this way, \eqref{knvalue1} can be interpreted as the expectation of payoff advantage of $S$ over its complement under a fair coin-toss of who chooses their strategies first.
+In this way, \eqref{knvalue1} can be interpreted as the expectation of nash equilibrium payoff advantage of $S$ over its complement under a fair coin-toss of who chooses their strategies first.
 
 In this formulation $v(N) = \max_{a\in A} (\sum_{i\in N} u_i(a))$ is the maximum achievable sum of payoffs that the players can achieve, and the GNK value $\varphi$, splits all of this amount between the players (by the efficiency axiom).
-The players execute the strategies that achieve this maximal sum, and then the outcome of $\varphi$ can be implemented by executing the required utility transfers.
-In this way the GNK value allocates a Pareto optimal outcome and budget-balanced payments between parties, proportional to their competitive advantages.
+The GNK value can be enacted by having the players execute the strategies that achieve this maximal sum, and then instigating utility transfers between the players.
+In this way the GNK value can be seen as a method of allocating a Pareto optimal outcome and budget-balanced payments between players, proportional to their competitive advantages.
 
 \subsection{Relation to other solution concepts}\label{relating_to_the_old}
 
 The Value and GNK value are both closely related to several other solution concepts, and even equivalent to them, or each other, under certain conditions. In this section, we discuss these relationships.
 
-The GNK value is identical to the Value \cite{value2} when the strategy space $A$ represents a mixed strategy game that is not generalized; 
+The GNK value is identical to Neyman and Kohlberg's Value \cite{value2} when the strategy space $A$ represents a mixed strategy game that is not generalized; 
  that is when the strategy space, $A$, is an unconstrained probabilistic combination of strategies for all agents.
 To see this, observe that the two halves of \eqref{knvalue1} are equal in the absence of joint action constraints (%proof in Appendix \ref{appendix1}, or 
 via direct application of von Neymann's minimax theorem, see Lemma 1 of \cite{value2}), 
@@ -180,16 +186,13 @@ and hence the characteristic value reduces to that used in Neyman and Kohlberg's
 %
 That is, the formulation of $\varphi$, per \eqref{da_value_eq}, 
 with $v_o(S)$ as in \eqref{knvalue2},
-is the Value, which cannot be directly applied to generalized games because the condition $v_o(S)=-v_o(N\setminus S)$ can fail to hold in that case. 
+Unfortunately this measure cannot be directly applied to generalized games because the required condition $v_o(S)=-v_o(N\setminus S)$ can fail to hold in that case. 
 
-The Value (and GNK value) is also conceptually related to Harsanyi's solution in this context \cite{values3},
+The Value (and GNK value) is also directly conceptually related to Harsanyi's solution in this context \cite{values3},
 while in the 2-player context, it is identical to Kalai and Kalai's \textit{coco-value} in the context of complete information \cite{kalai1,Kalai2010,value2} 
 and also identical to Nash's bargaining solution in the context of transferable utility \cite{nash2,value2}.
 It also shares a conceptual similarity with Aumann's $\alpha$ and $\beta$ core solution concepts \cite{aumann1961core}, and von Neumann and Morgenstern's historic formulation \cite{1944,KOHLBERG2018139,values3}:
 \begin{equation}\label{knvalue3}v_m(S) = \max_{x\in A^S}\min_{y\in A^{N\setminus S}} \sum_{i\in S} u_i(x,y).\end{equation}
-
-
-
 
 
 \section{GNK value applied to DC powerflows}\label{more_involved}
@@ -202,13 +205,14 @@ allocating surplus and savings in microgrids \cite{WU2017384} and;
 allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
 Since the GNK value can be seen as a particular formulation of the Shapley Value's characteristic function, it has the potential to be used and compared against other particular formulations in most of these contexts.
-However in this section we focus solely on the development of a simple case --- pricing the immediate consumption and generation of power on a meshed network under DC approximation.
+However in this section we focus solely on the development of a simple case --- the pricing the immediate consumption and generation of power on a meshed network under DC approximation.
 We also employ the simplifying assumption that all actors have linear utilities over their own power.
 Although this abstracts away some key technical problems in power networks, it allows us to clarify the analysis of the GNK value.
 
-%We consider an example electricity network under DC approximation and show how the electrical consumption/generation of network participants can be modeled as a generalized game. And then give some details of a computational method used to compute the GNK value in this context.
+We consider an example electricity network under DC approximation and show how the electrical consumption/generation of network participants can be modeled as a generalized game. And then give some details of a computational methods which can be used to compute the GNK value in this context.
 
 \subsection{Network Model}\label{sec:the_setup}
+
 
 The network comprises:
 \begin{itemize}
@@ -237,18 +241,31 @@ In this context, the DC approximated power-flow constraints are expressed as fol
 \end{aligned}
 \end{equation}
 where $p_i^{l}$, $p_i^{u}$, $p_{i,j}^l$, $p_{i,j}^u$ are the upper and lower bounds on power consumption/generation and line limits, respectively.
-The participants on each bus are treated as players in a game.
+
+We can eliminate redundant variables, such as $\theta_i$ and $p_{i,j}$, and to ease presentation, and use the abstract functions $h$ and $g$ to represent the remaining linear functions:
+
+\begin{equation}
+\label{dcopf2}
+\begin{aligned}
+\text{DC-powerflow}\\
+\text{Variables:}\quad & p_i (i\in B) \\
+\text{constraints:}\quad & h_j(p_1,p_2,\dots)=0\quad \forall j\\
+& g_k(p_1,p_2,\dots)\le 0 \quad \forall k
+\end{aligned}
+\end{equation}
+
+In this DC powerflow network the participants on each bus are treated as players in a game.
 For simplicity, we have one player per bus (i.e.~$N=B$), and the power consumption of that bus is the respective player's strategy space (i.e.\ $A_i=[p_i^l,p_i^u]$).
-Then the DC constraints define the space of jointly executable strategies (the generalized strategy space $A$). 
-We further assume that there is a utility (or payoff) associated with the power consumption of each player, denoted $u_i(p_i)$ for player $i$,
-and analyze this problem as a generalized game.
-In the next subsection we give an example of such a game.
+Then the DC constraints define the space of jointly executable strategies --- forming the generalized strategy space $A$. 
+We further assume that there is a linear utility (or payoff) associated with the power consumption of each player, denoted $u_i(p_i)$ for player $i$,
+which is all the components of a generalized game.
+In the next subsection \ref{sec:example_network} we give a simple example of such a game.
 
 \input{figs/Electro_table.tex}
 
 \subsection{Computing the GNK value}
 The GNK value is difficult to solve, particularly because of the bilevel structure of \eqref{knvalue1} which must be computed for each of the coalitions.
-Even in the context of linear utility functions and linear constraints, \eqref{knvalue1} is a linear bilevel program (LBP) and is known to be strongly NP-hard \cite{DBLP:journals/tec/SinhaMD18,Ben-Ayed:1990:CDB}.
+Even in the context of linear utility functions and linear constraints, \eqref{knvalue1} is a linear bilevel program (LBP) and is known to be  NP-hard \cite{DBLP:journals/tec/SinhaMD18,Ben-Ayed:1990:CDB}.
 
 There exist a history of approaches and techniques which can be used to solve LBPs \cite{DBLP:journals/tec/SinhaMD18,S.Dempe.Optimisations}.
 Some of the many methods include: vertex enumeration processes \cite{Bialas:1984:TLP:2784019.2784026,Shi:2005:EKA:2641854.2642183,LIU1995644,article_cutting_plane}; penalty method schemes \cite{KleinertSchmidt2019,ONAL1993126,dempe_optimisation111};
@@ -258,8 +275,72 @@ and approximating algorithms \cite{Pineda2018,rnnlbp1,genetic_algirthm_blp}.
 
 One well known way of addressing LBPs involves converting the inner optimisation constraints into KKT conditions \cite{kuhn1951nonlinear}, and then converting the complementarity conditions into disjunctive constraints with binary variables \cite{Fortuny-Amat1981,Pineda2018}.
 In this way, a bilevel program is converted into a mixed integer program, which is then directly amenable to standard optimization software.
-This method was chosen, and the SCIP Optimization Suite \cite{MaherFischerGallyetal.2017} was employed to compute the GNK value for an example network, described next.
+This method was chosen, and the SCIP Optimization Suite \cite{MaherFischerGallyetal.2017} was employed to compute the GNK value for an example network as described in the next section \ref{sec:example_network}.
 
+The particular details of how converting our bilevel program can be reformulated and then solved as KKT conditions is as follows:
+
+This reformulation of our bilevel problem involves transforming the inner maximization/minimization constraints into KKT conditions.
+KKT conditions are a set of well known conditions for optimality in non-linear programming.
+And specifically, the reformulation of \eqref{knvalue1} to involve KKT conditions is as follows:
+
+\begin{equation}
+\label{kkt_optimization1}
+\begin{aligned}
+2v(S) =& 
+\max_{\substack{p_i \\ i\in S}}\min\left[\substack{
+	\left(\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\right)\\
+	\text{s.t.}\forall i\notin S~~-\frac{d u_i}{d p_i}=\sum_j(\lambda_{h_j}\frac{\partial h_j}{p_i}) + \sum_k(\lambda_{g_k}\frac{\partial g_k}{p_i})\\
+	\forall j~~ h_j(p_1,p_2,\dots)=0\\
+	\forall k~~ g_k(p_1,p_2,\dots)\le 0\\
+	\forall k~~ \lambda_{g_k} \ge 0\\
+	\forall k~~ \lambda_{g_k}g_k(p_1,p_2,\dots)= 0}
+\right] +\\
+&\min_{\substack{p_i \\ i\notin S}}\max\left[\substack{
+	\left(\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\right)\\
+	\text{s.t.}\forall i\in S~~\frac{d u_i}{d p_i}=\sum_j(\lambda_{h_j}\frac{\partial h_j}{p_i}) + \sum_k(\lambda_{g_k}\frac{\partial g_k}{p_i})\\
+	\forall j~~ h_j(p_1,p_2,\dots)=0\\
+	\forall k~~ g_k(p_1,p_2,\dots)\le 0\\
+	\forall k~~ \lambda_{g_k} \ge 0\\
+	\forall k~~ \lambda_{g_k}g_k(p_1,p_2,\dots)= 0}
+\right]
+\end{aligned}
+\end{equation}
+
+By reformulating the inner maximization/minimizations of \eqref{knvalue1} in this way we replaced the constraint $(x,y)\in A$ with 
+the constraint that the $(x,y)$ satisfy the conditions for local minima/maxima (i.e.\ that they be \emph{KKT points}) in 
+the same space.\footnote{By doing this we tacitly we assume that $u_i(p_i)$ is continuously differentiable, and satisfy some regularity conditions.}
+As the constraints under DC-approximation are linear and hence define a convex polygon,
+if we assume that the functions $u_i(p_i)$ are concave then there is either: only ever a single KKT point for all sets of outer variables, or (if weakly-concave) then any of the KKT points will be equal to the global minima (maxima).
+Hence the inner maximization (minimization) over the KKT points can be ignored.
+
+It was also realized that a binary reformulation of the complementary slackness conditions would increase computational efficiency.
+Particularly that for each inequality constraint $g_k$ there was introduced a binary variable $Z_k$ indicating whether it was active or not.
+The result of these reformulations are as follows:
+
+\begin{equation}
+\label{optimization_eq1}
+\begin{aligned}
+2v(S) =& 
+\max_{\substack{p_i \\ i\in S}}\left[\substack{
+	\left(\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\right)\\
+	\text{s.t.}\forall i\notin S~~-\frac{d u_i}{d p_i}=\sum_j(\lambda_{h_j}\frac{\partial h_j}{p_i}) + \sum_k(\lambda_{g_k}\frac{\partial g_k}{p_i})\\
+	\forall j~~ h_j(p_1,p_2,\dots)=0\\
+	\forall k~~ (1-Z_k)\bar{\lambda}_{g_k} \ge \lambda_{g_k} \ge 0\\
+	\forall k~~ \underline{g_k}Z_k\le g_k(p_1,p_2,\dots) \le 0}
+\right] +\\
+&\min_{\substack{p_i \\ i\notin S}}\left[\substack{
+	\left(\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\right)\\
+	\text{s.t.}\forall i\in S~~\frac{d u_i}{d p_i}=\sum_j(\lambda_{h_j}\frac{\partial h_j}{p_i}) + \sum_k(\lambda_{g_k}\frac{\partial g_k}{p_i})\\
+	\forall j~~ h_j(p_1,p_2,\dots)=0\\
+	\forall k~~ (1-Z_k)\bar{\lambda}_{g_k} \ge \lambda_{g_k} \ge 0\\
+	\forall k~~ \underline{g_k}Z_k\le g_k(p_1,p_2,\dots) \le 0}
+\right]
+\end{aligned}
+\end{equation}
+
+Where $\bar{\lambda}_{g_k}$ and $\underline{g_k}$ are the estimated upper and lower bounds on the KKT multipliers and constraint function respectively.
+This reformulation is directly amenable for calculation by optimization solvers, and (as already stated) the SCIP Optimization Suite \cite{MaherFischerGallyetal.2017} 
+was used for this purpose in our case.
 
 \subsection{An Example Problem}\label{sec:example_network}
 
@@ -275,7 +356,7 @@ This optimization is more broadly known as optimal power flow problem (OPF) and 
 The Lagrange multipliers associated with the power conservation constraints (i.e. of the balancing constraint and line loss constraints) at each bus $p_j = \sum_{(i,j)\in C}p_{i,j}$, are the rates of marginal costs/value of the power at that respective bus, and are the prices of the LMP scheme.
 
 
-\section{Results}\label{sec:features}
+\section{Features of GNK}\label{sec:features}
 
 In this section we discuss the characteristics of the computed GNK value, and compare them against LMP, for the example 5-bus network (from Figure~\ref{fig:example1}).
 
@@ -298,7 +379,7 @@ In contrast, the GNK value differs from LMP because it takes into account the fu
 not just the marginal value or cost of only those generators that are dispatched or customers receiving power. 
 The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1e}.\\
 
-\subsection{Features of the GNK value}
+\subsection{Specific features of the GNK value}
 The results illustrate some notable qualities of the GNK value.
 
 % \begin{itemize}
@@ -494,3 +575,12 @@ It is hence suspected that this modified GNK value may be an appropriate proxy f
 \iffigures
 \input{figs/probability_comparrison1.tex}
 \fi
+
+
+
+\section{Results and Evaluation of the GNK value at scale}
+
+
+\section{Conclusion}
+
+

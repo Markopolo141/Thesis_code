@@ -27,14 +27,14 @@ length = 1000 #strata have 1000 data points
 print "Computing Bernoulli and Uniform Experiment"
 print " for bernoulli successes 1 to 20 ---"
 with open("Bernoulli_and_Uniform.csv","w") as f:
-	f.write("successes,SEBM*,SEBM,Ney\n");
+	f.write("successes,SEBM*,SEBM,Ney,SECM\n");
 	for ps in range(1,21): # for bernoulli successes 1 to 20
 		print ps
 
 		# structures for strata population data points
 		vals = [[],[]]
 		# errors achived by the three methods
-		error_values = [[],[],[]]
+		error_values = [[],[],[],[]]
 
 		iterator = range(20000)
 		if tqdm_enabled:
@@ -61,11 +61,15 @@ with open("Bernoulli_and_Uniform.csv","w") as f:
 
 			#calculate error achieved using Neyman sampling
 			cvals = copy(vals)
-			error_values[2].append(abs(mean-super_castro(cvals,m)))
+			error_values[2].append(abs(mean-super_castro(cvals,m,d)))
+
+			#calculate error achieved using Neyman sampling
+			cvals = copy(vals)
+			error_values[3].append(abs(mean-altered_burgess(cvals,m,d)))
 
 		#average the errors achieved by each method and output
 		error_values = [sum(errors)*1.0/len(errors) for errors in error_values]
-		f.write("{},{},{},{}\n".format(ps,error_values[0],error_values[1],error_values[2]))
+		f.write("{},{},{},{},{}\n".format(ps,error_values[0],error_values[1],error_values[2],error_values[3]))
 
 print "Finished Experiment"
 

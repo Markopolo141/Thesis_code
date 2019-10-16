@@ -25,7 +25,6 @@
 \usepackage[normalem]{ulem}
 \usepackage[table]{xcolor}
 \usepackage{makeidx}
-\usepackage{cleveref}
 \usepackage[centerlast]{caption2}
 \usepackage{float}
 \urlstyle{sf}
@@ -51,6 +50,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{csquotes}
+\usepackage{cleveref}
 
 \usepackage{accents}
 \usepackage{units}
@@ -90,8 +90,10 @@
 
 \newif\iffigures
 \figurestrue
-\usetikzlibrary{external}
-\tikzexternalize[prefix=tikz/]
+%\figuresfalse
+
+%\usetikzlibrary{external}
+%\tikzexternalize[prefix=tikz/]
 
 \input{style/macros.tex}            
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
