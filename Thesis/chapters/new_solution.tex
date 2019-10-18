@@ -342,18 +342,25 @@ Where $\bar{\lambda}_{g_k}$ and $\underline{g_k}$ are the estimated upper and lo
 This reformulation is directly amenable for calculation by optimization solvers, and (as already stated) the SCIP Optimization Suite \cite{MaherFischerGallyetal.2017} 
 was used for this purpose in our case.
 
-\subsection{An Example Problem}\label{sec:example_network}
 
-We consider the toy 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}, to illustrate the features of the GNK value in contrast to LMP.
-For this example network, we calculate the financial payments and dispatched powers under the GNK value and those under LMP, against parameter $p_1^l$ (the generator capacity in the network).
-The payments are plotted against $p_1^l$ in Figure \ref{fig:1} and the features of these plots are discussed in Section \ref{sec:features}.
-
-
+\subsection{Computing the LMP prices}
 
 For comparison with the GNK value, we also compute the LMP transfers for our example network.
 As described in literature \cite{lmp1,lmp2} it is possible to conduct an optimization directly over the possible power-flows to maximize the sum of utilities of the participants.
 This optimization is more broadly known as optimal power flow problem (OPF) and often yields the locational marginal prices (LMP) as a byproduct.
 The Lagrange multipliers associated with the power conservation constraints (i.e. of the balancing constraint and line loss constraints) at each bus $p_j = \sum_{(i,j)\in C}p_{i,j}$, are the rates of marginal costs/value of the power at that respective bus, and are the prices of the LMP scheme.
+
+
+
+\subsection{Computing the VCG imputations}
+
+
+
+\subsection{An Example Problem}\label{sec:example_network}
+
+We consider the toy 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}, to illustrate the features of the GNK value in contrast to LMP and VCG.
+For this example network, we calculate the financial payments and dispatched powers under the GNK value, LMP and VCG, against parameter $p_1^l$ (the generator capacity in the network).
+The financial payments are plotted against $p_1^l$ in Figures \ref{fig:1d}, \ref{fig:1f} and \ref{fig:1h} respectively. which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1c}, \ref{fig:1e} and \ref{fig:1g} respectively. The features of these plots are discussed in Section \ref{sec:features}.
 
 
 \section{Features of GNK}\label{sec:features}
