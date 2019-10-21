@@ -9,6 +9,7 @@ Our resulting solution concept is compared against some of the other solutions o
 In this way, it is to be seen that the different solution concepts give rather different outcomes.
 And then we step forward into discussing these features.
 
+
 \section{Prelude to the GNK value}
 
 In the previous section we introduced several solution concepts, each stemming from different principles and having ethical associations and perspective.
@@ -25,7 +26,7 @@ As already stated (in the bargaining section \ref{}), bargaining solutions attem
 Though the two (ideal competitive outcomes and ethical outcomes) may be related, or even identical in certain contexts - such as where no particular ethical principles apply or the purpose of the engagement is the competition (such as in sports).
 %And it is in this same way that the Marginalism outlined in Section \ref{} is often primarily treated usually begin descriptive than prescriptive.
 
-However there is a line of ethical thinking that idealises competition as being associated-with or determining appropriate ethics; as we consider in Section \ref{}, and for those inclined to think that way then our solution is all the more relevant.
+%However there is a line of ethical thinking that idealises competition as being associated-with or determining appropriate ethics; as we consider in Section \ref{}, and for those inclined to think that way then our solution is all the more relevant.
 In anycase, the process of crafting better (or different) descriptions of competitive outcomes is not to be feared, as it may be usefull for describing situations as they might occur under free competition, or as a starting point for implementation in arenas without or prior-to relevant ethical concerns.
 
 Let us begin.
@@ -45,10 +46,10 @@ Our recourse is instead to consider all the possible divisions of players betwee
 In the following subsections we give all the details of this process. Particularly we note that this question of how to reasonably extend bargaining solution concepts to multiple players has a history.
 And that our approach was first discovered by Harsanyi in 195X, and our work extends it.
 
-So far as we know, Harsanyi's solution concept has never been applied to electricity networks, particularly as there exists a particular problem in doing so.
+So far as we know, Harsanyi's solution concepts have never been applied to electricity networks, particularly as there exists a particular problem in doing so.
 The details of this problem and its remedy are spelled out in following subsections.
 But briefly, that in electricity networks the mutual actions of participants are limited, as not everybody can do any combination of specific actions, (such as might overload power lines etc.)
-And these limitation on the space of possible mutual actions is best modelled by a generalized noncooperative game, and unfortunately in the context of such a generalized game there is no necessarily unique minimax point between two players.
+And these limitation on the space of possible mutual actions is best modelled by a generalized noncooperative game, and unfortunately in the context of such a generalized game there is no necessarily unique minimax point between two players (or more).
 Our principle and novel development in this context is the provision of a remedy, such that Harsanyi's solution can then be applied.
 
 The remedy is to take the expected outcome on a coin-flip on who chooses actions first in the minimax strategies - as we shall see. And this turns out to be a unique minimax outcome, that satisfies all required properties and leads to a coherent outcome.
@@ -165,28 +166,28 @@ is the sum of payoffs that the coalition $S$ receives,
 minus the sum of payoffs that the complement $N\setminus S$ receives, 
 under the joint strategy $(x,y)\in A$, we call this the \textit{payoff advantage} to $S$.
 
-The first line of $v(S)$ in~\eqref{knvalue1} is half the payoff advantage achieved if, the players in $S$ collectively choose their strategies to maximize the payoff advantage to $S$ knowing that then the players in $N\setminus S$ will subsequently choose their strategies to minimize it - and this constitutes a bilevel optimization problem.
+The first line of $v(S)$ in~\eqref{knvalue1} is half the payoff advantage achieved if, the players in $S$ collectively choose their strategies to maximize the payoff advantage knowing that the players in $N\setminus S$ will subsequently choose their strategies to minimize it - and thus this dynamic constitutes a bilevel optimization problem.
 Then the second line of~\eqref{knvalue1} is an additional half of the payoff advantage achieved if the ordering of choice were reversed, with $N\setminus S$ choosing first.
 In this way, \eqref{knvalue1} can be interpreted as the expectation of nash equilibrium payoff advantage of $S$ over its complement under a fair coin-toss of who chooses their strategies first.
 
 In this formulation $v(N) = \max_{a\in A} (\sum_{i\in N} u_i(a))$ is the maximum achievable sum of payoffs that the players can achieve, and the GNK value $\varphi$, splits all of this amount between the players (by the efficiency axiom).
-The GNK value can be enacted by having the players execute the strategies that achieve this maximal sum, and then instigating utility transfers between the players.
+The allocation of utility that the GNK value allocates can be realised by having the players execute the strategies that achieve this maximal sum, and then enacting appropriate utility transfers between the players.
 In this way the GNK value can be seen as a method of allocating a Pareto optimal outcome and budget-balanced payments between players, proportional to their competitive advantages.
 
 \subsection{Relation to other solution concepts}\label{relating_to_the_old}
 
-The Value and GNK value are both closely related to several other solution concepts, and even equivalent to them, or each other, under certain conditions. In this section, we discuss these relationships.
+The Value and GNK value are both closely related to several other solution concepts, and even equivalent to them, or each other, under certain conditions. In this subsection, we discuss these relationships.
 
-The GNK value is identical to Neyman and Kohlberg's Value \cite{value2} when the strategy space $A$ represents a mixed strategy game that is not generalized; 
- that is when the strategy space, $A$, is an unconstrained probabilistic combination of strategies for all agents.
-To see this, observe that the two halves of \eqref{knvalue1} are equal in the absence of joint action constraints (%proof in Appendix \ref{appendix1}, or 
+Most immediately, the GNK value is identical to Neyman and Kohlberg's Value \cite{value2} when the strategy space $A$ represents a mixed strategy game that is not generalized; 
+ that is when the strategy space, $A$, is an unconstrained probabilistic combination of strategies for all agents (ie. $A = \prod_{i\in N}A^i$).
+To see this, we observe that the two halves of \eqref{knvalue1} are equal in the absence of joint action constraints (%proof in Appendix \ref{appendix1}, or 
 via direct application of von Neymann's minimax theorem, see Lemma 1 of \cite{value2}), 
 and hence the characteristic value reduces to that used in Neyman and Kohlberg's original definition:
 \begin{equation}\label{knvalue2}v_o(S) = \max_{x\in A^S}\min_{y\in A^{N\setminus S}} \left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S} u_i(x,y) \right).\end{equation}
 %
-That is, the formulation of $\varphi$, per \eqref{da_value_eq}, 
-with $v_o(S)$ as in \eqref{knvalue2},
-Unfortunately this measure cannot be directly applied to generalized games because the required condition $v_o(S)=-v_o(N\setminus S)$ can fail to hold in that case. 
+That is, Neyman and Kohlberg's Value is the formulation of $\varphi$ (per \eqref{da_value_eq}) 
+with $v_o(S)$ (per \eqref{knvalue2}).
+Unfortunately Neyman and Kohlberg's Value cannot be directly applied to generalized games because the required condition $v_o(S)=-v_o(N\setminus S)$ can fail to hold in that case. 
 
 The Value (and GNK value) is also directly conceptually related to Harsanyi's solution in this context \cite{values3},
 while in the 2-player context, it is identical to Kalai and Kalai's \textit{coco-value} in the context of complete information \cite{kalai1,Kalai2010,value2} 
@@ -197,14 +198,7 @@ It also shares a conceptual similarity with Aumann's $\alpha$ and $\beta$ core s
 
 \section{GNK value applied to DC powerflows}\label{more_involved}
 
-Shapley value concepts are increasingly being considered as mechanisms for pricing and cost allocation in various facets of electricity system operation.
-Example include: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}; 
-compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960};
-allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}; allocating profits for retailers and \cite{ACUNA2018161,WANG201972}; 
-allocating surplus and savings in microgrids \cite{WU2017384} and; 
-allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
-
-Since the GNK value can be seen as a particular formulation of the Shapley Value's characteristic function, it has the potential to be used and compared against other particular formulations in most of these contexts.
+Since the GNK value can be seen as a particular formulation of the Shapley Value's characteristic function, it has the potential to be used and compared against other particular formulations in a variety of different contexts.
 However in this section we focus solely on the development of a simple case --- the pricing the immediate consumption and generation of power on a meshed network under DC approximation.
 We also employ the simplifying assumption that all actors have linear utilities over their own power.
 Although this abstracts away some key technical problems in power networks, it allows us to clarify the analysis of the GNK value.

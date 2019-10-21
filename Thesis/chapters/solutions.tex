@@ -117,19 +117,21 @@ In the following sections we will compare the allocations of power/money in rand
 
 \subsection{Bargaining and Game Theory}
 
-One component of analysis that is completely missing from VCG is any specific consideration of `who can do what', and instead there is only recorded preferences over all-possible outcomes.
+One component of analysis that is missing from VCG is the consideration between the outcomes that the players value and the actions which they \textit{dont} enact which then leads to thoes outcomes - and instead there is only considered the sum-utility of utility-maximising outcomes with and/or without the participation of particular players.
 
-One of the most historic classes which involves an allocation which specifies distinct actions for individuals is bargaining solutions.
-particularly Nash bargaining and the disagreement outcome.
+While this schema leads to coherent outcomes that are incentive compatible, it might also be seen to be a shortcomming as it fails to account for the divergence of possible actions (including negative ones) for the players and the effect that these would have on the group.
 
-of solution concepts is `bargaining' - which serves as the perspective from which our investigation extends.\\
+One of the most historic classes of solution concepts which involve an allocation of utility which involves the consideration of all the distinct actions for the players are the bargaining solutions.
+particularly Nash bargaining with endogenous disagreement outcome.
 
-A bargaining solution concept applies in a situation where there are a number of parties (or agents) and a space of possible agreements which those agents can reach (and value differently) between themselves.
+\subsubsection{Nash bargaining with exogenous disagreement point}\label{sec:nash_bargaining_exogenous}
+
+A bargaining solution concept applies in a situation where there are a number of parties (or agents) and a space of possible agreements which those agents can reach and value differently between themselves.
 A bargaining solution concept identifies an outcome which the agents `will' (or `should') agree upon.
 Perhaps the most famous bargaining solution concept is called the Nash-bargaining solution concept.
 
 Nash bargaining was introduced \cite{nash1} as an axiomatic approach to predict the result of individuals who are bargaining over potential outcomes.
-It is defined over a convex compact set of potential outcomes $F$ (which might coincide with power-flows and fiscal payments on an electricity network) 
+It is defined over a convex compact set of potential outcomes $F$ (which might coincide with power-flows and fiscal payments on an electricity network etc.) 
 where each of the players $P=\{p_1,p_2,\dots\}$ value the outcomes differently with utilities $u_{p\in P}(f)$ for $f\in F$.
 Additionally there is a privileged outcome called the `disagreement' outcome $d$ which represents the event of the negotiation between the players breaking down.
 
@@ -137,7 +139,7 @@ Nash identified that in this case there is a unique solution satisfying some ver
 \begin{itemize}
 \item \textit{Invariant to affine transformations}: that the solution should not change if the utilities of either players are scaled (by some positive factor) or offset, ie that they are invariant under the set of affine transformations that might also represent their relative preferences.
 \item \textit{Pareto optimality}: That the solution will not be inferior to any other point with respect to the preferences of all players.
-\item \textit{Independence of irrelevant alternatives}: If any subset of potential outcomes does not feature the solution point then it could be removed without affecting the solution.
+\item \textit{Independence of irrelevant alternatives} (IIA): If any subset of potential outcomes does not feature the solution point then it could be removed without affecting the solution.
 \item \textit{Symmetry}: The solution is invariant with regards to the ordering of the players.
 \end{itemize}
 This solution maximizes the product of utilities above the utility of the disagreement point:\cite{book1}
@@ -147,23 +149,65 @@ and a Pareto-optimal outcome is determined which maximizes the product of those 
 
 In many cases of physical bargaining (which might involve alternating offers etc.) the `disagreement outcome' is often naturally dictated by the context of the bargaining process - 
 such as the event of quitting in the context of a wage-negotiation or of walking-away from a potential sale
-- It can be seen as the point of `threat' from which the bargaining process occurs.\cite{nash2}
+- It can be seen as the point of `threat' from which the bargaining process occurs, and which any player can unilatterally implement.\cite{nash2}
+
+There has been much work since Nash published his famous paper (\cite{nash1}) investigating other and/or similar solution concepts, and these bargaining solutions (such as \cite{smorodinsky,tempered,tale1,anbarci2002comparing}) often relate to different axioms (most often rejecting axiom IIA) and privilage different points in the bargaining process.
 
 One objection to the Nash bargaining solution is that it may not be considered natural or a reliable description of real-world bargaining.
-Although there do exist some evolutionary models suggesting that in some social dynamics Nash bargaining might emerge in a social situation \cite{articlechoakihiko}, there exists discussion and experimental work finding that real behavior between humans exhibits some ambiguity \cite{KROLL2014261}, even in the case when the disagreement point is naturally given by the setting.
+Although there do exist some evolutionary models suggesting that in some social dynamics Nash bargaining might naturally emerge \cite{articlechoakihiko}, there does exists discussion and experimental work finding that real behavior between humans exhibits some ambiguity \cite{KROLL2014261}, even in the case when the disagreement point is naturally given by the setting.
 
 However in other cases (such as in an electricity network) a singular disagreement outcome is not very clearly given by the context.
-And so if a bargaining-type solution concept is utilized then a disagreement outcome must be chosen `endogenously' from the set of possible outcomes $F$.
-How to do this?
+And so for a Nash bargaining solution concept to be applied then a disagreement outcome must be chosen `endogenously' from the set of possible outcomes $F$.
+How sould we do this?
 
-In John Nash's paper ``\textit{Two-person cooperative games}"\cite{nash2}, He explicitly addresses the consideration of the agents choosing a disagreement point between themselves in the bargaining process. However it is important to note that there are many possible bargaining solutions\cite{smorodinsky,tempered} which relate to different axioms,
- and also different methods of choosing a disagreement outcome.\cite{bozbay,alter_bargaining1,tale1}
+\subsubsection{Nash bargaining with endogenous disagreement point}
 
-\fix{Add much more info on endogenous disagrement point} 
+In John Nash's paper ``\textit{Two-person cooperative games}"\cite{nash2}, He explicitly addresses the consideration of the agents choosing a disagreement point between themselves in a prior stage in the bargaining process.
 
-Notwithstanding, Nash's solution concept has a very simple form in the case of two-player games where utility is transferable (TU), equivalent to the sometimes called the `coco-value' \cite{kalai1,Kalai2010}.
+Particularly he considers a game specifically between two players, and in a series of stages of negotiations they reach a cooperative outcome.
+He considers that each of the players has a space of mixed strategies $S_i$ in a normal form game, and for each possible pair of mixed strategies that the players might execute, each recieves an immediate payoff $p_1(s_1,s_2)$ and $p_2(s_1,s_2)$ respectively.
+He also considers that there is a set $B$ of possible payoffs for the players if they cooperate, which may be bigger than the set of payoffs in the normal form game.
+ie. $\forall s_1\in S_1,s_2\in S_2 \quad (p_1(s_1,s_2), p_2(s_1,s_2)) \in B$.
+
+Nash then considers a specific negotiation process:
+\begin{enumerate}
+\item Each player chooses a mixed strategy $t_i$ which he will be forced to use if the two cannot come to an agreement.
+\item The players inform each other of their threats.
+\item Each player $i$ decides upon his demand $d_i$, which is a point on his utility scale such that he/she will not accept any agreement which yeilds at least the utility $d_i$ to him/her.
+\item If there is a point $(u_1,u_2)$ in B such that $u_1 > d_1$, and $u_2 > d_2$, then the pay-off to each player $i$ is $d_i$. Otherwise, the pay-off to player $i$ is $p_i(t_l, t_2)$.
+\end{enumerate}
+
+This process encodes a process that includes two choices for the players, first, they must choose a `threat' strategy $t_i$ which they will be forced to execute if they cannot reach further agreement, and secondly they need to choose a `demand' $d_i$ of the utility which they would like to recieve from the negotiation.
+If it so happens that is possible for the players to have their demands muturally met then they recieve the utility associated with their demand.
+
+Nash identifies that a natural choice of compatable demands in the second part of the game occurs at the maximising of the Nash product (Equation \ref{nash-product}) above a disagreement point determined by the execution of threat strategies (as illucidated in the previous section \ref{sec:nash_bargaining_exogenous})
+Nash then identifies then that in light of this result for the second part of the game there exists a unique set of optimal choice of threats $t_i$ for the two players in the first part of the game; which is a Nash equilibrium.
+
+Nash also identifies the result via axioms:
+\begin{enumerate}
+\item For each game $(S_1,S_2,B)$ there is a unique solution $(v_1,v_2)$ which is a point in $B$
+\item If $(u_1,u_2)$ is in $B$ and $u_1\ge v_1$ and $u_2\ge v_2$ then $(u_1,u_2)=(v_1,v_2)$
+\item That order preserving linear transformation of utilitie do not change the solution. ie. for games with all utilities scaled (ie $u_1' = a_1u_1+b_1, u_2' = a_2u_2+b_2$ for $a_1,a_2\ge 0$) result in solution $(v_1',v_2')$ where $v_1'=a_1v_1+b_1$ and $v_2'=a_2v_2+b_2$.
+\item The solution does not depend on which player is player `one', ie. all functions are symmetrical
+\item If points from $B$ are removed except $(v_1,v_2)$ and the points $(p_1(s_1,s_2), p_2(s_1,s_2))$ for strategies $s_1\in S_1,s_2\in S_2$ then the new game yeilds the same solution.
+\item a restriction of strategies for a player cannot increase his/her resulting payoffs, ie. for $S_1'\subset S_1$ then $v_1(S_1',S_2,B)\le v_1(S_1,S_2,B)$
+\item there exists single (unmixed) strategies such that player one's value wont increase, ie. there exists $s_1,s_2$ such that $v_1(s_1,s_2,B)\le v_1(S_1,S_2,B)$
+\end{enumerate}
+
+These axioms very similar to, but perhaps a little less obvious than Nash's game with exogenous disagreement point (as given in the previous subsection).
+
+In anycase, this Nash bargaining solution is one example of a solution concept that explicitly considers strategies that dont just belong to social optima (such as 'threat' strategies) and how these might bear on the result of cooperative negotiations; and also evident that VCG mechanisms do not involve the consideration of these strategies.
+And it is interesting to consider the role of threats in real world cooperative negotiations.
+
+%\begin{displayquote}
+%A common device in negotiation is the threat ... If one considers the process of making a threat, one sees that its elements are as follows: A threatens B by convincing B that if B does not act in compliance with A's demands, then A will follow a certain policy T. Supposing A and B to be rational beings, it is essential for the success of the threat that A be compelled to carry out his threat T if B fails to comply. Otherwise it will have little meaning. For, in general, to execute the threat will not be something A would want to do, just of itself.
+%(\cite{nash2})
+%\end{displayquote}
+
+It is also worth noting that Nash's method of choosing the disagreement outcome via Nash equilibrium is not the only option, and that there are different methods of choosing (or avoiding) the specification of a disagreement outcome.\cite{bozbay,10.2307/43616981}
+
+It is worth noting that Nash's solution concept has a very simple form in the case of two-player games where utility is transferable (TU), equivalent to the sometimes called the `coco-value' \cite{kalai1,Kalai2010}.
 Which in-turn also has a well-studied extension to many players (which we are primarily interested in) which has been called `the Value'.\cite{values1,values2,values3}
-
 
 \subsection{Cooperative Game Theory}
 
@@ -262,7 +306,17 @@ A cooperative game is \textit{convex} iff:
 
 Shapley value concepts are increasingly being considered as a mechanism for pricing in the various facets of electricity system operation.
 
-Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \cite{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \cite{WU2017384} and community/small networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965}.
+Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \cite{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \cite{WU2017384} and allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
+
+
+%Shapley value concepts are increasingly being considered as mechanisms for pricing and cost allocation in various facets of electricity system operation.
+%Example include: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}; 
+%compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960};
+%allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}; allocating profits for retailers and \cite{ACUNA2018161,WANG201972}; 
+%allocating surplus and savings in microgrids \cite{WU2017384} and; 
+%allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
+
+
 
 In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
 In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
