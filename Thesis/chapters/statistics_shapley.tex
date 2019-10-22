@@ -1,0 +1,279 @@
+
+\section{Shapley Value Approximation}\label{sec:shapley}
+
+The Shapley value is a cornerstone measure in cooperative game theory. 
+It is an axiomatic approach to allocating a divisible reward or cost between participants where there is a clearly defined notion of how much surplus or profit a group or ``coalition'' of participants could achieve by themselves \citep{ChalkiadakisEtAl2012}.
+It has many applications, 
+including analyzing the power of voting blocks in weighted voting games \citep{Bachrach2009ApproximatingPI}, 
+in cost and surplus division problems  \citep{AzizEtal2016,archie_paper1}, 
+and as a measure of network centrality \citep{Michalak:2013}.
+
+Formally, a \textit{cooperative game}, $\langle N,v\rangle\in\mathbb{G}_N$, comprises a set of $n$ players, $N=\{1,2,\dots,n\}$, and a \textit{characteristic function}, $v:S\subset N\rightarrow \mathbb{R}$, which is a function specifying the reward which can be achieved if a subset of the players $S\subset N$ cooperate, where $v(\emptyset)=0$.
+In this context the Shapley value $\varphi$ is a unique mapping from cooperative games to the player rewards $\mathbb{G}_N\rightarrow\mathbb{R}^n$ which satisfies axioms:
+
+\begin{itemize}
+\item	
+\textbf{Efficiency}: That the total reward is divided up: $\sum_i\varphi_i(\langle N,v\rangle) = v(N)$
+\item	
+\textbf{Symmetry}: If two players $i$ and $j$ are totally equivalent `substitutes' then the receive the same reward: ie. if $v(S\cup i)=v(S\cup j)~~\forall S\subseteq N\setminus\{i,j\}$, then $\varphi_i(\langle N,v\rangle) = \varphi_i(\langle N,v\rangle)$
+\item	
+\textbf{Null Player}: If the addition of a player $i$ to any coalition brings nothing, and is a `null player', then it receives reward of zero: i.e if $v(S\cup i)=v(S)~~\forall S\subseteq N$ then $\varphi_i(\langle N,v\rangle)=0$
+\item	
+\textbf{Additivity}: That for any two games the reward afforded each player is each is the sum of the games considered together: i.e. for any $v_1$ and $v_2$, that: $\varphi(\langle N,v_1+v_2\rangle)=\varphi(\langle N,v_1 \rangle) + \varphi(\langle N,v_2\rangle)$
+\end{itemize}
+
+Specifically, the Shapley value is expressed as:
+\begin{equation}\label{shap1}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
+That is, under the Shapley value each player is afforded their average marginal contribution across every possible sequence of player join orderings.  
+Or, if $v_{i,k}$ is the average marginal contribution which player $i$ can make across coalitions of size $k$:
+\begin{equation}
+v_{i,k} = \frac{1}{\binom{n-1}{k}}\sum_{S\subset N\setminus \{ i\} , |S|=k} %\frac{(n-|S|-1)!\,|S|!}{(n-1)!}
+(v(S\cup\{i\})-v(S))
+\end{equation}
+then the Shapley value can be expressed as an average:
+\begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}v_{i,k} \end{equation}
+Though the Shapley value is conceptually simple, its use is hampered by the fact that its total expression involves exponentially many evaluations of the characteristic function (there are $n\times 2^{n-1}$ possible marginal contributions between $n$ players).
+
+However, since the Shapley value is expressible as an average over averages by Equation~\eqref{shap2}, 
+it is possible to approximate these averages via sampling techniques, and these averages are naturally stratified by coalition size.
+In previously published literature, other techniques have been used to allocate samples in this context, particularly simple sampling \citep{DBLP:journals/cor/CastroGT09}, Neyman allocation \citep{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}, and allocation to minimize Hoeffding's inequality \citep{2013arXiv1306.4265M}.
+
+We assess the benefits of using our bound by comparing its performance to the approaches above in the context of some example cooperative games, with results analyzed in Section~\ref{sec:discussion}.
+The example games are described below:
+
+\begin{example_game}[Airport Game]
+An $n=15$ player game with characteristic function:
+$$v(S)=\max_{i\in S}w_i$$
+where
+$w=\{w_1,\dots,w_{15}\} %\scriptstyle\scriptsize
+=\{ 1, 1, 2, 2, 2, 3, 4, 5, 5, 5, 7, 8, 8, 8, 10\}$.
+The maximum marginal contribution is $10$, so we assign $D_i=10$ for all $i$.
+\end{example_game}
+
+\begin{example_game}[Voting Game]
+An $n=15$ player game with characteristic function:
+$$v(S)=\begin{cases}
+       1, &\quad\text{if}\quad \sum_{i\in S}w_i>\sum_{j\in N}w_j/2\\
+       0, &\quad\text{otherwise}\\
+     \end{cases}$$
+where 
+$w=\{w_1,\dots,w_{15}\} %\scriptstyle\scriptsize
+=\{ 1, 3, 3, 6, 12, 16, 17, 19, 19, 19, 21, 22, 23, 24, 29\}$.
+The maximum marginal contribution is $1$, so we assign $D_i=1$ for all $i$.
+\end{example_game}
+
+\begin{example_game}[Simple Reward Division]
+An $n=15$ player game with characteristic function:
+$$v(S)=\frac{1}{2}\left(\sum_{i\in S}\frac{w_i}{100}\right)^2$$
+where
+$w=\{w_1,\dots,w_{15}\} = \{ 45, 41, 27, 26, 25, 21, 13, 13, 12, 12, 11, 11, 10, 10, 10 \}$\\
+The maximum marginal contribution is $1.19025$, so we assign $D_i=1.19025$ for all $i$.
+\end{example_game}
+
+\begin{example_game}[Complex Reward Division]
+An $n=15$ player game with characteristic function:
+$$v(S)=\left(\sum_{i\in S}\frac{w_i}{50}\right)^2 - \floor[\Bigg]{\sum_{i\in S}\frac{w_i}{50}}^2$$
+where
+$w=\{w_1,\dots,w_{15}\} = \{ 45, 41, 27, 26, 25, 21, 13, 13, 12, 12, 11, 11, 10, 10, 10 \}$\\
+In this game, we assign $D_i=2$ for all $i$.
+\end{example_game}
+
+%\input{table-2.tex}
+
+\input{figs/shapley_table.tex}
+
+
+For each game, we compute the exact Shapley value, and then the average absolute errors in the approximated Shapley value for a given budget $m$ of marginal-contribution samples across multiple computational runs.
+The results are shown in Table \ref{Table2}, 
+where the average absolute error in the Shapley value is computed by sampling with Maleki's method \citep{2013arXiv1306.4265M} is denoted $e^{Ma}$, $e^{sim}$ is Castro's stratified simple sampling method \citep{DBLP:journals/cor/CastroGT09}, $e^{Ca}$ is Castro's Neyman sampling method \citep{CASTRO2017180}, and $e^{SEBM}$ is the error associated with our method, SEBM. 
+The results in Table~\ref{Table2} show that our method performs well across the benchmarks. 
+A discussion of all of the results is considered in the next section. 
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+In this section we give considerations to the numerical results of the paper.
+In general, from the results across Figures~\ref{Table1} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that our sampling technique, SEBM or SEBM-W, 
+performs competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}).
+This is despite SEBM not having access to knowledge of strata variances, which the Neyman methods do.
+If instead we compare SEBM* to \textsc{Ney}, which both have access to strata variances, then both methods use the same information and the results are even stronger for our method. 
+The reasons for this performance are interesting, 
+and we now discuss them in more detail.
+
+From Figure~\ref{Table1} we observe that sampling without replacement always performs better than sampling with replacement for the same method. 
+This improvement is magnified as the number of samples grows large relative to the size of the population. 
+At the same time, simple random sampling almost always performs worst, because it fails to take advantage of any variance information. These results are as expected.
+
+Next, note that the results of Figure~\ref{Table1} show that there is a mid-range of sample sizes where choosing a different method can even have a greater impact on sampling efficiency and rate of average error reduction than the difference between sampling with or without replacement.
+This is an important insight, as sampling real-world data (e.g. surveys, polling, destructive testing, etc) can be an expensive and slow process.
+Accordingly an appropriate method of choosing numbers of samples can lead to a material difference in cost for the same accuracy.
+There is also a slight decrease in the performance of SEBM* in comparison with \textsc{Ney} in the case of high number of samples and sampling without replacement, as illustrated in Figure~\ref{Table1}. 
+This indicates that the use of sub-optimal equation~\ref{approx1} in the derivation of Lemma~\ref{martingale0} might have some negative effect, by distorting the shape of the functions that the sampling processes then minimizes.
+
+Furthermore, if the data features very rare events, then SEBM and SEBM* seem to perform in a manner less than ideal.
+These condition are illustrated in Figure~\ref{biggraph3}, where the more rare the Bernoulli variable successes, the worse our methods perform in comparison with Neyman sampling (\textsc{Ney}).
+This shortcoming can be partly explained by noting that SEBM unnecessarily wastes samples on the Bernoulli stratum of rare events in the process of learning that the variance is almost zero, whereas \textsc{Ney} can avoid this because it has prior knowledge of the variances to begin with. 
+As such, this factor explains the difference between the performance of SEBM and SEBM* in the context of Figure~\ref{Table1} and also in Figure~\ref{biggraph3}.
+What is surprising is how small the difference in performance between SEBM and SEBM* is. 
+This indicates that as additional samples are taken, the original uncertainty about the strata variances have less and less effect upon the total numbers of samples that are eventually drawn from each of the strata.
+
+However, the performance difference between SEBM* and \textsc{Ney} in Figure~\ref{biggraph3} is not explained by this argument, as they use the same information.
+Instead, the reason for this difference in performance is found by considering the simplifying approximation of Equation \eqref{eq:part2} in the derivation of Lemma~\ref{expectation1}. 
+Specifically, \eqref{eq:part2} introduces a particular distortion into the shape of Equation~\eqref{big_equation} which our sampling seeks to minimize.
+Figure~\ref{fig:graph2} illustrates how the approximation \eqref{eq:part2} loosens the bound with respect to the variance. 
+Observe that when the variances are very small that Equation~\eqref{eq:part3} overly loosens the bounds, causing oversampling of strata with very small variances. 
+It appears that this factor is at play in the under-performance shown in Figure~\ref{biggraph3} and also the slight under-performance of our method in the Voting Game in Table~\ref{tab2}. 
+We note that there may be other corner-cases where our method also under-performs.
+
+In comparison to existing approaches to approximating the Shapley value, our sampling method shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
+This was particularly the case in the context of large sample budgets, as our method (SEBM, with error $e^{SEBM}$) sampled without replacement, while the other methods sampled with replacement. 
+However it would be remiss not to mention the computational overhead of iteratively minimizing (one sample at a time) our inequality in the context of our simple example games. 
+This overhead can be a significant drawback, however on more complicated games such as where the characteristic function is slower to calculate, any overhead associated with the sampling choice is expected to be much less relevant. 
+We also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values for our example games.
+
+%\input{figure-22.tex} 
+
+
+%\begin{figure}
+%\floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,center},capbesidewidth=6.4cm}}]{figure}[\FBwidth]
+%{\caption{Chernoff upper bounds derived directly from the moment generating functions of equations Equation~\eqref{eq:part1} and~\eqref{eq:part3} (in black and blue, resp.) with $D=1$; Plotted for various $t$ against the variance $\sigma^2$.
+%Note that Equation~\eqref{eq:part3} generally captures the shape and magnitude of the more accurate equation, except in the region of small $\sigma^2$ where the bound is overly weakened.}
+%\label{fig:graph2}}
+%{\begin{tikzpicture}[xscale=15, yscale=5]%[xscale=15, yscale=7.5]
+%\draw[->] (0,0) -- (0.31,0) node[anchor=north] {$\sigma^2$};
+%\draw[->] (0,0) -- (0,1.13) node[anchor=east, align=left] {$\text{Chernoff}(t,\sigma^2)$\\ $~~~~\scriptstyle\ge\pr(X\ge t)$};
+%\foreach \t in {0.1,0.5,0.9}{
+%	\draw[domain=0:0.25, color=black, line width=0.20mm, samples=35] 
+%		plot (\x,{((\x/(\x+\t))^(\x+\t)*(1.0/(1-\t))^(1-\t))^(1.0/(\x+1))}) node [right] {\footnotesize $t=\t$};
+%	\draw[domain=0:0.25, color=blue, line width=0.20mm, samples=35] 
+%		plot (\x,{e^(-\t*\t/(4*(1.0/17+\x/2)))}) node [right] {};
+%}
+%
+%\draw (0.25,-0.02) -- (0.25,0.02);
+%\draw (-0.01,1) -- (0.01,1);
+%\draw	(0.25,-0.05) node{{\footnotesize $0.25$}}
+%		(-0.01,-0.02) node{{\footnotesize $0$}}
+%		(-0.04,1) node{{\footnotesize $1.0$}};
+%\end{tikzpicture}}
+%\end{figure}
+
+
+One primary limitation of our method is that it rests on assumption of known data widths $D_i$ (and in the case of sampling-without-replacement, also on strata sizes $N_i$), which may not be exactly known in practice.
+One way to overcome this may be to use our method with a reliable overestimate these parameters (by expert opinion or otherwise). This approximation or estimation may itself open consideration of other probability bounds and/or sampling methods, however we have not investigated this line of inquiry. 
+
+In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.
+
+% Our concentration inequality, Equation~\eqref{big_equation}, is derived by a combination of Chernoff bounds fused together with probability unions, so it is expected to give conservative confidence intervals on the error of the estimate in stratified random sampling, which may be useful outside of the context of sampling decisions.
+
+
+\section{Multidimensional Extension}\label{sec:multi}
+
+Our method of choosing samples can be extended to multidimensional data by a simple modification.
+Specifically, instead of considering data that is single-valued, we consider data points that are vectors. 
+
+Formally, for $n$ strata of finite data points which are all vectors of size $M$, let $n_i$ be the number of data points in the $i$th stratum.
+Let the data in the $i$th stratum have a mean vector values $\mu_i$ (with $\mu_{i,j}$ for the $j$th component of the vector), which are value bounded within a finite width $D_{i,j}$, and have vector value variances $\sigma_{i,j}^2$.  
+Given this, let $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ (where $X_{i,k,j}$ is the $j$th component, of the $k$th vector from stratum $i$) be vector random variables corresponding to those data values randomly and sequentially drawn (with or without) replacement. 
+Denote the average of the first $m_i$ of these random variables from the $i$th stratum by $\chi_{i,m_i}= \frac{1}{m_i}\sum_{k=1}^{m_i}X_{i,k}$ (with $\chi_{i,m_i,j}$ being the $j$th component of that vector average).
+Let $\doublehat{\sigma}_{i,j}^2=\frac{i}{m_i-1}\sum_{k=1}^{m_i}(X_{i,k,j}-\chi_{i,m_i,j})^2$ be the unbiased sample variance of the first $m_i$ of these random variables in the $j$th component. 
+As before, we assume weights $\tau_i$ for each stratum. \\
+In this context we have the following theorem:
+
+\begin{theorem}[Vector SEBM bound]
+In the context above, then with $\Omega_{m_i}^{n_i},\Psi_{m_i}^{n_i}$ per Lemma~\ref{martingale1}:
+%\begin{equation}\label{big_equation2}\p\left(\begin{matrix*}[l]\sum_{j=1}^M\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2 \ge \\ \quad\quad \log(6/p)\sum_{j=1}^M\begin{pmatrix*}[l]\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\ +\begin{pmatrix*}[l]\sqrt{\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)} \\ +\sqrt{\begin{matrix*}[l]2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i \\ + \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\ +\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)\end{matrix*}} \end{pmatrix*}^2\end{pmatrix*}\end{matrix*} \right)\le Mp \end{equation}
+
+\begin{equation}\label{big_equation2}\pr\left(\begin{matrix*}[l]\sum_{j=1}^M\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2 \ge \\ \quad\quad \log(6/p)\sum_{j=1}^M\left(\alpha_{m_i,j}^{n_i} +\left(\sqrt{\beta_{m_i,j}^{n_i}} +\sqrt{\gamma_{m_i,j}^{n_i}}\right)^2\right)\end{matrix*} \right)\le Mp \end{equation}
+
+where:
+
+\begin{align*}
+\alpha_{j}=&\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\
+\beta_{j}=&\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right) \\
+\gamma_{j}=&2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i
++ \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i}  \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad~~+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)
+\end{align*}
+
+%$$
+%\alpha_{m_i,j}^{n_i}
+%=\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 
+%$$
+%$$
+%\beta_{m_i,j}^{n_i}
+%=\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right) 
+%$$
+%and
+%\begin{align*}
+%\gamma_{m_i,j}^{n_i}
+%= 2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i
+%&+ \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i}  \\
+%&+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)
+%\end{align*}
+
+\end{theorem}
+\begin{proof}
+Squaring \eqref{big_equation} and applying it specifically to the $j$th component of all the vectors gives:
+\begin{equation*}
+\pr\left(\frac{\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right)^2}{\log(6/p)} 
+\ge \alpha_{j} 
++ \left(\sqrt{\beta_{j}} 
++ \sqrt{\gamma_{j}}\right)^2  \right)
+\le p 
+\end{equation*}
+%$$ \p\left(\frac{\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2}{\log(6/p)}\ge \begin{matrix*}[l]\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\ +\begin{pmatrix*}[l]\sqrt{\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)} \\ +\sqrt{\begin{matrix*}[l]2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i \\ + \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\ +\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)\end{matrix*}} \end{pmatrix*}^2\end{matrix*} \right)\le p $$
+Taking a series of union bounds (Lemma~\ref{prob_union}) over $j$ gives result.
+\end{proof}
+
+The left hand side of the inequality in \eqref{big_equation2} is the square Euclidean distance between our weighted stratified sample vector estimate $\sum_{i=1}^n\tau_i\chi_{i,m_i}$ and the true mean stratified vector $\sum_{i=1}^n\tau_i\mu_{i}$.
+In this context, an example sampling process might consist of sampling to maximally minimize the right hand side of the inequality (similar to our SEBM process, described in Section~\ref{sec:SEBMalgorithm}).
+This formulation can be applied to more involved computational tasks that involve sampling data with multiple features or auxiliary variables.
+
+
+\section{Conclusions and Future Work}\label{sec:future}
+
+%We begin this section with a discussion of the relationship of our bound to existing concentration inequalities, 
+%and some opportunities for future improvements. 
+The derivation of our inequality extends from consideration of Chernoff bounds and probability unions in a similar vein to other EBB derivations \citep{Maurer50empiricalbernstein,bardenet2015}.
+%, however we do not argue that our particular concentration inequality is ideal.
+However, the bounds on the moment generating functions that we developed in Section~\ref{sec:components} use loosening approximations, and hence stronger and/or more representative bounds could be developed at the cost of greater mathematical complexity.
+Alternatively, an approach utilizing entropic \citep{Boucheron_concentrationinequalities} or Efron-Stein inequalities \citep{efron1981} could result in different and potentially tighter results.
+
+% Additionally, although our method works generally, there may be better or more appropriate sampling methods in the event that there is more information known about the underlying distributions.
+% It is sometimes possible to derive ideal concentration inequalities in restricted circumstances, and more broadly there exist some computational methods to numerically derive ideal bounds \citep{OUQ1,doi:10.1137/13094712X}.
+% Using these techniques it may be possible to derive ideal numerical bounds, particularly for bounds considering very small numbers of samples.
+
+
+We now consider prospective applications of our method. 
+First, the approach derived in this paper was motivated by the problem of approximating the Shapley value of cooperative games defined over complicated optimization problems (i.e. with characteristic functions given by the solution to non-trivial optimization problems). 
+Two examples of this are the problems of pricing (i) logistics, involving solutions to the travelling salesman problem \citep{AzizEtal2016}, and 
+(ii) electricity networks, which requires solving optimzation problems that incorporate the power flow equations \citep{DBLP:journals/tsg/OBrienGR15,archie_paper1,ACUNA2018161,burgess_abstract}.
+Focusing on electricity networks in particular: 
+these are complicated technical system used to transport electrical power from generators to loads, 
+subject to the non-linear physical and operational constraints of the system's components.
+With the emergence of new technologies, electricity is now generated, monitored and used on neighborhood distribution networks by devices that are increasingly responsive and interconnected to the network. 
+Because of this, there are various emerging schemes of how a future distribution-network energy market platform might be designed.
+Within this context, the Shapley value has been proposed as a fair mechanism for the allocation of resources and costs on such networks.
+The Shapley value has been considered in different ways as a mechanism for pricing demand response \citep{DBLP:journals/tsg/OBrienGR15}, demand or load \citep{archie_paper1}, supply or generation \citep{ACUNA2018161}, and potentially all simultaneously \citep{burgess_abstract}.
+Although computing the Shapley value exactly is impractical in these contexts 
+sample-based approximations are a promising avenue for implementing Shapely value pricing schemes in real-world electricity systems.
+
+Second, a potential use of our stratified sampling method is in improving the performance of \textit{stochastic gradient decent} (SGD) methods for training neural networks \citep{2016arXiv160904747R}.
+Neural networks are trained by iteratively refining their parameters --- the weights and biases of the network --- against a cost function of the network's performance against training data.
+One common method of training neural networks is gradient decent (GD).
+In each iteration of GD, the derivative of how much a change in any parameter would influence the average performance of the network across the training data is calculated as a gradient vector.
+Once this vector is calculated, each network parameter takes a small step in the direction of this gradient, to incrementally increase the performance of the network, 
+and through many of these steps the network becomes trained.
+
+However in many cases, the entire corpus of training data is not used in each iteration but only a fraction of the corpus is sampled (as a `batch' or `minibatch'), and the average gradient vector of improved performance across the samples of the batch is calculated as an approximation of the true gradient vector. 
+This iterative process has been called SGD, where one of the hyperparameters is the size of the batches, see \cite{DBLP:journals/corr/KeskarMNST16,l.2018dont}.
+In the context of supervised learning, each element of the training data is labelled with the desired output of the neural network for it, and these labels can serve to naturally stratify the training data; or the data can be stratified by other means too \citep{DBLP:journals/corr/ZhangKM17,DBLP:journals/corr/abs-1804-02772,2014arXiv1405.3080Z}.
+In this setting, Equation~\ref{big_equation2} may be used to choose between samples of labelled training data, in order to sample batches that more-efficiently estimate of the performance gradient, and hence improve the efficiency of neural network training procedure.
+This idea of `smart sampling' for neural network training is not particularly new, and our method is potentially compatible with other performance-enhancing techniques in the literature on neural networks \citep{10.1007/978-3-319-24486-0_21,article123123131}.
+
+% Full exploration of the potential applications are beyond the scope of this document.
+% However, at present, we are pleased to present our analytic concentration inequality (Equation \ref{big_equation}) as an immediately computable expression and practical method for choosing samples from strata.\footnote{
+Sourcecode for all the experiments in this paper are available at:\\ \href{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling}{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling
+}
+

@@ -2,7 +2,7 @@
 \label{cha:new_solution}
 
 From the last chapter, we have seen several different approaches to the problem of allocation.
-In this chapter we introduce a new solution that takes some elements of the previous solutions as aspects.
+In this chapter we introduce a new solution that builds apon some elements of the previous solutions.
 Particularly we develop a solution concept that extends Nash bargaining with endogenous disagreement point to a coalitional schema of n-players.
 The solution we give extends the work of John Harsanyi to the space of generalized games, such as are suitable for various applications in electricity network situations - such as in an Optimal Power Flow (OPF) setting.
 Our resulting solution concept is compared against some of the other solutions of the previous chapter. Particularly we compare our new solution against a more straightforward Shapley Value solution concept and also against LMP and VCG.
@@ -354,15 +354,15 @@ The Lagrange multipliers associated with the power conservation constraints (i.e
 
 We consider the toy 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}, to illustrate the features of the GNK value in contrast to LMP and VCG.
 For this example network, we calculate the financial payments and dispatched powers under the GNK value, LMP and VCG, against parameter $p_1^l$ (the generator capacity in the network).
-The financial payments are plotted against $p_1^l$ in Figures \ref{fig:1d}, \ref{fig:1f} and \ref{fig:1h} respectively. which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1c}, \ref{fig:1e} and \ref{fig:1g} respectively. The features of these plots are discussed in Section \ref{sec:features}.
+The financial payments are plotted against $p_1^l$ in Figures \ref{fig:1d}, \ref{fig:1f} and \ref{fig:1h} respectively. Which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1c}, \ref{fig:1e} and \ref{fig:1g} respectively. The features of these plots are discussed in Section \ref{sec:features}.
 
 
 \section{Features of GNK}\label{sec:features}
 
-In this section we discuss the characteristics of the computed GNK value, and compare them against LMP, for the example 5-bus network (from Figure~\ref{fig:example1}).
+In this section we discuss the characteristics of the computed GNK value, and compare them against LMP and VCG, for the example 5-bus network (from Figure~\ref{fig:example1}).
 
-to begin, the GNK and LMP power allocations and payments are plotted against $p_1^l$ (generator capacity in the network) in Figure \ref{fig:1}.
-Through these figures we can see how the different mechanisms allocate payments in the context of constrained resources.
+To begin, both the GNK, LMP and VCG power allocations and the utilities associted with these are plotted against $p_1^l$ (generator capacity in the network) are shown in Figures \ref{fig:1a} and \ref{fig:1b}.
+And through subsequent pairs of figures we can see how the different mechanisms allocate payments in the context of constrained resources - Figures \ref{fig:1c}, \ref{fig:1d} for GNK, Figures \ref{fig:1e}, \ref{fig:1f} for LMP, Figures \ref{fig:1g}, \ref{fig:1h} for VCG.
 
 \iffigures
 % \input{graph0.tex}
@@ -370,15 +370,18 @@ Through these figures we can see how the different mechanisms allocate payments 
 \fi
 
 In Figure~\ref{fig:1a}, increasing the generator capacity from $0$ shows that power is initially consumed entirely by the consumer at bus 2, 
-who uses all $p_1^l$kW of power and values it at 1.9. This continues until the power constraint on line (1,2) binds, at 70kW.  
+who uses all $p_1^l$kW of power and values it at 1.9 units of utility. This continues until the power constraint on line (1,2) binds, at 70kW.  
 This dynamic is then repeated for the agent with the next-highest marginal utility for power (given by the utility function coefficients in Figure~\ref{fig:example1}), until the respective line constraint are also met.
 
-Considering the interval the first 70 units of generator capacity (ie. $p_1^l \in [0,-70]$), the LMP prices for this power, for both the generator at bus 1 and the consumer at bus 2, is given by its marginal value, \$1.9 (as the line constraint is not active). This corresponds to the slope of the blue line in Figure~\ref{fig:1d} over this interval. 
-More generally, the full set of the LMP transfers plotted in Figure~\ref{fig:1d} are given by the Lagrange multiplier for power conservation in the OPF optimization multiplied by the power consumed at that bus.
+Considering the interval the first 70 units of generator capacity (ie. $p_1^l \in [0,-70]$), the LMP prices for this power, for both the generator at bus 1 and the consumer at bus 2, is given by its marginal value, 1.9 (as the line constraint is not active). This corresponds to the slope of the black line in Figure~\ref{fig:1f} (or \ref{fig:1b}) over this interval. 
+More generally, the full set of the LMP transfers plotted in Figure~\ref{fig:1f} are given by the Lagrange multiplier for power conservation in the OPF optimization multiplied by the power consumed at that bus, and that as the generation capacity increases that the marginal price of power changes, and the gradients of the lines change in discrete steps.
 
-In contrast, the GNK value differs from LMP because it takes into account the full bargaining position of each agent when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, 
-not just the marginal value or cost of only those generators that are dispatched or customers receiving power. 
-The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1e}.\\
+Additionally, the VCG payments are plotted against $p_1^l$ in Figures \ref{h} and resulting utilities in Figure \ref{g}.
+The VCG payments are strongly related to LMP payments, except that instead of payment proportional to the marginal unit of electricity, each player is conpensated at his/her marginal cost of participation.
+VCG takes into account the marginal effect that each of the player's participation has apon each other at the social optimum
+
+In contrast from VCG and LMP, the GNK value takes into account the full bargaining position of each agent and possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
+The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1d}.
 
 \subsection{Specific features of the GNK value}
 The results illustrate some notable qualities of the GNK value.
@@ -387,18 +390,18 @@ The results illustrate some notable qualities of the GNK value.
 % \item GNK is continuous in the parameters of the network
 % \end{itemize}
 
-\subsubsection*{The GNK value is continuous in the parameters of the network}
-This properties can be derived from \eqref{knvalue1}, in which the minimax characteristic function, $v(S)$,
+\subsubsection*{The GNK value and VCG imputations are continuous in the parameters of the network}
+This continuity property for GNK can be derived directly from \eqref{knvalue1}, in which the minimax characteristic function, $v(S)$,
 always changes continuously with the utility functions $u$, and are generally continuous with continuous deformations of the strategy space $A$.
-Continuity with regards to utility functions is proven in the Appendix, together with some associated monotonicity properties.
+Continuity with regards to utility functions is proven in the Appendix \ref{appendix:continuity_of_GNK}, together with some associated monotonicity properties.
+This continuity is similarly witnessed in VCG imputations, but notably not in the context of LMP payments.
 
-LMP features discontinuous changes in financial transfers, however the GNK value is seen to feature no such discontinuities.
-This can clearly be seen from the jagged edges in Figure \ref{fig:1d}, where the payments received by generator 1 drop sharply with increasing generator capacity. 
-This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the payments under the GNK value in Figure \ref{fig:1c} feature no such drops or discontinuities.
+It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1d}, where the payments received by generator 1 drop sharply with increasing generator capacity.
+This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the payments under the GNK value (Figure \ref{fig:1c}) and VCG imputation (Figure \ref{}) feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
 which is one known cause of the volatility experienced in
 electricity markets \cite{RePEc:aen:journl:2006v27-02-a09}. 
-In contrast, the post-payment utilities under the GNK value are almost always continuous with network parameters.
+In contrast, the post-payment utilities under the GNK value and VCG are almost always continuous with network parameters.
 
 
 %In the electrical context, 
@@ -408,9 +411,9 @@ In contrast, the post-payment utilities under the GNK value are almost always co
 % \begin{itemize}
 % \item the GNK value is always budget balanced
 % \end{itemize}
-\subsubsection*{The GNK value is always budget balanced}
-The transactions under LMP are not necessarily budget-balanced and can yield a surplus, whereas payments under the GNK value are necessarily budget-balanced and result in no surplus or deficit.
-This is an outcome of the GNK value's axiomatic derivation, as given as equation \eqref{eff-axiom}.
+\subsubsection*{The GNK and VCG payments are always budget balanced}
+The transactions under LMP are not necessarily budget-balanced and can yield a surplus, whereas payments under the GNK and VCG value are necessarily budget-balanced and result in no surplus or deficit.
+This is an outcome of the GNK value's axiomatic derivation, as given as equation \eqref{eff-axiom}; and also VCG's axiomatic derivation, as given by equation \ref{}.
 Under LMP, each participant is credited or debited at the effective rate of supply for their location but there is no guarantees that the total payments should add to zero.
 This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1d}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
 The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called ``congestion-rents'' that are usually collected by owners of transmission lines \cite{lmp2} (and which are often also the owners of the utility-scale generation assets in vertically-integrated systems).
@@ -420,7 +423,7 @@ In a power systems context, budget-balancedness of payments is desirable in that
 % \begin{itemize}
 % \item the GNK value can offset those that do not receive/generate power
 % \end{itemize}
-\subsubsection*{The GNK value can offset those that do not receive/generate power}
+\subsubsection*{The GNK value (but not VCG or LMP) can offset those that do not receive/generate power}
 The GNK value can allocate payments between parties such that the consumers that receive power compensate those that are excluded from receiving it.
 This can be seen from Figures \ref{fig:1a} and \ref{fig:1c} particularly in the region where $x<50$.
 In this region there is only sufficient power to supply consumer 2 (who has the highest utility for that power) whereas consumers 3, 4 and 5 who would otherwise be in a position to receive that power are
@@ -436,22 +439,24 @@ For example, distribution network feeders that have a high penetration of PV sys
 times of high-supply/low-demand, particularly at the feeder extremities \cite{feeder1}. 
 In these settings, the inverters of PV owners at the bottom are unable to inject their power into the network and also typically get no compensation for essentially a forced curtailment of their electricity generation.
 This contrasts against LMP which deals in rates, and hence can only allocate zero transfer to/from a participant who consumes/generates zero of the respective quantity.
+And also contrasts against VCG which can only allocate positive utility to thoes participants whose presense or absense would make a difference to the network operating point.
 
 % \begin{itemize}
 % \item the GNK value is not incentive compatible
 % \end{itemize}
 \subsubsection*{The GNK value is not incentive compatible}
-Neither the GNK value or LMP are \emph{incentive compatible} in the sense that is often referred-to in mechanism design.
+Neither the GNK value or LMP are \emph{incentive compatible} in the sense that is often referred-to in mechanism design, but that VCG (by design) is.
 Specifically, the payments between parties are potentially subject to strategic manipulation if the agents are freely able to report their utility.\cite{8054716}
-This can be seen in \eqref{knvalue1}, or more easily in its reduced form, \eqref{knvalue2}, where the payoff advantage  of a coalition $v(S)$ is based on its reported utilities in minimax strategies which may not be actualized.
+In the GNK value this can be seen in \eqref{knvalue1}, or more easily in its reduced form, \eqref{knvalue2}, where the payoff advantage of a coalition $v(S)$ is based on its reported utilities in minimax strategies which may not be actualized.
 Misreporting these utilities may change the $v(S)$ and hence the GNK value itself and it is important to note that our paper does not address the potential consequences of this.
 While there does exist some work on similar solution concepts that are incentive compatible \cite{myerson1,Salamanca2019} their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
+LMP is known to be incentive incompatable, and there is work to understand exactly how consequential this fact is, in practice \cite{8054716}.
 
 % \begin{itemize}
 % \item the GNK value is computationally difficult
 % \end{itemize}
 \subsubsection*{The GNK value is computationally difficult}
-The GNK value is significantly more difficult than LMP to compute.
+The GNK value is more difficult than VCG and significantly more difficult than LMP, to compute.
 This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions of $S$, and each calculation of $v(s)$ is potentially an NP-hard bilevel problem even using DC approximation, whereas calculating LMP requires only solving one OPF optimization.
 
 
@@ -475,12 +480,12 @@ We consider two broadly different approaches for bias free sampling of the GNK v
 The first of these two is an uncomplicated approach consisting of running a program to generate random coalitions $S\subset N$ and computing $v(S)$ for each of them (implicitly also calculating $v(N\setminus S)$ via equation \ref{myeq2}), then for each size $k$ and player $i$ approximating $v_{i,k}$ by averaging thoes values of $v(S)$ for the generated coalitions $S$ that are of size $k$ and include player $i$.
 After sampling for each of the $v_{i,k}$ we then approximate the GNK value $\varphi$ via equation \ref{da_value_eq}. We denote this method `\textsc{Simple}'.
 
-For the second approach, there is a selection of powerful techniques in literature which have been applied to approximate the Shapley Value of classical cooperative game theory; include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') \cite{burgess2}, as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
+For the second approach, there is a selection of powerful techniques in literature which have been applied to approximate the Shapley Value of classical cooperative game theory; include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (\cite{burgess2} also as developed in Section \ref{section:SEBB}), as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
 
 Each of these particular methods sample over the marginal contributions of the Shapley value (per equation \ref{eq:shapley_value}) in slightly different ways.
 Primarily they differ in whether they employ stratified sampling, and stratify the sampling of marginal contributions by player and size by estimating each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}), or whether they do not employ stratified sampling and directly approximate the Shapley value via equation \eqref{eq:shapley_value}.
 
-Secondarily they differ in whether or not they sample by a join-order process. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and a particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions. Alternatively, the methods can iteratively select coalitions $S$ and player $i$ randomly and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
+Secondarily they differ in whether or not they sample by a join-order process. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and a particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions\footnote{although in practice many of these evaluations will be repeated across runs}. Alternatively, the methods can iteratively select coalitions $S$ and player $i$ randomly and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
 
 Between the methods: \textsc{Appro} samples in join orders without stratification, \textsc{Join} samples in join orders with stratification, \textsc{Hoeffding} samples with stratification and without join orders, to minimize a sum of Hoeffding-type concentration inequalities on each of the estimates $\hat{v}_{i,k}$,
 \textsc{Neyman} samples with stratification without join orders to the sample each $\hat{v}_{i,k}$ proportional to the sample variance of the marginal contributions which make up each,
@@ -515,8 +520,8 @@ We used a known process of generating pseudo random meshed networks of buses and
 \end{algorithm}
 
 We considered networks which were randomly generated to have 10 nodes with 12 lines between them.
-In each of these networks each node was assigned to be a generator or consumer randomly with a randomly generated linear utility function and each line had randomly generated line limits.
-These networks were small enough for it to be possible to solve the GNK value exactly.
+And in each of these networks each node was assigned to be either a generator or consumer of electricity randomly with a randomly generated linear utility function with randomly generated consumption/generation limits, additionally each line had randomly generated line limits.
+Specifically these networks were small enough for it to be possible to solve the GNK value exactly.
 
 By computing the exact GNK value for these networks we were then able to compute the average absolute error achieved by each of the different sampling methods and for different sample budgets.
 For a given budget, all the algorithms called for the computation of different numbers of the bilevel optimizations $v(S)$ (per equation \eqref{knvalue1}).
@@ -524,13 +529,13 @@ The resulting performance of the sampling methods against the number of optimiza
 
 On this graph it is seen that the methods which utilized stratification were given a warm-start of 200 samples (as \textsc{Neyman} required atleast two samples per stratum minimum for a bias-free estimate of the variance) and generally performed better than those that did not use stratification.
 
-From this Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be effective and it was chosen for all further analyses.
-To evaluate the performance of \textsc{Join} we generated randomly sized networks and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} where we computed the average error between them, and timed how long it took for the average magnitude of error between them to reach one percent of the magnitude of the estimated GNK value itself.
+From this Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be reasonably effective and it was chosen for all further analyses.
+To evaluate the performance of \textsc{Join} in solving the GNK value for larger networks, we generated random network of different sizes and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} method, and timed how long it took for the average magnitude of error between them to reach one percent of the magnitude of the estimated GNK value itself.
 In this way the run-time performance of \textsc{Join} in approximating the GNK value for variously sized random networks was computed and the results are shown in Figure \ref{fig:performance_graph2}.
 
-From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes intractable.
-Therefore we seek to make simplifications to the problem to ease this intractability.
-
+From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes very intractable to calculate for networks consisting of more than $16$ busses.
+Therefore we seek to make simplifications to the GNK value itself to ease this intractability.
+Specifically we consider a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
 
 \iffigures
 \input{figs/absolute_error1.tex}
@@ -538,10 +543,11 @@ Therefore we seek to make simplifications to the problem to ease this intractabi
 
 \iffigures
 \input{figs/approximating_times1.tex}
-\input{figs/accuracy_graph1.tex}
 \fi
 
 
+
+\newpage
 \subsection{Sampling a modified GNK at scale}\label{sec:modified_gnk}
 
 Given the intractable nature of the GNK value for large networks we consider a modification of the minimax optimizations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
@@ -558,7 +564,7 @@ v(S) = &+ \frac{1}{2}\left(\sum_{i\in S} u_i(p_i) - \sum_{i\in N\setminus S}u_i(
 Where $\epsilon$ is a small positive value, and where we assume all the DC power constraints apply in both $\argmax$.
 
 Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritize their own utility and then compliment's utility secondarily.
-This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original problem NP-hard, as the leader is unwilling to sacrifice their utility to harm the complement and vice versa.
+This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original expression NP-hard, as the leader is unwilling to sacrifice their utility to harm the complement and vice versa.
 
 The advantage of making this relaxation is that it reduces the NP-hard bilevel problems to single-level linear problems, hence making this modified GNK value much easier to scale.
 However, in this way, this modified GNK value encapsulates a slightly less perfect description of idealized bargaining.
@@ -573,13 +579,22 @@ From this graph it is noticed that the GNK and modified GNK values feature simil
 This limited observation coincides with expectations that the possible strategic counter-considerations in the minimax optimizations become less relevant in the context of larger networks.
 It is hence suspected that this modified GNK value may be an appropriate proxy for the GNK value in larger networks.
 
+We can now turn our attention to the question of what this proxy GNK value actually looks like when calculated on larger networks in comparrison with LMP and VCG results, which is the topic of the next section \ref{sec:results_and_evaluation_of_GNK}.
+
+\iffigures
+\input{figs/accuracy_graph1.tex}
+\fi
+
 \iffigures
 \input{figs/probability_comparrison1.tex}
 \fi
 
 
 
-\section{Results and Evaluation of the GNK value at scale}
+\section{Results and Evaluation of the GNK value at scale}\label{sec:results_and_evaluation_of_GNK}
+
+In this section we give some results of the utility imputations on larger and randomly generated networks between modified-GNK, VCG and LMP.
+Primarily from this exersize we are able to glimse of some of the distinct features of these solutions when applied to a large number of players.
 
 
 \section{Conclusion}

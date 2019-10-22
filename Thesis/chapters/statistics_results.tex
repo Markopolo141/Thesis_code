@@ -156,8 +156,9 @@ simple random sampling from the population irrespective of strata \textit{with} 
 \item \textsc{Ney} (Neyman sampling, without replacement): the method of maximally choosing samples \textit{without} replacement from strata proportional to the strata variance.
 \item \textsc{Ney-W} (Neyman sampling with replacement): the method of choosing samples \textit{with} replacement proportional to the strata variance.
 \item \textsc{SEBM*} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{without} replacement from strata to minimize Equation~\eqref{eq1}, utilizing martingale Lemma~\ref{martingale0}.
+\item \textsc{SECM-W} (Stratified empirical Chernoff method): the method of iteratively choosing samples \textit{without} replacement from strata to minimize Equation~\eqref{another_big_equation}.
 \end{itemize}
-Note that the last three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) assume and utilize prior perfect knowledge of the variance of each of the strata, and that for methods SEBM, SEBM-W and SEBM* (which use Equations~\eqref{big_equation} and~\eqref{eq1}) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
+Note that the last three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) assume and utilize prior perfect knowledge of the variance of each of the strata, and that for methods SEBM, SEBM-W, SEBM* and SECM (which use Equations~\eqref{big_equation}, \eqref{eq1} and \eqref{another_big_equation}) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
 
 Also note that these methods provide comparisons of different algorithm factors, such as the dynamics of sampling: with and without replacement; with stratification and without; between our method and Neyman sampling, and; with and without perfect knowledge of stratum variances. 
 For these methods, we consider the effectiveness against beta distributed data and for a case of uniform-and-Bernoulli data.
@@ -217,3 +218,12 @@ The reasons for this under-performance are discussed in conjunction with other r
 Before this, we considered the calculation of the Shapley value as an example computational application of our stratified sampling method.
 
 \input{figs/bernoulli_table.tex}
+
+
+
+
+
+
+
+
+

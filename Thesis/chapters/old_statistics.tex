@@ -349,7 +349,7 @@ And it is also possible to create a bound for the variance using the Efron-Stein
 \begin{equation}\label{eq:efron_stein_eq}\p\left(\sigma^2-\hat{\sigma}^2\ge k\right)\le\frac{5-n}{n(n-1)}\sigma^2 + \frac{D^4}{16nk^2}\end{equation}
 
 And the strength of these bounds for the variance against our bound can be graphically compared as per Figure \ref{fig:variance_graph1}.
-From this graph we see that our bound performs better at creating lighter tail bounds for the sample variance estimator but that different methods work better-or-worse in different regions - as divergent methods produce differing results.
+From this graph we see that our bound performs better at creating lighter tail bounds for the sample variance estimator but that different methods work better-or-worse in different regions - as divergent methods produce differing results.\footnote{We do however note that the graph ouf our variance bound on this figure was produced after taking the worst case $a,b$ consistent with a $D=1$, and the manner in which we use it subsequently avoids this deterioration, until a later stage.}
 
 \input{figs/variance_graph.tex}
 

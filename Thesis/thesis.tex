@@ -68,13 +68,19 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
+\usetikzlibrary{arrows}
 \usetikzlibrary{arrows.meta}
 \usepgfplotslibrary{statistics}
+
 \newcommand{\STAB}[1]{\begin{tabular}{@{}c@{}}#1\end{tabular}}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
+\newtheorem{example_game}{Example Game}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclareMathOperator*{\argmin}{\arg\!\min}
 \DeclareMathOperator*{\argmax}{\arg\!\max}
 \DeclareMathOperator{\E}{\mathbb{E}}
@@ -160,6 +166,7 @@
 \input{chapters/old_statistics.tex}
 \input{chapters/Statistics.tex}
 \input{chapters/statistics_results.tex}
+\input{chapters/statistics_shapley.tex}
 \input{chapters/Sampling_future.tex}
 \input{chapters/conclusion.tex}
 

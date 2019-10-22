@@ -7,6 +7,8 @@ chapter. \\
 
 \subsection{VCG}
 
+\fix{add axioms and flesh to the description}
+
 One of the elements of an electricity system is the bidding, and there is no loss for different strategies under these systems.
 and in the context of stragegic bidding the system will fall into a less than optimal situation.
 and it may beg the question as to what state the system under manipulation will fall into, and if potentially we could design the best possible lowest-common denominator system from the start.
@@ -157,59 +159,138 @@ One objection to the Nash bargaining solution is that it may not be considered n
 Although there do exist some evolutionary models suggesting that in some social dynamics Nash bargaining might naturally emerge \cite{articlechoakihiko}, there does exists discussion and experimental work finding that real behavior between humans exhibits some ambiguity \cite{KROLL2014261}, even in the case when the disagreement point is naturally given by the setting.
 
 However in other cases (such as in an electricity network) a singular disagreement outcome is not very clearly given by the context.
-And so for a Nash bargaining solution concept to be applied then a disagreement outcome must be chosen `endogenously' from the set of possible outcomes $F$.
-How sould we do this?
+And so for a Nash bargaining solution concept to be applied then a disagreement outcome must be chosen from the set of possible outcomes $F$.
+Which leads to the question of how we sould do this?
 
 \subsubsection{Nash bargaining with endogenous disagreement point}
 
 In John Nash's paper ``\textit{Two-person cooperative games}"\cite{nash2}, He explicitly addresses the consideration of the agents choosing a disagreement point between themselves in a prior stage in the bargaining process.
 
-Particularly he considers a game specifically between two players, and in a series of stages of negotiations they reach a cooperative outcome.
-He considers that each of the players has a space of mixed strategies $S_i$ in a normal form game, and for each possible pair of mixed strategies that the players might execute, each recieves an immediate payoff $p_1(s_1,s_2)$ and $p_2(s_1,s_2)$ respectively.
-He also considers that there is a set $B$ of possible payoffs for the players if they cooperate, which may be bigger than the set of payoffs in the normal form game.
-ie. $\forall s_1\in S_1,s_2\in S_2 \quad (p_1(s_1,s_2), p_2(s_1,s_2)) \in B$.
+Particularly he considers a game specifically between two players, who reach a cooperative outcome in a series of stages of negotiations.
+He considers that each of the players has a space of mixed strategies $S_i$ in a normal form game, and for each possible pair of mixed strategies that the players might execute, each recieves an immediate payoff $p_1(s_1,s_2)$ and $p_2(s_1,s_2)$ respectively ($s_1\in S_1$, $s_2\in S_2$).
+He also considers that there is a set $B$ of possible payoffs for the players if they cooperate, which may be bigger than the set of payoffs in the normal form game.\\
+$\text{ie.}\quad \forall s_1\in S_1,s_2\in S_2 \quad (p_1(s_1,s_2), p_2(s_1,s_2)) \in B$
 
 Nash then considers a specific negotiation process:
 \begin{enumerate}
-\item Each player chooses a mixed strategy $t_i$ which he will be forced to use if the two cannot come to an agreement.
+\item Each player $i$ chooses a mixed strategy $t_i$ which he will be forced to use if the two cannot come to an agreement.
 \item The players inform each other of their threats.
-\item Each player $i$ decides upon his demand $d_i$, which is a point on his utility scale such that he/she will not accept any agreement which yeilds at least the utility $d_i$ to him/her.
-\item If there is a point $(u_1,u_2)$ in B such that $u_1 > d_1$, and $u_2 > d_2$, then the pay-off to each player $i$ is $d_i$. Otherwise, the pay-off to player $i$ is $p_i(t_l, t_2)$.
+\item Each player $i$ decides upon his demand $d_i$, which is a point on his utility scale for which he/she will not accept any agreement which yeilds at less than the utility $d_i$ to him/her.
+\item If there is a point $(u_1,u_2)$ in B such that $u_1 > d_1$, and $u_2 > d_2$, then the pay-off to each player $i$ is $d_i$. Otherwise, the pay-off to each player $i$ is $p_i(t_l, t_2)$.
 \end{enumerate}
 
 This process encodes a process that includes two choices for the players, first, they must choose a `threat' strategy $t_i$ which they will be forced to execute if they cannot reach further agreement, and secondly they need to choose a `demand' $d_i$ of the utility which they would like to recieve from the negotiation.
 If it so happens that is possible for the players to have their demands muturally met then they recieve the utility associated with their demand.
 
 Nash identifies that a natural choice of compatable demands in the second part of the game occurs at the maximising of the Nash product (Equation \ref{nash-product}) above a disagreement point determined by the execution of threat strategies (as illucidated in the previous section \ref{sec:nash_bargaining_exogenous})
-Nash then identifies then that in light of this result for the second part of the game there exists a unique set of optimal choice of threats $t_i$ for the two players in the first part of the game; which is a Nash equilibrium.
+Nash then identifies then that in light of this result for the second part of the game there exists a unique set of optimal choice of threats $t_i$ for the two players in the first part of the game; which is a Nash equilibrium of them with respect to the subsequent maximisation of the Nash product.
 
-Nash also identifies the result via axioms:
+Nash also identifies this result via axioms:
 \begin{enumerate}
-\item For each game $(S_1,S_2,B)$ there is a unique solution $(v_1,v_2)$ which is a point in $B$
+\item For each game $(S_1,S_2,B)$ there is a unique solution $(v_1,v_2) \in B$
 \item If $(u_1,u_2)$ is in $B$ and $u_1\ge v_1$ and $u_2\ge v_2$ then $(u_1,u_2)=(v_1,v_2)$
 \item That order preserving linear transformation of utilitie do not change the solution. ie. for games with all utilities scaled (ie $u_1' = a_1u_1+b_1, u_2' = a_2u_2+b_2$ for $a_1,a_2\ge 0$) result in solution $(v_1',v_2')$ where $v_1'=a_1v_1+b_1$ and $v_2'=a_2v_2+b_2$.
 \item The solution does not depend on which player is player `one', ie. all functions are symmetrical
-\item If points from $B$ are removed except $(v_1,v_2)$ and the points $(p_1(s_1,s_2), p_2(s_1,s_2))$ for strategies $s_1\in S_1,s_2\in S_2$ then the new game yeilds the same solution.
-\item a restriction of strategies for a player cannot increase his/her resulting payoffs, ie. for $S_1'\subset S_1$ then $v_1(S_1',S_2,B)\le v_1(S_1,S_2,B)$
-\item there exists single (unmixed) strategies such that player one's value wont increase, ie. there exists $s_1,s_2$ such that $v_1(s_1,s_2,B)\le v_1(S_1,S_2,B)$
+\item If points from $B$ are removed except $(v_1,v_2)$ and the points $(p_1(s_1,s_2), p_2(s_1,s_2))$ for all strategies $s_1\in S_1,s_2\in S_2$ then the new game yeilds the same solution.
+\item A restriction of strategies for a player cannot increase his/her resulting payoffs, ie. for $S_1'\subset S_1$ then $v_1(S_1',S_2,B)\le v_1(S_1,S_2,B)$
+\item There exists single (unmixed) strategies such that player one's value wont increase, ie. there exists $s_1,s_2$ such that $v_1(s_1,s_2,B)\le v_1(S_1,S_2,B)$
 \end{enumerate}
 
-These axioms very similar to, but perhaps a little less obvious than Nash's game with exogenous disagreement point (as given in the previous subsection).
+These axioms very similar to, but perhaps a little less obvious than Nash's game with exogenous disagreement point (as given in the previous subsection \ref{sec:nash_bargaining_exogenous}).
 
-In anycase, this Nash bargaining solution is one example of a solution concept that explicitly considers strategies that dont just belong to social optima (such as 'threat' strategies) and how these might bear on the result of cooperative negotiations; and also evident that VCG mechanisms do not involve the consideration of these strategies.
-And it is interesting to consider the role of threats in real world cooperative negotiations.
+In anycase, this Nash bargaining solution is one example of a solution concept that explicitly considers strategies that dont just belong to social optima (such as 'threat' strategies) and how these might bear on the result of cooperative negotiations.
+It is also quite evident that VCG mechanisms do not involve the consideration of these strategies.
 
-%\begin{displayquote}
-%A common device in negotiation is the threat ... If one considers the process of making a threat, one sees that its elements are as follows: A threatens B by convincing B that if B does not act in compliance with A's demands, then A will follow a certain policy T. Supposing A and B to be rational beings, it is essential for the success of the threat that A be compelled to carry out his threat T if B fails to comply. Otherwise it will have little meaning. For, in general, to execute the threat will not be something A would want to do, just of itself.
-%(\cite{nash2})
-%\end{displayquote}
+This leads to the question of whether or not the consideration of `threat' strategies should (or would) play a role in the division of resources - such as in an electricity system.
+Particularly it is identified by Nash that the role of threats in negotiations depends on a dynamic about their ability to be enforced.
 
-It is also worth noting that Nash's method of choosing the disagreement outcome via Nash equilibrium is not the only option, and that there are different methods of choosing (or avoiding) the specification of a disagreement outcome.\cite{bozbay,10.2307/43616981}
+\begin{displayquote}
+A common device in negotiation is the threat ... If one considers the process of making a threat, one sees that its elements are as follows: A threatens B by convincing B that if B does not act in compliance with A's demands, then A will follow a certain policy T. Supposing A and B to be rational beings, it is essential for the success of the threat that A be compelled to carry out his threat T if B fails to comply. Otherwise it will have little meaning. For, in general, to execute the threat will not be something A would want to do, just of itself.
+(\cite{nash2})
+\end{displayquote}
 
-It is worth noting that Nash's solution concept has a very simple form in the case of two-player games where utility is transferable (TU), equivalent to the sometimes called the `coco-value' \cite{kalai1,Kalai2010}.
-Which in-turn also has a well-studied extension to many players (which we are primarily interested in) which has been called `the Value'.\cite{values1,values2,values3}
+In this light it is interesting to consider the role of threats in real-world cooperative negotiations. However, although Nash's bargaining solutions were first, there have since been developed alternative bargaining solution concepts that do not involve `threat' dynamics. \cite{bozbay}
+It is also good to note that the endogenous disagreement point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of disagreement point.\cite{10.2307/43616981}
 
-\subsection{Cooperative Game Theory}
+It is worth noting that Nash's solution concept has a very simple form in the case of two-player games where utility is transferable (TU) \cite{value2,shap_lectures,value1}, equivalent to the sometimes called the `coco-value' in the case of complete information \cite{kalai1,Kalai2010}.
+We present this simple form in the context of an example game from Neyman and Kohlberg's papers (\cite{value2,value1}).
+Consider the strategic game between two players (a row player and column player):
+\begin{equation}\label{eq:example_game1} \begin{bmatrix}2,1 & -1,-2\\ -2,-1 & 1,2\end{bmatrix} \end{equation}
+And consider that these players can share utility between themselves (ie. a TU game). In this context the Nash bargaining solution is found as follows:
+we consider that the maximum sum of utility which is achievable between the players $s=3$.
+We then form the zero-sum game of the differences in player payoffs
+$$ \begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix} $$
+Where we find that the minimax value of this game is $d=1$ Which indicates that the row player has a greater threat power.
+The Nash bargaining solution between the two players gives them utility as $(\frac{1}{2}s+\frac{1}{2}d,\frac{1}{2}s-\frac{1}{2}d) = (2,1)$
+The way in which this is seen to be the nash bargaining solution for this game can be gleamed by inspection from Figure \ref{fig:graph1_utilities}.
+Where the red lines corresponding to possible transfers of utility, show that the choice of disagreement point only matters insofar as it maximises the payoff advantage of one player over another.
+this payoff advantage is then an offset along the diagonal of pareto frontier.
+
+Particularly the measure minimax payoff advantage has been considered as a measure of bargaining power between two players, and has been a usefull component in other solution concepts.
+Which in-turn also has a well-studied extension to many players.\cite{values1,values2,values3}
+However, in the next section \ref{sec:cooperative_game_theory_part}, we must introduce considerations of manty players in the context of cooperative game theory.
+
+\definecolor{wwwwww}{rgb}{0.4,0.4,0.4}
+\definecolor{ccqqqq}{rgb}{0.8,0,0}
+\definecolor{qqqqff}{rgb}{0,0,1}
+\definecolor{wqwqwq}{rgb}{0.3764705882352941,0.3764705882352941,0.3764705882352941}
+\definecolor{cqcqcq}{rgb}{0.7529411764705882,0.7529411764705882,0.7529411764705882}
+\definecolor{strategy}{rgb}{0.7,0.7,0.9}
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+%strategy polygon
+\clip(-3,-3) rectangle (4,4);
+\draw[fill, opacity=1, color=strategy] (2,1) -- (1,2) -- (-2,-1) -- (-1,-2);
+%grid and axes
+\draw [color=cqcqcq,dotted, xstep=0.5cm,ystep=0.5cm] (-3,-3) grid (4,4);
+\draw[->,color=wqwqwq] (-3,0) -- (4,0);
+\draw[->,color=wqwqwq] (0,-3) -- (0,4);
+%grid numbers
+\foreach \x in {-3,-2.5,-2,-1.5,-1,-0.5,0.5,1,1.5,2,2.5,3,3.5,4}
+\draw[shift={(\x,0)},color=wqwqwq] (0pt,2pt) -- (0pt,-2pt) node[below] {\scalebox{0.35}{$\x$}};
+\foreach \y in {-3,-2.5,-2,-1.5,-1,-0.5,0.5,1,1.5,2,2.5,3,3.5,4}
+\draw[shift={(0,\y)},color=wqwqwq] (2pt,0pt) -- (-2pt,0pt) node[left] {\scalebox{0.35}{$\y$}};
+\draw[color=wqwqwq] (-2pt,-3pt) node[right] {\scalebox{0.35}{$0$}};
+%red lines
+\draw [line width=1.0pt,color=ccqqqq] (-1,4) -- node[above,sloped,pos=0.8]{\tiny Pareto Frontier} (4,-1);
+\draw [line width=0.6pt,color=ccqqqq] (-3,0) -- (0,-3);
+%grey lines
+\draw [dash pattern=on 1pt off 1pt,color=wwwwww] (-2,-1) -- (3,4);
+%\draw [dash pattern=on 1pt off 1pt,color=wwwwww] (1,-5) -- (6,0);
+%hyperbola
+\draw[samples=50, domain=-0.5:4,smooth,color=wwwwww,line width=0.5pt,dash pattern=on1pt off 1pt] 
+plot ({\x},{(9/(\x+2))-1});
+
+\begin{tiny}
+%labels
+%\draw [color=black] (1.5,-5) node {maxmin};
+%\draw [color=black] (3.572727273,-1.272727273) node {coco};
+%\draw [color=black] (4.4,-2) node {a-coco};
+%\draw [color=qqqqff] (1.5,1) node {maxmax};
+%\draw [color=black] (0.5,-4.4958677686) node {minimax};
+\draw [color=wqwqwq] (0.4,1.7) node [label={[align=left]Player1\\utility}]{};
+\draw [color=wqwqwq] (1.9,0.15) node {Player2 utility};
+%points
+\draw [fill=qqqqff] (2,1) circle (1.7pt);
+\draw [fill=qqqqff] (1,2) circle (1.7pt);
+\draw [fill=black] (-2,-1) circle (1.7pt);
+\draw [fill=qqqqff] (-1,-2) circle (1.7pt);
+%\draw [fill=wwwwww] (1,-5) ++(-2.5pt,0 pt) -- ++(2.5pt,2.5pt)--++(2.5pt,-2.5pt)--++(-2.5pt,-2.5pt)--++(-2.5pt,2.5pt);
+%\draw [fill=wwwwww] (0.0495867769,-4.4958677686) ++(-2.5pt,0 pt) -- ++(2.5pt,2.5pt)--++(2.5pt,-2.5pt)--++(-2.5pt,-2.5pt)--++(-2.5pt,2.5pt);
+%\draw [color=black,line width=0.8pt] (3.272727273,-1.272727273)-- ++(-3pt,0 pt) -- ++(6pt,0 pt) ++(-3pt,-3pt) -- ++(0 pt,6pt);
+%\draw [color=black,line width=0.8pt] (4,-2)-- ++(-3pt,0 pt) -- ++(6pt,0 pt) ++(-3pt,-3pt) -- ++(0 pt,6pt);
+\end{tiny}
+
+\end{tikzpicture}
+\caption[Utility diagram for example game.]{The potential outcomes for the TU example game (Equation \ref{eq:example_game1}). Red lines show all potential outcomes of pure strategies with TU. Blue points show non-TU pure strategy outcomes. The blue polygon shows space of outcomes for non-TU mixed strategies, The outcome that corresponds to the minimax strategy of the zero-sum component is shown in black. The Nash Bargaining value is shown on the pareto frontier as the feasible outcome that maximises the product of utilities above the minimax disagreement-point, the hyperbola of this maximum product is shown.}
+\label{fig:graph1_utilities}
+\end{figure}
+
+
+
+\subsection{Cooperative Game Theory}\label{sec:cooperative_game_theory_part}
 
 The idea that people (collectively) should be afforded atleast what they could achieve by themself is most directly articulated by the \textit{Core} of cooperative game theory.
 
