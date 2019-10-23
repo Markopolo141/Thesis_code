@@ -161,7 +161,7 @@ simple random sampling from the population irrespective of strata \textit{with} 
 \item \textsc{Ney} (Neyman sampling, without replacement): the method of maximally choosing samples \textit{without} replacement from strata proportional to the strata variance (via Theorem \ref{thm:neyman_selection}).
 \item \textsc{Ney-W} (Neyman sampling with replacement): the method of choosing samples \textit{with} replacement proportional to the strata variance (via Theorem \ref{thm:neyman_selection}).
 \item \textsc{SEBM*} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{without} replacement from strata to minimize Equation~\eqref{eq1}, utilizing martingale Lemma~\ref{martingale0}.
-\item \textsc{SECM-W} (Stratified empirical Chernoff method): the method of iteratively choosing samples from strata to minimize the SECB, given in Equation~\eqref{another_big_equation}. 
+\item \textsc{SECM} (Stratified empirical Chernoff method): the method of iteratively choosing samples from strata \textit{without} replacement to minimize the SECB, given in Equation~\eqref{another_big_equation}. 
 An initial sample of two data points from each strata is used to initialize the sample variances of each, with additional samples made to maximally minimize the inequality at each step. All samples are drawn \textit{without} replacement.
 \item \textsc{Hoeffding} (Unionised EBBs with Hoeffding's inequality): The method of sampling \textit{with} replacementto minimise probability bound of Theorem \ref{triangle_theorem2} applied with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper})
 \item \textsc{Audibert} (Unionised EBBs with Audibert et.al's EBB): The method of sampling \textit{with} replacementto minimise probability bound of Theorem \ref{triangle_theorem2} applied with Audibert et.al's EBB (Theorem \ref{AudibertsEBB})
@@ -202,10 +202,10 @@ with $\alpha$ and $\beta$ parameters drawn uniformly between 0 and 4 for each st
 \input{figs/big_table2.tex}
 
 
-Figure \ref{Table1} compares the distribution of absolute error achieved by each of the sampling methods over 5000 rounds of these data sets.
+Figures \ref{Table1} and \ref{Table11} compares the distribution of absolute error achieved by each of the sampling methods over 5000 rounds of these data sets.
 Each panel presents the results that the methods achieve for a given budget of samples, 
 expressed as a multiple of the number of strata (noting that data sets where the sampling budget exceeded the volume of data were excluded).
-From the plots in Figure \ref{Table1}, we can see that our sampling technique (SEBM and SEBM-W) performs comparably to
+From the plots in Figures \ref{Table1} and \ref{Table11}, we can see that our sampling technique (SEBM and SEBM-W) performs comparably to
 % competitive-to and sometimes better-than 
 Neyman sampling (\textsc{Ney} and \textsc{Ney-W}) despite not having access to knowledge of stratum variances.
 Also, there is a notable similarity between SEBM* and SEBM.

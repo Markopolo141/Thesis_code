@@ -94,17 +94,17 @@ A discussion of all of the results is considered in the next section.
 \section{Discussion}
 \label{sec:discussion}
 
-In this section we give considerations to the numerical results of the paper.
-In general, from the results across Figures~\ref{Table1} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that our sampling technique, SEBM or SEBM-W, 
+In this section we give considerations to the numerical results of this chapter.
+In general, from the results across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that our sampling technique, SEBM or SEBM-W, 
 performs competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}).
 This is despite SEBM not having access to knowledge of strata variances, which the Neyman methods do.
 If instead we compare SEBM* to \textsc{Ney}, which both have access to strata variances, then both methods use the same information and the results are even stronger for our method. 
 The reasons for this performance are interesting, 
 and we now discuss them in more detail.
 
-From Figure~\ref{Table1} we observe that sampling without replacement always performs better than sampling with replacement for the same method. 
+From between Figures~\ref{Table1} and \ref{Table111} we observe that sampling without replacement always performs better than sampling with replacement for the same method. 
 This improvement is magnified as the number of samples grows large relative to the size of the population. 
-At the same time, simple random sampling almost always performs worst, because it fails to take advantage of any variance information. These results are as expected.
+At the same time, simple \textsc{Random} sampling almost always performs worst, because it fails to take advantage of any variance information. and \textsc{Simple} sampling performs even worse as it fails to take into account data stratification, These results are as expected.
 
 Next, note that the results of Figure~\ref{Table1} show that there is a mid-range of sample sizes where choosing a different method can even have a greater impact on sampling efficiency and rate of average error reduction than the difference between sampling with or without replacement.
 This is an important insight, as sampling real-world data (e.g. surveys, polling, destructive testing, etc) can be an expensive and slow process.
