@@ -62,7 +62,7 @@ The principle of Neyman sampling is that it seeks the minimise the weighted vari
 
 \subsection{Neyman Allocation}
 
-\begin{theorem}[Neyman allocation]
+\begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
 If we have $m$ strata, of sizes $N_i$, with variance $\sigma_i^2$, and we sample with replacement (ie. all samples are independent and identically distributed). If we have a sample budget $n$, and we can choose how much to sample from each strata, $n_i$.
 Then the selection of $n_i$ which minimises the variance of our population estimate is:
 $$n_i = \frac{nN_i\sigma_i}{\sum_jN_j\sigma_j}$$

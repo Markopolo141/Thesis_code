@@ -4,7 +4,7 @@
     \resizebox{0.48\textwidth}{!}{
     \begin{tikzpicture}[]
     		\begin{axis}[
-			title={Performance for rare-events},
+			title={10N sample budget},
     		boxplot/draw direction=y,
     		x axis line style={opacity=0},
     		y axis line style={opacity=10},
@@ -54,7 +54,7 @@
 			\end{tikzpicture}}%
 \hfill\resizebox{0.48\textwidth}{!}{\begin{tikzpicture}[]
     		\begin{axis}[
-			title={Performance for rare-events},
+			title={50N sample budget},
     		boxplot/draw direction=y,
     		x axis line style={opacity=0},
     		y axis line style={opacity=10},
@@ -105,7 +105,7 @@
 \\
 \resizebox{0.48\textwidth}{!}{\begin{tikzpicture}[]
     		\begin{axis}[
-			title={Performance for rare-events},
+			title={100N sample budget},
     		boxplot/draw direction=y,
     		x axis line style={opacity=0},
     		y axis line style={opacity=10},
@@ -155,7 +155,7 @@
 			\end{tikzpicture}}%
 \hfill\resizebox{0.48\textwidth}{!}{\begin{tikzpicture}[]
     		\begin{axis}[
-			title={Performance for rare-events},
+			title={150N sample budget},
     		boxplot/draw direction=y,
     		x axis line style={opacity=0},
     		y axis line style={opacity=10},
@@ -203,7 +203,7 @@
 \addplot [boxplot prepared={lower whisker=0.00111938420481,lower quartile=0.0029603125937,median=0.00620114735116,upper quartile=0.0108178633571,upper whisker=0.0163350304413 }] coordinates {};
 				\end{axis}
 			\end{tikzpicture}}\\
-    \caption{The distribution of numerical absolute errors across 5000 rounds of beta-distributed data, for different methods of stratified sampling, for a sample budget of $50N$ and $100N$ samples where $N$ number of strata. Whiskers show the 9th and 91st percentiles.}
+    \caption{The distribution of numerical absolute errors across 5000 rounds of beta-distributed data, for different methods of stratified sampling \textit{with} replacement, for a sample budget of $10N$, $50N$, $100N$ and $150N$ samples where $N$ number of strata. Whiskers show the 9th and 91st percentiles.}
 \label{Table1}
 \end{figure}
 

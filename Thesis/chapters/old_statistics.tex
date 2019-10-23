@@ -12,7 +12,7 @@ Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with $D=
 \end{equation}
 \end{theorem}
 
-\begin{theorem}[\cite{10.1007/978-3-540-75225-7_15}]
+\begin{theorem}[\cite{10.1007/978-3-540-75225-7_15}]\label{AudibertsEBB}
 In exactly the same context as in Theorem \ref{MandPsEBB}
 \begin{equation}
     \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(3/t)}{2n}} + \frac{3D\log(3/t)}{2n}\right) \le t.
@@ -100,9 +100,9 @@ Using this knowledge, stronger bounds are very possible - and we explore and dev
 
 However in this section, it is by these bounds that we can bind together EBB's of our choice to create a bound for the error of the stratified estimate - which we can then sample to minimise.
 
-In this Section we develop a novel EBB derived from numerical computations, and compare it as a stratified sample mechanism against stratified sampling done with Maurer and Pontil's EBB and Audibert et.al's EBB, and also Neyman sampling in Chapter \ref{}.
+In this Section we develop a novel EBB derived from numerical computations, and compare it as a stratified sample mechanism against stratified sampling done with Maurer and Pontil's EBB and Audibert et.al's EBB, and also Neyman sampling in Chapter \ref{section:statistics_results}.
 
-We will also consider various EBBs in the context of Upper Confidence Bound (UCB) method of bandit algorithm in subsection \ref{}.
+%We will also consider various EBBs in the context of Upper Confidence Bound (UCB) method of bandit algorithm in subsection \ref{}.
 
 \subsection{Challenge: To derive a stronger EBB}
 
@@ -483,4 +483,22 @@ The performance of this new EBB offers (against others) in the context of choosi
 % Bandit feedback describes settings where a decision-maker wishes to learn about a system, and to do this, chooses samples from a set of actions and receives feedback regarding their chosen actions only, in the form of a realization of a random variable. 
 %Specifically, the decision-maker does not see how the system would have responded, if they had chosen a different action.
 %
+
+
+
+For the ease of this application of our EBB we hand-tuned a function approximating our EBB's numerical probability 0.5 bound,
+The process of creating the expression involved plotting the numerical data, and manually fitting an approximate symbolic expression:
+\begin{equation}\label{eq:prob_bound} \p\left(\mu-\hat{\mu}\ge \frac{D}{\sqrt{n}}\; \min\left[ \sqrt{2\log 2},
+\footnotesize
+\left(\begin{matrix*}[c]
+\frac{3}{5}\sqrt{\min\left[1,\frac{\hat{\sigma}^2}{D^2}+\frac{25}{n}\right]} \\+ \ln\left(\max\left[1,n\left(1-\frac{\hat{\sigma}^2}{D^2}\right)\right]\right)^{-4}\end{matrix*}
+\normalsize
+\right)\right]\right) 
+\lessapprox 0.5 \end{equation}
+
+
+
+
+
+
 
