@@ -95,43 +95,57 @@ A discussion of all of the results is considered in the next section.
 \label{sec:discussion}
 
 In this section we give considerations to the numerical results of this chapter.
-In general, from the results across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that our sampling technique, SEBM or SEBM-W, 
-performs competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}).
-This is despite SEBM not having access to knowledge of strata variances, which the Neyman methods do.
-If instead we compare SEBM* to \textsc{Ney}, which both have access to strata variances, then both methods use the same information and the results are even stronger for our method. 
-The reasons for this performance are interesting, 
-and we now discuss them in more detail.
+In general, from the results across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that most of the techniques performed well and similar to Neyman sampling, and that our sampling technique, SEBM (or SEBM-W) and SECM performed competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}) despite not having access to knowledge of strata variances.
+It is also observed that Neyman sampling was ultimately the most accurate, for reasons allready presented in section \ref{sec:neyman_sampling}.
+Particularly that if sufficient samples have been taken then the sample means of the strata will tend to approximately be Gaussian distributed by the Central Limit Theorem.
+In this context the strata means have a distribution that is entirely characterised by their mean and variance, and hence so too therefore is the population mean estimate.
+Hence the variance of the sampled population mean is the only parameter controlling the error, and minimising it directly translates into improved accuracy.
+
+One of the most remarkable inferences from the data is just how very readily Central Limit Theorem dynamics emerges, from Figure \ref{fig:central_limit_theorem} we can see that the sample error of uniformly distributed data converges almost perfectly to a gaussian distribution even in just 4 samples.
+
+\input{figs/convolution_graph.tex}
+
+This dynamic speaks strongly to the efficiency of Neyman sampling, and indeed our method SEBM* performs worse as it extends from minimising a simplification of Bennett's inequality - this is most evident in figure \ref{biggraph3}.\footnote{we would expect that a method consisting of minimising Bennett's inequality proper, would yeild extremely similar results to Neyman sampling}.
+One of the more interesting things is the relative inefficiency of the SECM method, particularly as it sought to minimise Chebyshev's inequality for the stratified sampling, and under perfect variance information would be identical to Neyman sampling.
+The implication about this context is that the inefficiency of utilising these methods primarily extends from uncertainty about the variances of the strata.
+The Bernoulli-uniform data results (plotted in \ref{biggraph3}) were specifically designed to amplify the detriment in stratified sampling that uncertainty about the variances would yeild.
+And that the more infrequent the bernoulli outlier, the more likely that the methods without variance information would over-sample the bernoulli stratum - which they did.
+It is interesting that the SEBM* method also did this to some extent, although it is not particularly clear exactly why.
+
 
 From between Figures~\ref{Table1} and \ref{Table111} we observe that sampling without replacement always performs better than sampling with replacement for the same method. 
 This improvement is magnified as the number of samples grows large relative to the size of the population. 
 At the same time, simple \textsc{Random} sampling almost always performs worst, because it fails to take advantage of any variance information. and \textsc{Simple} sampling performs even worse as it fails to take into account data stratification, These results are as expected.
+From the Figures ~\ref{Table1} and \ref{Table111} we see that the primary increase in performance comes from employing stratified sampling over simple sampling, sampling without replacement over sampling with replacement, and then using some method that is more intellegent than randomly selecting samples and preferrably using stratum variance information to get close to the ideal of Neyman sampling.
 
-Next, note that the results of Figure~\ref{Table1} show that there is a mid-range of sample sizes where choosing a different method can even have a greater impact on sampling efficiency and rate of average error reduction than the difference between sampling with or without replacement.
-This is an important insight, as sampling real-world data (e.g. surveys, polling, destructive testing, etc) can be an expensive and slow process.
-Accordingly an appropriate method of choosing numbers of samples can lead to a material difference in cost for the same accuracy.
-There is also a slight decrease in the performance of SEBM* in comparison with \textsc{Ney} in the case of high number of samples and sampling without replacement, as illustrated in Figure~\ref{Table1}. 
-This indicates that the use of sub-optimal equation~\ref{approx1} in the derivation of Lemma~\ref{martingale0} might have some negative effect, by distorting the shape of the functions that the sampling processes then minimizes.
+%Next, note that the results of Figure~\ref{Table1} show that there is a mid-range of sample sizes where choosing a different method can even have a greater impact on sampling efficiency and rate of average error reduction than the difference between sampling with or without replacement.
+%This is an important insight, as sampling real-world data (e.g. surveys, polling, destructive testing, etc) can be an expensive and slow process.
+%Accordingly an appropriate method of choosing numbers of samples can lead to a material difference in cost for the same accuracy.
+%There is also a slight decrease in the performance of SEBM* in comparison with \textsc{Ney} in the case of high number of samples and sampling without replacement, as illustrated in Figure~\ref{Table1}. 
+%This indicates that the use of sub-optimal equation~\ref{approx1} in the derivation of Lemma~\ref{martingale0} might have some negative effect, by distorting the shape of the functions that the sampling processes then minimizes.
 
-Furthermore, if the data features very rare events, then SEBM and SEBM* seem to perform in a manner less than ideal.
-These condition are illustrated in Figure~\ref{biggraph3}, where the more rare the Bernoulli variable successes, the worse our methods perform in comparison with Neyman sampling (\textsc{Ney}).
-This shortcoming can be partly explained by noting that SEBM unnecessarily wastes samples on the Bernoulli stratum of rare events in the process of learning that the variance is almost zero, whereas \textsc{Ney} can avoid this because it has prior knowledge of the variances to begin with. 
-As such, this factor explains the difference between the performance of SEBM and SEBM* in the context of Figure~\ref{Table1} and also in Figure~\ref{biggraph3}.
-What is surprising is how small the difference in performance between SEBM and SEBM* is. 
-This indicates that as additional samples are taken, the original uncertainty about the strata variances have less and less effect upon the total numbers of samples that are eventually drawn from each of the strata.
+%If the data features very rare events, then SEBM and SEBM* seem to perform in a manner less than ideal.
+%These condition are illustrated in Figure~\ref{biggraph3}, where the more rare the Bernoulli variable successes, the worse our methods perform in comparison with Neyman sampling (\textsc{Ney}).
+%This shortcoming can be partly explained by noting that SEBM unnecessarily wastes samples on the Bernoulli stratum of rare events in the process of learning that the variance is almost zero, whereas \textsc{Ney} can avoid this because it has prior knowledge of the variances to begin with. 
+%As such, this factor explains the difference between the performance of SEBM and SEBM* in the context of Figure~\ref{Table1} and also in Figure~\ref{biggraph3}.
+%What is surprising is how small the difference in performance between SEBM and SEBM* is. 
+%This indicates that as additional samples are taken, the original uncertainty about the strata variances have less and less effect upon the total numbers of samples that are eventually drawn from each of the strata.
 
-However, the performance difference between SEBM* and \textsc{Ney} in Figure~\ref{biggraph3} is not explained by this argument, as they use the same information.
-Instead, the reason for this difference in performance is found by considering the simplifying approximation of Equation \eqref{eq:part2} in the derivation of Lemma~\ref{expectation1}. 
-Specifically, \eqref{eq:part2} introduces a particular distortion into the shape of Equation~\eqref{big_equation} which our sampling seeks to minimize.
-Figure~\ref{fig:graph2} illustrates how the approximation \eqref{eq:part2} loosens the bound with respect to the variance. 
-Observe that when the variances are very small that Equation~\eqref{eq:part3} overly loosens the bounds, causing oversampling of strata with very small variances. 
-It appears that this factor is at play in the under-performance shown in Figure~\ref{biggraph3} and also the slight under-performance of our method in the Voting Game in Table~\ref{tab2}. 
-We note that there may be other corner-cases where our method also under-performs.
+%However, the performance difference between SEBM* and \textsc{Ney} in Figure~\ref{biggraph3} is not explained by this argument, as they use the same information.
+%Instead, the reason for this difference in performance is found by considering the simplifying approximation of Equation \eqref{eq:part2} in the derivation of Lemma~\ref{expectation1}. 
+%Specifically, \eqref{eq:part2} introduces a particular distortion into the shape of Equation~\eqref{big_equation} which our sampling seeks to minimize.
+%Figure~\ref{fig:graph2} illustrates how the approximation \eqref{eq:part2} loosens the bound with respect to the variance. 
+%Observe that when the variances are very small that Equation~\eqref{eq:part3} overly loosens the bounds, causing oversampling of strata with very small variances. 
+%It appears that this factor is at play in the under-performance shown in Figure~\ref{biggraph3} and also the slight under-performance of our method in the Voting Game in Table~\ref{tab2}. 
+%We note that there may be other corner-cases where our method also under-performs.
 
 In comparison to existing approaches to approximating the Shapley value, our sampling method shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
 This was particularly the case in the context of large sample budgets, as our method (SEBM, with error $e^{SEBM}$) sampled without replacement, while the other methods sampled with replacement. 
 However it would be remiss not to mention the computational overhead of iteratively minimizing (one sample at a time) our inequality in the context of our simple example games. 
 This overhead can be a significant drawback, however on more complicated games such as where the characteristic function is slower to calculate, any overhead associated with the sampling choice is expected to be much less relevant. 
 We also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values for our example games.
+
+However we attribute our methods startling success in estimating the Shapley value primarily to the design decisions used in the creation of thoes other methods.
 
 %\input{figure-22.tex} 
 
@@ -160,7 +174,7 @@ We also note that our method's performance could potentially be further improved
 %\end{figure}
 
 
-One primary limitation of our method is that it rests on assumption of known data widths $D_i$ (and in the case of sampling-without-replacement, also on strata sizes $N_i$), which may not be exactly known in practice.
+One primary limitation of our method(s) is that it rests on assumption of known data widths $D_i$ (and in the case of sampling-without-replacement, also on strata sizes $N_i$), which may not be exactly known in practice.
 One way to overcome this may be to use our method with a reliable overestimate these parameters (by expert opinion or otherwise). This approximation or estimation may itself open consideration of other probability bounds and/or sampling methods, however we have not investigated this line of inquiry. 
 
 In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.
@@ -170,7 +184,7 @@ In practice, it might also be advisable to run our method with an underestimate 
 
 \section{Multidimensional Extension}\label{sec:multi}
 
-Our method of choosing samples can be extended to multidimensional data by a simple modification.
+Our SEBM method of choosing samples can be extended to multidimensional data by a simple modification.
 Specifically, instead of considering data that is single-valued, we consider data points that are vectors. 
 
 Formally, for $n$ strata of finite data points which are all vectors of size $M$, let $n_i$ be the number of data points in the $i$th stratum.

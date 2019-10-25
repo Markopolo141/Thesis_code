@@ -60,7 +60,7 @@ The core question we face is, how do we sample optimally between the strata in s
 This question has been considered before, and the most direct historical answer to the question is called \textit{Neyman allocation} or \textit{sampling} \cite{1938.10503378,10.2307/23339498}.
 The principle of Neyman sampling is that it seeks the minimise the weighted variance of the population estimate assuming knowledge of the variances of the strata, and it can most directly be interpreted as a process of minimising Chebyschev's inequality.
 
-\subsection{Neyman Allocation}
+\subsection{Neyman Allocation}\label{sec:neyman_sampling}
 
 \begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
 If we have $m$ strata, of sizes $N_i$, with variance $\sigma_i^2$, and we sample with replacement (ie. all samples are independent and identically distributed). If we have a sample budget $n$, and we can choose how much to sample from each strata, $n_i$.
