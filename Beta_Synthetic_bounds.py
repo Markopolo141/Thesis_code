@@ -9,7 +9,7 @@
 #do imports
 from random import shuffle,random,randint,betavariate
 from copy import deepcopy as copy
-from methods import *
+from methods2 import *
 import sys
 try:
 	from tqdm import tqdm
@@ -19,51 +19,21 @@ except ImportError:
 
 d=1.0 #data width is one for beta distribution
 
-print "Computing Beta data Experiment"
-print " for sample budget per strata of [10,50,100,150] ---"
 
+methods = ['burgess_bound_ideal_small', 'altered_burgess_bound_small', 'neyman_bound_ideal', 'burgess_bound_small', 'Hoeffding_selection', 'burgess_bound', 'Maurer_selection', 'Audibert_selection']
+methods_list = {m:globals()[m] for m in methods}
 
-Hoeffding_union_method =	Adapto_sampling(Hoeffding_selection)
-Audibert_union_method =		Adapto_sampling(Audibert_selection)
-Maurer_union_method =		Adapto_sampling(Maurer_selection)
-Burgess_union_method =		Adapto_sampling(Burgess_selection)
-Random_union_method =		Adapto_sampling(Random_selection)
-
-
-
-
-methods_list = [
-("SEBM*",burgess_ideal),
-("SEBM",burgess),
-("Ney",super_castro),
-("SECM",altered_burgess),
-("Simple",simple),
-("SECM-W",altered_burgess_small),
-("SEBM**",burgess_ideal_small),
-("SEBM-W",burgess_small),
-("Ney-W",super_castro_small),
-("Hoeffding",Hoeffding_union_method),
-("Audibert",Audibert_union_method),
-("Maurer",Maurer_union_method),
-("Burgess",Burgess_union_method),
-("Random",Random_union_method),
-("Simple-W",simple_small)
-]
-
-methods_keys = [a[0] for a in methods_list]
-methods_list = {a:b for a,b in methods_list}
-
-
+['super_castro_small', 'super_castro']
 
 #open csv file
 with open("Beta_Synthetic_bounds.csv","w") as f:
 
 	#for each sample budget
-	for mperN in [10,50,100,150]:
+	for mperN in [50,100]:
 		print mperN
 
 		#data holding for the errors
-		sampling_errors = [list() for i in range(len(methods_list.keys()))] #[[],[],[],[],[],[],[]]
+		sampling_errors = [list() for i in range(len(methods_list.keys()))]
 		
 		iterator = range(5000)
 		if tqdm_enabled:
@@ -93,7 +63,6 @@ with open("Beta_Synthetic_bounds.csv","w") as f:
 			for ii,k in enumerate(methods_keys):
 				cvals = copy(vals)
 				sampling_errors[ii].append(abs(mean-methods_list[k](cvals,m,d)))
-
 
 
 		#sorting the sampling errors for quartile reporting
