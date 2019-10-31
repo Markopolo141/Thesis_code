@@ -68,7 +68,7 @@ OmegaBig = lambda n,N: (n+1)*(1-n*1.0/N)*1.0/(n**2)
 PsiBig = lambda n,N: (N+1.0-n)/(n**2)
 OmegaSmall = lambda n,N: 1.0/n
 PsiSmall = lambda n,N: 1.0/n
-def burgess_bound(N,ni,Ni,var,d,r):
+def burgess_bound(N,Ni,ni,var,d,r):
 	sumN = sum(Ni)
 	onN = [0 for i in range(2)]
 	max1 = [0 for i in range(2)]
@@ -100,7 +100,7 @@ def burgess_bound(N,ni,Ni,var,d,r):
 
 
 
-def burgess_bound_small(N,ni,Ni,var,d,r):
+def burgess_bound_small(N,Ni,ni,var,d,r):
 	sumN = sum(Ni)
 	onN = 0
 	max1 = 0
@@ -126,7 +126,7 @@ def burgess_bound_small(N,ni,Ni,var,d,r):
 
 
 
-def burgess_bound_ideal_small(N,Ni,ni,var,d,p):
+def burgess_bound_ideal(N,Ni,ni,var,d,p):
 	oversumN = 1.0/sum(Ni)
 	v = 0
 	d2 = d*d
@@ -166,26 +166,26 @@ def burgess_bound_ideal_small(N,Ni,ni,var,d,p):
 def Hoeffding_selection(N,Ni,n,v,d,t):
 	t /= N
 	SNi = sum(Ni)
-	vector = [sqrt(log(1.0/t)/(2*n[i])) for i in range(len(m))]
+	vector = [sqrt(log(1.0/t)/(2*n[i])) for i in range(N)]
 	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return sum(vector)
 
 def Audibert_selection(N,Ni,n,v,d,t):
 	t /= N
 	SNi = sum(Ni)
-	vector = [sqrt(v[i]*log(3.0/t)/(2*n[i])) + 3*log(3.0/t)/(2*n[i]) for i in range(len(m))]
+	vector = [sqrt(v[i]*log(3.0/t)/(2*n[i])) + 3*log(3.0/t)/(2*n[i]) for i in range(N)]
 	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return sum(vector)
 
 def Maurer_selection(N,Ni,n,v,d,t):
 	t /= N
 	SNi = sum(Ni)
-	vector = [sqrt(2*v[i]*log(2.0/t)/(n[i])) + 7*log(2.0/t)/(3*(n[i]-1)) for i in range(len(m))]
+	vector = [sqrt(2*v[i]*log(2.0/t)/(n[i])) + 7*log(2.0/t)/(3*(n[i]-1)) for i in range(N)]
 	vector = [Ni[i]*v*1.0/SNi for i,v in enumerate(vector)]
 	return sum(vector)
 
 
-def altered_burgess_bound_small(N,ni,Ni,var,d,r):
+def altered_burgess_bound_small(N,Ni,ni,var,d,r):
 	sumN = sum(Ni)
 	onN = 0
 	max1 = 0
