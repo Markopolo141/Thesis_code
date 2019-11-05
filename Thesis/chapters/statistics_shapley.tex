@@ -8,6 +8,7 @@ It has many applications,
 including analyzing the power of voting blocks in weighted voting games \citep{Bachrach2009ApproximatingPI}, 
 in cost and surplus division problems  \citep{AzizEtal2016,archie_paper1}, 
 and as a measure of network centrality \citep{Michalak:2013}.
+But primarily, is usefull to us as a method of allocating financial payments in electricity network contexts (see section \ref{the_value_def}).
 
 Formally, a \textit{cooperative game}, $\langle N,v\rangle\in\mathbb{G}_N$, comprises a set of $n$ players, $N=\{1,2,\dots,n\}$, and a \textit{characteristic function}, $v:S\subset N\rightarrow \mathbb{R}$, which is a function specifying the reward which can be achieved if a subset of the players $S\subset N$ cooperate, where $v(\emptyset)=0$.
 In this context the Shapley value $\varphi$ is a unique mapping from cooperative games to the player rewards $\mathbb{G}_N\rightarrow\mathbb{R}^n$ which satisfies axioms:
@@ -98,16 +99,17 @@ In this section we give considerations to the numerical results of this chapter.
 In general, from the results across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that most of the techniques performed well and similar to Neyman sampling, and that our sampling technique, SEBM (or SEBM-W) and SECM performed competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}) despite not having access to knowledge of strata variances.
 It is also observed that Neyman sampling was ultimately the most accurate, for reasons that were hinted in section \ref{sec:neyman_sampling}.
 Particularly that if sufficient samples have been taken then the sample means of the strata will tend to approximately be Gaussian distributed by the Central Limit Theorem.
-In this context the strata means have a distribution that is entirely characterised by their mean and variance, and hence so too therefore is the population mean estimate.
-Hence the variance of the sampled population mean is the only parameter controlling the error, and minimising it directly translates into improved accuracy.
+In this context the strata means have a distribution that is entirely characterised by their mean and variance, and hence so too is the population mean estimate.
+In this way the variance of the sampled population mean is the only parameter determining its error, and minimising it directly translates into improved accuracy.
 
 One of the most remarkable inferences from the data is just how very readily Central Limit Theorem dynamics emerges, from Figure \ref{fig:central_limit_theorem} we can see that the sample error of uniformly distributed data converges almost perfectly to a gaussian distribution even in just 4 samples.
 
-\input{figs/convolution_graph.tex}
 
 This dynamic speaks strongly to the efficiency of Neyman sampling, and indeed our method SEBM* performs worse as it extends from minimising only a simplification of Bennett's inequality - this is most evident in figure \ref{biggraph3}.\footnote{we would expect that a method consisting of minimising Bennett's inequality proper, would yeild extremely similar results to Neyman sampling}.
-One of the more interesting things is the relative inefficiency of the SECM method, particularly as it sought to minimise Chebyshev's inequality for the stratified sampling, and under perfect variance information would be identical to Neyman sampling.
+
+The relative inefficiency of the SECM method is interesting, particularly as it sought to minimise Chebyshev's inequality for the stratified sampling, and under perfect variance information would be identical to Neyman sampling.
 The implication in this context is that the inefficiency of utilising these methods primarily extended from uncertainty about the variances of the strata.
+
 The Bernoulli-uniform data results (plotted in \ref{biggraph3}) were specifically designed to amplify the detriment in stratified sampling that uncertainty about the variances would yeild.
 And that the more infrequent the bernoulli outlier, the more likely that the methods without variance information would over-sample the bernoulli stratum - which they did.
 It is interesting that the SEBM* method also did this to some extent, although it is not particularly clear exactly why.
@@ -115,16 +117,40 @@ It is interesting that the SEBM* method also did this to some extent, although i
 
 From between Figures~\ref{Table1} and \ref{Table111} we observe that sampling without replacement always performs better than sampling with replacement for the same method, and this improvement is magnified as the number of samples grows large relative to the size of the population. 
 At the same time, simple \textsc{Random} sampling almost always performs worst, because it fails to take advantage of any variance information, and \textsc{Simple} sampling performs even worse as it fails to take into account data stratification, these results are as expected.
-Therefore from the Figures ~\ref{Table1} and \ref{Table111} we see that the primary increase in performance comes from employing stratified sampling over simple sampling, sampling without replacement over sampling with replacement, and then using some method that is more intellegent than randomly selecting samples and preferrably using stratum variance information to get close to the ideal of Neyman sampling.
+Therefore from the Figures ~\ref{Table1} and \ref{Table111} we see that the primary increase in performance comes from employing stratified sampling over simple sampling, sampling without replacement over sampling with replacement, and then using some method that is more intellegent than randomly selecting samples (\textsc{Random} method) and preferrably using stratum variance information to get close to the ideal of Neyman sampling.
 
 Aside from comparing the different performances of these bounds as a target for minimisation by selective sampling, it also pays to consider them on their own - simply as bounds on the stratified mean error.
 Particularly we can see a range of different strengths of the bounds in Figure \ref{fig:bounds_widths}.
-In Figure \ref{fig:bounds_widths} we have plotted the bound widths of the various probability bounds of this paper in the context of the Beta-distributed data we considered in section \ref{sec:beta_distributed_data} achieved with a sampling budget $n=50N$ samples.
-Particularly we see that tightest bounds are given by thoes methods which are rooted in perfect variance information, and the widest bounds are given by thoes methods which utilize probability unions to bind EBBs together (via Theorem \ref{triangle_theorem2}).
-What is most notable is the dissimilarity between the widths of the bounds and their effectiveness as a target for sampling minimisation; as choosing samples to minimise a probability bound is sensitive to the shape of the bound not its magnitude.
-Also comparing this Figure \ref{fig:bounds_widths}, with Figure \ref{fig:1},\ref{fig:11} we can see that the width of the bounds are much wider than the magnitudes of the error which are actually achieved.
-And this is (to some extent) quite expected, as analytic concentraiton inequalities function quite generally as very concervative confidence intervals on the error of sampling.
 
+In Figure \ref{fig:bounds_widths} we have plotted the bound widths of the various probability bounds of this paper in the context of the Beta-distributed data we considered in section \ref{sec:beta_distributed_data} achieved after a sample budget $n=50N$ samples allocated using \textsc{Ney-W} method.
+In this graph we considered the following bounds for the error:
+
+\begin{itemize}
+\item 
+\textsc{Ney-B} The bound attained using knowledge of the variances of the strata using Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) in conjunction with the additivity of variance rule (Equation \ref{eq:variance_decomposition_for_strata_mean})
+\item 
+\textsc{SEBB*} The bound of Theorem \ref{thm:1} with variance knowledge of the variances, also using sampling without replacement sharpening (Theorem \ref{martingale0}) where optimal.
+\item 
+\textsc{SEBB*-W} The bound of Theorem \ref{thm:1} with variance knowledge of the variances, not using sampling without replacement sharpening (Theorem \ref{martingale0}).
+\item 
+\textsc{SECB} The bound of Theorem \ref{thm:SECM_bound}, which utilizes Chebyshev's inequality together with our probability bound on error deviation.
+\item 
+\textsc{SEBB} The bound of Theorem \ref{thm:SEBM_bound}, using sampling without replacement sharpening (Theorem \ref{martingale0}) where optimal.
+\item 
+\textsc{SEBB-W} The bound of Theorem \ref{thm:SEBM_bound}, not sampling without replacement sharpening (Theorem \ref{martingale0}).
+\item 
+\textsc{Hoeffding-B} The bound attained by Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper}) for the strata, unioned together (via Theorem \ref{triangle_theorem2}) to create a bound on the stratified sampling error.
+\item 
+\textsc{Audibert-B} The bound attained by Audibert et.al's EBB inequality (Theorem \ref{AudibertsEBB}) for the strata, unioned together (via Theorem \ref{triangle_theorem2}) to create a bound on the stratified sampling error.
+\item 
+\textsc{Maurer-B} The bound attained by Maurer and Pontil's EBB inequality (Theorem \ref{MandPsEBB}) for the strata, unioned together (via Theorem \ref{triangle_theorem2}) to create a bound on the stratified sampling error.
+\end{itemize}
+
+Particularly we see from Figure \ref{fig:bounds_widths} that tightest bounds are given by thoes methods which are rooted in perfect variance information, and the widest bounds are given by thoes methods which utilize probability unions to bind EBBs together (via Theorem \ref{triangle_theorem2}).
+What is most notable is the dissimilarity between the widths of the bounds and their effectiveness as a target for sampling minimisation; as choosing samples to minimise a probability bound is sensitive to the shape of the bound not its magnitude.
+Also comparing this Figure \ref{fig:bounds_widths}, with Figure \ref{fig:1},\ref{fig:11} we can see that the width of the bounds are much wider than the magnitudes of the error which are actually achieved; and this is quite expected, as analytic concentraiton inequalities function generally as conservative confidence intervals on the error of sampling.
+
+\input{figs/convolution_graph.tex}
 
 %Next, note that the results of Figure~\ref{Table1} show that there is a mid-range of sample sizes where choosing a different method can even have a greater impact on sampling efficiency and rate of average error reduction than the difference between sampling with or without replacement.
 %This is an important insight, as sampling real-world data (e.g. surveys, polling, destructive testing, etc) can be an expensive and slow process.
@@ -147,7 +173,7 @@ And this is (to some extent) quite expected, as analytic concentraiton inequalit
 %It appears that this factor is at play in the under-performance shown in Figure~\ref{biggraph3} and also the slight under-performance of our method in the Voting Game in Table~\ref{tab2}. 
 %We note that there may be other corner-cases where our method also under-performs.
 
-In comparison to existing approaches to approximating the Shapley value, our sampling method shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
+In considering the comparison of approaches to approximating the Shapley value, our sampling method shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
 This was particularly the case in the context of large sample budgets, as our method (SEBM, with error $e^{SEBM}$) sampled without replacement, while the other methods sampled with replacement. 
 However it would be remiss not to mention the computational overhead of iteratively minimizing (one sample at a time) our inequality in the context of our simple example games. 
 This overhead can be a significant drawback, however on more complicated games such as where the characteristic function is slower to calculate, any overhead associated with the sampling choice is expected to be much less relevant. 
@@ -259,6 +285,12 @@ This formulation can be applied to more involved computational tasks that involv
 
 \section{Conclusions and Future Work}\label{sec:future}
 
+
+
+
+
+
+
 %We begin this section with a discussion of the relationship of our bound to existing concentration inequalities, 
 %and some opportunities for future improvements. 
 The derivation of our inequality extends from consideration of Chernoff bounds and probability unions in a similar vein to other EBB derivations \citep{Maurer50empiricalbernstein,bardenet2015}.
@@ -271,32 +303,6 @@ Alternatively, an approach utilizing entropic \citep{Boucheron_concentrationineq
 % Using these techniques it may be possible to derive ideal numerical bounds, particularly for bounds considering very small numbers of samples.
 
 
-We now consider prospective applications of our method. 
-First, the approach derived in this paper was motivated by the problem of approximating the Shapley value of cooperative games defined over complicated optimization problems (i.e. with characteristic functions given by the solution to non-trivial optimization problems). 
-Two examples of this are the problems of pricing (i) logistics, involving solutions to the travelling salesman problem \citep{AzizEtal2016}, and 
-(ii) electricity networks, which requires solving optimzation problems that incorporate the power flow equations \citep{DBLP:journals/tsg/OBrienGR15,archie_paper1,ACUNA2018161,burgess_abstract}.
-Focusing on electricity networks in particular: 
-these are complicated technical system used to transport electrical power from generators to loads, 
-subject to the non-linear physical and operational constraints of the system's components.
-With the emergence of new technologies, electricity is now generated, monitored and used on neighborhood distribution networks by devices that are increasingly responsive and interconnected to the network. 
-Because of this, there are various emerging schemes of how a future distribution-network energy market platform might be designed.
-Within this context, the Shapley value has been proposed as a fair mechanism for the allocation of resources and costs on such networks.
-The Shapley value has been considered in different ways as a mechanism for pricing demand response \citep{DBLP:journals/tsg/OBrienGR15}, demand or load \citep{archie_paper1}, supply or generation \citep{ACUNA2018161}, and potentially all simultaneously \citep{burgess_abstract}.
-Although computing the Shapley value exactly is impractical in these contexts 
-sample-based approximations are a promising avenue for implementing Shapely value pricing schemes in real-world electricity systems.
-
-Second, a potential use of our stratified sampling method is in improving the performance of \textit{stochastic gradient decent} (SGD) methods for training neural networks \citep{2016arXiv160904747R}.
-Neural networks are trained by iteratively refining their parameters --- the weights and biases of the network --- against a cost function of the network's performance against training data.
-One common method of training neural networks is gradient decent (GD).
-In each iteration of GD, the derivative of how much a change in any parameter would influence the average performance of the network across the training data is calculated as a gradient vector.
-Once this vector is calculated, each network parameter takes a small step in the direction of this gradient, to incrementally increase the performance of the network, 
-and through many of these steps the network becomes trained.
-
-However in many cases, the entire corpus of training data is not used in each iteration but only a fraction of the corpus is sampled (as a `batch' or `minibatch'), and the average gradient vector of improved performance across the samples of the batch is calculated as an approximation of the true gradient vector. 
-This iterative process has been called SGD, where one of the hyperparameters is the size of the batches, see \cite{DBLP:journals/corr/KeskarMNST16,l.2018dont}.
-In the context of supervised learning, each element of the training data is labelled with the desired output of the neural network for it, and these labels can serve to naturally stratify the training data; or the data can be stratified by other means too \citep{DBLP:journals/corr/ZhangKM17,DBLP:journals/corr/abs-1804-02772,2014arXiv1405.3080Z}.
-In this setting, Equation~\ref{big_equation2} may be used to choose between samples of labelled training data, in order to sample batches that more-efficiently estimate of the performance gradient, and hence improve the efficiency of neural network training procedure.
-This idea of `smart sampling' for neural network training is not particularly new, and our method is potentially compatible with other performance-enhancing techniques in the literature on neural networks \citep{10.1007/978-3-319-24486-0_21,article123123131}.
 
 % Full exploration of the potential applications are beyond the scope of this document.
 % However, at present, we are pleased to present our analytic concentration inequality (Equation \ref{big_equation}) as an immediately computable expression and practical method for choosing samples from strata.\footnote{
