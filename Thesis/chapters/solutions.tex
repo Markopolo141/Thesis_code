@@ -1,38 +1,67 @@
-\section{Related Work}
+\chapter{Existing solutions}
 \label{cha:solutions}
-At the begging of each chapter, please introduce the motivation and high-level
-picture of the chapter. You also have to introduce sections in the
-chapter. \\
+
+Discussing the philosophy of distributive ethics is important, as we considered in the previous chapter \ref{}.
+However for each of these ideas there is a range of ways which they can be made quantitatively precise.
+Particularly in this chapter we consider a range of ways that some of our moral ideas about distribution have been mathemetised.
+We highlight the most famous and relevent mathemetisations, because our development extends from them, and also ultimately contrasts against them.
+Particularly we consider the following:
+\begin{itemize}
+\item VCG,
+\item nash bargaining with and without endogenous disagreement point,
+\item cooperative game theory concepts such as the Core and Shapley Value,
+\item and Locational Marginal Pricing.
+\end{itemize}
+
+We consider and discus the qualities of each of these in turn, before we attempt a new synthesis in the next chapter \ref{}.
+let us begin with the VCG mechanism.
+
+\section{VCG}
+
+In section \ref{sec:reference_points} we explored the idea that people might be rewarded in proportion to their contribution - particularly the value that they add above their absense.
+And while this idea may be uncomplicated, its mathematization has some suprising features.
+We consider the most direct mathemetisation of this idea as per the VCG mechanism with Clark pivot.
+
+Particularly the VCG mechanism (with Clark pivot) is an allocation process where each player is payed money (or `transferable utility') equal to the impact their presense has on others (ie. their externality) in the decision process which selecting an outcome that maximises utility.
+Let us explain with some mathematics:
+
+If we frame the VCG process as a bidding process of $n$ agents over a possible set of outcomes $X$.
+Then any agent $i$ has a valuation for any outcome in $X$:
+$$ v_i~:~X\rightarrow \mathbb{R}_+ $$
+The VCG bidding process asks every agent $i$ for their valuations and calculates the outcome that maximises the sum of the reported valuations:
+$$ x^*(v) = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
+This outcome is implemented and the bidding process pays each agent $i$ the value $p_i$:
+$$ p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') $$
+And this is the value that the player's presence adds to the utility of others minus the sum of utility which would have been obtained in the player's absense - ie. its externality.
+
+This is the VCG mechanism with Clark pivot, which might be seen as a straightforward way of allocating ethical payments, and has some particular properties.
+The first and most notable positive property is that if the utility of the agents is quasilinear, ie. that their utility is their valuation plus any transfer they recieve, and their utility has form:
+$$ u_i = p_i(v)+v_i $$
+Then VCG mechanisms like this are \textit{truthfull} or \textit{incentive compatable}, in that no player can possibly gain from misreporting their valuations.
+\cite{roberts1979characterization, Lavi2008}
+Additionally it has the property called \textit{individual rationality} in that no agent (assuming quasilinear utility) will left with a negative utility.
+However one drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount that is payed between the players might not add to zero.
+It is also \textit{efficient} in the sense that it actualises the utilitarian socially optimal solution $x^*(v)$.
+
+Each of these properties is often held to be desirable. Truthfull mechanisms induce all agents to report truthfully and hence eliminates the need for any strategising by them, which might otherwise be a source of system instability.
+Individually rational mechanisms is often viewed as a basic fairness property, in that nobody is left any worse-off for having participated in the system - which is a key factor in fairness as described by euvoluntary exchange (see section \ref{}).
+And budget balance is another important feature, in that the process can be maintained without budgetary injection, and without taking net moneys from the participants.
+
+Unfortunately all of these three properties are impossible to combine in the general case where valuations (or preferences) are unrestricted.(find a good source, of, myerson satterthwaite theorem)
+
+The VCG mechanism is a cornerstone discovery in the field of Mechanism Design, and there exist many good sources giving extended discussion on the surrounding theory and the variations about the technique.\cite{37377}
 
 
-\subsection{VCG}
+One of the more important features of Mechanism design that the VCG mechanism illustrates is the potential, for considering the way in which any system that is implemented will behave between strategising agents.
+and the result of that interraction leading to system dynamics.
+Particularly that for any system implemented, it is possible to design a system which is truthfull and will yeild the same nash equilibrium as the system would fall into anyways - this is known as the revelation principle (CITE CITE CITE)
 
-\fix{add axioms and flesh to the description}
+What we can do is to consider the way in which the truthfullness property of VCG coincides with other 
+%TODO
 
-One of the elements of an electricity system is the bidding, and there is no loss for different strategies under these systems.
-and in the context of stragegic bidding the system will fall into a less than optimal situation.
-and it may beg the question as to what state the system under manipulation will fall into, and if potentially we could design the best possible lowest-common denominator system from the start.
-
-one avenue of investigation that takes this approach to analysing the worst possible case under manipulation is called `Mechanism Design'.
-which famously won some people the nobel prize.
 
 particularly mechanim design broadly analyses the situation between multiple parties where each party has different preferences over the possible outcomes, and reported preferences over the outcomes.
 mechanism design then poses the question what systems can be put inplace to ensure the best (considered broadly and/or variously) outcome in the context of stragegic reporting.
-
-one of the primary contexts into which Mechanism Design has been historically considered is in the context of voting. -- is it possible to strategically vote, and by misrepresenting your preferences gain a better outcome for yourself?
-
-And is it possible to design an appealing system where the answer to this question is invariably `no'.
-
-There are many famous theorems (many of them strongly Negative - arrow and satherswaite) that apply broadly to these kinds of questions.
-
-however more particularly than the voting context, Mechanism design also oftend covers situations where an outcome is implemented in the context of transferrable utility (ie. money), and where outcomes are reported by their utility - than by transitive preference.
-In this situation the potential outcomes discussed involve not only the utility of the outcome to each player but usually in addition to the utility transferred/taken from him/her.
-
-$$insert equation$$
-
-this condition is often referred to as Linearity (CHECK).
-
-Among all the possible mechanisms that allocate outcomes and transferrs between parties, a historic mechanism called VCG is most famous.
 
 
 \begin{itemize}
@@ -408,20 +437,6 @@ There exist other solution concepts in the context of cooperative game theory, s
 The interested reader is encouraged to read more from sources \ref{} and \ref{} and \ref{}.
 
 \subsection{Economic Perspectives}
-
-\begin{displayquote}
- Concerns about exploitation often take the form of unfair economic exchange. Attempts to specify the principles that render an exchange fair or unfair can be traced back at least as far as Aristotle, who argued that a just exchange will embody a kind of reciprocity such that the values of the goods exchanged are proportional (Nicomachean Ethics, Book V, Part V). But while the notion of proportionality is intuitively appealing, it is somewhat unclear precisely what Aristotle had in mind by it, or what the most defensible explication of the idea would be. To borrow Aristotle’s own example, if a shoemaker and a builder trade, how many pairs of shoes is proportional to a single house?
-
-In the writings of St. Thomas Aquinas, we find the beginnings of a much more sophisticated and promising approach to questions such as this. In his Summa Theologiae, Aquinas sought to answer the question of “whether a man may lawfully sell a thing for more than it is worth?” The “worth” of a thing, for Aquinas, was its just price. And the just price, according to Aquinas, appears to have been simply the prevailing market price (Summa Theologiae, part 2, second part, question 77; see also de Roover 1958 and Friedman 1980). Rather than relying on some fixed notion of proportionality, Aquinas’ just price will be responsive to considerations of supply and demand. But not just any price that two individuals mutually agree upon will be deemed just on Aquinas’ standard. Thus, a seller who takes advantage of fraud, or a temporary monopoly, to charge an excessive price for an item would be acting unjustly, insofar as his price is in excess of the price at which similar goods typically sell in the relevant market. But Aquinas saw nothing inherently sinful in selling a good for more than one paid for it, or with charging enough to earn a profit, or to compensate for risks involved in the productive process. Seeking profit for its own sake may involve a certain sort of “debasement”, but profit can also be sought in order to fulfill necessary or even virtuous ends.
-
-Later Scholastics would devote considerable attention to developing and refining the notion of the just price. Of special concern was the price attached to the lending of money, or interest. Since the founding of the Catholic church, it was widely regarded as sinful for lenders to charge interest on their loans, and so-called “usury” was prohibited by canon and often by secular law. Much of the concern regarding usury seems to have been driven by the idea that the charging of interest involves an inequitable exchange—lenders give something to borrowers, but demand back more than they have given. But Aquinas seems to have been particularly concerned that borrowers would often be driven to take out loans out of necessity, and thus that their consent to the exchange is not fully voluntary (Summa Theologiae, part 2, second part, question 78).
-
-The much later natural law theorist John Locke also took up questions regarding just and unjust prices, not in either of his well-known treatises on government but in a lesser known tract titled, Venditio. Locke, even more explicitly than Aquinas, saw the just price as being equivalent to “the market price at the place where he sells” (Locke 1661: 340). The relativity of the just price to the particular market in which the transaction takes place is important. For Locke argued that if two ships sailed laden with corn, one to Dunkirk where there is a near famine taking place, and the other to Ostend where normal conditions obtain, it would not be unjust for the merchant to sell at a significantly higher price in the former location than in the latter (so long as the higher price is one that the buyers can afford). If the merchant did not charge a higher price, Locke argued, then two problems would result. First, it is likely that the merchant’s goods would simply be bought by speculators and resold on a secondary market, thereby simply redirecting the profit into somebody else’s hands without doing anything to improve the situation of buyers. And second, if merchants cannot charge a high price in “good” markets to cover their losses in “bad” ones, they will soon operate at a net loss and this will, Locke claims, “quickly put an end to merchandising” (Locke 1661: 342).
-
-What would be unjust would be for the merchant to sell an item to a particular individual for a price higher than the general market rate as might happen, for instance, if that individual is in particular distress. Thus, Locke holds, if anchors typically sell for a certain price, say 100 pounds, then it would be unjust (exploitative) to charge the captain of a distressed ship 5000 pounds for an anchor, simply because one knows he will be compelled to pay it. The just price is the going market rate, where that rate is determined by the general features of supply and demand, and not the particular needs or vulnerabilities of any particular buyer or seller.
-
-https://plato.stanford.edu/entries/exploitation/
-\end{displayquote}
 
 In this way what is considered exploitation and unfair trade, in defined in contrast to the value that is fetched in normative market circumstance.
 the question then becomes how to formulate this normative market circumstance.
