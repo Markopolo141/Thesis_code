@@ -1,10 +1,11 @@
 \chapter{Existing solutions}
 \label{cha:solutions}
 
-While discussions about distributive ethics are important (as considered in the previous chapter \ref{}), what is also important is the way in which those ideas can be made quantitatively precise.
+While general discussions about the philosophy of distributive ethics is important, what is also important is the way in which those ideas can be made quantitatively precise.
 
 In this chapter we consider the range of ways that some of the moral ideas about distribution have been mathemetised.
 We highlight some of the most famous and relevent formulations, primarily because our development extends from them, and also ultimately contrasts against them.
+
 We consider the following formulations:
 \begin{itemize}
 \item VCG,
@@ -13,16 +14,16 @@ We consider the following formulations:
 \item and Locational Marginal Pricing.
 \end{itemize}
 
-We consider and discus the qualities of each of these in turn, before we attempt a new synthesis in the next chapter \ref{}.
+We introduce, consider and discuss the qualities of each of these in turn, before we attempt a new synthesis in the next chapter \ref{}.
 let us begin with the VCG mechanism.
 
 \section{VCG}
 
-In section \ref{sec:reference_points} we briefly explored the idea that people might be rewarded in proportion to their contribution - which is the value that their presence adds to collective welfare above their absense.
-And while this idea may be unsophisticated, its mathematization has some suprising features.
-We consider the most direct mathemetisation of this idea, which is the VCG mechanism with Clark pivot.
+In section \ref{sec:reference_points} we briefly explored the idea that people might be rewarded in proportion to their contribution to social welfare, above their absense individually.
+While this idea may be simple, its mathematization has some suprising features.
+The most direct mathemetisation of this idea, is the VCG mechanism with Clark pivot.
 
-Particularly the VCG mechanism (with Clark pivot) is an allocation process where each player is payed money (or `transferable utility') equal to the impact that their presense has apon others (ie. their externality) in the decision process which selecting an outcome that maximises the sum of utility.
+The VCG mechanism (with Clark pivot) is an allocation process where each player is payed money (or `transferable utility') equal to the impact that their presense has apon others (ie. their externality) in the decision process which selecting an outcome that maximises the sum of utility.
 Let us explain with some mathematics:
 
 \subsection{The minimal VCG process - with Clark pivot}
@@ -33,37 +34,45 @@ The VCG bidding process asks every agent $i$ for their valuations and calculates
 $$ x^*(v) = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
 This outcome is implemented and the bidding process pays each agent $i$ the utility value $p_i$ (which may be positive or negative):
 $$ p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') $$
-And this is the value that the player's presence adds to the utility of others minus the sum of utility which would have been obtained in the player's absense - ie. its externality.
+And this value $p_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absense - ie. the player's externality.
 
 \subsection{Discussion about VCG}
-The VCG mechanism with Clark pivot might be seen as a straightforward way of allocating ethical payments,
-And this system might be considered very fine method for allocating a physical outcome on an electricity network and allocation of payments between participants; and this topic has had some exploration \cite{SESSA2017189, 8264596} (MORE CITES POSSIBLE).
- but it also has some particular properties.
+The VCG mechanism with Clark pivot might be seen as an straightforward way of allocating ethical payments - as if a player's presence adds to the utility of others then they are postiviely compensated, and if a player's influence detracts from the utility of others then they are negatively compensated.
 
-The first and most notable property is that VCG mechanisms like this are \textit{truthfull} or \textit{incentive compatable}, in that no player can possibly gain from misreporting their valuations \cite{roberts1979characterization, Lavi2008}
-if the utility of the agents is quasilinear, ie. that their utility is their valuation plus any transfer they recieve, and their utility has form:
+And since the set of possible outcomes $X$ are undefined it is possible to consider the application of the VCG mechanism in a variety of contexts, including electricity contexts.
+So, for instance, VCG has been considered as a mechanism for allocating physical and monetary outcomes in various contexts within electricity networks, such as in auctions for bulk electricity generation, buying and selling energy storage products, and in procuring ancillary services \cite{FABRA200272, SESSA2017189, 8264596, 7512339}.
+
+However VCG has some other particular properties, positive and negative.
+The first and most notable property is that VCG mechanisms are \textit{truthfull} or \textit{incentive compatable}, in that no player can possibly gain from misreporting their valuations
+in the event that the utility of the agents is quasilinear \cite{roberts1979characterization, Lavi2008}, ie. that their net utility is equal to their valuation of the outcome plus any transfers they recieve, and their utility $u_i$ has form:
 $$ u_i = p_i(v)+v_i $$
-Another interesting property is called \textit{individual rationality} in that no agent (assuming quasilinear utility) will left with a net negative utility.
-However one drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is payed between the players might not sum to zero.
-It is also \textit{efficient} in the sense that it actualises the utilitarian socially optimal solution $x^*(v)$.
+And if incentive compatability induces players not to bid strategically, then it reduces the overhead of their participating in the system, and potentially eliminates a source of system instability.
 
-Each of these properties (incentive compatable, individually rational, budget balanced, and efficient) are often held to be desirable. for instance, Truthfull mechanisms induce all agents to report truthfully and hence eliminates the need for any strategising by them (on an individual basis), which might otherwise be a source of system instability.
-Individually rationality is often viewed as a basic fairness property, in that nobody is left any worse-off for having participated in the system - which is a key factor in fairness as described by euvoluntary exchange (see section \ref{}).
-And budget balance is another important feature, in that the process can be maintained without budgetary injection, and without taking money from between the participants.
-And efficiency is straightforwardly a desirable property (see section \ref{}).
+Another interesting property is sometimes called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. If the valuation of utility zero is regarded as the utility that would result if no VCG mechanism took place, hence the fact that VCG is invidually rational means that everybody is left being better than they would be otherwise if they did not participate in the mechanism. This quality of leaving all parties better off then they would be otherwise, is a possible component of ethical negotiation (see chapter \ref{}).
 
-Unfortunately all of these properties (incentive compatable, individually rational, budget balanced, and efficient) are known to be impossible to combine in the general case where there are a plurality of outcomes and valuations (or preferences) are unrestricted.(find a good source, of, myerson satterthwaite theorem)
+It is also directly \textit{efficient} in the sense that it actualises the utilitarian socially optimal solution $x^*(v)$.
 
-\subsection{VCG and mechanism design}
+However more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is payed between the players might not sum to zero; and hence an implementation of VCG might require regular budget injection to maintain and/or sap money from between the participants.
 
-The VCG mechanism is a cornerstone discovery in the field of Mechanism Design, and there exist many good sources giving extended discussions on the theory surrounding the technique.\cite{37377}
-But generally, mechanism design analyses systems which select a social outcome bassed apon the interaction of multiple parties with divergent interests.% and where each party has actual preferences over the possible outcomes, and also reported preferences over the outcomes.
+Although VCG is incentive compatable for individual strategisers it is potentially vulnerabile to strategising coalitions, its implementation my involve imposing a lack of privacy for participants, and (depending on context) may also have high computational complexity.\cite{ShohamLeytonBrown09}
+
+%Some of these properties are often held to be desirable, and others not. So, for instance, Truthfull mechanisms can be thought to induce all agents to report truthfully and hence might serve to eliminates the need for any strategising by them, which might otherwise be a source of system instability.
+%Individually rationality is often viewed as a basic fairness property, in that nobody is left any worse-off for having participated in the system - which is a key factor in fairness as described by euvoluntary exchange (see section \ref{}).
+%And budget balance is another important feature, in that the process can be maintained without budgetary injection, and without taking money from between the participants.
+%And efficiency is straightforwardly a desirable property (see section \ref{}).
+
+It is unfortunate, that some of these properties (incentive compatable, individually rational, budget balanced, and efficient) are known to be impossible to combine in the general case where there are a plurality of outcomes and the valuations are unrestricted, and these impossibility theorems are a component feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
+
+\subsection{VCG and Mechanism Design}
+
+The VCG mechanism is a cornerstone component in the field of Mechanism Design, and there exist many good sources giving extended discussions on the field.\cite{37377}
+But generally, Mechanism Design analyses systems which select social outcome/s based apon the strategic interaction of multiple parties with divergent interests.% and where each party has actual preferences over the possible outcomes, and also reported preferences over the outcomes.
 
 One of the features of Mechanism design that the VCG mechanism illustrates, is the potential for considering and apprehending the way in which a system is likely to behave between rational individual strategising agents.
-This possibility extends beyond VCG, particularly as any system which is implemented between strategising agents can be altered to make it incentive compatable for them; this is called the revelation principle.\cite{RePEc:ecm:emetrp:v:41:y:1973:i:4:p:587-601}
+This possibility extends beyond VCG, particularly as it has been discovered that any system which is implemented between strategising agents can be altered such as to make it incentive compatable for them; this is called the revelation principle.\cite{RePEc:ecm:emetrp:v:41:y:1973:i:4:p:587-601}
 The revelation principle has various formulations, but generally, for any system there will nash-equilibria in the interraction between the agents, and consequently an incentive compatable mechanism can be constructed by asking the agents for their true valuations and then implimenting the corresponding nash equilibria directly.
+Unfortunately, it is sometimes the case that the nash-equilibria between strategising agents that have divergent interests may not coincide with what is socially optimal for them; and the far reaching effects of this are manifest in a variety of famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
 
-Unfortunately, it is often the case that the nash-equilibria between strategising agents that have divergent interests, may not correspond with what is socially optimal. And so for instance, there are a series of strong impossibility proofs in mechanism design.
 Some famous impossibility proofs in mechanism design include Arrow's impossibility theorem, the Myerson-Satterthwaite theorem, and the Gibbard-Satterthwaite theorem, which deal with impossibilities of socially optimal systems in voting, and in economic exchange where strategising is considered.
 
 And so it is also proven that there is no easy alternative to VCG that is incentive compatabile, has unrestricted player preferences, and has individual rationality, and implements pareto-optimal outcome.\cite{YI201679}
