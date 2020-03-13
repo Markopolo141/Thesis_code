@@ -21,7 +21,7 @@ let us begin with the VCG mechanism.
 
 In section \ref{sec:reference_points} we briefly presented the idea that people might be rewarded in proportion to their contribution to social welfare, above their absense individually.
 While this idea may be simple, its mathematization has some suprising features.
-The most direct mathemetisation of this idea, is the VCG mechanism with Clark pivot.
+The most direct mathemetisation of this idea, is the Vickery-Clark-Groves (VCG) mechanism with Clark pivot.
 
 The VCG mechanism (with Clark pivot) is an allocation process where each player is payed money (or `transferable utility') equal to the impact that their presense has apon others (ie. their externality) in the decision process which selecting an outcome that maximises the sum of utility.
 Let us explain with some mathematics:
@@ -33,7 +33,7 @@ $$ v_i~:~X\rightarrow \mathbb{R}_{\ge 0} $$
 The VCG bidding process asks every agent $i$ for their valuations and calculates the outcome that maximises the sum of the reported valuations:
 $$ x^*(v) = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
 This outcome is implemented and the bidding process pays each agent $i$ the utility value $p_i$ (which may be positive or negative):
-$$ p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') $$
+\begin{equation}\label{eq:VCG_payment_rule} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation}
 And this value $p_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absense - ie. the player's externality.
 
 \subsection{Discussion about VCG}
@@ -56,10 +56,12 @@ However more negative features of VCG exist, one primary drawback of this mechan
 
 Although VCG is incentive compatable for individual strategisers it is potentially vulnerabile to strategising coalitions, additionally its implementation may involve imposing a lack of privacy for participants, and also (depending on context) may also have higher computational complexity than other mechanisms.\cite{ShohamLeytonBrown09}
 
-As VCG has positive and negative features, it is possible to consider if there are similar mechanisms which avoid some of the negative features.
-However it is unfortunate, that some of these properties (incentive compatable, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a component feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
+Some of these disadvantages (and others) have made VCG seldom implemented in practice, and in electricity networks.\cite{Rothkopf07, Ausubel2006}
 
-\subsection{VCG and Mechanism Design}
+As VCG has positive and negative features, it is possible to ask if there are similar mechanisms which avoid some of the negative features.
+But it is unfortunate, that some of these properties (incentive compatable, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a component feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
+
+\subsection{Mechanism Design, is there a better VCG?}
 
 The VCG mechanism is a cornerstone component in the field of Mechanism Design, and there exist many good sources giving extended discussions on the field.\cite{37377}
 But generally, Mechanism Design analyses systems which select social outcome/s based apon the result of strategic interactions of multiple parties with divergent interests.% and where each party has actual preferences over the possible outcomes, and also reported preferences over the outcomes.
@@ -70,48 +72,56 @@ The revelation principle has various formulations, but generally, for any system
 Unfortunately, it is sometimes the case that the nash-equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always created as nash equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
 
 Some historic impossibility proofs in mechanism design concern voting and social choice, and notably include Arrow's impossibility theorem, and the Gibbard-Satterthwaite theorem.
-but the difficulty does not nessisarily receed even if monetary compensations between parties are included. such as per the Myerson-Satterthwaite theorem.
-And similarly it is also proven that there is no easy alternative to VCG which is incentive compatabile, has unrestricted player preferences, and has individual rationality, and implements a socially optimal outcome.\cite{YI201679}
+But the difficulty does not nessisarily receed even if monetary compensations between parties are included into consideration. such as per the Myerson-Satterthwaite theorem.
+Another impossibility theorem was also proven by Green and Laffont \cite{29088} to the effect of proving that there is no easy alternative to VCG; ie. a mechanism which is incentive compatabile, has unrestricted player preferences, has individual rationality, and implements a socially optimal outcome.
 
-The field of Mechanism Design is an evolving field, and there are several ways of getting navigating around some of these impossibilities.
+In the evolving field of Mechanism Design there are several avenues of averting some of the impossibilities.
 
-\subsection{Navigating around impossibilities of Mechanism Design}
+%\subsection{Navigating around impossibilities of Mechanism Design to a better VCG}
 
-%One of the fundamental problems of applying VCG to electricity networks is the budget-surplus that often results and where this money should go, particularly that if the money should go back into the participants in the network then it would destroy the incentive compatability that was essential to the scheme in the first place.
+One of the main problems in applying VCG to electricity networks is the fact that it is not budget-balanced, and this raises a question of where the budget surplus/defecit should be channeled to/from.
+Particularly if the money should be directed back to the participants in the electricity network, then it would destroy the incentive compatability that was part of the scheme in the first place.
+And this is a direct consequence of the impossibility result of Green and Laffont \cite{29088}. By this impossibility result we are constrained to consider mechanisms which are suboptimal in relation to these qualities (budget balance, incentive compatability, individually rational, and efficient).
 
+Subsequently, we could ask if there is any potential mechanisms which are boundedly suboptimal about thoes qualities, and the answer is unfortunately not.
+Particularly there are no mechanisms which allow bounded deviations from the efficiency, incentive compatibility and budget-balance at the same time (allowing such mild conditions as quasilinear utilities) \cite{YI201679}.
+Thus a search for a better alternative than VCG needs to sacrifice or substitute some of these desirable properties.
 
-And there are several methods which have been developed to avert this issue:
+And there are several options, such as:
 \begin{enumerate}
-    \item adding extra elements into consideration, such as baysean priors on preferences, and reducing incentive compatability to baysean incentive compatability (see section on bargaining)
-    \item By throwing away consideration on the unrestrictedness of the player preferences, and by moving to other groves mechanisms which allow some redistribution of the surplus
-    \item by sacrificing pareto-optimality in the choice of the social outcome while keeping budget balance and incentive compatability
+    \item Discarding the unrestrictedness of the player valuations, and by moving to other Groves mechanisms which allow some redistribution of the surplus
+    \item Sacrificing efficiency while keeping budget balance and incentive compatability
+    \item Adding baysean priors on the valuations of the players, and reducing incentive compatability to baysean incentive compatability
 \end{enumerate}
 
-A groves mechanism chooses an outcome $o^*$ and defines a transfer $T_i$ to each agent $$T_i=\sum_{j\in I\setminus\{i\}}\hat{v}_j(o^*) - C_{-i}$$
-where $C_{-i}$ is any value that is independent of $i$'s reported preferences.
-VCG is a groves mechanism where $C_{-i}=\sum_{j\in I\setminus\{i\}}\hat{v}_j(o^*_{-i})$.
+We briefly discuss these in turn:
 
+\subsubsection{Redistribution in Groves mechanisms}
 
-particularly the first is probably most interesting for our considerations, and is the source of the d'AVGA mechanism which allocates redistribution of the surplus bassed on baysean priors on player preferences.
-The addition of baysean priors also has links to bargaining, particularly with the work of Meyerson, and his bargaining games.
-Which in turn have been extened (by himself) to coalitional games, and also through some of his work to Harsanyi games. (CITE)
-Particularly through the introduction of baysean considerations other schemes can redily be made to be incentive compatable.
+One potential avenue of averting the impossibility result is to discard the assumption that the player's valuation over outcomes are unrestricted, and recognise that some of the budget surplus/defecit can be redistributed without destroying the incentive compatability property.
 
-However there are certain issues with supposing accurately known baysean priors (particularly if they are learnt from past behavior).
+To frame this approach, we must make a technical distinction between a Groves mechanism and its particular instance - in the VCG mechanism.
+A Groves mechanism is exactly the same as the VCG mechanism except instead of paying players per equation \ref{eq:VCG_payment_rule}, instead it pays them per:
+\begin{equation}\label{eq:Groves_payment_equation} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - C_{-i} \end{equation}
+where $C_{-i}$ is some function that is independent of $i$'s reported preferences.
+In this context it is notable that the VCG mechanism is a special case of a Groves mechanism where $C_{-i}= \max_{x'\in X}\sum_{j\ne i}v_j(x')$. \cite{10.2307/1914085}
+Groves mechanisms are a class of mechanisms which include VCG, and are categorically incentive compatable. 
 
-The second avenue involves the use of knowledge (or the imposition of restraints) on the possible preferences of players.
-This avenue often goes under the description of VCG redistribution, and there has been significant discussion about this particular avenue.
-Originally the first to propose this scheme was Ruggiero Cavallo \cite{Cavallo:2006:ODM:1160633.1160790}, particularly in the context of allocating a single physical object exclusively to one party.
-this game `All-Or-Nothing' games (AON) --- where any party's not recieving the object has known utility of zero --- has a better-than-VCG allocation mechanism.
-Cavallo, discussed this allocation mechanism and then consideres the associations and implications for the potential design of other allocation mechanisms where information (or constraints) are known about the players true preferences.
+The challenge therefore is to derive optimal functions $C_{-i}$ which minimise the budget surplus/defecit while maintaining individual rationality in the context of restricted player valuations.
+And to this challenge has been significant discussion about deriving these $C_{-i}$ functions, also known as `VCG redistribution' rules.
 
-The design of redistribution systems has since seen some more development, from redistribution systems in the context of other situations and games.
-But, it is generally known that designing optimal (non-linear) redistribution systems is a hard task, and even neural networks have been employed to construct such systems \cite{DBLP:conf/atal/ManishaJG18}.
+One of the first people to propose such a rule was Ruggiero Cavallo \cite{Cavallo:2006:ODM:1160633.1160790}.% who showed that such a redistribution rule exists with with a performance exceeding VCG.
+Who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be assumed that any party has a utility of zero if the do not recieve the physical object.
+This redistribution was possible primarily because there exists a simple constraint on player valuations - ie. not reciving the object has utility of zero.
 
-However it is known that these systems will (by construction) almost always produce some budget surplus.
+Similarly in other situations where there are restrictions on the players valuation over the outcomes, there is the potential for deriving VCG redistribution rules.
 
-A tertiary avenue to dealing with the problem is to throw away the pareto-optimality of outcome selection.
-Probably one of the first people to think of this process way Boi Faltings \cite{10.1007/978-3-642-25510-6_14}
+However there are some difficulties with this approach, particularly it is known that even with VCG redistribution rules there will almost always be some remaining budget surplus, and even then the process of deriving optimal redistribution rules can be a difficult and complex task --- even to the point where neural networks have been employed to construct such functions \cite{DBLP:conf/atal/ManishaJG18}.
+
+\subsubsection{Sacrificing efficiency}
+
+Anoher avenue in dealing with the problem is to sacrifice efficiency of outcome selection.
+One of the simplest such scheme is given by Boi Faltings \cite{10.1007/978-3-642-25510-6_14}
 Who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups, where the VCG outcome from the first group is selected irrespective of the preferencs in the second group.
 and where the second group recieves the budget surplus from the VCG mechanism applied to the first group.
 This rather genius mechanism is the subject of a patent in the US (CITE), and constitutes a budget balanced VCG-type mechanism.
@@ -120,28 +130,38 @@ which can be made a little bit more baysean regular by randomy selecting the `si
 particularly this method selecting a non-pareto optimal outcome has been the subject of investigation, and the process is proven to nessisarily need a sink.
 and that there are different ways to select an appropriate sink randomly \cite{NATH2019673}.
 
-What is particularly interesting is that various VCG type mechanisms can potentially be scaled up, leading to `effectively' the impossible combination \cite{NATH2019673}.
 
-There are several objections (and unanswered questions) to VCG as applied to electricity networks and more generally, and reasons why it has been seldom implemented in practice.\cite{journals/ior/Rothkopf07}\cite{Ausubel2006}
-Though it has been proposed (and presumably implemented) in the context of cooperative multi-agent reinforcing (CITE-NASA)
 
-Particularly it is not very obvious that VCG type payments are nessisarily economically reasonable payments between competitive parties, but much more payments between parties with incentives that are made to cooperate.
+\subsubsection{switching to Baysean incentive compatability}
+
+particularly the first is probably most interesting for our considerations, and is the source of the d'AVGA mechanism which allocates redistribution of the surplus bassed on baysean priors on player preferences.
+The addition of baysean priors also has links to bargaining, particularly with the work of Meyerson, and his bargaining games.
+Which in turn have been extened (by himself) to coalitional games, and also through some of his work to Harsanyi games. (CITE)
+Particularly through the introduction of baysean considerations other schemes can redily be made to be incentive compatable.
+
+However there are certain issues with supposing accurately known baysean priors (particularly if they are learnt from past behavior).
+
+ (see section on bargaining)
+
+
+
+
+
+
+
+What is particularly interesting is that various VCG type mechanisms can potentially be scaled up, leading to `effectively' the impossible combination \cite{NATH2019673, 8430852}.
 
 And although incentive compatability is a noble objective in mechanism design, it is still subject to strategic manipulation, particularly in the context of the forming of coalitions.
 
 Coalition strategy proofness, has been proven to be quite generally a difficult concept to design, and in some cases has categorically proven to be impossible \cite{10.2307/2297048} without further elements, such as private information transfer and uncertainty.
 Although there has been some effort in designing and analysing the occurance of coalition proof mechanisms, these remain difficult.
 
-One of the considerations of using VCG is how it is to be constructed as a mechanism in the context of an electricity system.
-and different people have published different ways to instigate such a system.
-fundamentally, it involves the question of what the network should be considered to be in the absense of a particular player.
-The solving of optimal utility is a classical OPF problem, and is it to be the case that the system would have to be solved to OPF for each of $n$ players?
-This is a disadvantage of LMP, but not nearly as much as a disadvantage over Shapley Mechanisms.
 
-If we discount the benefit of incentive compatability, then the fundamental question remains: how much \textit{should} (above other considerations) electrical participants be credited/debited according to their immediate influence apon others relative to their hypothetical absense.
-
-In the following sections \ref{} we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
-
+In short, the VCG mechanism provides a straightforward ethical schema for distributive payments, and is extensable to electricity systems.
+although it is incentive compatable, the primary practical draw-back to such a system is that it is not budget-balanced.
+Unfortunately there is no easily implementable system that is like VCG that is incentive compatable and is budget-balanced without forcing participants to trade at a loss.
+notwithstanding it is a possible scheme for the trading of electricity and electric resources, and in the following sections \ref{} we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
+Additionally in sections \ref{} we consider the computational difficulty in applying VCG against other schemes.
 
 \subsection{Bargaining and Game Theory}
 
