@@ -9,9 +9,9 @@ We highlight some of the most famous and relevent formulations, primarily becaus
 We consider the following formulations:
 \begin{itemize}
 \item VCG,
+\item Locational Marginal Pricing,
 \item nash bargaining with and without endogenous disagreement point,
-\item cooperative game theory concepts such as the Core and Shapley Value,
-\item and Locational Marginal Pricing.
+\item and cooperative game theory concepts including the Core and Shapley Value.
 \end{itemize}
 
 We introduce, consider and discuss the qualities of each of these in turn, before we attempt a new synthesis in the next chapter \ref{}.
@@ -134,11 +134,10 @@ and that there are different ways to select an appropriate sink randomly \cite{N
 
 \subsubsection{switching to Baysean incentive compatability}
 
-particularly the first is probably most interesting for our considerations, and is the source of the d'AVGA mechanism which allocates redistribution of the surplus bassed on baysean priors on player preferences.
+is the source of the d'AVGA mechanism which allocates redistribution of the surplus bassed on baysean priors on player preferences.
 The addition of baysean priors also has links to bargaining, particularly with the work of Meyerson, and his bargaining games.
 Which in turn have been extened (by himself) to coalitional games, and also through some of his work to Harsanyi games. (CITE)
 Particularly through the introduction of baysean considerations other schemes can redily be made to be incentive compatable.
-
 However there are certain issues with supposing accurately known baysean priors (particularly if they are learnt from past behavior).
 
  (see section on bargaining)
@@ -163,7 +162,73 @@ Unfortunately there is no easily implementable system that is like VCG that is i
 notwithstanding it is a possible scheme for the trading of electricity and electric resources, and in the following sections \ref{} we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
 Additionally in sections \ref{} we consider the computational difficulty in applying VCG against other schemes.
 
-\subsection{Bargaining and Game Theory}
+
+
+\subsection{Economic Perspectives}
+
+in Section \ref{sec:reference_points} we briefly considered the notion that moral and euvoluntary trading would result in normative market pricing; and potentially that the morality of a transaction could be framed with respect to the normal market prices.
+
+We also briefly mentioned John Locke's short essay Venditio \cite{locke2003locke} where it is argued that a fair price for something is simply its normal market price at its location.\footnote{``... the market price at the place where he sells. Whosoever keeps to that in whatever he sells I think is free from cheat, extortion and oppression, ...''}
+John Locke argues, that negotiating above market price for a good may well be extortionate in taking advantage of the circumstances of the buyer, but that negotiating below market price would only incentivise reselling, allowing others to profit at the original seller's loss.
+Additionally that selling below market price only to thoes who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same market price for everybody.
+
+While John Locke's arguments may or may not be convincing, it is usefull to consider the transactions and pricing that would occur under idealised or normative euvoluntary trading.
+As these prices may be a moral end in themself, or provide a back-drop for framing more moral trading.
+In section \ref{sec:solutions_bargaining} we consider mathematical schemas used to describe normalised bargaining between small numbers of participants, but in this section we describe some theory that is used in describing normalised trading en-masse.
+
+Unfortunately the determination of normalised trading, and normal market price is not nessisarily so easy to distill in practice.
+Notwithstanding centuries of economic research of ideas does lend some consideration to the idea that expected market prices can be described by combinations of factors, not limited to, supply and demand functions, market uncertainty, production costs and transport tariffs.
+And the combination of these things are related to the pricing and subsequent trading of the goods that result.
+
+For instance, in the history of economic thought, which is an attempt to make sense of markets and economic exchange, there was a general idea that the price of something should in some way be related to its usefullness at fulfilling human needs.
+However there was also a difficulty explaining how it was that things which were most usefull often had little price, and things which were most useless were more valuable.
+Particularly this distinction was made by David Riccardo in comparing the difference in price and value between water and diamonds.
+Particularly that water has a lot of functional value in terms of general use, and in preventing a person from dying, whereas diamonds have few direct uses related to survival, or even practical uses indirectly related to survival.
+how then are diamonds valued (ie. priced) much higher.
+
+In the history of economic thought, there was often thought some relation between labor and value - most notably through Karl Marx.
+which was thought to have some relation to prices. However the Labor Theory of value, essentially walked the line between `value' as descriptive and prescriptive of price.
+
+However (particularly in the 19th century) one of the primary connections was made in terms of viewing Economics in terms of utility.
+Utility (as was briefly addressed in section \ref{}) was a element of a social theory called utilitarianism, originally developed in thought throughout europe, and particularly developed by famous utilitarians such as Bentham, who sought to construct the principle of maximising utility as a moral calculus (akin to Newton's calcus of the heavens) for the governance of nations.
+Bentham framed utility maximisation not only as a compas for moral directions, but also as the psychological imperitive which governs human decisions and living.
+and its application to economcis, the idea that economic decisions are driven by utility maximisation.
+eventually delivered an answer to the distinction between usefullness (perhaps to survival) - or utility- and price.
+
+Particularly the synthesis that price is determined by the marginal utility - is one of the central ideas of 20th centry economics - which gained traction in a movement called which has subsequently been called `the marginalist revolution' has been subsequently been the basis of so-called `neo-liberal' economics.
+
+Ultimately there was exchange and conflict between Labor Theory advocates and Marginalists, in the attempt to describe the nature of markets and their dynamics.
+
+And ultimately comming into the 20th century marked increasing skepticism about utility theory as an appropriate psychological theory for market behavior (such as consumer dynamics and the like) but notwithstanding many of the schemas of neo-liberal economics remain in use.
+
+Particularly even if utility of individuals is not granted, it dosnt nessisarily follow that speaking of demand curves (that are downward sloping) is nessisarily innappropriate. and various defences of utility theory follow these lines.
+
+Particularly in the context of utility theory, that consumers and market participants will take actions which maximise their utility.
+And particularly in the setting of market prices.
+In an environment where there is constant (singular) market prices the setting of prices to match the marginal utility (at the intersection of demand and supply curves) corresponds to an equilibrium choice on the part of the sellers - and which also coincidently maximises the sum of social utility.
+
+
+
+
+
+
+ 
+
+
+
+
+In this way what is considered exploitation and unfair trade, in defined in contrast to the value that is fetched in normative market circumstance.
+the question then becomes how to formulate this normative market circumstance.
+
+Various Economic models and market simulations can be done to address such questions.
+however one of the most notable economoic paradigms is that of economoic marginalism.
+
+The theory of Value, has a long history with a notable waystation being Marxist labor theory of value. since then.....
+
+oogabooga
+
+
+\subsection{Bargaining and Game Theory}\label{sec:solutions_bargaining}
 
 One component of analysis that is missing from VCG is the consideration between the outcomes that the players value and the actions which they \textit{dont} enact which then leads to thoes outcomes - and instead there is only considered the sum-utility of utility-maximising outcomes with and/or without the participation of particular players.
 
@@ -453,15 +518,7 @@ in Chapter \ref{} we compare -an- application of the Shapley value applied to el
 There exist other solution concepts in the context of cooperative game theory, such as the Kernel and Neucleolus. and we have only touched the surface of cooperative game theory only enough for it to be relevant for our purposes.
 The interested reader is encouraged to read more from sources \ref{} and \ref{} and \ref{}.
 
-\subsection{Economic Perspectives}
 
-In this way what is considered exploitation and unfair trade, in defined in contrast to the value that is fetched in normative market circumstance.
-the question then becomes how to formulate this normative market circumstance.
-
-Various Economic models and market simulations can be done to address such questions.
-however one of the most notable economoic paradigms is that of economoic marginalism.
-
-The theory of Value, has a long history with a notable waystation being Marxist labor theory of value. since then.....
 
 \subsection{Summary}
 Summary what you discussed in this chapter, and mention the story in next
