@@ -1,23 +1,25 @@
 \chapter{Existing solutions}
 \label{cha:solutions}
 
-In the previous chapter we discussed some of the philosophy of distributive ethics, but it is also important to consider the way those ideas can be made quantitatively precise.
+In the previous chapter \ref{} we discussed some of the philosophy of distributive ethics, and in this chapter we discuss the various ways thoes ideas can be made quantitatively precise.
 
-In this chapter we consider some of ways that moral ideas about distribution can be mathemetised.
-We highlight some of the most famous and relevent formulations, primarily because our development extends from them, and also ultimately contrasts against them.
+In this chapter we consider some famous and relevent formulations that moral ideas about distribution can be mathemetised, primarily because our later developments extends from them and also ultimately contrasts against them.
 
 We consider the following formulations:
 \begin{itemize}
-\item VCG,
-\item Locational Marginal Pricing,
-\item nash bargaining with and without endogenous disagreement point,
-\item and cooperative game theory concepts including the Core and Shapley Value.
+\item in section \ref{sec:solutions_VCG} we consider VCG,
+\item in section \ref{sec:solutions_LMP} we consider Locational Marginal Pricing,
+\item in section \ref{sec:cooperative_game_theory_part} we consider cooperative game theory solution concepts including the Core and Shapley Value,
+\item and in section \ref{sec:solutions_bargaining} we consider Nash's bargaining solution concepts.
 \end{itemize}
 
-We introduce, consider and discuss the qualities of each of these in turn, before we attempt a new synthesis in the next chapter \ref{}.
+These different approaches stem from different moral considerations, and primarily reward participants with respect to different reference points that are briefly addressed in section \ref{sec:reference_points}.
+All of them tacitly respect formal equality (per section \ref{sec:formal_equality}), with bargaining and cooperative game theory concepts satisfying absolute efficiency requirements (per section \ref{sec:philosophy_efficiency}), with LMP often doing so.
+
+Each of the formulations presented has various background and unique properties and we will introduce and discuss each of them in turn, before we attempt a new synthesis in the next chapter \ref{cha:new_solution}.
 let us begin with the VCG mechanism.
 
-\section{VCG}
+\section{VCG}\label{sec:solutions_VCG}
 
 In section \ref{sec:reference_points} we briefly presented the idea that people might be rewarded in proportion to their contribution to social welfare, above their absense individually.
 While this idea may be simple, its mathematization has some suprising features.
@@ -36,8 +38,17 @@ This outcome is implemented and the bidding process pays each agent $i$ the util
 \begin{equation}\label{eq:VCG_payment_rule} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation}
 And this value $p_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absense - ie. the player's externality.
 
+\begin{example}
+Consider a set of outcomes $X = \{A,B,C\}$ and three agents with valuations 
+$$\begin{matrix}v_1(A) = 2\\v_1(B) = 4\\v_1(C) = 3\end{matrix}\quad\quad
+\begin{matrix}v_2(A) = 4.5\\v_2(B) = 2\\v_2(C) = 1\end{matrix}\quad\quad
+\begin{matrix}v_3(A) = 2\\v_3(B) = 1\\v_3(C) = 5\end{matrix}$$
+In this context $x^* = C$ is implemented (as $\sum_{i=1}^nv_i(C)=9$ is the biggest)\\And:
+$\quad p_1 = 6-6.5 = -0.5 \quad\quad p_2 = 8-8 = 0\quad\quad p_3 = 4-6.5 = -2.5 $
+\end{example}
+
 \subsection{Discussion about VCG}
-The VCG mechanism with Clark pivot might be seen as an straightforward way of allocating ethical payments; if a player's presence adds to the utility of others then they are postiviely compensated, and if a player's influence detracts from the utility of others then they are negatively compensated.
+The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are postiviely compensated, and if a player's influence detracts from the utility of others then they are negatively compensated.
 
 And since the set of possible outcomes $X$ are undefined it is possible to consider the application of the VCG mechanism in a variety of contexts.	
 For instance, VCG has been considered as a mechanism for allocating physical and monetary outcomes in various contexts within electricity networks, such as in auctions for bulk electricity generation, buying and selling energy storage products, and in procuring ancillary services \cite{FABRA200272, SESSA2017189, 8264596, 7512339}.
@@ -52,7 +63,8 @@ Another interesting property is sometimes called \textit{individual rationality}
 
 It is also worth noting that VCG mechanisms are also \textit{efficient} in the sense that the process actualises the utilitarian socially optimal solution $x^*(v) \in X$.
 
-However more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is transferred between the players might not sum to zero; and hence an implementation of VCG might require regular budget injection to maintain and/or sap money from between the participants.
+However more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is transferred between the players might not sum to zero; and hence an implementation of VCG might require regular budget injection to maintain and/or sap money from between the participants (see example).
+And in this way, VCG is not efficient in the sense of maximising utility - since that may be destroyed by lack of budget balance.
 
 Although VCG is incentive compatable for individual strategisers it is potentially vulnerabile to strategising coalitions, additionally its implementation may involve imposing a lack of privacy for participants, and also (depending on context) may also have higher computational complexity than other mechanisms.\cite{ShohamLeytonBrown09}
 
@@ -169,7 +181,7 @@ Additionally in sections \ref{} we consider the computational difficulty in appl
 
 
 
-\section{Locational Marginal Pricing}
+\section{Locational Marginal Pricing}\label{sec:solutions_LMP}
 
 In Section \ref{sec:reference_points} we briefly considered the notion that %moral and euvoluntary trading would result in normative market pricing; and potentially that 
 the morality of a transaction could be framed with respect to the normal market prices.
@@ -270,18 +282,20 @@ This particular scheme is called `Locational Marginal Pricing' (LMP); and we wil
 
 
 
-\subsection{Cooperative Game Theory}\label{sec:cooperative_game_theory_part}
+\section{Cooperative Game Theory}\label{sec:cooperative_game_theory_part}
 
-The idea that people (collectively) should be afforded atleast what they could achieve by themself is most directly articulated by the \textit{Core} of cooperative game theory.
+In section \ref{sec:reference_points} we briefly considered the idea that groups of people should be afforded atleast what they could achieve by themself.
+And this idea is most directly articulated by the \textit{Core} of cooperative game theory.
+In that same section we also mentioned the idea that people could be rewarded for their contribution under uncertainty about the presence of other group members, and that this idea was most directly articulated by the \textit{Shapley Value} of cooperative game theory.
 
-In this section we will detail only some of the parts of the theory of cooperative games which bear relevance and apon the quetions of distribution that we raise.
+Both of these ideas directly or implicitly consider possible groups and how much value each group has by itself, and this is directly the ground's of cooperative game theory.
 
 The basic elements of a classic cooperative game is that there is a set of players or individuals $N=\{1,2,\dots n\}$ and a function $v: S\subseteq N \rightarrow \mathbb{R}$ with $v(\emptyset)=0$ called the \textit{characteristic function}.
-The characteristic function identifies in some sense the `worth' of any group of players (a `coalition') which might be interpreted in terms of utility or monetary value.
-One aim in cooperative game theory is to evaluate schemes (or `solution concepts') which split the wealth achieved if everybody cooperated (that is $v(N)$) between all the players.
+The characteristic function identifies in some sense the `worth' or `value' of any group of players (a `coalition') which might be interpreted in terms of utility or monetary value.
+In this context, one aim of cooperative game theory is to develop schemes (or `solution concepts') which split the wealth achieved if everybody cooperated (that is $v(N)$) between all the players.
 
-However this kind of formulation does beg the question how the characteristic function should be determined.
-%, and they encode information that there is a set of players and a notion of how much each subset of players `is worth'.
+Fundamentally, this kind of analysis hinges on there being a clearly defined concept and determination of the value of each possible group (ie. the characteristic function), however it is not always the case that there is such a clearly defined notion.
+Consider the words of Lloyd Shapley about the characteristic function:
 
 \begin{displayquote}
 The idea is to capture in a single numerical index the potential \underline{worth} of each coalition of players.
@@ -292,50 +306,51 @@ With the characteristic function in hand, all questions of tactics, information,
 Unfortunately, not all games admit a clean separation between strategic and coalitional questions, and for those that do not the characteristic function approach must be modified or abandoned.\cite{ShapleySchubikCharacteristicFunction}
 \end{displayquote}
 
-However some games do admit a clean separation between strategic and coalitional questions.
-For instance, if there is a situation where the Characteristic function identifies the amount of utility/money/etc that members of a coalition could and unambiguously would, achieve by working by themself.
+However conversely, some games do admit a clean separation between strategic and coalitional questions.
+For instance, there may exist situations where the Characteristic function identifies the amount of money that members of a coalition could, and unambiguously would, achieve by working for themself.
 
-In this context, If the most amount of money that can be achieved is gained by everbody working together then the idea that this should be executed and that each member or possible group should be given more than they could feasibily get by themselves is a condition best described by the core:
+In these cases, if everybody works together there are a set of possible ways the money between everybody.
+One of the most natural divisions is that every subgroup should be given at least more than they could feasibly achieve by working for themself.
+And this is an allocation most naturally described by the \textit{Core}.
 
-\subsubsection{the Core}
+\subsection{The Core}
 
-Particularly, the core is an example solution concept for cooperative games:
+The Core is an example solution concept for cooperative games, in that for any set of players $N=\{1,2,\dots n\}$ and any characteristic function $v: S\subseteq N \rightarrow \mathbb{R}$ with $v(\emptyset)=0$, the core is a set of possible payoff allocations to each of the players $C(v)$ in which each subgroup is given atleast the value of the characteristic function:
 
 $$ C(v) = \left\{x\in\mathbb{R}^n : \sum_{i\in N}x_i=v(N); \sum_{i\in S}x_i \ge v(S), \forall S\in N \right\}$$
 
 The core is the set of possible allocations such that the sum of them equals what can be achieved by everybody working together (the worth of the `grand coalition' - $v(N)$) and such that for any group of individuals, the sum allocated to thoes individuals is greater than what they could achieve by working by themself.
 
-The allocations that belong to the Core have a sense of being stable - in that no coalition would have an incentive to split from the cooperative engagement to get a better payoff. One major drawback about the core is that it does not determine a unique outcome, but potentially a range of outcomes or perhaps none at all.
+The allocations in to the Core might be seen to have a stability property - in that no coalition would have an incentive to leave the grand coalition. One major drawback about the core is that it does not determine a unique outcome, but potentially a range of outcomes or potentially none at all.
 
-Indeed the Core may be empty, and there are modifications to the Core concept which remedy this problem.
-When no Core solutions exist, then straightforwardly no solution can posess the same kind of stability, however there is perhaps allocations that minimise this shortcomming.
-particularly the \textit{least-core} solution concept.
+Indeed the Core may be empty, and in this case no solution can posess the same kind of desirable stability, however there are alternative allocations that minimise this shortcomming.
+Most notably, the \textit{least-core} solution concept.
 
-The least-core solution concept is a particular instance of the \textit{strong $\epsilon$ core} which is defined as follows:
+The least-core solution concept is a particular instance of the \textit{strong $\epsilon$ core} which is very similar to the Core, and is defined as follows:
 $$ C_\epsilon(v) = \left\{x\in\mathbb{R}^n : \sum_{i\in N}x_i=v(N); \sum_{i\in S}x_i \ge v(S)-\epsilon, \forall S\in N \right\}$$
 The strong $\epsilon$ core is the set of allocations in which each coalition is allocated atleast their value minus some constant $\epsilon$.
 In this way some coalitions might be shortchanged, but only by atmost a constant factor $\epsilon$.
 The strong $\epsilon$ core can be defined for positive and negative $\epsilon$ values, it will certainly be non-empty for very large and positive $\epsilon$ values and certainly be empty for very large and negative $\epsilon$ values.
 In this way we can consider the limiting case between these two, the smallest value of $\epsilon$ in which the strong $\epsilon$ core is non-empty - and this is the least-core.\cite{doi:10.1287/moor.4.4.303}
-The least-core is therefore always non-empty and may even identify a singular solution. point; that can be said to minimum `dissatisfaction' between the groups.
+The least-core is therefore always non-empty and may even identify a singular solution point, which that can be said to identify the point of minimum `dissatisfaction' between the groups.
 
 The core is probably an intuitive solution concept in the context where the characteristic function identifies the `worth' of individuals and groups `by-themself' and the dynamics are driven by this isolation mechanic.
 However in other cases the `worth' identified by the characteristic function is in the context of cooperation with the others, or perhaps otherwise.
 And in this context the Core is not the only solution concept worth considering.
 
-\subsubsection{The Shapley Value}
+\subsection{The Shapley Value}
 
 The \textit{Shapley value} is another specific and well known solution concept in cooperative game theory.
 Particularly the Shapley value allocates to each individual the average contribution he/she would add across the possible coalitions to which he/she could join.
 
-So particularly, if for any coalition $S$ which does not include player $i$, $i$'s marginal contribution is $v(S\cup\{i\}) - v(S)$. If we average such contributions for coalitions of size $k$:
+So particularly, for any coalition $S$ which does not include a player $i$, then player $i$'s marginal contribution is $v(S\cup\{i\}) - v(S)$. Then if we average such contributions for coalitions of size $k$:
 \begin{equation}\label{eq:shapley_value2}
 \hat{v}_{i,k} = \frac{1}{\binom{n-1}{k}}\sum_{S\subset N\setminus \{ i\} , |S|=k} %\frac{(n-|S|-1)!\,|S|!}{(n-1)!}
 (v'(S\cup\{i\})-v'(S))
 \end{equation}
 Then we have the average marginal contribution of player $i$ to coalitions of size $k$, and if we average this over coalitions of different size, we get the Shapley value:
 \begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
-The Shapley value is an averaging over a players marginal contributions, which is obviously a unique allocation for any cooperative game.
+The Shapley value is an averaging over a players marginal contributions, which is straightforwardly a unique allocation for any cooperative game.
 
 The Shapley value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
 So for instance, if we let $\pi(N)$ denote the set of all ordered permutations of the player set $N$ and if we denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the shapley value can be expressed as the average marginal contribution across orderings, \cite{weber_1988}:
@@ -354,18 +369,19 @@ For instance:
 \item	\textbf{Additivity}: That for any two games, the imputation for the two together is the sum of the imputations in each, for any $v_1$ and $v_2$, $\varphi(\langle N,v_1+v_2\rangle)=\varphi(\langle N,v_1 \rangle) + \varphi(\langle N,v_2\rangle)$
 \end{itemize}
 
-These axioms might seem pretty reasonable and lead uniquely to the Shapley value allocation, and these are not the only set of axioms sufficient to derive the shapley value either.
+These axioms might seem pretty reasonable and they lead uniquely to the Shapley value allocation \cite{Shapley1953a}; additionally there are other possible sets of axioms which lead to the Shapley Value too.
 
-This raises the question of when the Shapley value is in the Core? - and therefore has that particular stability that would disincentivise any subset from leaving.
-One example case in which the Shapley Value is always in the core is in the context of Convex cooperative games:
-A cooperative game is \textit{convex} iff:
+This raises the question of when the Shapley value is in the Core? - and therefore has that particular stability that would disincentivise any subgroup from leaving.
+One example case where the Shapley Value is always in the core is the case of Convex cooperative games \cite[Chapter 6]{RePEc:cup:cbooks:9781107691322}:
+A cooperative game is \textit{convex} if the value that two coalitions together has is greater than the value of their parts minus the value of their intersection, ie. iff:
 \begin{equation}
     \forall S,T\subset N \quad v(S\cup T) \ge v(S)+v(T)-v(S\cap T)
 \end{equation}
+Which is a condition which might often be expected to hold each coalition unit is informally `greater than the sum of its parts'.
 
-\subsubsection{Applications to Electricity Systems}
+\subsection{Applications to Electricity Systems}
 
-Shapley value concepts are increasingly being considered as a mechanism for pricing in the various facets of electricity system operation.
+Shapley value concepts have often been considered as a potential mechanism for pricing in the various facets of electricity system operation.
 
 Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \cite{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \cite{WU2017384} and allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
@@ -380,22 +396,24 @@ Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electr
 
 
 In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
-In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
-Which may or may-not coincide with the Core and its coalitional stability property.
-in Chapter \ref{} we compare -an- application of the Shapley value applied to electricity systems against other allocation methods.
+%In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
+%Which may or may-not coincide with the Core and its coalitional stability property.
+In Chapter \ref{} we compare an application of the Shapley value applied to electricity systems against other allocation methods.
 
-There exist other solution concepts in the context of cooperative game theory, such as the Kernel and Neucleolus. and we have only touched the surface of cooperative game theory only enough for it to be relevant for our purposes.
-The interested reader is encouraged to read more from sources \ref{} and \ref{} and \ref{}.
+There exist many other solution concepts in the context of cooperative game theory, such as the Kernel and Neucleolus. The interested reader is encouraged to read more \ref{RePEc:cup:cbooks:9781107691322}.
 
-
-
-
+However in the next section \ref{sec:solutions_bargaining} we consider some solution concepts which apply in circumstances where it is not easy to describe the `worth' or `value' of a coalition of players; where strategic considerations between them are important and it is not easy to make sense of a characteristic function.
+Particularly we describe bargaining solution concepts.
 
 
 
-\section{Bargaining and Game Theory}\label{sec:solutions_bargaining}
 
-In the previous section, we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants.
+
+
+
+\section{Bargaining Solution Concepts}\label{sec:solutions_bargaining}
+
+In the previous section \ref{}, we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants.
 
 Particularly, we consider the situation where there are a small numbers of market participants negotiating over a set of possible outcomes.
 In this context, what is a normal or likely outcome of their bargaining process?
@@ -528,13 +546,14 @@ It may seem to be a bit difficult to see how these two approaches are related at
 However, it can be realised that in the context of selecting a threat point (for a TU game), that all that matters is the player's payoff advantage over their opponent.
 This fact can be seen by inspection in Figure \ref{fig:graph1_utilities}, where maximising the nash product over a threat point places the final payoff point directly above and to the right (on the pareto frontier) at a 45 degree angle.
 In this context, the threat point only matters to the players insofar as it serves to moves the resulting payoff point along the pareto frontier.
-The pareto frontier defines a set sum of player payoffs to be distributed, and all that threat point defines is the difference of how much is distributed to one player over another - their payoff advantage.\\
+The pareto frontier defines a set sum of player payoffs to be distributed, and hence the threat point only defines the difference of how much is distributed to one player over another - their payoff advantage.\\
 
-In this section we considered some bargaining solution concepts, particularly Nash's bargaining solution concept which gives an outcome that incorporate all the possible influences which the players can bear upon each other.
-In section \ref{} we develop Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value.
+In this section we considered some bargaining solution concepts, particularly Nash's bargaining solution concept which gives an outcome that implicitly incorporates all the possible influences which the players can bear upon each other.
+The solution concept for games of transferrable utility (TU) depend primarily on the minimax of payoff advantages between the players.
+In this way payoff advantage is considered as a measure of the strength of a player's bargaining position.
 
-
-However, in the next section \ref{sec:cooperative_game_theory_part}, we must introduce considerations of many players in the context of cooperative game theory.
+Nash's bargaining solution was principally suited for 2 players, however some extensions of it to many players have been developed.\cite{values1,values2,values3}
+In the following Chapter \ref{} we develop these extensions of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value.
 
 \input{figs/nash_game.tex}
 
@@ -542,7 +561,14 @@ However, in the next section \ref{sec:cooperative_game_theory_part}, we must int
 
 
 
-\subsection{Comparrison}
+\section{Comparrison \& Summary}
+
+In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features, and extend from slightly different moral perspective.
+
+One of the ideas that all these approaches have in common is that every participant should be credited in proportion to their contribution above some reference point.
+This is clearest in considering VCG, where it is explicitly put, that utility reward should be in proportion to contribution to the utility of the others above the absense of their preferences.
+In 
+
 
 Particularly the measure minimax payoff advantage has been considered as a measure of bargaining power between two players, and has been a usefull component in other solution concepts.
 Which in-turn also has a well-studied extension to many players.\cite{values1,values2,values3}
@@ -552,7 +578,6 @@ This contrasts against VCG and LMP
 
 it is also the same as VCG in the limit of large markets.
 
-\subsection{Summary}
 Summary what you discussed in this chapter, and mention the story in next
 chapter. Readers should roughly understand what your thesis takes about by only reading
 words at the beginning and the end (Summary) of each chapter.

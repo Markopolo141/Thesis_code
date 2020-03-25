@@ -7,7 +7,7 @@
 
 \begin{figure}[tb]
 \centering
-\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm,scale=1.1]
 %strategy polygon
 \clip(-3,-3) rectangle (4,4);
 \draw[fill, opacity=1, color=strategy] (2,1) -- (1,2) -- (-2,-1) -- (-1,-2);
@@ -38,8 +38,8 @@ plot ({\x},{(9/(\x+2))-1});
 %\draw [color=black] (4.4,-2) node {a-coco};
 %\draw [color=qqqqff] (1.5,1) node {maxmax};
 %\draw [color=black] (0.5,-4.4958677686) node {minimax};
-\draw [color=wqwqwq] (0.4,1.7) node [label={[align=left]Row Player\\utility}]{};
-\draw [color=wqwqwq] (1.9,0.15) node {Column Player utility};
+\draw [color=wqwqwq] (-0.8,2.1) node [label={[align=right]Row Player\\utility}]{};
+\draw [color=wqwqwq] (1.9,-0.5) node {Column Player utility};
 %points
 \draw [fill=qqqqff] (2,1) circle (1.7pt);
 \draw [fill=qqqqff] (1,2) circle (1.7pt);
@@ -52,6 +52,6 @@ plot ({\x},{(9/(\x+2))-1});
 \end{tiny}
 
 \end{tikzpicture}
-\caption[Utility diagram for example game.]{The potential outcomes for the TU example game (Equation \ref{eq:example_game1}). Red lines show all potential outcomes of pure strategies with TU. Blue points show non-TU pure strategy outcomes. The blue polygon shows space of outcomes for non-TU mixed strategies, The outcome that corresponds to the minimax strategy of the zero-sum component is shown in black. The Nash Bargaining value is shown on the pareto frontier as the feasible outcome that maximises the product of utilities above the minimax disagreement-point, the hyperbola of this maximum product is shown.}
+\caption[Utility diagram for example game.]{The potential outcomes for the TU example game (Equation \ref{eq:example_game1}), shown in blue, with a red Pareto frontier for transferrable utility, and nash product maximisation over a black threat point.}
 \label{fig:graph1_utilities}
 \end{figure}
