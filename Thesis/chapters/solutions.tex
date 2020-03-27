@@ -1,7 +1,7 @@
 \chapter{Existing solutions}
 \label{cha:solutions}
 
-In the previous chapter \ref{} we discussed some of the philosophy of distributive ethics, and in this chapter we discuss the various ways thoes ideas can be made quantitatively precise.
+In the previous chapter we discussed some of the philosophy of distributive ethics, and in this chapter we discuss the various ways thoes ideas can be made quantitatively precise.
 
 In this chapter we consider some famous and relevent formulations that moral ideas about distribution can be mathemetised, primarily because our later developments extends from them and also ultimately contrasts against them.
 
@@ -14,10 +14,11 @@ We consider the following formulations:
 \end{itemize}
 
 These different approaches stem from different moral considerations, and primarily reward participants with respect to different reference points that are briefly addressed in section \ref{sec:reference_points}.
-All of them tacitly respect formal equality (per section \ref{sec:formal_equality}), with bargaining and cooperative game theory concepts satisfying absolute efficiency requirements (per section \ref{sec:philosophy_efficiency}), with LMP often doing so.
+All of them tacitly respect formal equality (per section \ref{sec:formal_equality}), with bargaining and cooperative game theory concepts satisfying absolute efficiency requirements (per section \ref{sec:philosophy_efficiency}), and LMP often does so.
 
-Each of the formulations presented has various background and unique properties and we will introduce and discuss each of them in turn, before we attempt a new synthesis in the next chapter \ref{cha:new_solution}.
-let us begin with the VCG mechanism.
+Each of the formulations presented has various context and unique properties, and we will introduce and discuss each of them in turn.
+In the next chapter we attempt a new synthesis which brings many of these elements together.\\
+Let us begin with the VCG mechanism.
 
 \section{VCG}\label{sec:solutions_VCG}
 
@@ -155,40 +156,36 @@ However there are certain issues with supposing accurately known baysean priors 
  (see section on bargaining)
 
 
-
-
-
-
-
-What is particularly interesting is that various VCG type mechanisms can potentially be scaled up, leading to `effectively' the impossible combination \cite{NATH2019673, 8430852}.
-
 And although incentive compatability is a noble objective in mechanism design, it is still subject to strategic manipulation, particularly in the context of the forming of coalitions.
 
 Coalition strategy proofness, has been proven to be quite generally a difficult concept to design, and in some cases has categorically proven to be impossible \cite{10.2307/2297048} without further elements, such as private information transfer and uncertainty.
 Although there has been some effort in designing and analysing the occurance of coalition proof mechanisms, these remain difficult.
 
 
-In short, the VCG mechanism provides a straightforward ethical schema for distributive payments, and is extensable to electricity systems.
-although it is incentive compatable, the primary practical draw-back to such a system is that it is not budget-balanced.
+\subsection{Summary and Discussion of VCG}\label{subsec:summary_discussion_VCG}
+
+The VCG mechanism frames a elegent ethical schema for distributive payments, and is directly extensable to electricity systems.
+Although it is incentive compatable, the primary practical draw-back to such a system is that it is not budget-balanced.
 Unfortunately there is no easily implementable system that is like VCG that is incentive compatable and is budget-balanced without forcing participants to trade at a loss.
-notwithstanding it is a possible scheme for the trading of electricity and electric resources, and in the following sections \ref{} we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
-Additionally in sections \ref{} we consider the computational difficulty in applying VCG against other schemes.
 
+Notwithstanding it is a possible scheme for the trading of electricity and electric resources, and in the following chapter we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
+Additionally in sections \ref{} we consider the computational difficulty in applying VCG.
 
+One of the most features about VCG, is that it is one of the most direct expressions of marginal payments - in that each participant is payed the marginal difference their presense causes to the wellbeing of the other participants.
+This marginal quality is shared by two other solutions of this chapter, particularly Locational Marginal Pricing (section \ref{sec:solutions_LMP}) and Shapley Value (section \ref{subsec:the_shapley_value}).
 
-
-
-
+One of the most notable qualities of VCG is that when it is scaled up to large numbers of participants (and no specific participants are particularly influential) then VCG often limits to another solution concept called Locatinal Marginal Pricing, which often is budget balanced.\cite{NATH2019673, 8430852}.
 
 
 \section{Locational Marginal Pricing}\label{sec:solutions_LMP}
 
 In Section \ref{sec:reference_points} we briefly considered the notion that %moral and euvoluntary trading would result in normative market pricing; and potentially that 
 the morality of a transaction could be framed with respect to the normal market prices.
+And there is potentially no greater framework for describing nominal market pricing in economic thought more influential than the concept of the \textit{margin} or more specifically \textit{marginal pricing}.
 
-We saw this in John Locke's short essay Venditio \cite{locke2003locke} where it is argued that a fair price for something is simply its normal market price at its location.\footnote{``... the market price at the place where he sells. Whosoever keeps to that in whatever he sells I think is free from cheat, extortion and oppression, ...''}
-John Locke argues this thesis, by arguing that negotiating above market price for a good would be unethical as it would taking advantage of ignorance or special circumstance of the buyer, but that negotiating below market price would only incentivise reselling and allow others to profit at the original seller's loss.
-Additionally that selling below market price only to thoes who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same nominal market price for everybody.
+The idea that normal market trading should have any relation to moral trading was seen in John Locke's short essay Venditio \cite{locke2003locke} where it is argued that a fair price for something is simply its normal market price at its location.\footnote{``... the market price at the place where he sells. Whosoever keeps to that in whatever he sells I think is free from cheat, extortion and oppression, ...''}
+John Locke argues for this thesis, by considering that negotiating above market price for a good would be unethical as it would taking advantage of ignorance or special circumstance of the buyer, but that negotiating below market price would only incentivise reselling and allow others to profit at the original seller's loss.
+And Additionally that selling below market price only to thoes who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same nominal market price for everybody.
 
 While John Locke's arguments may or may not be convincing, it is usefull to consider the transactions and pricing that would occur under idealised or normative euvoluntary trading.
 As these prices may be a moral in-themself, or provide a back-drop for the framing of more moral trading.
@@ -198,6 +195,8 @@ In section \ref{sec:solutions_bargaining} we consider mathematical schemas used 
 Historic economic thought lends consideration to the idea that market prices can be described by combinations of factors, not limited to, supply and demand functions, market uncertainty, production costings and transport tariffs etc.
 And the combination of these many things are related to the pricing and subsequent trading of the goods.
 However, the way in which these factors have been seen to influence (or define) economic value has changed over time.
+
+\subsection{A brief summary on the history of Value}
 
 In the history of economic thought, there was some general idea that the economic value of something (and hence its normal market price) should, in some way, be related to its usefullness in fulfilling human needs (however fickle or not) as things which are utterly useless seldom fetch any price.
 %Even so far as to categorising into numbered classes different goods depending on their relation to satisficing needs (eg. \cite[Chapter 1]{mengerprinciples}).
@@ -232,6 +231,8 @@ Although the concept of the margin was evidenced in some writings in the earlier
 Although there was much discussion about the relationship between the labor theory of value and marginalism at the end of the 19th century \cite{steedman2003socialism} ultimately marginalism was adopted mainstream in the so-called 'marginal revolution', defining the beginning of neoclassical economics.\cite{Opocher_2017, marginalism1}
 
 The marginalist principles saw that economic values were not just equal to the summation of normal production costs\footnote{Such as promoted by Riccardo, ``The real and ultimate regulator of the relative value of any two commodities, is the cost of their production, and neither the respective quantities which may be produced, nor the competition amongst the purchasers.''\cite{Riccardo1Gutenberg}} (ultimately depending on the value of labor), but instead depends on the cost of production of the most marginal unit produced to meet demand.
+
+\subsection{A sketch of Marginalism}
 
 The idea of marginalism is best illustrated with a graph, in Figure \ref{fig_demand_supply} we have a hypothetical market for a particular economic good, with many suppliers and many buyers.
 In the figure we have the plotted the `Supply curve', identifying how many units of the good could be sustainably supplied to the market if the units sold for a particular price.
@@ -279,6 +280,22 @@ This process, of using calculus to determine nominal prices has been proposed in
 Particularly as the process of maximising utility on an electricity grid is a well known problem called the `Optimal Power Flow' problem (OPF), where the power conservation constraint at each bus of the network, identifies the marginal price of electrical power on that bus.
 This particular scheme is called `Locational Marginal Pricing' (LMP); and we will investigate and compare against it in section \ref{}.
 
+Particularly, we note that LMP has been implemented for real-time-pricing of transmission power in some existing electricity systems \cite{WANG2015695,zonal}.
+And that although LMP is like VCG in that it is ultimately not budget balanced, unlike VCG there are specifically identifiable cases which often occur where it is.\cite{lmp2}
+
+
+\subsection{Summary and Discussion of Locational Marginal Pricing}
+
+Locational Marginal Pricing is a historic example of economic framework of integrating market conditions (supply and demand information) to give equilibrium price points.
+It can be seen to provide a sensible description of normal trading value, and hence (perhaps) moral trading value; and it is currently used in electricity systems around the world.
+
+Locational Marginal pricing and VCG provide some of the most direct expressions of marginalism as a concept, and (as considered in section \ref{subsec:summary_discussion_VCG}) one can limit to the other for large markets.
+Both are expressions of the marginalism, in that both revolve around the socially optimal utility point, and reward participants with respect to their contribution to it.
+
+Both LMP and VCG root their concept of value in the idea of marginal contribution implicitly with respect to some notion of absense. While in most contexts it may be clear what this means, in section \ref{sec:solutions_bargaining} we outlay some solutions concepts which which embrace this ambiguity.
+
+However before we move to section \ref{sec:solutions_bargaining}, we notice that both LMP and VCG only treatment of every player individually, but neglect any consideration of potential groups of players and their influcence.
+And so, in the next section \ref{sec:cooperative_game_theory_part} we consider solution concepts which explicitly consider group influence and marginal contributions therein.
 
 
 
@@ -315,30 +332,30 @@ And this is an allocation most naturally described by the \textit{Core}.
 
 \subsection{The Core}
 
-The Core is an example solution concept for cooperative games, in that for any set of players $N=\{1,2,\dots n\}$ and any characteristic function $v: S\subseteq N \rightarrow \mathbb{R}$ with $v(\emptyset)=0$, the core is a set of possible payoff allocations to each of the players $C(v)$ in which each subgroup is given atleast the value of the characteristic function:
+The Core is an example solution concept for cooperative games, in that for any set of players $N=\{1,2,\dots n\}$ and any characteristic function $v: S\subseteq N \rightarrow \mathbb{R}$ with $v(\emptyset)=0$, the Core is a set of possible payoff allocations to each of the players $C(v)$ in which each subgroup is given atleast the value of the characteristic function:
 
 $$ C(v) = \left\{x\in\mathbb{R}^n : \sum_{i\in N}x_i=v(N); \sum_{i\in S}x_i \ge v(S), \forall S\in N \right\}$$
 
-The core is the set of possible allocations such that the sum of them equals what can be achieved by everybody working together (the worth of the `grand coalition' - $v(N)$) and such that for any group of individuals, the sum allocated to thoes individuals is greater than what they could achieve by working by themself.
+The Core is the set of possible allocations such that the sum of them equals what can be achieved by everybody working together (the worth of the `grand coalition' - $v(N)$) and such that for any group of individuals, the sum allocated to thoes individuals is greater than what they could achieve by working by themself.
 
-The allocations in to the Core might be seen to have a stability property - in that no coalition would have an incentive to leave the grand coalition. One major drawback about the core is that it does not determine a unique outcome, but potentially a range of outcomes or potentially none at all.
+The allocations in to the Core might be seen to have a stability property - in that no coalition would have an incentive to leave the grand coalition. One major drawback about the Core is that it does not determine a unique outcome, but potentially a range of outcomes or potentially none at all.
 
 Indeed the Core may be empty, and in this case no solution can posess the same kind of desirable stability, however there are alternative allocations that minimise this shortcomming.
-Most notably, the \textit{least-core} solution concept.
+Most notably, the \textit{least-Core} solution concept.
 
-The least-core solution concept is a particular instance of the \textit{strong $\epsilon$ core} which is very similar to the Core, and is defined as follows:
+The least-Core solution concept is a particular instance of the \textit{strong $\epsilon$ Core} which is very similar to the Core, and is defined as follows:
 $$ C_\epsilon(v) = \left\{x\in\mathbb{R}^n : \sum_{i\in N}x_i=v(N); \sum_{i\in S}x_i \ge v(S)-\epsilon, \forall S\in N \right\}$$
 The strong $\epsilon$ core is the set of allocations in which each coalition is allocated atleast their value minus some constant $\epsilon$.
 In this way some coalitions might be shortchanged, but only by atmost a constant factor $\epsilon$.
-The strong $\epsilon$ core can be defined for positive and negative $\epsilon$ values, it will certainly be non-empty for very large and positive $\epsilon$ values and certainly be empty for very large and negative $\epsilon$ values.
-In this way we can consider the limiting case between these two, the smallest value of $\epsilon$ in which the strong $\epsilon$ core is non-empty - and this is the least-core.\cite{doi:10.1287/moor.4.4.303}
+The strong $\epsilon$ Core can be defined for positive and negative $\epsilon$ values, it will certainly be non-empty for very large and positive $\epsilon$ values and certainly be empty for very large and negative $\epsilon$ values.
+In this way we can consider the limiting case between these two, the smallest value of $\epsilon$ in which the strong $\epsilon$ Core is non-empty - and this is the least-core.\cite{doi:10.1287/moor.4.4.303}
 The least-core is therefore always non-empty and may even identify a singular solution point, which that can be said to identify the point of minimum `dissatisfaction' between the groups.
 
-The core is probably an intuitive solution concept in the context where the characteristic function identifies the `worth' of individuals and groups `by-themself' and the dynamics are driven by this isolation mechanic.
+The Core is probably an intuitive solution concept in the context where the characteristic function identifies the `worth' of individuals and groups `by-themself' and the dynamics are driven by this isolation mechanic.
 However in other cases the `worth' identified by the characteristic function is in the context of cooperation with the others, or perhaps otherwise.
 And in this context the Core is not the only solution concept worth considering.
 
-\subsection{The Shapley Value}
+\subsection{The Shapley Value}\label{subsec:the_shapley_value}
 
 The \textit{Shapley value} is another specific and well known solution concept in cooperative game theory.
 Particularly the Shapley value allocates to each individual the average contribution he/she would add across the possible coalitions to which he/she could join.
@@ -354,7 +371,7 @@ The Shapley value is an averaging over a players marginal contributions, which i
 
 The Shapley value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
 So for instance, if we let $\pi(N)$ denote the set of all ordered permutations of the player set $N$ and if we denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the shapley value can be expressed as the average marginal contribution across orderings, \cite{weber_1988}:
-\begin{equation}
+\begin{equation}\label{shapley_value3}
     \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
 \end{equation}
 
@@ -371,20 +388,48 @@ For instance:
 
 These axioms might seem pretty reasonable and they lead uniquely to the Shapley value allocation \cite{Shapley1953a}; additionally there are other possible sets of axioms which lead to the Shapley Value too.
 
-This raises the question of when the Shapley value is in the Core? - and therefore has that particular stability that would disincentivise any subgroup from leaving.
-One example case where the Shapley Value is always in the core is the case of Convex cooperative games \cite[Chapter 6]{RePEc:cup:cbooks:9781107691322}:
+There is the additional question of when the Shapley value is in the Core - and therefore has that particular stability that would disincentivise any subgroup from leaving.
+One example case where the Shapley Value is always in the Core is the case of Convex cooperative games \cite[Chapter 6]{RePEc:cup:cbooks:9781107691322}:
 A cooperative game is \textit{convex} if the value that two coalitions together has is greater than the value of their parts minus the value of their intersection, ie. iff:
 \begin{equation}
     \forall S,T\subset N \quad v(S\cup T) \ge v(S)+v(T)-v(S\cap T)
 \end{equation}
-Which is a condition which might often be expected to hold each coalition unit is informally `greater than the sum of its parts'.
+Which is potentially a common condition in which each coalition is informally `greater than the sum of its parts'.
+We consider an example:
 
-\subsection{Applications to Electricity Systems}
+\begin{example}
+Consider player set $N=\{1,2,3\}$ with characteristic function:\\
+$v(S)=\left(\prod_{i\in S}i\right)-1$ (ie. the multiplication of their player numbers minus one).\footnote{We are assuming that the product over an empty set is one.}\\
+Solve for the shapley value, and show that it is efficient and also in the core.
+\end{example}
 
-Shapley value concepts have often been considered as a potential mechanism for pricing in the various facets of electricity system operation.
+\begin{solution}
+To calculate the shapley value for player $C$ we consider the marginal contributions which it can make to other coalitions:\\
+$ v(\{C\})-v(\emptyset) = 2-0 = 2, \quad\quad\quad v(\{C,A\})-v(\{A\}) = 2-0 = 2$\\
+$ v(\{C,B\})-v(\{B\}) = 5-1 = 4, \quad v(\{C,A,B\})-v(\{A,B\}) = 5-1 = 4  $\\
+Thus the Shapley Value for player $C$ is:
+$\varphi_C = \frac{1}{3}\left(2 + \frac{1}{2}(2+4) + 4\right) = 3$, and contiuing for the other players gives:
+$\varphi_A = 0,\quad\varphi_B = 2$\\
+The shapley Value is efficient as: $\varphi_A+\varphi_B+\varphi_C = 5 = v(\{A,B,C\})$\\
+and also in the Core, as it is true that:\\
+$\varphi_A+\varphi_B=2\ge v(\{A,B\})=1$\\
+$\varphi_A+\varphi_C=3\ge v(\{A,C\})=2$\\
+$\varphi_B+\varphi_C=5\ge v(\{B,C\})=5$\\
+It is also simple enough to verify that the cooperative game is convex.
 
+\end{solution}
+
+\subsection{Summary and Applications to Electricity Systems}
+
+Cooperative game theory concepts center on the consideration of groups and how reward or surplus utility should be divided among members, and particularly the Shapley Value is most famous.
+
+Indeed the Shapley Value has been considered as a potential mechanism for pricing in the various facets of electricity system operation.
 Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \cite{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \cite{WU2017384} and allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
+In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
+%In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
+%Which may or may-not coincide with the Core and its coalitional stability property.
+In Chapter \ref{} we compare an application of the Shapley value applied to electricity systems against other allocation methods.
 
 %Shapley value concepts are increasingly being considered as mechanisms for pricing and cost allocation in various facets of electricity system operation.
 %Example include: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}; 
@@ -393,27 +438,21 @@ Such as: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electr
 %allocating surplus and savings in microgrids \cite{WU2017384} and; 
 %allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
+Just like in LMP and VCG (considered in sections \ref{sec:solutions_LMP} and \ref{sec:solutions_VCG} respectively) the Shapley Value is also evidently a marginal approach, as it is directly expressible the an average marginal contribution across possible groups (by equations \ref{shap2} or \ref{shapley_value3})
 
+Informally the difference between VCG, LMP and the Shapley Value can be seen as a difference between the allocation of reward: equal to contribution to the grand coalition, in-proportional to marginal contribution to the grand coalition, or equal to contribution not just to the grand coalition.
 
-In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
-%In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
-%Which may or may-not coincide with the Core and its coalitional stability property.
-In Chapter \ref{} we compare an application of the Shapley value applied to electricity systems against other allocation methods.
+In anycase, just like for marginalist economics, and mechanism design, there there is much more which could be said about cooperative game theory; and the interested reader is encouraged to read more \ref{RePEc:cup:cbooks:9781107691322}.
 
-There exist many other solution concepts in the context of cooperative game theory, such as the Kernel and Neucleolus. The interested reader is encouraged to read more \ref{RePEc:cup:cbooks:9781107691322}.
+As identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}, cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
 
-However in the next section \ref{sec:solutions_bargaining} we consider some solution concepts which apply in circumstances where it is not easy to describe the `worth' or `value' of a coalition of players; where strategic considerations between them are important and it is not easy to make sense of a characteristic function.
+And so, in the next section \ref{sec:solutions_bargaining} we consider some solution concepts which apply in circumstances where it is not easy to describe the `worth' or `value' of a coalition of players; where strategic considerations between them are important and it is not easy to make sense of a characteristic function.
 Particularly we describe bargaining solution concepts.
-
-
-
-
-
 
 
 \section{Bargaining Solution Concepts}\label{sec:solutions_bargaining}
 
-In the previous section \ref{}, we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants.
+In discussing Locational Marginal Pricing (in section \ref{sec:solutions_LMP}), we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants where their individual strategic options are relevent.
 
 Particularly, we consider the situation where there are a small numbers of market participants negotiating over a set of possible outcomes.
 In this context, what is a normal or likely outcome of their bargaining process?
@@ -568,7 +607,6 @@ In this chapter we have explored four different ways in which ethical ideas abou
 One of the ideas that all these approaches have in common is that every participant should be credited in proportion to their contribution above some reference point.
 This is clearest in considering VCG, where it is explicitly put, that utility reward should be in proportion to contribution to the utility of the others above the absense of their preferences.
 In 
-
 
 Particularly the measure minimax payoff advantage has been considered as a measure of bargaining power between two players, and has been a usefull component in other solution concepts.
 Which in-turn also has a well-studied extension to many players.\cite{values1,values2,values3}
