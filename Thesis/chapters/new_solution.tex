@@ -6,8 +6,7 @@ And in this chapter, we introduce a new solution that builds apon some elements 
 
 Particularly we develop a solution concept that extends Nash bargaining with endogenous disagreement point to a coalitional schema of arbitrary number of players.
 The solution we give extends the work of John Harsanyi to the space of generalized non-cooperative games, such as are suitable for describing various applications in electricity network situations - such as in an Optimal Power Flow (OPF) setting.
-Our resulting solution concept is computed and compared against the results of some of the other solutions of the previous chapter - the Shapley Value, LMP and VCG.
-
+Our new solution concept is called the GNK value, and is computed and compared against other solutions of the previous chapter - particularly, the Shapley Value, LMP and VCG.
 By this comparrison, it is seen that the different solution concepts give rather different outcomes; and we discuss these differences.
 
 \section{Prelude to the GNK value}
@@ -15,51 +14,53 @@ By this comparrison, it is seen that the different solution concepts give rather
 In the previous section we introduced several solution concepts, each stemming from different principles and having ethical associations and perspective.
 %What is important to note, is that it is difficult to distinguish a singular `right' answer to the question of how utility and resources should be distributed, and as we will show in Section \ref{} they lead to conflicting results.
 
-In this section we outlay a new approach that takes combines some of the features of the solution concepts of the previous chapter.
-The primary motivation for this new solution, is to rarefy the intuition behind the bargaining solution concepts into a more full-blooded description of total allocation, suitable for arbitrary number of players (rather than just two).
-And to do this we consider the selection of disagreement points that could occur in bargaining between all possible groups of players.
-We consider the leverage that all the individuals - and groups of individuals - could hypothetically posses in bargaining for an outcome they desire.
+In this section we outlay a new approach that combines some of the features of the solution concepts of the previous chapter.
+The primary motivation for this new solution, is to rarefy the intuition behind the Nash bargaining solution concepts into a more full-blooded description of total allocation, suitable for arbitrary number of players (rather than just two).
+To do this we consider the disagreement points that could occur in bargaining between all possible coalitions of players.
+By this, we then allocate in proportion to the leverage that all the individuals - and groups of individuals - could hypothetically posses in bargaining for outcomes they desire.
 
 Our approach straightforwardly relates to many of the concepts of the previous section: where we have a fundamentally coalitional scheme (per Coalitional Game Theory), that rewards based upon disagreement points (Bargaining Theory), which is partially informed by how much individual's participation influences the group's well-being (reminiscent of VCG), and attempts to describe normative trading (Marginalism).
 
-%TODO: upto here
+As already stated (in the bargaining section \ref{sec:solutions_bargaining}), Nash's bargaining solutions attempt to mathematically describe outcomes that are a result of idealised competition under equilibrium, and hence can serve as a description of normalised trading;
+and our new GNK solution concept is similar.
+The reasons why this is potentially usefull, is that such normalised trading can potentially be a measure of what can (or could) be ethically expected of any market agent.
 
-As already stated (in the bargaining section \ref{}), bargaining solutions attempt to mathematically describe outcomes that are in some way outcomes of an idealised competition, much more than they are necessarily prescriptive outcomes of an idealised ethics.
-Though the two (ideal competitive outcomes and ethical outcomes) may be related, or even identical in certain contexts - such as where no particular ethical principles apply or the purpose of the engagement is the competition (such as in sports).
+%much more than they are necessarily prescriptive outcomes of an idealised ethics.
+%Though the two (ideal competitive outcomes and ethical outcomes) may be related, or even identical in certain contexts - such as where no particular ethical principles apply or the purpose of the engagement is the competition (such as in sports).
 %And it is in this same way that the Marginalism outlined in Section \ref{} is often primarily treated usually begin descriptive than prescriptive.
 
 %However there is a line of ethical thinking that idealises competition as being associated-with or determining appropriate ethics; as we consider in Section \ref{}, and for those inclined to think that way then our solution is all the more relevant.
-In anycase, the process of crafting better (or different) descriptions of competitive outcomes is not to be feared, as it may be usefull for describing situations as they might occur under free competition, or as a starting point for implementation in arenas without or prior-to relevant ethical concerns.
+%In anycase, the process of crafting better (or different) descriptions of competitive outcomes is not to be feared, as it may be usefull for describing situations as they might occur under free competition, or as a starting point for implementation in arenas without or prior-to relevant ethical concerns.
 
 Let us begin.
 
 \section{Introduction to the GNK value}
 
 How should we model ideal competition? In the two player case, existing bargaining solutions (such as Nash's) seem rather difficult to surpass. In that they describe a singular and axiomatic outcome that is both cooperatively pareto-optimal and also driven by perfect anti-cooperative strategising.
-The question then is how to extend this idealisation to an arbitrary number of n-players?
 
-For instance, In the context of nash bargaining with endogenous disagreement point, the disagreement point was interpreted as a unique point defined by a nash-equilibrium of strategies.
+So, in the context of nash bargaining with endogenous disagreement point (per section \ref{subsec:nash_bargaining_endogenous}), the disagreement point was interpreted as a unique point defined by a minimax nash-equilibrium of strategies.
 But if we directly extend the 2-player process to 3 or more players we encounter a problem as there isnt always a unique minimax equilibrium in a game of 3+ players.
-And so having a nash disagreement point becomes ambiguous.
+And so having such a disagreement point becomes ambiguous.
+The question then is how to logically extend Nash's bargaining solution with endogenous disagreement point to an arbitrary number of players?
 
 While it may well be possible to declare one of thoes possible nash equilibria in a 3+ person game as being the disagreement point, or otherwise privilage some other measure to that position.
 Our recourse is instead to consider all the possible divisions of players between two groups and then consider all the 2-player nash equilibrium points between them. And then to integrate this information via the Shapley value to form a unique outcome.
 
-In the following subsections we give all the details of this process. Particularly we note that this question of how to reasonably extend bargaining solution concepts to multiple players has a history.
-And that our approach was first discovered by Harsanyi in 195X, and our work extends it.
+In the following subsections we give all the details of this process. Particularly we note that this process of how to reasonably extend Nash's bargaining solution to multiple players has a history.
+And that our approach was first discovered by Harsanyi in 1963 \cite{values3}, and our work extends upon it.
 
-So far as we know, Harsanyi's solution concepts have never been applied to electricity networks, particularly as there exists a particular problem in doing so.
+So far as we know, Harsanyi's solution concepts have never been applied to electricity networks, particularly as there exists a particular problem in doing so, that Harsanyi's solution concepts apply to normal form non-cooperative games but not to generalised non-cooperative form games.
 The details of this problem and its remedy are spelled out in following subsections.
-But briefly, that in electricity networks the mutual actions of participants are limited, as not everybody can do any combination of specific actions, (such as might overload power lines etc.)
-And these limitation on the space of possible mutual actions is best modelled by a generalized noncooperative game, and unfortunately in the context of such a generalized game there is no necessarily unique minimax point between two players (or more).
+But briefly, that in many electricity network contexts the mutual actions of participants are limited, as not everybody can do any combination of specific actions.
+And these limitation on the space of possible mutual actions is best modelled by a generalized noncooperative game, and unfortunately in the context of such a generalized game there is no necessarily unique minimax point between two players.
 Our principle and novel development in this context is the provision of a remedy, such that Harsanyi's solution can then be applied.
 
-The remedy is to take the expected outcome on a coin-flip on who chooses actions first in the minimax strategies - as we shall see. And this turns out to be a unique minimax outcome, that satisfies all required properties and leads to a coherent outcome.
+The remedy is to take the expected outcome on a coin-flip on who chooses actions first in the minimax strategies - and as we shall see - this turns out to be a unique value, that satisfies all required properties and leads to a coherent outcome.
 
-The resulting outcome we call the \textit{Generalized Neymann and Kohlberg Value} or the \textit{GNK value} for short.
-as Harsanyi's solution was axiomatically derived by Neynamm and Kohlberg.
+The resulting outcome we call the \textit{Generalized Neymann and Kohlberg Value} or the \textit{GNK value} for short, 
+as Harsanyi's solution was also axiomatically derived by Neynamm and Kohlberg.\cite{value2,KOHLBERG2018139}
 This solution concept is shown to apply for all transferrable utility (TU) normal form generalized non-cooperative games.
-And which therefore is straightforwardly extensible to many contexts, but particularly we focus on the case of Optimal Power Flow (OPF).
+Which is flexible enough to extend to many contexts, but we focus particularly on the case of Optimal Power Flow (OPF).
 
 \section{Deriving the GNK value}\label{the_value_def2}
 
