@@ -260,25 +260,74 @@ We further assume that there is a linear utility (or payoff) associated with the
 In the next subsection \ref{sec:example_network} we give a simple example of such a game.
 
 
-\subsection{Computing the GNK value}
-The GNK value is difficult to solve, particularly because of the bilevel structure of \eqref{knvalue1} which must be computed for each of the coalitions.
-Even in the context of linear utility functions and linear constraints, \eqref{knvalue1} forms a linear bilevel program (LBP) and is known to be NP-hard \cite{DBLP:journals/tec/SinhaMD18,Ben-Ayed:1990:CDB}.
 
-There exist a history of approaches and techniques which can be used to solve LBPs \cite{DBLP:journals/tec/SinhaMD18,S.Dempe.Optimisations}.
+\subsection{An Example Problem}\label{sec:example_network}
+
+As an example instance, we consider the toy 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}.
+From this example it is possible to calculate and subsequently consider the features of the GNK value against LMP and VCG.
+
+To this end, in sections \ref{subsec:LMP_compute1}, \ref{subsec:VCG_compute1} and \ref{subsec:gnk_compute1} we outlay procedures used to calculate the financial payments and dispatched powers under the GNK value, LMP and VCG respectively, against parameter $p_1^l$ (the generator capacity in the network).
+As a result of this calculation the financial payments are plotted against $p_1^l$ in Figures \ref{fig:1f}, \ref{fig:1h} and \ref{fig:1d} respectively. Which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1e}, \ref{fig:1g} and \ref{fig:1c} respectively.
+Subsequently, the features of all these plots are discussed in Section \ref{sec:features}.
+
+We begin by describing the process of calculating the LMP values for this example network before considering VCG and then GNK calculation methodologies; in the order of complexity.
+
+\input{figs/Electro_table.tex}
+
+
+
+\subsection{Computing the LMP prices}\label{subsec:LMP_compute1}
+
+To compute the Locational Marginal Price (LMP) transfers for our example network, we follow a process described in various literature \cite{lmp1,lmp2}.
+Particularly we set up an optimisation problem of maximising the sum of utility subject to the power-flow constraints and then the Locational Marginal Prices are then identified as the lagrange multipliers associated with the power conservation constraints on each bus.
+This process is just an application of the more general marginal price calculation procedure discussed previously in section \ref{subsec:marginal_price_sketch}.
+
+We consider maximising the sum of utility: $\sum_{i\in B} u_i(p_i)$ subject to the DC powerflow constraints in equations \ref{dcopf1}.
+In this context the power conservation constraints on each bus are the constraints $p_j = \sum_{(i,j)\in C}p_{i,j}$, and the lagrange multipliers associated with these constraints are the marginal prices for power on each of the respective busses.
+
+What is most notable about Locational Marginal Pricing, as witnessed here and elsewhere, is that it is computationally rather easier than other schemes, in that only one optimisation problem is needed to be solved.
+In anycase, there are many optimisation solvers which exist and are able to handle these kinds of problems, and which also give the lagrange multipliers of all of the constraints as a byproduct.
+
+The SCIP optimisation suite \cite{MaherFischerGallyetal.2017} was employed for our optimisation for our example network, and the results of the calculation are shown in Figures \ref{fig:1f} and \ref{fig:1e}.
+These figures show the utility transfers under LMP which each participant makes, and the net utility which each participant has after transfers are made under LMP respectively; the discussion and comparrison of these figures is given in section \ref{sec:features}.
+
+\subsection{Computing the VCG imputations}\label{subsec:VCG_compute1}
+
+Unlike LMP, calculating VCG payments for our example network involves solving multiple optimisation problems.
+From section \ref{sec:solutions_VCG} we see that the utility payment that each participant makes is their externality.
+Particularly the externality is the difference that the participant's presence makes on the welfare of other participants.
+Where the VCG payment that a participant makes is the difference between the sum of other's utility at the social optimum point $x^*$, and the utility that others would have if the particiant were not present and the optimimisation were only over the remaining participants, as seen in equation \ref{eq:VCG_payment_rule}:
+\begin{equation*} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation*}
+
+In this way the socially optimum value $x^*$ needs to be computed, and then additionally an additional optimisation problem for each player.
+The additional optimisation problem involves calculating the optimum utility for the other participants: $\max_{x'\in X}\sum_{j\ne i}v_j(x')$.
+In this optimisation we assume that the participant has power zero $p_i=0$.
+
+In this way, if there are $n$ participants, there are $n+1$ comparable OPF optimisation problems which need to be solved to calculate VCG payments.
+In a similar way as in section \ref{subsec:LMP_compute1} the SCIP optimisation suite was used solving these optimisation problems, and the resulting utility payments, and post-payment utilities under VCG are shown in Figures \ref{fig:1h} and \ref{fig:1g}.
+The discussion and comparrison of these figures is given in section \ref{sec:features}.
+
+
+\subsection{Computing the GNK value}\label{subsec:gnk_compute1}
+
+More than LMP and VCG, the the GNK value is difficult to solve because of the bilevel structure of \eqref{knvalue1} which must be computed for each of the possible coalitions of network participants.
+Even as we have modeled our example network with a set of linear utility functions and linear constraints (as given in section \ref{sec:the_setup}), then equation \eqref{knvalue1} is still quite difficult to solve as it constitutes a linear bilevel program (LBP) which are a class of problems known to be NP-hard \cite{DBLP:journals/tec/SinhaMD18,Ben-Ayed:1990:CDB}.
+
+There exist a range of techniques which can be used to solve LBPs \cite{DBLP:journals/tec/SinhaMD18,S.Dempe.Optimisations}.
 Some of the many methods include: vertex enumeration processes \cite{Bialas:1984:TLP:2784019.2784026,Shi:2005:EKA:2641854.2642183,LIU1995644,article_cutting_plane}; penalty method schemes \cite{KleinertSchmidt2019,ONAL1993126,dempe_optimisation111};
 cutting plane approaches \cite{cuttingplane1};
 branch-and-bound/cut methods \cite{SHI200551,Hansen:1992:NBR:141164.141181,Audet2007};
 and approximating algorithms \cite{Pineda2018,rnnlbp1,genetic_algirthm_blp}.
 
-One well known way of addressing LBPs involves converting the inner optimisation constraints into KKT conditions \cite{kuhn1951nonlinear}, and then converting the complementarity conditions into disjunctive constraints with binary variables \cite{Fortuny-Amat1981,Pineda2018}.
+But one well known way of addressing LBPs involves converting the inner optimisation constraints into KKT conditions \cite{kuhn1951nonlinear}, and then converting the complementarity conditions into disjunctive constraints with binary variables \cite{Fortuny-Amat1981,Pineda2018}.
 In this way, a bilevel program is converted into a mixed integer program, which is then directly amenable to standard optimization software.
-This method was chosen, and the SCIP Optimization Suite \cite{MaherFischerGallyetal.2017} was employed to compute the GNK value for an example network as described in the next section \ref{sec:example_network}.
+This method was chosen, and the SCIP Optimization Suite was employed to compute the GNK value for our example network as described in the previous section \ref{sec:example_network}.
 
-The particular details of how our bilevel program can be reformulated and then solved as KKT conditions is as follows:
+KKT conditions are a well known set of algebraic tests which imply that the function under consideration is locally optimal (maximal or alternatively minimal) with respect to its variables under an arbitrary set of constraint functions, with some regularity assumptions on the functions.
+KKT are well documented, and extend the method of lagrange multipliers.
 
-This reformulation of our bilevel problem involves transforming the inner maximization/minimization constraints into KKT conditions.
-KKT conditions are a set of well known conditions for optimality in non-linear programming.
-And specifically, the reformulation of \eqref{knvalue1} to involve KKT conditions is as follows:
+The reformulation of our LBPs in equation \ref{knvalue1} involves transforming the inner maximization/minimization constraints into KKT conditions.
+And specifically, the reformulation of the inner part of \eqref{knvalue1} to involve KKT conditions is as follows:
 
 \begin{equation}
 \label{kkt_optimization1}
@@ -305,19 +354,23 @@ v(S) =&
 
 By reformulating the inner maximization/minimizations of \eqref{knvalue1} in this way we replaced the constraint $(x,y)\in A$ with 
 the constraint that the $(x,y)$ satisfy the conditions for local minima/maxima (i.e.\ that they be \emph{KKT points}) in 
-the same space.\footnote{By doing this we tacitly we assume that $u_i(p_i)$ is continuously differentiable, and satisfy some regularity conditions.}
-As the constraints under DC-approximation are linear and hence define a convex polygon,
-if we assume that the functions $u_i(p_i)$ are concave then there is either: only ever a single KKT point for all sets of outer variables, or (if weakly-concave) then any of the KKT points will be equal to the global minima (maxima).
-Hence the inner maximization (minimization) over the KKT points can be ignored.
+the same space.%\footnote{By doing this we tacitly we assume that $u_i(p_i)$ is continuously differentiable, and satisfy some regularity conditions.}
 
-It was also realized that a binary reformulation of the complementary slackness conditions would increase computational efficiency.
+As the constraints under DC-approximation are linear and hence define a convex polygon,
+%if we assume that the functions $u_i(p_i)$ are concave then there is either: only ever a single KKT point for all sets of outer variables, or (if weakly-concave) then any of the KKT points will be equal to the global minima (maxima).
+%Hence the inner maximization (minimization) over the KKT points can be ignored.
+and as the functions $u_i(p_i)$ are linear (per the assumption of linear utility in section \ref{sec:the_setup}), then there will most likely only ever be a single local maximum/minimum - which will in hence be the global maximum/minimum.
+Alternatively, if there are multiple such local maximum/minimum points then they will all share the same value.
+In this way the inner maximization (minimization) over the KKT points can be ignored.
+
+It was also realized that a binary reformulation of the complementary slackness conditions would increase computational efficiency, and so we transformed these complementarity constraints into disjunnctive binary constraints.
 Particularly that for each inequality constraint $g_k$ there was introduced a binary variable $Z_k$ indicating whether it was active or not.
 The result of these reformulations are as follows:
 
 \begin{equation}
 \label{optimization_eq1}
 \begin{aligned}
-2v(S) =& 
+v(S) =&\frac{1}{2} 
 \max_{\substack{p_i \\ i\in S}}\left[\substack{
 	\left(\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\right)\\
 	\text{s.t.}\forall i\notin S~~-\frac{d u_i}{d p_i}=\sum_j(\lambda_{h_j}\frac{\partial h_j}{p_i}) + \sum_k(\lambda_{g_k}\frac{\partial g_k}{p_i})\\
@@ -325,7 +378,7 @@ The result of these reformulations are as follows:
 	\forall k~~ (1-Z_k)\bar{\lambda}_{g_k} \ge \lambda_{g_k} \ge 0\\
 	\forall k~~ \underline{g_k}Z_k\le g_k(p_1,p_2,\dots) \le 0}
 \right] +\\
-&\min_{\substack{p_i \\ i\notin S}}\left[\substack{
+&\frac{1}{2}\min_{\substack{p_i \\ i\notin S}}\left[\substack{
 	\left(\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\right)\\
 	\text{s.t.}\forall i\in S~~\frac{d u_i}{d p_i}=\sum_j(\lambda_{h_j}\frac{\partial h_j}{p_i}) + \sum_k(\lambda_{g_k}\frac{\partial g_k}{p_i})\\
 	\forall j~~ h_j(p_1,p_2,\dots)=0\\
@@ -336,38 +389,16 @@ The result of these reformulations are as follows:
 \end{equation}
 
 Where $\bar{\lambda}_{g_k}$ and $\underline{g_k}$ are the estimated upper and lower bounds on the KKT multipliers and constraint function respectively.
-This reformulation is directly amenable for calculation by optimization solvers, and (as already stated) the SCIP Optimization Suite \cite{MaherFischerGallyetal.2017} 
-was used for this purpose in our case.
+This reformulation renders the LBP into a mixed integer program which is directly amenable for calculation by optimization solvers, and the SCIP optimization suite \cite{MaherFischerGallyetal.2017} was used for this purpose in our case.
+
+Using the SCIP optimisation suite, the GNK transfers we calculated, and in Figures \ref{fig:1d} and \ref{fig:1c} show the utility transfers and the post-transfer utilities under GNK; we discuss these figures next.
 
 
-\subsection{Computing the LMP prices}
+\section{Some features of GNK}\label{sec:features}
 
-For comparison with the GNK value, we also compute the LMP transfers for our example network.
-As described in literature \cite{lmp1,lmp2} it is possible to conduct an optimization directly over the possible power-flows to maximize the sum of utilities of the participants.
-This optimization is more broadly known as optimal power flow problem (OPF) and often yields the locational marginal prices (LMP) as a byproduct.
-The Lagrange multipliers associated with the power conservation constraints (i.e. of the balancing constraint and line loss constraints) at each bus $p_j = \sum_{(i,j)\in C}p_{i,j}$, are the rates of marginal costs/value of the power at that respective bus, and are the prices of the LMP scheme.
+In this section we discuss the characteristics of the GNK value, against LMP and VCG, for the example 5-bus network (from Figure~\ref{fig:example1}).
 
-
-
-\subsection{Computing the VCG imputations}
-
-
-
-\subsection{An Example Problem}\label{sec:example_network}
-
-We consider the toy 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}, to illustrate the features of the GNK value in contrast to LMP and VCG.
-For this example network, we calculate the financial payments and dispatched powers under the GNK value, LMP and VCG, against parameter $p_1^l$ (the generator capacity in the network).
-The financial payments are plotted against $p_1^l$ in Figures \ref{fig:1d}, \ref{fig:1f} and \ref{fig:1h} respectively. Which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1c}, \ref{fig:1e} and \ref{fig:1g} respectively. The features of these plots are discussed in Section \ref{sec:features}.
-
-
-
-\input{figs/Electro_table.tex}
-
-\section{Features of GNK}\label{sec:features}
-
-In this section we discuss the characteristics of the computed GNK value, and compare them against LMP and VCG, for the example 5-bus network (from Figure~\ref{fig:example1}).
-
-To begin, both the GNK, LMP and VCG power allocations and the utilities associted with these are plotted against $p_1^l$ (generator capacity in the network) are shown in Figures \ref{fig:1a} and \ref{fig:1b}.
+For GNK, LMP and VCG, the power allocations and the utilities associted with these power allocations are plotted against $p_1^l$ (the generator capacity in the network) and are shown in Figures \ref{fig:1a} and \ref{fig:1b}.
 And through subsequent pairs of figures we can see how the different mechanisms allocate payments in the context of constrained resources - Figures \ref{fig:1c}, \ref{fig:1d} for GNK, Figures \ref{fig:1e}, \ref{fig:1f} for LMP, Figures \ref{fig:1g}, \ref{fig:1h} for VCG.
 
 \iffigures
@@ -376,21 +407,26 @@ And through subsequent pairs of figures we can see how the different mechanisms 
 \fi
 
 In Figure~\ref{fig:1a}, increasing the generator capacity from $0$ shows that power is initially consumed entirely by the consumer at bus 2, 
-who uses all $p_1^l$kW of power and values it at 1.9 units of utility. This continues until the power constraint on line (1,2) binds, at 70kW.  
-This dynamic is then repeated for the agent with the next-highest marginal utility for power (given by the utility function coefficients in Figure~\ref{fig:example1}), until the respective line constraint are also met.
+who uses all $p_1^l$kW of power and values it at a rate of 1.9 units of utility. This continues until the power constraint on line (1,2) binds, at 70kW.
+Then the consumer at bus 3 begins to be supplied with power who values it at a rate of 1.8 units of utility until its consumption is maximised at 100kW. 
+This dynamic is then repeated for the agent with the next-highest marginal utility for power (given by the utility function coefficients in Figure~\ref{fig:example1}), until the respective line constraints are also met.
 
 Considering the interval the first 70 units of generator capacity (ie. $p_1^l \in [0,-70]$), the LMP prices for this power, for both the generator at bus 1 and the consumer at bus 2, is given by its marginal value, 1.9 (as the line constraint is not active). This corresponds to the slope of the black line in Figure~\ref{fig:1f} (or \ref{fig:1b}) over this interval. 
 More generally, the full set of the LMP transfers plotted in Figure~\ref{fig:1f} are given by the Lagrange multiplier for power conservation in the OPF optimization multiplied by the power consumed at that bus, and that as the generation capacity increases that the marginal price of power changes, and the gradients of the lines change in discrete steps.
 
-Additionally, the VCG payments are plotted against $p_1^l$ in Figures \ref{h} and resulting utilities in Figure \ref{g}.
-The VCG payments are strongly related to LMP payments, except that instead of payment proportional to the marginal unit of electricity, each player is conpensated at his/her marginal cost of participation.
+Additionally, the VCG payments are plotted against $p_1^l$ in Figures \ref{fig:1h} and resulting utilities in Figure \ref{fig:1g}.
+The VCG payments are similar to the LMP payments, except that instead of payment proportional to the marginal unit of electricity, each player is conpensated at his/her marginal cost of their participation.
 VCG takes into account the marginal effect that each of the player's participation has apon each other at the social optimum
 
-In contrast from VCG and LMP, the GNK value takes into account the full bargaining position of each agent and possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
+In contrast from VCG and LMP, the GNK value takes into account the full bargaining position of each agent and also every possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
 The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1d}.
 
+From these graphs we can witness some of the qualities of the GNK value against LMP and VCG.
+
 \subsection{Specific features of the GNK value}
-The results illustrate some notable qualities of the GNK value.
+
+From these graphs we can witness that LMP, VCG and GNK values feature a range of different dynamics,
+but some particularly notable qualities of the GNK value include:
 
 % \begin{itemize}
 % \item GNK is continuous in the parameters of the network
@@ -403,10 +439,9 @@ Continuity with regards to utility functions is proven in the Appendix \ref{appe
 This continuity is similarly witnessed in VCG imputations, but notably not in the context of LMP payments.
 
 It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1d}, where the payments received by generator 1 drop sharply with increasing generator capacity.
-This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the payments under the GNK value (Figure \ref{fig:1c}) and VCG imputation (Figure \ref{}) feature no such drops or discontinuities.
+This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the payments under the GNK value (Figure \ref{fig:1c}) and VCG imputation (Figure \ref{fig:1g}) feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
-which is one known cause of the volatility experienced in
-electricity markets \cite{RePEc:aen:journl:2006v27-02-a09}. 
+which is one known cause of the volatility experienced in electricity markets \cite{RePEc:aen:journl:2006v27-02-a09}. 
 In contrast, the post-payment utilities under the GNK value and VCG are almost always continuous with network parameters.
 
 
@@ -417,27 +452,26 @@ In contrast, the post-payment utilities under the GNK value and VCG are almost a
 % \begin{itemize}
 % \item the GNK value is always budget balanced
 % \end{itemize}
-\subsubsection*{The GNK and VCG payments are always budget balanced}
-The transactions under LMP are not necessarily budget-balanced and can yield a surplus, whereas payments under the GNK and VCG value are necessarily budget-balanced and result in no surplus or deficit.
-This is an outcome of the GNK value's axiomatic derivation, as given as equation \eqref{eff-axiom}; and also VCG's axiomatic derivation, as given by equation \ref{}.
+\subsubsection*{The GNK payments are always budget balanced}
+The transactions under LMP and VCG are not necessarily budget-balanced and can yield a surplus or defecit, whereas payments under the GNK value are necessarily budget-balanced and result in no surplus or deficit.
+This is an outcome of the GNK value's axiomatic derivation, as given as equation \eqref{eff-axiom}.
 Under LMP, each participant is credited or debited at the effective rate of supply for their location but there is no guarantees that the total payments should add to zero.
 This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1d}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
 The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called ``congestion-rents'' that are usually collected by owners of transmission lines \cite{lmp2} (and which are often also the owners of the utility-scale generation assets in vertically-integrated systems).
+Whereas in a VCG payments are known not to be budget balanced generally and may yeild a surplus or defecit depending on various conditions, as considered in section \ref{sec:solutions_VCG}.
 
 In a power systems context, budget-balancedness of payments is desirable in that any revenue/deficit collected is independent of the network operating conditions.
 
 % \begin{itemize}
 % \item the GNK value can offset those that do not receive/generate power
 % \end{itemize}
-\subsubsection*{The GNK value (but not VCG or LMP) can offset those that do not receive/generate power}
+\subsubsection*{The GNK value (but not VCG or LMP) can offset those that do not receive or generate power}
 The GNK value can allocate payments between parties such that the consumers that receive power compensate those that are excluded from receiving it.
 This can be seen from Figures \ref{fig:1a} and \ref{fig:1c} particularly in the region where $x<50$.
 In this region there is only sufficient power to supply consumer 2 (who has the highest utility for that power) whereas consumers 3, 4 and 5 who would otherwise be in a position to receive that power are
 compensated such as to be barely worse off (as can be seen from \ref{fig:1c}).
 
-For instance at $x=50$, generator 1 produces $50$kW
- which is consumed entirely by consumer 2; the utilities of the participants before transfers are: $-10, 95, 0, 0, 0$ respectively 
-(which can be seen from Figure \ref{fig:1b}).
+For instance at $x=50$, generator 1 produces $50$kW hich is consumed entirely by consumer 2; the utilities of the participants before transfers are: $-10, 95, 0, 0, 0$ respectively (which can be seen from Figure \ref{fig:1b}).
 However under the GNK value, consumer 2 must pay both the generator and also the other consumers for its right-of-way to consumption.
 The utilities after the transfers of the participants are: $0.5, 23.83, 21.33, 20.08, 19.25$ respectively (which can be seen from Figure \ref{fig:1d}).
 In a power systems context, this is likely to be seen as a desirable quality as it may correspond to people's intuitions about the fair allocation of resources.
@@ -451,24 +485,27 @@ And also contrasts against VCG which can only allocate positive utility to thoes
 % \item the GNK value is not incentive compatible
 % \end{itemize}
 \subsubsection*{The GNK value is not incentive compatible}
-Neither the GNK value or LMP are \emph{incentive compatible} in the sense that is often referred-to in mechanism design, but that VCG (by design) is.
-Specifically, the payments between parties are potentially subject to strategic manipulation if the agents are freely able to report their utility.\cite{8054716}
+Neither the GNK value or LMP are \emph{incentive compatible} in the sense that is often referred-to in mechanism design, but that VCG is.
+Specifically, the payments between parties are potentially subject to strategic manipulation if the agents are freely able to report their utility.
 In the GNK value this can be seen in \eqref{knvalue1}, or more easily in its reduced form, \eqref{knvalue2}, where the payoff advantage of a coalition $v(S)$ is based on its reported utilities in minimax strategies which may not be actualized.
-Misreporting these utilities may change the $v(S)$ and hence the GNK value itself and it is important to note that our paper does not address the potential consequences of this.
-While there does exist some work on similar solution concepts that are incentive compatible \cite{myerson1,Salamanca2019} their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
+Misreporting these utilities may change the $v(S)$ and hence the GNK value itself.
 LMP is known to be incentive incompatable, and there is work to understand exactly how consequential this fact is, in practice \cite{8054716}.
+In section \ref{sec:GNK_value_discussion} we continue discussion about this point.
 
 % \begin{itemize}
 % \item the GNK value is computationally difficult
 % \end{itemize}
 \subsubsection*{The GNK value is computationally difficult}
 The GNK value is more difficult than VCG and significantly more difficult than LMP, to compute.
-This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions of $S$, and each calculation of $v(s)$ is potentially an NP-hard bilevel problem even using DC approximation, whereas calculating LMP requires only solving one OPF optimization.
+This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions $S$, and each calculation of $v(s)$ are potentially NP-hard bilevel problems.
+This contrasts against LMP which requires only solving one OPF optimization, and VCG which requires $n+1$ OPF optimisations.
+
+In light of this profound difficulty, we next consider ways mitigating this issue, so that the GNK value can be applied to larger networks.
 
 
 \section{Scaling the GNK value}\label{sec:scaling}
 
-Since computing the GNK value is difficult we review two remedies to approximate the GNK value for larger and more realistic networks:
+Since computing the GNK value is difficult we review two primary remedies to approximate the GNK value for larger and more realistic networks:
 
 \begin{itemize}
     \item We employ sampling techniques to reduce the number of optimizations that need to be conducted to approximate the GNK value to sufficient accuracy.
@@ -603,6 +640,30 @@ In this section we give some results of the utility imputations on larger and ra
 Primarily from this exersize we are able to glimse of some of the distinct features of these solutions when applied to a large number of players.
 
 
-\section{Conclusion}
 
+\section{Discussion and Conclusion}\label{sec:GNK_value_discussion}
+
+GNK value incentive incompatability, and it is important to note that our paper does not address the potential consequences of this.
+While there does exist some work on similar solution concepts that are incentive compatible \cite{myerson1,Salamanca2019} their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
+
+
+
+\begin{enumerate}
+\item	GNK value is hard to compute, sampling and proxy extend this to about 100 to 150, but not easily beyond, which still is practically limited; and still isnt escaping NP-hard nature of the problem. which VCG and LMP potentially avoid
+\item	GNK value is interesting, and involuted way of total bargaining solution, raising the question of how much the group formulation is a relevent moral reference point
+\item	GNK value seems to have an evident `majority-rule' issue (atleast in the proxy), it remains to be seen if it holds in the normal version, but since it dosnt scale beyond 15 it seems impossible to really know. it may be very possible to mediate this by weighting individuals in the shapley value formulation.
+\item	GNK is incentive incompatable, and hence there is raised big questions about how it would perform in practice, and under strategising of the agents. atleast in VCG it is somewhat mitigated by incentive compatability, but not group incentive compatability, and LMP is known to limit to VCG in the limit of large markets where each player is small; but with GNK it could be unbounded dynamics under strategising.
+\item	GNK seems to violate an individual rationality constraint, in that it is possible for participants to walk away with less than they started with, leaving them regretting partaking in the system. when designing GNK for electricity systems, it was hoped that invidiual rationality would `fall out', and in the neyman-kohlberg formulation it might well fall out, in that the most any agent can threaten to do is to not particiapte in the system, whereas under GNK value, the power conservation constraint allows participants to extortionately threaten to oversupply others, leaving them worse off then when they were before. this is a major ethical failing.
+\end{enumerate}
+
+In comjunction with Chapter \ref{}, we see that althought the GNK value satisfies many ethical pricniples including hard efficiency, formal equality, and consistent reference point.
+ultimately it fails to encode any notion of `euvoluntary' exchange as it violates individual rationality.
+Additionally, we could hardly imagine any electricity system where participants could be left worse-off for participanting without social disturbance or riots. and while it may allow a survival of the fittest, freedom to profit, it ultimately would fail to enhance the freedom of society, and fails wider social equality considerations. 
+
+the GNK value is intricate and total considered bargaining solution, involving the calculus of what everybody could possibly do and the value that each and every participant values each and every possible combination of actions which they could bring about.
+It is computationally difficult to apply to real and large electricity networks, although this is something which is potentially subject to be mitigated with momre compute power and proxies and sampling to its total calculation.
+However ultimately its formulation encodes a specific type of extoritionate principle which makes it ethically untenuous.
+
+reflectively, it is interesting how perfect competition may or may not coincide with what is equal and ethical.
+and the question of when and where these two coincide, and if they might coincide in the context of electricity networks was part of the motivation of this work.
 
