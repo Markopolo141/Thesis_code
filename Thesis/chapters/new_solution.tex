@@ -508,20 +508,20 @@ In light of this profound difficulty, we next consider ways mitigating this issu
 Since computing the GNK value is difficult we review two primary remedies to approximate the GNK value for larger and more realistic networks:
 
 \begin{itemize}
-    \item We employ sampling techniques to reduce the number of optimizations that need to be conducted to approximate the GNK value to sufficient accuracy.
+    \item We employ sampling techniques to reduce the number of minimax optimizations that need to be conducted to approximate the GNK value to sufficient accuracy.
     \item And consider a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
 \end{itemize}
 
 \subsection{Sampling Techniques}\label{sec:sampling_techniques}
-To compute the GNK value to a required accuracy, not all of the $2^n-1$ evaluations of $v(S)$ need to be performed as sampling techniques may be used.
-We consider two broadly different approaches for bias free sampling of the GNK value:
+To compute the GNK value to a required accuracy, not all of the $v(S)$ for all of the $2^n-1$ coalitions $S$ of players need to be performed, as sampling techniques may be used.
+We consider two different approaches for bias free sampling of the GNK value:
 \begin{enumerate}
-    \item By inspecting equation \ref{da_value_eq}, we can sample for estimations of each of the $v_{i,k}$, by computing $v(S)$ for coalitions $S$ which are sampled randomly and without replacement.
-    \item By utilizing equation \ref{convert1} we convert the problem into a standard cooperative game, where we can then compute the GNK value via existing sampling techniques developed for approximating the Shapley Value.
+    \item By the inspection of equation \ref{da_value_eq}, we see that the GNK value of any player $i$ is an average over $v_{i,k}$ (the average value $v(S)$ for coalitions $S$ of size $k$ that include player $i$), and that by choosing random coalitions of size $k$ which include $i$ we can sample for an estimations of each $v_{i,k}$.
+    \item By utilizing equation \ref{convert1} we convert the problem into a standard cooperative game, where we can then compute the GNK value via the many existing sampling techniques developed for approximating the Shapley Value.
 \end{enumerate}
 
 The first of these two is an uncomplicated approach consisting of running a program to generate random coalitions $S\subset N$ and computing $v(S)$ for each of them (implicitly also calculating $v(N\setminus S)$ via equation \ref{myeq2}), then for each size $k$ and player $i$ approximating $v_{i,k}$ by averaging thoes values of $v(S)$ for the generated coalitions $S$ that are of size $k$ and include player $i$.
-After sampling for each of the $v_{i,k}$ we then approximate the GNK value $\varphi$ via equation \ref{da_value_eq}. We denote this method `\textsc{Simple}'.
+Then each of the approximated $v_{i,k}$ are used to approximate the GNK value $\varphi$ via equation \ref{da_value_eq}. We denote this method `\textsc{Simple}'.
 
 For the second approach, there is a selection of powerful techniques in literature which have been applied to approximate the Shapley Value of classical cooperative game theory; include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (\cite{burgess2} also as developed in Section \ref{section:SEBB}), as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
 
@@ -552,7 +552,7 @@ We used a known process of generating pseudo random meshed networks of buses and
     \STATE $M=\emptyset$ is set of nodes
     \STATE $M_a=\emptyset$ is set of links for nodes for $a$
     \FOR{$a=1:n$}
-        \STATE Randomly generate planar coordinates for $a$, $(x_a ,y_a)$ from a uniform distribution
+        \STATE Randomly generate planar coordinates for $a$, $(x_a ,y_a)$ with uniform distribution
         \FOR{$b=1:n_i$}
             \STATE select novel $b\in M$ to minimize the Euclidean distance to $a$:\\ $\quad\min_b\quad (x_a-x_b)^2+(y_a-y_b)^2\quad\text{s.t}\quad (a, b)\notin M_a$
             \STATE Add the link $a$-to-$b$:\\ $\quad M_a=M_a\cup \{(a, b)\}$\\ $\quad M_b=M_b\cup \{(b, a)\}$
@@ -570,15 +570,25 @@ By computing the exact GNK value for these networks we were then able to compute
 For a given budget, all the algorithms called for the computation of different numbers of the bilevel optimizations $v(S)$ (per equation \eqref{knvalue1}).
 The resulting performance of the sampling methods against the number of optimizations induced is shown in Figure \ref{fig:performance_graph1}.
 
-On this graph it is seen that the methods which utilized stratification were given a warm-start of 200 samples (as \textsc{Neyman} required atleast two samples per stratum minimum for a bias-free estimate of the variance) and generally performed better than those that did not use stratification.
+On this graph it is seen that the methods which utilized stratification (\textsc{Hoeffding}, \textsc{Neyman}, \textsc{SEBM} and \textsc{Join}) were given a warm-start of 200 samples (as methods like \textsc{Neyman} required atleast two samples per stratum minimum for a bias-free estimate of the variance) and generally performed better than those that did not use stratification (particularly \textsc{Simple} and \textsc{Appro}).
+In this graph, is show the number of unique optimisations $v(S)$ called during the sampling process, and since these are 10 bus network, there is only 1024 unique optimsations that can be called; as these methods sample with replacement it begins to be time-prohibitive to sample to perfect accuracy, and so they were apprehended beforehand.
+Each of these methods were carried out by sampling with replacement primarily as in the context of large networks (where there are $2^n-1$ possible coalitions) generating and finding unique coalitions proves itself to be a bottleneck challenge - and so sampling without replacement becomes impractical; and so we carried out the testing with sampling with replacement.
+
+\subsection{Determination of Sampling Method}
 
 From this Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be reasonably effective and it was chosen for all further analyses.
-To evaluate the performance of \textsc{Join} in solving the GNK value for larger networks, we generated random network of different sizes and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} method, and timed how long it took for the average magnitude of error between them to reach one percent of the magnitude of the estimated GNK value itself.
+The reason for this superiority is the additional power of solving across join orders over choosing coalitions randomly.
+As allready stated, by using join orders, it is possible to calculate $n$ marginal contributions using $n+1$ evaluations of $v(S)$ as opposed to the random selection of coalitional contributions, which thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
+This simple factor outweighed all the extra computing power associated with \textsc{SEBM} and \textsc{Neyman} methods.
+
+To evaluate the performance of the \textsc{Join} method in solving the GNK value for larger networks, we generated random networks of different sizes and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} method, and timed how long it took for the average magnitude of error between these estimations to reach an error of percent of each other.
 In this way the run-time performance of \textsc{Join} in approximating the GNK value for variously sized random networks was computed and the results are shown in Figure \ref{fig:performance_graph2}.
 
 From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes very intractable to calculate for networks consisting of more than $16$ busses.
-Therefore we seek to make simplifications to the GNK value itself to ease this intractability.
-Specifically we consider a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
+And this was somewhat expected, as the GNK value is a calculation that involves exponentially many NP-hard computations to determine.
+
+Because of this we sought to make simplifications to the GNK value itself to ease this intractability.
+Specifically we considered a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
 
 \iffigures
 \input{figs/absolute_error1.tex}
@@ -590,7 +600,6 @@ Specifically we consider a polynomial-time computable proxy inplace of the minim
 
 
 
-\newpage
 \subsection{Sampling a modified GNK at scale}\label{sec:modified_gnk}
 
 Given the intractable nature of the GNK value for large networks we consider a modification of the minimax optimizations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
@@ -639,7 +648,15 @@ We can now turn our attention to the question of what this proxy GNK value actua
 In this section we give some results of the utility imputations on larger and randomly generated networks between modified-GNK, VCG and LMP.
 Primarily from this exersize we are able to glimse of some of the distinct features of these solutions when applied to a large number of players.
 
+Particular things which we note are:
 
+\begin{enumerate}
+\item	The GNK value ascribes negative utilities
+\item	the VCG and LMP are similar
+\item	The GNK has a majority-rule effect between consumers and generators
+\item	LMP and shapley value are related
+\item	GNK seems to feature entirely different dynamics, and sometimes appears to be inverted with respect to rewards
+\end{enumerate}
 
 \section{Discussion and Conclusion}\label{sec:GNK_value_discussion}
 
