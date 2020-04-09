@@ -403,7 +403,7 @@ And through subsequent pairs of figures we can see how the different mechanisms 
 
 \iffigures
 % \input{graph0.tex}
-\input{figs/GNK_graph1.tex}
+%\input{figs/GNK_graph1.tex}
 \fi
 
 In Figure~\ref{fig:1a}, increasing the generator capacity from $0$ shows that power is initially consumed entirely by the consumer at bus 2, 
@@ -485,11 +485,11 @@ And also contrasts against VCG which can only allocate positive utility to thoes
 % \item the GNK value is not incentive compatible
 % \end{itemize}
 \subsubsection*{The GNK value is not incentive compatible}
-Neither the GNK value or LMP are \emph{incentive compatible} in the sense that is often referred-to in mechanism design, but that VCG is.
+Unlike VCG, the GNK value and LMP are not \emph{incentive compatible} in the sense that is often referred-to in mechanism design (see Section \ref{sec:solutions_VCG}).
 Specifically, the payments between parties are potentially subject to strategic manipulation if the agents are freely able to report their utility.
 In the GNK value this can be seen in \eqref{knvalue1}, or more easily in its reduced form, \eqref{knvalue2}, where the payoff advantage of a coalition $v(S)$ is based on its reported utilities in minimax strategies which may not be actualized.
-Misreporting these utilities may change the $v(S)$ and hence the GNK value itself.
-LMP is known to be incentive incompatable, and there is work to understand exactly how consequential this fact is, in practice \cite{8054716}.
+And hence, misreporting these utilities may change the $v(S)$ and hence the GNK value itself.
+Additionally, LMP is known not to be incentive compatable, and there is further work to understand exactly how consequential this \cite{8054716}.
 In section \ref{sec:GNK_value_discussion} we continue discussion about this point.
 
 % \begin{itemize}
@@ -497,7 +497,8 @@ In section \ref{sec:GNK_value_discussion} we continue discussion about this poin
 % \end{itemize}
 \subsubsection*{The GNK value is computationally difficult}
 The GNK value is more difficult than VCG and significantly more difficult than LMP, to compute.
-This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions $S$, and each calculation of $v(s)$ are potentially NP-hard bilevel problems.
+This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions $S$, and each calculation of $v(s)$ is an NP-hard bilevel optimisation problems.
+And this computational difficulty is reflected in a later Figure \ref{fig:performance_graph2} where we can see that even using sampling to approximate the GNK value is double-exponential complexity. 
 This contrasts against LMP which requires only solving one OPF optimization, and VCG which requires $n+1$ OPF optimisations.
 
 In light of this profound difficulty, we next consider ways mitigating this issue, so that the GNK value can be applied to larger networks.
@@ -505,43 +506,52 @@ In light of this profound difficulty, we next consider ways mitigating this issu
 
 \section{Scaling the GNK value}\label{sec:scaling}
 
-Since computing the GNK value is difficult we review two primary remedies to approximate the GNK value for larger and more realistic networks:
+Because the GNK value is difficult to compute at scale, we review two primary approaches to approximate the GNK value for larger and more realistic networks:
 
 \begin{itemize}
-    \item We employ sampling techniques to reduce the number of minimax optimizations that need to be conducted to approximate the GNK value to sufficient accuracy.
-    \item And consider a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
+    \item In section \ref{sec:sampling_techniques} we employ sampling techniques to reduce the number of minimax optimizations that need to be conducted to approximate the GNK value to sufficient accuracy.
+    \item And in section \ref{sec:modified_gnk} we consider a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
 \end{itemize}
 
 \subsection{Sampling Techniques}\label{sec:sampling_techniques}
-To compute the GNK value to a required accuracy, not all of the $v(S)$ for all of the $2^n-1$ coalitions $S$ of players need to be performed, as sampling techniques may be used.
+To compute the GNK value to a required accuracy, not all of the minimax optimisations $v(S)$ need to be performed, as sampling techniques may be used.
 We consider two different approaches for bias free sampling of the GNK value:
 \begin{enumerate}
-    \item By the inspection of equation \ref{da_value_eq}, we see that the GNK value of any player $i$ is an average over $v_{i,k}$ (the average value $v(S)$ for coalitions $S$ of size $k$ that include player $i$), and that by choosing random coalitions of size $k$ which include $i$ we can sample for an estimations of each $v_{i,k}$.
+    \item By the inspection of equation \ref{da_value_eq}, we see that the GNK value of any player $i$ is an average over $v_{i,k}$%(the average value $v(S)$ for coalitions $S$ of size $k$ that include player $i$)
+, and that by randomly sampling coalitions of size $k$ which include $i$ we can sample for an estimations of each $v_{i,k}$.
     \item By utilizing equation \ref{convert1} we convert the problem into a standard cooperative game, where we can then compute the GNK value via the many existing sampling techniques developed for approximating the Shapley Value.
 \end{enumerate}
 
-The first of these two is an uncomplicated approach consisting of running a program to generate random coalitions $S\subset N$ and computing $v(S)$ for each of them (implicitly also calculating $v(N\setminus S)$ via equation \ref{myeq2}), then for each size $k$ and player $i$ approximating $v_{i,k}$ by averaging thoes values of $v(S)$ for the generated coalitions $S$ that are of size $k$ and include player $i$.
+The first of these two is an uncomplicated approach consisting of randomly generated coalitions $S\subset N$, %(implicitly also calculating $v(N\setminus S)$ via equation \ref{myeq2})
+and then approximating $v_{i,k}$ by averaging the $v(S)$ for the generated coalitions $S$ that are of size $k$ and include player $i$.
 Then each of the approximated $v_{i,k}$ are used to approximate the GNK value $\varphi$ via equation \ref{da_value_eq}. We denote this method `\textsc{Simple}'.
 
-For the second approach, there is a selection of powerful techniques in literature which have been applied to approximate the Shapley Value of classical cooperative game theory; include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (\cite{burgess2} also as developed in Section \ref{section:SEBB}), as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
+The second of these two approaches is more complicated, since it involves converting the problem into a cooperative game and then a selecting a technique to sample the shapley value.
+Some of the possible techniques include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (\cite{burgess2} also as developed in Section \ref{section:SEBB}), as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
 
-Each of these particular methods sample over the marginal contributions of the Shapley value (per equation \ref{eq:shapley_value}) in slightly different ways.
-Primarily they differ in whether they employ stratified sampling, and stratify the sampling of marginal contributions by player and size by estimating each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}), or whether they do not employ stratified sampling and directly approximate the Shapley value via equation \eqref{eq:shapley_value}.
+We will compare the performance of these sampling approaches in section \ref{section:performance}, but first we will summarise some of the differences between Shapley Value sampling techniques first.
 
-Secondarily they differ in whether or not they sample by a join-order process. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and a particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions\footnote{although in practice many of these evaluations will be repeated across runs}. Alternatively, the methods can iteratively select coalitions $S$ and player $i$ randomly and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
+\subsubsection*{Differences in sampling approaches}
+
+All the sampling technique used to approximate the Shapley Value sample over the marginal contributions (per equation \ref{eq:shapley_value}) in slightly different ways.
+And primarily, they differ in whether they employ stratified sampling or not.
+In that, if they employ stratified sampling, they sampling the marginal contributions by player and size and estimate estimating each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}).
+Conversely if they do not employ stratified sampling, then they directly approximate the Shapley value via equation \eqref{eq:shapley_value}.
+
+Secondarily, they differ in whether or not they sample by a join-order process. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and a particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions.%\footnote{although in practice many of these evaluations will be repeated across runs}.
+However, if they do not use a join-order process, the methods can iteratively select coalitions $S$ and player $i$ randomly and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
 
 Between the methods: \textsc{Appro} samples in join orders without stratification, \textsc{Join} samples in join orders with stratification, \textsc{Hoeffding} samples with stratification and without join orders, to minimize a sum of Hoeffding-type concentration inequalities on each of the estimates $\hat{v}_{i,k}$,
 \textsc{Neyman} samples with stratification without join orders to the sample each $\hat{v}_{i,k}$ proportional to the sample variance of the marginal contributions which make up each,
 and \textsc{SEBM} samples with stratification without join orders to sample $\hat{v}_{i,k}$ in order to maximally reduce a complicated concentration inequality on the resultant estimated Shapley value itself.
 
 The full details on each of the methods can be found in their respective source documents.\cite{CASTRO2017180,2013arXiv1306.4265M,burgess2,DBLP:journals/cor/CastroGT09}
-
-The error in calculating the GNK value by these sampling methods (as shown in Figure \ref{fig:performance_graph1}) is discussed in the next Section \ref{section:performance}.
+And the performance of using these different methods is evaluated in the next section \ref{section:performance}.
 
 \subsection{Sampling the GNK value at Scale}\label{section:performance}
 
-To analyze the performance of approximating the GNK with different sampling techniques we calculated the average absolute error in the approximated GNK value across randomly generated electricity networks.
-We used a known process of generating pseudo random meshed networks of buses and lines reminiscent of real electricity networks. The particular algorithm called `Simple minimum-distance graph' method was considered by Hines \& Blumsack et.al \cite{hines1} and is given as Algorithm \ref{alg1}.
+To analyze the performance of approximating the GNK with different sampling techniques we calculated the average absolute error in the approximated GNK value for randomly generated electricity networks.
+We used a known process of generating pseudo random meshed networks of buses and lines reminiscent of real electricity networks. The particular algorithm called the `Simple minimum-distance graph' method and was considered by Hines \& Blumsack et.al \cite{hines1} and is given as Algorithm \ref{alg1}.
 
 \begin{algorithm}[]
 \caption{Simple minimum-distance graph}
@@ -567,25 +577,26 @@ And in each of these networks each node was assigned to be either a generator or
 Specifically these networks were small enough for it to be possible to solve the GNK value exactly.
 
 By computing the exact GNK value for these networks we were then able to compute the average absolute error achieved by each of the different sampling methods and for different sample budgets.
-For a given budget, all the algorithms called for the computation of different numbers of the bilevel optimizations $v(S)$ (per equation \eqref{knvalue1}).
-The resulting performance of the sampling methods against the number of optimizations induced is shown in Figure \ref{fig:performance_graph1}.
+For a given budget, all the algorithms called for the computation of different numbers of the bilevel optimizations $v(S)$ (per equation \ref{knvalue1}).
+And by plotting the absolute error achieved against the number of unique optimisations called, we can see the performance of the sampling methods as shown in Figure \ref{fig:performance_graph1}.
 
-On this graph it is seen that the methods which utilized stratification (\textsc{Hoeffding}, \textsc{Neyman}, \textsc{SEBM} and \textsc{Join}) were given a warm-start of 200 samples (as methods like \textsc{Neyman} required atleast two samples per stratum minimum for a bias-free estimate of the variance) and generally performed better than those that did not use stratification (particularly \textsc{Simple} and \textsc{Appro}).
-In this graph, is show the number of unique optimisations $v(S)$ called during the sampling process, and since these are 10 bus network, there is only 1024 unique optimsations that can be called; as these methods sample with replacement it begins to be time-prohibitive to sample to perfect accuracy, and so they were apprehended beforehand.
-Each of these methods were carried out by sampling with replacement primarily as in the context of large networks (where there are $2^n-1$ possible coalitions) generating and finding unique coalitions proves itself to be a bottleneck challenge - and so sampling without replacement becomes impractical; and so we carried out the testing with sampling with replacement.
+From this graph it is seen that the methods which utilized stratification (\textsc{Hoeffding}, \textsc{Neyman}, \textsc{SEBM} and \textsc{Join})  generally performed better than those that did not use stratification (particularly \textsc{Simple} and \textsc{Appro}).
+And particularly that the \textsc{Join} method, which utilises stratification and join-order sampling is quite effective over a range of situations.
 
-\subsection{Determination of Sampling Method}
+On this graph, methods which utilised stratification were given a warm-start of 200 samples (as methods like \textsc{Neyman} required atleast two samples per stratum minimum for a bias-free estimate of the variances)
+It is also seen that since these are 10 bus network, there is only 1024 unique optimsations $v(S)$ that can be called; as some of these methods sample with replacement it begins to be time-prohibitive to sample to perfect accuracy, and so their execution was curtailed where nessisary.
 
-From this Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be reasonably effective and it was chosen for all further analyses.
-The reason for this superiority is the additional power of solving across join orders over choosing coalitions randomly.
-As allready stated, by using join orders, it is possible to calculate $n$ marginal contributions using $n+1$ evaluations of $v(S)$ as opposed to the random selection of coalitional contributions, which thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
-This simple factor outweighed all the extra computing power associated with \textsc{SEBM} and \textsc{Neyman} methods.
+\subsection{Selection of Sampling Method}
+
+From the Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be reasonably effective and it was chosen for all further analyses.
+The reason for this superiority is the additional power of sapling with stratification and by join-orders.
+As allready stated, by using join orders, it is possible to calculate $n$ marginal contributions using $n+1$ evaluations of $v(S)$ as opposed to taking two evaluations of $v(S)$ for one marginal contribution sample point.
+This simple factor outweighed all the extra computing power associated with \textsc{SEBM} and \textsc{Neyman} methods, which did not use join-order sampling.
 
 To evaluate the performance of the \textsc{Join} method in solving the GNK value for larger networks, we generated random networks of different sizes and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} method, and timed how long it took for the average magnitude of error between these estimations to reach an error of percent of each other.
 In this way the run-time performance of \textsc{Join} in approximating the GNK value for variously sized random networks was computed and the results are shown in Figure \ref{fig:performance_graph2}.
 
-From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes very intractable to calculate for networks consisting of more than $16$ busses.
-And this was somewhat expected, as the GNK value is a calculation that involves exponentially many NP-hard computations to determine.
+From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes very intractable to calculate for networks consisting of more than $16$ busses; and this was somewhat expected as the GNK value is a calculation that involves exponentially many NP-hard computations to determine.
 
 Because of this we sought to make simplifications to the GNK value itself to ease this intractability.
 Specifically we considered a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
@@ -602,7 +613,7 @@ Specifically we considered a polynomial-time computable proxy inplace of the min
 
 \subsection{Sampling a modified GNK at scale}\label{sec:modified_gnk}
 
-Given the intractable nature of the GNK value for large networks we consider a modification of the minimax optimizations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
+Given the intractable nature of the GNK value for large networks, we considered a proxy inplace of the minimax optimizations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
 Particularly we considered a relaxation:
 
 \begin{align}
@@ -615,23 +626,18 @@ v(S) = &+ \frac{1}{2}\left(\sum_{i\in S} u_i(p_i) - \sum_{i\in N\setminus S}u_i(
 
 Where $\epsilon$ is a small positive value, and where we assume all the DC power constraints apply in both $\argmax$.
 
-Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritize their own utility and then compliment's utility secondarily.
-This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original expression NP-hard, as the leader is unwilling to sacrifice their utility to harm the complement and vice versa.
+Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritize their own utility and then the follower's utility is maximised secondarily.
+This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original expression NP-hard, as the leader is unwilling to sacrifice their utility to harm the follwer's utility and vice versa.
 
 The advantage of making this relaxation is that it reduces the NP-hard bilevel problems to single-level linear problems, hence making this modified GNK value much easier to scale.
-However, in this way, this modified GNK value encapsulates a slightly less perfect description of idealized bargaining.
+However, in this way, this modified GNK value encapsulates a slightly less perfect description of idealized bargaining, and may see the introduction of artifacts into the result - we briefly discuss the similarity of the original GNK with this modification in section \ref{sec:GNK_value_discussion}.
 
-Some of the runtime statistics of approximating this modified GNK value with \textsc{Join} sampling for randomly generated network sizes are shown in Figure \ref{fig:performance_graph4}.
+Some of the runtime statistics of sampling this modified GNK value with \textsc{Join} sampling for randomly generated network sizes are shown in Figure \ref{fig:performance_graph4}.
 From the figure it is seen that it is readily possible to calculate to about one percent accuracy this modified GNK value in three minutes of runtime for networks of upto the size of about 50 nodes, and with ten minutes of runtime upto about 80 nodes.\footnote{\label{note1} All calculations were performed on an Dell Optiplex 9020, with Intel i7 quad core 3.6GHz processor, and all source-code available at:\\
 \href{https://github.com/Markopolo141/The\_Generalized\_N-K\_Value}{github.com/Markopolo141/The\_Generalized\_N-K\_Value}}
-Larger networks are expected to be tractable with more computing power and/or execution time, but for further methodological improvements it may be necessary employ further approximations such as player clustering \cite{DBLP:journals/corr/abs-1903-10965}, or potentially move away from Shapley value structure.
+Larger networks are expected to be tractable with more computing power and/or execution time, but for further methodological improvements it may be necessary employ further approximations such as player clustering \cite{DBLP:journals/corr/abs-1903-10965}, or potentially move away from Shapley value structure entirely.
 
-And the error of using this modification as a proxy for the more original GNK value was calculated for randomly generated networks as shown in Figure \ref{fig:performance_graph5}.
-From this graph it is noticed that the GNK and modified GNK values feature similarity which seems to increase with the size of the network under consideration --- although it is increasingly difficult to confirm this for networks with a size greater than 13.
-This limited observation coincides with expectations that the possible strategic counter-considerations in the minimax optimizations become less relevant in the context of larger networks.
-It is hence suspected that this modified GNK value may be an appropriate proxy for the GNK value in larger networks.
-
-We can now turn our attention to the question of what this proxy GNK value actually looks like when calculated on larger networks in comparrison with LMP and VCG results, which is the topic of the next section \ref{sec:results_and_evaluation_of_GNK}.
+From this we can now turn our attention to the question of what this proxy GNK value actually looks like when calculated on larger networks in comparrison with LMP and VCG results, which is the topic of the next section \ref{sec:results_and_evaluation_of_GNK}.
 
 \iffigures
 \input{figs/accuracy_graph1.tex}
@@ -660,6 +666,16 @@ Particular things which we note are:
 
 \section{Discussion and Conclusion}\label{sec:GNK_value_discussion}
 
+
+
+
+And the error of using this modification as a proxy for the more original GNK value was calculated for randomly generated networks as shown in Figure \ref{fig:performance_graph5}.
+From this graph it is noticed that the GNK and modified GNK values feature similarity which seems to increase with the size of the network under consideration --- although it is increasingly difficult to confirm this for networks with a size greater than 13.
+This limited observation coincides with expectations that the possible strategic counter-considerations in the minimax optimizations become less relevant in the context of larger networks.
+It is hence suspected that this modified GNK value may be an appropriate proxy for the GNK value in larger networks.
+
+
+
 GNK value incentive incompatability, and it is important to note that our paper does not address the potential consequences of this.
 While there does exist some work on similar solution concepts that are incentive compatible \cite{myerson1,Salamanca2019} their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
 
@@ -669,7 +685,7 @@ While there does exist some work on similar solution concepts that are incentive
 \item	GNK value is hard to compute, sampling and proxy extend this to about 100 to 150, but not easily beyond, which still is practically limited; and still isnt escaping NP-hard nature of the problem. which VCG and LMP potentially avoid
 \item	GNK value is interesting, and involuted way of total bargaining solution, raising the question of how much the group formulation is a relevent moral reference point
 \item	GNK value seems to have an evident `majority-rule' issue (atleast in the proxy), it remains to be seen if it holds in the normal version, but since it dosnt scale beyond 15 it seems impossible to really know. it may be very possible to mediate this by weighting individuals in the shapley value formulation.
-\item	GNK is incentive incompatable, and hence there is raised big questions about how it would perform in practice, and under strategising of the agents. atleast in VCG it is somewhat mitigated by incentive compatability, but not group incentive compatability, and LMP is known to limit to VCG in the limit of large markets where each player is small; but with GNK it could be unbounded dynamics under strategising.
+\item	GNK is incentive incompatable, and hence there is raised big questions about how badly it would perform in practice, and under strategising of the agents. atleast in VCG it is somewhat mitigated by incentive compatability, but not group incentive compatability, and LMP is known to limit to VCG in the limit of large markets where each player is small; but with GNK it could be unbounded dynamics under strategising.
 \item	GNK seems to violate an individual rationality constraint, in that it is possible for participants to walk away with less than they started with, leaving them regretting partaking in the system. when designing GNK for electricity systems, it was hoped that invidiual rationality would `fall out', and in the neyman-kohlberg formulation it might well fall out, in that the most any agent can threaten to do is to not particiapte in the system, whereas under GNK value, the power conservation constraint allows participants to extortionately threaten to oversupply others, leaving them worse off then when they were before. this is a major ethical failing.
 \end{enumerate}
 
