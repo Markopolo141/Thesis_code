@@ -58,6 +58,7 @@
 \usepackage{array}
 \usepackage{hyperref}
 %\usepackage{floatrow}
+%\usepackage[x11names, svgnames, rgb]{xcolor}
 
 \usepackage{tikz}
 \usepackage{tikzscale}
@@ -68,9 +69,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-\usetikzlibrary{arrows}
-\usetikzlibrary{arrows.meta}
 \usepgfplotslibrary{statistics}
+\usetikzlibrary{snakes,arrows,shapes}
+\usetikzlibrary{arrows.meta}
 
 \newcommand{\STAB}[1]{\begin{tabular}{@{}c@{}}#1\end{tabular}}
 
@@ -101,8 +102,8 @@
 
 
 \newif\iffigures
-\figurestrue
-%\figuresfalse
+%\figurestrue
+\figuresfalse
 
 %\usetikzlibrary{external}
 %\tikzexternalize[prefix=tikz/]
