@@ -1,0 +1,60 @@
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=6cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+colorbar,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/lmp_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=6cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+colorbar,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/vcg_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=6cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+colorbar,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/gnk_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{asdfa}
+\end{figure}
+
+
+
+
+
+
+%point meta min=-0.1, point meta max=1.0,
+%colorbar horizontal,
+%colorbar,
+%colorbar style={
+%	at={(1.07,0.64)},
+	%title=Advantage,
+	%ylabel=Z-value,
+	%ytick={-1,-0.75,...,1},
+%	height=0.52*\pgfkeysvalueof{/pgfplots/parent axis height},
+%	xticklabel style={
+%		text width=2.5em,
+		%align=below,
+		%anchor=north west,
+%		/pgf/number format/.cd,
+%		fixed,
+%		fixed zerofill
+%	}
+%}

@@ -2,7 +2,7 @@
 
 #define TINY 0.0000001
 #define MEMORY_INITIAL_SIZE 131072
-#define EPSILON 0.001
+#define EPSILON 0.0001
 
 #define DEBUG 0
 #define ARTIF 1

@@ -79,12 +79,22 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
 \newtheorem{example_game}{Example Game}
-
 \theoremstyle{definition}
 \newtheorem*{example}{Example}
-
 \theoremstyle{definition}
 \newtheorem*{solution}{Solution}
+
+\pgfplotsset{
+    colormap={blackwhite}{[5pt]
+        rgb255(0pt)=(255, 0, 0);
+        rgb255(90pt)=(255, 0, 0);
+        rgb255(100pt)=(0, 0, 100);
+        rgb255(300pt)=(0, 80, 130);
+        rgb255(500pt)=(0, 200, 130);
+        rgb255(1000pt)=(255, 255, 100)
+    },
+}
+
 
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}

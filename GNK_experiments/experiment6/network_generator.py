@@ -52,6 +52,16 @@ def run(n,k,name):
 			f.write("    p{} -- p{};\n".format(l[0],l[1]))
 		f.write("}");
 
+	with open("{}_springy.json".format(name),"w") as f:
+		Z = {"nodes":[],"edges":[]}
+		for l in links:
+			if str(l[0]) not in Z['nodes']:
+				Z['nodes'].append(str(l[0]))
+			if str(l[1]) not in Z['nodes']:
+				Z['nodes'].append(str(l[1]))
+			Z['edges'].append([str(l[0]),str(l[1])])
+		json.dump(Z, f)
+
 
 	ppc = {"bus":[],"gen":[],"branch":[],"gencost":[]}
 	b = []
@@ -62,16 +72,11 @@ def run(n,k,name):
 			b.append(l[1])
 	for i,bb in enumerate(b):
 		ppc['bus'].append([bb,-1,0])
-		if i<0:
-			#ppc['gen'].append([bb, -1,-1,-1,-1,-1,-1,-1, 1000, 0])
-			#ppc['gencost'].append([2, 0, 0, 2, -0.01, 0])
-			ppc['gen'].append([bb, -1,-1,-1,-1,-1,-1,-1, 0, -100])
-			ppc['gencost'].append([2, 0, 0, 2, 0.01, 0])
-		elif random()>0.6:
-			ppc['gen'].append([bb, -1,-1,-1,-1,-1,-1,-1, randint(10,15), 0])
+		if random()>0.5:
+			ppc['gen'].append([bb, -1,-1,-1,-1,-1,-1,-1, randint(1,15), 0])
 			ppc['gencost'].append([2, 0, 0, 2, -(randint(0,20)*0.1+0.1), 0])
 		else:
-			ppc['gen'].append([bb, -1,-1,-1,-1,-1,-1,-1, 0, -randint(10,15)])
+			ppc['gen'].append([bb, -1,-1,-1,-1,-1,-1,-1, 0, -randint(1,15)])
 			ppc['gencost'].append([2, 0, 0, 2, -(randint(0,20)*0.1+0.1), 0])
 	for l in links:
 		#ppc['branch'].append([l[0], l[1], -1,-1,  randint(0,60)*0.1+0.1, randint(20,301)])
