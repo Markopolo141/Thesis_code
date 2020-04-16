@@ -535,11 +535,11 @@ We will compare the performance of these sampling approaches in section \ref{sec
 
 All the sampling technique used to approximate the Shapley Value sample over the marginal contributions (per equation \ref{eq:shapley_value}) in slightly different ways.
 And primarily, they differ in whether they employ stratified sampling or not.
-In that, if they employ stratified sampling, they sampling the marginal contributions by player and size and estimate estimating each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}).
+In that, if they employ stratified sampling, they sample the marginal contributions by player $i$ and size $k$ and average them to estimate each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}).
 Conversely if they do not employ stratified sampling, then they directly approximate the Shapley value via equation \eqref{eq:shapley_value}.
 
-Secondarily, they differ in whether or not they sample by a join-order process. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and a particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions.%\footnote{although in practice many of these evaluations will be repeated across runs}.
-However, if they do not use a join-order process, the methods can iteratively select coalitions $S$ and player $i$ randomly and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
+Secondarily, they differ in whether or not they sample by a join-order process or not. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and one particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions.%\footnote{although in practice many of these evaluations will be repeated across runs}.
+However, if they do not use a join-order process, the methods randomly select coalitions $S$ and player $i$ and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
 
 Between the methods: \textsc{Appro} samples in join orders without stratification, \textsc{Join} samples in join orders with stratification, \textsc{Hoeffding} samples with stratification and without join orders, to minimize a sum of Hoeffding-type concentration inequalities on each of the estimates $\hat{v}_{i,k}$,
 \textsc{Neyman} samples with stratification without join orders to the sample each $\hat{v}_{i,k}$ proportional to the sample variance of the marginal contributions which make up each,
@@ -551,7 +551,7 @@ And the performance of using these different methods is evaluated in the next se
 \subsection{Sampling the GNK value at Scale}\label{section:performance}
 
 To analyze the performance of approximating the GNK with different sampling techniques we calculated the average absolute error in the approximated GNK value for randomly generated electricity networks.
-We used a known process of generating pseudo random meshed networks of buses and lines reminiscent of real electricity networks. The particular algorithm called the `Simple minimum-distance graph' method and was considered by Hines \& Blumsack et.al \cite{hines1} and is given as Algorithm \ref{alg1}.
+We used a known process of generating pseudo random meshed networks of buses and lines reminiscent of real electricity networks. The particular algorithm is called the `Simple minimum-distance graph' method as considered by Hines \& Blumsack et.al \cite{hines1} and is given as Algorithm \ref{alg1}.
 
 \begin{algorithm}[]
 \caption{Simple minimum-distance graph}
@@ -591,14 +591,15 @@ It is also seen that since these are 10 bus network, there is only 1024 unique o
 From the Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be reasonably effective and it was chosen for all further analyses.
 The reason for this superiority is the additional power of sapling with stratification and by join-orders.
 As allready stated, by using join orders, it is possible to calculate $n$ marginal contributions using $n+1$ evaluations of $v(S)$ as opposed to taking two evaluations of $v(S)$ for one marginal contribution sample point.
-This simple factor outweighed all the extra computing power associated with \textsc{SEBM} and \textsc{Neyman} methods, which did not use join-order sampling.
+This simple factor outweighed the extra computing power associated with \textsc{SEBM} and \textsc{Neyman} methods, which did not use join-order sampling - even though SEBM was witnessed to be slightly moreperformant for larger sample budgets.
 
-To evaluate the performance of the \textsc{Join} method in solving the GNK value for larger networks, we generated random networks of different sizes and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} method, and timed how long it took for the average magnitude of error between these estimations to reach an error of percent of each other.
+To evaluate the performance of the \textsc{Join} method in solving the GNK value for larger networks, we generated random networks of different sizes and estimated the GNK value using 8 simultaneous estimations using \textsc{Join} method, and timed how long it took for the average magnitude of error between these estimations to reach an average error of one percent of each other.
 In this way the run-time performance of \textsc{Join} in approximating the GNK value for variously sized random networks was computed and the results are shown in Figure \ref{fig:performance_graph2}.
 
-From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes very intractable to calculate for networks consisting of more than $16$ busses; and this was somewhat expected as the GNK value is a calculation that involves exponentially many NP-hard computations to determine.
+From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to calculate and/or approximate and quickly becomes very intractable to calculate for networks consisting of more than $16$ busses.
+This double-exponential complexity was somewhat expected as the GNK value is a calculation that involves exponentially many NP-hard computations to determine.
 
-Because of this we sought to make simplifications to the GNK value itself to ease this intractability.
+In light of this realisation we sought to make simplifications to the GNK value itself to ease its intractability.
 Specifically we considered a polynomial-time computable proxy inplace of the minimax optimizations in the characteristic function \eqref{knvalue1} of the GNK value.
 
 \iffigures
@@ -629,13 +630,13 @@ Where $\epsilon$ is a small positive value, and where we assume all the DC power
 Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritize their own utility and then the follower's utility is maximised secondarily.
 This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original expression NP-hard, as the leader is unwilling to sacrifice their utility to harm the follwer's utility and vice versa.
 
-The advantage of making this relaxation is that it reduces the NP-hard bilevel problems to single-level linear problems, hence making this modified GNK value much easier to scale.
-However, in this way, this modified GNK value encapsulates a slightly less perfect description of idealized bargaining, and may see the introduction of artifacts into the result - we briefly discuss the similarity of the original GNK with this modification in section \ref{sec:GNK_value_discussion}.
+This relaxation reduces the two-part NP-hard bilevel problems of equation \ref{knvalue1}, into two-part linear programming problems.
+This transformation makes the GNK value much easier to compute at scale, but at the cost of being a less perfect description of idealized bargaining.
+Additionally this transformatiob may see the introduction of unique artifacts into the result - we briefly discuss the similarity of the original GNK with this modification in section \ref{sec:GNK_value_discussion}.
 
 Some of the runtime statistics of sampling this modified GNK value with \textsc{Join} sampling for randomly generated network sizes are shown in Figure \ref{fig:performance_graph4}.
-From the figure it is seen that it is readily possible to calculate to about one percent accuracy this modified GNK value in three minutes of runtime for networks of upto the size of about 50 nodes, and with ten minutes of runtime upto about 80 nodes.\footnote{\label{note1} All calculations were performed on an Dell Optiplex 9020, with Intel i7 quad core 3.6GHz processor, and all source-code available at:\\
-\href{https://github.com/Markopolo141/The\_Generalized\_N-K\_Value}{github.com/Markopolo141/The\_Generalized\_N-K\_Value}}
-Larger networks are expected to be tractable with more computing power and/or execution time, but for further methodological improvements it may be necessary employ further approximations such as player clustering \cite{DBLP:journals/corr/abs-1903-10965}, or potentially move away from Shapley value structure entirely.
+From the figure it is seen that it is readily possible to calculate to about one percent accuracy this modified GNK value in three minutes of runtime for networks of upto the size of about 50 nodes, and with ten minutes of runtime upto about 80 nodes.\footnote{\label{note1} All calculations were performed on an Dell Optiplex 9020, with Intel i7 quad core 3.6GHz processor.}%, and all source-code available at:\\
+%\href{https://github.com/Markopolo141/The\_Generalized\_N-K\_Value}{github.com/Markopolo141/The\_Generalized\_N-K\_Value}}
 
 From this we can now turn our attention to the question of what this proxy GNK value actually looks like when calculated on larger networks in comparrison with LMP and VCG results, which is the topic of the next section \ref{sec:results_and_evaluation_of_GNK}.
 
@@ -643,31 +644,43 @@ From this we can now turn our attention to the question of what this proxy GNK v
 \input{figs/accuracy_graph1.tex}
 %\fi
 
-%\iffigures
-\input{figs/probability_comparrison1.tex}
-%\fi
-
 
 
 \section{Results and Evaluation of the GNK value at scale}\label{sec:results_and_evaluation_of_GNK}
 
 
-%\input{figs/experiment_graph1.tex}
+In this section we give display and discuss some of the results exhibited by modified-GNK, VCG and LMP for randomly generated larger networks.
+Particularly in figures \ref{fig:experiment_table_11}-\ref{fig:experiment_table_14} we show the results of these techniques applied to an example 90 bus network, consisting of a 50-50 split of small consumers and generators of electricity.
+From this exersize we are able to glimse of some of the distinct features of these solutions when applied to a large number of players.
 
+The most immediate thing which is apparent is that LMP and VCG are nearly identical, while GNK is distinctly different, in the utility imputations they induce.
+The similarity between VCG and LMP can be explained by a variety of means.
+But a most informal explanation is that both LMP and VCG implement the same electrical outcome, and while LMP allocates payments equal to a participants dispatch multiplied by the marginal social value per unit power they dispatched, VCG allocates each participant directly the difference in value they create - which in this case is marginal anyway.
+The confluence between VCG and LMP is not only witnessed by us, but also has been noted in a more general settings where there are many small participants \cite{NATH2019673, 8430852}.%\ref{subsec:summary_discussion_VCG}
+
+In figure \ref{fig:experiment_table_11} and \ref{fig:experiment_table_12} we see that there are no negative utility imputations, but that positive utility is allocated to thoes generators who are able to provide power the cleapest, and thoes consumers who value power the greatest.
+This is particularly because the LMP scheme creates prices for power such that the cheapest generators are scheduled to create power which is consumed by the most desiring consumers up until a marginal point where no further dispatch/consumption would be unmotivated.
+From these graphs we identify thoes consumers/generators which generate/recieve power as they are rewarded with positive utility.
+
+Conversely we notice in figure \ref{fig:experiment_table_13} a completely different result, that the GNK imputes utility to thoes consumers who do not recieve power (as already noted in section \ref{sec:features}), but furthermore, it allocates negative net utility to all but the cheapest generators, even thoes who generate power at the socially optimal point.
+And this dynamic is not particularly easy to explain.
+
+One primary explanation, is to contemplate the average additional playoff advantage to a coalition of a high-cost generator.
+Particularly, if we consider the in taking a 50-50 coin flip of who chooses their strategies first, if the high-cost generator is in the coalition, and if the coalition goes first, then the generator will be idle (bringing no benefit to the coalition), whereas if the complement goes first, then it potentially will get distpatched (hence causing a loss to the coalition), because the anti-coalition will choose to consume power and power-constraints must be obeyed, giving them a greater pay off advantage.
+the same principle works in reverse, if the high-cost generator belongs to the anti-coalition then it is a benefit to the coalition.
+hence the high-cost generator only brings negative payoff-advantage.
+
+Particularly the way in which the generators get allocated negative utility is that they are targets of being forced to generate at their own defecit since power-conservation constraints must be obeyed, and this becomes a negotiating lever, in the selection of threat points.
+
+conversely consumers can only consume, which is always a positive utility to them, in the worst case, they dont consume which costs them zero utility, therefore they are at a bargaining advantage, which is reflected in the positive utility they are rewarded with under GNK.
+
+The result of this behavior is somewhat unexpected and interesting; and we summarise the primary findings in the following section \ref{sec:GNK_value_discussion}.
+
+
+%\iffigures
 \input{figs/experiment_table1.tex}
+%\fi
 
-In this section we give some results of the utility imputations on larger and randomly generated networks between modified-GNK, VCG and LMP.
-Primarily from this exersize we are able to glimse of some of the distinct features of these solutions when applied to a large number of players.
-
-Particular things which we note are:
-
-\begin{enumerate}
-\item	The GNK value ascribes negative utilities
-\item	the VCG and LMP are similar
-\item	The GNK has a majority-rule effect between consumers and generators
-\item	LMP and shapley value are related
-\item	GNK seems to feature entirely different dynamics, and sometimes appears to be inverted with respect to rewards
-\end{enumerate}
 
 \section{Discussion and Conclusion}\label{sec:GNK_value_discussion}
 
@@ -679,7 +692,7 @@ From this graph it is noticed that the GNK and modified GNK values feature simil
 This limited observation coincides with expectations that the possible strategic counter-considerations in the minimax optimizations become less relevant in the context of larger networks.
 It is hence suspected that this modified GNK value may be an appropriate proxy for the GNK value in larger networks.
 
-
+Larger networks are expected to be tractable with more computing power and/or execution time, but for further methodological improvements it may be necessary employ further approximations such as player clustering \cite{DBLP:journals/corr/abs-1903-10965}, or potentially move away from Shapley value structure entirely.
 
 GNK value incentive incompatability, and it is important to note that our paper does not address the potential consequences of this.
 While there does exist some work on similar solution concepts that are incentive compatible \cite{myerson1,Salamanca2019} their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
@@ -704,4 +717,10 @@ However ultimately its formulation encodes a specific type of extoritionate prin
 
 reflectively, it is interesting how perfect competition may or may not coincide with what is equal and ethical.
 and the question of when and where these two coincide, and if they might coincide in the context of electricity networks was part of the motivation of this work.
+
+
+%\iffigures
+\input{figs/probability_comparrison1.tex}
+%\fi
+
 
