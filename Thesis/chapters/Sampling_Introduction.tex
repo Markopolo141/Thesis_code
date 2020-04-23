@@ -1,6 +1,9 @@
 \chapter{Stratified Sampling}
 
-In this chapter we investigate the different possible rules for choosing samples from strata in the context of stratified sampling.
+In the previous chapter we introduced the GNK value, considered that it could be approximated by a sampling procedure.
+Particularly that the GNK value could be identified with the Shapley Value over a cooperative game.
+The sampling for the Shapley Value of this cooperative game was evidently a form of stratified sampling.
+Accordingly, in this chapter we investigate the different possible rules for choosing samples from strata in the context of stratified sampling.
 
 Particularly we review the orthodox solution to the problem - which is called Neymann allocation.
 We show how it is equivalent to minimising a concentration inequality called Chebyshev's ineqality.
@@ -8,17 +11,21 @@ We then turn our attention to alternative concentration inequalities and particu
 
 In the first section of this chapter, we address the recent innovation of Empirical Bernstein Bounds (EBBs) as concentration inequalities that specifically include variance information via the sample variance explicitly.
 And show how EBBs can be bound together using probability unions to create a concentration inequality for stratified sampling - hence defining a new rule for choosing samples in the context of stratified sampling.
+And we develop a stronger EBB for this purpose.
 
-We develop a new EBB and show its effectiveness against other EBBs in the context of the Upper Confidence Bound method of Bandit algorithms.
+The work in the first part most directly reflects published material: \\\-\hspace{1cm}``An Engineered Empirical Bernsten Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessable: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
 
-In the second section of this chapter, we specifically give a multi-part derivation of a concentration inequality specifically tailored for the purposes of stratified sampling.
+In the second section of this chapter, we specifically give a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
 
 And in the third section, we contrast the effectiveness of the stratified sampling rules in the context of synthetic data sets, and also in the application of approximating the Shapley Value.
+
+The second and third parts most directly reflect unpublished material: \\\-\hspace{1cm}`Stratified Finite Empirical Bernstein Sampling'', Preprints 2019\\
+(accessable: \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2})\\
 
 \section{Introduction and Background}
 
 In the previous chapter, we defined the GNK value and saw that there is a significant computational difficulties in solving the GNK value at scale.
-Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{} and \ref{}, \ref{} and \ref{}).
+Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{da_value_eq} or \ref{eq:shapley_value2} by conversion identified by equation \ref{convert1}).
 
 It was realised that these averages might be approximated by sample averages,
 and hence that one potential avenue of approximating the GNK value at scale was by sampling.
