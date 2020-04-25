@@ -1,26 +1,25 @@
 
-\newpage
+%\newpage
 
 \section{Stratified Sampling by a Stratified Probability Bound}\label{section:SEBB}
 
 In the previous section we considered different possible EBBs as a means of yielding different methods of choosing samples in the context of stratified random sampling.
-This process proceeds by binding EBBs together using union bounds to create a bound on the Stratified sample mean error (via with Theorem \ref{triangle_theorem1}).
-Which is sequentially minimised by choosing additional samples.
+This process proceeds by binding EBBs together using union bounds to create a bound on the Stratified sample mean error (via with Theorem \ref{triangle_theorem1}); which is then sequentially minimised by the choosing of additional samples.
 
 However in considering this process, and also the weakness of union bounds, it was discovered that there was a way to more directly create an empirical (ie. depending on sample variances) concentration inequality specifically for stratified random sampling; which could then serve as a basis for choosing samples
 
-We note that the derivation in this section gets rather difficult, and we understand that the result is a concentration inequality that is complex and tailored for a specific application, and as such, is the only one of its kind.
+We note that the derivation in this section gets rather difficult, and we understand that the result is a concentration inequality that is complex and tailored for a specific application, and as such, we suspect is the only one of its kind.
 
-The resulting concentration inequality gives an analytic bound on the error of the stratified mean explicitly considering the sample variance, data widths, sample number, and any additional weights of all of the strata; including factors specifically for any strata sampled with and/or without replacement.
+The resulting concentration inequality gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includs factors specifically for strata sampled with and/or without replacement.
 
-The derivation involves and utilises much of the same components of the previous section and an additional martingale theorem specifically for any any strata sampled without replacement.
+The derivation involves and utilises much of the same components of the previous section with an additional martingale theorem specifically for any any strata sampled without replacement.
 
 \subsection{A new probability bound for Stratified Sampling (SEBB)}
 
 To begin the derivation of our new concentration inequality for stratified random sampling, we utilize and build apon some of the results of the previous section.
 
 
-To begin with we need to consider three upper bounds for various moment generating functions.
+To begin, we need to consider three upper bounds for various moment generating functions.
 The first of which has already been given in the previous section, and is Hoeffding's lemma - Lemma \ref{Hoeffdings_lemma_lemma}.
 The other two are strongly related to Theorems \ref{hoeffdings1} and \ref{sample_squares} respectively.
 These two theorems derive an upper bound on the moment generating function and then minimise them with the free parameter to form a concentration inequality.
@@ -91,7 +90,7 @@ $$ \E[\exp(-q X^2)] \le \exp\left(\frac{1}{2}\sigma^2q^2(D^2-\sigma^2)-\sigma^2q
 and the result follows by multiplying by $\exp(q\sigma^2)$.
 \end{proof}
 
-The three inequalities above, Lemmas \ref{hoeffdings_lemma_lemma},\ref{expectation1} and \ref{expectation2}, are used in the derivation of our stratified sampling concentration inequality in Section~\ref{sec:constructing}. One of the primary reasons for utilizing these weakened bounds on the moment generating function is that they make the subsequent mathematics far more tractable.
+The inequalities above, Lemmas \ref{expectation1} and \ref{expectation2}, as well as Lemma \ref{Hoeffdings_lemma_lemma}, are used in the derivation of our stratified sampling concentration inequality in Section~\ref{sec:constructing}. One of the primary reasons for utilizing these weakened bounds on the moment generating function is that they make the subsequent mathematics far more tractable.
 However in order to use these moment generating functions we need to explicitly describe the difference between the moment generating functions of individual random variables (which these are) and the moment generating function of the sample mean of them.
 
 \subsubsection{The Moment Generating Function of Sample Means}\label{sec:without_replacement}
@@ -163,7 +162,7 @@ We note that this result could potentially be made much stronger by working arou
 Since Lemmas~\ref{martingale0} and~\ref{martingale1} share a common form, and because of Hoeffding's reduction (Lemma~\ref{hoeffdings_reduction}), 
 all the derivations that follow that invoke Lemma~\ref{martingale1} have direct analogues using Lemma~\ref{martingale0} for the context of sampling without replacement.
 Note, however, that the bound without replacement (Lemma~\ref{martingale0}) may or may not be tighter than the bound with replacement (Lemma~\ref{martingale1}). However, the process of substituting one for the other can be done judiciously on a case-by-case basis to create the tightest possible bound.
-All the numerical results in Section \ref{} (that are relevant to sampling without replacement) have been produced with this judicious choice conducted.
+All the numerical results in Section \ref{section:statistics_results} (that are relevant to sampling without replacement) have been produced with this judicious choice conducted.
 
 \subsection{The Stratified Finite Empirical Bernstein Bound and Sampling Method}
 \label{sec:constructing}
@@ -225,11 +224,11 @@ $$ \pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge t\right)\le 2
 Minimizing with respect to $s$ and rearranging gives result.
 \end{proof}
 
-This particular bound assumes knowledge of the variances of the strata, and will be used as a tool for selecting samples primarily for comparison with other sampling methods (such as Neyman sampling) in Section \ref{}.
+This particular bound assumes knowledge of the variances of the strata, and will be used as a tool for selecting samples primarily for comparison with other sampling methods (such as Neyman sampling) in Section \ref{section:statistics_results}.
 
 It is a concentration inequality for the weighted stratum means, leading to the more general question of what the weights should be. In most cases, the weights $\tau_i$ can be considered as the probability weights $\tau_i=n_i/(\sum_{j=1}^nn_j)$ of standard stratified sampling.
 In this context this probability bound can be used as-is for a measure of uncertainty in stratified random sampling if the true variances (or alternatively, upper bounds on the true variances) of the strata are known.
-However the weights can be assigned differently - and we will investigate such a case for the Shapley Value in section \ref{}.
+However the weights can be assigned differently - and we will investigate such a case for the Shapley Value in section \ref{section:statistics_results}.
 
 The bound depends on a weighted sum of strata variances $ \sum_{i=1}^n \sigma_i^2 \Psi_{m_i}^{n_i} \tau_i^2 $, and in most situations these values aren't known.
 Hence to use this inequality we need to consider the probable error between the weighted sum of strata variances and the weighted sum of strata sample variances.

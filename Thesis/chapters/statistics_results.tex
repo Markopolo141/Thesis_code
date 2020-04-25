@@ -131,7 +131,7 @@ $\quad \p(\hat{\mu}_i-\mu_i \ge Z(m_i,D_i,\hat{\sigma}^2_i,t)) \le t $
 In the next Section~\ref{sec:application} we evaluate the performance of SEBM with other methods in the context of synthetic data.
 
 
-\pagebreak
+%\pagebreak
 \section{Numerical Evaluation}\label{sec:application}
 
 In this section assess the value of SEBM as an online method of sampling from stratified data.
@@ -203,10 +203,10 @@ with $\alpha$ and $\beta$ parameters drawn uniformly between 0 and 4 for each st
 \input{figs/big_table2.tex}
 
 
-Figures \ref{Table1} and \ref{Table11} compares the distribution of absolute error achieved by each of the sampling methods over 5000 rounds of these data sets.
+Figures \ref{Table1} and \ref{Table111} compares the distribution of absolute error achieved by each of the sampling methods over 5000 rounds of these data sets.
 Each panel presents the results that the methods achieve for a given budget of samples, 
 expressed as a multiple of the number of strata (noting that data sets where the sampling budget exceeded the volume of data were excluded).
-From the plots in Figures \ref{Table1} and \ref{Table11}, we can see that our sampling technique (SEBM and SEBM-W) performs comparably to
+From the plots in Figures \ref{Table1} and \ref{Table111}, we can see that our sampling technique (SEBM and SEBM-W) performs comparably to
 % competitive-to and sometimes better-than 
 Neyman sampling (\textsc{Ney} and \textsc{Ney-W}) despite not having access to knowledge of stratum variances.
 Also, there is a notable similarity between SEBM* and SEBM.
@@ -223,11 +223,10 @@ For this purpose, a data set with two strata is generated, with each stratum con
 The data in the first stratum is uniform continuous data in range $[0,1]$, while the data in the second is Bernoulli distributed, with all zeros except for a specified small number, $a$, of successes with value 1.
 For this problem, we conduct stratified random sampling with a budget of $300$ samples, comparing the SEBM*, SEBM and \textsc{Ney} methods.
 The average error returned by the methods across 20,000 realizations of this problem, plotted against the number of successes $a$, are shown as a graph in Figure \ref{biggraph3}.
-
 This figure demonstrates that SEBM and SEBM* perform poorly when the strata contain only very small numbers of successes.
 This under-performance is not simply a result of the SEBM method oversampling in a process of learning the stratum variances, as the under-performance is present in SEBM* as well.
-The reasons for this under-performance are discussed in conjunction with other results in more detail in Section~\ref{sec:discussion}.
-Before this, we considered the calculation of the Shapley value as an example computational application of our stratified sampling method.
+The reasons for this under-performance are discussed in in more detail in Section~\ref{sec:discussion}.
+But before this discussion, we considered the calculation of the Shapley value as an example computational application of our stratified sampling method.
 
 \input{figs/bernoulli_table.tex}
 

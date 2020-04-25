@@ -1,21 +1,18 @@
 \chapter{Stratified Sampling}
 
-In the previous chapter we introduced the GNK value, considered that it could be approximated by a sampling procedure.
-Particularly that the GNK value could be identified with the Shapley Value over a cooperative game.
-The sampling for the Shapley Value of this cooperative game was evidently a form of stratified sampling.
+In the previous chapter we introduced the GNK value and considered that it could be approximated by a stratified sampling process (section \ref{sec:sampling_techniques}).
 Accordingly, in this chapter we investigate the different possible rules for choosing samples from strata in the context of stratified sampling.
 
-Particularly we review the orthodox solution to the problem - which is called Neymann allocation.
-We show how it is equivalent to minimising a concentration inequality called Chebyshev's ineqality.
+Particularly we review the orthodox solution to the problem, which is called Neymann allocation, and show how it is equivalent to minimising a concentration inequality called Chebyshev's ineqality.
 We then turn our attention to alternative concentration inequalities and particularly the various forms of Chernoff bounds.
 
-In the first section of this chapter, we address the recent innovation of Empirical Bernstein Bounds (EBBs) as concentration inequalities that specifically include variance information via the sample variance explicitly.
-And show how EBBs can be bound together using probability unions to create a concentration inequality for stratified sampling - hence defining a new rule for choosing samples in the context of stratified sampling.
+In the first section of this chapter, we address the recent innovation of Empirical Bernstein Bounds (EBBs) which are concentration inequalities that specifically incorporate sample variance information.
+And then show how these EBBs can be bound together using probability unions to create a concentration inequality for stratified sampling - which can then be used as a new rule for choosing samples in the context of stratified sampling.
 And we develop a stronger EBB for this purpose.
 
 The work in the first part most directly reflects published material: \\\-\hspace{1cm}``An Engineered Empirical Bernsten Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessable: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
 
-In the second section of this chapter, we specifically give a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
+In the second section of this chapter, we develop a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
 
 And in the third section, we contrast the effectiveness of the stratified sampling rules in the context of synthetic data sets, and also in the application of approximating the Shapley Value.
 
@@ -27,8 +24,7 @@ The second and third parts most directly reflect unpublished material: \\\-\hspa
 In the previous chapter, we defined the GNK value and saw that there is a significant computational difficulties in solving the GNK value at scale.
 Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{da_value_eq} or \ref{eq:shapley_value2} by conversion identified by equation \ref{convert1}).
 
-It was realised that these averages might be approximated by sample averages,
-and hence that one potential avenue of approximating the GNK value at scale was by sampling.
+It was realised that these averages might be approximated by sample averages, and hence that one potential avenue of approximating the GNK value at scale was by sampling.
 And the process of replacing analytic averages with sample averages leads to the question of how that sampling process could be done most effectively.
 
 The process of selecting samples to most accurately estimate an average over sample averages is strongly similar to that faced in the process of Stratified sampling, which is a well known sampling technique.
@@ -58,16 +54,18 @@ Particularly, when we have a population decomposed into strata of known sizes wh
 For instance, if we sample primarily from a single stratum, we would likely have a very good estimate of the average for that one stratum, but no accuracy in estimate for the others, leading to a weak estimate of the population average.
 Conversely, if we choose to take the same number of samples from all the strata, some of the strata might be far smaller or have far less variance than others, resulting in thoes being oversampled.
 
-This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. eg. for sampling the Shapley Value, the question of which strata should sampled becomes a question of which sized coalitions should be sampled as we consider each players marginal contributions to them.
+This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. And in the context of sampling the Shapley Value, the question of which strata should sampled is equivalent to a question about what sized coalitions should be sampled in consideration of each players marginal contributions to them.
 
-The developments that we outlay in this chapter hence have relevance not only to the specific tasks of computing the GNK and Shapley Value, but also have potential relevance for statisticians and statistics more generally.
-We will also show how these techniques touch on topics relevant to machine learning, particularly in the context of Bandit algorithms; and also how our work extends from present knowledge on the topic of concentration inequalities.
+The developments that we outlay in this chapter have relevance not only to the specific tasks of computing the GNK and Shapley Value, but also have potential relevance for statisticians and statistics more generally.
+%We will also show how these techniques touch on topics relevant to machine learning, particularly in the context of Bandit algorithms; and also how our work extends from present knowledge on the topic of concentration inequalities.
 
 The core question we face is, how do we sample optimally between the strata in stratified sampling?
 This question has been considered before, and the most direct historical answer to the question is called \textit{Neyman allocation} or \textit{sampling} \cite{1938.10503378,10.2307/23339498}.
 The principle of Neyman sampling is that it seeks the minimise the weighted variance of the population estimate assuming knowledge of the variances of the strata, and it can most directly be interpreted as a process of minimising Chebyschev's inequality.
 
 \subsection{Neyman Allocation}\label{sec:neyman_sampling}
+
+Neyman allocation suggests that if we want to minimise the variance in the final estimate of the population, we should sample directly in proportion to the stratum variances multiplied by their sizes:
 
 \begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
 If we have $m$ strata, of sizes $N_i$, with variance $\sigma_i^2$, and we sample with replacement (ie. all samples are independent and identically distributed). If we have a sample budget $n$, and we can choose how much to sample from each strata, $n_i$.
@@ -108,7 +106,7 @@ In this context the variance of the sampled population mean is the only paramete
 
 One primary limitation of using Neyman allocation, is that is presupposes knowledge of the variances of the strata, which usually aren't available beforehand or in practice.
 One relatively easy way of going around this problem is to go through a process to estimate the variances of the strata, perhaps as a prior step, and then using this knowledge with Neyman allocation to choose further samples.
-And indeed some proceses do this, particularly in Section \ref{X} we will consider a method of sampling the Shapley Value using exactly this idea.
+And indeed some proceses do this, particularly in Section \ref{sec:shapley} we will consider a method of sampling the Shapley Value using exactly this idea.
 And while this idea certainly works, it leaves open the question about how much sampling should be done to estimate the strata variances against how much sampling should be left to sample by those estimated variances.
 
 A Secondary limitation of using Neyman allocation (as presented here) is that it can potentially prescribe non-integer numbers of samples. While it is rather straightforward that these can be rounded to integer numbers in-practice. The question of how to optimally round these numbers is a further question that has been given distinct treatment, and infact a rather recent answer.
@@ -158,7 +156,7 @@ using Markov's inequality and the i.i.d of the samples, respectively.
 \end{proof}
 
 Here we have given the general form of Chernoff bounds for the sample mean of random variable, parameterised by a choice of $s>0$ and $t$.
-Using this kind of lemma, many well-known examples of Chernoff bounds (such as Hoeffding's inequality) follow from the derivation of upper bounds for $\E\left[\exp(sX)\right]$, also known as the \textit{moment generating function} - as we will show in Theorems \ref{} and \ref{}.
+Using this kind of lemma, many well-known examples of Chernoff bounds (such as Hoeffding's inequality) follow from the derivation of upper bounds for $\E\left[\exp(sX)\right]$, also known as the \textit{moment generating function}.
 
 For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality.
 And hence, in this way a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
@@ -224,7 +222,7 @@ Alternatively by rearranging:
 \end{theorem}
 
 The most limiting feature of Hoeffding's inequality is that it assumes that the data are bounded within a range $a\le X\le b$, which obviously limits the application of Hoeffding's inequality.
-Similarly Chebyschev's inequality only sensibly holds in contexts where the data's distribution has a defined variance (consider various heavy-tailed distributions, for instance).
+Similarly Chebyschev's inequality only sensibly holds in contexts where the data's distribution has a defined variance (consider that various heavy-tailed distributions may not have a finite variance, for instance).
 What is quite notable is that it is difficult to come to very meaningful conclusions about data processes without assuming atleast -something- about the distribution of data in question.
 And further that these inequalities can be seen as being largely (if not entirely) a consequence of chosen assumptions.
 These assumptions may be based on prior information, expert opinion, or determined from the characteristics of the system under observation.

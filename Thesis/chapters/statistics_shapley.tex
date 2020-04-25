@@ -25,7 +25,7 @@ In this context the Shapley value $\varphi$ is a unique mapping from cooperative
 \end{itemize}
 
 Specifically, the Shapley value is expressed as:
-\begin{equation}\label{shap1}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
+\begin{equation}\label{shap1_X}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
 That is, under the Shapley value each player is afforded their average marginal contribution across every possible sequence of player join orderings.  
 Or, if $v_{i,k}$ is the average marginal contribution which player $i$ can make across coalitions of size $k$:
 \begin{equation}
@@ -33,10 +33,10 @@ v_{i,k} = \frac{1}{\binom{n-1}{k}}\sum_{S\subset N\setminus \{ i\} , |S|=k} %\fr
 (v(S\cup\{i\})-v(S))
 \end{equation}
 then the Shapley value can be expressed as an average:
-\begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}v_{i,k} \end{equation}
+\begin{equation}\label{shap2_X} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}v_{i,k} \end{equation}
 Though the Shapley value is conceptually simple, its use is hampered by the fact that its total expression involves exponentially many evaluations of the characteristic function (there are $n\times 2^{n-1}$ possible marginal contributions between $n$ players).
 
-However, since the Shapley value is expressible as an average over averages by Equation~\eqref{shap2}, 
+However, since the Shapley value is expressible as an average over averages by Equation~\eqref{shap2_X}, 
 it is possible to approximate these averages via sampling techniques, and these averages are naturally stratified by coalition size.
 In previously published literature, other techniques have been used to allocate samples in this context, particularly simple sampling \citep{DBLP:journals/cor/CastroGT09}, Neyman allocation \citep{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}, and allocation to minimize Hoeffding's inequality \citep{2013arXiv1306.4265M}.
 
@@ -148,9 +148,10 @@ In this graph we considered the following bounds for the error:
 
 Particularly we see from Figure \ref{fig:bounds_widths} that tightest bounds are given by thoes methods which are rooted in perfect variance information, and the widest bounds are given by thoes methods which utilize probability unions to bind EBBs together (via Theorem \ref{triangle_theorem2}).
 What is most notable is the dissimilarity between the widths of the bounds and their effectiveness as a target for sampling minimisation; as choosing samples to minimise a probability bound is sensitive to the shape of the bound not its magnitude.
-Also comparing this Figure \ref{fig:bounds_widths}, with Figure \ref{fig:1},\ref{fig:11} we can see that the width of the bounds are much wider than the magnitudes of the error which are actually achieved; and this is quite expected, as analytic concentraiton inequalities function generally as conservative confidence intervals on the error of sampling.
+Also comparing this Figure \ref{fig:bounds_widths}, with Figures \ref{Table1},\ref{Table111} we can see that the width of the bounds are much wider than the magnitudes of the error which are actually achieved; and this is quite expected, as analytic concentraiton inequalities function generally as conservative confidence intervals on the error of sampling.
 
 \input{figs/convolution_graph.tex}
+\input{figs/widths_graph.tex}
 
 %Next, note that the results of Figure~\ref{Table1} show that there is a mid-range of sample sizes where choosing a different method can even have a greater impact on sampling efficiency and rate of average error reduction than the difference between sampling with or without replacement.
 %This is an important insight, as sampling real-world data (e.g. surveys, polling, destructive testing, etc) can be an expensive and slow process.
@@ -211,12 +212,14 @@ However we attribute our methods startling success in estimating the Shapley val
 One primary limitation of our method(s) is that it rests on assumption of known data widths $D_i$ (and in the case of sampling-without-replacement, also on strata sizes $N_i$), which may not be exactly known in practice.
 One way to overcome this may be to use our method with a reliable overestimate these parameters (by expert opinion or otherwise). This approximation or estimation may itself open consideration of other probability bounds and/or sampling methods, however we have not investigated this line of inquiry. 
 
-In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.
+In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.\footnote{
+Sourcecode for all the experiments in this paper are available at:\\ \href{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling}{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling
+}}
 
 % Our concentration inequality, Equation~\eqref{big_equation}, is derived by a combination of Chernoff bounds fused together with probability unions, so it is expected to give conservative confidence intervals on the error of the estimate in stratified random sampling, which may be useful outside of the context of sampling decisions.
 
 
-\input{figs/widths_graph.tex}
+
 
 
 \section{Multidimensional Extension}\label{sec:multi}
@@ -283,29 +286,9 @@ In this context, an example sampling process might consist of sampling to maxima
 This formulation can be applied to more involved computational tasks that involve sampling data with multiple features or auxiliary variables.
 
 
-\section{Conclusions and Future Work}\label{sec:future}
 
 
 
 
 
-
-
-%We begin this section with a discussion of the relationship of our bound to existing concentration inequalities, 
-%and some opportunities for future improvements. 
-The derivation of our inequality extends from consideration of Chernoff bounds and probability unions in a similar vein to other EBB derivations \citep{Maurer50empiricalbernstein,bardenet2015}.
-%, however we do not argue that our particular concentration inequality is ideal.
-However, the bounds on the moment generating functions that we developed in Section~\ref{sec:components} use loosening approximations, and hence stronger and/or more representative bounds could be developed at the cost of greater mathematical complexity.
-Alternatively, an approach utilizing entropic \citep{Boucheron_concentrationinequalities} or Efron-Stein inequalities \citep{efron1981} could result in different and potentially tighter results.
-
-% Additionally, although our method works generally, there may be better or more appropriate sampling methods in the event that there is more information known about the underlying distributions.
-% It is sometimes possible to derive ideal concentration inequalities in restricted circumstances, and more broadly there exist some computational methods to numerically derive ideal bounds \citep{OUQ1,doi:10.1137/13094712X}.
-% Using these techniques it may be possible to derive ideal numerical bounds, particularly for bounds considering very small numbers of samples.
-
-
-
-% Full exploration of the potential applications are beyond the scope of this document.
-% However, at present, we are pleased to present our analytic concentration inequality (Equation \ref{big_equation}) as an immediately computable expression and practical method for choosing samples from strata.\footnote{
-Sourcecode for all the experiments in this paper are available at:\\ \href{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling}{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling
-}
 

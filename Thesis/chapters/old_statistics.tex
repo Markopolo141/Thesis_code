@@ -25,7 +25,7 @@ However these inequalities depart from Hoeffding's inequality in that they speci
 In this section we show how deriving (and subsequently minimising) inequalities such as these will allows for us to conduct stratified sampling in a single stage, rather than in two (as is nessisary in Neyman sampling).
 
 The derivation of these inequalities also assume that the values that the samples take are probabilistically independently from each other.  This most naturally corresponds to the schema of sampling \textit{with} replacement, rather than sampling \textit{without} replacement.
-In the next Section \ref{} we will consider probability bounds specifically developed for sampling without replacement. However it is sufficient to note that all these probability bounds also hold in the case of sampling without replacement; but the converse is not nessisarily true. 
+In the next Section (particularly \ref{sec:without_replacement}) we will consider probability bounds specifically developed for sampling without replacement. However it is sufficient to note that all these probability bounds also hold in the case of sampling without replacement; but the converse is not nessisarily true. 
 This is due to a result shown by \cite{hoeffding1}:
 
 \begin{lemma}[Hoeffding's reduction]\label{hoeffdings_reduction}
@@ -96,7 +96,7 @@ And also to illustrate exactly how weak probability unions are.
 
 The triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} we are effectively developing a bound assuming all the errors of the estimates of the strata are additive - which is positively the worst case.
 Whereas we know that (or can possibly assume) that the errors in the strata estimates are actually independant of each other, and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
-Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following Section \ref{}.
+Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following Section \ref{section:SEBB}.
 
 However in this section, it is by these bounds that we can bind together EBB's of our choice to create a bound for the error of the stratified estimate - which we can then sample to minimise.
 
@@ -190,11 +190,10 @@ $$z\alpha+\gamma = (((z+fb-b)(f-b-1)-b)e^f+(f^2+z)e^b)(b-f)^{-2}$$
 Minimizing with respect to $f$ occurs at $f=\frac{-z}{b}$ and gives the result.
 \end{proof}
 
-The reason for the separation of Bennet's inequality into two parts is that we will reuse the Lemma to derive a weaker but more mathematically manipulatable inequality later (as theorem \ref{}).
+The reason for the separation of Bennet's inequality into two parts is that we will reuse the Lemma to derive a weaker but more mathematically manipulatable inequality later (as Lemma \ref{expectation1}).
 In our statement of Bennet's inequality the assumption that the mean is zero can be used without a loss of generality, in exactly the same way as we did with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper}).
 And so, Bennett's inequality gives us a probability bound for the difference of the sample mean from the true mean, given the variance - in a similar way as does Chebyshev's inequality.
 The fundamental difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a line over the exponential function.
-Additionally the derivation of Hoeffdings inequality (per Theorem \ref{Hoeffdings_inequality_proper}) is built with a mathematically simplifying assumption that is not nessisary - but can be conducted without it as Theorem \ref{} in the Appendix \ref{}.
 
 As already stated, the variance is often unknown in practice, but can only be estimated via the sample variance statistic. And so we sought to derive a bound for the error between the sample variance and the variance. To do this we derived a concentration inequality for the sample squares to use in conjunction with the variance decomposition Lemma \ref{variance1}.
 We derived the following concentration inequality (which we note, appears to be novel):
@@ -229,50 +228,7 @@ It is worth noting that we choose to restrict the application of this inequality
 
 Since the Theorem \ref{sample_squares} is derived from a fundamentally similar process to Bennet's inequality we expect it to have similarly strong properties.
 
-\begin{figure}[b]%
-\centering
-\parbox{2.5in}{
-
-\begin{tikzpicture}[scale=0.8]
-\draw[->] (-3.5,0) -- (2,0) node[anchor=north] {$x$};
-\draw[->] (0,0) -- (0,4) node[anchor=east] {};
-\draw[smooth, domain=-3.5:2.0, color=black, line width=0.20mm] 
-    plot (\x,{e^(\x)/2}) node [right] {\footnotesize $e^x$};
-\draw[smooth, domain=-3.5:2.0, color=red, line width=0.20mm] 
-    plot (\x,{(0.316137167001903*\x*\x + 1.39988395124422*\x + 1.67055451771745)/2}) node [right] {\footnotesize $\alpha x^2+\beta x+\gamma$};
-\draw (1.5,-0.1) -- (1.5,{e^(1.5)/2});
-\draw (-2,-0.1) -- (-2,{e^(-2)/2});
-\draw (-2.5,-0.1) -- (-2.5,0);
-\draw[black,fill] (1.5,{e^(1.5)/2}) circle (0.25mm);
-\draw[black,fill] (-2,{e^(-2)/2}) circle (0.25mm);
-\draw	(-2.5,-0.25) node{{\scriptsize $a$}}
-		(-2,-0.25) node{{\scriptsize $f$}}
-		(1.5,-0.25) node{{\scriptsize $b$}};
-\end{tikzpicture}
-
-\caption{A parabola parametarised by touching and intercepting points $f,b$ above an exponential curve for all $a\le x\le b$}%
-\label{fig:graph1}}%
-\qquad
-\begin{minipage}{2.5in}%
-
-\begin{tikzpicture}[scale=1.25]
-\draw[->] (-2.2,0) -- (2.2,0) node[anchor=north] {$x$};
-\draw[->] (0,0) -- (0,1.5) node[anchor=east] {};
-\draw[smooth, domain=-2.0:2.0, color=black, line width=0.20mm] 
-    plot (\x,{e^(-(\x*\x))}) node [above] {\footnotesize $e^{-qx^2}$};
-\draw[smooth, domain=-1.8:1.8, color=red, line width=0.20mm] 
-    plot (\x,{-0.4825*\x*\x+1}) node [right] {\footnotesize $g(x)$};
-\draw (1.3,-0.1) -- (1.3,{e^(-1.3*1.3)});
-\draw (-1,-0.1) -- (-1,{e^(-1*1)});
-\draw	(-1,-0.25) node{{\scriptsize $a$}}
-		(1.3,-0.25) node{{\scriptsize $b$}};
-\end{tikzpicture}
-
-\caption{$g(x)=(e^{-qd^2}-1)d^{-2}x^2+1$ over function $f(x)=e^{-qx^2}$ for all $a\le x\le b$ where $d=\max(b,-a)$}%
-\label{fig:graph111}%
-\end{minipage}%
-\end{figure}
-
+\input{figs/parabola_illustrations.tex}
 
 
 At this point, we have a probability bound on the mean squared (Theorem \ref{hoeffdings1}) 
@@ -335,7 +291,7 @@ For a random variable that is bounded $a\le X\le b$ with variance $\sigma^2$, th
 \end{theorem}
 
 The computational maximisation with respect to $b$ can also be done via parameter sweep.
-Though this parameter sweep on $b$ may not necessarily respecting analytical accuracy (since it is a maximisation, not a minimisation), we convert to this form only for the purposes of broad comparison with other bounds on the variance.
+Though this parameter sweep on $b$ may not necessarily respect analytical accuracy (since it is a maximisation, not a minimisation), we convert to this form only for the purposes of broad comparison with other bounds on the variance.
 
 It is good to stop here to compare against other probability bounds for the error of the sample variance.
 Particularly the bound on the variance developed by using Entropy method (as found in \cite{MR2245497} and used in \cite{Maurer50empiricalbernstein})
@@ -409,17 +365,17 @@ Letting $y=t+w$ and $x=y-w$ completes the proof.
 \end{proof}
 
 The result of this Theorem is an Empricial Bernstein Bound. And our novel EBB is completed by substituting  $h(\sigma^2,t)=H_1^n\left(\sigma^2/b^2,t/b\right)$ (from Theorem \ref{hoeffdings1}) and $f(\sigma^2,w)=H_3^n\left(a,b,w,\sigma^2\right)$ (from Theorem \ref{variance2}) into Theorem \ref{ebb1}.
-In this process care must be taken in applying this theorem that all the assumptions hold, the necessary inverses exist, and the domains of the functions are propagated through the analysis.
+In this process care was taken in applying this theorem that all the assumptions hold, the necessary inverses exist, and that the domains of the functions were propagated through the analysis.
 
 
 
 
 \subsubsection{Numerical Implementation}
 \label{numerical-implementation}
-Analytically solving this new EBB is challenging, however it is possible to evaluate it to arbitrary accuracy using numerical techniques.
+Analytically solving this our EBB was challenging, however it was possible to evaluate it to arbitrary accuracy using numerical techniques.
 This section provides a high-level description of a process that was used for calculating our EBB.
 
-This calculation is composed of three primary parts:
+This calculation was composed of three primary parts:
 (i) the computation of function $f(\sigma^2,w)=H_3^n(a,b,y,\sigma^2)$;
 (ii) verifying that the assumptions of Theorem \ref{ebb1} hold for $h(\sigma^2,t)=H_1$ and $f(\sigma^2,w)=H_3$, and;
 (iii) calculating the subsequent result of Theorem \ref{ebb1}.
@@ -427,8 +383,8 @@ This calculation is composed of three primary parts:
 First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) is the solution to an optimization problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
 Despite its complexity, a solution can be found quickly using a single variable parameter sweep.
 
-Second, it is necessary to verify the assumptions that $h^{-(2)}$, $f^{-(2)}$ and $z^{-(1)}$ exist and that $z^{-(1)}$ and $f^{-(2)}$ are monotonically increasing in their first argument.
-It is easy to note that $h(\sigma^2,t)=H_1^n\left(\sigma^2/b^2,t/b\right)$ is a closed-form function that is monotonically decreasing from $1$ to $0$ on the second argument, so $h^{-(2)}$ exists and is monotonically increasing in its first argument.  However the remaining of these assumptions are more difficult to verify.
+Second, it was necessary to verify the assumptions that $h^{-(2)}$, $f^{-(2)}$ and $z^{-(1)}$ exist and that $z^{-(1)}$ and $f^{-(2)}$ are monotonically increasing in their first argument.
+It was easy to note that $h(\sigma^2,t)=H_1^n\left(\sigma^2/b^2,t/b\right)$ is a closed-form function that is monotonically decreasing from $1$ to $0$ on the second argument, so $h^{-(2)}$ exists and is monotonically increasing in its first argument.  However the remaining of these assumptions are more difficult to verify.
 For any function, the values that the function takes can be plotted as an array of points and the values that the inverse of that function takes can be determined by conducting coordinate swaping on those points.
 The values of $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ were computed and were seen to be monotonically decreasing in its second argument confirming that $f^{-(2)}$ exists.
 The function $z(\sigma^2,w)=\sigma^2-f^{-(2)}\left(\sigma^2,w\right)$ is then a manipulation on the coordinate swapped points of $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$.
@@ -436,7 +392,7 @@ By coordinate swapping again, $z^{-(1)}$ was seen to be a regular function monot
 
 
 Third, to numerically calculate the result of Theorem \ref{ebb1} the functions $h^{-(2)}$ and $z^{-(1)}$ were numerically evaluated by direct parameter searches and then composed as:
-$h^{-(2)}(z^{-(1)}(\hat{\sigma}^2,y-x),x)$ - which is the inner part of the expression of the new EBB parameterised by $x$ explicitly and also $a,b$ implicitly.
+$h^{-(2)}(z^{-(1)}(\hat{\sigma}^2,y-x),x)$ - which was the inner part of the expression of the new EBB parameterised by $x$ explicitly and also $a,b$ implicitly.
 %
 However we typically don't know the values of $a$ and $b$, but instead know the mean is somewhere within a finite interval of width $D=b-a$.
 So in a similar way as was handled by introduction of Theorem \ref{variance22}, we took the worst case values of $a$ and $b$ consistent with a given $D$, 
@@ -444,7 +400,7 @@ and then took the best $x\in[0,y]$ subject to all other bounds.
 In short, the numerical process involved a series of coordinate manipulations to conduct inversions and some mundane parameter searches.\footnote{sourcecode available at:\\\url{https://github.com/Markopolo141/Engineered-Empirical-Bernstein-Bound}}
 
 \subsection{Comparison to existing bounds}\label{evaluation}
-By being able to numerically evaluate our EBB, we were abel to compare the strength of our results against existing concentration bounds, particularly our EBB is compared to Maurer and Pontil's EBB and, Bennett's inequality with perfect variance information.
+By being able to numerically evaluate our EBB, we were able to compare the strength of our results against existing concentration bounds, particularly our EBB is compared to Maurer and Pontil's EBB and, Bennett's inequality with perfect variance information.
 
 We compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB, 
 given by:
@@ -454,7 +410,7 @@ Specifically, this is the domain where:
 \[ \frac{1}{2}>\frac{\sqrt{\hat{\sigma}^2}}{D}+\sqrt{\frac{2\log(2/y)}{n-1}} \]
 We plotted the improvement our EBB offers in this domain, as shown in Figure \ref{biggraph3}. 
 In this plot, a probability 0.5 bound is shown to shrink by approximately one third.
-But that generally, we observed that our refinement of M\&P's EBB was expectedly uniformly tighter across a large range of values.
+But that generally, we observed that our refinement of Maurer and Pontil's EBB was expectedly uniformly tighter across a large range of values.
 
 
 \input{figs/ebb_strength.tex}
