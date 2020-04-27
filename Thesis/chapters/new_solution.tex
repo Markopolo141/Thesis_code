@@ -136,7 +136,7 @@ v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
 
 In this subsection we define the characteristic function $v(S)$, in the context of a \textit{generalized non-cooperative game}.
 A generalized non-cooperative game is a game where the strategies available to one player may be restricted by the strategy choice of others.
-Such games were introduced by Debreu in 1952 \cite{Debreu01101952} and the problem of finding equilibria in such games has been a topic of further research \cite{Facchinei2007,fischer2014,DutangSurvey}.
+Such games were introduced by Debreu in 1952 \cite{Debreu01101952} and the problem of finding equilibria in such games has been a topic of further research \cite{Facchinei2007,fischer2014}.
 
 In more detail, a generalized non-cooperative game consists of a triplet $G = \langle N,A,u \rangle$ in which:
 \begin{itemize}
@@ -318,7 +318,7 @@ More than LMP and VCG, the the GNK value is difficult to solve because of the bi
 Even as we have modeled our example network with a set of linear utility functions and linear constraints (as given in section \ref{sec:the_setup}), then equation \eqref{knvalue1} is still quite difficult to solve as it constitutes a linear bilevel program (LBP) which are a class of problems known to be NP-hard \cite{DBLP:journals/tec/SinhaMD18,Ben-Ayed:1990:CDB}.
 
 There exist a range of techniques which can be used to solve LBPs \cite{DBLP:journals/tec/SinhaMD18,S.Dempe.Optimisations}.
-Some of the many methods include: vertex enumeration processes \cite{Bialas:1984:TLP:2784019.2784026,Shi:2005:EKA:2641854.2642183,LIU1995644,article_cutting_plane}; penalty method schemes \cite{KleinertSchmidt2019,ONAL1993126,dempe_optimisation111};
+Some of the many methods include: vertex enumeration processes \cite{Bialas:1984:TLP:2784019.2784026,Shi:2005:EKA:2641854.2642183,LIU1995644}; penalty method schemes \cite{KleinertSchmidt2019,ONAL1993126,dempe_optimisation111};
 cutting plane approaches \cite{cuttingplane1};
 branch-and-bound/cut methods \cite{SHI200551,Hansen:1992:NBR:141164.141181,Audet2007};
 and approximating algorithms \cite{Pineda2018,rnnlbp1,genetic_algirthm_blp}.
@@ -532,7 +532,7 @@ and then approximating $v_{i,k}$ by averaging the $v(S)$ for the generated coali
 Then each of the approximated $v_{i,k}$ are used to approximate the GNK value $\varphi$ via equation \ref{da_value_eq}. We denote this method `\textsc{Simple}'.
 
 The second of these two approaches is more complicated, since it involves converting the problem into a cooperative game and then a selecting a technique to sample the Shapley Value.
-Some of the possible techniques include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (\cite{burgess2} also as developed in Section \ref{section:SEBB}), as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
+Some of the possible techniques include: Neyman Sampling (`\textsc{Neyman}') \cite{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \cite{2013arXiv1306.4265M}, and the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (as developed in Section \ref{section:SEBB}), as well as a random stratified join-order sampling method (`\textsc{Join}') \cite{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \cite{DBLP:journals/cor/CastroGT09}.
 
 We will compare the performance of these sampling approaches in section \ref{section:performance}, but first we will summarise some of the differences between Shapley Value sampling techniques first.
 
@@ -550,7 +550,7 @@ Between the methods: \textsc{Appro} samples in join orders without stratificatio
 \textsc{Neyman} samples with stratification without join orders to the sample each $\hat{v}_{i,k}$ proportional to the sample variance of the marginal contributions which make up each,
 and \textsc{SEBM} samples with stratification without join orders to sample $\hat{v}_{i,k}$ in order to maximally reduce a complicated concentration inequality on the resultant estimated Shapley Value itself.
 
-The full details on each of the methods can be found in their respective source documents.\cite{CASTRO2017180,2013arXiv1306.4265M,burgess2,DBLP:journals/cor/CastroGT09}
+The full details on each of the methods can be found in their respective source documents.\cite{CASTRO2017180,2013arXiv1306.4265M,DBLP:journals/cor/CastroGT09} (and Chapter \ref{chap:stratified_sampling_chapter})
 And the performance of using these different methods is evaluated in the next section \ref{section:performance}.
 
 \subsection{Sampling the GNK value at Scale}\label{section:performance}

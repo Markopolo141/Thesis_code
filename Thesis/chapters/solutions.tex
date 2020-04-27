@@ -24,7 +24,7 @@ Let us begin with the VCG mechanism.
 
 In section \ref{sec:reference_points} we briefly presented the idea that people might be rewarded in proportion to their contribution to social welfare, above their absense individually.
 While this idea may be simple, its mathematization has some suprising features.
-The most direct mathemetisation of this idea, is the Vickery-Clark-Groves (VCG) mechanism with Clark pivot.
+The most direct mathemetisation of this idea, is the Vickrey-Clarke-Groves (VCG) mechanism with Clark pivot.
 
 The VCG mechanism (with Clark pivot) is an allocation process where each player is payed `transferable utility' (or money) equal to the impact that their presense has apon others (ie. their externality) in the decision process which selecting an outcome that maximises the sum of utility.
 Let us explain with some mathematics:
@@ -202,7 +202,7 @@ In answer to this, there was promoted the idea that economic value reflects labo
 And this `labor theory of value' was held by many authors (including Adam Smith\footnote{``The real price of every thing, what every thing really costs to the man who wants to acquire it, is the toil and trouble of acquiring it.''\cite{Smith1Gutenberg}}, David Riccardo\footnote{``The value of a commodity, or the quantity of any other commodity for which it will exchange, depends on the relative quantity of labour which is necessary for its production...''\cite[Section 1, Chapter 1]{Riccardo1Gutenberg}}, and many others) but most notably by Karl Marx:
 
 \begin{displayquote}
-It suffices to say that if supply and demand equilibrate each other, the market prices of commodities will correspond with their natural prices, that is to say with their values, as determined by the respective quantities of labour required for their production \cite{marx1910value}
+It suffices to say that if supply and demand equilibrate each other, the market prices of commodities will correspond with their natural prices, that is to say with their values, as determined by the respective quantities of labour required for their production \cite[Chapter 2]{marx1910value}
 \end{displayquote}
 
 And this idea, that the quantity of labor should (in some way) define market prices at market equilibrium, was subject to analysis and verification.
@@ -215,7 +215,7 @@ The utilitarian perspective sought to explain market dynamics in terms of people
 And this perspective linked market dynamics with the concept of the margin - or `marginalism'.
 
 Although the concept of the margin was evidenced in some writings in the earlier half of the 19th century (such as in the works of Jules Dupuit and Hermann Heinrich Gossen), it took to the end of the century for the idea to become more thoroughly developed \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307}.
-Although there was much discussion about the relationship between the labor theory of value and marginalism at the end of the 19th century \cite{steedman2003socialism} ultimately marginalism was adopted mainstream in the so-called 'marginal revolution', defining the beginning of neoclassical economics.\cite{Opocher_2017, marginalism1}
+Although there was much discussion about the relationship between the labor theory of value and marginalism at the end of the 19th century \cite{steedman2003socialism} ultimately marginalism was adopted mainstream in the so-called 'marginal revolution', defining the beginning of neoclassical economics.\cite{marginalism1}
 
 The marginalist principles saw that economic values were not just equal to the summation of normal production costs\footnote{Such as promoted by Riccardo, ``The real and ultimate regulator of the relative value of any two commodities, is the cost of their production, and neither the respective quantities which may be produced, nor the competition amongst the purchasers.''\cite{Riccardo1Gutenberg}} (ultimately depending on the value of labor), but instead depends on the cost of production of the most marginal unit produced to meet demand.
 
@@ -487,7 +487,7 @@ There has been much work since Nash published his famous paper (\cite{nash1}) in
 One objection to the Nash bargaining solution is that it may not be considered natural or a reliable description of real-world bargaining.
 Although there do exist some evolutionary models suggesting that in some social dynamics Nash bargaining might naturally emerge \cite{articlechoakihiko}, there does exists discussion and experimental work finding that real behavior between humans exhibits some ambiguity \cite{KROLL2014261}, even in the case when the disagreement point is naturally given by the setting.
 
-However in other cases (such as in an electricity network) a singular disagreement outcome is not very clearly given by the context.
+However in other cases (such as in an electricity network) a singular disagreement outcome may not be very clearly given by the context.
 And so for a Nash bargaining solution concept to be applied then a disagreement outcome must be chosen from the set of possible outcomes $F$.
 Which leads to the question of how this sould be done.
 
@@ -538,8 +538,8 @@ A common device in negotiation is the threat ... If one considers the process of
 (\cite{nash2})
 \end{displayquote}
 
-In this light, it is interesting to consider where threats do and do not play a role in real-world negotiations, particularly as there are alternative bargaining solution concepts that do not involve threats (eg. \cite{bozbay}). 
-It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
+In this light, it is interesting to consider where threats do and do not play a role in real-world negotiations (such as discussed in \cite{anbarci2002comparing}), particularly as there are alternative bargaining solution concepts that do not involve threats (eg. \cite{bozbay}). 
+%It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
 
 
 \begin{example}
@@ -578,34 +578,30 @@ In this section we considered some bargaining solution concepts, particularly Na
 The solution concept for games of transferrable utility (TU) depend primarily on the minimax of payoff advantages between the players.
 In this way payoff advantage is considered as a measure of the strength of a player's bargaining position.
 
-Nash's bargaining solution was principally suited for 2 players, however some extensions of it to many players have been developed.\cite{values1,values2,values3}
-In the following Chapter \ref{} we develop these extensions of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value.
+Nash's bargaining solution was principally suited for 2 players, however some extensions of it to many players have been developed.%\cite{values1,values2,values3}
+In the following Chapter \ref{cha:new_solution} we develop these extensions of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value.
 
 \input{figs/nash_game.tex}
 
 
 
-
-
 \section{Comparrison \& Summary}
 
-In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features, and extend from slightly different moral perspective.
+In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features, and encode different moral perspectives.
 
-One of the ideas that all these approaches have in common is that every participant should be credited in proportion to their contribution above some reference point.
-This is clearest in considering VCG, where it is explicitly put, that utility reward should be in proportion to contribution to the utility of the others above the absense of their preferences.
-In 
+Particularly we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locatinal Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concept.
 
-Particularly the measure minimax payoff advantage has been considered as a measure of bargaining power between two players, and has been a usefull component in other solution concepts.
-Which in-turn also has a well-studied extension to many players.\cite{values1,values2,values3}
+Each of the ideas embody different rules of proportionality above some reference point.
+In the context of VCG, the rule is that utility reward should be in proportion to contribution to the utility of the others above the absense of their preferences; and in the context of LMP, that it should be in proportional to the marginal absense.
+In the context of the Shapley Value, that reward should be in proportion to marginal contribution under uncertainty of the presence of others,
+And Nash's bargaining solution concept, considers proportionality in a context where the reference point is ambiguous.
 
-This contrasts against VCG and LMP
- VCG essentially credits participants what they contribute to the wellbeing of the other players above their absense, and LMP credits participants in proportion to the margin of what they contribute above their absense.
+as identified by the philosophy of the previous chapter, non of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are more suitable than others.
 
-it is also the same as VCG in the limit of large markets.
+One particularly interesting feature of the Nash-bargaining solution is that it considers the minimax payoff advantage as a measure of competitive strength, and allocates utility accordingly.
+However the nash bargaining solution is limited to two players, as for three (or more) players there may not exist a unique zero-sum minimax value.
 
-Summary what you discussed in this chapter, and mention the story in next
-chapter. Readers should roughly understand what your thesis takes about by only reading
-words at the beginning and the end (Summary) of each chapter.
+In the following chapter \ref{cha:new_solution} we consider and construct an extention of Nash bargaining solution that also utilizes Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks.
 
 
 
