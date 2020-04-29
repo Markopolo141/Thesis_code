@@ -6,45 +6,51 @@
 %I believe A is better than B.
 
 
-\section{Introduction}
+Electrical power systems have a history of changing over time, particularly with the introduction of new technologies and new damands.
+And this trend continues today as there are divergent ways that new technology is driving additional change, \cite{BELL2018765} name a few:
+\begin{itemize}
+\item The introduction and continued proliferation of intermittant renewable generation - such as solar and wind - is seen as driving a need for energy storage and grid interconnection to provide stability.
+\item The incorporation of Distributed Energy Resources (DERs) such as smart meters, solar pannesl, batteries, electric vehicles (EVs), and other electrically flexible components particularly on distribution networks, rather than transmission networks.
+\item The increased need for active grid stability mechanisms due to a reduction of synchronous generation, brought about as part of the process towards a zero-carbon emission electricity grid.
+\end{itemize}
 
+The implications of these changes are not yet fully realised and there exist differing visions of what structure a future electricity system might have, and what it might look like for the consumers that participate in it \cite{Parag2016}.
 
-The way in which electricity has been generated and consumed has changed over time, and presently it is changing yet still.
-One of the primary ways that electricity generation is changing is with the introduction of distributed generation.
-historically the electricity network was composed of large industrial generation companies - that owned the networks, and a multitude of small private consumers.
-several changes have been made over time, with one of the most important being the 
+In the past there have been many changes to the way that electricity has been bought and sold on the grid.
+One of the most recent and important changes was the process of electricity system deregulation/liberalisation that took place in many countries throughout the late 80's into the 2000's.
+Historically, electricity supply was often operated by vertically integrated companies, who had a hand in the control of the generation, transmission, distribution and/or retail of electricity services to consumers.
+Part of the rationale for the regulation of these companies was that electricity supply was a natural monopoly in which economics of scale provide competitive advantage to larger companies, leading naturally to monopoly situations.
+The process that occured, was that various governments were able to remove regulations over the generation and retail of electricity, and replaced them with market structures to provide a platform for competition in generation and retail of electricity.
+And the introduction of such a market structure, is a challenging process which can lead to unintentioned outcomes if designed poorly.
+The history and the challenges of such changes are widely understood, including some failures of the process, such as the 2000-2001 California electricity crisis. \cite{griffin2009electricity}
 
+The process of electricity dergulation/liberalisation process was a systematic change to the electricity system that introduced market platforms for competition between entities on the grid; and many people expect a similar change to take place in the near future.
+Particularly as indidivual consumers are now generating and storing their own electricity, and there is investigation about possible market platforms which could enable consumers to sell electricity between themselves.
+In these possible futures these consumers are sometimes called 'prosumers', which are individuals armed with electrical devices (such as batteries, solar pannels, and electric vehicles) which can interract with the electricity network in a way that is more than simply by consumption.
+And various ideas about how these prosumers might trade directly or indirectly between themself and the wider grid; involving such ideas as peer-to-peer trading (P2P) and/or aggregation into larger virtual power plants (VPPs) \cite{Morstyn2018}.
 
+Today, network participants are payed for the power they consume/generate largely behind their own meter, inducing them to optimise their own energy consumption, but it is anticipated that a future energy market could induce larger and more social benefits than simply offsetting their own consumption.
+However there are a many of potential gains and hazards to be managed, such as providing grid stability by securing timely reactive and real power supply to stabilise voltages and frequency, grid robustness such as blackout protection and islanding, improving system efficiency by minimising long-distance transmission costs, and facilitating the advent of a green electricity network, by fairly and equitably managing the interaction between prosumer's devices while preserving their privacy, in a scalable way while minimising the complexity of the management of such devices. \cite{BELL2018765}
+%And a future electricity network might include more exotic components such as community level energy storage, and microgrid interconnections.
 
+The way that electricity is being produced and consumed is expected to change in the future, from a system which supports the supply of few big generation companies to many small consumers, to being a system in which prosumers exchange energy.
 
-The way that electricity is being produced and consumed is changing in a direction not fully understood, and it has this before.
+And for this purpose, there are many potentially important engineering considerations in the operation of powergrids which may bear importance for the exchange of energy between such prosumers - such as voltage rises and line limits, real and reactive power compensation, phase connections, network topologies etc.
+And it is hoped that a properly designed system might be extensible to be able to accommodate these considerations arbitrarily.
 
-The means by which electricity has been produced and consumed between individuals and industry players has suffered structural changes over time and these changes are expected to continue into the future.
-When Electricity was first introduced in Britain in the 1800s there were different companies offering the service of supplying electricity to the homes of individuals, these companies covered different regions of service in and between cities, and each operated according to their own guidelines on safety and service stability.
-These electricity operators owned the poles and lines and supplied energy to houses per subscription at their own voltage and current specifications.
-When electricity was first being introduced, its use was in direct competition to other technologies such as gas and coal/keroscene, and even though the electricity companies often had regional monopoly on electricity supply, ther competition between industries kept the pricing in-line.
-Through the course of buisiness these companies eventually either went out of buisiness or consolidated into larger coporations, and proceeded to supply larger amounts of electricy at scale to the residents of Britain.
-As the people's daily reliance on electricity increased in plurality and popularity of electrical appliances and lighting, greater public pressure came to the fore, for the regulation of the electricity grid.
-Primarily for the regulation of Voltages and frequency and for the safe interopration of devices between networks but also to prevent price hikes and extortionate pricing of the electricity companies.
+Additionally, one of political and social questions that the design of such a structure brings is the question of distributive justice.
+In the past, it was held that inducing competition among generation companies was desirable, however it is important to ask if inducing competition among electrically generating prosumers is equally a good idea.
+A part of the answer comes in the likely result: would a competitive system induce outcomes which are socially desirable and/or serve to promote social equality?
 
+A major component of this question lies in the formulation of the arena in which the competition takes place; which is the primary design question.
+And the purpose of this research is an attempt to explore a portion of the space of possible arenas, and evaluate it against desirable ethics.
 
+\section*{Thesis Outline}
+Our Thesis consists of four primary chapters:
+\begin{enumerate}
+\item in Chapter \ref{cha:background}, we a series of brief philosophical points to provide background about the nature of the ethical underlying question of how \textit{should} electrical energy be traded. Particularly we refer to the diversity of conceptions about social Equality, the different ways in which systems can be considered better/worse appart from equality - particularly by notions of Efficiency, and by ethical rules and guidance in proportion to various norms and reference points. 
+\item in Chapter \ref{cha:solutions}, we provide a presentation of some of the core ideas and background of already developed and/or applied solutions to electricity networks, particularly eacho of these ideas mathematically embody different ideas about distributive ethics. The particular ideas we briefly present, are the Vickrey-Clarke-Groves (VCG) mechanism, the Locational Marginal Pricing (LMP) method, cooperative game theory solutions such as the Shapley Value and The Core, and the approach of bargaining solution concepts such as Nash bargaining. 
+\item in Chapter \ref{cha:new_solution}, we develop and explore a new solution concept called the GNK value, that is derived from Shapley Value axioms and relates directly to Nash bargaining, and we compare it against LMP and VCG results in the context of simulated electricity networks. Particularly the advantages and disadvantages of the new approach are discussed and related back to the ethical desirata established in Chpater \ref{cha:background}. The particular difficulty of computing this new GNK value is addressed and overcome by utilising sampling techniques in the presence of a proxy for its most difficult part.
+\item in Chapter \ref{chap:stratified_sampling_chapter}, we reveiew the investigation into sampling techniques which was used to compute the new GNK value. partiularly divergent techniques of conducting stratified sampling by minimising concentration inequalities were investigated and a new technique was resolved called the Stratified empirical Bernstein method (SEBM).
+\end{enumerate}
 
-The way that electricity is being produced and consumed is changing in a direction not fully understood, and it has this before.
-
-The means by which electricity has been produced and consumed between individuals and industry players has suffered structural changes over time and these changes are expected to continue into the future.
-The challenges today are reminiscient of the challenges historical.
-The introduction of new technologies and sources of energy into the strata of society is a process that is prone to problems and features that are historical, political and social.
-Before discussing the process of new technologies and their integration into the electricity grid, we will divolve the discussion into some similar features of the historical introduction of electrical grids themselves.
-One example of a tension with the introduction of new technology is its regulation.
-Today there are institutions such as AEMO and AER which provide industry regulations to incentivise competition and ease monopolising of indistry participants over the concerns of individuals.
-It is worth noting that the institution of overly-tight regulations can and potentially has actually hampered the deployment of new technologies.
-A particular example from British history is the Electric Lighting act of 1882 which occured in the context of an economic resession; and which was strongly blamed for reducing Brtiain's uptake of electrical energy for a period of 4 years.
-The government at the time, was regional-socialist, and
-
-
-
-\section{Thesis Outline}
-\label{sec:outline}
-How many chapters you have? You may have Chapter~\ref{cha:background},
-Chapter~\ref{cha:design}, Chapter~\ref{cha:methodology},
-Chapter~\ref{cha:result}, and Chapter~\ref{cha:conc}.

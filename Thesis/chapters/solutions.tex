@@ -129,8 +129,7 @@ Anoher avenue in dealing with the problem is to sacrifice efficiency of outcome 
 One of the simplest such scheme is given by Boi Faltings \cite{10.1007/978-3-642-25510-6_14, 10.1007/978-3-642-25510-6_14}
 Who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups, where the VCG outcome from the first group is selected irrespective of the preferencs in the second group.
 and where the second group recieves the budget surplus from the VCG mechanism applied to the first group.
-This mechanism is the subject of a patent in the US \ref{Boi_faltings_patent}, and constitutes a budget balanced VCG-type mechanism.
-which can be made a little bit more regular by randomly selecting the `sink', and splitting the budget surplus between the parties evenly without knowledge of who will be selected.\cite{10.1007/978-3-642-25510-6_14}
+This mechanism constitutes a budget balanced VCG-type mechanism which can be made a little bit more regular by randomly selecting the `sink', and splitting the budget surplus between the parties evenly without knowledge of who will be selected.\cite{10.1007/978-3-642-25510-6_14}
 
 Particularly this method selecting a non-pareto optimal outcome has been the subject of investigation, and the process is proven to nessisarily need a sink and that there are different ways to select an appropriate sink randomly \cite{NATH2019673}.
 
@@ -265,7 +264,7 @@ The general development of the mathematics is slightly beyond our scope here, bu
 \end{enumerate}
 This process, of using calculus to determine nominal prices has been proposed in the electricity space in recent years \cite{lmp1, lmp2, lmp4, game3}.
 Particularly as the process of maximising utility on an electricity grid is a well known problem called the `Optimal Power Flow' problem (OPF), where the power conservation constraint at each bus of the network, identifies the marginal price of electrical power on that bus.
-This particular scheme is called `Locational Marginal Pricing' (LMP); and we will investigate and compare against it in section \ref{}.
+This particular scheme is called `Locational Marginal Pricing' (LMP); and we will investigate and compare against it in section \ref{sec:features}.
 
 Particularly, we note that LMP has been implemented for real-time-pricing of transmission power in some existing electricity systems \cite{WANG2015695,zonal}.
 And that although LMP is like VCG in that it is ultimately not budget balanced, unlike VCG there are specifically identifiable cases which often occur where it is.\cite{lmp2}
@@ -361,6 +360,10 @@ So for instance, if we let $\pi(N)$ denote the set of all ordered permutations o
 \begin{equation}\label{shapley_value3}
     \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
 \end{equation}
+%Or alternatively,
+%\begin{equation}\label{eq:shapley_value}
+%    \varphi_i(\langle N,v\rangle)= \frac{1}{n}\sum_{S\subseteq N\setminus\{i\}} \binom{n-1}{|S|}^{-1} \left(v'(S\cup\{i\})-v'(S)\right) 
+%\end{equation}
 
 The Shapley value has perhaps some moral intuition behind it - rewarding each person in proportion to what they would add across any ordering that the coalition could form.
 But more than that, the Shapley value has been derived from different sets of quite intuitive axioms.
@@ -429,9 +432,8 @@ Just like in LMP and VCG (considered in sections \ref{sec:solutions_LMP} and \re
 
 Informally the difference between VCG, LMP and the Shapley Value can be seen as a difference between the allocation of reward: equal to contribution to the grand coalition, in-proportional to marginal contribution to the grand coalition, or equal to contribution not just to the grand coalition.
 
-In anycase, just like for marginalist economics, and mechanism design, there there is much more which could be said about cooperative game theory; and the interested reader is encouraged to read more \ref{RePEc:cup:cbooks:9781107691322}.
-
-As identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}, cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
+In anycase, just like for marginalist economics, and mechanism design, there there is much more which could be said about cooperative game theory.
+But as identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}, cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
 
 And so, in the next section \ref{sec:solutions_bargaining} we consider some solution concepts which apply in circumstances where it is not easy to describe the `worth' or `value' of a coalition of players; where strategic considerations between them are important and it is not easy to make sense of a characteristic function.
 Particularly we describe bargaining solution concepts.
@@ -444,8 +446,8 @@ In discussing Locational Marginal Pricing (in section \ref{sec:solutions_LMP}), 
 Particularly, we consider the situation where there are a small numbers of market participants negotiating over a set of possible outcomes.
 In this context, what is a normal or likely outcome of their bargaining process?
 
-In the first section of this chapter (section \ref{}) we considered the VCG solution, which allocates utility to a participant with respect to their contribution above their absense.
-And in the previous section (section \ref{}) we considered Marginal Pricing, which allocates utility to participants in proportion to their marginal absense.
+In the first section of this chapter (section \ref{sec:solutions_VCG}) we considered the VCG solution, which allocates utility to a participant with respect to their contribution above their absense.
+And in the previous section (section \ref{sec:solutions_LMP}) we considered Marginal Pricing, which allocates utility to participants in proportion to their marginal absense.
 But in this section we consider the various ways in which this `absense' can be defined for each of the participants.
 
 We begin with one of the most historic classes of barginaing solution concepts, particularly Nash bargaining with endogenous disagreement outcome.

@@ -40,7 +40,7 @@ The equivalent algorithm for sampling with replacement simply is the same algori
 Similarly it is elementary to modify the terms of Algorithn \ref{alg2} to be ameniable to be minimising SECB bound (Theorem \ref{thm:SECM_bound}).
 
 \begin{algorithm}
-\caption{Stratified Empirical Bernstein Method (SEBM) with replacement}
+\caption{Stratified Empirical Bernstein Method (SEBM) algorithm, with replacement}
 \label{alg2}
 \begin{algorithmic}[1]
     \REQUIRE probability $p$, strata number $N$, stratum sizes $n_i$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, weights $\tau_i$, widths $D_i$, maximum sample budget $B$
@@ -89,7 +89,7 @@ This algorithm \ref{alg3} is much more simple than algorithn \ref{alg2} primaril
 This is because Theorem \ref{triangle_theorem2} identifies that the bound on the stratified mean estimate is the sum of the EBBs of the strata, hence they can be considerd as minimising factors in isolation.
 
 \begin{algorithm}
-\caption{Stratified Error bound reduction by unionised EBBs - by Theorem \ref{triangle_theorem2}}
+\caption[Stratified Error bound reduction algorithm by unionised EBBs]{Stratified Error bound reduction algorithm by unionised EBBs - by Theorem \ref{triangle_theorem2}}
 \label{alg3}
 \begin{algorithmic}[1]
     \REQUIRE probability $t$, strata number $N$, stratum sizes $n_i$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, weights $\tau_i$, widths $D_i$, maximum sample budget $B$.

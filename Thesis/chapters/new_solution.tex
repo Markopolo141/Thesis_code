@@ -458,7 +458,7 @@ In contrast, the post-payment utilities under the GNK value and VCG are almost a
 % \end{itemize}
 \subsubsection*{The GNK payments are always budget balanced}
 The transactions under LMP and VCG are not necessarily budget-balanced and can yield a surplus or defecit, whereas payments under the GNK value are necessarily budget-balanced and result in no surplus or deficit.
-This is an outcome of the GNK value's axiomatic derivation, as given by equation \eqref{eff-axiom}.
+This is an outcome of the GNK value's axiomatic derivation, as given by equation \eqref{myeq}.
 Under LMP, each participant is credited or debited at the effective rate of supply for their location but there is no guarantees that the total payments should add to zero.
 This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1d}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
 The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called ``congestion-rents'' that are usually collected by owners of transmission lines \cite{lmp2} (and which are often also the owners of the utility-scale generation assets in vertically-integrated systems).
@@ -538,10 +538,10 @@ We will compare the performance of these sampling approaches in section \ref{sec
 
 \subsubsection*{Differences in sampling approaches}
 
-All the sampling technique used to approximate the classical Shapley Value sample over the marginal contributions (per equation \ref{eq:shapley_value}) in slightly different ways.
+All the sampling technique used to approximate the classical Shapley Value sample over its marginal contributions in slightly different ways.
 And primarily, they differ in whether they employ stratified sampling or not.
 In that, if they employ stratified sampling, they sample the marginal contributions by player $i$ and size $k$ and average them to estimate each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}).
-Conversely if they do not employ stratified sampling, then they directly approximate the Shapley Value via equation \eqref{eq:shapley_value}.
+Conversely if they do not employ stratified sampling, then they directly approximate the Shapley Value via equation \eqref{shapley_value3}.
 
 Secondarily, they differ in whether or not they sample by a join-order process or not. Sampling over marginal contributions involves calculating the difference between $v(S)$ and $v(S\cup\{i\})$ for various players $i$ and coalitions $S$, and one particularly easy way of doing this is to start with the empty coalition $\emptyset$ and generate a permutation of players that sequentially join the coalition and each make a marginal contribution in turn, in this way $n+1$ evaluations of $v(S)$ can be used to calculate $n$ marginal contributions.%\footnote{although in practice many of these evaluations will be repeated across runs}.
 However, if they do not use a join-order process, the methods randomly select coalitions $S$ and player $i$ and calculate the marginal contribution $v(S\cup\{i\}) - v(S)$, thus taking two evaluations of $v(S)$ for one marginal contribution sample point.
@@ -559,7 +559,7 @@ To analyze the performance of approximating the GNK with different sampling tech
 We used a known process of generating pseudo random meshed networks of buses and lines reminiscent of real electricity networks. The particular algorithm is called the `Simple minimum-distance graph' method as considered by Hines \& Blumsack et.al \cite{hines1} and is given as Algorithm \ref{alg1}.
 
 \begin{algorithm}[]
-\caption{Simple minimum-distance graph}
+\caption{Simple minimum-distance graph algorithm}
 \label{alg1}
 \begin{algorithmic}
     \REQUIRE number of nodes $n$, number of links $m$
@@ -710,7 +710,7 @@ While there does exist some work on similar solution concepts like GNK that are 
 
 \section{Discussion and Conclusion}\label{sec:GNK_value_discussion}
 
-To consider the social and ethical value of our GNK solutions we must loop back to cosider some of the topics explored in chapter \ref{chap:background}.
+To consider the social and ethical value of our GNK solutions we must loop back to cosider some of the topics explored in chapter \ref{cha:background}.
 Particularly were we briefly considered some of the moral elements which may be present in peoples thinking about the distribution of resources, including Equality, Efficiency, and the various normative reference points which may be pertinent.
 We will consider the GNK in light of each of these in turn.
 
