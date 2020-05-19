@@ -1,18 +1,97 @@
-\chapter{Conceptual Background}
+\chapter{Background}
 \label{cha:background}
 %At the begging of each chapter, please introduce the motivation and high-level
 %picture of the chapter. You also have to introduce sections in the
 %chapter. \\
 
-The electricity grid is seen as an evolving system of increasingly interconnected and complex devices, providing a structured platform for the exchange of power and services between people.
-However at the heart of this evolving construction there is a morally ambiguous question - how should it be determined how much people \textit{should} pay or be-paid for the power they consume or generate?
+The Australian electricity grid is seen as an evolving system of increasingly interconnected and complex devices, providing a structured platform for the exchange of power and services between people.
+However at the heart of this evolving construction there is a morally ambiguous question - by what mechanisms should it be determined how much people \textit{should} pay or be-paid for the power they consume or generate?
 
 Or, to ask the question with more granularity: when the possible power-flows on an electricity network are valued and influenced by participants differently, 
 what is a reasonable electrical outcome for the network and what monetary transactions should occur between the participants in that case? -- and this is to ask: how \textit{should} electricity be traded?\\
 
-%Our development relates to mechanisms which are intentioned to be practical, and a brief elucidation of some economic and game-theory concepts will ultimately be involved. However we begin with the ethical considerations.
+To begin this discussion we briefly address the state of the electricity system and its possible trajectory into the future in section \ref{sec:electricity_system},
+and then we also begin to frame some of the philosophy underlying the question of how the financial transactions on that future network should look like in section \ref{sec:philosophy}.
 
-\section{A Philosophical Prelude}
+\section{The state and future of electricity systems}\label{sec:electricity_system}
+
+Electrical power systems have a history of evolution over time, particularly with the introduction of new technologies and new damands.
+And this trend continues today as there are divergent ways that new technology is driving additional change, \cite{BELL2018765} name a few:
+\begin{itemize}
+\item The introduction and continued proliferation of intermittant renewable generation - such as solar and wind - is seen as driving a need for energy storage and grid interconnection to provide stability.
+\item The incorporation of Distributed Energy Resources (DERs) such as smart meters, solar pannels, batteries, electric vehicles (EVs), and other electrically flexible components particularly on distribution networks, rather than transmission networks.
+\item The increased need for active grid stability mechanisms due to a reduction of synchronous generation, brought about as part of the process towards a zero-carbon emission electricity grid.
+\end{itemize}
+
+And these challenges are physically manifest, between the fiscal years 2008/2009 - 2018/2019 the volume of renewable electricity generated on the National electricity market (NEM) increased from 18,645 GWh to 44,292 GWh, an increase of approximately 10\% per year, increasing the proportion of renewable energy in the network from 7.5\% to 17\% over the same period (or 1.7\% growth in proportion per year).
+This increase is primarily in the deployment of wind and solar, and 90\% of solar generation being small scale solar PV systems (of which there were ~300,000 installations in the year 2019 - clean energy australia report 2020, with solar PV generation projected to triple by the year 2030 (AEMO observations)).
+(Table O - Department of Energy & Environment, Australian Energy Statistics) 
+
+%in addition to small solar PV system installations  there was an array of medium and large scale solar installations.
+%In the same time additional household batteries are increasingly being installed (with 22,661 household battery installations in the 2019 year) taking australias household battery storage to 1GW. with an addtional 15 large scale battery projects scheduled for completion in the 2019 year ranging between 1 and 150MW capacity.
+%(clean energy australia report 2020)
+These additional solar PV systems are often behind-the-meter and are having the effect that they are changing the demand profile, particularly in the middle of the day creating the infamous 'duck-curve' which is identified to be one source of potential future difficulty.
+Additionally the variability of solar PV output has the potential to creates large swings of power output, creating issues related to frequency and voltage control which need accurate forcasting to anticipate.
+These demand side changes occur alongside supply side changes such as the retirement and decrease of coal generation capacity, and continued uptake of industrial wind generation capacity - further creating problems associated with stability.
+This increased variability of demand and supply, are part of a changing electricity system that need to be managed and addressed.
+One way in which this variability is driving change is in the procurement of market systems for the procuring the production of strategic reserve power (RERT), and increasing the participant of demand response, or price resonsive demand, to avoid the risk of non-supply.
+particularly the production of a market structure to produce demand-responsive supply/consumption against generation (potentially even extending to normal users of electricity systems) a `two sided market' is something that is being scoped out by COAG energy council australia (ECA) 
+
+It has been identified that this combination change in mix and concentration of supply and demand (the closure of coal fired power stations, the leveling off of grid demand (partly caused by solar PV systems and other technology changes) and the incorporation of further renewable generation) as been part of the reason that the average price of electricity for consumers between 2008 and 2018 has increased 35\%. (Restoring electricity affordability and Australia’s competitive advantage)
+
+"Level playing field – all competitors, irrespective of their size or financial strength, get equal opportunity to
+compete. It is not enough if all players play by the same rules. The rules must accommodate the needs of all,
+whether small or large, so the market is free of impediments to smaller players." (AEMO observations: Operational and market challenges to reliability and security in the NEM)
+
+These combinations of changes has resulted in inordinate increase in AEMO direct intervations (AEMO) , and AER rule changes (KPMG)
+
+The NEM2025 plan directly investigates possible changes to market structure to NEM in order to ensure future stable grid, particularly mentioning the potential of utilising DERs.
+
+the COGATI is investigating changes in the NEM that can be made to incentivse strategic generation to minimise congestion experienced on the grid; incentivising appropriate network generation and transmission.
+
+These distributed energy resources exist on distribution networks where there is occasional problems with voltage management, where 
+solar inverter reactive power stability is not often utilised. (Smart Grid and its future perspectives in Australia)
+
+Aemo's virtual power plant demonstration project.
+
+The implications of these changes are not yet fully realised and there exist differing visions of what structure a future electricity system might have, and what it might look like for the consumers that participate in it \cite{Parag2016}.
+
+
+
+
+In the past there have been many changes to the way that electricity has been bought and sold on the grid.
+One of the most recent and important changes was the process of electricity system deregulation/liberalisation that took place in many countries throughout the late 80's into the 2000's.
+Historically, electricity supply was often operated by vertically integrated companies, who had a hand in the control of the generation, transmission, distribution and/or retail of electricity services to consumers.
+Part of the rationale for the regulation of these companies was that electricity supply was a natural monopoly in which economics of scale provide competitive advantage to larger companies, leading naturally to monopoly situations.
+The process that occured, was that various governments were able to remove regulations over the generation and retail of electricity, and replaced them with market structures to provide a platform for competition in generation and retail of electricity.
+And the introduction of such a market structure, is a challenging process which can lead to unintentioned outcomes if designed poorly.
+The history and the challenges of such changes are widely understood, including some failures of the process, such as the 2000-2001 California electricity crisis. \cite{griffin2009electricity}
+
+The process of electricity dergulation/liberalisation process was a systematic change to the electricity system that introduced market platforms for competition between entities on the grid; and many people expect a similar change to take place in the near future.
+Particularly as indidivual consumers are now generating and storing their own electricity, and there is investigation about possible market platforms which could enable consumers to sell electricity between themselves.
+In these possible futures these consumers are sometimes called 'prosumers', which are individuals armed with electrical devices (such as batteries, solar pannels, and electric vehicles) which can interract with the electricity network in a way that is more than simply by consumption.
+And various ideas about how these prosumers might trade directly or indirectly between themself and the wider grid; involving such ideas as peer-to-peer trading (P2P) and/or aggregation into larger virtual power plants (VPPs) \cite{Morstyn2018}.
+
+Today, network participants are payed for the power they consume/generate largely behind their own meter, inducing them to optimise their own energy consumption, but it is anticipated that a future energy market could induce larger and more social benefits than simply offsetting their own consumption.
+However there are a many of potential gains and hazards to be managed, such as providing grid stability by securing timely reactive and real power supply to stabilise voltages and frequency, grid robustness such as blackout protection and islanding, improving system efficiency by minimising long-distance transmission costs, and facilitating the advent of a green electricity network, by fairly and equitably managing the interaction between prosumer's devices while preserving their privacy, in a scalable way while minimising the complexity of the management of such devices. \cite{BELL2018765}
+%And a future electricity network might include more exotic components such as community level energy storage, and microgrid interconnections.
+
+The way that electricity is being produced and consumed is expected to change in the future, from a system which supports the supply of few big generation companies to many small consumers, to being a system in which prosumers exchange energy.
+
+And for this purpose, there are many potentially important engineering considerations in the operation of powergrids which may bear importance for the exchange of energy between such prosumers - such as voltage rises and line limits, real and reactive power compensation, phase connections, network topologies etc.
+And it is hoped that a properly designed system might be extensible to be able to accommodate these considerations arbitrarily.
+
+Additionally, one of political and social questions that the design of such a structure brings is the question of distributive justice.
+In the past, it was held that inducing competition among generation companies was desirable, however it is important to ask if inducing competition among electrically generating prosumers is equally a good idea.
+A part of the answer comes in the likely result: would a competitive system induce outcomes which are socially desirable and/or serve to promote social equality?
+
+A major component of this question lies in the formulation of the arena in which the competition takes place; which is the primary design question.
+And the purpose of this research is an attempt to explore a portion of the space of possible arenas, and evaluate it against desirable ethics.
+
+
+
+
+\section{A Philosophical Prelude}\label{sec:philosophy}
 
 %\begin{displayquote}
 %My claim is merely that there is no single fundamental principle that determines or provides guidance on what justice requires in relation to the distribution of access to overall advantage.\cite{mason2006levelling} 
