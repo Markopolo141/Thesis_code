@@ -1,9 +1,9 @@
 \chapter{Existing solutions}
 \label{cha:solutions}
 
-In the previous chapter we discussed some of the philosophy surrounding distributive justice, and in this chapter we discuss some of the various ways thoes ideas can be made quantitatively precise.
+In the previous chapter we discussed some of the philosophy surrounding distributive justice, and in this chapter we discuss some of the various ways those ideas can be made quantitatively precise.
 
-In this chapter we consider some of the relevent formulations of the way that moral ideas about distribution can be mathemetised, primarily because our later developments extends from them and also ultimately contrasts against them.
+In this chapter we consider some of the relevant formulations of the way that moral ideas about distribution can be mathemetised, primarily because our later developments extends from them and also ultimately contrasts against them.
 
 We consider the following formulations:
 \begin{itemize}
@@ -22,11 +22,11 @@ Let us begin with the VCG mechanism.
 
 \section{VCG}\label{sec:solutions_VCG}
 
-In section \ref{sec:reference_points} we briefly presented the idea that people might be rewarded in proportion to their contribution to social welfare, above their absense individually.
-While this idea may be simple, its mathematization has some suprising features.
-The most direct mathemetisation of this idea, is the Vickrey-Clarke-Groves (VCG) mechanism with Clark pivot.
+In section \ref{sec:reference_points} we briefly presented the idea that people might be rewarded in proportion to their contribution to social welfare, above their absence, individually.
+While this idea may be simple, its mathematization has some surprising features.
+The most direct mathemetisation of this idea is the Vickrey-Clarke-Groves (VCG) mechanism with Clark pivot.
 
-The VCG mechanism (with Clark pivot) is an allocation process where each player is payed `transferable utility' (or money) equal to the impact that their presense has apon others (ie. their externality) in the decision process which selecting an outcome that maximises the sum of utility.
+The VCG mechanism (with Clark pivot) is an allocation process where each player is payed `transferable utility' (or money) equal to the impact that their presence has upon others (ie. their externality) in the decision process which selects an outcome that maximises the sum of utility.
 Let us explain with some mathematics:
 
 \subsection{The minimal VCG process - with Clark pivot}
@@ -37,7 +37,7 @@ The VCG bidding process asks every agent $i$ for their valuations and calculates
 $$ x^*(v) = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
 This outcome is implemented and the bidding process pays each agent $i$ the utility value $p_i$ (which may be positive or negative):
 \begin{equation}\label{eq:VCG_payment_rule} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation}
-And this value $p_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absense - ie. the player's externality.
+And this value $p_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absence - ie. the player's externality.
 
 \begin{example}
 Consider a set of outcomes $X = \{A,B,C\}$ and three agents with valuations 
@@ -49,75 +49,76 @@ $\quad p_1 = 6-6.5 = -0.5 \quad\quad p_2 = 8-8 = 0\quad\quad p_3 = 4-6.5 = -2.5 
 \end{example}
 
 \subsection{Discussion about VCG}
-The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are postiviely compensated, and if a player's influence detracts from the utility of others then they are negatively compensated.
+The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are positively compensated, and if a player's influence detracts from the utility of others then they are negatively compensated.
 
 And since the set of possible outcomes $X$ are undefined it is possible to consider the application of the VCG mechanism in a variety of contexts.	
 For instance, VCG has been considered as a mechanism for allocating physical and monetary outcomes in various contexts within electricity networks, such as in auctions for bulk electricity generation, buying and selling energy storage products, and in procuring ancillary services \cite{FABRA200272, SESSA2017189, 8264596, 7512339}.
 
 However VCG has some particular advantages and disadvantages.
-The first and most notable property is that VCG mechanisms are \textit{truthfull} or \textit{incentive compatable}, in that no player can possibly gain from misreporting their valuations
-in the event that the utility of the agents is \textit{quasilinear} \cite{roberts1979characterization, Lavi2008}, ie. that their net utility is equal to their valuation of the outcome plus any transfers they recieve, and their utility $u_i$ has form:
+The first and most notable property is that VCG mechanisms are \textit{truthfull} or \textit{incentive compatable}, in that no single player can possibly gain by misreporting their valuations in the event that the utility of the agents is \textit{quasilinear} \cite{roberts1979characterization, Lavi2008}.
+An agent's utility is quasilinear if their utility is equal to their valuation of the outcome plus any transfers they recieve, and hence their utility $u_i$ has form:
 $$ u_i = p_i(v)+v_i $$
-And thus if incentive compatability induces the players not to bid strategically, then it reduces a potential overhead of their participation in the system, and also potentially eliminates a source of instability in the resulting system.
+And thus if incentive compatibility induces the players not to bid strategically, then it reduces a potential overhead of their participation in the system, and also potentially eliminates a source of instability in the resulting system.
 
-Another interesting property is sometimes called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. Particularly if the utility of zero is regarded as the utility of non-participation, then invidually rational means that everybody is left being better-off by participating than they would be otherwise. Hence individual rationality is possible a minimal component of ethical euvolentary negotiation (see chapter \ref{sec:reference_points}).
+Another interesting property is called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. Particularly if the utility of zero is regarded as the utility of non-participation, then individually rational means that everybody is left being better-off by participating than they would be otherwise. Hence individual rationality is a possible of ethical euvolentary negotiation (see chapter \ref{sec:reference_points}).
 
 It is also worth noting that VCG mechanisms are also \textit{efficient} in the sense that the process actualises the utilitarian socially optimal solution $x^*(v) \in X$.
 
-However more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is transferred between the players might not sum to zero; and hence an implementation of VCG might require regular budget injection to maintain and/or sap money from between the participants (see example).
-And in this way, VCG is not efficient in the sense of maximising utility - since that may be destroyed by lack of budget balance.
+However, more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is transferred between the players might not sum to zero.
+Because of this an implementation of VCG might require regular budget injection to maintain and/or produce a budget surplus, hence sapping money from between the participants (see example).
+Because VCG may produce a budget surplus from between the participants it is hence easy to note that the maximum amount of utility is not being given to the participants, and hence VCG is not efficient in the sense of maximising utility for the particiants (see section \ref{sec:philosophy_efficiency}).
 
-Although VCG is incentive compatable for individual strategisers it is potentially vulnerabile to strategising coalitions, additionally its implementation may involve imposing a lack of privacy for participants, and also (depending on context) may also have higher computational complexity than other mechanisms.\cite{ShohamLeytonBrown09}
+Although VCG is incentive compatible for individual strategisers it is potentially vulnerable to strategising coalitions, additionally its implementation may involve imposing a lack of privacy for participants, and also (depending on context) may also have higher computational complexity than other mechanisms.\cite{ShohamLeytonBrown09}
 
-Some of these disadvantages (and others) have made VCG seldom implemented in practice, and in electricity networks.\cite{Rothkopf07, Ausubel2006}
+The disadvantages of VCG have made it seldom implemented in practice, also in electricity networks.\cite{Rothkopf07, Ausubel2006}
 
 As VCG has positive and negative features, it is possible to ask if there are similar mechanisms which avoid some of the negative features.
-But it is unfortunate, that some of these properties (incentive compatable, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a component feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
+But it is unfortunate, that some of these properties (incentive compatible, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
 
 \subsection{Mechanism Design, is there a better VCG?}
 
 The VCG mechanism is a cornerstone component in the field of Mechanism Design, and there exist many good sources giving extended discussions on the field.\cite{37377}
-But generally, Mechanism Design analyses systems which select social outcome/s based apon the result of strategic interactions of multiple parties with divergent interests.% and where each party has actual preferences over the possible outcomes, and also reported preferences over the outcomes.
+But generally, Mechanism Design conducts the analysis of systems which select social outcomes based upon the result of strategic interactions of multiple parties with divergent interests.% and where each party has actual preferences over the possible outcomes, and also reported preferences over the outcomes.
 
-One of the features of Mechanism design that the VCG mechanism illustrates, is the potential for considering and apprehending the way in which a system is likely to behave between rational individual strategising agents.
-This possibility extends beyond VCG, as it has been discovered that any system which is implemented between strategising agents can be altered such as to make it incentive compatable for them; and this is called the revelation principle.\cite{RePEc:ecm:emetrp:v:41:y:1973:i:4:p:587-601} \cite[Chapter~2.3]{37377}
-The revelation principle has various formulations, but generally, for any system there will nash-equilibria in the interaction between the agents, and consequently an incentive compatable mechanism can be constructed by asking the agents for their true valuations and then implimenting the corresponding nash equilibria directly.
-Unfortunately, it is sometimes the case that the nash-equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always a nash equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
+One of the features of Mechanism Design that the VCG mechanism illustrates, is the potential for considering and apprehending the way in which a system is likely to behave between rational individually strategising agents.
+This possibility extends beyond VCG, as it has been discovered that any system which is implemented between strategising agents can be altered such as to make it incentive compatible for them; this is called the revelation principle.\cite{RePEc:ecm:emetrp:v:41:y:1973:i:4:p:587-601} \cite[Chapter~2.3]{37377}
+The revelation principle has various formulations, but generally, for any system there will some Nash-equilibria in the interaction between the agents, and consequently an incentive compatible mechanism can be constructed by asking the agents for their true valuations and then implementing the corresponding Nash-equilibria directly.
+Unfortunately, it is sometimes the case that the Nash-equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always a Nash-equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
 
-Some historic impossibility proofs in mechanism design concern voting and social choice, and notably include Arrow's impossibility theorem, and the Gibbard-Satterthwaite theorem.
-But the difficulty does not nessisarily receed even if monetary compensations between parties are included into consideration. such as per the Myerson-Satterthwaite theorem.
-Another impossibility theorem was also proven by Green and Laffont \cite{29088} to the effect of proving that there is no easy alternative to VCG; ie. a mechanism which is incentive compatabile, has unrestricted player preferences, has individual rationality, and implements a socially optimal outcome.
+Some of the primary historic impossibility proofs in Mechanism Design concern voting and social choice systems, and notably include Arrow's impossibility theorem, and the Gibbard-Satterthwaite theorem.
+But the difficulty does not necessarily recede even if monetary compensations between parties are included into consideration, such as per the Myerson-Satterthwaite theorem.
+Another impossibility theorem was also proven by Green and Laffont \cite{29088} to the effect of proving that there is no easy alternative to VCG - a mechanism which is incentive compatible, has unrestricted player preferences, has individual rationality, and implements a socially optimal outcome, in the case of quasilinear utilities.
 
-In the evolving field of Mechanism Design there are several avenues of averting some of the impossibilities.
+In the evolving field of Mechanism Design there are several avenues of mitigating some of the impossibilities.
 
 %\subsection{Navigating around impossibilities of Mechanism Design to a better VCG}
 
-One of the main problems in applying VCG to electricity networks is the fact that it is not budget-balanced, and this raises a question of where the budget surplus/defecit should be channeled to/from.
-Particularly if the money should be directed back to the participants in the electricity network, then it would destroy the incentive compatability that was part of the scheme in the first place.
-And this is a direct consequence of the impossibility result of Green and Laffont \cite{29088}. By this impossibility result we are constrained to consider mechanisms which are suboptimal in relation to these qualities (budget balance, incentive compatability, individually rational, and efficient).
+One of the main problems in applying VCG to electricity networks is the fact that it is not budget-balanced, and this raises a question of where the budget surplus/deficit should be channeled to/from.
+Particularly if the money should be directed back to the participants in the electricity network, then it would destroy the incentive compatibility that was part of the scheme in the first place.
+This is a direct consequence of the impossibility result of Green and Laffont \cite{29088} and hence we are constrained to consider mechanisms which are suboptimal in relation to these qualities (budget balance, incentive compatibility, individually rational, and efficiency).
+However it is also known that there are no mechanisms which allow bounded deviations from the efficiency, incentive compatibility and budget-balance \cite{YI201679}.
 
-Subsequently, we could ask if there is any potential mechanisms which are boundedly suboptimal about thoes qualities, and the answer is unfortunately not.
-Particularly there are no mechanisms which allow bounded deviations from the efficiency, incentive compatibility and budget-balance at the same time (allowing such mild conditions as quasilinear utilities) \cite{YI201679}.
-Thus a search for a better alternative than VCG needs to sacrifice or substitute some of these desirable properties.
-And although we cannot go into too much detail about the field of Mechanism design in this chapter (and the different kinds of imposibility theorems and kinds of incentive compatability), but we can highlight some interesting options.
+Thus a search for a better alternative than VCG needs to outright sacrifice or substitute some of these desirable properties.
+
+Although we cannot go into too much detail about the field of Mechanism Design in this chapter (and the different kinds of impossibility theorems and kinds of incentive compatability), we can highlight some interesting options.
 
 \subsubsection*{Redistribution in Groves mechanisms}
 
-One potential avenue of averting the impossibility result is to discard the assumption that the player's valuation over outcomes are unrestricted, and recognise that some of the budget surplus/defecit can be redistributed without destroying the incentive compatability property.
+One potential avenue of averting the impossibility result is to discard the assumption that the player's valuation over outcomes are unrestricted, and recognise that some of the budget surplus/deficit can be redistributed without destroying the incentive compatibility property.
 
 To frame this approach, we must make a technical distinction between a Groves mechanism and its particular instance - in the VCG mechanism.
 A Groves mechanism is exactly the same as the VCG mechanism except instead of paying players per equation \ref{eq:VCG_payment_rule}, instead it pays them per:
 \begin{equation}\label{eq:Groves_payment_equation} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - C_{-i} \end{equation}
 where $C_{-i}$ is some function that is independent of $i$'s reported preferences.
 In this context it is notable that the VCG mechanism is a special case of a Groves mechanism where $C_{-i}= \max_{x'\in X}\sum_{j\ne i}v_j(x')$. \cite{10.2307/1914085}
-Groves mechanisms are a class of mechanisms which include VCG, and are categorically incentive compatable. 
+Groves mechanisms are a class of mechanisms which include VCG, and are categorically incentive compatible. 
 
 The challenge therefore is to derive optimal functions $C_{-i}$ which minimise the budget surplus/defecit while maintaining individual rationality in the context of restricted player valuations.
-And to this challenge has been significant discussion about deriving these $C_{-i}$ functions, also known as `VCG redistribution' rules.
+For this purpose there has been significant discussion about deriving these $C_{-i}$ functions, also known as `VCG redistribution' rules.
 
 One of the first people to propose such a rule was Ruggiero Cavallo \cite{Cavallo:2006:ODM:1160633.1160790}.% who showed that such a redistribution rule exists with with a performance exceeding VCG.
-Who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be assumed that any party has a utility of zero if the do not recieve the physical object.
-This redistribution was possible primarily because there exists a simple constraint on player valuations - ie. not reciving the object has utility of zero.
+Who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be naturally assumed that any party has a utility of zero if they do not recieve the physical object.
+This redistribution was possible primarily because there exists a simple constraint on player valuations - ie. not receiving the object has utility of zero.
 
 Similarly in other situations where there are restrictions on the players valuation over the outcomes, there is the potential for deriving VCG redistribution rules.
 
@@ -125,14 +126,15 @@ However there are some difficulties with this approach, particularly it is known
 
 \subsubsection*{Sacrificing efficiency with budget sinks}
 
-Anoher avenue in dealing with the problem is to sacrifice efficiency of outcome selection.
-One of the simplest such scheme is given by Boi Faltings \cite{10.1007/978-3-642-25510-6_14, 10.1007/978-3-642-25510-6_14}
-Who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups, where the VCG outcome from the first group is selected irrespective of the preferencs in the second group.
-and where the second group recieves the budget surplus from the VCG mechanism applied to the first group.
+Another avenue is to sacrifice efficiency of outcome selection.
+One of the simplest such schemes is given by Boi Faltings \cite{10.1007/978-3-642-25510-6_14, 10.1007/978-3-642-25510-6_14}
+Who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups, where the VCG outcome from the first group is selected irrespective of the preferences in the second group.
+and where the second group (the `sink') receives the budget surplus from the VCG mechanism applied to the first group.
 This mechanism constitutes a budget balanced VCG-type mechanism which can be made a little bit more regular by randomly selecting the `sink', and splitting the budget surplus between the parties evenly without knowledge of who will be selected.\cite{10.1007/978-3-642-25510-6_14}
 
-Particularly this method selecting a non-pareto optimal outcome has been the subject of investigation, and the process is proven to nessisarily need a sink and that there are different ways to select an appropriate sink randomly \cite{NATH2019673}.
+Particularly this method selecting a non-pareto optimal outcome has been the subject of investigation, and the process is proven to necessarily need a sink and that there are different ways to select an appropriate sink randomly \cite{NATH2019673}.
 
+However it is expected that such a mechanism of randomly assigning a sacrificial `sink' could potentially be ethically dangerous; potentially falling afoul of Formal Equality ideas (see section \ref{sec:formal_equality})
 
 
 %\subsubsection{switching to Baysean incentive compatability}
@@ -151,13 +153,13 @@ Particularly this method selecting a non-pareto optimal outcome has been the sub
 
 \subsection{Summary and Discussion of VCG}\label{subsec:summary_discussion_VCG}
 
-The VCG mechanism frames a elegent ethical schema for distributive payments, and is directly extensable to electricity systems.
-Although it is incentive compatable, the primary practical draw-back to such a system is that it is not budget-balanced.
-Unfortunately there is no easily implementable system that is like VCG that is incentive compatable and is budget-balanced without forcing participants to trade at a loss.
+The VCG mechanism frames a elegant ethical schema for distributive payments and is directly applicable to electricity systems.
+Although it is incentive compatible, the primary practical draw-back to such a system is that it is not budget-balanced.
+Unfortunately there is no easily implementable system that is like VCG that is incentive compatible and is budget-balanced without forcing participants to potentially trade at a loss.
 
 Notwithstanding it is a possible scheme for the trading of electricity and electric resources, and in the following chapter we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
 
-One of the most features about VCG, is that it is one of the most direct expressions of marginal payments - in that each participant is payed the marginal difference their presense causes to the wellbeing of the other participants.
+One of the most features about VCG, is that it is one of the most direct expressions of marginal payments - in that each participant is payed the marginal difference their presence causes to the well-being of the other participants.
 This marginal quality is shared by two other solutions of this chapter, particularly Locational Marginal Pricing (section \ref{sec:solutions_LMP}) and Shapley Value (section \ref{subsec:the_shapley_value}).
 
 One of the most notable qualities of VCG is that when it is scaled up to large numbers of participants (and no specific participants are particularly influential) then VCG often limits to another solution concept called Locatinal Marginal Pricing, which often is budget balanced.\cite{NATH2019673, 8430852}.
@@ -167,27 +169,26 @@ One of the most notable qualities of VCG is that when it is scaled up to large n
 
 In Section \ref{sec:reference_points} we briefly considered the notion that %moral and euvoluntary trading would result in normative market pricing; and potentially that 
 the morality of a transaction could be framed with respect to the normal market prices.
-And there is potentially no greater framework for describing nominal market pricing in economic thought more influential than the concept of the \textit{margin} or more specifically \textit{marginal pricing}.
+There is potentially no greater framework for describing nominal market pricing in economic thought more influential than the concept of the \textit{margin} or more specifically \textit{marginal pricing}.
 
 The idea that normal market trading should have any relation to moral trading was seen in John Locke's short essay Venditio \cite{locke2003locke} where it is argued that a fair price for something is simply its normal market price at its location.\footnote{``... the market price at the place where he sells. Whosoever keeps to that in whatever he sells I think is free from cheat, extortion and oppression, ...''}
 John Locke argues for this thesis, by considering that negotiating above market price for a good would be unethical as it would taking advantage of ignorance or special circumstance of the buyer, but that negotiating below market price would only incentivise reselling and allow others to profit at the original seller's loss.
-And Additionally that selling below market price only to thoes who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same nominal market price for everybody.
+Additionally that selling below market price only to those who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same nominal market price for everybody.
 
-While John Locke's arguments may or may not be convincing, it is usefull to consider the transactions and pricing that would occur under idealised or normative euvoluntary trading.
+While John Locke's arguments may or may not be convincing, it is useful to consider the transactions and pricing that would occur under idealised or normative euvoluntary trading.
 As these prices may be a moral in-themself, or provide a back-drop for the framing of more moral trading.
-In section \ref{sec:solutions_bargaining} we consider mathematical schemas used to describe idealised bargaining between small numbers of participants, but in this section we describe some economic theory that has been used to describing normalised trading between large numbers of market participants.
+In section \ref{sec:solutions_bargaining} we consider mathematical schemas used to describe idealised normative bargaining between small numbers of participants, but in this section we describe some economic theory that has been used to describing normalised trading between large numbers of market participants.
 
 %Unfortunately the determination of normalised trading, and normal market price is not nessisarily so easy to distill in practice.
-Historic economic thought lends consideration to the idea that market prices can be described by combinations of factors, not limited to, supply and demand functions, market uncertainty, production costings and transport tariffs etc.
-And the combination of these many things are related to the pricing and subsequent trading of the goods.
+Historic economic thought lends consideration to the idea that market prices can be described by combinations of factors, not limited to, supply and demand functions, market uncertainty, production costings and transport tariffs etc. and the combination of these may be related to the pricing and subsequent trading of the goods.
 However, the way in which these factors have been seen to influence (or define) economic value has changed over time.
 
 \subsection{A brief summary on the history of Value}
 
-In the history of economic thought, there was some general idea that the economic value of something (and hence its normal market price) should, in some way, be related to its usefullness in fulfilling human needs (however fickle or not) as things which are utterly useless seldom fetch any price.
+In the history of economic thought, there was some general idea that the economic value of something (and hence its normal market price) should, in some way, be related to its usefulness in fulfilling human needs (however fickle or not) as things which are utterly useless seldom fetch any price.
 %Even so far as to categorising into numbered classes different goods depending on their relation to satisficing needs (eg. \cite[Chapter 1]{mengerprinciples}).
 %Such as where different needs (eg. hunger) require first-order goods (eg. bread) to satisfy them, and thoes require second-order goods to provide (eg. flour to make bread), and so on. 
-But, above this, there was a difficulty explaining how it was that things which were most usefull to satisfying needs often had little economic value, and things which were more useless were sometimes most economically valuable. This apparent contradiction is known as the water-diamond paradox, best put by Adam Smith:
+But, above this, there was a difficulty explaining how it was that things which were most useful to satisfying needs often had little economic value, and things which were more useless were sometimes most economically valuable. This apparent contradiction is known as the water-diamond paradox, best put by Adam Smith:
 
 %\begin{displayquote}
 %The word VALUE, it is to be observed, has two different meanings, and sometimes expresses the utility of some particular object, and sometimes the power of purchasing other goods which the possession of that object conveys. The one may be called `value in use;' the other, `value in exchange.' The things which have the greatest value in use have frequently little or no value in exchange; and, on the contrary, those which have the greatest value in exchange have frequently little or no value in use. Nothing is more useful than water; but it will purchase scarce any thing; scarce any thing can be had in exchange for it. A diamond, on the contrary, has scarce any value in use; but a very great quantity of other goods may frequently be had in exchange for it.\cite{Smith1Gutenberg}
@@ -198,53 +199,53 @@ The word VALUE, it is to be observed, has two different meanings, ... The things
 \end{displayquote}
 
 In answer to this, there was promoted the idea that economic value reflects labor, as water is easy to procure but diamond is not so.
-And this `labor theory of value' was held by many authors (including Adam Smith\footnote{``The real price of every thing, what every thing really costs to the man who wants to acquire it, is the toil and trouble of acquiring it.''\cite{Smith1Gutenberg}}, David Riccardo\footnote{``The value of a commodity, or the quantity of any other commodity for which it will exchange, depends on the relative quantity of labour which is necessary for its production...''\cite[Section 1, Chapter 1]{Riccardo1Gutenberg}}, and many others) but most notably by Karl Marx:
+This `labor theory of value' was held by many authors (including Adam Smith\footnote{``The real price of every thing, what every thing really costs to the man who wants to acquire it, is the toil and trouble of acquiring it.''\cite{Smith1Gutenberg}}, David Riccardo\footnote{``The value of a commodity, or the quantity of any other commodity for which it will exchange, depends on the relative quantity of labour which is necessary for its production...''\cite[Section 1, Chapter 1]{Riccardo1Gutenberg}}, and many others) but most notably by Karl Marx:
 
 \begin{displayquote}
 It suffices to say that if supply and demand equilibrate each other, the market prices of commodities will correspond with their natural prices, that is to say with their values, as determined by the respective quantities of labour required for their production \cite[Chapter 2]{marx1910value}
 \end{displayquote}
 
-And this idea, that the quantity of labor should (in some way) define market prices at market equilibrium, was subject to analysis and verification.
-But ultimately the question of how to transform volumes of labor into competitive market prices became a difficult problem known as the `Transformation Problem'.
+And this idea, that the quantity of labour should (in some way) define market prices at market equilibrium, was subject to analysis and verification.
+But ultimately the question of how to transform volumes of labour into competitive market prices became a difficult problem known as the `Transformation Problem'.
 
-However the various utilitarians of the 19th century viewed utility no only as a direction of moral efforts, but as a fundamental drive of human behavior\footnote{for instance see Bentham: ``Nature has placed mankind under the governance of two sovereign masters, pain and pleasure.
-It is for them alone to point out what we ought to do, as well as to determine what we shall do.''\cite{bentham1823introduction}}, including market behaviors such as price setting; and ultimately, this perspective yeilded a new explanation for economic value.
+However, the various utilitarians of the 19th century viewed utility no only as a direction of moral efforts, but as a fundamental drive of human behaviour\footnote{for instance see Bentham: ``Nature has placed mankind under the governance of two sovereign masters, pain and pleasure.
+It is for them alone to point out what we ought to do, as well as to determine what we shall do.''\cite{bentham1823introduction}}, including market behaviours such as price setting; and ultimately, this perspective yielded a new explanation for economic value.
 
-The utilitarian perspective sought to explain market dynamics in terms of people's efforts to maximise their own utility (or more practically, profit), and in this context stable (and hence normal) market prices were associated with the equilibrium of thoes efforts.
-And this perspective linked market dynamics with the concept of the margin - or `marginalism'.
+The utilitarian perspective sought to explain market dynamics in terms of people's efforts to maximise their own utility (or more practically, profit), and in this context stable (and hence normal) market prices were associated with the equilibrium of those efforts.
+This perspective yielded a link between market dynamics with the concept of the margin - or `marginalism'.
 
 Although the concept of the margin was evidenced in some writings in the earlier half of the 19th century (such as in the works of Jules Dupuit and Hermann Heinrich Gossen), it took to the end of the century for the idea to become more thoroughly developed \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307}.
-Although there was much discussion about the relationship between the labor theory of value and marginalism at the end of the 19th century \cite{steedman2003socialism} ultimately marginalism was adopted mainstream in the so-called 'marginal revolution', defining the beginning of neoclassical economics.\cite{marginalism1}
+Although there was much discussion about the relationship between the labour theory of value and marginalism at the end of the 19th century \cite{steedman2003socialism} ultimately marginalism was adopted mainstream in the so-called 'marginal revolution', defining the beginning of neoclassical economics.\cite{marginalism1}
 
-The marginalist principles saw that economic values were not just equal to the summation of normal production costs\footnote{Such as promoted by Riccardo, ``The real and ultimate regulator of the relative value of any two commodities, is the cost of their production, and neither the respective quantities which may be produced, nor the competition amongst the purchasers.''\cite{Riccardo1Gutenberg}} (ultimately depending on the value of labor), but instead depends on the cost of production of the most marginal unit produced to meet demand.
+The marginalist revolution saw that economic prices were not just equal to the summation of normal production costs\footnote{Such as promoted by Riccardo, ``The real and ultimate regulator of the relative value of any two commodities, is the cost of their production, and neither the respective quantities which may be produced, nor the competition amongst the purchasers.''\cite{Riccardo1Gutenberg}} (ultimately depending on the value of labor), but instead depended on the cost of production of the most marginal unit produced to meet demand.
 
 \subsection{A sketch of Marginalism}\label{subsec:marginal_price_sketch}
 
-The idea of marginalism is best illustrated with a graph, in Figure \ref{fig_demand_supply} we have a hypothetical market for a particular economic good, with many suppliers and many buyers.
+The idea of marginalism is best illustrated with a graph, in Figure \ref{fig_demand_supply} is reflected a hypothetical market for a particular economic good, with many suppliers and many buyers.
 In the figure we have the plotted the `Supply curve', identifying how many units of the good could be sustainably supplied to the market if the units sold for a particular price.
 And we also have the `Demand curve', identifying how many units of the good would be sold depending on the price which the goods sold at.
 If the goods have a set price and the market is functioning ideally, then there is only one sensible outcome: that the goods should be sold in the number (and therefore at the price), that is at the intersection of the supply and demand curves - ie. the marginal price point.
-For if there were more goods produced, then thoes excess units would be unsold hence their production would be unprofitable, and if there were less goods produced, then there would be unmet demand which would spur more production.
+For if there were more goods produced, then those excess units would be unsold hence their production would be unprofitable, and if there were less goods produced, then there would be unmet demand which would spur more production.
 
-Different sellers may choose different prices in a market, however if any individual seller tried to deviate from this marginal price in the context of such an ideal market, then it would be a disadvantageous for them.
+Different sellers may choose different prices in a market, however if any small individual seller tried to deviate from this marginal price in the context of such an ideal market, then it would be a disadvantageous for them.
 If a seller tried to set a higher price than the marginal rate then it would result in a failure to sell, or if a seller set a lower price then it would only result in less profit.
 In this way, the marginal price point identifies an equilibrium of peoples utility (or profit) maximising efforts.
 
-This kind of marginal analysis is a short sketch of the analysis and treatment in modern microeconomic texts (such as Vohra \cite{vohra_2020}).
-And this sort marginalist analysis is also widely regarded to resolve the water-diamond paradox, in that water is cheap because its marginal unit is cheap to produce.
+This kind of marginal analysis is a short sketch of the analysis and treatment in modern microeconomic texts (such as \cite{vohra_2020}).
+This marginalist analysis is also widely regarded to resolve the water-diamond paradox, in that water is cheap because its marginal unit is cheap to produce.
 
-Over time the marginalist synthesis was developed more comprehensively in the presense of many discussions and criticisms.
-Particular criticisms attack the academic assertion that market participants are psychologically driven by rational utility maximisation \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307}, and the more pragmatic assertion that markets are approximately ideal and tend towards the stability of equilibrium \cite{nla.cat-vn5739105}.
+Over time the marginalist synthesis was developed more comprehensively in the presence of many discussions and criticisms.
+Particular criticisms attack the academic assertion that market participants are psychologically driven by rational utility maximisation \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307}\footnote{individual traders in any market are atleast partially driven by irrationality such as fear, ignorance and gambling}, and the more pragmatic assertion that markets are approximately ideal and tend towards the stability of equilibrium \cite{nla.cat-vn5739105}\footnote{as might be witnessed in markets where is inherent uncertainty, notably in speculative markets such as stocks, housing and crypto-currency}.
 
 \input{figs/demand_supply.tex}
 
-Notwithstanding, one of the most notable features of this neoclassical analysis is that the equilibrium marginal price point also maximises the utility of thoes that participate; for in Figure \ref{fig_demand_supply} it can be seen that for each unit of good that is supplied to the market a sale can be made which is desirable for the buyer and of profitable to the seller, up until the marginal point where, whereafter the mutual advantage ceases for the sale of more goods.
+Notwithstanding, one of the most notable features of this neoclassical analysis is that the equilibrium marginal price point also maximises the sum of utility of those that participate in the market.
+This can be seen from Figure \ref{fig_demand_supply} where all the buyers who value the goods the most are provided the goods they require from all the sellers who can supply those goods at lowest cost up until the marginal point where no further trade is viable.
 
-This quality is seen in neoliberal analysis more generally, where market equilibrium prices (at and/or between markets) occur at the point of the maximisation of sum of utility.
-And in the 20th century, the process of mathematically deriving these marginal prices developed into a kind of calculus, where the marginal prices fall out as lagrange multipliers in the process of maximising the sum of utility.
+This point of utility maximisation is seen in Neoclassical analysis more generally, where market equilibrium prices (at and/or between markets) occur at the point of the maximisation of the sum of utility.
+Indeed, process of mathematically deriving these marginal prices developed is associated with a kind of calculus, where the marginal prices fall out as Lagrange multipliers in the process of maximising the sum of utility.
 
-To see this, consider the curves in figure \ref{fig_demand_supply} where the Supply function is\\ $S(x) = 20(x/40)^2$ and the Demand function is $D(x) = \frac{40}{1+(x/40)^2}$.
-
+To see this, consider the curves in figure \ref{fig_demand_supply} where the Demand function is\\ $D(x) = 20(x/40)^2$ and the Supply function is $S(x) = \frac{40}{1+(x/40)^2}$.
 
 From these functions\footnote{We could, more directly, observe that by solving $S(x)=D(x)$ we get $x=40$.} we construct the utility of the buyers and sellers as:
 $$U_s(x) = \int_0^x\frac{-40}{1+(z/40)^2}dz \quad\quad\text{and}\quad\quad U_d(x) = \int_0^x20\left(\frac{z}{40}\right)^2dz$$
@@ -254,13 +255,13 @@ $L(a,b,\lambda) = U_d(a) + U_s(b) + \lambda(b-a)$
 $$\frac{\partial L}{\partial a} = 20\left(\frac{a}{40}\right)^2 - \lambda = 0 \quad\quad\text{thus:}\quad\quad a = 40\sqrt{\lambda/20}$$
 $$\frac{\partial L}{\partial b} = \frac{-40}{1+(b/40)^2} + \lambda = 0 \quad\quad\text{thus:}\quad\quad b = 40\sqrt{40/\lambda - 1}$$
 substituting into the constraint $a=b$ gives $\lambda=20$ and thus $a=b=40$\\
-In this way the lagrange multiplier on the conservation constraint gives the marginal price of the good - which is also called the `shadow price'.
+In this way the Lagrange multiplier on the conservation constraint gives the marginal price of the good - which is also called the `shadow price'.
 
 The general development of the mathematics is slightly beyond our scope here, but the general process is:
 \begin{enumerate}
 \item formulate the utility function from all the market participants, including all variables
 \item form an optimisation problem for utility maximisation, with appropriate conservation constraints
-\item solve the optimisation problem, and record the lagrange multipliers of the conservation constraints as shadow prices.
+\item solve the optimisation problem, and record the Lagrange multipliers of the conservation constraints as shadow prices.
 \end{enumerate}
 This process, of using calculus to determine nominal prices has been proposed in the electricity space in recent years \cite{lmp1, lmp2, lmp4, game3}.
 Particularly as the process of maximising utility on an electricity grid is a well known problem called the `Optimal Power Flow' problem (OPF), where the power conservation constraint at each bus of the network, identifies the marginal price of electrical power on that bus.
@@ -272,13 +273,15 @@ And that although LMP is like VCG in that it is ultimately not budget balanced, 
 
 \subsection{Summary and Discussion of Locational Marginal Pricing}
 
-Locational Marginal Pricing is a historic example of economic framework of integrating market conditions (supply and demand information) to give equilibrium price points.
-It can be seen to provide a sensible description of normal trading value, and hence (perhaps) moral trading value; and it is currently used in electricity systems around the world.
+Locational Marginal Pricing is a historic example of an economic framework of integrating market conditions (supply and demand information) to give equilibrium price points.
+It can be seen to provide a sensible description of normal trading value, and thence (perhaps) moral trading value; and it is currently used in electricity systems around the world.
 
 Locational Marginal pricing and VCG provide some of the most direct expressions of marginalism as a concept, and (as considered in section \ref{subsec:summary_discussion_VCG}) one can limit to the other for large markets.
-Both are expressions of the marginalism, in that both revolve around the socially optimal utility point, and reward participants with respect to their contribution to it.
+%TODO: FIX THIS SENTANCE
+Particularly VCG rewards participants with economic incentives equal to their direct impact on group wellbeging above their absense wheras Locational Marginal Pricing provides participants with economic incentives in proportion to their marginal impact on group wellbeing.
+Both are expressions of marginalism, in that both revolve around the socially optimal utility point, and reward participants with respect to their contribution to it.
 
-Both LMP and VCG root their concept of value in the idea of marginal contribution implicitly with respect to some notion of absense. While in most contexts it may be clear what this means, in section \ref{sec:solutions_bargaining} we outlay some solutions concepts which which embrace this ambiguity.
+Both LMP and VCG root their concept of value in the idea of marginal contribution implicitly with respect to some notion of absence. While in most contexts it may be clear what this means, in section \ref{sec:solutions_bargaining} we outlay some solutions concepts which which embrace this ambiguity.
 
 However before we move to section \ref{sec:solutions_bargaining}, we notice that both LMP and VCG only treatment of every player individually, but neglect any consideration of potential groups of players and their influcence.
 And so, in the next section \ref{sec:cooperative_game_theory_part} we consider solution concepts which explicitly consider group influence and marginal contributions therein.
@@ -554,14 +557,14 @@ We consider the space of possible payoffs between the players in the game (see s
 %We observe that a point within the shaded region will be chosen by the players as a threat point.
 %And then we ask what threat point will be a nash equilibrium between the players if they subsequently get the payoff given by the nash product (equation \ref{nash-product}).
 and note that if the pure strategy payoff $(-1,-2)$ within the shaded region was chosen as the threat point by the players (highlighted by a black point; corresponding to the payoff in game row 1 \& column 2), then the subsequent payoff to the players would be $(2,1)$, since it is the point within the shaded region that maximises the product of utilities above $(-1,-2)$ (per equation \ref{nash-product}).
-We also observe that the $(-1,-2)$ is a nash equilibrium as a choice of threat point, as if the column player chose the alternate column 1 instead, then the threat point would be $(2,1)$ which would effect the same outcome, and if the row player chose the alternate row 2 then the threat point would be $(1,2)$ which would be worse for the row player.
-In this way it is seen that $(2,1)$ is the nash bargaining solution for this game.
+We also observe that the $(-1,-2)$ is a Nash-equilibrium as a choice of threat point, as if the column player chose the alternate column 1 instead, then the threat point would be $(2,1)$ which would effect the same outcome, and if the row player chose the alternate row 2 then the threat point would be $(1,2)$ which would be worse for the row player.
+In this way it is seen that $(2,1)$ is the Nash bargaining solution for this game.
 \end{solution}
 \vspace{2mm}
 
 This example comes directly from Neyman and Kohlberg's papers (\cite{value2,value1}) where it is explained that Nash's solution concept has a particularly simple form in games where utility is transferable (TU) \cite{value2,shap_lectures,value1}.\footnote{It also coincides with the `coco-value' in the case of complete information \cite{kalai1,Kalai2010}.}
 The approach involves converting the normal form game \eqref{eq:example_game1} into a zero sum game by calculating the player advantage in payoffs, and our example zero sum game is given by \eqref{eq:zero_sum_game_1}.
-If $d$ is the minimax value of the zero sum game, and if $s$ is the maximum sum of utility achievable in the normal form game, then the nash bargaining solution is $(\frac{1}{2}s+\frac{1}{2}d,\frac{1}{2}s-\frac{1}{2}d)$.
+If $d$ is the minimax value of the zero sum game, and if $s$ is the maximum sum of utility achievable in the normal form game, then the Nash bargaining solution is $(\frac{1}{2}s+\frac{1}{2}d,\frac{1}{2}s-\frac{1}{2}d)$.
 
 \begin{equation}\label{eq:zero_sum_game_1} \begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix} \end{equation}
 
@@ -572,7 +575,7 @@ The Nash bargaining solution between the two players gives them utility as $(\fr
 
 It may seem to be a bit difficult to see how these two approaches are related at first glance.
 However, it can be realised that in the context of selecting a threat point (for a TU game), that all that matters is the player's payoff advantage over their opponent.
-This fact can be seen by inspection in Figure \ref{fig:graph1_utilities}, where maximising the nash product over a threat point places the final payoff point directly above and to the right (on the pareto frontier) at a 45 degree angle.
+This fact can be seen by inspection in Figure \ref{fig:graph1_utilities}, where maximising the Nash product over a threat point places the final payoff point directly above and to the right (on the pareto frontier) at a 45 degree angle.
 In this context, the threat point only matters to the players insofar as it serves to moves the resulting payoff point along the pareto frontier.
 The pareto frontier defines a set sum of player payoffs to be distributed, and hence the threat point only defines the difference of how much is distributed to one player over another - their payoff advantage. We also note that for these bargaining solution concepts, that there is a way in which an `individual rationality' property can be guarranteed, specifically, if both players have the ability to unilatterally implement zero utility for themeself, then any disagreement point must be in the first quadrant, guarranteeing non-negative utility for both parties.\\
 
@@ -601,7 +604,7 @@ And Nash's bargaining solution concept, considers proportionality in a context w
 as identified by the philosophy of the previous chapter, non of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are more suitable than others.
 
 One particularly interesting feature of the Nash-bargaining solution is that it considers the minimax payoff advantage as a measure of competitive strength, and allocates utility accordingly.
-However the nash bargaining solution is limited to two players, as for three (or more) players there may not exist a unique zero-sum minimax value.
+However the Nash bargaining solution is limited to two players, as for three (or more) players there may not exist a unique zero-sum minimax value.
 
 In the following chapter \ref{cha:new_solution} we consider and construct an extention of Nash bargaining solution that also utilizes Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks.
 
