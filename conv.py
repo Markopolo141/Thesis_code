@@ -21,6 +21,8 @@ def conv(A,B):
 
 datas = []
 
+import pdb
+pdb.set_trace()
 A = [0]+[1 for i in range(41)]+[0]
 datas.append(A)
 B = copy(A)
@@ -36,6 +38,6 @@ for d in datas:
 	s = ""
 	for dd in d:
 		s += str(dd)
-	print s
-	print ""
+	print(s)
+	print("")
 

@@ -30,7 +30,7 @@ Then for any individual $i\in N$, if all coalitions $S$ such that $i\in S$ it is
 $$\varphi^v_i = \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v(S) \le \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v'(S) =\varphi^{v'}_i$$
 \end{proof}
 
-The question then becomes about what changes in utility functions and network constraints bring about this kind of monotonicity. The most direct case is shift invariance, which is inherited from nash bargaining roots \cite{nash2} and directly stated as an axiom in the case of the `coco' value \cite{kalai1}.
+The question then becomes about what changes in utility functions and network constraints bring about this kind of monotonicity. The most direct case is shift invariance, which is inherited from Nash bargaining roots \cite{nash2} and directly stated as an axiom in the case of the `coco' value \cite{kalai1}.
 
 \begin{theorem}[GNK is shift invariant]
 For any two utility profiles $u^1_i(x,y)$ and $u^2_i(x,y)$, and GNK defined by these utility profiles $\varphi_i^1$ and $\varphi_i^2$.
@@ -52,7 +52,7 @@ v_2(S) = &
 The above step simply brings the additive constant out the front of the max and min terms.
 Therefore for every coalition $S$ which includes individual $i$ of size $k$, $v_2(S)=v_1(S)+c$, therefore the average of these values over such coalitions has a similar relation.
 $$\frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_2(S) = \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_1(S) + c$$
-therefore the average of these averages over sizes of coaltions $k=1\dots n$ is again similar:
+therefore the average of these averages over sizes of coalitions $k=1\dots n$ is again similar:
 $$\frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_2(S) = \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v_2(S) + c$$
 which is to say that $\varphi_i^2 = \varphi_i^2+c$.
 \end{proof}

@@ -1,62 +1,55 @@
 \chapter{Conclusion}
 \label{cha:conc}
 
-Throughout this research program we have investigated various possible mechanisms for valuing electricity, particularly thoes mechanisms which can be bring into account all the possible confluences of electrical system details.
-It is understood that the future network will encompas differeing electrical sutiations with a range of smart devices, and the value of these will need a comprehensive answer, rather than a hatchet job of different policies and mechanisms.
+Throughout this research program we have undertaken an investigation into novel possible mechanisms for valuing electricity, particularly thoes mechanisms which can be bring into account all the possible confluences of electrical system details.
+It is understood that the future network will encompass differing electrical situations with a range of smart devices, and the value of these devices and the electricity they consume/generate will need a answer.
+
 The original research question was: what is the value of electricity?
 
 Unfortunately such a question is not easy to answer and has strong ethical undertones, making a comprehensive answer impossible in principle, but an object of important investigation notwithstanding.
-To investigate, we covered some of the existing solution concpets such as Nash's axiomatic bargaining, Cooperative game theory topics such as the core and shapley value, the VCG mechanism from mechanism design and marginal pricing theory.
-And with the aim of exploration we attempted to take some of the best parts of these concepts and attempted to construct a geninely novel solution.
+To investigate, we covered some of the existing solution concepts such as Nash's axiomatic bargaining, Cooperative game theory topics such as the core and Shapley value, the VCG mechanism from mechanism design and marginal pricing theory.
+With the aim of exploration we attempted to take some of the best parts of these concepts and construct a genuinely novel solution.
 
-Our new GNK solution was essentially rooted in bargaining perspective, rewarding particpants for the advantage and/or harm they could induce apon others.
+Our new GNK solution was essentially rooted in bargaining perspective, rewarding participants for the advantage they might have in competition with others, 
 It was hoped that an idealised bargaining solution like this would mirror the kinds of arrangements that people with divergent interests would freely come to anyway, and hence would ascribe economic value to electricity resources in the most natural way.
-However this naturallness ultimately proved to be somewhat artificial.
+However this process ultimately yielded a disappointing result.
 
 % the minimax nature of the bargaining game was only one of a possible ways of modelling the competition between divergent interests, and the result that was obtained violated the principles of euoluntary exchange anyways.
 %In principle, the negative utility imputed under the GNK value was seen to come from the way that the game was modeled, in that if everybody is unilatterally able to choose their power, and if power conservation constraints must be obeyed, then it acts a a lever in gargaining others below utility of zero.
 %This particular dynamic was fundamentally a result of the way that the intereaction between the participants was modelled.
 
-Additionally, the GNK value extends from the Shapley Value axioms, and as such it inherits the NP-hard computational difficulty associated with the Shapley Value.
-However through investigation into sampling techniques and in utilizing a particular proxy for the minimax-optimisations we were able to extend the GNK value from being intractable for ~14 size network, to being computable to about 80-100 sized networks.
-And this was actually quite surprising that the GNK value could be computed for even this, since if it were calculated exactly it would involve $2^{100}$ OPF terms.
+The GNK value extended from the Shapley Value axioms, and as such it inherits the NP-hard computational difficulty associated with the Shapley Value.
+However through investigation into sampling techniques and in utilising a particular proxy for the minimax-optimisations we were able to extend the GNK value from being intractable for ~14 sized nodal network, to being computable to about 80-100 sized nodal networks.
+And this was actually a quite surprising accomplishment especially considering that if the GNK value would be calculated exactly for a 100 sized nodal network it would involve $2^{100}$ OPF terms.
 
-And through the process of considering the different ways that the shapley value could be sampled, we developed some of our own complicated techniques.
-Particularly the different ways in which stratified sampling could be conducted were investigated, and a new concentration inequality was developed specifically taylored for stratified sampling; and this was probably the most involved and technical part of our research.
+Through the process of considering the different ways that our GNK value value could be sampled, we developed some of our own complicated techniques, which proved to be competitive against methods for sampling the Shapley Value in literature (particularly per Table \ref{Table2}).
+Particularly the different ways in which stratified sampling could be conducted were investigated, and a new concentration inequality was developed specifically tailored for stratified sampling.
 
-Ultimately, we dont feel that we truly did succeed in bringing a new and satisfying solution to light, primarily as the GNK's violation of individual rationality (ie assigning negative utilities) was seen to be a rather big ethical problem.
+Ultimately, we don't feel that we succeeded in bringing a new and satisfying solution for electricity systems to light, primarily as the GNK's violation of individual rationality (ie assigning negative utilities) was seen to be a significant ethical issue.
 
 %Additionally it is good to note that the computational difficultyies in the shapley value, seem to make it quite difficult to apply.
-In retrospect, the confluence between VCG and LMP that was witnessed lends credance to the suitability of the LMP solution.
+In retrospect, the confluence between VCG and LMP that was witnessed lends credence to the suitability of the LMP solution.
 
 
 \section{Future Work}
 \label{sec:future}
 
-The biggest problem with the GNK value is that it does not respect individual rationality, and there are several ways that it could potentially be made to do so.
+The major issue with the GNK value is that it does not respect individual rationality, and it isn't particularly clear how this should be remedied.
+From experimentation the violation seems primarily to extend from the GNK's being an average over payoff advantages rather than payoffs in the context of the power conservation constraint.
+We could, instead of using the GNK value with payoff advantages, modify the von Neumann and Morgenstern's solution (per equation \ref{knvalue3}) to work in the context of generalised games, and investigation of this avenue this may rectify the shortcoming.
 
-Particularly, the violation of individual ratinoality for GNK extends from the fact that they way it is modeled, particularly that the action space of the participants is in the power that they consume/generate, which they have unilatteral control over.
-And in the context of power conservation constraints, this actually provides a lever which results in which generator participants often being forced into a loss.
-And this bargaining dynamic in the was we have developed the GNK is basically unrealistic.
-A potentially more realistic way of modelling the action space of network participants, would be if every participant's action space were the voltage at their network position.
-Such a change would make it possible for any network participant to set the their own power consumption to zero unilatterally; and hence potentially make the resulting GNK value more balanced.
-
-%However, it is also worth noting that such a change would change the linear-DC OPF into a quadratic programs, since participants would have utility over the power they withdraw, voltage times current.
-
-%potentially it might be worth considering and investigating in the future.
-
-Additionally, the GNK value could be made more computationally scalable by converting it into a more marginal form.
-So for instance, there is the non-atomic shapley value that consideres that each participant as marginal contributor, and instead of summations of marginal differences, is instead rendered as an integral, potentially a non-atomic shapley/GNK value could be more tractable for far larger networks in a more tractable way.
-There are other techniques such as player clustering, that could also be used.
-%It might be worth investigating the way in which GNK and similar solution concepts could be made incentive compatable, although, the primary ways %in which it is seen to be made to be incentive compatable is through the introduction of baysean preference priors - which are kind of yuck.
+The GNK value (with its proxy) is difficult to calculate for networks even using sampling for networks over ~100 on an ordinary computer, and different techniques such as clustering (as mentioned in section \ref{sec:GNK_extensions_discussion}) may be possible to approximate it yet still for greater sized networks.
+Additionally it might be possible to convert the GNK value to a non-atomic form in a similar way as there is a non-atomic Shapley Value.
+The non-atomic shapley value considers that each participant as marginal contributor, and instead of summations of marginal differences, is instead rendered as an integral, potentially a non-atomic Shapley/GNK value could be more tractable for far larger networks.
+Indeed the application of the non-atomic Shapley Value to electricity networks may be an interesting investigation.
 
 In regards to the sampling theory, we ultimately ended up with something that was reasonably effective for the task of choosing samples from strata in stratified sampling, but there are potential improvements.
-The first possibl improvement, was in investigating ways of minimising the computational overhead of the method.
-Secondarily it may be possible to modify the method to take of join order process in shapley value sampling.
+The first possible improvement, was in investigating ways of minimising the computational overhead of the method.
+Secondarily it may be possible to modify the method to take of join order process in Shapley value sampling.
 And thirdly, it might be possible to tighten the concentration inequality (SEBB) in the sampling process.
 
-In the derivation of the SEBB we primarily utilised chernoff bounds, ie. frequency domain representation, approximation and manipulation. however it is known that ideal and stronger bounds can potentially be derived without the frequency domain representation at all.
-Particularly the asertion of optimal uncertainty quantification (OUQ) can result in perfectly tight bounds on concentration, directly by solving for the worst case scenario directly, we are unsure how this could be made to apply to stratified sampling particularly, but potentially it is worth investigation.\citep{OUQ1,doi:10.1137/13094712X}
+In the derivation of the SEBB we primarily utilised Chernoff bounds, however it is stronger bounds can potentially be derived.
+Particularly the assertion of optimal uncertainty quantification (OUQ) can result in perfectly tight bounds on concentration, directly by solving for the worst case scenario directly, we are unsure how this could be made to apply to stratified sampling particularly, but potentially it is worth investigation.\citep{OUQ1,doi:10.1137/13094712X}
 
 
 

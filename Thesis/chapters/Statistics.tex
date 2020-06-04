@@ -10,20 +10,20 @@ However in considering this process, and also the weakness of union bounds, it w
 
 We note that the derivation in this section gets rather difficult, and we understand that the result is a concentration inequality that is complex and tailored for a specific application, and as such, we suspect is the only one of its kind.
 
-The resulting concentration inequality gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includs factors specifically for strata sampled with and/or without replacement.
+The resulting concentration inequality gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
 
 The derivation involves and utilises much of the same components of the previous section with an additional martingale theorem specifically for any any strata sampled without replacement.
 
 \subsection{A new probability bound for Stratified Sampling (SEBB)}
 
-To begin the derivation of our new concentration inequality for stratified random sampling, we utilize and build apon some of the results of the previous section.
+To begin the derivation of our new concentration inequality for stratified random sampling, we utilise and build upon some of the results of the previous section.
 
 
 To begin, we need to consider three upper bounds for various moment generating functions.
 The first of which has already been given in the previous section, and is Hoeffding's lemma - Lemma \ref{Hoeffdings_lemma_lemma}.
 The other two are strongly related to Theorems \ref{hoeffdings1} and \ref{sample_squares} respectively.
 These two theorems derive an upper bound on the moment generating function and then minimise them with the free parameter to form a concentration inequality.
-However the usefull part here is to simplify thoes same upper bounds on the moment generating function into an exponential of a quadratic. as we will see.
+However the useful part here is to simplify thoes same upper bounds on the moment generating function into an exponential of a quadratic. as we will see.
 
 
 
@@ -40,7 +40,7 @@ For a random variable $X$ that is bounded on an interval $a\le X\le b$ with $D=b
 \]
 \end{lemma}
 \begin{proof}
-We assume without loss of generality that $X$ is centered to have a mean of zero.
+We assume without loss of generality that $X$ is centred to have a mean of zero.
 Then we construct an upper bound for $\E\left[\exp(sX)\right]$ in terms of $D$ by a parabola over $\exp(sX)$ for the permitted values of $X$ in the same way as in the proof of Theorem \ref{hoeffdings1}. By Lemma \ref{thm:parabola} there exists an $\alpha,\beta,\gamma$ such that $\alpha s^2X^2+\beta sX+\gamma\ge \exp(sX)$, and for all $a\le X\le b$, hence:
 \[
 E\left[\exp(sX)\right] \le \E[\alpha s^2X^2+\beta sX+\gamma] = \alpha s^2\E[X^2]+\gamma = \alpha s^2\sigma^2+\gamma
@@ -74,7 +74,7 @@ Let $X$ be a random variable of finite support on an interval $a\le X\le b$, wit
 $$\E[\exp(q(\sigma^2-(X-\E[X])^2))] \le \exp\left(\frac{1}{2}\sigma^2q^2D^2\right)$$
 \end{lemma}
 \begin{proof}
-We assume without loss of generality (and for ease of presentation) that X is centered to have a mean of zero.
+We assume without loss of generality (and for ease of presentation) that X is centred to have a mean of zero.
 We construct an upper bound for $\E\left[\exp(-qX^2)\right]$ in terms of $D$ by a parabola over $\exp(-qX^2)$ for the permitted values of $X$.
 
 For an $\alpha,\gamma$ such that $\alpha X^2+\gamma\ge \exp(-qX^2)$ then:
@@ -280,7 +280,7 @@ Thus we can apply Lemma~\ref{chernoff1} together with Lemmas~\ref{martingale1} a
 $$ 
 \pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\left(1-2\exp\left(-\frac{2r_i}{\theta_iD_i^2\Omega_{m_i}^{n_i}}\right)\right)
 $$
-Next, choosing $r_i$ to minimize the right hand side of this expression gives:
+Next, choosing $r_i$ to minimise the right hand side of this expression gives:
 $$
 r_i = \frac{r\theta_iD_i^2\Omega_{m_i}^{n_i}}{\sum_j \theta_jD_j^2\Omega_{m_j}^{n_j}}
 $$
@@ -373,8 +373,8 @@ One of the best ways of testing this hypothesis is with actual data, where diver
 And this is the approach that is taken in the next section, where we compare the accuracy attained via process of minimising the different probability bounds developed in this chapter.
 
 But before we leave this section, we also (for good measure) consider another strongly related bound on the error in stratified sampling.
-particularly since the last Theorem \ref{thm:SEBM_bound} ultimately builds apon Theorem \ref{thm:1} which was the embodiment of a simplification of Bennett's inequality per Lemma \ref{expectation1}.
-And since we will compare against Neyman sampling which is conceptually built apon the minimisation of Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) we will also consider and compare against a empirical Chebyshev's inequality for stratified sampling.
+particularly since the last Theorem \ref{thm:SEBM_bound} ultimately builds upon Theorem \ref{thm:1} which was the embodiment of a simplification of Bennett's inequality per Lemma \ref{expectation1}.
+And since we will compare against Neyman sampling which is conceptually built upon the minimisation of Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) we will also consider and compare against a empirical Chebyshev's inequality for stratified sampling.
 
 
 

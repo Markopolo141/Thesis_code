@@ -93,14 +93,14 @@ In the evolving field of Mechanism Design there are several avenues of mitigatin
 
 %\subsection{Navigating around impossibilities of Mechanism Design to a better VCG}
 
-One of the main problems in applying VCG to electricity networks is the fact that it is not budget-balanced, and this raises a question of where the budget surplus/deficit should be channeled to/from.
+One of the main problems in applying VCG to electricity networks is the fact that it is not budget-balanced, and this raises a question of where the budget surplus/deficit should be channelled to/from.
 Particularly if the money should be directed back to the participants in the electricity network, then it would destroy the incentive compatibility that was part of the scheme in the first place.
 This is a direct consequence of the impossibility result of Green and Laffont \cite{29088} and hence we are constrained to consider mechanisms which are suboptimal in relation to these qualities (budget balance, incentive compatibility, individually rational, and efficiency).
 However it is also known that there are no mechanisms which allow bounded deviations from the efficiency, incentive compatibility and budget-balance \cite{YI201679}.
 
 Thus a search for a better alternative than VCG needs to outright sacrifice or substitute some of these desirable properties.
 
-Although we cannot go into too much detail about the field of Mechanism Design in this chapter (and the different kinds of impossibility theorems and kinds of incentive compatability), we can highlight some interesting options.
+Although we cannot go into too much detail about the field of Mechanism Design in this chapter (and the different kinds of impossibility theorems and kinds of incentive compatibility), we can highlight some interesting options.
 
 \subsubsection*{Redistribution in Groves mechanisms}
 
@@ -333,7 +333,7 @@ The Core is the set of possible allocations such that the sum of them equals wha
 
 The allocations in the Core might be seen to have a kind of stability property - in that no coalition would have an incentive to leave the grand coalition. One major drawback about the Core is that it does not determine a unique outcome, but potentially a range of outcomes or potentially none at all, depending on the cooperative game.
 
-Indeed the Core may be empty, and in this case no solution can posses the same kind of desirable stability, however there are alternative allocations that minimise this shortcomming.
+Indeed the Core may be empty, and in this case no solution can posses the same kind of desirable stability, however there are alternative allocations that minimise this shortcoming.
 Most notably, the \textit{least-Core} solution concept.
 
 The least-Core solution concept is a particular instance of the \textit{strong $\epsilon$ Core} which is very similar to the Core, and is defined as follows:
@@ -360,6 +360,8 @@ Particularly, for any coalition $S$ which does not include a player $i$, then pl
 \end{equation}
 Then we have the average marginal contribution of player $i$ to coalitions of size $k$, and if we average this over coalitions of different size, we get the Shapley value:
 \begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
+Or more directly as:
+\begin{equation}\label{shap1_X}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
 The Shapley value is an averaging over a players marginal contributions, which is thus a unique allocation for any cooperative game.
 
 The Shapley value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
@@ -529,29 +531,15 @@ Nash also identifies this result via axioms:
 \begin{enumerate}
 \item For each game $(S_1,S_2,B)$ there is a unique solution $(v_1,v_2) \in B$
 \item If $(u_1,u_2)$ is in $B$ and $u_1\ge v_1$ and $u_2\ge v_2$ then $(u_1,u_2)=(v_1,v_2)$
-\item That order preserving linear transformation of utilitie do not change the solution. ie. for games with all utilities scaled (ie $u_1' = a_1u_1+b_1, u_2' = a_2u_2+b_2$ for $a_1,a_2\ge 0$) result in solution $(v_1',v_2')$ where $v_1'=a_1v_1+b_1$ and $v_2'=a_2v_2+b_2$.
+\item That order preserving linear transformation of utilities do not change the solution. ie. for games with all utilities scaled (ie $u_1' = a_1u_1+b_1, u_2' = a_2u_2+b_2$ for $a_1,a_2\ge 0$) result in solution $(v_1',v_2')$ where $v_1'=a_1v_1+b_1$ and $v_2'=a_2v_2+b_2$.
 \item The solution does not depend on which player is player `one', ie. all functions are symmetrical
-\item If points from $B$ are removed except $(v_1,v_2)$ and the points $(p_1(s_1,s_2), p_2(s_1,s_2))$ for all strategies $s_1\in S_1,s_2\in S_2$ then the new game yeilds the same solution.
+\item If points from $B$ are removed except $(v_1,v_2)$ and the points $(p_1(s_1,s_2), p_2(s_1,s_2))$ for all strategies $s_1\in S_1,s_2\in S_2$ then the new game yields the same solution.
 \item A restriction of strategies for a player cannot increase his/her resulting payoffs, ie. for $S_1'\subset S_1$ then $v_1(S_1',S_2,B)\le v_1(S_1,S_2,B)$
 \item There exists single (unmixed) strategies such that player one's value wont increase, ie. there exists $s_1,s_2$ such that $v_1(s_1,s_2,B)\le v_1(S_1,S_2,B)$
 \end{enumerate}
 
 These axioms are very similar to, but perhaps a little less obvious than Nash's game with exogenous disagreement point (as given in the previous subsection \ref{sec:nash_bargaining_exogenous}).
-
-In anycase, this Nash bargaining solution is one example of a solution concept that explicitly considers various 'threat' strategies, and how these might bear on the result of cooperative negotiations.
-%It is also quite evident that VCG mechanisms do not involve the consideration of these strategies.
-
-This leads to the question of whether or not the consideration of `threat' strategies should (or would) play a role in the division of resources - such as in an electricity system.
-Particularly it is identified by Nash that the role of threats in negotiations depends on a dynamic about their ability to be enforced.
-
-\begin{displayquote}
-A common device in negotiation is the threat ... If one considers the process of making a threat, one sees that its elements are as follows: A threatens B by convincing B that if B does not act in compliance with A's demands, then A will follow a certain policy T. Supposing A and B to be rational beings, it is essential for the success of the threat that A be compelled to carry out his threat T if B fails to comply. Otherwise it will have little meaning. For, in general, to execute the threat will not be something A would want to do, just of itself.
-(\cite{nash2})
-\end{displayquote}
-
-In this light, it is interesting to consider where threats do and do not play a role in real-world negotiations (such as discussed in \cite{anbarci2002comparing}), particularly as there are alternative bargaining solution concepts that do not involve threats (eg. \cite{bozbay}). 
-%It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
-
+Let us consider an example game for the calculation of Nash bargaining with endogenous disagreement point:
 
 \begin{example}
 Consider the matrix representation of the strategic normal-form game between two players (a row player and column player respectively):
@@ -559,7 +547,7 @@ Consider the matrix representation of the strategic normal-form game between two
 %And consider that these players can share utility between themselves (ie. a TU game). 
 What is the the Nash bargaining solution for this game, if the set of possible payoffs is only that which can be attained by mixed strategies?\end{example}
 \begin{solution}
-We consider the space of possible payoffs between the players in the game (see shaded region in figure \ref{fig:graph1_utilities})
+We consider the space of possible payoffs between the players in the game for mixed strategies (see shaded region in figure \ref{fig:graph1_utilities})
 %We observe that a point within the shaded region will be chosen by the players as a threat point.
 %And then we ask what threat point will be a nash equilibrium between the players if they subsequently get the payoff given by the nash product (equation \ref{nash-product}).
 and note that if the pure strategy payoff $(-1,-2)$ within the shaded region was chosen as the threat point by the players (highlighted by a black point; corresponding to the payoff in game row 1 \& column 2), then the subsequent payoff to the players would be $(2,1)$, since it is the point within the shaded region that maximises the product of utilities above $(-1,-2)$ (per equation \ref{nash-product}).
@@ -575,44 +563,62 @@ If $d$ is the minimax value of the zero sum game, and if $s$ is the maximum sum 
 \begin{equation}\label{eq:zero_sum_game_1} \begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix} \end{equation}
 
 \begin{solution}[TU approach]
-From \eqref{eq:example_game1} we see that the maximum sum of utility which is achievable between the players $s=3$. Then we compute the minimax value of the zero sum game \eqref{eq:zero_sum_game_1}, $d=1$ Which indicates that the row player has a greater threat power.
+From \eqref{eq:example_game1} we see that the maximum sum of utility achievable between the players $s=3$. Then we compute the minimax value of the zero sum game \eqref{eq:zero_sum_game_1}, $d=1$ Which indicates that the row player has a greater threat power.
 The Nash bargaining solution between the two players gives them utility as $(\frac{1}{2}s+\frac{1}{2}d,\frac{1}{2}s-\frac{1}{2}d) = (2,1)$
 \end{solution}
 
 It may seem to be a bit difficult to see how these two approaches are related at first glance.
-However, it can be realised that in the context of selecting a threat point (for a TU game), that all that matters is the player's payoff advantage over their opponent.
-This fact can be seen by inspection in Figure \ref{fig:graph1_utilities}, where maximising the Nash product over a threat point places the final payoff point directly above and to the right (on the pareto frontier) at a 45 degree angle.
-In this context, the threat point only matters to the players insofar as it serves to moves the resulting payoff point along the pareto frontier.
-The pareto frontier defines a set sum of player payoffs to be distributed, and hence the threat point only defines the difference of how much is distributed to one player over another - their payoff advantage. We also note that for these bargaining solution concepts, that there is a way in which an `individual rationality' property can be guarranteed, specifically, if both players have the ability to unilatterally implement zero utility for themeself, then any disagreement point must be in the first quadrant, guarranteeing non-negative utility for both parties.\\
+However, it can be realised that in the context of selecting a threat point (for a TU game), all that matters is the player's payoff advantage over their opponent.
+This fact can be seen by inspection of Figure \ref{fig:graph1_utilities}, where maximising the Nash product over a threat point places the final payoff point directly above and to the right (on the Pareto frontier) at a 45 degree angle.
+In this context, the threat point only matters to the players insofar as it serves to moves the resulting payoff point along the Pareto frontier.
+The Pareto frontier defines a set sum of player payoffs to be distributed, and hence the threat point only defines the difference of how much is distributed to one player over another - their payoff advantage. We also note that for these bargaining solution concepts, that there is a way in which an `individual rationality' property can be guaranteed, specifically, if both players have the ability to unilatterally implement zero utility for themself, then any disagreement point must be in the first quadrant, guaranteeing non-negative utility for both parties.
+
+\subsection{Discussion of Nash bargaining concepts}
+
 
 In this section we considered some bargaining solution concepts, particularly Nash's bargaining solution concept which gives an outcome that implicitly incorporates all the possible influences which the players can bear upon each other.
-The solution concept for games of transferrable utility (TU) depend primarily on the minimax of payoff advantages between the players.
+The solution concept for games of transferable utility (TU) depend primarily on the minimax of payoff advantages between the players.
 In this way payoff advantage is considered as a measure of the strength of a player's bargaining position.
 
 Nash's bargaining solution was principally suited for 2 players, however some extensions of it to many players have been developed.%\cite{values1,values2,values3}
 In the following Chapter \ref{cha:new_solution} we develop these extensions of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value.
 
+However, the contemplation of Nash bargaining solutions leads to the question of whether `threat' strategies should (or would) naturally play a role in the division of resources - such as in an electricity system.
+
+Nash bargaining solutions are a primary example of a solution concept that explicitly considers the direct selection of possible 'threat' strategies for the players, and how these might bear on the result of cooperative negotiations.
+This consideration contrasts against the LMP, VCG and Shapley Value concepts where the implicit reference point for each player may be interpreted as an articulation of their absence from cooperation.
+However, unlike these other concepts, Nash bargaining with endogenous disagreement point removes any ambiguity and explicitly selects the point that would correspond to a failure of cooperation.
+
+The moral ideas surrounding proportionality (per section \ref{sec:reference_points}) suggest that monetary compensation should be defined in relation to reference point/s, and Nash bargaining is one example solution concept that explicitly selects such a reference point; the question therefore is whether this selection process is the right one.
+
+The selection of moral reference points may be influenced by a range of moral or practical factors, and we can ask, when an equilibrium of `threat' strategies would bear practical relevance.
+Particularly it is identified by Nash that the role of threats in negotiations depends on a dynamic about their ability to be enforced.
+
+\begin{displayquote}
+A common device in negotiation is the threat ... If one considers the process of making a threat, one sees that its elements are as follows: A threatens B by convincing B that if B does not act in compliance with A's demands, then A will follow a certain policy T. Supposing A and B to be rational beings, it is essential for the success of the threat that A be compelled to carry out his threat T if B fails to comply. Otherwise it will have little meaning. For, in general, to execute the threat will not be something A would want to do, just of itself.
+(\cite{nash2})
+\end{displayquote}
+
+In this light, it is pertinent to consider where threats do and do not play a role in real-world negotiations (such as discussed in \cite{anbarci2002comparing}) and subsequently to consider whether or not threat dynamics could or should be manifest in electricity systems.
+In the following Chapter we explore this question by developing a direct extension of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value, and apply it to electricity systems to witness its effects.%, particularly as there are alternative bargaining solution concepts that do not involve threats (eg. \cite{bozbay}).
+
+%It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
+
 \input{figs/nash_game.tex}
 
-
-
-\section{Comparrison \& Summary}
+\section{Comparison \& Summary}
 
 In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features, and encode different moral perspectives.
 
-Particularly we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locatinal Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concept.
+Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locatinal Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts.
 
-Each of the ideas embody different rules of proportionality above some reference point.
-In the context of VCG, the rule is that utility reward should be in proportion to contribution to the utility of the others above the absense of their preferences; and in the context of LMP, that it should be in proportional to the marginal absense.
-In the context of the Shapley Value, that reward should be in proportion to marginal contribution under uncertainty of the presence of others,
-And Nash's bargaining solution concept, considers proportionality in a context where the reference point is ambiguous.
-
-as identified by the philosophy of the previous chapter, non of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are more suitable than others.
+Each of the ideas embody different rules with respect to implementing different moral reference point/s.
+And as identified by the philosophy of the previous chapter, none of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are potentially more suitable than others.
 
 One particularly interesting feature of the Nash-bargaining solution is that it considers the minimax payoff advantage as a measure of competitive strength, and allocates utility accordingly.
 However the Nash bargaining solution is limited to two players, as for three (or more) players there may not exist a unique zero-sum minimax value.
+In the following chapter \ref{cha:new_solution} we consider and construct an extension of Nash bargaining solution that also utilises Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks so that we can make moral judgements about the suitability of them in that context.
 
-In the following chapter \ref{cha:new_solution} we consider and construct an extention of Nash bargaining solution that also utilizes Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks.
 
 
 

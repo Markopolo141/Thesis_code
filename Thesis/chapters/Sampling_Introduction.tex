@@ -10,14 +10,14 @@ In the first section of this chapter, we address the recent innovation of Empiri
 And then show how these EBBs can be bound together using probability unions to create a concentration inequality for stratified sampling - which can then be used as a new rule for choosing samples in the context of stratified sampling.
 And we develop a stronger EBB for this purpose.
 
-The work in the first part most directly reflects published material: \\\-\hspace{1cm}``An Engineered Empirical Bernsten Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessable: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
+The work in the first part most directly reflects published material: \\\-\hspace{1cm}``An Engineered Empirical Bernsten Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessible: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
 
 In the second section of this chapter, we develop a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
 
 And in the third section, we contrast the effectiveness of the stratified sampling rules in the context of synthetic data sets, and also in the application of approximating the Shapley Value.
 
 The second and third parts most directly reflect unpublished material: \\\-\hspace{1cm}`Stratified Finite Empirical Bernstein Sampling'', Preprints 2019\\
-(accessable: \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2})\\
+(accessible: \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2})\\
 
 \section{Introduction and Background}
 
@@ -52,7 +52,7 @@ Particularly, when we have a population decomposed into strata of known sizes wh
 %In other cases, the strata may be naturally given, or alternatively that this first stage may be considered to have been done ideally.
 
 For instance, if we sample primarily from a single stratum, we would likely have a very good estimate of the average for that one stratum, but no accuracy in estimate for the others, leading to a weak estimate of the population average.
-Conversely, if we choose to take the same number of samples from all the strata, some of the strata might be far smaller or have far less variance than others, resulting in thoes being oversampled.
+Conversely, if we choose to take the same number of samples from all the strata, some of the strata might be far smaller or have far less variance than others, resulting in those being oversampled.
 
 This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. And in the context of sampling the Shapley Value, the question of which strata should sampled is equivalent to a question about what sized coalitions should be sampled in consideration of each players marginal contributions to them.
 
@@ -142,7 +142,7 @@ entropy methods~\cite{Boucheron_concentrationinequalities}.%, and Talagrand's co
 
 One of the more famous Concentration Inequalities is \textit{Hoeffding's Inequality}.
 Hoeffding's inequality is one of a class of concentration inequalities called \textit{Chernoff bounds}.
-Chernoff bounds are probability bounds that extend from considering the addition of random variables in the laplace frequency domain - as we will discuss.
+Chernoff bounds are probability bounds that extend from considering the addition of random variables in the Laplace frequency domain - as we will discuss.
 
 \begin{lemma}[Chernoff Bound]\label{chernoff1}
 If $\hat{\mu}$ is sample mean of $n$ independent and identically distributed samples of random variable $X$ then for any $s>0$ and $t$:
@@ -160,7 +160,7 @@ Using this kind of lemma, many well-known examples of Chernoff bounds (such as H
 
 For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality.
 And hence, in this way a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
-The primary reason that this technique is particularly powerfull is that the moment-generating-function has some useful properties that bear close relation to thoes of the Laplace transform.
+The primary reason that this technique is particularly powerful is that the moment-generating-function has some useful properties that bear close relation to those of the Laplace transform.
 
 So for instance, if $X$ is a continuous random variable with a probability density function $f(x)$ then the moment-generating-function has form:
 $$ \E[\exp(sX)] = \int_{-\infty}^\infty f(x)\exp(sx) dx $$
@@ -179,7 +179,7 @@ And so by using the Laplace transform we can deal with repeated addition as mult
 $$\E[\exp(sZ)] = \E[\exp(s(X+Y))] = \E[\exp(sX)\cdot \exp(sY)] = \E[\exp(sX)]\cdot\E[\exp(sY)]$$
 Thus the moment generating function of the addition of two independent random variables is the multiplication of their moment generating functions.
 And this feature is embodied in Lemma \ref{chernoff1} where the addition of $n$ independent samples of $X$ thence becomes $\E[\exp(sX)]^n$.
-Hence by using Lemma \ref{chernoff1} we leverage this most powerfull feature of frequency domain representation to derive new probability bounds.
+Hence by using Lemma \ref{chernoff1} we leverage this most powerful feature of frequency domain representation to derive new probability bounds.
 
 %What is even more impressive is if we consider the natural logarithm of the moment generating function, for any independant variables $X$ and $Y$ that
 %$$\log\E[\exp(s(X+Y))] = \log\E[\exp(sX)] + \log\E[\exp(sY)]$$
@@ -197,7 +197,7 @@ Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a m
 \end{equation}
 \end{theorem}
 \begin{proof}
-To prove Hoeffding's inequality we develop an upper bound for $\E[\exp(sX)]$, if we assume variable $X$ has a probability density function $f(x)$, then we can linearize $\exp(sx)$ as:
+To prove Hoeffding's inequality we develop an upper bound for $\E[\exp(sX)]$, if we assume variable $X$ has a probability density function $f(x)$, then we can linearise $\exp(sx)$ as:
 \begin{equation}\label{Hoeffdings_line_fitting}\E[\exp(sX)] = \int_a^bf(x)\exp(sx)dx \le \int_a^bf(x)\left(\frac{x-a}{b-a}e^{sb} + \frac{b-x}{b-a}e^{sa}\right)dx\end{equation}
 Using the fact that the mean $\mu = \int_a^bf(x)xdx = 0$ thus:
 \begin{equation}\E[\exp(sX)] \le \frac{1}{sb-sa}\left(sb\exp(sa) - sa\exp(sb) \right)\end{equation}
@@ -228,7 +228,7 @@ And further that these inequalities can be seen as being largely (if not entirel
 These assumptions may be based on prior information, expert opinion, or determined from the characteristics of the system under observation.
 
 It is also worth noting that Hoeffding's inequality is a rather friendly result that states that the concentration of sample mean is probability bounded by a Gaussian function, which might be seen as an intuitive corollary of the Central Limit Theorem. 
-We will not use Hoeffding's inequality directly but we give its derivation to illustrate technique, however we will utilize Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma:
+We will not use Hoeffding's inequality directly but we give its derivation to illustrate technique, however we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma:
 \begin{lemma}[Hoeffding's Lemma]\label{Hoeffdings_lemma_lemma}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero, then for $D=b-a$ and any $s>0$:
 $$\E[\exp(sX)] \le \exp\left(\frac{1}{8}s^2D^2 \right)$$

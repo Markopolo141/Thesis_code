@@ -25,7 +25,7 @@ However these inequalities depart from Hoeffding's inequality in that they speci
 In this section we show how deriving (and subsequently minimising) inequalities such as these will allows for us to conduct stratified sampling in a single stage, rather than in two (as is nessisary in Neyman sampling).
 
 The derivation of these inequalities also assume that the values that the samples take are probabilistically independently from each other.  This most naturally corresponds to the schema of sampling \textit{with} replacement, rather than sampling \textit{without} replacement.
-In the next Section (particularly \ref{sec:without_replacement}) we will consider probability bounds specifically developed for sampling without replacement. However it is sufficient to note that all these probability bounds also hold in the case of sampling without replacement; but the converse is not nessisarily true. 
+In the next Section (particularly \ref{sec:without_replacement}) we will consider probability bounds specifically developed for sampling without replacement. However it is sufficient to note that all these probability bounds also hold in the case of sampling without replacement; but the converse is not necessarily true. 
 This is due to a result shown by \cite{hoeffding1}:
 
 \begin{lemma}[Hoeffding's reduction]\label{hoeffdings_reduction}
@@ -95,7 +95,7 @@ We give this second theorem in addition to the first make clear, that sampling t
 And also to illustrate exactly how weak probability unions are.
 
 The triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} we are effectively developing a bound assuming all the errors of the estimates of the strata are additive - which is positively the worst case.
-Whereas we know that (or can possibly assume) that the errors in the strata estimates are actually independant of each other, and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
+Whereas we know that (or can possibly assume) that the errors in the strata estimates are actually independent of each other, and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
 Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following Section \ref{section:SEBB}.
 
 However in this section, it is by these bounds that we can bind together EBB's of our choice to create a bound for the error of the stratified estimate - which we can then sample to minimise.
@@ -273,8 +273,8 @@ The development of this theorem for the bound of the error of the sample mean is
 Although the minimisation with $\phi$ is not very tractable, it can be conducted quickly for any situation on a computer via a parameter sweep.
 Any lack of resolution on this sweep would not hamper the analytical accuracy of it as a bound - as an improper sweep could only be larger then what is possible.
 
-To compare this bound against others, we cannot compare as-is, because we dont know $a$ and $b$ quite so much as we know that the data is bounded within a width of $D=b-a$.
-To directly compare this bound against others we susequently take the worst case $a,b$ consistent with a given $D$ and also $\sigma^2\le-ab$. And this process creates a bound which is directly comparable to other bounds such as Hoeffding's inequality among others.
+To compare this bound against others, we cannot compare as-is, because we don't know $a$ and $b$ quite so much as we know that the data is bounded within a width of $D=b-a$.
+To directly compare this bound against others we subsequently take the worst case $a,b$ consistent with a given $D$ and also $\sigma^2\le-ab$. And this process creates a bound which is directly comparable to other bounds such as Hoeffding's inequality among others.
 
 From this action the resulting form of the bound is as follows:
 

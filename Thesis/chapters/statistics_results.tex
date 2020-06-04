@@ -23,13 +23,13 @@ Specifically, Algorithm \ref{alg2} is a repetitive process involving a scan thro
 The process of scanning involves calculating the confidence bound width (SEBB) that would result if an additional sample were to be taken from that stratum without changing its sample variance (line numbers 5-17 in Algorithm~\ref{alg2}).
 The stratum that yields the smallest confidence bound width in the context of an additional sample is then selected (line 18-21) and sampled (line 24), the sample variance of that stratum is updated (line 26); 
 this process repeats until the maximum sample budget is reached (per the outer loop, line 1).
-In this way the process attempts to iteratively minimize the SEBB in expectation with each additional sample taken; and hence lead to potentially greater accuracy in stratified sampling as a result.
+In this way the process attempts to iteratively minimise the SEBB in expectation with each additional sample taken; and hence lead to potentially greater accuracy in stratified sampling as a result.
 
 The primary assumption that exists in this method's selection calculus is that it assumes that the sample variance of the strata would likely remain unchanged for the taking of the additional sample from any strata.
 While this technically isn't true, the unbiased sample variance is intuitively be expected to be almost as likely to increase as it is likely to decrease from the taking of an additional sample.
 Plus developing an even more complicated probability bound that explicitly takes account of the likely change in error of the stratified mean estimate due to the expected change in the sample variance is beyond the scope of our investigation.
 
-This SEBM method (Algorithm \ref{alg2}) requires the sample variances of all the strata to be calculated. And accordingly, Algorithm \ref{alg2} must be initialized with at least two samples from each stratum so that sample variance can be calculated for it to be able to function.
+This SEBM method (Algorithm \ref{alg2}) requires the sample variances of all the strata to be calculated. And accordingly, Algorithm \ref{alg2} must be initialised with at least two samples from each stratum so that sample variance can be calculated for it to be able to function.
 And this is a standard requirement of the many reinforcement learning algorithms that use variance in their sampling policies.
 
 We also note that Algorithm \ref{alg2} describes a process specific to the sampling without replacement of all strata, and involves the calculation of the SEBB with the tightest possible use cases of Lemmas \ref{martingale0} and~\ref{martingale1}.
@@ -37,7 +37,7 @@ In particular, for any stratum $i$ that is sampled without replacement, any spec
 Since the SEBB is a composition of such bounds with such choices throughout, there is a structure of valid pairs of substitutions $\Omega,\Psi$ for $\bar{\Omega},\bar{\Psi}$ in the optimal calculation of the SEBB, which is shown in the steps 8-15 of Algorithm \ref{alg2}.
 The equivalent algorithm for sampling with replacement simply is the same algorithm altered by replacing all use of $\bar{\Omega},\bar{\Psi}$ with $\Omega,\Psi$ respectively.
 
-Similarly it is elementary to modify the terms of Algorithn \ref{alg2} to be ameniable to be minimising SECB bound (Theorem \ref{thm:SECM_bound}).
+Similarly it is elementary to modify the terms of Algorithn \ref{alg2} to be amenable to be minimising SECB bound (Theorem \ref{thm:SECM_bound}).
 
 \begin{algorithm}
 \caption{Stratified Empirical Bernstein Method (SEBM) algorithm, with replacement}
@@ -85,8 +85,8 @@ In the section \ref{section:old_statistics} of this chapter we considered differ
 This method is made clear in pseudocode in algorithm \ref{alg3} which is adaptable for a choice of EBB.
 In algorithm \ref{alg3}, as scan is conducted over the possible strata in lines 4-10, and the improvement that would be offered by taking an additional sample from the stratum's respective EBB is calculated.
 The strata that gives the most reduction of its EBB for a prospective additional sample is chosen to have an additional sample taken, and its sample variance is recalculated in lines 11-13; this process repeats until the sample budget is exhausted.
-This algorithm \ref{alg3} is much more simple than algorithn \ref{alg2} primarily because the scan through the strata only needs to consider the change in the EBB associated with that stratum.
-This is because Theorem \ref{triangle_theorem2} identifies that the bound on the stratified mean estimate is the sum of the EBBs of the strata, hence they can be considerd as minimising factors in isolation.
+This algorithm \ref{alg3} is much more simple than algorithm \ref{alg2} primarily because the scan through the strata only needs to consider the change in the EBB associated with that stratum.
+This is because Theorem \ref{triangle_theorem2} identifies that the bound on the stratified mean estimate is the sum of the EBBs of the strata, hence they can be considered as minimising factors in isolation.
 
 \begin{algorithm}
 \caption[Stratified Error bound reduction algorithm by unionised EBBs]{Stratified Error bound reduction algorithm by unionised EBBs - by Theorem \ref{triangle_theorem2}}
@@ -148,11 +148,11 @@ In the numerical evaluations, we compare the following sampling methods:
 \begin{itemize}
 \item 
 \textsc{SEBM} (Stratified empirical Bernstein method, without replacement):
-our SEBM method (per Algorithm \ref{alg2}) of iteratively choosing samples from strata to minimize the SEBB, given in Equation~\eqref{big_equation}. 
-An initial sample of two data points from each strata is used to initialize the sample variances of each, with additional samples made to maximally minimize the inequality at each step. All samples are drawn \textit{without} replacement.
+our SEBM method (per Algorithm \ref{alg2}) of iteratively choosing samples from strata to minimise the SEBB, given in Equation~\eqref{big_equation}. 
+An initial sample of two data points from each strata is used to initialise the sample variances of each, with additional samples made to maximally minimise the inequality at each step. All samples are drawn \textit{without} replacement.
 \item 
 \textsc{SEBM-W} (Stratified empirical Bernstein method with replacement): 
-as above, with the exception that all samples are drawn \textit{with} replacement, and consequently the inequality does not utilize the martingale inequality given in Lemma~\ref{martingale0}.
+as above, with the exception that all samples are drawn \textit{with} replacement, and consequently the inequality does not utilise the martingale inequality given in Lemma~\ref{martingale0}.
 \item 
 \textsc{Simple} (Simple random sampling, without replacement): simple random sampling from the population irrespective of strata \textit{without} replacement.
 \item 
@@ -160,17 +160,17 @@ as above, with the exception that all samples are drawn \textit{with} replacemen
 simple random sampling from the population irrespective of strata \textit{with} replacement.
 \item \textsc{Ney} (Neyman sampling, without replacement): the method of maximally choosing samples \textit{without} replacement from strata proportional to the strata variance (via Theorem \ref{thm:neyman_selection}).
 \item \textsc{Ney-W} (Neyman sampling with replacement): the method of choosing samples \textit{with} replacement proportional to the strata variance (via Theorem \ref{thm:neyman_selection}).
-\item \textsc{SEBM*} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{without} replacement from strata to minimize Equation~\eqref{eq1}, utilizing martingale Lemma~\ref{martingale0}.
-\item \textsc{SEBM*-W} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{with} replacement from strata to minimize Equation~\eqref{eq1}.
+\item \textsc{SEBM*} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{without} replacement from strata to minimise Equation~\eqref{eq1}, utilizing martingale Lemma~\ref{martingale0}.
+\item \textsc{SEBM*-W} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{with} replacement from strata to minimise Equation~\eqref{eq1}.
 \item \textsc{SECM} (Stratified empirical Chernoff method): the method of iteratively choosing samples from strata \textit{without} replacement to minimize the SECB, given in Equation~\eqref{another_big_equation}. 
-An initial sample of two data points from each strata is used to initialize the sample variances of each, with additional samples made to maximally minimize the inequality at each step. All samples are drawn \textit{without} replacement.
-\item \textsc{Hoeffding} (Unionised EBBs with Hoeffding's inequality): The method of sampling \textit{with} replacementto minimise probability bound of Theorem \ref{triangle_theorem2} applied with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper})
+An initial sample of two data points from each strata is used to initialise the sample variances of each, with additional samples made to maximally minimize the inequality at each step. All samples are drawn \textit{without} replacement.
+\item \textsc{Hoeffding} (Unionised EBBs with Hoeffding's inequality): The method of sampling \textit{with} replacement to minimise probability bound of Theorem \ref{triangle_theorem2} applied with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper})
 \item \textsc{Audibert} (Unionised EBBs with Audibert et.al's EBB): The method of sampling \textit{with} replacementto minimise probability bound of Theorem \ref{triangle_theorem2} applied with Audibert et.al's EBB (Theorem \ref{AudibertsEBB})
 \item \textsc{Maurer} (Unionised EBBs with Maurer \& Pontil's EBB): The method of sampling \textit{with} replacementto minimise probability bound of Theorem \ref{triangle_theorem2} applied with Audibert et.al's EBB (Theorem \ref{MandPsEBB})
 \item \textsc{EEBB} (Unionised EBBs with our Engineered EBB): The method of sampling to \textit{with} replacementminimise probability bound of Theorem \ref{triangle_theorem2} applied with our fitted EBB (Equation \ref{eq:prob_bound})
 \item \textsc{Random} (stratified sampling with random samples from strata): The process of stratified sampling \textit{with} replacement, choosing random numbers of samples from each of the strata.
 \end{itemize}
-Note that the last three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) assume and utilize prior perfect knowledge of the variance of each of the strata, and that for all other methods (where appropriate) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
+Note that the last three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) assume and utilise prior perfect knowledge of the variance of each of the strata, and that for all other methods (where appropriate) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
 
 Also note that these methods provide comparisons of different algorithm factors, such as the dynamics of sampling: with and without replacement; with stratification and without; between our method and Neyman sampling, and; with and without perfect knowledge of stratum variances. 
 For these methods, we consider the effectiveness against beta distributed data and for a case of uniform-and-Bernoulli data.
@@ -222,7 +222,7 @@ The aim of this section is to examine cases of distributions in which our sampli
 For this purpose, a data set with two strata is generated, with each stratum containing $1000$ points. 
 The data in the first stratum is uniform continuous data in range $[0,1]$, while the data in the second is Bernoulli distributed, with all zeros except for a specified small number, $a$, of successes with value 1.
 For this problem, we conduct stratified random sampling with a budget of $300$ samples, comparing the SEBM*, SEBM and \textsc{Ney} methods.
-The average error returned by the methods across 20,000 realizations of this problem, plotted against the number of successes $a$, are shown as a graph in Figure \ref{biggraph3}.
+The average error returned by the methods across 20,000 realisations of this problem, plotted against the number of successes $a$, are shown as a graph in Figure \ref{biggraph3}.
 This figure demonstrates that SEBM and SEBM* perform poorly when the strata contain only very small numbers of successes.
 This under-performance is not simply a result of the SEBM method oversampling in a process of learning the stratum variances, as the under-performance is present in SEBM* as well.
 The reasons for this under-performance are discussed in in more detail in Section~\ref{sec:discussion}.
