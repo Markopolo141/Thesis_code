@@ -1,7 +1,7 @@
 
 %\newpage
 
-\section{Stratified Sampling by a Stratified Probability Bound}\label{section:SEBB}
+\section{Stratified sampling by a stratified probability bound}\label{section:SEBB}
 
 In the previous section we considered different possible EBBs as a means of yielding different methods of choosing samples in the context of stratified random sampling.
 This process proceeds by binding EBBs together using union bounds to create a bound on the Stratified sample mean error (via with Theorem \ref{triangle_theorem1}); which is then sequentially minimised by the choosing of additional samples.
@@ -14,7 +14,7 @@ The resulting concentration inequality gives an analytic bound on the error of t
 
 The derivation involves and utilises much of the same components of the previous section with an additional martingale theorem specifically for any any strata sampled without replacement.
 
-\subsection{A new probability bound for Stratified Sampling (SEBB)}
+\subsection{A new probability bound for stratified sampling (SEBB)}
 
 To begin the derivation of our new concentration inequality for stratified random sampling, we utilise and build upon some of the results of the previous section.
 
@@ -93,7 +93,7 @@ and the result follows by multiplying by $\exp(q\sigma^2)$.
 The inequalities above, Lemmas \ref{expectation1} and \ref{expectation2}, as well as Lemma \ref{Hoeffdings_lemma_lemma}, are used in the derivation of our stratified sampling concentration inequality in Section~\ref{sec:constructing}. One of the primary reasons for utilizing these weakened bounds on the moment generating function is that they make the subsequent mathematics far more tractable.
 However in order to use these moment generating functions we need to explicitly describe the difference between the moment generating functions of individual random variables (which these are) and the moment generating function of the sample mean of them.
 
-\subsubsection{The Moment Generating Function of Sample Means}\label{sec:without_replacement}
+\subsubsection{The Moment Generating Function of sample means}\label{sec:without_replacement}
 
 In order to use the previous bonds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
 To do this we state three further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second and third (Lemma~\ref{hoeffdings_reduction} and Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
@@ -164,7 +164,7 @@ all the derivations that follow that invoke Lemma~\ref{martingale1} have direct 
 Note, however, that the bound without replacement (Lemma~\ref{martingale0}) may or may not be tighter than the bound with replacement (Lemma~\ref{martingale1}). However, the process of substituting one for the other can be done judiciously on a case-by-case basis to create the tightest possible bound.
 All the numerical results in Section \ref{section:statistics_results} (that are relevant to sampling without replacement) have been produced with this judicious choice conducted.
 
-\subsection{The Stratified Finite Empirical Bernstein Bound and Sampling Method}
+\subsection{The Stratified Finite Empirical Bernstein Bound and sampling method}
 \label{sec:constructing}
 
 This section contains our primary derivation: 

@@ -34,10 +34,10 @@ If we frame the VCG process as a bidding process of $n$ agents over a possible s
 We assume that every agent $i$ has a valuation (or utility) $v_i$ for any outcome in $X$:
 $$ v_i~:~X\rightarrow \mathbb{R}_{\ge 0} $$
 The VCG bidding process asks every agent $i$ for their valuations and calculates the outcome that maximises the sum of the reported valuations:
-$$ x^*(v) = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
-This outcome is implemented and the bidding process pays each agent $i$ the utility value $p_i$ (which may be positive or negative):
-\begin{equation}\label{eq:VCG_payment_rule} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation}
-And this value $p_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absence - ie. the player's externality.
+$$ x^* = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
+This outcome is implemented and the bidding process pays each agent $i$ the utility value $d_i$ (which may be positive or negative):
+\begin{equation}\label{eq:VCG_payment_rule} d_i(v)=\sum_{j\ne i}v_j(x^*) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation}
+And this value $d_i$ is the value that the player's presence adds to the utility of others minus the sum of their utility which would have been obtained in the player's absence - ie. the player's externality.
 
 \begin{example}
 Consider a set of outcomes $X = \{A,B,C\}$ and three agents with valuations 
@@ -45,7 +45,7 @@ $$\begin{matrix}v_1(A) = 2\\v_1(B) = 4\\v_1(C) = 3\end{matrix}\quad\quad
 \begin{matrix}v_2(A) = 4.5\\v_2(B) = 2\\v_2(C) = 1\end{matrix}\quad\quad
 \begin{matrix}v_3(A) = 2\\v_3(B) = 1\\v_3(C) = 5\end{matrix}$$
 In this context $x^* = C$ is implemented (as $\sum_{i=1}^nv_i(C)=9$ is the biggest)\\And:
-$\quad p_1 = 6-6.5 = -0.5 \quad\quad p_2 = 8-8 = 0\quad\quad p_3 = 4-6.5 = -2.5 $
+$\quad d_1 = 6-6.5 = -0.5 \quad\quad d_2 = 8-8 = 0\quad\quad d_3 = 4-6.5 = -2.5 $
 \end{example}
 
 \subsection{Discussion about VCG}
@@ -57,7 +57,7 @@ For instance, VCG has been considered as a mechanism for allocating physical and
 However VCG has some particular advantages and disadvantages.
 The first and most notable property is that VCG mechanisms are \textit{truthfull} or \textit{incentive compatible}, in that no single player can possibly gain by misreporting their valuations in the event that the utility of the agents is \textit{quasilinear} \cite{roberts1979characterization, Lavi2008}.
 An agent's utility is quasilinear if their utility is equal to their valuation of the outcome plus any transfers they receive, and hence their utility $u_i$ has form:
-$$ u_i = p_i(v)+v_i $$
+$$ u_i = d_i(v)+v_i $$
 And thus if incentive compatibility induces the players not to bid strategically, then it reduces a potential overhead of their participation in the system, and also potentially eliminates a source of instability in the resulting system.
 
 Another interesting property is called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. Particularly if the utility of zero is regarded as the utility of non-participation, then individually rational means that everybody is left being better-off by participating than they would be otherwise. Hence individual rationality is a possible of ethical euvolentary negotiation (see chapter \ref{sec:reference_points}).
@@ -108,7 +108,7 @@ One potential avenue of averting the impossibility result is to discard the assu
 
 To frame this approach, we must make a technical distinction between a Groves mechanism and its particular instance - in the VCG mechanism.
 A Groves mechanism is exactly the same as the VCG mechanism except instead of paying players per equation \ref{eq:VCG_payment_rule}, instead it pays them per:
-\begin{equation}\label{eq:Groves_payment_equation} p_i(v)=\sum_{j\ne i}v_j(x^*(v)) - C_{-i} \end{equation}
+\begin{equation}\label{eq:Groves_payment_equation} d_i(v)=\sum_{j\ne i}v_j(x^*(v)) - C_{-i} \end{equation}
 where $C_{-i}$ is some function that is independent of $i$'s reported preferences.
 In this context it is notable that the VCG mechanism is a special case of a Groves mechanism where $C_{-i}= \max_{x'\in X}\sum_{j\ne i}v_j(x')$. \cite{10.2307/1914085}
 Groves mechanisms are a class of mechanisms which include VCG, and are categorically incentive compatible. 
@@ -151,7 +151,7 @@ However it is expected that such a mechanism of randomly assigning a sacrificial
 %Although there has been some effort in designing and analysing the occurance of coalition proof mechanisms, these remain difficult.
 
 
-\subsection{Summary and Discussion of VCG}\label{subsec:summary_discussion_VCG}
+\subsection{Summary and discussion of VCG}\label{subsec:summary_discussion_VCG}
 
 The VCG mechanism frames a elegant ethical schema for distributive payments and is directly applicable to electricity systems.
 Although it is incentive compatible, the primary practical draw-back to such a system is that it is not budget-balanced.
@@ -183,7 +183,7 @@ In section \ref{sec:solutions_bargaining} we consider mathematical schemas used 
 Historic economic thought lends consideration to the idea that market prices can be described by combinations of factors, not limited to, supply and demand functions, market uncertainty, production costings and transport tariffs etc. and the combination of these may be related to the pricing and subsequent trading of the goods.
 However, the way in which these factors have been seen to influence (or define) economic value has changed over time.
 
-\subsection{A brief summary on the history of Value}
+\subsection{A brief summary on the history of value}
 
 In the history of economic thought, there was some general idea that the economic value of something (and hence its normal market price) should, in some way, be related to its usefulness in fulfilling human needs (however fickle or not) as things which are utterly useless seldom fetch any price.
 %Even so far as to categorising into numbered classes different goods depending on their relation to satisficing needs (eg. \cite[Chapter 1]{mengerprinciples}).
@@ -271,12 +271,12 @@ Particularly, we note that LMP has been implemented for real-time-pricing of tra
 And that although LMP is like VCG in that it is ultimately not budget balanced, unlike VCG there are specifically identifiable cases which often occur where it is.\cite{lmp2}
 
 
-\subsection{Summary and Discussion of Locational Marginal Pricing}
+\subsection{Summary and discussion of Locational Marginal Pricing}
 
 Locational Marginal Pricing is a historic example of an economic framework of integrating market conditions (supply and demand information) to give equilibrium price points.
 It can be seen to provide a sensible description of normal trading value, and thence (perhaps) moral trading value.
 
-Locational Marginal pricing and VCG provide some of the most direct expressions of marginalism as a concept, and (as considered in section \ref{subsec:summary_discussion_VCG}) one can limit to the other for large markets.
+Locational Marginal Pricing and VCG provide some of the most direct expressions of Marginalism as a concept, and (as considered in section \ref{subsec:summary_discussion_VCG}) one can limit to the other for large markets.
 Particularly VCG rewards participants with economic incentives equal to their direct impact on group wellbeing above their absence whereas Locational Marginal Pricing can be seen as providing participants with economic incentives in proportion to their presence's incremental impact on group wellbeing.
 
 With VCG it is directly considered what the notion of absence means, particularly the difference the presence of a participant makes is in relation to the affect the participant's utility brings upon the social utility maximum.
@@ -421,7 +421,7 @@ It is also simple enough to verify that the cooperative game is convex.
 
 \end{solution}
 
-\subsection{Summary and Applications to Electricity Systems}
+\subsection{Summary and applications to electricity systems}
 
 Cooperative game theory concepts centre on the consideration of groups and how reward or surplus utility should be divided among members, and particularly the Shapley Value is most famous.
 
@@ -450,7 +450,7 @@ Thus in the next section \ref{sec:solutions_bargaining} we consider some solutio
 Particularly we describe bargaining solution concepts.
 
 
-\section{Bargaining Solution Concepts}\label{sec:solutions_bargaining}
+\section{Bargaining solution concepts}\label{sec:solutions_bargaining}
 
 In discussing Locational Marginal Pricing (in section \ref{sec:solutions_LMP}), we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants where their individual strategic options are relevant.
 
@@ -575,7 +575,6 @@ The Pareto frontier defines a set sum of player payoffs to be distributed, and h
 
 \subsection{Discussion of Nash bargaining concepts}
 
-
 In this section we considered some bargaining solution concepts, particularly Nash's bargaining solution concept which gives an outcome that implicitly incorporates all the possible influences which the players can bear upon each other.
 The solution concept for games of transferable utility (TU) depend primarily on the minimax of payoff advantages between the players.
 In this way payoff advantage is considered as a measure of the strength of a player's bargaining position.
@@ -586,12 +585,13 @@ In the following Chapter \ref{cha:new_solution} we develop these extensions of N
 However, the contemplation of Nash bargaining solutions leads to the question of whether `threat' strategies should (or would) naturally play a role in the division of resources - such as in an electricity system.
 
 Nash bargaining solutions are a primary example of a solution concept that explicitly considers the direct selection of possible 'threat' strategies for the players, and how these might bear on the result of cooperative negotiations.
-This consideration contrasts against the LMP, VCG and Shapley Value concepts where the implicit reference point for each player may be interpreted as an articulation of their absence from cooperation.
+This consideration contrasts against the LMP, VCG and Shapley Value concepts where the implicit reference point for each player may be interpreted as an articulation of their absence from cooperation - which may also be interpreted as a 'threat'.
 However, unlike these other concepts, Nash bargaining with endogenous disagreement point removes any ambiguity and explicitly selects the point that would correspond to a failure of cooperation.
 
 The moral ideas surrounding proportionality (per section \ref{sec:reference_points}) suggest that monetary compensation should be defined in relation to reference point/s, and Nash bargaining is one example solution concept that explicitly selects such a reference point; the question therefore is whether this selection process is the right one.
 
-The selection of moral reference points may be influenced by a range of moral or practical factors, and we can ask, when an equilibrium of `threat' strategies would bear practical relevance.
+Nash bargaining attempt to mathematically identify outcomes that are a cooperative result underpinned by perfect competition under equilibrium, and hence can potentially serve as a description of normalised and idealised trading;
+In more realistic contexts, the selection of moral reference points may be influenced by a range of moral or practical factors, and we can ask, when an equilibrium of `threat' strategies would bear practical relevance.
 Particularly it is identified by Nash that the role of threats in negotiations depends on a dynamic about their ability to be enforced.
 
 \begin{displayquote}
@@ -600,25 +600,24 @@ A common device in negotiation is the threat ... If one considers the process of
 \end{displayquote}
 
 In this light, it is pertinent to consider where threats do and do not play a role in real-world negotiations (such as discussed in \cite{anbarci2002comparing}) and subsequently to consider whether or not threat dynamics could or should be manifest in electricity systems.
-In the following Chapter we explore this question by developing a direct extension of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value, and apply it to electricity systems to witness its effects.%, particularly as there are alternative bargaining solution concepts that do not involve threats (eg. \cite{bozbay}).
+In the following Chapter we explore this question by developing a direct extension of Nash's bargaining solution concept into a scheme applicable to electricity networks called the GNK value, and apply it to electricity systems to witness its features.%, particularly as there are alternative bargaining solution concepts that do not involve threats (eg. \cite{bozbay}).
 
 %It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
 
 \input{figs/nash_game.tex}
 
-\section{Comparison \& Summary}
+\section{Comparison \& summary}
 
-In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features, and encode different moral perspectives.
+In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features and encode different moral perspectives.
 
-Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locatinal Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts.
+Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locational Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts.
+Each of the ideas embody different rules and respect different moral reference point/s.
 
-Each of the ideas embody different rules with respect to implementing different moral reference point/s.
 And as identified by the philosophy of the previous chapter, none of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are potentially more suitable than others.
 
-One particularly interesting feature of the Nash-bargaining solution is that it considers the minimax payoff advantage as a measure of competitive strength, and allocates utility accordingly.
+One particularly interesting feature of the Nash-bargaining solution is that it considers the minimax payoff advantage as a measure of competitive strength between participants, and it allocates utility accordingly.
 However the Nash bargaining solution is limited to two players, as for three (or more) players there may not exist a unique zero-sum minimax value.
-In the following chapter \ref{cha:new_solution} we consider and construct an extension of Nash bargaining solution that also utilises Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks so that we can make moral judgements about the suitability of them in that context.
-
+In the following chapter \ref{cha:new_solution} we construct an extension of Nash bargaining solution called the GNK value, that is built around Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks so that we can make moral judgements about the suitability of them for that context.
 
 
 

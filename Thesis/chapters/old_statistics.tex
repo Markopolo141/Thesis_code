@@ -1,4 +1,4 @@
-\section{Stratified Sampling by Unstratified Probability Bounds}\label{section:old_statistics}
+\section{Stratified sampling by unstratified probability bounds}\label{section:old_statistics}
 
 In considering appropriate concentration inequalities, one of the more recent and interesting kinds of concentration inequalities, are sometimes called \textit{empirical Bernstein bounds} (EBB).
 These are probability bounds describing the likely difference of a sample mean from the population mean in terms of the \textit{sample} variance.
@@ -38,7 +38,7 @@ Using the continuous and convex function $f(x)=\exp(sx)$ it can be seen via the 
 
 But regardless of whether sampling is done with or without replacement, in the context of stratified sampling, inequalities such as EBBs cannot be directly minimised in quite the same way as Chebyschev's inequality can since the population mean itself does not have a sample variance, but only that the samples of the strata have means and sample variances.
 
-\subsection{Stratified Sampling via EBBs and the Sequential Unions}
+\subsection{Stratified sampling via EBBs and sequential unions}
 
 To create a bound for the error of our stratified mean estimator from EBBs we need to use probability unions to bind them together:
 
@@ -370,7 +370,7 @@ In this process care was taken in applying this theorem that all the assumptions
 
 
 
-\subsubsection{Numerical Implementation}
+\subsubsection{Numerical implementation}
 \label{numerical-implementation}
 Analytically solving this our EBB was challenging, however it was possible to evaluate it to arbitrary accuracy using numerical techniques.
 This section provides a high-level description of a process that was used for calculating our EBB.

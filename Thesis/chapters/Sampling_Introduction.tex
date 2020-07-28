@@ -19,7 +19,7 @@ And in the third section, we contrast the effectiveness of the stratified sampli
 The second and third parts most directly reflect unpublished material: \\\-\hspace{1cm}`Stratified Finite Empirical Bernstein Sampling'', Preprints 2019\\
 (accessible: \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2})\\
 
-\section{Introduction and Background}
+\section{Introduction and background}
 
 In the previous chapter, we defined the GNK value and saw that there is a significant computational difficulties in solving the GNK value at scale.
 Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{da_value_eq} or \ref{eq:shapley_value2} by conversion identified by equation \ref{convert1}).
@@ -63,7 +63,7 @@ The core question we face is, how do we sample optimally between the strata in s
 This question has been considered before, and the most direct historical answer to the question is called \textit{Neyman allocation} or \textit{sampling} \cite{1938.10503378,10.2307/23339498}.
 The principle of Neyman sampling is that it seeks the minimise the weighted variance of the population estimate assuming knowledge of the variances of the strata, and it can most directly be interpreted as a process of minimising Chebyschev's inequality.
 
-\subsection{Neyman Allocation}\label{sec:neyman_sampling}
+\subsection{Neyman allocation}\label{sec:neyman_sampling}
 
 Neyman allocation suggests that if we want to minimise the variance in the final estimate of the population, we should sample directly in proportion to the stratum variances multiplied by their sizes:
 
@@ -117,7 +117,7 @@ is it possible to improve upon two-stage Neyman sampling for Stratified Random S
 
 To answer this question we investigated and derived new and alternative concentration inequalities which we then minimised.  And the particular inequalities that we minimised extended from the classes of inequalities called Chernoff Bounds.
 
-\subsection{Chernoff Bounds}
+\subsection{Chernoff bounds}
 
 In the previous Section, the accuracy guaranteed by Chebyshev's inequality was one of the principle motivations that we gave for the use of Neyman sampling.
 Chebyshev's inequality is an example of what is called a \textit{concentration inequality}.
@@ -189,7 +189,7 @@ And using this Lemma \ref{chernoff1} it is possible to derive new concentration 
 
 Let us begin first by deriving Hoeffding's inequality (\cite{hoeffding1}), primarily because it illustrates the technique of deriving Chernoff bounds which will be indicative of further developments. It also gives a particular Lemma (called Hoeffding's Lemma) which we will also use directly.
 
-\subsubsection{Hoeffding's Inequality}
+\subsubsection{Hoeffding's inequality}
 
 \begin{theorem}[Hoeffding's inequality for mean zero]\label{hoeffdings_inequality}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
