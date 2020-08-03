@@ -235,8 +235,8 @@ In this context, the DC approximated power-flow constraints are expressed as fol
 \text{Variables:} \quad&  p_{i\in B},\ \theta_{i\in B},\ p_{(i,j)\in C} \\
 \text{constraints:} \quad& p_i^{l}\le p_i \le p_i^{u} \\
 &p_{i,j}^l \le p_{i,j} \le p_{i,j}^u \\
-&p_j = \sum_{(i,j)\in C}p_{i,j}~\forall j\in B\\
-&p_{i,j} = -b_{i,j}(\theta_i - \theta_j) ~\forall(i,j)\in C
+&p_j = \sum_{(i,j)\in C}p_{i,j}\\
+&p_{i,j} = -b_{i,j}(\theta_i - \theta_j)
 \end{aligned}
 \end{equation}
 where $p_i^{l}$, $p_i^{u}$, $p_{i,j}^l$, $p_{i,j}^u$ are the upper and lower bounds on power consumption/generation and line limits, respectively.
@@ -547,7 +547,7 @@ We consider these alongside our own developed method, the Stratified Finite Empi
 
 We will compare the performance of these sampling approaches in section \ref{section:performance}, but first we will summarise some of the differences between Shapley Value sampling techniques first.
 
-\subsubsection*{Differences in sampling approaches}
+\subsection{Differences in sampling approaches}
 
 All the Shapley Value sampling technique sample over marginal contributions in slightly different ways; but primarily, they differ in whether they employ stratified sampling or not.
 If they employ stratified sampling, they sample the marginal contributions by player $i$ and size $k$ and average them to estimate each $\hat{v}_{i,k}$ (ie. approximating the terms of \eqref{eq:shapley_value2} and then using \eqref{shap2}).
@@ -624,7 +624,9 @@ Each of the methods were run multiple times with increasing sample budget allowa
 From the Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was seen to be reasonably effective and it was chosen for all further analysis.
 The reason for this superiority is the additional power of sampling with stratification and by join-orders.
 As already stated, by using join orders, it is possible to calculate $n$ marginal contributions using $n+1$ evaluations of $v(S)$ as opposed to taking two evaluations of $v(S)$ for one marginal contribution sample point.
-This simple factor outweighed the extra computing power associated with \textsc{SEBM} and \textsc{Neyman} methods, which did not use join-order sampling - even though SEBM was seen to be more performant for larger sample budgets.
+This simple factor outweighed the advantage of the extra sophistication associated with \textsc{SEBM} and \textsc{Neyman} methods, which did not use join-order sampling - even though SEBM was seen to be more performant for larger sample budgets.
+Another advantage that was witnessed in utilising the \textsc{Join} method was that it didnt have the computational overhead of using the formulas present in the \textsc{SEBM} method, and additionally the join-order sampling allowed each new optimisation that was called to be warm-started by the previous one as each new addition to the coalition would yield an optimisation similar to the previous one.
+These factors made \textsc{Join} appear as simpler and more effective method for our purposes.
 
 To evaluate the performance of the \textsc{Join} method in solving the GNK value for larger networks where solving the GNK value exactly is impractical, we ran simulations where generated random networks of different sizes and estimated the GNK value using 8 simultaneous estimations using the \textsc{Join} method, and timed how long it took for the average magnitude of error between these estimations to reach an average error of one percent of each other.
 A scatter plot of the run-time performance of \textsc{Join} in approximating the GNK value for variously sized random networks by this process was generated and the results are shown in Figure \ref{fig:performance_graph2}.
@@ -713,21 +715,21 @@ This behaviour in the context of large networks was somewhat unexpected; and we 
 
 \subsection{Possible extensions}\label{sec:GNK_extensions_discussion}
 
-One primary question is how much the behaviour exhibited in figure \ref{fig:experiment_table_13} is entirely the result of us using a modified characteristic function (equation \ref{knvalue22}) over the more original characteristic function (equation \ref{knvalue1}).
+One primary question is how much the behaviour exhibited in figure \ref{fig:experiment_table_13} is entirely the result of us using a modified characteristic function in M-GNK value (equation \ref{knvalue22}) over the more original characteristic function of the GNK value (equation \ref{knvalue1}).
 In order to investigate this question, the error of using this modification across randomly generated networks was calculated and shown in Figure \ref{fig:performance_graph5}.
-This graph shows the cumulative probability of the difference in payments between the GNK and M-GNK - and shows that for 60\% of participants could expect to receive within 10\% what they would have between GNK and M-GNK values, and that this margin decreases for larger network sizes.
+This graph shows the cumulative probability of the difference in payments between the GNK and M-GNK - and shows for instance, that 60\% of participants could expect to receive within 10\% what they would have between GNK and M-GNK values, and that this margin decreases for larger network sizes.
 
 From this graph it is noticed that the GNK and M-GNK values feature similarity which seems to increase with the size of the network under consideration --- although for computational reasons, it is increasingly difficult to confirm for networks with a size greater than 13.
-This limited observation coincides with expectations that the possible strategic counter-considerations that are discarded by using equation \ref{knvalue22} become less relevant in the context of larger networks.
+This limited observation coincides with expectations that the possible strategic counter-considerations that are discarded by using equation \ref{knvalue22} over equation \ref{knvalue1} become less relevant in the context of larger networks.
 
-Another observation, is that while the GNK remains soluble for networks of less than 13 nodes and the M-GNK value remains soluble for upto 80 node networks (to about 1\% accuracy per figure \ref{fig:performance_graph4}), however these numbers might still be regarded as being too small for real-world electrical network modelling.
-Larger networks are expected to be tractable for the M-GNK value with more computing power and/or execution time, however further methodological improvements may be necessary to make the GNK value (or anything like it) capable of bearing on real world larger networks.
+Another observation, is that while the GNK remains soluble for networks of less than 13 nodes and the M-GNK value remains soluble for up to 80 node networks (to about 1\% accuracy, as per figure \ref{fig:performance_graph4}), however these numbers might still be regarded as being too small for real-world electrical network modelling.
+Larger networks are expected to be tractable for the M-GNK value with more computing power and/or execution time, however further methodological improvements may be necessary to make the GNK value (or anything similar to it) capable of bearing on larger and real world networks.
 Some possible avenues of investigation include employing further approximations such as player clustering \cite{DBLP:journals/corr/abs-1903-10965}, or transforming the problem into a non-atomic form, similar to non-atomic Shapley Value.
-However, ultimately, these technical considerations are secondary to the ethical considerations about the desirability of GNK-type solutions, which we consider in the following section \ref{sec:GNK_value_discussion}.
+However, these technical considerations are secondary to the ethical considerations about the desirability of GNK-type solutions, which we consider in the following section \ref{sec:GNK_value_discussion}.
 
-Another outstanding question, is what the likely outcome is under GNK of strategising network participants.
-So, while VCG has explicit consideration of the strategising of agents, and LMP is identified to be largely identical to it in the context of large numbers of small players, the likely outcome of agents strategising under GNK is not considered here.
-As the GNK is incentive incompatible and also quite complex, this is a major consideration and a difficult question.
+Another outstanding question, is what the likely outcome would be, under GNK, in the context of strategising network participants.
+So, while VCG has some explicit consideration of the strategising of individual agents, and LMP is identified to be largely identical to it in the context of large numbers of small players, the consequences of agents strategising under GNK is not considered here.
+As the GNK is incentive incompatible and also quite complex, this is both a major consideration and a difficult question.
 While there does exist some work on similar solution concepts like GNK that are incentive compatible (but more complex) \cite{myerson1,Salamanca2019} their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
 
 
@@ -737,62 +739,59 @@ While there does exist some work on similar solution concepts like GNK that are 
 
 \section{Discussion and conclusion}\label{sec:GNK_value_discussion}
 
-To consider the social and ethical value of our GNK solutions we must loop back to consider some of the topics explored in Chapter \ref{cha:background}.
+To consider the social and ethical value of the GNK value we must loop back to consider some of the topics explored in Chapter \ref{cha:background}.
 Particularly we briefly considered some moral elements about the distribution of resources, including Equality, Efficiency, and the various normative reference points which may be pertinent.
 We will consider the GNK in light of each of these in turn.
 
-\subsubsection*{Efficiency}
-It is easy to realise that the GNK value is axiomatically efficient, specifically in terms of maximising the sum of utility, by axiom (equation \ref{myeq}); and it is efficient in this regard it is also therefore Pareto optimal.
-The way this is implemented is that the GNK designates the electrical outcome which maximises the sum of utility, and issues budget-balanced utility transfers between the players.
-Neither LMP or VCG has a similar efficiency claim, as both allocates payments between network participants are not necessarily budget balanced.
+\subsection{Efficiency}
+It is easy to realise that the GNK value is axiomatically efficient, specifically in terms of maximising the sum of utility, by axiom (equation \ref{myeq}); and as it is efficient in this regard it is also therefore Pareto optimal.
+The way this efficiency is implemented is that the GNK designates the electrical outcome which maximises the sum of utility, and issues budget-balanced utility transfers between the players.
+Neither LMP or VCG has a similar efficiency claim, as both allocate payments between network participants are not necessarily budget balanced.
+However in order to consider whether this axiomatic efficiency is actually a good thing we need to consider it in terms of what is socially good.
 
-While there are different and potentially competing notions of what 'efficiency' should mean, the maximisation of the sum of utility is a very classical notion.
-The implementation of the GNK value assumes that utility is transferable, and the easiest way of considering this is in terms of utility as measured by money. And hence, in this context the maximisation of utility corresponds to the maximisation of the monetary value of outcomes.
+While there are different and potentially competing philosophical notions of what social 'efficiency' should mean, the maximisation of the sum of utility is a very classical notion.
+The implementation of the GNK value assumes that utility is transferable, and the easiest way of comprehending this is in terms of utility as measured by money. And hence, in this context the maximisation of utility might be seen as corresponding to the maximisation of the monetary value of outcomes.
 
-There may be some sense in thinking that maximising utility via monetary measurement could potentially be prone to social problems, specifically as there exists some agreement of the diminishing utility for money itself, in that the rich are made only a little better off by an amount of money, that would be more appreciated by the poor.
+However it is worth noting that this might not be socially desirable, as there may be some sense in thinking that maximising utility via monetary measurement could potentially be prone to social problems, specifically as there exists some agreement of the diminishing value for money itself, in that the rich are made only a little better off by an amount of money, that would be more appreciated by the poor.
 
-The GNK value allocates the utilitarian outcome and issues budget balanced utility transfers between participants, however it does not necessarily required that utility be measured in money (even though this is the easiest interpretation).
-It is also possible to note that there exist non-transferable-utility (NTU) modifications of the GNK value - such as also considered by Neyman and Kohlberg \cite{value1} which could be modified to apply to a generalised game context.
-Such solution concepts could be utilised where utility is not directly transferable, and which could incorporate non-linear utilities over possible monetary transactions and potentially resulting in a more egalitarian outcome.
+The GNK value allocates the utilitarian outcome, however it is not necessarily required that utility be measured in money (even though this is the easiest interpretation).
+It is also possible to note that there exist non-transferable-utility (NTU) modifications - such as also considered by Neyman and Kohlberg \cite{value1} - which could be modified to yield a NTU GNK value.
+Such solution concepts could be utilised where utility is not directly transferable and which could incorporate non-linear utilities over possible monetary transactions, potentially resulting in more egalitarian outcomes.
 
-As we have developed it in this text, the GNK value is inherently utilitarian in the most classical sense, but similar solution concepts could be made to bias it towards other efficiency measures.
+The potential for modifying the GNK value for application in NTU settings in order to account for different efficiency measures is a topic of potential future investigation.
 
-\subsubsection*{Formal-equality}
+\subsection{Formal-equality}
 
-All the solutions explored in this text satisfy variations of formal-equality, as there is no mechanism which specifies distinct behaviour or treatment for any individual participant.
-
-In all the techniques (GNK, VCG and LMP, etc.) only treat different participants differently in relation to their utility, and how their presence and actions can affect the utility of others.
+In all the techniques (GNK, VCG and LMP, etc.) satisfy formal-equality, as they only treat different participants differently in relation to morally relevent characteristics, particularly their utility preferences, and how their presence and actions can affect the utility of others.
 In the electricity context, this involves the utility of electricity and capacity to deliver/generate electricity at a location in relation to the utility of that electricity for others.
 
-Hence, these systems satisfy formal equality of a specific sense, in that the morally relevant characteristics that warrant differential treatment are the utility of electricity relative to others and the capacity to supply electricity at a location.
+However, whether-or-not these qualify as morally warranted bases for differential treatment is the subject of a wider discussion, particularly as differential treatment gives rise to differential incentives.
 
-Whether-or-not these qualify as morally warranted bases for differential treatment is the subject of a wider discussion.
-However one notable reality, is that differential treatment gives rise to differential incentives.
+For instance, the idea of people being afforded different effective prices for electricity supply depending on location may be regarded as being ethically unfair to some people (especially if the locations are close), however this would also negate any possible incentive for people to install generation capacity in advantageous locations.
 
-So, for instance, the idea of people being afforded different effective prices for electricity supply depending on location may be regarded as being ethically unfair for some people (especially if the locations are close), however this would also negate any possible incentive for people to install generation capacity in advantageous locations.
+In this way, differential treatment can be seen as the mirror image of incentive, and a comprehensive reflection of the incentives that would be given under LMP against VCG and GNK are beyond the scope of our consideration.
+However we can speculate that there exists a primary difference between VCG and LMP (which give similar results) and GNK, in that LMP and VCG incentivse behaviour that could affect the network operating point; particularly affecting only those generators/consumers which would (or do) generate or consume power at the network operating point.
+Wherease GNK is more comprehensive in its consideration, as it affords utility for every possible way that the network could degenerate into adversarial competition; thus we might suspect that the GNK value (or something similar to it) might incentives robustness in the network.
 
-In this way, differential treatment is the mirror image of incentive, and a comprehensive reflection of the incentives that would be given under LMP against VCG and GNK are beyond the scope of our consideration.
-However we can speculate that there exists a primary difference between VCG and LMP (which give similar results) and GNK, in that LMP and VCG incentivse behaviour that can affect the network operating point; particularly affecting only those generators/consumers which would (or do) generate or consume power at the network operating point.
-Wherease GNK is more comprehensive in its consideration, as it affords utility for every possible way that the network could degenerate into adversarial competition; thus might suspect that something similar to the GNK might incentives robustness in the network.
+\subsection{Hetrogeny of normative points}
 
-\subsubsection*{Hetrogeny of normative points}
-
-The essential feature of the GNK value is that it is an extension of bargaining solution concepts to multiple players over a restricted strategy space; particularly the space of generalised non-cooperative games.
+The essential feature of the GNK value is that it is an extension of bargaining solution concepts to multiple players over the restricted strategy space of a generalised non-cooperative game.
 %And it inherits the underlying idea that the disagreement point in the non-cooperative game between two parties is the normative reference point from which the cooperative bargaining result is determined.
-In the GNK context the assumption is that the minimax of the zero-sum game is the point which is/should-be the disagreement point between any two coalitions for the system.
-
-However, there is the question about how justified this is.
+The GNK value inherits the assumption from Nash bargaining that the minimax of the zero-sum game is the point which is/should-be the disagreement point between any two coalitions for the system - however this can be questioned.
 The minimax of the zero-sum game identifies a point of maximum strategising to gain payoff advantage specifically over the opponent, irrespective of the absolute payoff to the player.
 And in this way minimax of the zero-sum game identifies a point of maximally engaged competition between the players.
-the GNK value integrates this dynamic to consider the space of all possible coalitions and anti-coalitions which could form, and amalgamates all possible minimax's between them into a point of value for each participant in those formations.
+%the GNK value integrates this dynamic to consider the space of all possible coalitions and anti-coalitions which could form, and amalgamates all possible minimax's between them into a point of value for each participant in those formations.
 
 The GNK value contrasts against other similar solutions over non-cooperative games (as briefly mentioned in section \ref{relating_to_the_old}) such von Neumann and Morgenstern's solution (per equation \ref{knvalue3}), where the characteristic function is identified as minimax payoff, not minimax payoff advantage.
-In this way von Neumann and Morgenstern's solution may be descriptive of a point of less totally engaged competition - which might be more appropriate or pertinent for electricity networks.
+In this way von Neumann and Morgenstern's characteristic function can be considered as descriptive of a point of less totally engaged competition between coalitions - which might be more appropriate or pertinent for electricity networks.
+However this is not the only possible way that the characteristic function could be constructed, but that these alternative constructions would not yield Nash bargaining solution in the two player case.
 
 Additionally, the GNK can be seen to assign equal weight for every possible coalition that could form, irrespective of the likelihood that such coalitions would actually form in competition.
 It may be possible to construct a weighted GNK value to account for differential likelihoods of different coalitions forming, but that is a remaining further task.
 
-Another thing of note, is that while the GNK (and Nash bargaining solution concepts) can be viewed as a description of perfect competition between individuals, it can directly account for the possibility that that groups of players may be altruistic (as might be incorporated in their respective utility functions).
+Another thing of note, is that while the GNK (and Nash bargaining solution concepts) can be viewed as a description of perfect competition between individuals, it can also directly account for the possibility that that groups (or subgroups) of players may be altruistic.
+The way that altruism may be accounted for is that a player's utility functions may potentially including terms associated with positive utility for others.
+
 %And the question outstanding is, should resources be distributed above the point of such a specific description of perfect competition?
 
 %From this perspective the GNK contrasts against other solutions (such as LMP and VCG) in regards to the reference point which they build upon.
@@ -804,32 +803,33 @@ Another thing of note, is that while the GNK (and Nash bargaining solution conce
 %If a zero utility is associated with not participating in the system, then individual rationality guarantees that it is better that any participant participates in the mechanism than not.
 %This is an important reference point is not manifest in GNK and we discuss it in the next.
 
-\subsubsection*{Wider equality}
+\subsection{Wider equality}
 
-In the development of this research it was hoped that the GNK value would ultimately prove to be have a similar individual rationality property as VCG, in that no participant should be allocated less than zero utility, which might be interpreted as what they would get if they did not participate in the mechanism.
-The ethical importance of individual rationality cannot easily be overstated, particularly as a primary notion of ethical exchange is the concept of `euvoluntary' exchange - see section \ref{sec:reference_points}.
+In the development of this research it was hoped that the GNK value would ultimately be witnessed to have a similar individual rationality property as VCG.
+Specifically the individual rationality property that no participant should be allocated less than zero utility, which might be interpreted as what they would get if they did not participate in the mechanism.
+The ethical importance of individual rationality cannot easily be overstated, particularly as a primary notion of ethical exchange is the concept of `euvoluntary' exchange (see section \ref{sec:reference_points}) where every party is benefits from participation.
 
 However, it is evident that GNK seems to violate such a property, particularly in that it is possible for participants to `walk away' from the interaction with less less utility than zero; and we would expect that his particular absence of a guarantee for participants would be a major hindrance to GNK's application in electricity systems; hence an ethical failing.
-Indeed, is difficult to imagine that a system which would leave participants worse off than if they did not participate, could possibly be good for the wellbeing of society.
+Indeed, is difficult to imagine how a system which would leave participants worse off than if they did not participate could be good for the wellbeing of society.
 
-In the designing of the GNK value it was hoped that individual rationality would be a property which would be present for large networks, particularly as it was suspected in section \ref{subsec:nash_bargaining_endogenous} that if it was possible for players to unilaterally implement an outcome which guaranteed them a utility of zero (or effectively such), then they would be guaranteed a non-negative net utility.
-However in our GNK application to electricity networks, the enforcement of the power conservation constraint seems to have disallowed this eventuality.
+In the designing of the GNK value it was hoped that individual rationality would be a property which would be present for larger networks, particularly as it was suspected in section \ref{subsec:nash_bargaining_endogenous} that if it was possible for players to unilaterally implement an outcome which guaranteed them a utility of zero, then they would be guaranteed a non-negative net utility.
+However in our GNK application to electricity networks, the enforcement of the power conservation constraints (per equation \ref{dcopf1}) seems to have disallowed this eventuality.
 
 For instance, under GNK value in the context of our generalised game modelling DC networks, the power conservation constraint causes the incorporation of unrealistic bargaining manoeuvres, such participants extortionately threatening to oversupply others.
 It is very possible that alterations to the GNK value, and similar types of Shapley Value structures over non-cooperative game solutions could be made to amend this issue.
 
-%, leaving them worse off then when they were before.
+It may be possible, for instance, to reconsider the electrical interaction between participatns, perhaps by allowing player's action space to be selection of voltage level at their location, rather than directly their power input/output; however in this context power line limits would be manifest as non-linear constraints on the optimisation problem, subsequently computation more difficult.
+It might also be possible to implement blackout costs to participants to curtail the possibility of unrealistic bargaining maneuvers in the GNK value logic.
 
-%It may be possible to apply GNK to electricity networks to provide such a unilatteral option to players, perhaps by allowing player's action space to be selection of the voltage level at their location, rather than directly their power input/output; however in this context power line limits would be manifest as non-linear constraints on the optimisation problem, subsequently computation more difficult.
-%Such investigation is left for future work.
+In these cases, it might be possible to give participants actions to guarantee themself a disagreement point which affords them a zero utility, and hence restore individual rationality to the resultant GNK value; however these investigations are future research.
 
 %However ultimately its formulation encodes a specific type of extortionate principle which makes it ethically untenuous.
 
-At a broader level of consideration, it is interesting to consider how perfect competition may or may not coincide with what is equal and ethical.
+At a broader level of consideration, it is interesting how perfect competition may or may not coincide with what is equal and ethical.
 The question of when and where these coincide, and particularly if they might coincide in the context of electricity networks was part of the motivation of this research.
-Unfortunately our investigations demonstrated the GNK value would be expected to fail wider social equality considerations.
+Unfortunately our investigations demonstrated that the most direct application of the GNK value would be expected to fail wider social equality considerations.
 
-In the next chapter we delve into the details of the sampling techniques that were developed and tested throughout this research, and we provide a final conclusion to our research in Chapter \ref{cha:conc}. 
+In the next two chapters we delve into the details of the sampling techniques that were developed and tested throughout this research, and we provide a final conclusion to our research in Chapter \ref{cha:conc}. 
 
 
 
