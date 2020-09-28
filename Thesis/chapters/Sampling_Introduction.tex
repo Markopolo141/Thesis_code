@@ -1,10 +1,11 @@
 \chapter{Stratified Sampling}\label{chap:stratified_sampling_chapter}
 
-In the previous chapter we introduced the GNK value and considered that it could be approximated by a stratified sampling process (section \ref{sec:sampling_techniques}).
+In the previous chapter we introduced the GNK value and recognised that it could be approximated by a stratified sampling process (section \ref{sec:sampling_techniques}).
 Accordingly, in this chapter we investigate the different possible rules for choosing samples from strata in the context of stratified sampling.
 
 Particularly we review the orthodox solution to the problem, which is called Neymann allocation, and show how it is equivalent to minimising a concentration inequality called Chebyshev's ineqality.
 We then turn our attention to alternative concentration inequalities and particularly the various forms of Chernoff bounds.
+In this chapter we develop
 
 In the first section of this chapter, we address the recent innovation of Empirical Bernstein Bounds (EBBs) which are concentration inequalities that specifically incorporate sample variance information.
 And then show how these EBBs can be bound together using probability unions to create a concentration inequality for stratified sampling - which can then be used as a new rule for choosing samples in the context of stratified sampling.
@@ -19,47 +20,46 @@ And in the third section, we contrast the effectiveness of the stratified sampli
 The second and third parts most directly reflect unpublished material: \\\-\hspace{1cm}`Stratified Finite Empirical Bernstein Sampling'', Preprints 2019\\
 (accessible: \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2})\\
 
-\section{Introduction and background}
 
-In the previous chapter, we defined the GNK value and saw that there is a significant computational difficulties in solving the GNK value at scale.
-Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{da_value_eq} or \ref{eq:shapley_value2} by conversion identified by equation \ref{convert1}).
 
-It was realised that these averages might be approximated by sample averages, and hence that one potential avenue of approximating the GNK value at scale was by sampling.
-And the process of replacing analytic averages with sample averages leads to the question of how that sampling process could be done most effectively.
 
-The process of selecting samples to most accurately estimate an average over sample averages is strongly similar to that faced in the process of Stratified sampling, which is a well known sampling technique.
-The concept of Stratified Sampling is easily illustrated, for instance, to poll the population of a country's support for a particular government policy, we can sample the different demographic regions within the country.
-For instance, if we know that regions $A$,$B$ and $C$ contain 10\%, 40\% and 50\% of the population, and our sampling shows support levels of 2\%, 70\% and 30\%, respectively, then we can estimate that 43.2\% of the total population supports the policy.
-
-This process of estimating the average over a population by breaking a population into mutually-exclusive subgroups and sampling them randomly, is called stratified random sampling.
-Such stratified sampling can lead to improved reliability in estimation when \cite{1938.10503378,10.2307/23339498}:
-\begin{itemize}
-\item The population is divisible into strata, in which there is less variance in each stratum than across them all 
-\item When the size of the strata are known or reasonably estimated
-\item When sampling selectively from each strata is possible 
-\end{itemize}
 
 In the same way as the average of a statistic over the population of a country is expressible as the weighted average over the averages of its regions, so to the Shapley Value and GNK value are expressible as a weighted average over the averages of coalitions by different sizes.
 Hence component of our investigation turns fundamentally into a question about stratified sampling.
 
 Particularly, when we have a population decomposed into strata of known sizes which we can selectively sample from, how do we choose samples from the strata to get the most accuracy in the final population estimate?
 
-%In some cases, there is a question of how to optimally divide a population into strata which can then be sampled selectively.
-%Particularly that 
-%\cite{2015PLoSO..1032850H,DBLP:journals/jmma/KhanAK09,CIS-196251}
-%In some cases, there is a choice of different variables by which to selectively sample the population data (called auxilliary variables), and hence a choice about how the population should be broken into strata.
-%In this context it may be necessary to collect information about the possible strata and their sizes, and sometimes this is done directly by simple random sampling as a first stage of a sampling procedure.
-%In other cases, the strata may be naturally given, or alternatively that this first stage may be considered to have been done ideally.
+This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. And in the context of sampling the Shapley Value, the question of which strata should sampled is equivalent to a question about what sized coalitions should be sampled in consideration of each players marginal contributions to them.
+
+
+\section{Introduction and background}
+
+%In the previous chapter, we defined the GNK value and saw that there is a significant computational difficulties in solving the GNK value at scale.
+%Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{da_value_eq} or \ref{eq:shapley_value2} by conversion identified by equation \ref{convert1}).
+
+%It was realised that these averages might be approximated by sample averages, and hence that one potential avenue of approximating the GNK value at scale was by sampling.
+%And the process of replacing analytic averages with sample averages leads to the question of how that sampling process could be done most effectively.
+
+Stratified sampling is a well known example of a process of selecting samples to most accurately estimate an average over weighted sample averages.
+Particularly stratified random sampling is a process of estimating the average over a population by breaking a population into mutually-exclusive subgroups and sampling them randomly.
+Such stratified sampling can lead to improved reliability in estimation over simple random sampling of the population particularly when \cite{1938.10503378,10.2307/23339498}:
+\begin{itemize}
+\item The population is divisible into strata, in which there is less variance in each stratum than across them all 
+\item When the size of the strata are known or reasonably estimated
+\item When sampling selectively from each strata is possible 
+\end{itemize}
+
+The concept of stratified random sampling is easily illustrated, for instance, to poll the population of a country's support for a particular government policy, we can sample the different demographic regions within the country.
+For instance, if we know that regions $A$,$B$ and $C$ contain 10\%, 40\% and 50\% of the population, and our sampling shows support levels of 2\%, 70\% and 30\%, respectively, then we can estimate that 43.2\% of the total population supports the policy.
+
+Our primary investigative question in this chapter is this: when we have a population decomposed into strata of known sizes which we can selectively sample from, how do we choose samples from the strata to get the most accuracy in the final population estimate?
+
 
 For instance, if we sample primarily from a single stratum, we would likely have a very good estimate of the average for that one stratum, but no accuracy in estimate for the others, leading to a weak estimate of the population average.
 Conversely, if we choose to take the same number of samples from all the strata, some of the strata might be far smaller or have far less variance than others, resulting in those being oversampled.
 
-This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. And in the context of sampling the Shapley Value, the question of which strata should sampled is equivalent to a question about what sized coalitions should be sampled in consideration of each players marginal contributions to them.
 
-The developments that we outlay in this chapter have relevance not only to the specific tasks of computing the GNK and Shapley Value, but also have potential relevance for statisticians and statistics more generally.
-%We will also show how these techniques touch on topics relevant to machine learning, particularly in the context of Bandit algorithms; and also how our work extends from present knowledge on the topic of concentration inequalities.
-
-The core question we face is, how do we sample optimally between the strata in stratified sampling?
+%The core question we face is, how do we sample optimally between the strata in stratified sampling?
 This question has been considered before, and the most direct historical answer to the question is called \textit{Neyman allocation} or \textit{sampling} \cite{1938.10503378,10.2307/23339498}.
 The principle of Neyman sampling is that it seeks the minimise the weighted variance of the population estimate assuming knowledge of the variances of the strata, and it can most directly be interpreted as a process of minimising Chebyschev's inequality.
 
