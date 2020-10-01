@@ -3,36 +3,36 @@
 In the previous chapter we introduced the GNK value and recognised that it could be approximated by a stratified sampling process (section \ref{sec:sampling_techniques}).
 Accordingly, in this chapter we investigate the different possible rules for choosing samples from strata in the context of stratified sampling.
 
-Particularly we review the orthodox solution to the problem, which is called Neymann allocation, and show how it is equivalent to minimising a concentration inequality called Chebyshev's ineqality.
-We then turn our attention to alternative concentration inequalities and particularly the various forms of Chernoff bounds.
-In this chapter we develop
+We review the orthodox solution to the problem which is called Neymann allocation, and show how it is equivalent to minimising a concentration inequality called Chebyshev's ineqality.
+We then turn our attention to developing two alternative and novel sampling methodologies by developing and minimising two novel concentration inequalities.
+These two new sampling methodologies are then tested for their performance in the context of synthetic sample data sets, and in the context of sampling the Shapley Value of cooperative games.
 
-In the first section of this chapter, we address the recent innovation of Empirical Bernstein Bounds (EBBs) which are concentration inequalities that specifically incorporate sample variance information.
-And then show how these EBBs can be bound together using probability unions to create a concentration inequality for stratified sampling - which can then be used as a new rule for choosing samples in the context of stratified sampling.
-And we develop a stronger EBB for this purpose.
+The structure of this Chapter is as follows:
+\begin{enumerate}
+\item	In the first section \ref{sec:sampling_background}, we give a review of relevent background information and techniques.
+\item	In the second section \ref{section:old_statistics}, of this chapter we develop the first concentration inequality, we address the recent innovation of Empirical Bernstein Bounds (EBBs) we and develop a stronger EBB for this purpose.
+\item	In the third section \ref{section:SEBB}, we develop a second concentration inequality, which is a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
+\item	And finally in the forth section \ref{section:statistics_results}, we show how these concentration inequalities can be used to define new sampling methodologies and give their performance results in the context of synthetic data sets, and in the application of approximating the Shapley Value.
+\end{enumerate}
 
-The work in the first part most directly reflects published material: \\\-\hspace{1cm}``An Engineered Empirical Bernsten Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessible: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
 
-In the second section of this chapter, we develop a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
-
-And in the third section, we contrast the effectiveness of the stratified sampling rules in the context of synthetic data sets, and also in the application of approximating the Shapley Value.
-
-The second and third parts most directly reflect unpublished material: \\\-\hspace{1cm}`Stratified Finite Empirical Bernstein Sampling'', Preprints 2019\\
+The work and development from the second section most directly reflects published material: ``An Engineered Empirical Bernsten Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessible: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
+The work and development from the third section most directly reflect unpublished material: ``Stratified Finite Empirical Bernstein Sampling'', Preprints 2019\\
 (accessible: \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2})\\
 
 
 
 
 
-In the same way as the average of a statistic over the population of a country is expressible as the weighted average over the averages of its regions, so to the Shapley Value and GNK value are expressible as a weighted average over the averages of coalitions by different sizes.
-Hence component of our investigation turns fundamentally into a question about stratified sampling.
+%In the same way as the average of a statistic over the population of a country is expressible as the weighted average over the averages of its regions, so to the Shapley Value and GNK value are expressible as a weighted average over the averages of coalitions by different sizes.
+%Hence component of our investigation turns fundamentally into a question about stratified sampling.
 
-Particularly, when we have a population decomposed into strata of known sizes which we can selectively sample from, how do we choose samples from the strata to get the most accuracy in the final population estimate?
+%Particularly, when we have a population decomposed into strata of known sizes which we can selectively sample from, how do we choose samples from the strata to get the most accuracy in the final population estimate?
 
-This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. And in the context of sampling the Shapley Value, the question of which strata should sampled is equivalent to a question about what sized coalitions should be sampled in consideration of each players marginal contributions to them.
+%This question is directly relevant to sampling the GNK and Shapley value, since they are both immediately expressible as a weighted average of strata averages, where the strata and their sizes are immediately given. And in the context of sampling the Shapley Value, the question of which strata should sampled is equivalent to a question about what sized coalitions should be sampled in consideration of each players marginal contributions to them.
 
 
-\section{Introduction and background}
+\section{Introduction and background}\label{sec:sampling_background}
 
 %In the previous chapter, we defined the GNK value and saw that there is a significant computational difficulties in solving the GNK value at scale.
 %Particularly that the GNK value and its Shapley Value formulation are definable as being an average over a combinatorial number of averages (via equations \ref{da_value_eq} or \ref{eq:shapley_value2} by conversion identified by equation \ref{convert1}).
@@ -49,14 +49,13 @@ Such stratified sampling can lead to improved reliability in estimation over sim
 \item When sampling selectively from each strata is possible 
 \end{itemize}
 
-The concept of stratified random sampling is easily illustrated, for instance, to poll the population of a country's support for a particular government policy, we can sample the different demographic regions within the country.
-For instance, if we know that regions $A$,$B$ and $C$ contain 10\%, 40\% and 50\% of the population, and our sampling shows support levels of 2\%, 70\% and 30\%, respectively, then we can estimate that 43.2\% of the total population supports the policy.
+The concept of stratified random sampling is easily illustrated, for instance, to poll the population of a country's support for a particular government policy, it is possible to sample the different demographic regions within the country.
+For instance, if regions $A$,$B$ and $C$ contain 10\%, 40\% and 50\% of a population, and sampling of these regions reliably show support levels of 2\%, 70\% and 30\%, respectively, then it is possible to discern that 43.2\% of the total population supports the policy.
 
-Our primary investigative question in this chapter is this: when we have a population decomposed into strata of known sizes which we can selectively sample from, how do we choose samples from the strata to get the most accuracy in the final population estimate?
-
+Our primary investigative question of this chapter is this: when we have a population decomposed into strata of known sizes which we can selectively sample from, how do we choose samples from the strata to get the most accuracy in the final population estimate?
 
 For instance, if we sample primarily from a single stratum, we would likely have a very good estimate of the average for that one stratum, but no accuracy in estimate for the others, leading to a weak estimate of the population average.
-Conversely, if we choose to take the same number of samples from all the strata, some of the strata might be far smaller or have far less variance than others, resulting in those being oversampled.
+Conversely, if we choose to take the same number of samples from all the strata, some of the strata might be far smaller or have far less variance than others, resulting in those strata being oversampled.
 
 
 %The core question we face is, how do we sample optimally between the strata in stratified sampling?
@@ -65,27 +64,21 @@ The principle of Neyman sampling is that it seeks the minimise the weighted vari
 
 \subsection{Neyman allocation}\label{sec:neyman_sampling}
 
-Neyman allocation suggests that if we want to minimise the variance in the final estimate of the population, we should sample directly in proportion to the stratum variances multiplied by their sizes:
+Neyman allocation identifies that in order to minimise the variance in the final estimate of the population, that sampling should be directly in proportion to the stratum variances multiplied by their sizes:
 
 \begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
 If we have $m$ strata, of sizes $N_i$, with variance $\sigma_i^2$, and we sample with replacement (ie. all samples are independent and identically distributed). If we have a sample budget $n$, and we can choose how much to sample from each strata, $n_i$.
-Then the selection of $n_i$ which minimises the variance of our population estimate is:
+Then the selection of $n_i$ which minimises the variance of our population estimate $\mu$ is:
 $$n_i = \frac{nN_i\sigma_i}{\sum_jN_j\sigma_j}$$
 \end{theorem}
 \begin{proof}
-To derive Neyman allocation principle we need to use the principle of the addition of variance, that is, for two random variables $X$ and $Y$ which are independent (and for any $a,b\in \mathbb{R}$), then $$\text{Var}(aX+bY) = a^2\text{Var}(X)+b^2\text{Var}(Y)$$
-So, if the strata have probability distributions $X_i$, and $X_{i,j}$ are the random variable of the $j$th sample from the $i$th stratum drawn with replacement. If we have $n_i$ samples from each strata then the stratified probability estimate $\hat{\mu}$ is:
-$$ \hat{\mu} = \sum_{i=1}^m\frac{N_i}{\sum_kN_k}\frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j} $$
-And the variance of this estimate is thus:
-$$ \text{Var}(\hat{\mu}) = \text{Var}\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}\frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}\right) = \frac{1}{\left(\sum_kN_k\right)^2}\sum_{i=1}^m\frac{N_i^2}{n_i^2}\sum_{j=1}^{n_i}\text{Var}(X_{i,j})$$
-\begin{equation}\label{eq:variance_decomposition_for_strata_mean}= \frac{1}{\left(\sum_kN_k\right)^2} \sum_{i=1}^m\frac{N_i^2}{n_i}\sigma_i^2 \end{equation}
-If we have a sample budget $n$ of total samples, and we wish to minimise the variance of our estimate $\text{Var}(\mu)$ then the task is to select maximally efficient $n_i$ subject to the constraint that $\sum_{i=1}^m n_i = n$, we form the Lagrangian:
+For any independant random variables $X$ and $Y$ (and for any $a,b\in \mathbb{R}$), $\text{Var}(aX+bY) = a^2\text{Var}(X)+b^2\text{Var}(Y)$.\\
+So, if $X_{i,j}$ are the random variable of the $j$th sample from the $i$th stratum, then:
+\begin{equation}\label{eq:variance_decomposition_for_strata_mean} \hat{\mu} = \sum_{i=1}^m\frac{N_i}{\sum_kN_k}\frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j} ~~~~~~~\text{and hence}~~~~~~~\text{Var}(\hat{\mu}) = \frac{1}{\left(\sum_kN_k\right)^2} \sum_{i=1}^m\frac{N_i^2}{n_i}\sigma_i^2 \end{equation}
+To minimise the variance of our estimate $\text{Var}(\mu)$ by selecting $n_i$ subject to the constraint that $\sum_{i=1}^m n_i = n$, we form the Lagrangian (with Lagrange multiplier $\lambda$):
 $$L = \text{Var}(\hat{\mu}) + \lambda\left(\sum_{i=1}^mn_i-n\right) = \sum_{i=1}^m\left(\frac{N_i^2\sigma_i^2}{n_i\left(\sum_kN_k\right)^2} + \lambda \left(n_i-\frac{n}{m}\right)\right)$$
-Where $\lambda$ is the Lagrange multiplier, hence for any $i$ solving for $\frac{\partial L}{\partial n_i}=0$ leads to:
-$$n_i = \frac{N_i\sigma_i}{\lambda\sum_kN_k}$$
-Using $\sum_{i=1}^m n_i = n$, to eliminate $\lambda$ gives:
-$$n_i = \frac{nN_i\sigma_i}{\sum_jN_j\sigma_j}$$
-Which is the Neyman allocation rule.
+Hence for any $i$ solving for $\frac{\partial L}{\partial n_i}=0$ leads to:
+$n_i = \frac{N_i\sigma_i}{\lambda\sum_kN_k}$ and using $\sum_{i=1}^m n_i = n$, to eliminate $\lambda$ gives the result
 \end{proof}
 
 This allocation rule begs the question of why we would specifically want to minimise the variance of our population mean estimate.
@@ -106,24 +99,18 @@ In this context the variance of the sampled population mean is the only paramete
 
 One primary limitation of using Neyman allocation, is that is presupposes knowledge of the variances of the strata, which usually aren't available beforehand or in practice.
 One relatively easy way of going around this problem is to go through a process to estimate the variances of the strata, perhaps as a prior step, and then using this knowledge with Neyman allocation to choose further samples.
-And indeed some proceses do this, particularly in Section \ref{sec:shapley} we will consider a method of sampling the Shapley Value using exactly this idea.
+%And indeed some proceses do this, particularly in Section \ref{sec:shapley} we will consider a method of sampling the Shapley Value using exactly this idea.
 And while this idea certainly works, it leaves open the question about how much sampling should be done to estimate the strata variances against how much sampling should be left to sample by those estimated variances.
 
-A Secondary limitation of using Neyman allocation (as presented here) is that it can potentially prescribe non-integer numbers of samples. While it is rather straightforward that these can be rounded to integer numbers in-practice. The question of how to optimally round these numbers is a further question that has been given distinct treatment, and infact a rather recent answer.
-Specifically \cite{WRIGHT201750} gives a process of optimal integer Neyman allocation.
+%A Secondary limitation of using Neyman allocation (as presented here) is that it can potentially prescribe non-integer numbers of samples. While it is rather straightforward that these can be rounded to integer numbers in-practice. The question of how to optimally round these numbers is a further question that has been given distinct treatment, and infact a rather recent answer.
+%Specifically \cite{WRIGHT201750} gives a process of optimal integer Neyman allocation.
 
-In considering the work already done via Neyman allocation, our research question becomes:
-is it possible to improve upon two-stage Neyman sampling for Stratified Random Sampling?
+Neyman allocation is an orthodox sampling rule which is thus seen to directly extend from minimising a specific concentration inequality that depends on known variances.
+It is therefore suitable to ask if there are alternative concentration inequalities which can be minimised to form novel sampling rules.
 
-To answer this question we investigated and derived new and alternative concentration inequalities which we then minimised.  And the particular inequalities that we minimised extended from the classes of inequalities called Chernoff Bounds.
+\subsection{Concentration inequalities and Chernoff bounds}
 
-\subsection{Chernoff bounds}
-
-In the previous Section, the accuracy guaranteed by Chebyshev's inequality was one of the principle motivations that we gave for the use of Neyman sampling.
-Chebyshev's inequality is an example of what is called a \textit{concentration inequality}.
-Concentration Inequalities are (broadly speaking) probabilistic upper bounds that a given statistic deviates from its expectation value more extremely than a selected particular parameter.
-However Chebyshev's inequality is not the only concentration inequality worth considering.
-
+Chebyshev's inequality is one example of many \textit{concentration inequalitys}, which are probabilistic upper bounds on how likely a given statistic can deviate from its expectation value.
 Concentration inequalities are applied in a range of data science contexts for a variety of prediction, machine learning and hypothesis testing tasks, including:
 change detection \cite{KiferShaiGehrke2004,8000571} 
 and classification \cite{Zia-UrRehman2012} in data streams;
@@ -133,16 +120,15 @@ online prediction and learning problems \cite{%Cesa-BianchiLugosi2006,%Maron1997
 Mnih:2008:EBS:1390156.1390241,DBLP:conf/aaai/ThomasTG15,Maurer50empiricalbernstein},
 and in settings with bandit feedback \cite{AuerCesa-BianchiEtal_SIAM2003,AudibertBubeck_COLT2009,Tran-ThanhChapmanRJ_AAAI2009}.
 
-There are many different concentration inequalities such as Chebyshev's inequality~\cite{Chebyshev1}, Bernstein's inequalities~\cite{Burnstein1}, 
+There are many famous concentration inequalities such as Chebyshev's inequality~\cite{Chebyshev1}, Bernstein's inequalities~\cite{Burnstein1}, 
 Hoeffding's inequalities~\cite{hoeffding1} and Bennett's inequalities~\cite{10.2307/2282438}.
-Building on these, new analysis has yielded a wider range of concentration inequalities and methods of generating them ~\cite{MR3363542,Boucheron2004}. 
+New analysis has yielded a wider range of concentration inequalities and methods of generating them ~\cite{MR3363542,Boucheron2004}. 
 In particular, various innovations concern the concentration of more-general functions of random variables, such as 
 the Efron-Stein~\cite{efron1981} and 
 entropy methods~\cite{Boucheron_concentrationinequalities}.%, and Talagrand's concentration inequality~\cite{Talagrand1995}.
 
 One of the more famous Concentration Inequalities is \textit{Hoeffding's Inequality}.
 Hoeffding's inequality is one of a class of concentration inequalities called \textit{Chernoff bounds}.
-Chernoff bounds are probability bounds that extend from considering the addition of random variables in the Laplace frequency domain - as we will discuss.
 
 \begin{lemma}[Chernoff Bound]\label{chernoff1}
 If $\hat{\mu}$ is sample mean of $n$ independent and identically distributed samples of random variable $X$ then for any $s>0$ and $t$:
@@ -159,37 +145,9 @@ Here we have given the general form of Chernoff bounds for the sample mean of ra
 Using this kind of lemma, many well-known examples of Chernoff bounds (such as Hoeffding's inequality) follow from the derivation of upper bounds for $\E\left[\exp(sX)\right]$, also known as the \textit{moment generating function}.
 
 For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality.
-And hence, in this way a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
-The primary reason that this technique is particularly powerful is that the moment-generating-function has some useful properties that bear close relation to those of the Laplace transform.
+And thus, a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
 
-So for instance, if $X$ is a continuous random variable with a probability density function $f(x)$ then the moment-generating-function has form:
-$$ \E[\exp(sX)] = \int_{-\infty}^\infty f(x)\exp(sx) dx $$
-Which is very close to being exactly the same as the bi-directional Laplace transform of $f(x)$ (aside for the parameter sign change):
-$$ \mathcal{L}\{f\}(s) = \int_{-\infty}^\infty f(x)e^{-sx} dx$$
-Since the Laplace transform is invertable on a large class of functions, it is interpreted as an alternative representation of the function $f$ in `the frequency domain', where $s$ is a complex number or `frequency'.
-In a similar way the moment generating function is also an alternative representation of the function $f(x)$.
-So instead of considering the random variable $X$ by its probability density function $f(x)$ we can consider the random variable $X$ by its frequency domain representation $\E[\exp(sX)]$.
-
-A primary reason for doing this is that there are certain features of frequency domain representation that are useful. One primary feature of frequency domain representation is that it converts the operation of convolution into that of multiplication.
-So, for instance, the Laplace transform converts a convolution of functions into the multiplication of those Laplace transformed functions (sometimes called the convolution theorem), ie:
-$$ \mathcal{L}\{f \ast g\} = \mathcal{L}\{f\} \cdot \mathcal{L}\{g\} $$
-
-And this is useful to us because the addition of two independent random variables is known to have a probability density function that is the convolution of the probability density functions of the individual random variables.
-And so by using the Laplace transform we can deal with repeated addition as multiplications rather than convolutions, thus for $Z=X+Y$ for independent random variables $X$ and $Y$:
-$$\E[\exp(sZ)] = \E[\exp(s(X+Y))] = \E[\exp(sX)\cdot \exp(sY)] = \E[\exp(sX)]\cdot\E[\exp(sY)]$$
-Thus the moment generating function of the addition of two independent random variables is the multiplication of their moment generating functions.
-And this feature is embodied in Lemma \ref{chernoff1} where the addition of $n$ independent samples of $X$ thence becomes $\E[\exp(sX)]^n$.
-Hence by using Lemma \ref{chernoff1} we leverage this most powerful feature of frequency domain representation to derive new probability bounds.
-
-%What is even more impressive is if we consider the natural logarithm of the moment generating function, for any independant variables $X$ and $Y$ that
-%$$\log\E[\exp(s(X+Y))] = \log\E[\exp(sX)] + \log\E[\exp(sY)]$$
-%This expression $\log\E[\exp(sX)]$ is called the \textit{cumulant generating function} of the random variable $X$ and using it the probability density function of the addition of random variables (a convolution) is converted into being a summation - which is much easier to handle.
-
-And using this Lemma \ref{chernoff1} it is possible to derive new concentration inequalities - similar to Chebyshev's inequality, which we can then be minimised to form the basis of novel methods of stratified sampling. And we follow two different avenues of following this method in the next two sections.
-
-Let us begin first by deriving Hoeffding's inequality (\cite{hoeffding1}), primarily because it illustrates the technique of deriving Chernoff bounds which will be indicative of further developments. It also gives a particular Lemma (called Hoeffding's Lemma) which we will also use directly.
-
-\subsubsection{Hoeffding's inequality}
+Hoeffding's inequality (\cite{hoeffding1}) is an illustrative example of deriving a Chernoff bound, and it is also built on a particular Lemma (called Hoeffding's Lemma) which we will also use directly in further developments.
 
 \begin{theorem}[Hoeffding's inequality for mean zero]\label{hoeffdings_inequality}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
@@ -197,8 +155,8 @@ Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a m
 \end{equation}
 \end{theorem}
 \begin{proof}
-To prove Hoeffding's inequality we develop an upper bound for $\E[\exp(sX)]$, if we assume variable $X$ has a probability density function $f(x)$, then we can linearise $\exp(sx)$ as:
-\begin{equation}\label{Hoeffdings_line_fitting}\E[\exp(sX)] = \int_a^bf(x)\exp(sx)dx \le \int_a^bf(x)\left(\frac{x-a}{b-a}e^{sb} + \frac{b-x}{b-a}e^{sa}\right)dx\end{equation}
+If $X$ has a probability density function $f(x)$, then we can linearise $\exp(sx)$ as:
+\begin{equation}\label{Hoeffdings_line_fitting}\E[\exp(sX)] = \int_a^bf(x)\exp(sx)dx \le \int_a^bf(x)\left(\frac{x-a}{b-a}\exp(sb) + \frac{b-x}{b-a}\exp(sa)\right)dx\end{equation}
 Using the fact that the mean $\mu = \int_a^bf(x)xdx = 0$ thus:
 \begin{equation}\E[\exp(sX)] \le \frac{1}{sb-sa}\left(sb\exp(sa) - sa\exp(sb) \right)\end{equation}
 Given the fact that for any $\kappa>0,\gamma<0$:
@@ -210,7 +168,7 @@ $$ \p(\hat{\mu}\ge t) \le \exp\left(\frac{1}{8}s^2(b-a)^2 n-snt\right) $$
 And minimising with respect to $s$ yields the required result.
 \end{proof}
 
-At a first glance the most limiting feature of the derivation given is the requirement that the mean is zero, however this is ultimately immaterial and intentionally used to simplify the derivation. Because any statistic can be shifted such that its expectation value becomes zero, leaving $D$ unchanged. hence:
+The most limiting feature of the derivation is the requirement that the mean is zero however this is immaterial and is used to simplify the derivation, as any statistic can be shifted such that its expectation value becomes zero. hence:
 
 \begin{theorem}[Hoeffding's inequality]\label{Hoeffdings_inequality_proper}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
@@ -221,10 +179,10 @@ Alternatively by rearranging:
 \end{equation}
 \end{theorem}
 
-The most limiting feature of Hoeffding's inequality is that it assumes that the data are bounded within a range $a\le X\le b$, which obviously limits the application of Hoeffding's inequality.
+A limiting feature of Hoeffding's inequality is that it assumes that the data are bounded within a range $a\le X\le b$, which limits the application of Hoeffding's inequality.
 Similarly Chebyschev's inequality only sensibly holds in contexts where the data's distribution has a defined variance (consider that various heavy-tailed distributions may not have a finite variance, for instance).
 What is quite notable is that it is difficult to come to very meaningful conclusions about data processes without assuming atleast -something- about the distribution of data in question.
-And further that these inequalities can be seen as being largely (if not entirely) a consequence of chosen assumptions.
+And further that these inequalities can be seen as being largely a consequence of chosen assumptions.
 These assumptions may be based on prior information, expert opinion, or determined from the characteristics of the system under observation.
 
 It is also worth noting that Hoeffding's inequality is a rather friendly result that states that the concentration of sample mean is probability bounded by a Gaussian function, which might be seen as an intuitive corollary of the Central Limit Theorem. 
@@ -234,27 +192,27 @@ Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a m
 $$\E[\exp(sX)] \le \exp\left(\frac{1}{8}s^2D^2 \right)$$
 \end{lemma}
 
-This lemma is the root from which Hoeffding's inequality is derived as a Chernoff bound,
-however it is also worth noting that Hoeffding's inequality is not nearly as strong as it could be, infact the use of simplifying approximation Equation \ref{Hoeffdings_lemma} is actually completely unnecessary, and failing to incorporate it ultimately results in a stronger and uglier bound - see Appendix \ref{Appendix:more_concentration}:
+It is also worth noting that this lemma is actually unnecessary, and failing to incorporate it ultimately results in a stronger and uglier bound - see Appendix \ref{Appendix:more_concentration}:
 
-In anycase, there are two further Lemmas that are necessary for all further derivations for this chapter. The first lemma is an often-used and rather weak result used to fuse simple statements of probability:
+\subsection{Other general probability lemmas}
+
+There are further Lemmas that are necessary for the further derivations for this Chapter.
+The first lemma is an often-used and rather weak result used to fuse simple statements of probability:
 \begin{lemma}[Probability Union]\label{prob_union}
 For any random variables $a,b$ and $c$:
 \[\p(a>c) \; \le \; \p(a>b) + \p(b>c)\]
 \end{lemma}
 \begin{proof}[Proof of Probability Union - Lemma \ref{prob_union}]
-For any events $A$ and $B$\\
-$\p(A\cup B) \le \p(A)+\p(B)$, hence for events $a>b$ and $b>c$:\\ $\p((a>b) \cup (b>c)) \le \p(a>b) + \p(b>c)$\\
+For events $A$ and $B$\\$\p(A\cup B) \le \p(A)+\p(B)$\\
+hence for events $a>b$ and $b>c$:\\ $\p((a>b) \cup (b>c)) \le \p(a>b) + \p(b>c)$\\
 If $a>c$, then $(a>b) \cup (b>c)$ is true irrespective of $b$, so:\\
 $\p(a>c) \le \p((a>b) \cup (b>c))$
 \end{proof}
 This relationship is a well known and useful tool for settings where the probability relationship between $a$ and $c$ is unknown but the relationship between $a$ and some $b$, and also between that $b$ and $c$ is known.
-Although this relationship is quite useful, it is known to be a very weak relationship, as it holds with equality only if $\p((a>b)\cap(b>c))=0$, ie. when the unionised statements have zero coincidence.
-If more information is known about the coincidence of the statements, then more powerful probability unions are possible.
+Although this relationship is quite useful, it is known to be a very weak relationship, as it holds with equality only if $\p((a>b)\cap(b>c))=0$.
+Note also, that the same proof method for probability union also works straightforwardly for various substitutions of the $\ge$ symbol in the inner inequalities, only except specifically that: $\p(a\ge c) \; \le \; \p(a>b) + \p(b>c)$ can be false.
 
-Note also, that the same proof method for probability union also works straightforwardly for various substitutions of the $\ge$ symbol in the inner inequalities, only except that: $\p(a\ge c) \; \le \; \p(a>b) + \p(b>c)$ can be false.
-
-The final remaining Lemma before we begin this section in earnest is a lemma that is a straightforward result of algebra that relates the sample squares about the mean and the mean squared, to the sample variance.
+A second Lemma is a straightforward result of algebra that relates the sample squares about the mean and the mean squared, to the sample variance.
 \begin{lemma}[Variance Decomposition]\label{variance1}
 For $n$ samples $x_i$, sample mean $\hat{\mu} = \frac{1}{n}\sum_ix_i$, sample variance $\hat{\sigma}^2=\frac{1}{n-1}\sum_i(x_i-\hat{\mu})^2$, and average of sample squares $\hat{\sigma}_0^2 = \frac{1}{n}\sum_ix_i^2$, the following relationship holds:
 % \begin{align*}
@@ -274,5 +232,5 @@ By expanding $\hat{\sigma}^2$ into parts:\\
 =\frac{1}{n-1}\left(\sum_ix_i^2-\frac{1}{n}\sum_{i,j}x_ix_j \right) = \frac{n}{n-1}\left(\hat{\sigma}_0^2-\hat{\mu}^2\right)\)
 \end{proof}
 
-And we will eventually use this result to create bounds for the sample variance from bounds on the sample squares about the mean and the mean squared.
+%And we will eventually use this result to create bounds for the sample variance from bounds on the sample squares about the mean and the mean squared.
 
