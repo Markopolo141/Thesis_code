@@ -102,11 +102,11 @@ One relatively easy way of going around this problem is to go through a process 
 %And indeed some proceses do this, particularly in Section \ref{sec:shapley} we will consider a method of sampling the Shapley Value using exactly this idea.
 And while this idea certainly works, it leaves open the question about how much sampling should be done to estimate the strata variances against how much sampling should be left to sample by those estimated variances.
 
-%A Secondary limitation of using Neyman allocation (as presented here) is that it can potentially prescribe non-integer numbers of samples. While it is rather straightforward that these can be rounded to integer numbers in-practice. The question of how to optimally round these numbers is a further question that has been given distinct treatment, and infact a rather recent answer.
-%Specifically \cite{WRIGHT201750} gives a process of optimal integer Neyman allocation.
+Neyman allocation is an orthodox sampling rule which directly extends from minimising a specific concentration inequality that unfortunately depends on known variances.
+It is therefore suitable to ask if there are alternative concentration inequalities which can be minimised to form novel sampling rules for stratified sampling.
 
-Neyman allocation is an orthodox sampling rule which is thus seen to directly extend from minimising a specific concentration inequality that depends on known variances.
-It is therefore suitable to ask if there are alternative concentration inequalities which can be minimised to form novel sampling rules.
+
+
 
 \subsection{Concentration inequalities and Chernoff bounds}
 
@@ -186,13 +186,43 @@ And further that these inequalities can be seen as being largely a consequence o
 These assumptions may be based on prior information, expert opinion, or determined from the characteristics of the system under observation.
 
 It is also worth noting that Hoeffding's inequality is a rather friendly result that states that the concentration of sample mean is probability bounded by a Gaussian function, which might be seen as an intuitive corollary of the Central Limit Theorem. 
-We will not use Hoeffding's inequality directly but we give its derivation to illustrate technique, however we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma:
+We will not use Hoeffding's inequality directly but we give its derivation to illustrate technique, however we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma\footnote{It is also worth noting that this lemma is actually unnecessary, and failing to incorporate it ultimately results in a stronger and uglier bound - see Appendix \ref{Appendix:more_concentration}}:
 \begin{lemma}[Hoeffding's Lemma]\label{Hoeffdings_lemma_lemma}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero, then for $D=b-a$ and any $s>0$:
 $$\E[\exp(sX)] \le \exp\left(\frac{1}{8}s^2D^2 \right)$$
 \end{lemma}
 
-It is also worth noting that this lemma is actually unnecessary, and failing to incorporate it ultimately results in a stronger and uglier bound - see Appendix \ref{Appendix:more_concentration}:
+
+While Hoeffding's inequality provides an alternative concentration inequality to Chebyshev's inequality, and does not require known variances, it fails to incorporate any variance information at all.
+Recent examples of alternative Chernoff bounds which include variance information but do not depend on known variances are sometimes called \textit{empirical Bernstein bounds} (EBB).
+These are concentration inequalities describing the likely difference of a sample mean from the population mean in terms of the \textit{sample} variance.
+Some of the first EBBs given in literature are:
+
+\begin{theorem}[\cite{Maurer50empiricalbernstein}]\label{MandPsEBB}
+Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with $D=b-a$.  Then for $x_1,x_2,\dots,x_n$ independent samples of $X$ the mean $\hat{\mu}=\frac{1}{n}\sum_{i=1}^nx_i$ and sample variance $\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(x_i-\hat{\mu})^2 $ are probability bounded by $t$ for any $t>0$:
+\begin{equation}\label{maurersbound} 
+    \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(2/t)}{n}}+\frac{7D\log(2/t)}{3(n-1)}\right)\le t
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[\cite{10.1007/978-3-540-75225-7_15}]\label{AudibertsEBB}
+In exactly the same context as in Theorem \ref{MandPsEBB}
+\begin{equation}
+    \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(3/t)}{2n}} + \frac{3D\log(3/t)}{2n}\right) \le t.
+    \end{equation}
+\end{theorem}
+
+These inequalities depart from Hoeffding's inequality in that they rely on variance information, but unlike Chebyshev's inequality do not assume knowledge of the variance itself, but only its estimator (the sample variance $\hat{\sigma}^2$) and can give tighter probability bounds particular when the variance of the data is small.
+Unfortunately these concentration inequalities cannot be directly used to minimise the error in the stratified sampling population estimate, as the population estimate does not itself have a sample variance, but in \ref{section:unionising_ebbs} we develop a process which these EBBs can be used for stratified sampling. 
+
+
+
+
+
+
+
+
+
 
 \subsection{Other general probability lemmas}
 
@@ -233,4 +263,22 @@ By expanding $\hat{\sigma}^2$ into parts:\\
 \end{proof}
 
 %And we will eventually use this result to create bounds for the sample variance from bounds on the sample squares about the mean and the mean squared.
+
+
+\subsubsection{A further note on sampling with or without replacement}
+
+The derivation of various concentration inequalities inequalities also assume that the values that the samples take are probabilistically independently from each other. 
+This most naturally corresponds to the schema of sampling \textit{with} replacement, rather than sampling \textit{without} replacement.
+However it is sufficient to note that all Chernoff probability bounds that assume independence of the samples are also suitable to the case of sampling without replacement
+This is due to a result shown by \cite{hoeffding1}:
+
+\begin{lemma}[Hoeffding's reduction]\label{hoeffdings_reduction}
+let $X=(x_1,\dots,x_n)$ be a finite population of $n$ real points, let $X_1,\dots,X_n$ denote random samples without replacement from $X$ and $Y_1,\dots,Y_n$ denote random samples with replacement from $X$. 
+If $f:\mathbb{R}\rightarrow\mathbb{R}$ is continuous and convex, then:
+$$\textstyle \E\left[f\left(\sum_{i=1}^nX_i\right)\right]\le\E\left[f\left(\sum_{i=1}^nY_i\right)\right] $$
+\end{lemma}
+
+Using the continuous and convex function $f(x)=\exp(sx)$ it can be seen via the construction of Chernoff bounds (Theorem \ref{chernoff1}) that this result implies that all Chernoff bounds developed for sampling with replacement also hold for sampling without replacement.
+
+
 
