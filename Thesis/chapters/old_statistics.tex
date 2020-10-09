@@ -1,19 +1,71 @@
-\section{Stratified sampling by unstratified probability bounds}\label{section:old_statistics}
+\section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
+
+Inequalities such as EBBs cannot be directly minimised in quite the same way as Chebyschev's inequality in the context of stratified sampling, since the population mean itself does not have a sample variance, but only that the samples of each of the strata have means and sample variances.
+Thus an EBB can bound a stratum mean by the respective stratum variance, but an EBB cannot bind the aggregated mean estimate of all the stata.
+
+In this section, we show that EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
+The combined probability bound will depends on the sample variances of the strata, and hence sampling to minimise them allows for us to conduct variance sensitive stratified sampling in a single stage, rather than in two (as is nessisary in Neyman sampling).
+
+Additionally in this Section we develop a novel EBB derived from numerical computations, which we then later compare against other EBBs in the context of stratified sampling in section \ref{section:statistics_results}.
+
+
+\subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
+
+To create a bound for the error of a stratified mean estimator from EBBs it is nessisary to use probability unions to bind them together.
+the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} give deriations on the error, and the absolute error, of the stratified mean estimator.
+
+\begin{theorem}\label{triangle_theorem1}
+If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
+If the error in the sample mean of a stratum is bounded by an Empirical Bernstein Bound:
+$\quad \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t $\\
+Then the error in our stratified estimation is probability bounded:
+$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/m)\right)\le t $$
+\end{theorem}
+\begin{proof}
+We begin by considering that the stratified mean estimate is given by:
+$$ \hat{\mu} = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} \hat{\mu}_i ~~~~~~~\text{and thus:}~~~~~~~ \hat{\mu}-\mu = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} (\hat{\mu}_i-\mu_i)$$
+Thence because we can scale (by positive factor) the inside of the EBB inequality (for any $j\in\{1,\dots, m\}$):
+\begin{equation}\label{equation_partial_union1} \p\left(\frac{N_j}{\sum_kN_k}(\hat{\mu}_j-\mu_j) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\right) \le t \end{equation}
+adding identical terms to both sides of the inner inequality gives:
+\begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
+now since equation \ref{equation_partial_union1} also holds for any $l\in\{1,\dots, m\}$ other $j$ then:
+$$ \p\left(\frac{N_l}{\sum_kN_k}(\hat{\mu}_l-\mu_l) \ge \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t)\right) \le t $$
+hence by adding terms to both sides of the inner inequality:
+\begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
+Applying probability union (lemma \ref{prob_union}) to equations \ref{equation_partial_union2} and \ref{equation_partial_union3} gives:
+$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
+Repeating this process of taking equation \ref{equation_partial_union1} for a new index, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, ultimately gives:
+$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le mt $$
+And scaling $t$ gives result.
+\end{proof}
+
+The result of this proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata.
+It is possible to apply this theorem with a choice of EBB to create a bound for the stratified mean error, which can then be minimised by choosing appropriate sample numbers.
+If instead of the error, we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then by a similar procedure (utilising the triangle inequality)\footnote{inspired by \cite{2013arXiv1306.4265M}} we can derive a similar probability bound.
+
+\begin{theorem}\label{triangle_theorem2}
+In the same context of the statement of theorem \ref{triangle_theorem1} the absolute error of the stratified estimation is probability bounded:
+$$ \p\left(|\hat{\mu}-\mu| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/2m)\right)\le t $$
+\end{theorem}
+\begin{proof}
+If $ \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t$ then
+$ \p(|\hat{\mu}_i-\mu_i| \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le 2t$.\\
+Then by repeated application of probability unions (similar to that process used in the proof of theorem \ref{triangle_theorem1}) we get:
+\begin{equation}\label{partial_equation_part11} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k} |\hat{\mu}_i-\mu_i| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t) \right) \le 2mt \end{equation}
+Now, via the triangle inequality:
+$$\hat{\mu}-\mu = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} (\hat{\mu}_i-\mu_i) ~~~~~~~~~~\text{implies}~~~~~~~~~~ |\hat{\mu}-\mu| \le \sum_{i=1}^m\frac{N_i}{\sum_kN_k} |\hat{\mu}_i-\mu_i| $$
+then $ \p(|\hat{\mu}-\mu| > \sum_{i=1}^m\frac{N_i}{\sum_kN_k}|\hat{\mu}_i-\mu_i|) \le 0 $ and by probability union with \eqref{partial_equation_part11}:
+$$ \p\left(|\hat{\mu}-\mu| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le 2mt $$
+And the result follows by scaling $t$.
+\end{proof}
+
+These two theorems make clear that sampling to minimise either the error or the absolute error, essentially amounts to minimising the same target.
 
 
 
 
-In this section we show how deriving (and subsequently minimising) inequalities such as these will allows for us to conduct stratified sampling in a single stage, rather than in two (as is nessisary in Neyman sampling).
 
 
-But regardless of whether sampling is done with or without replacement, in the context of stratified sampling, inequalities such as EBBs cannot be directly minimised in quite the same way as Chebyschev's inequality can since the population mean itself does not have a sample variance, but only that the samples of the strata have means and sample variances.
-
-
-
-
-However in this section, it is by these bounds that we can bind together EBB's of our choice to create a bound for the error of the stratified estimate - which we can then sample to minimise.
-
-In this Section we develop a novel EBB derived from numerical computations, and compare it as a stratified sample mechanism against stratified sampling done with Maurer and Pontil's EBB and Audibert et.al's EBB, and also Neyman sampling in Chapter \ref{section:statistics_results}.
 
 %We will also consider various EBBs in the context of Upper Confidence Bound (UCB) method of bandit algorithm in subsection \ref{}.
 
@@ -368,64 +420,17 @@ The process of creating the expression involved plotting the numerical data, and
 
 
 
-\subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
 
-To create a bound for the error of our stratified mean estimator from EBBs we need to use probability unions to bind them together:
+\subsection{discussion}
 
-\begin{theorem}\label{triangle_theorem1}
-If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
-If the error in the sample mean of a stratum is bounded by an Empirical Bernstein Bound:
-$\quad \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t $\\
-Then the error in our stratified estimation is probability bounded:
-$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/m)\right)\le t $$
-\end{theorem}
-\begin{proof}
-We begin by considering that the stratified mean estimate is given by:
-$$ \hat{\mu} = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} \hat{\mu}_i ~~~~~~~\text{and thus:}~~~~~~~ \hat{\mu}-\mu = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} (\hat{\mu}_i-\mu_i)$$
-Thence because we can scale (by positive factor) the inside of the EBB inequality (for any $j\in\{1,\dots, m\}$):
-\begin{equation}\label{equation_partial_union1} \p\left(\frac{N_j}{\sum_kN_k}(\hat{\mu}_j-\mu_j) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\right) \le t \end{equation}
-adding identical terms to both sides of the inner inequality gives:
-\begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
-now since equation \ref{equation_partial_union1} also holds for any $l\in\{1,\dots, m\}$ other $j$ then:
-$$ \p\left(\frac{N_l}{\sum_kN_k}(\hat{\mu}_l-\mu_l) \ge \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t)\right) \le t $$
-hence by adding terms to both sides of the inner inequality:
-\begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
-Applying probability union (lemma \ref{prob_union}) to equations \ref{equation_partial_union2} and \ref{equation_partial_union3} gives:
-$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
-Repeating this process of taking equation \ref{equation_partial_union1} for a new index, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, ultimately gives:
-$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le mt $$
-And scaling $t$ gives result.
-\end{proof}
-
-The result of this proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata - which is exactly what we are looking for.
-We can apply this theorem with our choice of EBB to create a bound for the stratified mean error, which we can then seek to minimise.
-
-What is worth noting is that this process of binding EBBs together by a series of probability unions is expected to result in a rather weak bound, as probability unions are not very strong.
-And that this weakness is expected to increase with larger numbers of strata (ie. larger $m$) as there are more probability unions needed to bind it together.
-
-If we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then we can conduct a similar procedure, and utilize the triangle inequality - as done by \cite{2013arXiv1306.4265M}.
-
-\begin{theorem}\label{triangle_theorem2}
-In exactly the same context as theorem \ref{triangle_theorem1}, that:
-$$ \p\left(|\hat{\mu}-\mu| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/2m)\right)\le t $$
-\end{theorem}
-\begin{proof}
-If $ \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t$ then
-$ \p(|\hat{\mu}_i-\mu_i| \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le 2t$.\\
-Then by repeated application of probability unions (similar to that process used in the proof of theorem \ref{triangle_theorem1}) we get:
-\begin{equation}\label{partial_equation_part11} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k} |\hat{\mu}_i-\mu_i| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t) \right) \le 2mt \end{equation}
-Now, via the triangle inequality:
-$$\hat{\mu}-\mu = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} (\hat{\mu}_i-\mu_i) ~~~~~~~~~~\text{implies}~~~~~~~~~~ |\hat{\mu}-\mu| \le \sum_{i=1}^m\frac{N_i}{\sum_kN_k} |\hat{\mu}_i-\mu_i| $$
-then $ \p(|\hat{\mu}-\mu| > \sum_{i=1}^m\frac{N_i}{\sum_kN_k}|\hat{\mu}_i-\mu_i|) \le 0 $ and by probability union with \eqref{partial_equation_part11}:
-$$ \p\left(|\hat{\mu}-\mu| \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le 2mt $$
-And the result follows by scaling $t$.
-\end{proof}
-
-We give this second theorem in addition to the first make clear, that sampling to minimise either the error, or the absolute error essentially amounts to minimising the same target in this context.
-And also to illustrate exactly how weak probability unions are.
-
-The triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} we are effectively developing a bound assuming all the errors of the estimates of the strata are additive - which is positively the worst case.
+What is worth noting is that this process of binding EBBs together by probability unions is expected to result in a rather weak bound and that this weakness is expected to increase with larger numbers of strata (ie. larger $m$) as there are more probability unions needed to bind it together.
+The triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} we are effectively developing a bound assuming all the errors of the estimates of the strata are additive - which is the worst case.
 Whereas we know that (or can possibly assume) that the errors in the strata estimates are actually independent of each other, and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
-Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following Section \ref{section:SEBB}.
+Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following section \ref{section:SEBB} of this chapter.
+
+
+
+
+
 
 
