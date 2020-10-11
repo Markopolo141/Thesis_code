@@ -10,8 +10,9 @@ These two new sampling methodologies are then tested for their performance in th
 The structure of this Chapter is as follows:
 \begin{enumerate}
 \item	In the first section \ref{sec:sampling_background}, we give a review of relevent background information and techniques, particularly addressing the recent innovation of Empirical Bernstein Bounds (EBBs).
-\item	In the second section \ref{section:old_statistics}, of this chapter we show how EBBs can be bound together to create concentration inequalities appropriate for Stratified Sampling, and we develop a stronger EBB for this purpose.
-\item	In the third section \ref{section:SEBB}, we develop a second concentration inequality, which is a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
+\item	In the second section \ref{section:old_statistics}, of this chapter we show how EBBs can be bound together to create concentration inequalities appropriate for Stratified Sampling.
+\item	In the third section \ref{section:new_EBB} of this chapter we derive a unique and stronger EBB, for the purposes of evaluation in the context of stratified sampling.
+\item	In the fourth section \ref{section:SEBB}, we develop a second concentration inequality, which is a multi-part derivation of a complicated concentration inequality specifically tailored for the purposes of stratified sampling.
 \item	And finally in the forth section \ref{section:statistics_results}, we show how these concentration inequalities can be used to define new sampling methodologies and give their performance results in the context of synthetic data sets, and in the application of approximating the Shapley Value.
 \end{enumerate}
 
@@ -235,7 +236,10 @@ $$\textstyle \E\left[f\left(\sum_{i=1}^nX_i\right)\right]\le\E\left[f\left(\sum_
 
 Using the continuous and convex function $f(x)=\exp(sx)$ it can be seen via the construction of Chernoff bounds (Theorem \ref{chernoff1}) that this result implies that all Chernoff bounds developed for sampling with replacement also hold for sampling without replacement.
 
-In section \ref{} we specifically give a tightening result specific to sampling without replacement, but it is sufficient to note that all bounds developed here for sampling with replacement are suitable for sampling without replacement by this Lemma.
+Concentration inequalities that specifically describe sampling without replacement can give additional tightening over those that assume sampling with replacement. This refinement was first demonstrated in \cite{serfling1974} with a martingale argument.
+More recently, this result was improved with a reverse martingale argument and used to extend M\&P's EBB to the case of sampling without replacement \cite{bardenet2015}.
+
+These techniques are extended in section \ref{sec:without_replacement} we specifically give a tightening result specific to sampling without replacement, but it is sufficient to note that all bounds developed here for sampling with replacement are suitable for sampling without replacement by this Lemma.
 
 
 \subsection{Other general probability lemmas}

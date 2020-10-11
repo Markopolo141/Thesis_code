@@ -95,6 +95,82 @@ A discussion of all of the results is considered in the next section.
 \section{Discussion}
 \label{sec:discussion}
 
+\subsection{part1}
+
+%Unfortunately we don't know $a$ and $b$ but know that the data is bounded within a width of $D=b-a$.
+%Thus we subsequently take the worst case $a,b$ consistent with a given $D$ and also $\sigma^2\le-ab$ and by this process create a bound:
+
+
+%\begin{theorem}[Sample Variance Bound]\label{variance22}
+%For a random variable that is bounded $a\le X\le b$ with variance $\sigma^2$, then for $w>0$, the sample variance $\hat{\sigma}^2$ of $n$ samples is probability bounded by:
+
+%\begin{equation}\label{eq_no9}
+%\p(\sigma^2 - \hat{\sigma}^2 > w) \le \max_{b\in[D/2,{D}/{2}+\sqrt{{D^2}/{4}-\sigma^2}]}\min_{\phi\in[0,1]}
+%\begin{Bmatrix}
+%	H_1^n\left(\frac{\sigma^2}{b^2},\frac{\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b}\right)\\
+%	+H_1^n\left(\frac{\sigma^2}{(b-D)^2},\frac{-\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b-D}\right)\\
+%	+H_2^n\left(\frac{\sigma^2}{\max(b,D-b)^2},\frac{(1-\phi)(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}{\max(b,D-b)^2}\right)
+%\end{Bmatrix}\end{equation}
+%\end{theorem}
+
+%The computational maximisation with respect to $b$ can also be done via parameter sweep.
+%Though this parameter sweep on $b$ may not necessarily respect analytical accuracy (since it is a maximisation, not a minimisation), we convert to this form only for the purposes of broad comparison with other bounds on the variance.
+
+%It is good to stop here to compare against other probability bounds for the error of the sample variance.
+%Particularly the bound on the variance developed by using Entropy method (as found in \cite{MR2245497} and used in \cite{Maurer50empiricalbernstein})
+
+%\begin{equation}\label{eq:fe} 
+%\p(\sigma^2 - \hat{\sigma}^2>w) \le \exp\left(\frac{-(n-1)w^2}{2\sigma^2D^2}\right) 
+%\end{equation}
+
+%And it is also possible to create a bound for the variance using the Efron-Stein method (\cite{efron1981}) with Chebyshev's inequality (for derivation see Appendix \ref{appendix:efron_chebyshev}), as:
+
+%\begin{equation}\label{eq:efron_stein_eq}\p\left(\sigma^2-\hat{\sigma}^2\ge k\right)\le\frac{5-n}{n(n-1)}\sigma^2 + \frac{D^4}{16nk^2}\end{equation}
+
+%And the strength of these bounds for the variance against our bound can be graphically compared as per Figure \ref{fig:variance_graph1}.
+%From this graph we see that our bound performs better at creating lighter tail bounds for the sample variance estimator but that different methods work better-or-worse in different regions - as divergent methods produce differing results.\footnote{We do however note that the graph our our variance bound on this figure was produced after taking the worst case $a,b$ consistent with a $D=1$, and the manner in which we use it subsequently avoids this deterioration, until a later stage.}
+
+%\input{figs/variance_graph.tex}
+
+
+
+
+By being able to numerically evaluate our EBB, we were able to compare the strength of our results against existing concentration bounds, particularly our EBB is compared to Maurer and Pontil's EBB and, Bennett's inequality with perfect variance information.
+
+We compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB, 
+given by:
+\begin{equation}\label{maurersbound} \p\left(\mu-\hat{\mu}>\sqrt{\frac{2\hat{\sigma}^2\log(2/y)}{n}}+\frac{7D\log(2/y)}{3(n-1)}\right)<y. \end{equation}
+We felt that it would be fair to compare our EBB to Maurer and Pontil's EBB if they had applied Popoviciu's inequality as a domain restriction and carried it through their derivation, as we did to our own EBB. 
+Specifically, this is the domain where:
+\[ \frac{1}{2}>\frac{\sqrt{\hat{\sigma}^2}}{D}+\sqrt{\frac{2\log(2/y)}{n-1}} \]
+We plotted the improvement our EBB offers in this domain, as shown in Figure \ref{biggraph3}. 
+In this plot, a probability 0.5 bound is shown to shrink by approximately one third.
+But that generally, we observed that our refinement of Maurer and Pontil's EBB was expectedly uniformly tighter across a large range of values.
+
+
+\input{figs/ebb_strength.tex}
+
+
+Secondly, a comparison is made of the further improvement in confidence over our EBB that might be achieved with perfect information about the variance; specifically that, Bennett's inequality is used assuming $\hat{\sigma}^2=\sigma^2$. 
+This improvement is plotted in Figure \ref{biggraph4}, which shows that when the variance is small, uncertainty about the variance is the most detrimental to an EBB, such as ours.
+However, in general, going from our EBB to perfect variance information shrinks the bounds by about another third.
+
+In this way (although the results are loose) we can witness that our EBB provides approximately a half-way mark from existing state-of-the-art EBBs to an impossible ideal of having perfect variance information.
+
+The purpose of developing a novel EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value).
+The performance of this new EBB offers (against others) in the context of choosing samples for stratified Stratified Sampling is considered in Section \ref{section:statistics_results}.
+
+
+
+
+
+
+
+\subsection{part2}
+
+
+
+
 In this section we give considerations to the numerical results of this chapter.
 In general, from the results across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that most of the techniques performed well and similar to Neyman sampling, and that our sampling technique, SEBM (or SEBM-W) and SECM performed competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}) despite not having access to knowledge of strata variances.
 It is also observed that Neyman sampling was ultimately the most accurate, for reasons that were hinted in section \ref{sec:neyman_sampling}.

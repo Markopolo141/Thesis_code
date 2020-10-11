@@ -1,13 +1,11 @@
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
-Inequalities such as EBBs cannot be directly minimised in quite the same way as Chebyschev's inequality in the context of stratified sampling, since the population mean itself does not have a sample variance, but only that the samples of each of the strata have means and sample variances.
-Thus an EBB can bound a stratum mean by the respective stratum variance, but an EBB cannot bind the aggregated mean estimate of all the stata.
-
-In this section, we show that EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
-The combined probability bound will depends on the sample variances of the strata, and hence sampling to minimise them allows for us to conduct variance sensitive stratified sampling in a single stage, rather than in two (as is nessisary in Neyman sampling).
-
-Additionally in this Section we develop a novel EBB derived from numerical computations, which we then later compare against other EBBs in the context of stratified sampling in section \ref{section:statistics_results}.
-
+The minimisation of inequalities such as EBBs cannot be directly be used as a method of choosing samples in stratified sampling.
+Since the aggregated population mean estimate does not itself have a sample variance, but only that the strata have means and sample variances.
+An EBB can be a bound for the mean of a stratum, but an EBB cannot bind the aggregated mean estimate of all the strata.
+However in this section, we show that EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
+The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
+Hence these new sampling methodologies will be variance sensitive and also possible in a single step, rather than two steps - as is necessary in Neyman sampling.
 
 \subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
 
@@ -60,48 +58,35 @@ And the result follows by scaling $t$.
 \end{proof}
 
 These two theorems make clear that sampling to minimise either the error or the absolute error, essentially amounts to minimising the same target.
+These theorems can be utilised with a choice of EBB, and the results of the performance of these in the context of stratified sampling are shown in section \ref{section:statistics_results}.
+In the next section we derive and numerically generate a stronger EBB for application in the context of these theorems for stratified sampling.
 
 
 
+\section{The derivation of a stronger EBB}\label{section:new_EBB}\label{derivation}
 
+There are various EBBs which place variance-sensitive bounds on the mean, and it remains an outstanding task is to see how much these EBBs can be sharpened; we take inspiration from the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
+However, due to its analytic intractability, we complete the derivation by discussing how to numerically determine the bound.
 
-
-
-%We will also consider various EBBs in the context of Upper Confidence Bound (UCB) method of bandit algorithm in subsection \ref{}.
-
-\subsection{Challenge: To derive a stronger EBB}
-
-EBBs have been used as a method of generating confidence bounds for the mean, and an outstanding task is to see how much these techniques can be sharpened.
-Given this challenge, we take inspiration and extend the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
-Specifically, we use two Chernoff bounds, for the sample mean and the mean of sample squares, which are fused using a probability union (Theorem \ref{prob_union}) and variance decomposition (Theorem \ref{variance1}),
-to create a novel probability bound for the sample variance, which is then used to derive our novel EBB.
-
-
-
-%Our EBB tightens existing bounds by incorporating a combination of bounds on the variation of the sample variance.
-%However, due to its analytic intractability, we complete the derivation by discussing how to numerically implement the bound.
 %The evaluations in section \ref{} show that our EBB significantly tightens existing bounds. 
 %Specifically, our EBB can shrink the best existing EBBs by about a third. This represents half of the distance between the best existing EBBs and an unattainable Bernstein bound constructed with perfect variance information.
-%Moreover, we demonstrate the use of our novel EBB in an \textit{upper-confidence bound} (UCB) multi-armed bandit (MAB) algorithm in section \ref{}.  
-%Results from a set of MABs show that using our bound in a UCB algorithm outperforms existing approaches, by producing comparable or lower expected regret than employing other existing bounds, including state-of-the-art EBBs.
+
+In this section, we derive two Chernoff bounds, for the sample mean and the mean of sample squares, (Theorem~\ref{sample_squares} and Lemma~\ref{variance2}, respectively). 
+These are fused using a probability union (Theorem \ref{prob_union}) and variance decomposition (Theorem \ref{variance1}) to derive a bound for the sample variance. This bound is then used to derive our new EBB, as presented in Theorem~\ref{ebb1}.
+
+Within this section there are multiple parts:
+\begin{enumerate}
+\item	subsection \ref{subsection:bennetts_inequality} presents and provides a derivation of Bennett's inequality
+\item	subsection \ref{subsection:sample_squares_bound} presents and derives a Chernoff bound on the error of the sample squares
+\item	subsection \ref{subsection:sample_variance_bound} shows how these two can be used to create a bound on the sample variance
+\item	subsection \ref{subsection:general_ebb_creation} shows how a bound on the sample variance and a bound on the mean can be used to derive an EBB
+\item	subsection \ref{numerical-implementation} we give details on the numerical determination of a new EBB using all appropriate elements, and present a numerically fitted symbolic envelope over the numerical determinations. 
+\end{enumerate}
 
 
+\subsection{A presentation of Bennett's inequality}\label{subsection:bennetts_inequality}
 
-% In addition, concentration inequalities that describe sampling without replacement can give additional tightening over those that assume sampling with replacement. This refinement was first demonstrated in \cite{serfling1974} with a martingale argument.
-% More recently, this result was improved with a reverse martingale argument and used to extend M\&P's EBB to the case of sampling without replacement \cite{bardenet2015}.
-% Furthermore, if small sample sizes are assumed, then it may be possible to derive perfectly tight %ideal 
-% concentration inequalities in some circumstances, and there do exist some computational methods to derive these perfect bounds more generally \cite{OUQ1,doi:10.1137/13094712X}.
-% However, in this paper we focus on refining bounds in the case of sampling with replacement in the context of large numbers of samples.
-
-
-\subsubsection{Derivation and numerical implementation}
-\label{derivation}
-In this section, we derive two Chernoff bounds, 
-for the sample mean and the mean of sample squares, (Theorem~\ref{sample_squares} and Lemma~\ref{variance2}, respectively). 
-These are fused using a probability union and variance decomposition, defined above, to derive a bound for the sample variance. 
-This bound is then used to derive our new EBB, as presented in Theorem~\ref{ebb1}.
-
-Our first probability bound is a Chernoff bound on the sample mean called \textit{Bennett's inequality}. 
+Our first part of the derivation of our new EBB is a Chernoff bound on the sample mean called \textit{Bennett's inequality}. 
 This bound is not new and was derived by \cite{hoeffding1} and \cite{10.2307/2282438} and has subsequently been a subject of discussion and many further developments; it is known to be quite strong \cite{Bentkus08boundsfor,Pinelis2014,zbMATH00812598}; 
 We state the theorem \ref{hoeffdings1} whose proof involves the use of an intermediate theorem \ref{thm:parabola}.
 
@@ -155,13 +140,21 @@ $$z\alpha+\gamma = (((z+fb-b)(f-b-1)-b)e^f+(f^2+z)e^b)(b-f)^{-2}$$
 Minimizing with respect to $f$ occurs at $f=\frac{-z}{b}$ and gives the result.
 \end{proof}
 
-The reason for the separation of Bennet's inequality into two parts is that we will reuse the Lemma to derive a weaker but more mathematically manipulatable inequality later (as Lemma \ref{expectation1}).
-In our statement of Bennet's inequality the assumption that the mean is zero can be used without a loss of generality, in exactly the same way as we did with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper}).
-And so, Bennett's inequality gives us a probability bound for the difference of the sample mean from the true mean, given the variance - in a similar way as does Chebyshev's inequality.
-The fundamental difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a line over the exponential function.
 
-As already stated, the variance is often unknown in practice, but can only be estimated via the sample variance statistic. And so we sought to derive a bound for the error between the sample variance and the variance. To do this we derived a concentration inequality for the sample squares to use in conjunction with the variance decomposition Lemma \ref{variance1}.
-We derived the following concentration inequality (which we note, appears to be novel):
+\input{figs/parabola_illustrations.tex}
+
+The derivation of Bennet's inequality is separated into two parts as the above Lemma \ref{thm:parabola} will also be reused to derive a weaker but more mathematically manipulatable inequality later (as Lemma \ref{expectation1}).
+
+The essential difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a line over the exponential function.
+And this second order parabolic term makes Bennett's inequality sensitive to the variance of the distribution whereas Hoeffding's inequality is not.
+Bennett's inequality provides a probability bound for the difference of the sample mean from the true mean given the variance, however the true variance is not often known in practice.
+
+
+\subsection{A Chernoff bound on the sample squares}\label{subsection:sample_squares_bound}
+
+As already stated, the variance is often unknown in practice, but can only be estimated via the sample variance statistic.
+In order to derive a bound for the error between the sample variance and the variance we derived a concentration inequality for the sample squares to use in conjunction with the variance decomposition Lemma \ref{variance1}.
+The following concentration inequality was derived (which we note, appears to be novel):
 
 \begin{lemma}[Sample square bound]\label{sample_squares}
 Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$, if $d=\max(b,-a)$ then for $y>0$, the mean of sample squares $\hat{\sigma}_0^2=\frac{1}{n}\sum_ix_i^2$ is probability bounded:
@@ -187,17 +180,15 @@ Substituting $t$ for $y-\sigma^2$ and minimizing with $q$ completes the proof, m
 $$ q = \frac{1}{d^2}\log\left(\frac{\sigma^2(-\sigma^2 + d^2 + y)}{(\sigma^2-d^2)(y-\sigma^2)}\right) $$
 \end{proof}
 
-
-It is worth noting that we choose to restrict the application of this inequality (and thence the domain of function $H_2^n$) to cases which are sensible for it to be applied:
-(i) it is defined for $a<0<b$ (because otherwise the mean could not be zero), and (ii) $\sigma^2\le-ab\le (b-a)^2/4$ by Popoviciu's inequality (see \cite{zbMATH05780164}) as it is not possible for the variance to be larger given the width of the data bounds. It is important that we carried these domain restrictions with the analysis.
-
+Note that the application of this inequality (and thence the domain of function $H_2^n$) are only sensibly considered in certain settings, such as when:
+(i) it is defined for $a<0<b$ (because otherwise the mean could not be zero), and (ii) $\sigma^2\le-ab\le (b-a)^2/4$ by Popoviciu's inequality\footnote{see \cite{zbMATH05780164}} (as it is not possible for the variance to be larger given the width of the data bounds).
 Since the Theorem \ref{sample_squares} is derived from a fundamentally similar process to Bennet's inequality we expect it to have similarly strong properties.
 
-\input{figs/parabola_illustrations.tex}
 
 
-At this point, we have a probability bound on the mean squared (Theorem \ref{hoeffdings1}) 
-and a probability bound on the sample squares (Lemma \ref{sample_squares}). With these in hand, we use lemma \ref{variance1} to create a bound on the sample variance, as follows.
+\subsection{A new bound on the sample variance}\label{subsection:sample_variance_bound}
+
+By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares. it is possible to create a bound on the sample variance useing lemma \ref{variance1}, as follows.
 
 
 \begin{theorem}[Sample Variance Bound]\label{variance2}
@@ -231,58 +222,15 @@ $$\p\left(\sigma^2 - \hat{\sigma}^2 > w\right)
 The result of this proof follows by taking the minimum over $\phi$.
 \end{proof}
 
-The use of this Theorem \ref{variance2} (and thus implicitly the domain of function $H_3^n$) is subject to the same restrictions as Lemma \ref{sample_squares} (and its domain as $H_2^n$); specifically that it is defined for $a<0$ and $b>0$ and for $\sigma^2\le-ab$; as otherwise the configuration is senseless.
-
-The development of this theorem for the bound of the error of the sample mean is derived from two strong concentration inequalities and a single probability union. The question then is how much that probability union manages to weaken the result.
-
-Although the minimisation with $\phi$ is not very tractable, it can be conducted quickly for any situation on a computer via a parameter sweep.
-Any lack of resolution on this sweep would not hamper the analytical accuracy of it as a bound - as an improper sweep could only be larger then what is possible.
-
-To compare this bound against others, we cannot compare as-is, because we don't know $a$ and $b$ quite so much as we know that the data is bounded within a width of $D=b-a$.
-To directly compare this bound against others we subsequently take the worst case $a,b$ consistent with a given $D$ and also $\sigma^2\le-ab$. And this process creates a bound which is directly comparable to other bounds such as Hoeffding's inequality among others.
-
-From this action the resulting form of the bound is as follows:
-
-\begin{theorem}[Sample Variance Bound]\label{variance22}
-For a random variable that is bounded $a\le X\le b$ with variance $\sigma^2$, then for $w>0$, the sample variance $\hat{\sigma}^2$ of $n$ samples is probability bounded by:
-
-\begin{equation}\label{eq_no9}
-\p(\sigma^2 - \hat{\sigma}^2 > w) \le \max_{b\in[D/2,{D}/{2}+\sqrt{{D^2}/{4}-\sigma^2}]}\min_{\phi\in[0,1]}
-\begin{Bmatrix}
-	H_1^n\left(\frac{\sigma^2}{b^2},\frac{\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b}\right)\\
-	+H_1^n\left(\frac{\sigma^2}{(b-D)^2},\frac{-\sqrt{\phi(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}}{b-D}\right)\\
-	+H_2^n\left(\frac{\sigma^2}{\max(b,D-b)^2},\frac{(1-\phi)(\frac{n-1}{n}w+\frac{1}{n}\sigma^2)}{\max(b,D-b)^2}\right)
-\end{Bmatrix}\end{equation}
-\end{theorem}
-
-The computational maximisation with respect to $b$ can also be done via parameter sweep.
-Though this parameter sweep on $b$ may not necessarily respect analytical accuracy (since it is a maximisation, not a minimisation), we convert to this form only for the purposes of broad comparison with other bounds on the variance.
-
-It is good to stop here to compare against other probability bounds for the error of the sample variance.
-Particularly the bound on the variance developed by using Entropy method (as found in \cite{MR2245497} and used in \cite{Maurer50empiricalbernstein})
-
-\begin{equation}\label{eq:fe} 
-\p(\sigma^2 - \hat{\sigma}^2>w) \le \exp\left(\frac{-(n-1)w^2}{2\sigma^2D^2}\right) 
-\end{equation}
-
-And it is also possible to create a bound for the variance using the Efron-Stein method (\cite{efron1981}) with Chebyshev's inequality (for derivation see Appendix \ref{appendix:efron_chebyshev}), as:
-
-\begin{equation}\label{eq:efron_stein_eq}\p\left(\sigma^2-\hat{\sigma}^2\ge k\right)\le\frac{5-n}{n(n-1)}\sigma^2 + \frac{D^4}{16nk^2}\end{equation}
-
-And the strength of these bounds for the variance against our bound can be graphically compared as per Figure \ref{fig:variance_graph1}.
-From this graph we see that our bound performs better at creating lighter tail bounds for the sample variance estimator but that different methods work better-or-worse in different regions - as divergent methods produce differing results.\footnote{We do however note that the graph ouf our variance bound on this figure was produced after taking the worst case $a,b$ consistent with a $D=1$, and the manner in which we use it subsequently avoids this deterioration, until a later stage.}
-
-\input{figs/variance_graph.tex}
+The use of this Theorem \ref{variance2} (and thus implicitly the domain of function $H_3^n$) is subject to the same restrictions as Lemma \ref{sample_squares} (and its domain as $H_2^n$); specifically that it is defined for $a<0$ and $b>0$ and for $\sigma^2\le-ab$; as otherwise the configuration is senseless. 
 
 
-Because of this plurality, it is always possible to use the minima of several different variance bounds together, so in constructing our EBB, we took the minima of all three.
+\subsection{Generalised EBB creation process}\label{subsection:general_ebb_creation}
 
+Theorem \ref{hoeffdings1} presents a bound for the sample mean given the variance, and Theorem \ref{variance2} presents a probability bound for the error of the sample variance from the variance. The task remaining is to create a new Empirical Bernstein Bound by binding these two together.
+To combine these two theorems to create a bound for the sample mean given the sample variance (ie. a new EBB), we give a theorem that embodies a process slightly improved from that followed by \cite{Maurer50empiricalbernstein}.
 
-And so by Theorem \ref{hoeffdings1}, we have a bound for the sample mean given the variance, and in Theorem \ref{variance2} we have a probability bound for the error of the sample variance from the variance (in conjunction with the minima of the other two bounds on the variance). The task to create a new Empirical Bernstein Bound is bind these two together.
-
-We used a method of combining these two to create a bound for the sample mean given the sample variance, by a theorem that embodies a process slightly improved from that followed by \cite{Maurer50empiricalbernstein}. 
-
-Before beginning this theorem, we need to introduce some notation.
+Before beginning this theorem, we need to introduce some notation to ease presentation.
 For a function $f$ with ordered inputs, we denote the inverse of $f$ with respect to its $i${th} input (counting from one) as $f^{-(i)}$, assuming it exists.
 We summarily denote probability bounds on the differences of the sample mean from the mean, and the sample variance from the variance, by
 $\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\sigma^2,w)$, respectively.
@@ -335,22 +283,20 @@ In this process care was taken in applying this theorem that all the assumptions
 
 
 
-\subsubsection{Numerical implementation}
-\label{numerical-implementation}
-Analytically solving this our EBB was challenging, however it was possible to evaluate it to arbitrary accuracy using numerical techniques.
-This section provides a high-level description of a process that was used for calculating our EBB.
+\subsection{Numerical implementation}\label{numerical-implementation}
 
-This calculation was composed of three primary parts:
+The Empirical Bernstein Bound described in the previous subsection \ref{subsection:general_ebb_creation} consiting of the inversions and compositions of functions $H_1$ and $H_3$ from theorems \ref{hoeffdings1} and \ref{variance2} was identified as challenging analytically, however much possible numerically.
+And this process that was used for calculating this numerical EBB consisted of three primary parts:
 (i) the computation of function $f(\sigma^2,w)=H_3^n(a,b,y,\sigma^2)$;
 (ii) verifying that the assumptions of Theorem \ref{ebb1} hold for $h(\sigma^2,t)=H_1$ and $f(\sigma^2,w)=H_3$, and;
 (iii) calculating the subsequent result of Theorem \ref{ebb1}.
 
-First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) is the solution to an optimization problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
-Despite its complexity, a solution can be found quickly using a single variable parameter sweep.
+First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) was identified as the solution to an optimization problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
+Despite its complexity, solutions of this sort can be found quickly using a single variable parameter sweep.
 
 Second, it was necessary to verify the assumptions that $h^{-(2)}$, $f^{-(2)}$ and $z^{-(1)}$ exist and that $z^{-(1)}$ and $f^{-(2)}$ are monotonically increasing in their first argument.
 It was easy to note that $h(\sigma^2,t)=H_1^n\left(\sigma^2/b^2,t/b\right)$ is a closed-form function that is monotonically decreasing from $1$ to $0$ on the second argument, so $h^{-(2)}$ exists and is monotonically increasing in its first argument.  However the remaining of these assumptions are more difficult to verify.
-For any function, the values that the function takes can be plotted as an array of points and the values that the inverse of that function takes can be determined by conducting coordinate swaping on those points.
+For any function, the values that the function takes can be plotted as an array of points and the values that the inverse of that function takes can be determined by conducting coordinate swapping on those points.
 The values of $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ were computed and were seen to be monotonically decreasing in its second argument confirming that $f^{-(2)}$ exists.
 The function $z(\sigma^2,w)=\sigma^2-f^{-(2)}\left(\sigma^2,w\right)$ is then a manipulation on the coordinate swapped points of $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$.
 By coordinate swapping again, $z^{-(1)}$ was seen to be a regular function monotonically increasing on its first argument, hence satisfying assumptions.
@@ -359,52 +305,9 @@ By coordinate swapping again, $z^{-(1)}$ was seen to be a regular function monot
 Third, to numerically calculate the result of Theorem \ref{ebb1} the functions $h^{-(2)}$ and $z^{-(1)}$ were numerically evaluated by direct parameter searches and then composed as:
 $h^{-(2)}(z^{-(1)}(\hat{\sigma}^2,y-x),x)$ - which was the inner part of the expression of the new EBB parameterised by $x$ explicitly and also $a,b$ implicitly.
 %
-However we typically don't know the values of $a$ and $b$, but instead know the mean is somewhere within a finite interval of width $D=b-a$.
-So in a similar way as was handled by introduction of Theorem \ref{variance22}, we took the worst case values of $a$ and $b$ consistent with a given $D$, 
+However we typically don't know the values of $a$ and $b$, but instead know the mean is somewhere within a finite interval of width $D=b-a$, in this context was taken the worst case values of $a$ and $b$ consistent with a given $D$, 
 and then took the best $x\in[0,y]$ subject to all other bounds.
 In short, the numerical process involved a series of coordinate manipulations to conduct inversions and some mundane parameter searches.\footnote{sourcecode available at:\\\url{https://github.com/Markopolo141/Engineered-Empirical-Bernstein-Bound}}
-
-\subsection{Comparison to existing bounds}\label{evaluation}
-By being able to numerically evaluate our EBB, we were able to compare the strength of our results against existing concentration bounds, particularly our EBB is compared to Maurer and Pontil's EBB and, Bennett's inequality with perfect variance information.
-
-We compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB, 
-given by:
-\begin{equation}\label{maurersbound} \p\left(\mu-\hat{\mu}>\sqrt{\frac{2\hat{\sigma}^2\log(2/y)}{n}}+\frac{7D\log(2/y)}{3(n-1)}\right)<y. \end{equation}
-We felt that it would be fair to compare our EBB to Maurer and Pontil's EBB if they had applied Popoviciu's inequality as a domain restriction and carried it through their derivation, as we did to our own EBB. 
-Specifically, this is the domain where:
-\[ \frac{1}{2}>\frac{\sqrt{\hat{\sigma}^2}}{D}+\sqrt{\frac{2\log(2/y)}{n-1}} \]
-We plotted the improvement our EBB offers in this domain, as shown in Figure \ref{biggraph3}. 
-In this plot, a probability 0.5 bound is shown to shrink by approximately one third.
-But that generally, we observed that our refinement of Maurer and Pontil's EBB was expectedly uniformly tighter across a large range of values.
-
-
-\input{figs/ebb_strength.tex}
-
-
-Secondly, a comparison is made of the further improvement in confidence over our EBB that might be achieved with perfect information about the variance; specifically that, Bennett's inequality is used assuming $\hat{\sigma}^2=\sigma^2$. 
-This improvement is plotted in Figure \ref{biggraph4}, which shows that when the variance is small, uncertainty about the variance is the most detrimental to an EBB, such as ours.
-However, in general, going from our EBB to perfect variance information shrinks the bounds by about another third.
-
-In this way (although the results are loose) we can witness that our EBB provides approximately a half-way mark from existing state-of-the-art EBBs to an impossible ideal of having perfect variance information.
-
-The purpose of developing a novel EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value).
-The performance of this new EBB offers (against others) in the context of choosing samples for stratified Stratified Sampling is considered in Section \ref{section:statistics_results}.
-
-
-%Within this context, finite-sample \textit{concentration inequalities} are used to place bounds on 
-%the variation of sample statistics around their population values.
-%Such bounds are applied in a range of data science contexts for a variety of prediction, machine learning and hypothesis testing tasks, including:
-%change detection \cite{KiferShaiGehrke2004,8000571} 
-%and classification \cite{Zia-UrRehman2012} in data streams;
-%outlier analysis in large databases \cite{Aggarwal2015};
-%online optimisation \cite{FlaxmanKalaiMcMahan2005,AgarwalDekelXiao2010}; and, of most relevance to this paper, 
-%online prediction and learning problems \cite{Cesa-BianchiLugosi2006,%Maron1997,
-%Mnih:2008:EBS:1390156.1390241,DBLP:conf/aaai/ThomasTG15,Maurer50empiricalbernstein},
-%particularly in settings with \textit{bandit feedback} \cite{AuerCesa-BianchiEtal_SIAM2003,AudibertBubeck_COLT2009,Tran-ThanhChapmanRJ_AAAI2009}. 
-% Bandit feedback describes settings where a decision-maker wishes to learn about a system, and to do this, chooses samples from a set of actions and receives feedback regarding their chosen actions only, in the form of a realization of a random variable. 
-%Specifically, the decision-maker does not see how the system would have responded, if they had chosen a different action.
-%
-
 
 
 For the ease of this application of our EBB we hand-tuned a function approximating our EBB's numerical probability 0.5 bound,
@@ -417,20 +320,8 @@ The process of creating the expression involved plotting the numerical data, and
 \right)\right]\right) 
 \lessapprox 0.5 \end{equation}
 
-
-
-
-
-\subsection{discussion}
-
-What is worth noting is that this process of binding EBBs together by probability unions is expected to result in a rather weak bound and that this weakness is expected to increase with larger numbers of strata (ie. larger $m$) as there are more probability unions needed to bind it together.
-The triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} we are effectively developing a bound assuming all the errors of the estimates of the strata are additive - which is the worst case.
-Whereas we know that (or can possibly assume) that the errors in the strata estimates are actually independent of each other, and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
-Using this knowledge, stronger bounds are very possible - and we explore and develop this in the following section \ref{section:SEBB} of this chapter.
-
-
-
-
-
+The strength of this new EBB against existing EBBs, as well as the effectiveness of the variance bound which it is built on (per Theorem \ref{variance2}) against other variance bounds is discussed in section \ref{sec:discussion}.
+The performance of this new EBB in the context of stratified sampling is reported in section \ref{section:statistics_results}.
+We now turn away from the subject matter of the unionisation of EBBs for stratified sampling (in the previous section \ref{section:old_statistics}) and the creation of a new EBB for this purpose in this section, to the creation of a completely novel bound directly tailored for stratified sampling.
 
 
