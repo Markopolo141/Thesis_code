@@ -1,150 +1,18 @@
+
+
+
 \section{Results and evaluation of methods}\label{section:statistics_results}
 
-To evaluate the effectiveness of the process of sequentially minimising the probability bounds on the error of the sample estimated stratified mean, we need a little development of those algorithms before proceeding to give details on the process of testing them in the context of synthetic data.
 
-Particularly it is necessary to consider the way in which the concentration inequality of the previous section (Theorem \ref{thm:SEBM_bound}) should be iteratively minimised; and this process is expounded as Algorithm \ref{alg2}.
-Additionally it is necessary to give some explication to how the concentration inequalities derived from EBBs (per Theorem \ref{triangle_theorem2}) should be sequentially minimised; and this process is expounded as Algorithm \ref{alg3}. Both of these algorithms simply encode the process of iteratively choosing samples from strata to minimise the respective probability bounds.
-
-In this section, these different schemes of sampling in the context of Stratified sampling are compared primarily in the context of Beta-distributed data, and also in a more specific Bernoulli-uniform data set; all this comparison occurs in Section \ref{sec:application}.
-
-In the following section \ref{sec:shapley} we also consider the effectiveness of these different methods of sampling specifically to approximate the Shapley Value.
-
-\subsection{Sequential sampling using the Stratified Empirical Berstein Method} \label{sec:SEBMalgorithm}
-In the previous section \ref{section:SEBB}, we developed a concentration inequality to bound the error of the sampling mean estimate in stratified random sampling, called the SEBB - as per Theorem \ref{thm:SEBM_bound}.
-The process of selecting additional samples to minimise this probability bound on the error is introduced in this section. And we call it the \textit{stratified empirical Bernstein method} (SEBM).
-
-The fundamental principle of the SEBM, is that it is an online method of choosing additional samples, and to do this it scans through all the possible strata from which it can take an additional sample, and as it does so it calculates the possible reduction in the SEBB bound that would be achieved if an additional sample were taken from the respective strata.
-The strata which would result in the most reduction of the SEBB bound is then recommended for additional sampling.
-The pseudo-code for this process of sampling, is given as Algorithm \ref{alg2}.
-
-
-
-Specifically, Algorithm \ref{alg2} is a repetitive process involving a scan through the possible strata and then the selection of one stratum to sample from, to minimize the SEBB under mild assumptions.
-The process of scanning involves calculating the confidence bound width (SEBB) that would result if an additional sample were to be taken from that stratum without changing its sample variance (line numbers 5-17 in Algorithm~\ref{alg2}).
-The stratum that yields the smallest confidence bound width in the context of an additional sample is then selected (line 18-21) and sampled (line 24), the sample variance of that stratum is updated (line 26); 
-this process repeats until the maximum sample budget is reached (per the outer loop, line 1).
-In this way the process attempts to iteratively minimise the SEBB in expectation with each additional sample taken; and hence lead to potentially greater accuracy in stratified sampling as a result.
-
-The primary assumption that exists in this method's selection calculus is that it assumes that the sample variance of the strata would likely remain unchanged for the taking of the additional sample from any strata.
-While this technically isn't true, the unbiased sample variance is intuitively be expected to be almost as likely to increase as it is likely to decrease from the taking of an additional sample.
-Plus developing an even more complicated probability bound that explicitly takes account of the likely change in error of the stratified mean estimate due to the expected change in the sample variance is beyond the scope of our investigation.
-
-This SEBM method (Algorithm \ref{alg2}) requires the sample variances of all the strata to be calculated. And accordingly, Algorithm \ref{alg2} must be initialised with at least two samples from each stratum so that sample variance can be calculated for it to be able to function.
-And this is a standard requirement of the many reinforcement learning algorithms that use variance in their sampling policies.
-
-We also note that Algorithm \ref{alg2} describes a process specific to the sampling without replacement of all strata, and involves the calculation of the SEBB with the tightest possible use cases of Lemmas \ref{martingale0} and~\ref{martingale1}.
-In particular, for any stratum $i$ that is sampled without replacement, any specific bound with an associated $\Omega_{m_i}^{n_i}$ and $\Psi_{m_i}^{n_i}$ may be substituted for $\bar{\Omega}_{m_i}^{n_i}$ and $\bar{\Psi}_{m_i}^{n_i}$ to potentially tighten the bound, and this corresponds to choice of Lemma~\ref{martingale0} or Lemma~\ref{martingale1} in the bound's derivation. 
-Since the SEBB is a composition of such bounds with such choices throughout, there is a structure of valid pairs of substitutions $\Omega,\Psi$ for $\bar{\Omega},\bar{\Psi}$ in the optimal calculation of the SEBB, which is shown in the steps 8-15 of Algorithm \ref{alg2}.
-The equivalent algorithm for sampling with replacement simply is the same algorithm altered by replacing all use of $\bar{\Omega},\bar{\Psi}$ with $\Omega,\Psi$ respectively.
-
-Similarly it is elementary to modify the terms of Algorithn \ref{alg2} to be amenable to be minimising SECB bound (Theorem \ref{thm:SECM_bound}).
-
-\begin{algorithm}
-\caption{Stratified Empirical Bernstein Method (SEBM) algorithm, with replacement}
-\label{alg2}
-\begin{algorithmic}[1]
-    \REQUIRE probability $p$, strata number $N$, stratum sizes $n_i$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, weights $\tau_i$, widths $D_i$, maximum sample budget $B$
-    \WHILE{$\sum_i{m_i}<B$}
-        \STATE $beststrata \leftarrow -1$
-        \STATE $lowestbound \leftarrow \infty$
-    	\FOR{$k=0$ to $N$}
-    	    \STATE $m_k \leftarrow m_k + 1$
-        	\STATE $a \leftarrow [0,0]$, $b \leftarrow [0,0]$, $c \leftarrow [0,0]$, $d \leftarrow [0,0]$
-        	\FOR{$i=0$ to $N$}
-        		\STATE $a_0 \leftarrow a_0 + \log(6N/p)D_i^2\bar{\Psi}_{m_i}^{n_i}\min(\bar{\Omega}_{m_i}^{n_i},\Omega_{m_i}^{n_i})\tau^2$
-        		\STATE $a_1 \leftarrow a_1 + \log(6N/p)D_i^2\Psi_{m_i}^{n_i}\min(\bar{\Omega}_{m_i}^{n_i},\Omega_{m_i}^{n_i})\tau^2$
-        		\STATE $b_0 \leftarrow \max(b_0,\log(3/p)D_i^2\bar{\Psi}_{m_i}^{n_i}\min(\bar{\Psi}_{m_i}^{n_i},\Psi_{m_i}^{n_i})\tau^2)$
-        		\STATE $b_1 \leftarrow \max(b_1,\log(3/p)D_i^2\Psi_{m_i}^{n_i}\min(\bar{\Psi}_{m_i}^{n_i},\Psi_{m_i}^{n_i})\tau^2)$
-        		\STATE $c_0 \leftarrow c_0 + 2\bar{\Psi}_{m_i}^{n_i}((m_i-1)\doublehat{\sigma}_i^2/m_i)\tau^2$
-        		\STATE $c_1 \leftarrow c_1 + 2\Psi_{m_i}^{n_i}((m_i-1)\doublehat{\sigma}_i^2/m_i)\tau^2$
-        		\STATE $d_0 \leftarrow d_0 + \frac{4}{17}D_i^2\bar{\Omega}_{m_i}^{n_i}\tau^2$
-        		\STATE $d_1 \leftarrow d_1 + \frac{4}{17}D_i^2\Omega_{m_i}^{n_i}\tau^2$
-        	\ENDFOR
-        	\STATE $boundwidth \leftarrow \sqrt{\log(6/p)\min_j(d_j + (\sqrt{c_j + a_j + b_j} + \sqrt{b_j})^2)}$
-    	    \IF{$boundwidth < lowestbound$}
-    	        \STATE $beststrata \leftarrow k$
-    	        \STATE $lowestbound \leftarrow boundwidth$
-    	    \ENDIF
-    	    \STATE $m_k \leftarrow m_k - 1$
-    	\ENDFOR
-    	\STATE take an extra sample from strata: $beststrata$
-	    \STATE $m_{beststrata} \leftarrow m_{beststrata} + 1$
-    	\STATE recalculate $\doublehat{\sigma}_{beststrata}^2$
-    \ENDWHILE
-\end{algorithmic}
-\end{algorithm}
-
-
-In the next part we give an algorithm and pseudo-code corresponding to the minimising of error bounds for stratified sampling created by EBBs, via Theorem \ref{triangle_theorem2}.
-
-
-
-\subsection{Sequential sampling using unionised EBBs} \label{sec:EBBalgorithm}
-
-In the section \ref{section:old_statistics} of this chapter we considered different possible EBBs as a means of creating bounds for the error in stratified sampling (by Theorem \ref{triangle_theorem2}) and that choosing additional samples to minimise these bounds can function as a method of choosing samples in the context of stratified sampling.
-This method is made clear in pseudocode in algorithm \ref{alg3} which is adaptable for a choice of EBB.
-In algorithm \ref{alg3}, as scan is conducted over the possible strata in lines 4-10, and the improvement that would be offered by taking an additional sample from the stratum's respective EBB is calculated.
-The strata that gives the most reduction of its EBB for a prospective additional sample is chosen to have an additional sample taken, and its sample variance is recalculated in lines 11-13; this process repeats until the sample budget is exhausted.
-This algorithm \ref{alg3} is much more simple than algorithm \ref{alg2} primarily because the scan through the strata only needs to consider the change in the EBB associated with that stratum.
-This is because Theorem \ref{triangle_theorem2} identifies that the bound on the stratified mean estimate is the sum of the EBBs of the strata, hence they can be considered as minimising factors in isolation.
-
-\begin{algorithm}
-\caption[Stratified Error bound reduction algorithm by unionised EBBs]{Stratified Error bound reduction algorithm by unionised EBBs - by Theorem \ref{triangle_theorem2}}
-\label{alg3}
-\begin{algorithmic}[1]
-    \REQUIRE probability $t$, strata number $N$, stratum sizes $n_i$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, weights $\tau_i$, widths $D_i$, maximum sample budget $B$.
-    We assume an Empirical Bernstein Bound $Z$ as per the following form:
-$\quad \p(\hat{\mu}_i-\mu_i \ge Z(m_i,D_i,\hat{\sigma}^2_i,t)) \le t $
-    \WHILE{$\sum_i{m_i}<B$}
-        \STATE $beststrata \leftarrow -1$
-        \STATE $bestimprovement \leftarrow 0$
-    	\FOR{$k=0$ to $N$}
-    		\STATE $improvement \leftarrow \frac{n_i}{\sum_kn_k}\left(Z(m_i,D_i,\hat{\sigma}^2_i,t) - Z(m_i+1,D_i,\hat{\sigma}^2_i,t)\right)$
-    	    \IF{$improvement > bestimprovement$}
-    	        \STATE $beststrata \leftarrow k$
-    	        \STATE $bestimprovement \leftarrow improvement$
-    	    \ENDIF
-    	\ENDFOR
-    	\STATE take an extra sample from strata: $beststrata$
-	    \STATE $m_{beststrata} \leftarrow m_{beststrata} + 1$
-    	\STATE recalculate $\doublehat{\sigma}_{beststrata}^2$
-    \ENDWHILE
-\end{algorithmic}
-\end{algorithm}
-
-
-
-
-%\begin{theorem}\label{triangle_theorem1}
-%If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
-%If the error in the sample mean of a stratum is bounded by an Empirical Bernstein Bound:
-%$\quad \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t $\\
-%Then the error in our stratified estimation is probability bounded:
-%$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/m)\right)\le t $$
-%\end{theorem}
-
-
-
-
-
-
-In the next Section~\ref{sec:application} we evaluate the performance of SEBM with other methods in the context of synthetic data.
-
-
-%\pagebreak
-\section{Numerical evaluation}\label{sec:application}
-
-In this section assess the value of SEBM as an online method of sampling from stratified data.
-First we outline the benchmark algorithms used to evaluate our method's performance.
-Then in Section~\ref{ssec:SyntheticDists}
-we describe two synthetic data sets and report the distribution of errors under our method and the benchmarks.
-Following this, in Section~\ref{sec:shapley}, we evaluate our method in an example application --- that of calculating the Shapley value of a cooperative game.
-Discussion and analysis of all the numerical results is left to Section~\ref{sec:discussion}.
-
-
+In this section, different schemes of sampling in the context of Stratified sampling are compared in the context of synthetic data, primarily in the context of Beta-distributed data, and also in a more specific Bernoulli-uniform data set.
+In the next subsection \ref{sec:shapley} we consider the effectiveness of these different methods of sampling specifically to approximate the Shapley Value in the context of various cooperative games.
+The results and analysis of these methods are discussed in the following discussion section \ref{sec:discussion}.
 
 \subsection{Benchmarks algorithms}
-In the numerical evaluations, we compare the following sampling methods:
+We outline a range of benchmark algorithms used to evaluate the various methods performance in the context of synthetic data sets.
+Then in Section~\ref{ssec:SyntheticDists} is described two synthetic data sets and report the distribution of errors under our benchmarks algorithms.
+
+In the numerical evaluations for synthetic data, we compare the following sampling methods:
 \begin{itemize}
 \item 
 \textsc{SEBM} (Stratified empirical Bernstein method, without replacement):
@@ -193,8 +61,6 @@ $$\phi(x)_{\{\alpha,\beta\}}
 =\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}     
     x^{\alpha-1}(1-x)^{\beta-1} $$
 with $\alpha$ and $\beta$ parameters drawn uniformly between 0 and 4 for each stratum, and $\Gamma$ is gamma function.
-
-
 
 
 

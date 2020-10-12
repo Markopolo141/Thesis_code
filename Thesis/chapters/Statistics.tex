@@ -3,27 +3,38 @@
 
 \section{Stratified sampling by a stratified probability bound}\label{section:SEBB}
 
-In the previous section we considered different possible EBBs as a means of yielding different methods of choosing samples in the context of stratified random sampling.
-This process proceeded by binding EBBs together using union bounds to create a bound on the stratified sample mean error (via with Theorem \ref{triangle_theorem1}); which is then sequentially minimised by the choosing of additional samples.
+In the previous section we considered different possible EBBs as a way of bounding the error in the context of stratified random sampling, and for this purpose developed a new EBB.
+This process of using EBBs involved binding EBBs applied to different strata together using union bounds to create a bound on the stratified sample mean error (via with Theorem \ref{triangle_theorem1}).
 
 What is worth noting is that this process of binding EBBs together by probability unions is expected to result in a rather weak bound and that this weakness is expected to increase with larger numbers of strata as there are more probability unions needed to bind it together.
 It is noted that the triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} the bound for the error is developed effectively assuming all the errors of the estimates of the strata are additive - which is positively the worst case.
 Whereas by assumption, the errors in the strata estimates are independent of each other and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
-Using this knowledge, stronger bounds are very possible - and in this section is created an empirical (ie. depending on sample variances) concentration inequality specifically for stratified random sampling; which then can be used to serve as a basis for choosing samples.
+Using this knowledge, stronger bounds are possible - and in this section is created an empirical (ie. depending on sample variances) concentration inequality specifically for stratified random sampling; and which then can be used to serve as a basis for choosing samples in the next section.
 
 The resulting concentration inequality gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
 
+We proceed with the derivation of this new bound and method in a series of stages:
+\begin{enumerate}
+\item	in subsection \ref{subsection:new_bounds} we outlay some lemmas which are the building blocks of further derivations in this section, these are new upper bounds are for the moment generating function of samples and sample squares, as well as the sample means depending on whether sampling is done with or without replacement.
+\item	in subsection \ref{sec:constructing} we use these elements to begin the derivation of the new bound, called the Stratified Empirical Bernstein Bound (SEBB)
+\item	in subsection \ref{subsection:SECB} we additionally derive a variant of the SEBB which uses Chebyshev's inequality
+\item	in subsection \ref{sec:SEBMalgorithm} we describe the algorithm of choosing samples in stratified sampling to minimise the new SEBB bound.
+\end{enumerate}
+
+After these subsections, in the next section \ref{section:statistics_results} we consider the numerical performance of minimising these new bounds in the context of stratified sampling.
+Let us begin with the elements in these new derivations.
+
+
 %The derivation involves and utilises much of the same components of the previous section with an additional martingale theorem specifically for any any strata sampled without replacement.
 
-\subsection{A new probability bound for stratified sampling (SEBB)}
+\subsection{Some new bounds on the moment generating function}\label{subsection:new_bounds}
 
 To begin the derivation of our new concentration inequality for stratified random sampling, we build upon some of the results of the previous sections.
-Specifically we consider three upper bounds for various moment generating functions.
+Specifically we utilise three upper bounds for various moment generating functions.
 The first of which has already been given in the previous section, and is Hoeffding's lemma - Lemma \ref{Hoeffdings_lemma_lemma}.
-The other two are strongly related to Theorems \ref{hoeffdings1} and \ref{sample_squares} respectively, except that they use parabolic upper upper bounds.
+The other two are given here, and are bounds strongly related to Theorems \ref{hoeffdings1} and \ref{sample_squares} respectively.
 
 The first of these other two upper bounds is very much like Hoeffding's Lemma, except it involves additional information about the variance of the random variable.
-The proof of this result is included because it is useful in explaining our own approach.
 
 \begin{lemma}\label{expectation1}
 For a random variable $X$ that is bounded on an interval $a\le X\le b$ with $D=b-a$ and variance $\sigma^2$, and any $s>0$:
@@ -87,7 +98,7 @@ and the result follows by multiplying by $\exp(q\sigma^2)$.
 The inequalities above, Lemmas \ref{expectation1} and \ref{expectation2}, as well as Lemma \ref{Hoeffdings_lemma_lemma}, are used in the derivation of our stratified sampling concentration inequality in Section~\ref{sec:constructing}. One of the primary reasons for utilising these weakened bounds on the moment generating function is that they make the subsequent mathematics far more tractable.
 However in order to use these moment generating functions we need to explicitly describe the difference between the moment generating functions of individual random variables (which these are) and the moment generating function of the sample mean of them.
 
-\subsubsection{The Moment Generating Function of sample means}\label{sec:without_replacement}
+\subsubsection{Some bounds on the Moment Generating Function of sample means}\label{sec:without_replacement}
 
 In order to use the previous bonds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
 To do this we state three further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second and third (Lemma~\ref{hoeffdings_reduction} and Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
@@ -158,7 +169,7 @@ all the derivations that follow that invoke Lemma~\ref{martingale1} have direct 
 Note, however, that the bound without replacement (Lemma~\ref{martingale0}) may or may not be tighter than the bound with replacement (Lemma~\ref{martingale1}). However, the process of substituting one for the other can be done judiciously on a case-by-case basis to create the tightest possible bound.
 All the numerical results in Section \ref{section:statistics_results} (that are relevant to sampling without replacement) have been produced with this judicious choice conducted.
 
-\subsection{The Stratified finite Empirical Bernstein Bound (SEBB) and sampling Method (SEBM)}
+\subsection{The Stratified finite Empirical Bernstein Bound (SEBB)}
 \label{sec:constructing}
 
 In this section we derive a novel probability bound for the error of the stratified random sampling estimate, 
@@ -181,19 +192,17 @@ Before this, we begin by precisely defining the context of our derivations, to w
 \end{itemize}
 \end{definition}
 
-Given this context, the following two subsections contain the derivation of the stratified empirical Berstein bound (SEBB) and the sequential sampling method (SEBM), respectively. 
 
-
-
-\subsubsection{Bound derivation}
-The bound is now developed in four theorems, 
-which build on each other in sequence:
+\noindent The bound is now developed in four theorems, which build on each other in sequence:
 \begin{enumerate}
-    \item Theorem~\ref{thm:1} develops a concentration inequality for the error in the stratified population mean estimate $\sum_{i=1}^n\tau_i\chi_{i,m_i}$ in the context of the knowledge of stratum variances.
-    \item Theorem~\ref{thm:2} is a concentration inequality of the difference between the stratum variances and sample variances in the context the sum of knowledge of the squared stratum mean errors.
-    \item Theorem~\ref{thm:3} is an inequality directly that binds the sum of sample squared stratum mean errors.
-    \item Theorem~\ref{thm:SEBM_bound} combines the three previous theorems together using two union bounds to create a concentration inequality for the error in the stratified population mean estimate given the sample variances.
+    \item in subsubsection~\ref{subsubsection:variance_assisted_sebb} Theorem~\ref{thm:1} develops a concentration inequality for the error in the stratified population mean estimate $\sum_{i=1}^n\tau_i\chi_{i,m_i}$ in the context of the knowledge of stratum variances.
+    \item in subsubsection~\ref{subsubsection:variance_square_error_bound} Theorem~\ref{thm:2} is a concentration inequality of the difference between the stratum variances and sample variances in the context the sum of knowledge of the squared stratum mean errors.
+    \item in subsubsection~\ref{subsubsection:a_bound_on_sample_squares} Theorem~\ref{thm:3} is an inequality directly that binds the sum of sample squared stratum mean errors.
+    \item in subsubsection~\ref{subsubsection:centerpiece} Theorem~\ref{thm:SEBM_bound} combines the three previous theorems together using two union bounds to create a concentration inequality for the error in the stratified population mean estimate given the sample variances.
 \end{enumerate}
+
+
+\subsubsection{A bound on the sample mean assuming variances}\label{subsubsection:variance_assisted_sebb}
 
 In a similar way to what was done in the previous section, to derive an Empirical Bernstein Bound we begin with a derivation of a probability bound on the error of the sample mean of a random variable in terms of the random variable's variance.
 In the previous section the bound in question was the venerable Bennett's inequality (Theorem \ref{hoeffdings1}) however in this section we consider a more relaxed and similar version of it which is more easy for us to manipulate, and in this case the random variable in question is the weighted mean $\sum_{i=1}^n\tau_i\chi_{i,m_i}$.
@@ -221,12 +230,14 @@ This particular bound assumes knowledge of the variances of the strata, and will
 
 It is a concentration inequality for the weighted stratum means, leading to the more general question of what the weights should be. In most cases, the weights $\tau_i$ can be considered as the probability weights $\tau_i=n_i/(\sum_{j=1}^nn_j)$ of standard stratified sampling.
 In this context this probability bound can be used as-is for a measure of uncertainty in stratified random sampling if the true variances (or alternatively, upper bounds on the true variances) of the strata are known.
-However the weights can be assigned differently - and we will investigate such a case for the Shapley Value in section \ref{section:statistics_results}.
+However the weights may be assigned differently - and we will investigate such a case for the Shapley Value in section \ref{section:statistics_results}.
 
 The bound depends on a weighted sum of strata variances $ \sum_{i=1}^n \sigma_i^2 \Psi_{m_i}^{n_i} \tau_i^2 $, and in most situations these values aren't known.
 Hence to use this inequality we need to consider the probable error between the weighted sum of strata variances and the weighted sum of strata sample variances.
 
-And to craft such a probability bound on that error we develop a probability bound for the error estimate of the sum of variances (as weighted by arbitrary $\theta_i$), as follows:
+\subsubsection{A bound on the sample variance in terms of sample error squares}\label{subsubsection:variance_square_error_bound}
+
+To create a bound on the error between the strata variances and the strata sample variances we develop a probability bound for the error estimate of the sum of variances (as weighted by arbitrary $\theta_i$) in terms of the sample square errors (which will also consequently be bounded), as follows:
 
 \begin{theorem}\label{thm:2}
 Assuming the context given in Definition~\ref{def:ProblemContext}.
@@ -251,7 +262,11 @@ Minimizing with respect to $s$, rearranging, and applying Lemma \ref{variance1} 
 
 This inequality gives the probability bound between the arbitrarily (by $\theta_i$) weighted variances of the strata and also the same weighted (biased estimator) sample variances.
 However it also additionally involves the weighted square error of the sample means as a complicating factor.
-Now, although the weighted square error of the sample means may go to zero quickly as additional samples are taken, we nonetheless need to develop another probability bound to incorporate the specific consideration of it. The following probability inequality bounds the weighted square error of the sample means:
+Although the weighted square error of the sample means may go to zero quickly as additional samples are taken, we nonetheless need to develop another probability bound to incorporate the specific consideration of it.
+
+\subsubsection{A bound on weighted sample error squares}\label{subsubsection:a_bound_on_sample_squares}
+
+In the previous Theorem \ref{thm:2} the weighted sum of sample squares was a complicating factor which we seek to bound and incorporate. The following probability inequality bounds the weighted square error of the sample means directly:
 
 \begin{theorem}\label{thm:3}
 Assuming the context given in Definition~\ref{def:ProblemContext}.
@@ -266,7 +281,7 @@ As the probability that sum of any random variables is less than $r$ is obviousl
 
 $$ \pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\pr\left(\theta_i(\mu_i - \chi_{i,m_i})^2 < r_i\right) $$
 hence by probability complimentarities again:
-$$\pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le 1-\prod_{i=1}^n\left(1-\pr\left(\mu_i - \chi_{i,m_i} \ge \sqrt{\frac{r_i}{\theta_i}}\right) - \pr\left( \chi_{i,m_i}-\mu_i \ge \sqrt{\frac{r_i}{\theta_i}}\right)\right),$$
+\begin{align*}&\pr\left(\sum_{i=1}^n\theta_i(\mu_i - \chi_{i,m_i})^2 \ge r\right) \le \\&\qquad\qquad 1-\prod_{i=1}^n\left(1-\pr\left(\mu_i - \chi_{i,m_i} \ge \sqrt{\frac{r_i}{\theta_i}}\right) - \pr\left( \chi_{i,m_i}-\mu_i \ge \sqrt{\frac{r_i}{\theta_i}}\right)\right)\end{align*}
 
 And this is exactly the form which we want, in terms of the products of the error in each of the strata sample means.
 Thus we can apply Lemma~\ref{chernoff1} together with Lemmas~\ref{martingale1} and~\ref{Hoeffdings_lemma_lemma}, which gives:
@@ -285,7 +300,11 @@ Using the fact that $\log(1-(1-\exp(x))^n)\le x+\log(n)$ for any negative $x$, a
 \end{proof}
 
 This theorem directly bounds the weighted square errors of the sample means independently of any other specifically unknown factors.
-In the next, and final, step we combine all the inequalities of Equations~\eqref{eq1}, \eqref{eq2} and~\eqref{eq1.5} from Theorems \ref{thm:1}, \ref{thm:2} and \ref{thm:3} together, to complete our derivation of a probability bound for the error in stratified sampling - our SEBB.
+
+\subsubsection{The centerpiece of the SEBB}\label{subsubsection:centerpiece}
+
+In the previous three theorems we have a bound on the stratified mean estimate in terms of the variances, a bound on the variances in terms of the sample variances by the sample square errors, and a bound on the sample square errors.
+In the next step we combine all the inequalities of Equations~\eqref{eq1}, \eqref{eq2} and~\eqref{eq1.5} from Theorems \ref{thm:1}, \ref{thm:2} and \ref{thm:3} together, to complete our derivation of a probability bound for the error in stratified sampling in terms of stratum sample variances - our SEBB.
 
 
 \begin{theorem}[Stratified Empirical Bernstein Bound (SEBB)]\label{thm:SEBM_bound}
@@ -348,27 +367,18 @@ Letting $\theta_i = \frac{1}{2}\tau_i^2\Psi_{m_i}^{n_i}$ and combining with \eqr
 and then assigning $ r=t=y=p/3 $ and rewriting in terms of unbiased sample variance, gives the result.
 \end{proof}
 
-This completes the derivation.
+This completes the derivation of the SEBB.
 In Equation \eqref{big_equation} of Theorem~\ref{thm:SEBM_bound}, we have a concentration inequality for the sum of weighted strata sample mean errors relative to the sample variances. 
 In this context, the weights $\tau_i$ are flexible but would naturally be probability weights proportional to strata size,  $\tau_i=n_i/(\sum_{j=1}^nn_j)$, 
 in which case the inequality provides a concentration of measure in stratified random sampling.\\
 
 
 
-In this and the previous section we have proposed two different methods of developing concentration inequalities for the error of the stratified sampling mean estimate.
-In Section \ref{section:old_statistics} we outlined how different EBBs could be bound together to create a bound for the error in stratified sampling via Theorem \ref{triangle_theorem2} (and we also developed our own numerical EBB).
-And in this section we built a bound directly and specifically for stratified sampling mean estimate in Theorem \ref{thm:SEBM_bound}.
+\subsection{A Stratified Empirical Chebyshev Bound (SECB)}\label{subsection:SECB}
 
-It is evident that for any probability bound for the error of our stratified sampling mean estimate, it is possible to choose additional samples from strata to minimise the expression.
-And it is expected that the better and more tight the bound, the more likely it will be the case that iteratively choosing samples to minimise the bound will infact produce better estimate of the population mean in practice.
-One of the best ways of testing this hypothesis is with actual data, where divergent sets of synthetic data can be generated (with their mean calculated exactly) and the different methods of sampling tested to see how well they estimate the known means.
-
-And this is the approach that is taken in the next section, where we compare the accuracy attained via process of minimising the different probability bounds developed in this chapter.
-
-But before we leave this section, we also (for good measure) consider another strongly related bound on the error in stratified sampling.
-particularly since the last Theorem \ref{thm:SEBM_bound} ultimately builds upon Theorem \ref{thm:1} which was the embodiment of a simplification of Bennett's inequality per Lemma \ref{expectation1}.
-And since we will compare against Neyman sampling which is conceptually built upon the minimisation of Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) we will also consider and compare against a empirical Chebyshev's inequality for stratified sampling.
-
+It is also possible to consider another strongly related bound on the error in stratified sampling.
+Since the last Theorem \ref{thm:SEBM_bound} ultimately builds upon Theorem \ref{thm:1} which was the embodiment of a simplification of Bennett's inequality per Lemma \ref{expectation1}.
+And since we will ultimately compare performance of these bounds against Neyman sampling which is conceptually built upon the minimisation of Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) we will also consider and compare against a empirical Chebyshev's inequality for stratified sampling.
 
 
 \begin{theorem}[Stratified Empirical Chebyshev Bound (SECB)]\label{thm:SECM_bound}
@@ -381,16 +391,13 @@ Then with $\Omega_{m_i}^{n_i},\Psi_{m_i}^{n_i}$ per Lemma~\ref{martingale1}:
 + \sqrt{\beta}\right)  \right)
 \le p 
 \end{equation}
-
 where:
 \begin{align*}
 \alpha=&\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i+ \frac{\log(6n/p)}{2}\sum_i\tau_i^2\Psi_{m_i}^{n_i}D_i^2\Omega_{m_i}^{n_i} \\
 \beta=&\frac{\log(3/p)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)
 \end{align*}
-
 \end{theorem}
 \begin{proof}
-
 We can use Chebyshev's inequality (Theorem \ref{thm:chebyshevs}) for the strata sample estimator giving:
 $$ \p\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge \frac{1}{\sqrt{k}}\sqrt{\text{Var}\left(\sum_{i=1}^n\tau_i\chi_{i,m_i}\right)}\right) \le k $$
 Which is a probability bound for the error of the stratum mean estimator in terms of its variance.
@@ -400,17 +407,92 @@ Hence:
 $$ \p\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge \frac{1}{\sqrt{k}}\sqrt{\sum_{i=1}^n\Psi_{m_i}^{n_i}\tau_i^2\sigma_i^2}\right) \le k $$
 Which is a Chebyshev type inequality for the error of the stratum mean estimator in terms of a sum of the stratum variances - and is very analogous to Equation \ref{eq1} of Theorem \ref{thm:1}.
 And since equation \ref{eq:sum_variance_bound_equation} (from the previous proof) is a general bound for an arbitrary sum of the stratum variances we can combine with it (in the case of setting $\theta_i = \tau_i^2\Psi_{m_i}^{n_i}$) by a union bound (Lemma~\ref{prob_union}), giving:
-
-$$
-\pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right| \ge \frac{1}{\sqrt{k}}\left( \begin{matrix*}[l]\quad\sqrt{\begin{matrix*}[l]\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}\hat{\sigma}_i^2+ \frac{\log(2n/r)}{2}\sum_i\tau_i^2\Psi_{m_i}^{n_i}D_i^2\Omega_{m_i}^{n_i} \\ ~+ \frac{\log(1/y)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)\end{matrix*}} \\ +\sqrt{\frac{\log(1/y)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)}\end{matrix*}\right)\right) \le y+r+k,
-$$
-
+\begin{align*}
+\pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right| \ge \frac{1}{\sqrt{k}}\left( \begin{matrix*}[l]\quad\sqrt{\begin{matrix*}[l]\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}\hat{\sigma}_i^2+ \frac{\log(2n/r)}{2}\sum_i\tau_i^2\Psi_{m_i}^{n_i}D_i^2\Omega_{m_i}^{n_i} \\ ~+ \frac{\log(1/y)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)\end{matrix*}} \\ +\sqrt{\frac{\log(1/y)}{2}\left(\max_i\tau_i^2D_i^2{\Psi_{m_i}^{n_i}}^2\right)}\end{matrix*}\right)\right)&\\ \le y+&r+k
+\end{align*}
 And setting $ r=k=y=p/3 $ and rewriting in terms of unbiased sample variance, gives the result.
-
 \end{proof}
 
+We will now turn to how minimising these bounds on the stratified sample mean estimate (theorems \ref{thm:SEBM_bound} and \ref{thm:SECM_bound}) can be used as a method of choosing samples in the context of stratified sampling.
+And afterwards, in the next section \ref{section:statistics_results} we will compare how all these methods work in actually sampling stratified data.
 
-We particularly consider this extra bound as a half-way-horse between the technique that is minimising our more thoroughly developed SEBM (per Theorem \ref{thm:SEBM_bound}) and the method we are comparing against - particularly Neyman sampling.
-We note that like Neyman sampling, that this bound works most effectively in the context of choosing samples with replacement.
-In the next section we will compare how all these methods work in actually sampling stratified data.
+
+
+
+
+\subsection{Sequential sampling using the Stratified Empirical Berstein Method} \label{sec:SEBMalgorithm}
+
+%To evaluate the effectiveness of the process of sequentially minimising the probability bounds on the error of the sample estimated stratified mean, we need a little development of those algorithms before proceeding to give details on the process of testing them in the context of synthetic data.
+%It is necessary to consider the way in which the concentration inequality of the previous section (Theorem \ref{thm:SEBM_bound}) should be iteratively minimised; and this process is expounded as Algorithm \ref{alg2}.
+
+
+In this section, we developed a concentration inequality to bound the error of the sampling mean estimate in stratified random sampling, called the SEBB - as per Theorem \ref{thm:SEBM_bound}.
+The process of selecting additional samples to minimise this probability bound on the error is introduced in this section. And we call it the \textit{stratified empirical Bernstein method} (SEBM).
+
+The fundamental principle of the SEBM, is that it is an online method of choosing additional samples which repeatedly scans through possible stratum for optimum sample choice, and the strata which would result in the most reduction of the SEBB bound is then recommended for additional sampling.
+The pseudo-code for this process of sampling, is given as Algorithm \ref{alg2}.
+
+
+Specifically, Algorithm \ref{alg2} is a repetitive process involving a scan through the possible strata and then the selection of one stratum to sample from.
+The process of scanning involves calculating the confidence bound width (SEBB) that would result if an additional sample were to be taken from that stratum without changing its sample variance (line numbers 5-17 in Algorithm~\ref{alg2}).
+The stratum that yields the smallest confidence bound width in the context of an additional sample is then selected (line 18-21) and sampled (line 24), the sample variance of that stratum is updated (line 26); 
+this process repeats until the maximum sample budget is reached (per the outer loop, line 1).
+In this way the process attempts to iteratively minimise the SEBB in expectation with each additional sample taken; and hence lead to potentially greater accuracy in stratified sampling as a result.
+
+The primary assumption that exists in this method's selection calculus is that it assumes that the sample variance of the strata would likely remain unchanged for the taking of the additional sample from any strata.
+While this technically isn't true, the unbiased sample variance is expected to be almost as likely to increase as it is likely to decrease from the taking of an additional sample.
+Plus developing an even more complicated probability bound that explicitly takes account of the likely change in error of the stratified mean estimate due to the expected change in the sample variance is beyond the scope of our investigation.
+
+This SEBM method (Algorithm \ref{alg2}) requires the sample variances of all the strata to be calculated. And accordingly, Algorithm \ref{alg2} must be initialised with at least two samples from each stratum so that sample variance can be calculated for it to be able to function.
+
+We also note that Algorithm \ref{alg2} describes a process specific to the sampling without replacement of all strata, and involves the calculation of the SEBB with the tightest possible use cases of Lemmas \ref{martingale0} and~\ref{martingale1}.
+In particular, for any stratum $i$ that is sampled without replacement, any specific bound with an associated $\Omega_{m_i}^{n_i}$ and $\Psi_{m_i}^{n_i}$ may be substituted for $\bar{\Omega}_{m_i}^{n_i}$ and $\bar{\Psi}_{m_i}^{n_i}$ to potentially tighten the bound, and this corresponds to choice of Lemma~\ref{martingale0} or Lemma~\ref{martingale1} in the bound's derivation. 
+Since the SEBB is a composition of such bounds with such choices throughout, there is a structure of valid pairs of substitutions $\Omega,\Psi$ for $\bar{\Omega},\bar{\Psi}$ in the optimal calculation of the SEBB, which is shown in the steps 8-15 of Algorithm \ref{alg2}.
+The equivalent algorithm for sampling with replacement simply is the same algorithm altered by replacing all use of $\bar{\Omega},\bar{\Psi}$ with $\Omega,\Psi$ respectively.
+
+Similarly it is elementary to modify the terms of Algorithn \ref{alg2} to be amenable to be minimising SECB bound (Theorem \ref{thm:SECM_bound}).
+
+\begin{algorithm}
+\caption{Stratified Empirical Bernstein Method (SEBM) algorithm, with replacement}
+\label{alg2}
+\begin{algorithmic}[1]
+    \REQUIRE probability $p$, strata number $N$, stratum sizes $n_i$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, weights $\tau_i$, widths $D_i$, maximum sample budget $B$
+    \WHILE{$\sum_i{m_i}<B$}
+        \STATE $beststrata \leftarrow -1$
+        \STATE $lowestbound \leftarrow \infty$
+    	\FOR{$k=0$ to $N$}
+    	    \STATE $m_k \leftarrow m_k + 1$
+        	\STATE $a \leftarrow [0,0]$, $b \leftarrow [0,0]$, $c \leftarrow [0,0]$, $d \leftarrow [0,0]$
+        	\FOR{$i=0$ to $N$}
+        		\STATE $a_0 \leftarrow a_0 + \log(6N/p)D_i^2\bar{\Psi}_{m_i}^{n_i}\min(\bar{\Omega}_{m_i}^{n_i},\Omega_{m_i}^{n_i})\tau^2$
+        		\STATE $a_1 \leftarrow a_1 + \log(6N/p)D_i^2\Psi_{m_i}^{n_i}\min(\bar{\Omega}_{m_i}^{n_i},\Omega_{m_i}^{n_i})\tau^2$
+        		\STATE $b_0 \leftarrow \max(b_0,\log(3/p)D_i^2\bar{\Psi}_{m_i}^{n_i}\min(\bar{\Psi}_{m_i}^{n_i},\Psi_{m_i}^{n_i})\tau^2)$
+        		\STATE $b_1 \leftarrow \max(b_1,\log(3/p)D_i^2\Psi_{m_i}^{n_i}\min(\bar{\Psi}_{m_i}^{n_i},\Psi_{m_i}^{n_i})\tau^2)$
+        		\STATE $c_0 \leftarrow c_0 + 2\bar{\Psi}_{m_i}^{n_i}((m_i-1)\doublehat{\sigma}_i^2/m_i)\tau^2$
+        		\STATE $c_1 \leftarrow c_1 + 2\Psi_{m_i}^{n_i}((m_i-1)\doublehat{\sigma}_i^2/m_i)\tau^2$
+        		\STATE $d_0 \leftarrow d_0 + \frac{4}{17}D_i^2\bar{\Omega}_{m_i}^{n_i}\tau^2$
+        		\STATE $d_1 \leftarrow d_1 + \frac{4}{17}D_i^2\Omega_{m_i}^{n_i}\tau^2$
+        	\ENDFOR
+        	\STATE $boundwidth \leftarrow \sqrt{\log(6/p)\min_j(d_j + (\sqrt{c_j + a_j + b_j} + \sqrt{b_j})^2)}$
+    	    \IF{$boundwidth < lowestbound$}
+    	        \STATE $beststrata \leftarrow k$
+    	        \STATE $lowestbound \leftarrow boundwidth$
+    	    \ENDIF
+    	    \STATE $m_k \leftarrow m_k - 1$
+    	\ENDFOR
+    	\STATE take an extra sample from strata: $beststrata$
+	    \STATE $m_{beststrata} \leftarrow m_{beststrata} + 1$
+    	\STATE recalculate $\doublehat{\sigma}_{beststrata}^2$
+    \ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+
+
+In the next section \ref{section:statistics_results} we will compare how algorithms \ref{alg3} and \ref{alg2} work in actually sampling stratified data.
+
+
+
+
+
 

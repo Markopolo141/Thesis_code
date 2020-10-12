@@ -131,42 +131,47 @@ Theorems \ref{hoeffdings_inequality22} and \ref{hoeffdings_inequality23} will no
 
 
 
-\section{An Efron-Stein inequality for the sample variance}\label{appendix:efron_chebyshev}
+%\section{An Efron-Stein inequality for the sample variance}\label{appendix:efron_chebyshev}
 
-It is to be noted that one way to derive a concentration inequality for the variance is to use Chebyshev's inequality for the sample variance itself.
-Consider that if $\hat{\sigma}^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-\mu)^2$ where $\mu = \frac{1}{n}\sum_{i=1}^nx_i$ is the sample mean, then:
+%It is to be noted that one way to derive a concentration inequality for the variance is to use Chebyshev's inequality for the sample variance itself.
+%Consider that if $\hat{\sigma}^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-\mu)^2$ where $\mu = \frac{1}{n}\sum_{i=1}^nx_i$ is the sample mean, then:
 
-$$\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \frac{\text{Var}(\hat{\sigma}^2)}{k^2}$$
-which gives us a pretty straightforward error on the sample variance if we can bound $\text{Var}(\hat{\sigma}^2)$
+%$$\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \frac{\text{Var}(\hat{\sigma}^2)}{k^2}$$
+%which gives us a pretty straightforward error on the sample variance if we can bound $\text{Var}(\hat{\sigma}^2)$
 
-Now since, $\hat{\sigma}^2$ is a general function of the samples $x_1,\dots,x_n$ we can apply Efron-Stein inequality to bound it.
-The Efron-Stein inequality bounds the variance of a function of random variables by the sum of variances about each of those parameter variables.
+%Now since, $\hat{\sigma}^2$ is a general function of the samples $x_1,\dots,x_n$ we can apply Efron-Stein inequality to bound it.
+%The Efron-Stein inequality bounds the variance of a function of random variables by the sum of variances about each of those parameter variables.
 
-\begin{theorem}[Efron-Stein inequality]
-If $f$ is a function of $n$ random variables $x_1,x_2,\dots,x_n$, let $x'_1,x'_2,\dots,x'_n$ be independent copies of the same variables, letting $Z=f(x_1,x_2,\dots,x_n)$ and $Z'_i=f(x_1,x_2,\dots,x_{i-1},x'_i,x_{i+1},\dots,x_n)$
-then:
-$$ \text{Var}(Z) \le \frac{1}{2}\sum_{i=1}^n\E[(Z-Z'_i)^2]$$
-\end{theorem}
+%\begin{theorem}[Efron-Stein inequality]
+%If $f$ is a function of $n$ random variables $x_1,x_2,\dots,x_n$, let $x'_1,x'_2,\dots,x'_n$ be independent copies of the same variables, letting $Z=f(x_1,x_2,\dots,x_n)$ and $Z'_i=f(x_1,x_2,\dots,x_{i-1},x'_i,x_{i+1},\dots,x_n)$
+%then:
+%$$ \text{Var}(Z) \le \frac{1}{2}\sum_{i=1}^n\E[(Z-Z'_i)^2]$$
+%\end{theorem}
 
-Applying the Efron-Stein inequality to the function $\hat{\sigma}^2$ gives:
-$$\text{Var}(\hat{\sigma}^2)\le \frac{5-n}{n(n-1)}\sigma^2 + \frac{1}{n}\mu_4 $$
-where $\mu_4$ is the forth central moment.
+%Applying the Efron-Stein inequality to the function $\hat{\sigma}^2$ gives:
+%$$\text{Var}(\hat{\sigma}^2)\le \frac{5-n}{n(n-1)}\sigma^2 + \frac{1}{n}\mu_4 $$
+%where $\mu_4$ is the forth central moment.
 
-Therefore there are two primary options, we can eliminate the first term, or we can half reduce the second.
-For the first option, the $\sigma^2$ coefficient is non-positive for $n\ge 5$, therefore for $n\ge 5$ that:
-$$\text{Var}(\hat{\sigma}^2)\le \frac{1}{n}\mu_4 $$ and given that if the variables $x_1,\dots,x_n$ are bounded $a\le X\le b$ with $D=b-a$ then
-$\mu_4\le \frac{D^4}{16}$ and hence:
-\begin{equation}\label{appendix_eq_1}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \frac{D^4}{16nk^2}\end{equation}
+%Therefore there are two primary options, we can eliminate the first term, or we can half reduce the second.
+%For the first option, the $\sigma^2$ coefficient is non-positive for $n\ge 5$, therefore for $n\ge 5$ that:
+%$$\text{Var}(\hat{\sigma}^2)\le \frac{1}{n}\mu_4 $$ and given that if the variables $x_1,\dots,x_n$ are bounded $a\le X\le b$ with $D=b-a$ then
+%$\mu_4\le \frac{D^4}{16}$ and hence:
+%\begin{equation}\label{appendix_eq_1}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \frac{D^4}{16nk^2}\end{equation}
 
 
-For the second option, since $\mu_4=\E[(X-\mu)^4]\le D^2\E[(X-\mu)^2]=D^2\sigma^2$ hence:
-$$\text{Var}(\hat{\sigma}^2)\le \frac{5-n}{n(n-1)}\sigma^2 + \frac{1}{n}\mu_4 \le \left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\sigma^2$$
-hence:
-\begin{equation}\label{appendix_eq_2}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\frac{\sigma^2}{k^2}
-\end{equation}
+%For the second option, since $\mu_4=\E[(X-\mu)^4]\le D^2\E[(X-\mu)^2]=D^2\sigma^2$ hence:
+%$$\text{Var}(\hat{\sigma}^2)\le \frac{5-n}{n(n-1)}\sigma^2 + \frac{1}{n}\mu_4 \le \left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\sigma^2$$
+%hence:
+%\begin{equation}\label{appendix_eq_2}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\frac{\sigma^2}{k^2}
+%\end{equation}
 
-Therefore combining these two expressions \ref{appendix_eq_1} and \ref{appendix_eq_2} becomes:
+%Therefore combining these two expressions \ref{appendix_eq_1} and \ref{appendix_eq_2} becomes:
 
-\begin{equation}\label{appendix_eq_3}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \min\left(\left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\frac{\sigma^2}{k^2},\frac{D^4}{16nk^2}\right)
-\end{equation}
-Which is valid for $n\ge 5$.
+%\begin{equation}\label{appendix_eq_3}\p\left(|\hat{\sigma}^2-\sigma^2|\ge k\right)\le \min\left(\left(\frac{5-n}{n(n-1)} + \frac{D^2}{n}\right)\frac{\sigma^2}{k^2},\frac{D^4}{16nk^2}\right)
+%\end{equation}
+%Which is valid for $n\ge 5$.
+
+
+
+
+
