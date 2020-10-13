@@ -42,7 +42,7 @@ The work and development from the fourth and fifth section most directly reflect
 
 Stratified sampling is a well known example of a process of selecting samples to most accurately estimate an average over weighted sample averages.
 Particularly stratified random sampling is a process of estimating the average over a population by breaking a population into mutually-exclusive subgroups and sampling them randomly.
-Such stratified sampling can lead to improved reliability in estimation over simple random sampling of the population particularly when \cite{1938.10503378,10.2307/23339498}:
+Such stratified sampling has been identified to lead to improved reliability in estimation over simple random sampling of the population by \cite{1938.10503378,10.2307/23339498} particularly when:
 \begin{itemize}
 \item The population is divisible into strata, in which there is less variance in each stratum than across them all 
 \item When the size of the strata are known or reasonably estimated
@@ -59,7 +59,7 @@ Conversely, if we choose to take the same number of samples from all the strata,
 
 
 %The core question we face is, how do we sample optimally between the strata in stratified sampling?
-This question has been considered before, and the most direct historical answer to the question is called \textit{Neyman allocation} or \textit{sampling} \cite{1938.10503378,10.2307/23339498}.
+This question has been considered before, and the most direct historical answer to the question is called \textit{Neyman allocation} or \textit{sampling} \citep{1938.10503378}.
 The principle of Neyman sampling is that it seeks the minimise the weighted variance of the population estimate assuming knowledge of the variances of the strata, and it can most directly be interpreted as a process of minimising Chebyschev's inequality.
 
 \subsection{Neyman allocation}\label{sec:neyman_sampling}
@@ -114,20 +114,20 @@ In order to consider what alternative concentration inequalities exist, which ap
 
 Neyman allocation implicitly minimises Chebyshev's inequality, but Chebyshev's inequality is one example of many \textit{concentration inequalities}.
 Concentration inequalities are applied in a range of data science contexts for a variety of prediction, machine learning and hypothesis testing tasks, including:
-change detection \cite{KiferShaiGehrke2004,8000571} 
-and classification \cite{Zia-UrRehman2012} in data streams;
-outlier analysis in large databases \cite{Aggarwal2015};
-online optimisation \cite{FlaxmanKalaiMcMahan2005,AgarwalDekelXiao2010}; and, of most relevance to this paper, 
-online prediction and learning problems \cite{%Cesa-BianchiLugosi2006,%Maron1997,
+change detection \citep{KiferShaiGehrke2004,8000571} 
+and classification \citep{Zia-UrRehman2012} in data streams;
+outlier analysis in large databases \citep{Aggarwal2015};
+online optimisation \citep{FlaxmanKalaiMcMahan2005,AgarwalDekelXiao2010}; and, of most relevance to this paper, 
+online prediction and learning problems \citep{%Cesa-BianchiLugosi2006,%Maron1997,
 Mnih:2008:EBS:1390156.1390241,DBLP:conf/aaai/ThomasTG15,Maurer50empiricalbernstein},
-and in settings with bandit feedback \cite{AuerCesa-BianchiEtal_SIAM2003,AudibertBubeck_COLT2009,Tran-ThanhChapmanRJ_AAAI2009}.
+and in settings with bandit feedback \citep{AuerCesa-BianchiEtal_SIAM2003,AudibertBubeck_COLT2009,Tran-ThanhChapmanRJ_AAAI2009}.
 
-There are many famous concentration inequalities such as Chebyshev's inequality~\cite{Chebyshev1}, Bernstein's inequalities~\cite{Burnstein1}, 
-Hoeffding's inequalities~\cite{hoeffding1} and Bennett's inequalities~\cite{10.2307/2282438}.
-New analysis has yielded a wider range of concentration inequalities and methods of generating them ~\cite{MR3363542,Boucheron2004}. 
+There are many famous concentration inequalities such as Chebyshev's inequality~\citep{Chebyshev1}, Bernstein's inequalities~\citep{Burnstein1}, 
+Hoeffding's inequalities~\citep{hoeffding1} and Bennett's inequalities~\citep{10.2307/2282438}.
+New analysis has yielded a wider range of concentration inequalities and methods of generating them ~\citep{MR3363542,Boucheron2004}. 
 In particular, various innovations concern the concentration of more-general functions of random variables, such as 
-the Efron-Stein~\cite{efron1981} and 
-entropy methods~\cite{Boucheron_concentrationinequalities}.%, and Talagrand's concentration inequality~\cite{Talagrand1995}.
+the Efron-Stein~\citep{efron1981} and 
+entropy methods~\citep{Boucheron_concentrationinequalities}.%, and Talagrand's concentration inequality~\cite{Talagrand1995}.
 
 Recently, concentration inequalities have been developed which do not rely on variance information, but incorporate uncertainty about variance information via the sample variance, these bounds are sometimes called \textit{Empirical Bernstein Bounds} (EBB).
 These concentration inequalities describe the likely difference of a sample mean from the population mean in terms of the \textit{sample} variance, some of the first EBBs given in literature are:
@@ -168,7 +168,7 @@ Using this kind of lemma, many well-known examples of Chernoff bounds follow fro
 
 For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality.
 And thus, a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
-Hoeffding's inequality (\cite{hoeffding1}) is an illustrative example of this process of deriving a Chernoff bound:
+Hoeffding's inequality \citep{hoeffding1} is an illustrative example of this process of deriving a Chernoff bound:
 
 \begin{theorem}[Hoeffding's inequality for mean zero]\label{hoeffdings_inequality}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:

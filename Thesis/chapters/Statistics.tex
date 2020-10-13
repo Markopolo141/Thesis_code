@@ -89,7 +89,7 @@ If $d=\max(b,-a)$ we can choose $\gamma=1$ and $\alpha=(\exp(-q d^2)-1)d^{-2}$ (
 &\le \exp\left(\log\left(\frac{\sigma^2}{D^2}\exp(-q D^2)-\frac{\sigma^2}{D^2} + 1\right)\right)
 \end{align*}
 Given that for any $0\le \kappa \le 0.5$ and $x\le 0$ that: $$\log\left(\kappa\exp(x)-\kappa + 1\right) \le \kappa x+\frac{1}{2}\kappa(1-\kappa)x^2$$
-Letting $\kappa=\frac{\sigma^2}{D^2}$ and $x=-qD^2$, which is valid by Popoviciu's inequality (\cite{zbMATH05780164}) $\sigma^2\le D^2/4$, then:
+Letting $\kappa=\frac{\sigma^2}{D^2}$ and $x=-qD^2$, which is valid by Popoviciu's inequality (see \cite{zbMATH05780164}) $\sigma^2\le D^2/4$, then:
 $$ \E[\exp(-q X^2)] \le \exp\left(\frac{1}{2}\sigma^2q^2(D^2-\sigma^2)-\sigma^2q\right) \le \exp\left(\frac{1}{2}\sigma^2q^2D^2-\sigma^2q\right)$$
 and the result follows by multiplying by $\exp(q\sigma^2)$.
 \end{proof}
@@ -122,7 +122,7 @@ Thus:
 For the case of sampling without replacement, there is an alternative result that can be directly substituted, given in Lemma~\ref{martingale0}, below, which can be tighter in certain cases.
 Before this, particular note must be made that the inequality above, Lemma~\ref{martingale1} can be used in the context of either sampling with or without replacement.
 In contrast, Lemma~\ref{martingale0} can only be used when sampling without replacement. 
-This distinction was shown to be true by Hoeffding \cite{hoeffding1}, and is rooted in an already presented Lemma \ref{hoeffdings_reduction}.
+This distinction was shown to be true by \cite{hoeffding1}, and is rooted in an already presented Lemma \ref{hoeffdings_reduction}.
 
 We now state Lemma~\ref{martingale0}, an inequality regarding the moment generating function of the average of samples taken specifically \textit{without replacement}.
 When the sampling takes place without replacement the inequality of Lemma~\ref{martingale1} can potentially be tightened to take advantage of the finite size of the population.
