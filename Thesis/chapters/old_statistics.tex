@@ -1,3 +1,4 @@
+\pagebreak
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
 The minimisation of inequalities such as EBBs cannot be directly be used as a method of choosing samples in stratified sampling.
@@ -5,12 +6,12 @@ Since the aggregated population mean estimate does not itself have a sample vari
 An EBB can be a bound for the mean of a stratum, but an EBB cannot bind the aggregated mean estimate of all the strata.
 However in this section, we show that EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
 The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
-Hence these new sampling methodologies will be variance sensitive and also possible in a single step, rather than two steps - as is necessary in Neyman sampling.
+Hence these new sampling methodologies will be variance sensitive and also possible to conduct in a single step, rather than two steps - as is necessary in Neyman sampling.
 
 \subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
 
-To create a bound for the error of a stratified mean estimator from EBBs it is nessisary to use probability unions to bind them together.
-the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} give deriations on the error, and the absolute error, of the stratified mean estimator.
+To create a bound for the error of a stratified mean estimator from EBBs it is necessary to use probability unions to bind them together.
+the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} give derivations on the error, and the absolute error, of the stratified mean estimator.
 
 \begin{theorem}\label{triangle_theorem1}
 If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
@@ -60,7 +61,7 @@ These two theorems make clear that sampling to minimise either the error or the 
 It is possible to apply these theorems with a choice of EBB to create a bound for the stratified mean error, which can then be minimised by choosing appropriate sample numbers.
 
 This method is made clear in pseudocode in algorithm \ref{alg3}.
-In algorithm \ref{alg3}, as scan is conducted over the possible strata in lines 4-10, and the improvement that would be offered by taking an additional sample from the stratum's respective EBB is calculated.
+Where a scan is conducted over the possible strata in lines 4-10, and the improvement that would be offered by taking an additional sample from the stratum's respective EBB is calculated.
 The strata that gives the most reduction of its EBB for a prospective additional sample is chosen to have an additional sample taken, and its sample variance is recalculated in lines 11-13; this process repeats until the sample budget is exhausted.
 %This algorithm \ref{alg3} is much more simple than algorithm \ref{alg2} primarily because the scan through the strata only needs to consider the change in the EBB associated with that stratum.
 %This is because Theorem \ref{triangle_theorem2} identifies that the bound on the stratified mean estimate is the sum of the EBBs of the strata, hence they can be considered as minimising factors in isolation.
@@ -99,7 +100,7 @@ In the next section we derive and numerically generate a stronger EBB for applic
 
 
 
-
+\newpage
 \section{The derivation of a stronger EBB}\label{section:new_EBB}\label{derivation}
 
 There are various EBBs which place variance-sensitive bounds on the mean, and it remains an outstanding task is to see how much these EBBs can be sharpened; we take inspiration from the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
@@ -180,7 +181,7 @@ Minimizing with respect to $f$ occurs at $f=\frac{-z}{b}$ and gives the result.
 
 \input{figs/parabola_illustrations.tex}
 
-The derivation of Bennet's inequality is separated into two parts as the above Lemma \ref{thm:parabola} will also be reused to derive a weaker but more mathematically manipulatable inequality later (as Lemma \ref{expectation1}).
+The derivation of Bennett's inequality is separated into two parts as the above Lemma \ref{thm:parabola} will also be reused to derive a weaker but more mathematically manipulatable inequality later (as Lemma \ref{expectation1}).
 
 The essential difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a line over the exponential function.
 And this second order parabolic term makes Bennett's inequality sensitive to the variance of the distribution whereas Hoeffding's inequality is not.
@@ -213,19 +214,18 @@ Then applying lemma \ref{chernoff1} to the mean of the negated sample squares gi
 $$
 \p(-\hat{\sigma}_0^2\ge t) \le \left(\frac{\sigma^2}{d^2}\exp(-qd^2)+1-\frac{\sigma^2}{d^2}\right)^n\exp(-qnt) 
 $$
-Substituting $t$ for $y-\sigma^2$ and minimizing with $q$ completes the proof, minimum $q$ occurs at:
+Substituting $t$ for $y-\sigma^2$ and minimising with $q$ completes the proof, minimum $q$ occurs at:
 $$ q = \frac{1}{d^2}\log\left(\frac{\sigma^2(-\sigma^2 + d^2 + y)}{(\sigma^2-d^2)(y-\sigma^2)}\right) $$
 \end{proof}
 
 Note that the application of this inequality (and thence the domain of function $H_2^n$) are only sensibly considered in certain settings, such as when:
 (i) it is defined for $a<0<b$ (because otherwise the mean could not be zero), and (ii) $\sigma^2\le-ab\le (b-a)^2/4$ by Popoviciu's inequality\footnote{see \cite{zbMATH05780164}} (as it is not possible for the variance to be larger given the width of the data bounds).
-Since the Theorem \ref{sample_squares} is derived from a fundamentally similar process to Bennet's inequality we expect it to have similarly strong properties.
 
 
 
 \subsection{A new bound on the sample variance}\label{subsection:sample_variance_bound}
 
-By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares. it is possible to create a bound on the sample variance useing lemma \ref{variance1}, as follows.
+By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares. it is possible to create a bound on the sample variance using lemma \ref{variance1}, as follows.
 
 
 \begin{theorem}[Sample Variance Bound]\label{variance2}
@@ -264,8 +264,8 @@ The use of this Theorem \ref{variance2} (and thus implicitly the domain of funct
 
 \subsection{Generalised EBB creation process}\label{subsection:general_ebb_creation}
 
-Theorem \ref{hoeffdings1} presents a bound for the sample mean given the variance, and Theorem \ref{variance2} presents a probability bound for the error of the sample variance from the variance. The task remaining is to create a new Empirical Bernstein Bound by binding these two together.
-To combine these two theorems to create a bound for the sample mean given the sample variance (ie. a new EBB), we give a theorem that embodies a process slightly improved from that followed by \cite{Maurer50empiricalbernstein}.
+Theorem \ref{hoeffdings1} presents a bound for the sample mean given the variance, and Theorem \ref{variance2} presents a probability bound for the error of the sample variance from the variance. The task remaining is to create a new EBB by binding these two together.
+To combine these two theorems to create a bound for the sample mean given the sample variance, we give a theorem that embodies a process slightly improved from that followed by \cite{Maurer50empiricalbernstein}.
 
 Before beginning this theorem, we need to introduce some notation to ease presentation.
 For a function $f$ with ordered inputs, we denote the inverse of $f$ with respect to its $i${th} input (counting from one) as $f^{-(i)}$, assuming it exists.
@@ -328,7 +328,7 @@ And this process that was used for calculating this numerical EBB consisted of t
 (ii) verifying that the assumptions of Theorem \ref{ebb1} hold for $h(\sigma^2,t)=H_1$ and $f(\sigma^2,w)=H_3$, and;
 (iii) calculating the subsequent result of Theorem \ref{ebb1}.
 
-First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) was identified as the solution to an optimization problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
+First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) was identified as the solution to an optimisation problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
 Despite its complexity, solutions of this sort can be found quickly using a single variable parameter sweep.
 
 Second, it was necessary to verify the assumptions that $h^{-(2)}$, $f^{-(2)}$ and $z^{-(1)}$ exist and that $z^{-(1)}$ and $f^{-(2)}$ are monotonically increasing in their first argument.

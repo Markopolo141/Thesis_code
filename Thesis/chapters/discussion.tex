@@ -2,93 +2,77 @@
 \section{Discussion}
 \label{sec:discussion}
 
-This section involves a multi-part discussion of the features of the derived results and their numerical performance.
-particularly we discuss:
+This section contains discussion of all the parts of this chapter, particularly the nature of the techniques employed, the nature of the mechanisms discovered and the experimental effectiveness in the context of synthetic data.
 \begin{itemize}
 \item	in subsection \ref{subsection:discussion_EBB} we discuss the nature and effectiveness of our derived EBB from section \ref{section:new_EBB}.
 \item	in subsection \ref{subsection:main_discussion} we discuss the performance of our new SEBM method, in the context of synthetic data
-\item	in subsection \ref{sec:multi} we give indication of future work regarding the extention of SEBB to multidimensional data.
+\item	in subsection \ref{subsection:discussion_shapley} we discuss the performance of our SEBM method in the context of sampling the Shapley Value.
+\item	in subsection \ref{sec:multi} we give indication of future work regarding the extension of SEBB to multidimensional data.
 \end{itemize}
 
 
 
 \subsection{The effectiveness of our new EBB}\label{subsection:discussion_EBB}
 
-By being able to numerically evaluate our EBB, we were able to compare the strength of our results against existing concentration bounds, particularly our EBB is compared to Maurer and Pontil's EBB and, Bennett's inequality with perfect variance information.
+In section \ref{section:new_EBB} we went through the process of deriving an EBB using complex components thus yielding a requirement for numerical determination.
+The resulting numerical EBB was then fitted with a symbolic envelope for ease of use - per equation \ref{eq:prob_bound}.
 
-We compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB, 
-given by:
-\begin{equation}\label{maurersbound} \p\left(\mu-\hat{\mu}>\sqrt{\frac{2\hat{\sigma}^2\log(2/y)}{n}}+\frac{7D\log(2/y)}{3(n-1)}\right)<y. \end{equation}
-We felt that it would be fair to compare our EBB to Maurer and Pontil's EBB if they had applied Popoviciu's inequality as a domain restriction and carried it through their derivation, as we did to our own EBB. 
+It is perhaps interesting to compare the strength of the new EBB against other EBBs, particularly we considered that most of the elements in our new EBB were improvements apon the process used in the derivation of Maurer and Pontil's EBB.
+
+And so we compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB given by theorem \ref{MandPsEBB} as:
+$$\p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(2/t)}{n}}+\frac{7D\log(2/t)}{3(n-1)}\right)\le t$$
+We felt that it would only be fair to compare our EBB to Maurer and Pontil's EBB if they had applied Popoviciu's inequality as an appropriate domain restriction and carried it through their derivation, as we did to our own EBB. 
 Specifically, this is the domain where:
-\[ \frac{1}{2}>\frac{\sqrt{\hat{\sigma}^2}}{D}+\sqrt{\frac{2\log(2/y)}{n-1}} \]
+\[ \frac{1}{2}>\frac{\sqrt{\hat{\sigma}^2}}{D}+\sqrt{\frac{2\log(2/t)}{n-1}} \]
 We plotted the improvement our EBB offers in this domain, as shown in Figure \ref{biggraph3}. 
-In this plot, a probability 0.5 bound is shown to shrink by approximately one third.
-But that generally, we observed that our refinement of Maurer and Pontil's EBB was expectedly uniformly tighter across a large range of values.
 
+In this plot, a probability 0.5 bound is shown to shrink by approximately one third.
+And we observed that our refinement of Maurer and Pontil's EBB was uniformly tighter across a large range of values.
 
 \input{figs/ebb_strength.tex}
 
-
-Secondly, a comparison is made of the further improvement in confidence over our EBB that might be achieved with perfect information about the variance; specifically that, Bennett's inequality is used assuming $\hat{\sigma}^2=\sigma^2$. 
-This improvement is plotted in Figure \ref{biggraph4}, which shows that when the variance is small, uncertainty about the variance is the most detrimental to an EBB, such as ours.
-However, in general, going from our EBB to perfect variance information shrinks the bounds by about another third.
-
+While this may be an interesting result, we also sought to put this in perspective with what could ideally be achieved
+And so we conducted a comparison about the further improvement over our EBB that might be achieved with perfect information about the variance; specifically that, Bennett's inequality is used assuming $\hat{\sigma}^2=\sigma^2$.
+The improvement that Bennett's inequality (with perfect variance information) has over our EBB is plotted in Figure \ref{biggraph4}, which shows that when the variance is small, uncertainty about the variance is the most detrimental to an EBB, such as ours.
+However, it is witnessed that loosely going from our EBB to perfect variance information shrinks the bound by about another third.
 In this way (although the results are loose) we can witness that our EBB provides approximately a half-way mark from existing state-of-the-art EBBs to an impossible ideal of having perfect variance information.
 
-The purpose of developing a novel EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value).
-The performance of this new EBB offers (against others) in the context of choosing samples for stratified Stratified Sampling is considered in Section \ref{section:statistics_results}.
+The purpose of developing a stronger EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value) over other EBBs.
+It was expected that the better and more tight the EBBs used, the more likely it would be that iteratively choosing samples to minimise such a bound would produce better sample choices and thus yield better estimate of the population mean.
 
-
-
-
+And while it is evident that the EBB we produced was tighter than Maurer and Pontil's EBB, the actual resulting performance difference between (as seen between \textsc{EEBB} and \textsc{Maurer} in Table \ref{Table1}) is surprisingly marginal; so marginal infact it is comparable against the performance of using unioned Hoeffding bounds - as \textsc{Hoeffding} method.
+We continue discussion of this surprising result in the context of all the other methods in section \ref{subsection:main_discussion}.
 
 
 
 \subsection{Discussion of stratified sampling results}\label{subsection:main_discussion}
 
 
-It is evident that for any probability bound for the error of our stratified sampling mean estimate, it is possible to choose additional samples from strata to minimise the expression.
-And it is expected that the better and more tight the bound, the more likely it will be the case that iteratively choosing samples to minimise the bound will infact produce better estimate of the population mean in practice.
-One of the best ways of testing this hypothesis is with actual data, where divergent sets of synthetic data can be generated (with their mean calculated exactly) and the different methods of sampling tested to see how well they estimate the known means.
-And this is the approach that is taken in the next section, where we compare the accuracy attained via process of minimising the different probability bounds developed in this chapter.
+The results for our different sampling methods are shown across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3}, with the main observation that most of the techniques performed well and similar to Neyman sampling, and that our sampling technique (including SEBM (or SEBM-W) and SECM) performed competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}) despite not having access to knowledge of strata variances.
 
-
-
-
-
-
-
-
-
-
-
-
-In this section we give considerations to the numerical results of this chapter.
-In general, from the results across Figures~\ref{Table1},\ref{Table111} and \ref{biggraph3} and Table \ref{Table2}, the main observation is that most of the techniques performed well and similar to Neyman sampling, and that our sampling technique, SEBM (or SEBM-W) and SECM performed competitively to Neyman sampling (\textsc{Ney} or \textsc{Ney-W}) despite not having access to knowledge of strata variances.
 It is also observed that Neyman sampling was ultimately the most accurate, for reasons that were hinted in section \ref{sec:neyman_sampling}.
 Particularly that if sufficient samples have been taken then the sample means of the strata will tend to approximately be Gaussian distributed by the Central Limit Theorem.
 In this context the strata means have a distribution that is entirely characterised by their mean and variance, and hence so too is the population mean estimate.
-In this way the variance of the sampled population mean is the only parameter determining its error, and minimising it directly translates into improved accuracy.
+Thus the variance of the sampled population mean is the only parameter determining its error, and minimising it directly translates into improved accuracy.
+The fact that the variances of the strata are the only parameters determining the error in the stratified sampling process is most directly exploited by Neyman allocation but is more obscured in SEBM* allocation methodology (as it is based only on a simplification of Bennett's inequality), thus leading to slightly worse results, particularly in Figure \ref{biggraph3}.
+
+However this mode of explanation is perhaps the underlying reason for the similarity in performance of many of the other methods as well, particularly that after sufficiently many samples have been taken the sample means of all of the strata become Gaussian distributed and the performance of the methods then depend primarily on how effectively they estimate the variances of the strata and then allocate accordingly.
+Perhaps in our Beta synthetic data there was not sufficient spread of data variances for it to make significant difference how effectively this variance estimation and allocation was done.
 
 %One of the most remarkable inferences from the data is just how very readily Central Limit Theorem dynamics emerges, from Figure \ref{fig:central_limit_theorem} we can see that the sample error of uniformly distributed data converges almost perfectly to a gaussian distribution even in just 4 samples.
 
-
-This dynamic speaks strongly to the efficiency of Neyman sampling, and indeed our method SEBM* performs worse as it extends from minimising only a simplification of Bennett's inequality - this is most evident in figure \ref{biggraph3}.\footnote{we would expect that a method consisting of minimising Bennett's inequality proper, would yield extremely similar results to Neyman sampling}.
-
-The relative inefficiency of the SECM method is interesting, particularly as it sought to minimise Chebyshev's inequality for the stratified sampling, and under perfect variance information would be identical to Neyman sampling.
-The implication in this context is that the inefficiency of utilising these methods primarily extended from uncertainty about the variances of the strata.
-
-The Bernoulli-uniform data results (plotted in \ref{biggraph3}) were specifically designed to amplify the detriment in stratified sampling that uncertainty about the variances would yeild.
-And that the more infrequent the Bernoulli outlier, the more likely that the methods without variance information would over-sample the bernoulli stratum - which they did.
-It is interesting that the SEBM* method also did this to some extent, although it is not particularly clear exactly why.
-
+Conversely the Bernoulli-uniform synthetic data was specifically designed to create a significant spread in variance between the strata.
+And the results (plotted in \ref{biggraph3}) reveal the design to amplify the detriment in stratified sampling that uncertainty about the variances would yield.
+In this context Neyman sampling is very efficient as it samples based on perfect variance information, and reversely our method SEBM performs worse as it extends from minimising only a simplification of Bennett's inequality under uncertainty of the variance - this is most evident in figure \ref{biggraph3}.
+Because of this uncertainty about the variance, the more infrequent the Bernoulli outlier, the more likely that the methods without variance information would over-sample the Bernoulli stratum - which they did.
+The relative inefficiency of the SECM method also interesting, particularly as it sought to minimise Chebyshev's inequality for the stratified sampling, and under perfect variance information would be identical to Neyman sampling.
+The implication in this context is that the inefficiency of utilising these methods primarily extends from uncertainty about the variances of the strata.
 
 From between Figures~\ref{Table1} and \ref{Table111} we observe that sampling without replacement always performs better than sampling with replacement for the same method, and this improvement is magnified as the number of samples grows large relative to the size of the population. 
 At the same time, simple \textsc{Random} sampling almost always performs worst, because it fails to take advantage of any variance information, and \textsc{Simple} sampling performs even worse as it fails to take into account data stratification, these results are as expected.
-Therefore from the Figures ~\ref{Table1} and \ref{Table111} we see that the primary increase in performance comes from employing stratified sampling over simple sampling, sampling without replacement over sampling with replacement, and then using some method that is more intelligent than randomly selecting samples (\textsc{Random} method) and preferably using stratum variance information to get close to the ideal of Neyman sampling.
+Therefore from the Figures ~\ref{Table1} and \ref{Table111} we see that the primary increase in performance comes from employing stratified sampling over simple sampling, sampling without replacement over sampling with replacement, and then using some method that is more intelligent than randomly selecting samples (ie. \textsc{Random} method) and preferably using stratum variance information to get close to the ideal of Neyman sampling.
 
-Aside from comparing the different performances of these bounds as a target for minimisation by selective sampling, it also pays to consider them on their own - simply as bounds on the stratified mean error.
+Aside from comparing the different performances of these bounds as a target for minimisation by selective sampling, it also was seen to be productive to consider them on their own - simply as bounds on the stratified mean error.
 Particularly we can see a range of different strengths of the bounds in Figure \ref{fig:bounds_widths}.
 
 In Figure \ref{fig:bounds_widths} we have plotted the bound widths of the various probability bounds of this paper in the context of the Beta-distributed data we considered in section \ref{sec:beta_distributed_data} achieved after a sample budget $n=50N$ samples allocated using \textsc{Ney-W} method.
@@ -143,25 +127,26 @@ Also comparing this Figure \ref{fig:bounds_widths}, with Figures \ref{Table1},\r
 %It appears that this factor is at play in the under-performance shown in Figure~\ref{biggraph3} and also the slight under-performance of our method in the Voting Game in Table~\ref{tab2}. 
 %We note that there may be other corner-cases where our method also under-performs.
 
-In considering the comparison of approaches to approximating the Shapley value, our sampling method shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
-This was particularly the case in the context of large sample budgets, as our method (SEBM, with error $e^{SEBM}$) sampled without replacement, while the other methods sampled with replacement. 
-However it would be remiss not to mention the computational overhead of iteratively minimising (one sample at a time) our inequality in the context of our simple example games. 
-This overhead can be a significant drawback, however on more complicated games such as where the characteristic function is slower to calculate, any overhead associated with the sampling choice is expected to be much less relevant. 
-We also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values for our example games.
+\subsection{Discussion of Shapley Value results}\label{subsection:discussion_shapley}
 
-However we attribute our methods success in estimating the Shapley Value primarily to the design decisions used in the creation of those other methods.
+In considering the comparison of approaches to approximating the Shapley value, our sampling method (SEBM, with error $e^{SEBM}$) shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
+This was particularly the case in the context of large sample budgets, as our method sampled without replacement, while the other methods sampled with replacement.
+Additionally we also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values in the context of our example games.
+
+We additionally attribute our methods success in estimating the Shapley Value primarily to the design decisions used in the creation of those other methods.
+Particularly we note that Castro's Neyman sampling method (with error $e^{Ca}$) deploys about half the samples learning about the variance and the other half using a Neyman style allocation.
+The choice of allocating half the samples was identified as a default by Castro with the acknowledgement that the proportion should be treated as a context dependant parameter.
+However, to make a fair comparison with other methods we did not tune any context dependant parameter for any of the methods.
+
+In the process of generating these results one of the major effects that was witnessed in our sampling method (SEBM) was the computational overhead of iteratively minimising (one sample at a time) our inequality (equation \ref{big_equation}) in the context of our simple example games.
+Although we acknowledged and expected a computational overhead, we designed our method with the intention of using it to approximate the GNK value (per section \ref{sec:sampling_techniques}), where each additional sample requires running an optimisation problem, and in this context a computational overhead about which sample to choose was deemed less relevant.
+
 
 %\input{figure-22.tex} 
 
-
-
-
 One primary limitation of our method(s) is that it rests on assumption of known data widths $D_i$ (and in the case of sampling-without-replacement, also on strata sizes $N_i$), which may not be exactly known in practice.
 One way to overcome this may be to use our method with a reliable overestimate these parameters (by expert opinion or otherwise). This approximation or estimation may itself open consideration of other probability bounds and/or sampling methods, however we have not investigated this line of inquiry. 
-
-In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.\footnote{
-Sourcecode for all the experiments in this paper are available at:\\ \href{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling}{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling
-}}
+In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.
 
 % Our concentration inequality, Equation~\eqref{big_equation}, is derived by a combination of Chernoff bounds fused together with probability unions, so it is expected to give conservative confidence intervals on the error of the estimate in stratified random sampling, which may be useful outside of the context of sampling decisions.
 
@@ -173,7 +158,7 @@ Sourcecode for all the experiments in this paper are available at:\\ \href{https
 
 \subsection{Future Work: applications of a Multidimensional Extension}\label{sec:multi}
 
-Although we will not be evaluating this potential, it is notable that our SEBB can be extended to multidimensional data by a simple modification.
+It was noticed that our SEBB can be extended to multidimensional data by a simple modification.
 Specifically, instead of considering data that is single-valued, we consider data points that are vectors. 
 
 Formally, for $n$ strata of finite data points which are all vectors of size $M$, let $n_i$ be the number of data points in the $i$th stratum.
@@ -235,11 +220,7 @@ In this context, an example sampling process might consist of sampling to maxima
 This formulation can be applied to more involved computational tasks that involve sampling data with multiple features or auxiliary variables.
 
 
-
-
-
-
-Second, a potential use of our stratified sampling method is in improving the performance of \textit{stochastic gradient decent} (SGD) methods for training neural networks \citep{2016arXiv160904747R}.
+A potential use of this multi-dimensional stratified sampling method is in improving the performance of \textit{stochastic gradient decent} (SGD) methods for training neural networks \citep{2016arXiv160904747R}.
 Neural networks are trained by iteratively refining their parameters --- the weights and biases of the network --- against a cost function of the network's performance against training data.
 One common method of training neural networks is gradient decent (GD).
 In each iteration of GD, the derivative of how much a change in any parameter would influence the average performance of the network across the training data is calculated as a gradient vector.
@@ -247,9 +228,9 @@ Once this vector is calculated, each network parameter takes a small step in the
 and through many of these steps the network becomes trained.
 
 However in many cases, the entire corpus of training data is not used in each iteration but only a fraction of the corpus is sampled (as a `batch' or `minibatch'), and the average gradient vector of improved performance across the samples of the batch is calculated as an approximation of the true gradient vector. 
-This iterative process has been called SGD, where one of the hyperparameters is the size of the batches, see \cite{DBLP:journals/corr/KeskarMNST16,l.2018dont}.
+This iterative process has been called SGD, where one of the hyperparameters is the size of the batches, see \cite{DBLP:journals/corr/KeskarMNST16}.
 In the context of supervised learning, each element of the training data is labelled with the desired output of the neural network for it, and these labels can serve to naturally stratify the training data; or the data can be stratified by other means too \citep{DBLP:journals/corr/ZhangKM17,DBLP:journals/corr/abs-1804-02772,2014arXiv1405.3080Z}.
-In this setting, Equation~\ref{big_equation2} may be used to choose between samples of labelled training data, in order to sample batches that more-efficiently estimate of the performance gradient, and hence improve the efficiency of neural network training procedure.
+In this setting, Equation~\ref{big_equation2} may be used to choose between samples of labelled training data, in order to sample batches that estimate of the performance gradient more efficiently, and hence improve the efficiency of neural network training procedure.
 This idea of `smart sampling' for neural network training is not particularly new, and our method is potentially compatible with other performance-enhancing techniques in the literature on neural networks \citep{10.1007/978-3-319-24486-0_21,article123123131}.
 
 

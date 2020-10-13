@@ -1,5 +1,4 @@
 
-%\newpage
 
 \section{Stratified sampling by a stratified probability bound}\label{section:SEBB}
 
@@ -101,9 +100,9 @@ However in order to use these moment generating functions we need to explicitly 
 \subsubsection{Some bounds on the Moment Generating Function of sample means}\label{sec:without_replacement}
 
 In order to use the previous bonds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
-To do this we state three further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second and third (Lemma~\ref{hoeffdings_reduction} and Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
+To do this we state two further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second (Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
 
-We first state a lemma that essentially is a formalisation of the process we are familiar with in the last section (see Lemma \ref{chernoff1}):
+We first state a lemma that is essentially is a formalisation of the process we are familiar with in the last section (see Lemma \ref{chernoff1}):
 
 \begin{lemma}[Replacement Bound]\label{martingale1}
 Let $X$ be a random variable that is bounded $a\le X\le b$ with a mean of zero, with $D=b-a$ and variance $\sigma^2$.
@@ -120,8 +119,7 @@ Thus:
 \end{proof}
 
 %The requirement that the mean of the random variable is zero is useful as further derivations are applied to random variables which are shifted such as to have a mean of zero ie. $X-\E[X]$.
-Technically all the inequalities thus far are sufficient for all the further derivations that we conduct to derive our concentration in equality for stratified sampling - in Section \ref{sec:constructing}. 
-However, for the case of sampling without replacement, there is an alternative result that can be directly substituted, given in Lemma~\ref{martingale0}, below, which can be tighter in certain cases.
+For the case of sampling without replacement, there is an alternative result that can be directly substituted, given in Lemma~\ref{martingale0}, below, which can be tighter in certain cases.
 Before this, particular note must be made that the inequality above, Lemma~\ref{martingale1} can be used in the context of either sampling with or without replacement.
 In contrast, Lemma~\ref{martingale0} can only be used when sampling without replacement. 
 This distinction was shown to be true by Hoeffding \cite{hoeffding1}, and is rooted in an already presented Lemma \ref{hoeffdings_reduction}.
@@ -420,7 +418,7 @@ And afterwards, in the next section \ref{section:statistics_results} we will com
 
 
 
-\subsection{Sequential sampling using the Stratified Empirical Berstein Method} \label{sec:SEBMalgorithm}
+\subsection{Sequential sampling using the Stratified Empirical Bernstein Method} \label{sec:SEBMalgorithm}
 
 %To evaluate the effectiveness of the process of sequentially minimising the probability bounds on the error of the sample estimated stratified mean, we need a little development of those algorithms before proceeding to give details on the process of testing them in the context of synthetic data.
 %It is necessary to consider the way in which the concentration inequality of the previous section (Theorem \ref{thm:SEBM_bound}) should be iteratively minimised; and this process is expounded as Algorithm \ref{alg2}.
