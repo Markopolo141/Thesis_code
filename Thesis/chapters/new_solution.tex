@@ -6,7 +6,7 @@ In the last chapter we introduced several different mathematical approaches to t
 Particularly we develop a solution concept that extends Nash bargaining with endogenous disagreement point (from section \ref{sec:solutions_bargaining}) to a coalitional schema accommodating arbitrary numbers of players.
 The solution we give extends the work of others to the space of generalised non-cooperative games, which are then suitable for describing various applications in electricity network situations.
 
-Our new solution concept is called the GNK value, and is computed and compared against other solutions of the previous chapter - particularly, the Shapley Value, LMP and VCG.
+Our new solution concept is called the `GNK value', and is computed and compared against other solutions of the previous chapter - particularly, LMP and VCG.
 We particularly focus in the calculation of monetary transfers in the Optimal Power Flow (OPF) setting.
 By this comparison it is seen that the different solution concepts give rather different outcomes; and we discuss these differences in light of our ethical considerations (from Chapter \ref{cha:background}).
 
@@ -19,7 +19,7 @@ The material from this chapter extends from work which was originally submitted 
 In the previous chapter we introduced several different solution concepts, each stemming from different ethical principles and perspectives.
 
 In this section we detail a new approach that combines some of the features of the solution concepts outlaid in the previous chapter.
-The primary motivation for this new solution, is to attempt to rarefy the intuition behind the Nash bargaining solution concepts (per section \ref{sec:solutions_bargaining}) into a description of total allocation that is suitable for arbitrary number of players - rather than just two.
+The primary motivation for this new solution, is to attempt to distill the intuition behind the Nash bargaining solution concepts (per section \ref{sec:solutions_bargaining}) into a description of total allocation that is suitable for arbitrary number of players - rather than just two.
 
 
 
@@ -43,7 +43,7 @@ Let us begin.
 How should we model ideal competition? In the two player case, existing bargaining solutions (such as Nash's) seem rather difficult to surpass as they describe a singular and axiomatic outcome that is both cooperatively pareto-optimal and also accounts for anti-cooperative strategising.
 
 In the context of Nash bargaining with endogenous disagreement point (per section \ref{subsec:nash_bargaining_endogenous}), the disagreement point was interpreted as a unique point defined by a minimax equilibrium in the payoff-advantage of strategies.
-However there exists a problem extending this scheme directly to three or more players, as there may exist a unique minimax equilibrium in payoff-advantages for strategies in a game of three-or-more players.
+However there exists a problem extending this scheme directly to three or more players, as there may not exist a unique minimax equilibrium in payoff-advantages for strategies in a game of three-or-more players.
 The question then is how to logically and consistently extend Nash's bargaining solution with endogenous disagreement point to an arbitrary number of players.
 
 While it may be possible to arbitrarily choose one of those possible minimax equilibria in a 3+ person game as the disagreement point, 
@@ -70,7 +70,7 @@ Let us derive the GNK value before giving details of its application.
 
 \section{Deriving the GNK value}\label{the_value_def2}
 
-We begin by presenting the axiomatic foundations of the GNK value, starting from the same point as Neyman and Kohlberg's exposition \cite{value2}.
+We begin by presenting the axiomatic foundations of the GNK value, in a similar manner as Neyman and Kohlberg's exposition \cite{value2}.
 We begin by defining the the GNK value to be the integration of \emph{threat} values between possible coalitions; defined via Shapley Value axioms.
 We then describe the \emph{threat} or \emph{advantage} of a coalition $v(S)$ in the context of a \textit{generalized non-cooperative game} (which is our key point of novelty in the solution concept).
 And then we clarify how the GNK value relates to other prominent solution concepts in non-cooperative games.
@@ -92,7 +92,7 @@ v(S)=-v(N\setminus S) \label{myeq2} \quad \forall S\subseteq N.
 \end{equation}
 \end{itemize}
 The intuition for \eqref{myeq2} is that the characteristic function of this game is an measure of the strength of the bargaining position (the `threat' or `advantage') that a coalition, $S$, has over its complement, $N\setminus S$.
-This contrasts against classical cooperative game theory games, where the characteristic function $v(\emptyset)=0$ and equation \ref{myeq2} does not generally hold (see section \ref{sec:cooperative_game_theory_part}).
+This contrasts with classical cooperative game theory games, where the characteristic function $v(\emptyset)=0$ and equation \ref{myeq2} does not generally hold (see section \ref{sec:cooperative_game_theory_part}).
 
 Neyman and Kohlberg's key result was to prove that if $\mathbb{D}$ is the set of all such games, then there exists a unique mapping $\varphi:\mathbb{D}\rightarrow\mathbb{R}^n$ that satisfies the following four axioms:
 
@@ -206,7 +206,7 @@ It also shares a conceptual similarity with Aumann's $\alpha$ and $\beta$ core s
 \section{GNK value applied to DC powerflows}\label{more_involved}
 
 The the GNK value has the potential to be used and compared against other solution concepts in a variety of different contexts,
-however in this section we focus solely on the development of a simple case --- the pricing the one-time consumption and generation of power on a meshed network under DC approximation, where all participants have linear utilities over their own power.
+however in this section we focus solely on the development of a simple case --- the pricing the immeditate consumption and generation of power on a meshed network under DC approximation, where all participants have linear utilities over their own power.
 Although this construction simplifies away some key technical problems in power networks, it allows us to clarify the analysis of the GNK value and its features.
 
 In this section, we consider an example electricity network under DC approximation and show how the electrical consumption/generation of network participants can be modelled as a generalised game. And then give some details of a computational methods which can be used to compute the GNK value in this context.
@@ -241,7 +241,7 @@ In this context, the DC approximated power-flow constraints are expressed as fol
 \end{equation}
 where $p_i^{l}$, $p_i^{u}$, $p_{i,j}^l$, $p_{i,j}^u$ are the upper and lower bounds on power consumption/generation and line limits, respectively.
 
-We can eliminate redundant variables, such as $\theta_i$ and $p_{i,j}$, and to ease presentation, and use the abstract functions $h$ and $g$ to represent the remaining linear functions:
+We can eliminate redundant variables, such as $\theta_i$ and $p_{i,j}$, and to ease presentation, and use the abstract functions $h_j$ and $g_k$ (for indeices $j,k$) to represent the remaining linear functions:
 
 \begin{equation}
 \label{dcopf2}
@@ -295,14 +295,15 @@ These figures show the utility transfers under LMP which each participant makes,
 \subsection{Computing the VCG imputations}\label{subsec:VCG_compute1}
 
 Unlike LMP, calculating VCG payments for our example network involves solving multiple optimisation problems.
-From section \ref{sec:solutions_VCG} we see that the utility payment that each participant makes is their externality.
-Particularly the externality is the difference that the participant's presence makes on the welfare of other participants.
-Where the VCG payment that a participant makes is the difference between the sum of other's utility at the social optimum point $x^*$, and the utility that others would have if the participant were not present and the optimisation were only over the remaining participants, as seen in equation \ref{eq:VCG_payment_rule}.
+From section \ref{sec:solutions_VCG} we see that the utility payment that each participant makes is their externality, where the externality is the difference that the participant's presence makes on the welfare of other participants.
+More specifically, the VCG payment that a participant makes is the difference between the sum of other's utility at the social optimum point $x^*$, and the utility that others would have if the participant were not present and the optimisation were only over the remaining participants, as seen in equation \ref{eq:VCG_payment_rule}.
 
 In this way the socially optimum value $x^*$ needs to be computed, and then additionally an additional optimisation problem for each player - where we assume that the excluded participant has power zero $p_i=0$. Thus in our context, equation \ref{eq:VCG_payment_rule} becomes:
 \begin{equation*} d_i(v)=\argmax_{\sum_{j} u_j(p_j)}\sum_{j\ne i}u_j(p_j) - \argmax_{\sum_{j\ne i} u_j(p_j), p_i=0}\sum_{j\ne i}u_j(p_j)\end{equation*}
 
-In this context the first part of the equation is common to all players contributions $d_i$ but the last part is unique for each.
+The first term in this equation is the sum of utilities at the point which maximises the sum of utilities minus the player $i$.
+The second term in this equation is the sum of other's utilities (ie. excluding player $i$) at the point which maximises the sum of other's utilities in the context that the players power is zero.
+The first part of the equation is common to all player's contributions $d_i$, but the second negative part is unique for each.
 In this way, if there are $n$ participants, there are $n+1$ comparable OPF optimisation problems which need to be solved to calculate VCG payments.
 The SCIP optimisation suite was used solving these optimisation problems (as similar to section \ref{subsec:LMP_compute1}), and the resulting utility payments, and post-payment utilities under VCG are shown in Figures \ref{fig:1h} and \ref{fig:1g}.
 The discussion and comparison of these figures is given in section \ref{sec:features}.
@@ -329,9 +330,9 @@ KKT are well documented, and extend the method of Lagrange multipliers.
 Specifically for maximising an objective function $f(\mathbf{x})$ subject to multiple constraints:
 \begin{equation}\label{eq:KKT_condition1} g_k(\mathbf{x})\le 0 \end{equation}
 \begin{equation}\label{eq:KKT_condition2} h_j(\mathbf{x})=0 \end{equation}
-Then $\mathbf{x}*$ is a local maximum if the following KKT conditions are true, that:
+Then $\mathbf{x}*$ is a local maximum if the following KKT conditions are true:
 \begin{equation}\label{eq:KKT_conditions3} \nabla f(\mathbf{x}*) - \sum_k\lambda_k\nabla g_k(\mathbf{x}*) - \sum_j\mu_k\nabla h_k(\mathbf{x}*) =0\end{equation}
-and that equations \ref{eq:KKT_condition1} and \ref{eq:KKT_condition2} hold for $\mathbf{x}*$, and for all $i$ that $\lambda_i\ge 0$ and $\lambda_ig_i(\mathbf{x}*)=0$.
+and equations \ref{eq:KKT_condition1} and \ref{eq:KKT_condition2} hold for $\mathbf{x}*$, and for all $i$ that $\lambda_i\ge 0$ and $\lambda_ig_i(\mathbf{x}*)=0$.
 
 By KKT conditions, we can convert the DC powerflow constraints given by equations \ref{dcopf2} into a set of equations for maximising an objective function $f(p_{i\in B})$:
 
@@ -342,32 +343,23 @@ By KKT conditions, we can convert the DC powerflow constraints given by equation
 \begin{equation}\label{eq:complementarity_constraint_KKT}\forall k~~ \lambda_kg_k(p_{i\in B}) = 0\end{equation}
 
 Hence the reformulation of our LBPs in equation \ref{knvalue1} involves transforming the inner maximisation/minimisation constraints into KKT conditions.
-And specifically, the reformulation of the inner part of \eqref{knvalue1} to involve KKT conditions is as follows:
+The sets of variable values which satisfy the KKT conditions are called KKT points, if we denote the set of values of an maximised objective function $f(p_{i\in B})$ at the KKT points as $\mathcal{KKT}(f(p_{i\in B}))$.
+Then reformulation of the inner part of \eqref{knvalue1} to involve KKT conditions is as follows:
+
+
+
 
 \begin{equation}
 \label{kkt_optimization1}
 \begin{aligned}
 v(S) =& 
-\frac{1}{2}\max_{\substack{p_i \\ i\in S}}\min\left[\substack{
-	\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\\
-	\text{s.t.}\forall i\notin S~~-\frac{\partial u_i}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\\
-	\forall j~~ h_j(p_{i\in B})=0\\
-	\forall k~~ g_k(p_{i\in B})\le 0\\
-	\forall k~~ \lambda_k \ge 0\\
-	\forall k~~ \lambda_kg_k(p_{i\in B})= 0}
-\right] +\\
-&\frac{1}{2}\min_{\substack{p_i \\ i\notin S}}\max\left[\substack{
-	\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\\
-	\text{s.t.}\forall i\in S~~\frac{\partial u_i}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\\
-	\forall j~~ h_j(p_{i\in B})=0\\
-	\forall k~~ g_k(p_{i\in B})\le 0\\
-	\forall k~~ \lambda_k \ge 0\\
-	\forall k~~ \lambda_kg_k(p_{i\in B})= 0}
-\right]
+ \frac{1}{2}\max_{\substack{p_i \\ i\in S}}   \min\left[-\mathcal{KKT}\left(-\sum_{i\in S} u_i(x,y) + \sum_{i\in N\setminus S}u_i(x,y)\right)\right] +\\
+&\frac{1}{2}\min_{\substack{p_i \\ i\notin S}}\max\left[\mathcal{KKT}\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)\right]
 \end{aligned}
 \end{equation}
 
-By reformulating the inner maximisations/minimisations of \eqref{knvalue1} in this way we replaced the inner minimisations/maximisations in the space $(x,y)\in A$ with minimisations/maximisations over \emph{KKT points}) in the same space.%\footnote{By doing this we tacitly we assume that $u_i(p_i)$ is continuously differentiable, and satisfy some regularity conditions.}
+
+By reformulating the inner maximisations/minimisations of \eqref{knvalue1} in this way we replaced the inner minimisations/maximisations in the space $(x,y)\in A$ with minimisations/maximisations over KKT points) in the same space.%\footnote{By doing this we tacitly we assume that $u_i(p_i)$ is continuously differentiable, and satisfy some regularity conditions.}
 
 As the constraints under DC-approximation are linear and hence define a convex polygon,
 %if we assume that the functions $u_i(p_i)$ are concave then there is either: only ever a single KKT point for all sets of outer variables, or (if weakly-concave) then any of the KKT points will be equal to the global minima (maxima).
@@ -377,32 +369,31 @@ In this way the inner maximisation (minimisation) over the KKT points can be ign
 
 It was also realised that a binary reformulation of the complementary slackness conditions (equation \ref{eq:complementarity_constraint_KKT}) would increase computational efficiency, and so we transformed these complementarity constraints into disjunnctive binary constraints.
 
-Specifically, for each complementary slackness condition $\lambda_kg_k(p_{i\in B}) = 0$ we introduce a binary variable $Z_k$ to indicate which of $\lambda_k$ or $g_k(p_{i\in B})$ is zero and then introduce and larger numbers $\bar{\lambda}_k$ and $ \underline{g_k} $ such as to make the complementary slackness condition equivalent to: $(1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0$ and $\underline{g_k}Z_k\le g_k(p_{i\in B})\le 0$.
+Specifically, for each complementary slackness condition $\lambda_kg_k(p_{i\in B}) = 0$ we introduce a binary variable $Z_k$ to indicate which of $\lambda_k$ or $g_k(p_{i\in B})$ is zero and then introduce large numbers $\bar{\lambda}_k$ and $ \underline{g_k} $ such as to make the complementary slackness condition equivalent to: $(1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0$ and $\underline{g_k}Z_k\le g_k(p_{i\in B})\le 0$.
+Where $\bar{\lambda}_k$ and $\underline{g_k}$ are the estimated upper and lower bounds on the KKT multipliers and constraint functions respectively.
+
+the resulting KKT conditions for maximising and objective function $f(p_{i\in B})$ under this complementary slcakness conditions are as follows:
+
+\begin{equation}\forall i~~\frac{\partial f}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\end{equation}
+\begin{equation}\forall j~~ h_j(p_{i\in B})=0\end{equation}
+\begin{equation}\forall k~~ g_k(p_{i\in B})\le 0\end{equation}
+\begin{equation}\forall k~~ (1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0\end{equation}
+\begin{equation}\forall k~~ \underline{g_k}Z_k\le g_k(p_{i\in B}) \le 0\end{equation}
+
+if we denote the set of values of an maximised objective function $f(p_{i\in B})$ that satisfy these new KKT conditions $\mathbb{KKT}(f(p_{i\in B}))$.
+Then reformulation of the inner part of \eqref{knvalue1} to involve KKT conditions is as follows:
 
 The resulting reformulation is as follows:
 
 \begin{equation}
 \label{optimization_eq1}
 \begin{aligned}
-v(S) =&\frac{1}{2} 
-\max_{\substack{p_i \\ i\in S}}\left[\substack{
-	\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\\
-	\text{s.t.}\forall i\notin S~~-\frac{\partial u_i}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\\
-	\forall j~~ h_j(p_{i\in B})=0\\
-	\forall k~~ (1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0\\
-	\forall k~~ \underline{g_k}Z_k\le g_k(p_{i\in B}) \le 0}
-\right] +\\
-&\frac{1}{2}\min_{\substack{p_i \\ i\notin S}}\left[\substack{
-	\sum_{i\in S}u_i(p_i) - \sum_{i\notin S}u_i(p_i)\\
-	\text{s.t.}\forall i\in S~~\frac{\partial u_i}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\\
-	\forall j~~ h_j(p_{i\in B})=0\\
-	\forall k~~ (1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0\\
-	\forall k~~ \underline{g_k}Z_k\le g_k(p_{i\in B}) \le 0}
-\right]
+v(S) =
+&\frac{1}{2}\max_{\substack{p_i \\ i\in S}}   \left[-\mathbb{KKT}\left(-\sum_{i\in S} u_i(x,y) + \sum_{i\in N\setminus S}u_i(x,y)\right)\right] +\\
+&\frac{1}{2}\min_{\substack{p_i \\ i\notin S}}\left[\mathbb{KKT}\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)\right]
 \end{aligned}
 \end{equation}
 
-Where $\bar{\lambda}_k$ and $\underline{g_k}$ are the estimated upper and lower bounds on the KKT multipliers and constraint functions respectively.
 This reformulation renders the LBP into a mixed integer program which is directly amenable for calculation by optimisation solvers, and the SCIP optimisation suite \cite{MaherFischerGallyetal.2017} was used in our case.
 
 Using the SCIP optimisation suite, the GNK transfers we calculated, and in Figures \ref{fig:1d} and \ref{fig:1c} show the utility transfers and the post-transfer utilities under GNK; we discuss these figures next.
@@ -422,17 +413,17 @@ And through subsequent pairs of figures we can see how the different mechanisms 
 
 In Figure~\ref{fig:1a}, increasing the generator capacity from $0$ shows that power is initially consumed entirely by the consumer at bus 2, 
 who uses all $p_1^l$kW of power and values it at a rate of 1.9 units of utility. This continues until the power constraint on line (1,2) binds, at 70kW.
-Then the consumer at bus 3 begins to be supplied with power who values it at a rate of 1.8 units of utility until its consumption is maximised at 100kW. 
+Then the consumer at bus 3 begins to be supplied with power, who values it at a rate of 1.8 units of utility until its consumption is maximised at 100kW. 
 This dynamic is then repeated for the agent with the next-highest marginal utility for power (given by the utility function coefficients in Figure~\ref{fig:example1}), until the respective line constraints are also met.
 
-Considering the interval the first 70 units of generator capacity (ie. $p_1^l \in [0,-70]$), the LMP prices for this power, for both the generator at bus 1 and the consumer at bus 2, is given by its marginal value, 1.9 (as the line constraint is not active). This corresponds to the slope of the black line in Figure~\ref{fig:1f} (or \ref{fig:1b}) over this interval. 
-More generally, the full set of the LMP transfers plotted in Figure~\ref{fig:1f} are given by the Lagrange multiplier for power conservation in the OPF optimisation multiplied by the power consumed at that bus, and that as the generation capacity increases that the marginal price of power changes, and the gradients of the lines change in discrete steps as the utility functions in the example network are linear.
+Considering the interval the first 70 units of generator capacity (ie. $p_1^l \in [0,-70]$), the LMP price for this power, for both the generator at bus 1 and the consumer at bus 2, is given by its marginal value 1.9 (as the line constraint is not active). This corresponds to the slope of the black line in Figure~\ref{fig:1f} (or \ref{fig:1b}) over this interval. 
+More generally, the full set of the LMP transfers plotted in Figure~\ref{fig:1f} are given by the Lagrange multiplier for power conservation in the OPF optimisation multiplied by the power consumed at that bus, and that as the generation capacity increases the marginal price of power changes, and the gradients of the lines change in discrete steps as the utility functions in the example network are linear.
 
 Additionally, the VCG payments are plotted against $p_1^l$ in Figures \ref{fig:1h} and resulting utilities in Figure \ref{fig:1g}.
 The VCG payments are similar to the LMP payments, except that instead of payment proportional to the marginal unit of electricity, each player is compensated at his/her marginal cost of their participation.
 VCG takes into account the marginal effect that each of the player's participation has apon each other at the social optimum
 
-In contrast from VCG and LMP, the GNK value takes into account the full bargaining position of each agent and also every possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
+In contrast VCG and LMP, the GNK value takes into account the full bargaining position of each agent and also every possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
 The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1d}.
 
 From these graphs we can witness some of the qualities of the GNK value against LMP and VCG.
@@ -452,7 +443,7 @@ This continuity property is proven in the Appendix \ref{appendix:continuity_of_G
 %, and are generally continuous with continuous deformations of the strategy space $A$.
 This continuity is similarly witnessed in VCG imputations, but notably not in the context of LMP payments.
 
-It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1d}, where the payments received by generator 1 drop sharply with increasing generator capacity.
+It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1f}, where the payments received by generator 1 drop sharply with increasing generator capacity.
 This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the payments under the GNK value (Figure \ref{fig:1c}) and VCG imputation (Figure \ref{fig:1g}) feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
 which is one known cause of the volatility experienced in electricity markets \cite{RePEc:aen:journl:2006v27-02-a09}. 
@@ -470,7 +461,7 @@ In contrast, the post-payment utilities under the GNK value and VCG are almost a
 The transactions under LMP and VCG are not necessarily budget-balanced and can yield a surplus or deficit, whereas payments under the GNK value are necessarily budget-balanced and result in no surplus or deficit.
 This is an outcome of the GNK value's axiomatic derivation, as given by equation \eqref{myeq}.
 Under LMP, each participant is credited or debited at the effective rate of supply for their location but there is no guarantees that the total payments should add to zero.
-This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1d}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
+This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1f}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
 The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called ``congestion-rents'' that are usually collected by owners of transmission lines \cite{lmp2} (and which are often also the owners of the utility-scale generation assets in vertically-integrated systems).
 Additionally VCG payments are known not to be budget balanced generally and may yield a surplus or deficit depending on various conditions, as considered in section \ref{sec:solutions_VCG}.
 
