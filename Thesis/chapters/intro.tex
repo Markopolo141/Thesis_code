@@ -2,7 +2,7 @@
 \label{cha:intro}
 
 The Australian electricity grid is the facing structural changes in response to the pressures of new technology.
-And the way in which the grid should change to meet these new pressures is cause for reflection on the morally ambiguous question at the heart of electrical transactions on the grid - how \textit{should} electricity be traded?\\
+And the way in which the grid should change to meet these new pressures is cause for reflection on the morally ambiguous question at the heart of electrical transactions on the grid - how \textit{should} electricity be traded?
 
 Or, to ask our research question with more granularity:
 when the possible power-flows on an electricity network are valued and influenced by participants differently, 
@@ -143,8 +143,8 @@ Thus our investigation is to explore and evaluate the general question of what m
 
 \section{Research and Problem Approach}
 
-The fundamental research question about what `market structures \textit{should} be implemented' is easily identified as having a slight moral and ethical quality, in Chapter \ref{sec:philosophy} we survey some of the philosophy associated with the ethics of \textit{Distributed Justice}.
-Distributed Justice is a branch of moral philosophy associated with the distribution of goods and services in society, about which electricity and electrical services are naturally considered as an example.
+The fundamental research question about what `market structures \textit{should} be implemented' is easily identified as having a slight moral and ethical quality, in Chapter \ref{sec:philosophy} we survey some of the philosophy associated with the ethics of \textit{Distributive justice}.
+Distributive justice is a branch of moral philosophy associated with the distribution of goods and services in society, about which electricity and electrical services are naturally considered as an example.
 In this context the moral philosophy considers different ideas that people have about what distributions are justified in relation to more general moral principles, particularly such as various descriptions of `Equality', `Deservedness', `Reward', `Efficiency', etc. 
 With the central observation being, that these broad and blurry ethical ideals conflict between themselves and do not logically imply specific electrical market structures.
 
@@ -152,7 +152,7 @@ With the central observation being, that these broad and blurry ethical ideals c
 However there do exist various mathematical solutions and structures which function as mathematical formulations of these different ethical perspectives, particularly we review a range of different structures and show how they attempt to describe different broader ethical ideas in Chapter \ref{cha:solutions}.
 These existing solutions form a part of the background of our research, and also provide inspiration and a contrast for further developments.
 For instance, we review the details about the Vickrey-Clarke-Groves (VCG) mechanism, showing that it embodies an idea about compensation for contribution, and identify how it has been proposed as a mechanism for dictating payments between participants on electricity networks.
-Other mechanisms which we consider include Locational Marginal Pricing (LMP), the Shapley Value and cooperative game theory solutions such as the Core, and descriptions of idealised bargaining such as Nash bargaining solution concepts.
+Other mechanisms which we consider include Locational Marginal Pricing (LMP), cooperative game theory solutions such as the Shapley Value, and descriptions of idealised bargaining such as Nash bargaining solution concepts.
 These mechanisms were investigated specifically because of their abstract and general applicability, and hence they could (in theory) account all the practical factors and possible confluences of electrical system details.
 This was seen to be important quality as it is understood that future electricity networks will encompass differing electrical situations with a range of smart devices (such as battery technologies), and the ways in which these devices and the electricity they consume/generate should be valued is part of the research problem.
 
@@ -162,19 +162,20 @@ We developed a novel solution concept which we called the \textit{Generalized Ne
 
 We identified Nash bargaining as a particularly interesting mechanism which was able to be applied to provide a unique and direct answer to the question of how electricity should be traded between two participants that could directly consider all possible ways that the electrical participants could interact and influence each other.
 Our new solution, the GNK value, was designed as a generalisation of Nash bargaining to larger numbers of players (more than two), additionally it was made to be even more extensible as it was designed to work in the space of generalised games and so able to account for arbitrary constraints on mutual player interactions.
-The GNK value embodied the cooperative game theory axioms (and the marginalism) of the Shapley Value, and contrasting against the more immediate marginalism of VCG and LMP.
-And we developed and applied the GNK value against VCG and LMP in the context of randomly generated electricity networks, to witness and discuss the differences between them.
+The GNK value embodies the cooperative game theory axioms (and the marginalism) of the Shapley Value, and contrasts against the more immediate marginalism of VCG and LMP.
+We developed and applied the GNK value against VCG and LMP in the context of randomly generated electricity networks, to witness and discuss the differences between them.
 
 The GNK value is rooted in bargaining perspective and rewards participants for the advantage they might have in an idealised competition with others.
 It was hoped that an idealised bargaining solution like this would mirror the kinds of arrangements that people with divergent interests would freely come to anyway, and hence would ascribe economic value to electricity resources in the most natural way; however this process ultimately yielded a disappointing result, as the net result failed specific ethical criteria.
-The specific major ethical issue with the GNK value is that it does not respect the ethical criterion called `individual rationality'.
-Individual Rationality is the desirable quality that every participant is ascribed non-negative net utility, specifically if zero utility is interpreted as the utility of a non-participant, then Individual Rationality property implies that every participant is made better-off by participating.
+The specific major ethical issue witnessed in GNK value was that it does not respect the ethical criterion called `individual rationality'.
+Individual Rationality is the desirable quality that every participant is ascribed non-negative net utility.
+If zero utility is interpreted as the utility of a non-participant, then Individual Rationality property implies that every participant is made better-off by participating.
 It was hoped that Individual Rationality would emerge in the context of larger networks.
 
 The GNK value also extended from the Shapley Value axioms, and it inherited the NP-hard computational burden associated with the Shapley Value.
 However through investigation into sampling techniques and in utilising a particular proxy we were able to extend the GNK value from being intractable for ~14 bus sized nodal networks, to being computable to about 80-100 sized nodal networks.
 This was identified as a computational accomplishment particularly because if the GNK value were to be calculated exactly for a 100 sized nodal network it would involve $2^{100}$ power flow optimisations.
-This computational accomplishment was done through a process of considering the different ways that our GNK value value could be sampled, we developed some of our own complicated sampling technique called the Stratified Empirical Bernstein Method (SEBM).
+This computational accomplishment was done through a process of considering the different ways that our GNK value value could be sampled, and we developed our own complicated sampling technique called the Stratified Empirical Bernstein Method (SEBM).
 
 The SEBM was derived as a online method of choosing samples in the context of stratified sampling, where the orthodox method of choosing samples (called Neyman sampling) takes a necessary two unique stages to complete.
 The development of the SEBM method was conducted in the context of evaluating other methods for sample selection in Chapter \ref{chap:stratified_sampling_chapter}, and the performance of multiple methods were evaluated on sampling synthetic data sets.
