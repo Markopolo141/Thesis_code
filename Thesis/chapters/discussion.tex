@@ -131,12 +131,12 @@ Also comparing this Figure \ref{fig:bounds_widths}, with Figures \ref{Table1},\r
 
 In considering the comparison of approaches to approximating the Shapley value, our sampling method (SEBM, with error $e^{SEBM}$) shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
 This was particularly the case in the context of large sample budgets, as our method sampled without replacement, while the other methods sampled with replacement.
-Additionally we also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values in the context of our example games.
+And we also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values in the context of our example games.
 
-We additionally attribute our methods success in estimating the Shapley Value primarily to the design decisions used in the creation of those other methods.
+We attribute our methods success in estimating the Shapley Value primarily to the design decisions used in the creation of those other methods.
 Particularly we note that Castro's Neyman sampling method (with error $e^{Ca}$) deploys about half the samples learning about the variance and the other half using a Neyman style allocation.
-The choice of allocating half the samples was identified as a default by Castro with the acknowledgement that the proportion should be treated as a context dependant parameter.
-However, to make a fair comparison with other methods we did not tune any context dependant parameter for any of the methods.
+The choice of allocating half the samples was identified as a default by Castro with the acknowledgement that the proportion should be treated as a tunable parameter depending on the particular context of the cooperative game.
+However, to make a fair comparison did not tune any such parameters for any of the methods.
 
 In the process of generating these results one of the major effects that was witnessed in our sampling method (SEBM) was the computational overhead of iteratively minimising (one sample at a time) our inequality (equation \ref{big_equation}) in the context of our simple example games.
 Although we acknowledged and expected a computational overhead, we designed our method with the intention of using it to approximate the GNK value (per section \ref{sec:sampling_techniques}), where each additional sample requires running an optimisation problem, and in this context a computational overhead about which sample to choose was deemed less relevant.
@@ -145,8 +145,8 @@ Although we acknowledged and expected a computational overhead, we designed our 
 %\input{figure-22.tex} 
 
 One primary limitation of our method(s) is that it rests on assumption of known data widths $D_i$ (and in the case of sampling-without-replacement, also on strata sizes $N_i$), which may not be exactly known in practice.
-One way to overcome this may be to use our method with a reliable overestimate these parameters (by expert opinion or otherwise). This approximation or estimation may itself open consideration of other probability bounds and/or sampling methods, however we have not investigated this line of inquiry. 
-In practice, it might also be advisable to run our method with an underestimate of the data widths, as the sampling process is fundamentally sensitive the the shape of the inequality and not necessarily its magnitude or accuracy as a bound.
+One way to overcome this may be to use our method with a reliable overestimate these parameters (by expert opinion or otherwise) and such estimation may itself open consideration of other probability bounds and/or sampling methods.
+Conversely, it might also be advisable to run our method with an underestimate of the data widths, as in-practice the sampling process is fundamentally sensitive to the shape of the inequality and not necessarily its magnitude or accuracy as a bound.
 
 % Our concentration inequality, Equation~\eqref{big_equation}, is derived by a combination of Chernoff bounds fused together with probability unions, so it is expected to give conservative confidence intervals on the error of the estimate in stratified random sampling, which may be useful outside of the context of sampling decisions.
 

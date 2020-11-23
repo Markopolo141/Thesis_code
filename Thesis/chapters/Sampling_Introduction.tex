@@ -110,7 +110,7 @@ It is therefore suitable to ask if there are alternative concentration inequalit
 
 \subsection{Concentration inequalities and Chernoff bounds}
 
-In order to consider what alternative concentration inequalities exist, which apply in stratified sampling and do not depend on known variances we need to turn to the space of concentration inequalities generally. 
+In order to consider what alternative concentration inequalities exist which apply in the case of stratified sampling and also do not depend on known variances, we need to turn to the space of concentration inequalities generally. 
 
 Neyman allocation implicitly minimises Chebyshev's inequality, but Chebyshev's inequality is one example of many \textit{concentration inequalities}.
 Concentration inequalities are applied in a range of data science contexts for a variety of prediction, machine learning and hypothesis testing tasks, including:
@@ -146,10 +146,10 @@ In exactly the same context as in Theorem \ref{MandPsEBB}
     \end{equation}
 \end{theorem}
 
-In later section \ref{section:unionising_ebbs} we will show how these types of inequalities can be modified and subsequently minimised to create new methods of sample selection in stratified random sampling, and these new methods will not depend on knowledge of the variances proper (unlike Neyman sampling) but only the sample variances of the strata.
+In later section \ref{section:unionising_ebbs} we will show how these types of inequalities can be modified and subsequently minimised to create new methods of sample selection in stratified random sampling.%, and these new methods will not depend on knowledge of the variances proper (unlike Neyman sampling) but only the sample variances of the strata.
 Unfortunately these EBBs cannot directly be used to minimise the error in the aggregated population estimate, as the aggregated population estimate does not itself have a sample variance.
 
-In section \ref{derivation} we show how it is possible to derive stronger EBBs using classical techniques, hence it is pertinent to introduce the components used in the process of deriving EBBs.
+In section \ref{derivation} we show how it is possible to derive stronger EBBs, thus we introduce some of the components used in the process of deriving EBBs.
 One of the more famous Concentration Inequalities is \textit{Hoeffding's Inequality} which is one of a class of concentration inequalities called \textit{Chernoff bounds}.
 
 \begin{lemma}[Chernoff Bound]\label{chernoff1}
@@ -207,7 +207,7 @@ Alternatively by rearranging:
 %These assumptions may be based on prior information, expert opinion, or determined from the characteristics of the system under observation.
 
 It is also worth noting that Hoeffding's inequality is a rather friendly result that states that the concentration of sample mean is probability bounded by a Gaussian function, which might be seen as an intuitive corollary of the Central Limit Theorem. 
-We give its derivation to illustrate the technique of deriving a Chernoff bound, additionally we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma\footnote{It is also worth noting that this lemma is actually unnecessary in the derivation of Hoeffding's inequality, and failing to incorporate it ultimately results in a stronger but uglier bound - see Appendix \ref{Appendix:more_concentration}}:
+We give its derivation to illustrate the technique of deriving a Chernoff bound, additionally we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma:%\footnote{It is also worth noting that this lemma is actually unnecessary in the derivation of Hoeffding's inequality, and failing to incorporate it ultimately results in a stronger but uglier bound - see Appendix \ref{Appendix:more_concentration}}:
 
 \begin{lemma}[Hoeffding's Lemma]\label{Hoeffdings_lemma_lemma}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero, then for $D=b-a$ and any $s>0$:
@@ -246,10 +246,11 @@ For any random variables $a,b$ and $c$:
 \[\p(a>c) \; \le \; \p(a>b) + \p(b>c)\]
 \end{lemma}
 \begin{proof}[Proof of Probability Union - Lemma \ref{prob_union}]
-For events $A$ and $B$\\$\p(A\cup B) \le \p(A)+\p(B)$\\
-hence for events $a>b$ and $b>c$:\\ $\p((a>b) \cup (b>c)) \le \p(a>b) + \p(b>c)$\\
-If $a>c$, then $(a>b) \cup (b>c)$ is true irrespective of $b$, so:\\
-$\p(a>c) \le \p((a>b) \cup (b>c))$
+For events $A$ and $B$
+$$\p(A\cup B) \le \p(A)+\p(B)$$
+hence for events $a>b$ and $b>c$: $$\p((a>b) \cup (b>c)) \le \p(a>b) + \p(b>c)$$
+If $a>c$, then $(a>b) \cup (b>c)$ is true irrespective of $b$, so:
+$$\p(a>c) \le \p((a>b) \cup (b>c))$$
 \end{proof}
 This relationship is a well known and useful tool for settings where the probability relationship between $a$ and $c$ is unknown but the relationship between $a$ and some $b$, and also between that $b$ and $c$ is known.
 Although this relationship is quite useful, it is known to be a very weak relationship, as it holds with equality (ie. $\p(a>c)=\p(a>b)+\p(b>c)$) only if $\p((a>b)\cap(b>c))=0$.
@@ -272,8 +273,8 @@ For $n$ samples $x_i$, sample mean $\hat{\mu} = \frac{1}{n}\sum_ix_i$, sample va
 \end{lemma}
 \begin{proof}[Proof of Variance Decomposition - Lemma \ref{variance1}]
 By expanding $\hat{\sigma}^2$ into parts:\\
-\(\quad\hat{\sigma}^2=\frac{1}{n-1}\sum_i\left(x_i-\frac{1}{n}\sum_jx_j \right)^2 
-=\frac{1}{n-1}\left(\sum_ix_i^2-\frac{1}{n}\sum_{i,j}x_ix_j \right) = \frac{n}{n-1}\left(\hat{\sigma}_0^2-\hat{\mu}^2\right)\)
+$$\quad\hat{\sigma}^2=\frac{1}{n-1}\sum_i\left(x_i-\frac{1}{n}\sum_jx_j \right)^2 
+=\frac{1}{n-1}\left(\sum_ix_i^2-\frac{1}{n}\sum_{i,j}x_ix_j \right) = \frac{n}{n-1}\left(\hat{\sigma}_0^2-\hat{\mu}^2\right)$$
 \end{proof}
 
 %And we will eventually use this result to create bounds for the sample variance from bounds on the sample squares about the mean and the mean squared.
