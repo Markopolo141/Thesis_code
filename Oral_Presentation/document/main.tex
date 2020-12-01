@@ -1,0 +1,309 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arsclassica Article
+% LaTeX Template
+% Version 1.1 (1/8/17)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Lorenzo Pantieri (http://www.lorenzopantieri.net) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+10pt, % Main document font size
+a4paper, % Paper type, use 'letterpaper' for US Letter paper
+oneside, % One page layout (no page indentation)
+%twoside, % Two page layout (page indentation for binding and different headers)
+headinclude,footinclude, % Extra spacing for the header and footer
+BCOR5mm, % Binding correction
+]{scrartcl}
+
+\input{structure.tex} % Include the structure.tex file which specified the document structure and layout
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR(S)
+%----------------------------------------------------------------------------------------
+
+\title{\normalfont\spacedallcaps{Oral Presentation Summary}} % The article title
+
+\subtitle{In requirement for PhD program} % Uncomment to display a subtitle
+
+\author{\spacedlowsmallcaps{Mark Burgess}} % The article author(s) - author affiliations need to be specified in the AUTHOR AFFILIATIONS block
+
+%\date{} % An optional date to appear under the author(s)
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	HEADERS
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\sectionmark}[1]{\markright{\spacedlowsmallcaps{#1}}} % The header for all pages (oneside) or for even pages (twoside)
+%\renewcommand{\subsectionmark}[1]{\markright{\thesubsection~#1}} % Uncomment when using the twoside option - this modifies the header on odd pages
+\lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray} \vline}\color{halfgray}\hspace{0.5em}\rightmark\hfil}} % The header style
+
+\pagestyle{scrheadings} % Enable the headers specified in this block
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LISTS OF FIGURES AND TABLES
+%----------------------------------------------------------------------------------------
+
+\maketitle % Print the title/author/date block
+
+\setcounter{tocdepth}{2} % Set the depth of the table of contents to show sections and subsections only
+
+\tableofcontents % Print the table of contents
+
+%\listoffigures % Print the list of figures
+
+%\listoftables % Print the list of tables
+
+
+%----------------------------------------------------------------------------------------
+%	AUTHOR AFFILIATIONS
+%----------------------------------------------------------------------------------------
+
+\let\thefootnote\relax\footnotetext{\textit{Australian National University, College of Engineering and Computer Science (mark.burgess@anu.edu.au)}}
+
+%----------------------------------------------------------------------------------------
+
+%\newpage % Start the article content on the second page, remove this if you have a longer abstract that goes onto the second page
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+
+The Australian electricity system is currently being subjective to technological change, particularly the replacement of fossil fuel generators by solar and renewable energy sources, and the intermittancy of renewable generation technology is driving the need for investigation and implementation of energy storage technologies.
+Particularly there is much investigation into the potential of renewable energy resources on distribution networks - or Distributed Energy Resources (DERs) - as a solution of future energy grids.
+However there currently does not exist any agreed apon market structure for the participation of DERs in future electricity grids.
+
+The investigation of possible market structures ultimately reduces to a fundamental question "How should electrical energy be traded?", which is identified as having a moral character.
+The question of how resources such as money and electricity \textit{should} be distributed between parties is investigated in a branch of philosophy called \textit{Distributive Justice}.
+Distributive Justice analyses this question in terms of vague moral elements such as various notions of \textit{Equality}, \textit{Efficiency}, \textit{Deservedness}, \textit{Proportionality}, etc.
+But unfortunately most of these vague moral elements conflict amongst themself and do not nessisarily lead to definitive and defined solutions.
+
+Alternatively there exist a range of defined solutions that exist in disparate fields that do can directly give tangible answers to the question of how electrical and monetary resources should be allocated. Particularly:
+\begin{enumerate}[noitemsep]
+\item From the field of micro-economics comes the description of normative trading established by \textit{Marginalist} principles, particularly the mechanism of 'Locational Marginal Pricing' (LMP)
+\item From the field of Mechanism Design comes the description of idealised incentive compatable allocation embodied in the Vickrey Clark Groves (VCG) mechanism.
+\item From the field of cooperative Game Theory comes the description of axiomatic allocation in proportion to marginal contribution between possible coalitions, particularly the Shapley Value (SV)
+\item From the field of Game Theory comes the description of idealised negotion between small numbers of parties in respect with potential threats they can leverage against each other, particularly Nash Bargaining.
+\end{enumerate}
+
+Our development extends the small-numbers limitation in Nash bargaining (point 4) to embody arbitrary numbers of players allocating according to strength of possible coalitions and mirroring SV axioms (point 3).
+We then develop this new solution called the \textit{Generalised Neyman \& Kohlberg Value} (or GNK value) and approximate it using sampling theory in the context of larger electricity networks and compare it against the solutions given by LMP and VCG in the same context (points 1\&2).
+
+The results are discussed and compared against these two other solutions, particulary in respect that they satisfy or fail-to satisfy broader moral notions in Distributive Justice.
+
+\subsection{Structure}
+The summary is composed of the following sections:
+
+\begin{itemize}[noitemsep]
+\item	in Section \ref{}, is discussed the moral nature and intractability of the problem of electricity allocation.
+\item	in Section \ref{}, we briefly qualitively overview the alternative solutions of LMP, and VCG and SV, and Nash bargaining
+\item	in Section \ref{}, is introduced our GNK value, and its approximation and computation for larger electricity networks.
+\item	in Section \ref{}, we discuss and morally compare the results of the methods.
+\end{itemize}
+
+\section{Moral Allocation}
+
+There is a long history of philosophical scepticism about the nature of moral knowledge, and Distributive Justice is not exceptional in this regard.
+An example historical argument is Hume’s ‘Guillotine’ [Hume, 1739] 1 which is often read as stating that: no material facts about how the physical world is, by themself, could ever seem to logically imply any claim about how the world (or its material components) should be.
+Another historic argument is G.E. Moore’s open-question argument [Moore, 1903] which argues that for anything which defines what is morally good, then a question about or statement-of that equivalence would only be tautology.
+What is quite evident, is that different people have different incompatable conceptions of how the world should be and that any particular ethical system is likely to be rooted in a specific focus (as encoded by principles, maxims, cultural narrative, language etc) and will yield outcomes that may be disagreeable to some people and agreeable to others.
+
+While we must acknowledge the moral ambiguity inherent in the question of electricity allocation, we contend that this does not mean that any answer is simply as good as any other.
+But only that we believe that the suitability of our answer is not something we can totally demonstrate, in principle.
+Thus we give a brief overview of some of the elements that feature in people's moral thinking, and attempt to develop a novel synthesis about electricity systems, which bears relevance to these moral considerations.
+
+\subsection{Equality}
+
+People tend to believe that they are, should be, or be treated, ‘equal’ in some sense, And this broad conception has changed throughout time and place in history. [Capaldi, 2002]
+While the notion that all people `are moral equals' does not nessisarily imply any specifically equal treatment. On a more practical level, the divergences between people's various ideas of equality can be seen as regarding what things should-be equal (when, where and for whom); and also what should be done about inequalities as they may exist.
+There are many positions about equality
+
+\paragraph{Formal Equality}
+
+One equality is that people should be subject to systems that treat them in a manner that is impartial. The minimal idea is that an impartial system should not afford arbitrary or unjustified special treatment toward any particular individual/s. Hence that systems should operate by rules which are blind to particular identity and sensitive only to morally relevant characteristics.
+And this idea is characteristed by various thought experiments - eg. Rawl’s “Original Position”, Kant’s categorical imperatives, or vari-
+ous positions defined by hypothetical ideal sympathy and/or perfect detachment.
+
+However what characteristics are or should be Morally relevent? or salient? when they conflict.
+
+Additionally Formal equality is 
+
+\paragraph{Equality of Social Goods}
+
+
+\section{Existing Solutions}
+
+There exist a range of solutions which can/have been used to answer the question of electricity allocation
+
+\subsection{Locational Marginal Pricing (LMP)}
+
+In the history of economic thought was a question of how to describe the value that things economic goods (such as electrical power) possess. particularly it was thought that the value of things should be relative to how much they fulfull human needs (broadly considered) and perhaps be associated with the volume of work nessisary to produce them, however this characterisation was not 
+
+
+
+%----------------------------------------------------------------------------------------
+%	METHODS
+%----------------------------------------------------------------------------------------
+
+\section{Methods}
+
+\lipsum[5] % Dummy text
+
+\begin{enumerate}[noitemsep] % [noitemsep] removes whitespace between the items for a compact look
+\item First item in a list
+\item Second item in a list
+\item Third item in a list
+\end{enumerate}
+
+%------------------------------------------------
+
+\subsection{Paragraphs}
+
+\lipsum[6] % Dummy text
+
+\paragraph{Paragraph Description} \lipsum[7] % Dummy text
+
+\paragraph{Different Paragraph Description} \lipsum[8] % Dummy text
+
+%------------------------------------------------
+
+\subsection{Math}
+
+\lipsum[4] % Dummy text
+
+\begin{equation}
+\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
+\label{eq:refname2}
+\end{equation}
+
+\lipsum[5] % Dummy text
+
+\begin{definition}[Gauss] 
+To a mathematician it is obvious that
+$\int_{-\infty}^{+\infty}
+e^{-x^2}\,dx=\sqrt{\pi}$. 
+\end{definition} 
+
+\begin{theorem}[Pythagoras]
+The square of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the other two sides.
+\end{theorem}
+
+\begin{proof} 
+We have that $\log(1)^2 = 2\log(1)$.
+But we also have that $\log(-1)^2=\log(1)=0$.
+Then $2\log(-1)=0$, from which the proof.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	RESULTS AND DISCUSSION
+%----------------------------------------------------------------------------------------
+
+\section{Results and Discussion}
+
+Reference to Figure~\vref{fig:gallery}. % The \vref command specifies the location of the reference
+
+%\begin{figure}[tb]
+%\centering 
+%\includegraphics[width=0.5\columnwidth]{GalleriaStampe} 
+%\caption[An example of a floating figure]{An example of a floating figure (a reproduction from the \emph{Gallery of prints}, M.~Escher,\index{Escher, M.~C.} from \url{http://www.mcescher.com/}).} % The text in the square bracket is the caption for the list of figures while the text in the curly brackets is the figure caption
+%\label{fig:gallery} 
+%\end{figure}
+
+\lipsum[10] % Dummy text
+
+%------------------------------------------------
+
+\subsection{Subsection}
+
+\lipsum[11] % Dummy text
+
+\subsubsection{Subsubsection}
+
+\lipsum[12] % Dummy text
+
+\begin{description}
+\item[Word] Definition
+\item[Concept] Explanation
+\item[Idea] Text
+\end{description}
+
+\lipsum[12] % Dummy text
+
+\begin{itemize}[noitemsep] % [noitemsep] removes whitespace between the items for a compact look
+\item First item in a list
+\item Second item in a list
+\item Third item in a list
+\end{itemize}
+
+\subsubsection{Table}
+
+\lipsum[13] % Dummy text
+
+\begin{table}[hbt]
+\caption{Table of Grades}
+\centering
+\begin{tabular}{llr}
+\toprule
+\multicolumn{2}{c}{Name} \\
+\cmidrule(r){1-2}
+First name & Last Name & Grade \\
+\midrule
+John & Doe & $7.5$ \\
+Richard & Miles & $2$ \\
+\bottomrule
+\end{tabular}
+\label{tab:label}
+\end{table}
+
+Reference to Table~\vref{tab:label}. % The \vref command specifies the location of the reference
+
+%------------------------------------------------
+
+\subsection{Figure Composed of Subfigures}
+
+Reference the figure composed of multiple subfigures as Figure~\vref{fig:esempio}. Reference one of the subfigures as Figure~\vref{fig:ipsum}. % The \vref command specifies the location of the reference
+
+\lipsum[15-18] % Dummy text
+
+%\begin{figure}[tb]
+%\centering
+%\subfloat[A city market.]{\includegraphics[width=.45\columnwidth]{Lorem}} \quad
+%\subfloat[Forest landscape.]{\includegraphics[width=.45\columnwidth]{Ipsum}\label{fig:ipsum}} \\
+%\subfloat[Mountain landscape.]{\includegraphics[width=.45\columnwidth]{Dolor}} \quad
+%\subfloat[A tile decoration.]{\includegraphics[width=.45\columnwidth]{Sit}}
+%\caption[A number of pictures.]{A number of pictures with no common theme.} % The text in the square bracket is the caption for the list of figures while the text in the curly brackets is the figure caption
+%\label{fig:esempio}
+%\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\refname}{\spacedlowsmallcaps{References}} % For modifying the bibliography heading
+
+\bibliographystyle{unsrt}
+
+\bibliography{sample.bib} % The file containing the bibliography
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
