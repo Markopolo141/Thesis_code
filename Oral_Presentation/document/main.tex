@@ -41,6 +41,57 @@ BCOR5mm, % Binding correction
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
+\pgfplotsset{
+    colormap={blackwhite}{[5pt]
+        rgb255(0pt)=(255, 0, 0);
+        rgb255(90pt)=(255, 0, 0);
+        rgb255(100pt)=(0, 0, 100);
+        rgb255(300pt)=(0, 80, 130);
+        rgb255(500pt)=(0, 200, 130);
+        rgb255(1000pt)=(255, 255, 100)
+    },
+}
+
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{csquotes}
+\usepackage{cleveref}
+
+\usepackage{accents}
+\usepackage{units}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{hyperref}
+%\usepackage{floatrow}
+%\usepackage[x11names, svgnames, rgb]{xcolor}
+
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usepackage{stmaryrd}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\p}{\mathbb{P}}
+\DeclareMathOperator{\pr}{\mathbb{P}}
+\newlength{\dhatheight}
+\newcommand{\doublehat}[1]{%
+    \settoheight{\dhatheight}{\ensuremath{\hat{#1}}}%
+    \addtolength{\dhatheight}{-0.15ex}%
+    \hat{\vphantom{\rule{1pt}{\dhatheight}}%
+    \smash{\hat{#1}}}}
+
+\newtheorem{example_game}{Example Game}
+
 %----------------------------------------------------------------------------------------
 %	TITLE AND AUTHOR(S)
 %----------------------------------------------------------------------------------------
@@ -104,31 +155,78 @@ However there currently does not exist any agreed apon market structure for the 
 
 The investigation of possible market structures ultimately reduces to a fundamental question "How should electrical energy be traded?", which is identified as having a moral character.
 The question of how resources such as money and electricity \textit{should} be distributed between parties is investigated in a branch of philosophy called \textit{Distributive Justice}.
-Distributive Justice analyses this question in terms of vague moral elements such as various notions of \textit{Equality}, \textit{Efficiency}, \textit{Deservedness}, \textit{Proportionality}, etc.
 But unfortunately most of these vague moral elements conflict amongst themself and do not nessisarily lead to definitive and defined solutions.
 
-Alternatively there exist a range of defined solutions that exist in disparate fields that do can directly give tangible answers to the question of how electrical and monetary resources should be allocated. Particularly:
+How should electrical resources and monetary transactions occur in the space of a complex electrical system.
+
+We develop a new solution called the \textit{Generalised Neyman \& Kohlberg Value} (or GNK value) and approximate it using sampling theory in the context of larger electricity networks and compare it against
 \begin{enumerate}[noitemsep]
-\item From the field of micro-economics comes the description of normative trading established by \textit{Marginalist} principles, particularly the mechanism of 'Locational Marginal Pricing' (LMP)
-\item From the field of Mechanism Design comes the description of idealised incentive compatable allocation embodied in the Vickrey Clark Groves (VCG) mechanism.
-\item From the field of cooperative Game Theory comes the description of axiomatic allocation in proportion to marginal contribution between possible coalitions, particularly the Shapley Value (SV)
-\item From the field of Game Theory comes the description of idealised negotion between small numbers of parties in respect with potential threats they can leverage against each other, particularly Nash Bargaining.
+\item Locational Marginal Pricing (LMP)
+\item Vickrey Clark Groves (VCG) mechanism.
 \end{enumerate}
 
-Our development extends the small-numbers limitation in Nash bargaining (point 4) to embody arbitrary numbers of players allocating according to strength of possible coalitions and mirroring SV axioms (point 3).
-We then develop this new solution called the \textit{Generalised Neyman \& Kohlberg Value} (or GNK value) and approximate it using sampling theory in the context of larger electricity networks and compare it against the solutions given by LMP and VCG in the same context (points 1\&2).
+Our solution extends:
+\begin{enumerate}
+\item Shapley Value (SV)
+\item Bargaining Solution Concepts
+\end{enumerate}
 
-The results are discussed and compared against these two other solutions, particulary in respect that they satisfy or fail-to satisfy broader moral notions in Distributive Justice.
 
-\subsection{Structure}
-The summary is composed of the following sections:
 
-\begin{itemize}[noitemsep]
-\item	in Section \ref{}, is discussed the moral nature and intractability of the problem of electricity allocation.
-\item	in Section \ref{}, we briefly qualitively overview the alternative solutions of LMP, and VCG and SV, and Nash bargaining
-\item	in Section \ref{}, is introduced our GNK value, and its approximation and computation for larger electricity networks.
-\item	in Section \ref{}, we discuss and morally compare the results of the methods.
+\section{The GNK value}
+We define the characteristic function $v(S)$, in the context of a \textit{generalized non-cooperative game} which is a game where the strategies available to one player may be restricted by the strategy choice of others.
+A generalised non-cooperative game consists of a triplet $G = \langle N,A,u \rangle$ in which:
+\begin{itemize}
+\item	$N=\{1,\dots,n\}$ is a finite set of players,
+\item	$A\subseteq \prod_{i\in N}A^i$ is a set of all possible joint strategies, where $A^i$ denotes the set of strategies available to player $i\in N$, and $A$ is a subset of their product space
+\item	$\{u_i(a) : A\rightarrow \mathbb{R}\}_{i\in N}$ is a set of functions of each player's payoff/utility when joint strategy $a\in A$ is executed.
 \end{itemize}
+
+In this context, we wish to describe the payoff `threat' or `advantage' $v(S)$ of a coalition $S\subseteq N$ (letting $A^S=\prod_{i\in S}A^i$), taking into account the constraints that apply to the joint action space.
+Denoting $(x,y)\in A$ as a partition of a joint action between two coalitions $S$ and $N\setminus S$, 
+the characteristic function for the game of threats with generalised action spaces is given by:
+\begin{align}
+\label{knvalue1}
+v(S) = &
+\frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}} 
+\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}}
+	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)\nonumber\\
++&
+\frac{1}{2}\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
+\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}}
+	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S} u_i(x,y) \right)
+\end{align}
+
+We wish to aggregate these payoff advantages, or `threat', via axioms.
+
+for any characteristic function $v$ where $v(S)=-v(N\setminus S) \label{myeq2} \quad \forall S\subseteq N$
+The intuition is the characteristic function of this game is an measure of the strength of the bargaining position (the `threat' or `advantage') that a coalition, $S$, has over its complement, $N\setminus S$.
+
+It is proven that if $\mathbb{D}$ is the set of all such games, then there exists a unique mapping $\varphi:\mathbb{D}\rightarrow\mathbb{R}^n$ that satisfies Shapley style axioms:
+
+\begin{itemize}
+\item	\textbf{Efficiency}: $\sum_i\varphi(\langle N,v\rangle)_i = v(N)\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad~~\refstepcounter{equation}(\theequation)\label{myeq}$
+\item	\textbf{Symmetry}: If two players $i$ and $j$ are substitutes, such that if $v(S\cup i)=v(S\cup j)~~\forall S\subseteq N\setminus\{i,j\}$, then $\varphi(\langle N,v\rangle)_i = \varphi(\langle N,v\rangle)_j$
+\item	\textbf{Null Player}: If a player $i$ is a null player (i.e.\ $v(S\cup i)=v(S)~~\forall S\subseteq N$) then $\varphi(\langle N,v\rangle)_i=0$
+\item	\textbf{Additivity}: for any $v_1$ and $v_2$, $\varphi(\langle N,v_1+v_2\rangle)=\varphi(\langle N,v_1 \rangle) + \varphi(\langle N,v_2\rangle)$
+\end{itemize}
+
+Letting agent $i$'s element of $\varphi$ be denoted by $\varphi_i$, this mapping is:
+\begin{equation}\label{da_value_eq} 
+\varphi_i(\langle N,v\rangle)
+= \frac{1}{n}\sum_{k=1}^n v_{i,k} 
+= \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v(S) 
+\end{equation}
+Where $v_{i,k}$ is the average value of $v(S)$ for all coalitions of size $k$ that include $i$.
+This is a novel extension of existing work to the space of generalised games.
+
+Indeed \cite{KOHLBERG2018139} have shown that for any game of threats $\langle N,v\rangle$ there is a classic cooperative game $\langle N,v'\rangle$ where the two Shapley values are the same.
+It is possible to map a game of threats $v$ to a cooperative game $v'$ via relation:
+\begin{equation}\label{convert1}
+v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
+\end{equation}
+
+
 
 
 \section{Existing Solution Space}
@@ -165,12 +263,18 @@ The basic elements of a classic cooperative game are that there is a set of play
 The characteristic function identifies in some sense the `worth' or `value' of any group of players (a `coalition'), and one aim of cooperative game theory is to develop solution concepts which split the wealth achieved if everybody cooperated (that is $v(N)$) between all the players.
 
 Particularly, for any coalition $S$ which does not include a player $i$, then player $i$'s marginal contribution is $v(S\cup\{i\}) - v(S)$. If we average such contributions for coalitions of size $k$:
-\begin{equation}\label{eq:shapley_value2}
+\begin{equation}\label{shapley_value1}
 \hat{v}_{i,k} = \frac{1}{\binom{n-1}{k}}\sum_{S\subseteq N\setminus \{ i\} , |S|=k} %\frac{(n-|S|-1)!\,|S|!}{(n-1)!}
 (v(S\cup\{i\})-v(S))
 \end{equation}
 Then we have the average marginal contribution of player $i$ to coalitions of size $k$, and if we average this over coalitions of different size, we get the Shapley value:
-\begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
+\begin{equation}\label{shapley_value2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
+
+The Shapley value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
+So for instance, if we let $\pi(N)$ denote the set of all ordered permutations of the player set $N$ and if we denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the Shapley value can be expressed as the average marginal contribution across orderings, see \cite{weber_1988}:
+\begin{equation}\label{shapley_value3}
+    \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
+\end{equation}
 
 The shapley value satisfies a range different sets of attractive axioms, such as:
 \begin{itemize}
@@ -332,75 +436,6 @@ examples of reference points:
 \end{itemize}
 
 
-\section{The GNK value}
-
-
-The question then is how to logically and consistently extend Nash's bargaining solution with endogenous disagreement point to an arbitrary number of players.
-The fundamental idea behind our approach was first detailed by John Harsanyi in 1963 \cite{values3}.
-
-
-We begin by considering \cite{KOHLBERG2018139}'s \textit{coalitional game of threats}, 
-which is a coalitional game defined by a pair $\langle N,v \rangle$ in which:
-\begin{itemize}
-\item	$N=\{1,\dots,n\}$ is a finite set of \textit{players} or \textit{agents}, and
-\item	$v:2^N\rightarrow \mathbb{R}$ is a \textit{characteristic function} with 
-\begin{equation}
-v(S)=-v(N\setminus S) \label{myeq2} \quad \forall S\subseteq N.
-\end{equation}
-\end{itemize}
-The intuition for \eqref{myeq2} is that the characteristic function of this game is an measure of the strength of the bargaining position (the `threat' or `advantage') that a coalition, $S$, has over its complement, $N\setminus S$.
-
-It is proven that if $\mathbb{D}$ is the set of all such games, then there exists a unique mapping $\varphi:\mathbb{D}\rightarrow\mathbb{R}^n$ that satisfies the following four axioms:
-
-\begin{itemize}
-\item	\textbf{Efficiency}: $\sum_i\varphi(\langle N,v\rangle)_i = v(N)\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad~~\refstepcounter{equation}(\theequation)\label{myeq}$
-\item	\textbf{Symmetry}: If two players $i$ and $j$ are substitutes, such that if $v(S\cup i)=v(S\cup j)~~\forall S\subseteq N\setminus\{i,j\}$, then $\varphi(\langle N,v\rangle)_i = \varphi(\langle N,v\rangle)_j$
-\item	\textbf{Null Player}: If a player $i$ is a null player (i.e.\ $v(S\cup i)=v(S)~~\forall S\subseteq N$) then $\varphi(\langle N,v\rangle)_i=0$
-\item	\textbf{Additivity}: for any $v_1$ and $v_2$, $\varphi(\langle N,v_1+v_2\rangle)=\varphi(\langle N,v_1 \rangle) + \varphi(\langle N,v_2\rangle)$
-\end{itemize}
-
-Letting agent $i$'s element of $\varphi$ be denoted by $\varphi_i$, this mapping is:
-\begin{equation}\label{da_value_eq} 
-\varphi_i(\langle N,v\rangle)
-= \frac{1}{n}\sum_{k=1}^n v_{i,k} 
-= \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v(S) 
-\end{equation}
-Where $v_{i,k}$ is the average value of $v(S)$ for all coalitions of size $k$ that include $i$.
-This mapping gives a distribution of the total surplus $v(N)$ among the players, and \cite{KOHLBERG2018139} appropriately call this unique mapping the `Shapley Value' of the game of threats as it mirrors the classic \textit{Shapley Value} of cooperative game theory \cite{Shapley1953a}.
-
-Indeed \cite{KOHLBERG2018139} have shown that for any game of threats $\langle N,v\rangle$ there is a classic cooperative game $\langle N,v'\rangle$ where the two Shapley values are the same.
-It is possible to map a game of threats $v$ to a cooperative game $v'$ via relation:
-\begin{equation}\label{convert1}
-v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
-\end{equation}
-
-
-We define the characteristic function $v(S)$, in the context of a \textit{generalized non-cooperative game} which is a game where the strategies available to one player may be restricted by the strategy choice of others.
-A generalised non-cooperative game consists of a triplet $G = \langle N,A,u \rangle$ in which:
-\begin{itemize}
-\item	$N=\{1,\dots,n\}$ is a finite set of players,
-\item	$A\subseteq \prod_{i\in N}A^i$ is a set of all possible joint strategies, where $A^i$ denotes the set of strategies available to player $i\in N$, and $A$ is a subset of their product space
-\item	$\{u_i(a) : A\rightarrow \mathbb{R}\}_{i\in N}$ is a set of functions of each player's payoff/utility when joint strategy $a\in A$ is executed.
-\end{itemize}
-
-In this context, we wish to describe the payoff `threat' or `advantage' $v(S)$ of a coalition $S\subseteq N$ (letting $A^S=\prod_{i\in S}A^i$), taking into account the constraints that apply to the joint action space.
-Denoting $(x,y)\in A$ as a partition of a joint action between two coalitions $S$ and $N\setminus S$, 
-the characteristic function for the game of threats with generalised action spaces is given by:
-\begin{align}
-\label{knvalue1}
-v(S) = &
-\frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}} 
-\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}}
-	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)\nonumber\\
-+&
-\frac{1}{2}\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
-\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}}
-	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S} u_i(x,y) \right)
-\end{align}
-
-The requisite condition $v(S)=-v(N\setminus S)$, as given in~\eqref{myeq2}, is immediately satisfied, and \eqref{knvalue1} is a feasible representation of the competitive advantage (or threat) that a coalition has over its complement in a generalised strategy space.
-With the characteristic function \eqref{knvalue1}, the formulation of $\varphi$ (per \eqref{da_value_eq}) defines the GNK value.
-This is a novel extension of existing work to the space of generalised games (see Section~\ref{relating_to_the_old}).
 
 \section{Application to Electricity Networks}
 
@@ -432,8 +467,21 @@ In this context, the DC approximated powerflow constraints (per \cite{Wang1}) ar
 \end{equation}
 where $p_i^{l}$, $p_i^{u}$, $p_{i,j}^l$, $p_{i,j}^u$ are the upper and lower bounds on power consumption/generation and line limits, respectively.
 
+In this DC powerflow network the participants on each bus are treated as players in a game.
+For simplicity, we have one player per bus (i.e.~$N=B$), and the power consumption of that bus is the respective player's strategy space (i.e.\ $A_i=[p_i^l,p_i^u]$).
+Then the DC constraints define the space of jointly executable strategies --- forming the generalised strategy space $A$.
 
-\resizebox*{0.5\columnwidth} {!} {
+We further assume that there is a linear utility (or payoff) associated with the power consumption of each player, denoted $u_i(p_i)$ for player $i$, which is all the components of a generalised game.
+
+
+
+
+
+\begin{figure}[]
+\subfloat[bog][Transfers under LMP.]{\includegraphics[width=0.5\linewidth,height=0.5\linewidth]{figs/GNK5.tikz}}%
+\subfloat[bog][Transfers under VCG.]{\includegraphics[width=0.5\linewidth,height=0.5\linewidth]{figs/GNK8.tikz}}\\
+\subfloat[bog][Transfers under the GNK value, $\varphi_i(\langle N,v \rangle)-u_i(p_i)$]{\includegraphics[width=0.5\linewidth,height=0.5\linewidth]{figs/GNK4.tikz}}%
+\subfloat[bog][Line-Node diagram of example network]{\resizebox*{0.5\linewidth} {!} {
     \begin {tikzpicture}
 		\draw[line width=3pt] (0,0) -- (4,0);
 		\draw[line width=3pt] (-2,-3) -- (2,-3);
@@ -470,141 +518,354 @@ where $p_i^{l}$, $p_i^{u}$, $p_{i,j}^l$, $p_{i,j}^u$ are the upper and lower bou
 		\node (text) at (8.1,-5+0.4) {\scalebox{1.9}{4}};
 		\node (text) at (6.1,-7+0.4) {\scalebox{1.9}{5}};
     \end {tikzpicture}
-}
+}}
 
-%----------------------------------------------------------------------------------------
-%	METHODS
-%----------------------------------------------------------------------------------------
+\caption[Power-levels and utility imputations under LMP, VCG and GNK for example network]{The transfers under LMP, VCG, GNK for the example network.\\ All x-axes are the system generation capacity, $-p_1^l$}\label{fig:11}
+\end{figure}
 
-\section{Methods}
+Some things of note:
 
-\lipsum[5] % Dummy text
-
-\begin{enumerate}[noitemsep] % [noitemsep] removes whitespace between the items for a compact look
-\item First item in a list
-\item Second item in a list
-\item Third item in a list
-\end{enumerate}
-
-%------------------------------------------------
-
-\subsection{Paragraphs}
-
-\lipsum[6] % Dummy text
-
-\paragraph{Paragraph Description} \lipsum[7] % Dummy text
-
-\paragraph{Different Paragraph Description} \lipsum[8] % Dummy text
-
-%------------------------------------------------
-
-\subsection{Math}
-
-\lipsum[4] % Dummy text
-
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname2}
-\end{equation}
-
-\lipsum[5] % Dummy text
-
-\begin{definition}[Gauss] 
-To a mathematician it is obvious that
-$\int_{-\infty}^{+\infty}
-e^{-x^2}\,dx=\sqrt{\pi}$. 
-\end{definition} 
-
-\begin{theorem}[Pythagoras]
-The square of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the other two sides.
-\end{theorem}
-
-\begin{proof} 
-We have that $\log(1)^2 = 2\log(1)$.
-But we also have that $\log(-1)^2=\log(1)=0$.
-Then $2\log(-1)=0$, from which the proof.
-\end{proof}
-
-%----------------------------------------------------------------------------------------
-%	RESULTS AND DISCUSSION
-%----------------------------------------------------------------------------------------
-
-\section{Results and Discussion}
-
-Reference to Figure~\vref{fig:gallery}. % The \vref command specifies the location of the reference
-
-%\begin{figure}[tb]
-%\centering 
-%\includegraphics[width=0.5\columnwidth]{GalleriaStampe} 
-%\caption[An example of a floating figure]{An example of a floating figure (a reproduction from the \emph{Gallery of prints}, M.~Escher,\index{Escher, M.~C.} from \url{http://www.mcescher.com/}).} % The text in the square bracket is the caption for the list of figures while the text in the curly brackets is the figure caption
-%\label{fig:gallery} 
-%\end{figure}
-
-\lipsum[10] % Dummy text
-
-%------------------------------------------------
-
-\subsection{Subsection}
-
-\lipsum[11] % Dummy text
-
-\subsubsection{Subsubsection}
-
-\lipsum[12] % Dummy text
-
-\begin{description}
-\item[Word] Definition
-\item[Concept] Explanation
-\item[Idea] Text
-\end{description}
-
-\lipsum[12] % Dummy text
-
-\begin{itemize}[noitemsep] % [noitemsep] removes whitespace between the items for a compact look
-\item First item in a list
-\item Second item in a list
-\item Third item in a list
+\begin{itemize}
+\item	The GNK value and VCG imputations are continuous in the parameters of the network
+\item	The GNK payments are always budget balanced
+\item	The GNK value (but not VCG or LMP) can offset those that do not receive or generate power
+\item	The GNK value is not incentive compatible
+\item	The GNK value is computationally difficult
 \end{itemize}
 
-\subsubsection{Table}
+\section{Scaling to larger Networks}
 
-\lipsum[13] % Dummy text
+Approaches
+\begin{itemize}
+\item	Sampling techniques
+\item	Simplifying Proxy for minimax optimisations
+\end{itemize}
 
-\begin{table}[hbt]
-\caption{Table of Grades}
-\centering
-\begin{tabular}{llr}
-\toprule
-\multicolumn{2}{c}{Name} \\
-\cmidrule(r){1-2}
-First name & Last Name & Grade \\
-\midrule
-John & Doe & $7.5$ \\
-Richard & Miles & $2$ \\
-\bottomrule
-\end{tabular}
-\label{tab:label}
-\end{table}
+\subsection{Sampling Approches}
+It is possible to convert the GNK value into the form of a classic Shapley Value, and then employ a range of existing techniques to sample the shapley value to specific accuracy.
+Alternatively it is possible to sample the GNK value directly.
+If The GNK value is converted to shapley value form, then there is an additional question whether the sampling is conducted in a join ordering, and additionally whether stratification is used.
+particularly stratification is used whether equation \ref{shapley_value1} is used over or \ref{shapley_value3} more directly.
 
-Reference to Table~\vref{tab:label}. % The \vref command specifies the location of the reference
+Particularly we consider the effectiveness of sampling using the following methods:
 
-%------------------------------------------------
+\begin{itemize}
+\item	\textsc{Simple}: For sampling the GNK value directly per equation \ref{da_value_eq}, stratification approximating each $v_{i,k}$ 
+\item	\textsc{Appro}: For sampling the Shapley Value directly without stratification by sampling equation \ref{shapley_value3}. \cite{DBLP:journals/cor/CastroGT09}
+\item	\textsc{Join}: For sampling the Shapley Value using stratification equation \ref{shapley_value1} using join orders. \cite{CASTRO2017180}
+\item	\textsc{Neyman}: For sampling the Shapley Value using stratification equation \ref{shapley_value1}, not using join orders, in proportion to the sample variance of the strata, expending half the budget attaining variances before sampling in proportion to them. \cite{CASTRO2017180,1938.10503378}
+\item	\textsc{Hoeffding}: For sampling the Shapley Value using stratification equation \ref{shapley_value1}, not using join orders, in proportion to a Hoeffding type inequality on the error of the strata estimates \cite{2013arXiv1306.4265M}
+\item	\textsc{SEBM}: For sampling the Shapley Value using stratification, not using join orders, in association with a complicated concentration inequality developed by us.
+\end{itemize}
 
-\subsection{Figure Composed of Subfigures}
+\input{figs/absolute_error1.tex}
 
-Reference the figure composed of multiple subfigures as Figure~\vref{fig:esempio}. Reference one of the subfigures as Figure~\vref{fig:ipsum}. % The \vref command specifies the location of the reference
+The GNK is doubly exponentially complex to compute even using sampling
 
-\lipsum[15-18] % Dummy text
+\input{figs/approximating_times1.tex}
 
-%\begin{figure}[tb]
-%\centering
-%\subfloat[A city market.]{\includegraphics[width=.45\columnwidth]{Lorem}} \quad
-%\subfloat[Forest landscape.]{\includegraphics[width=.45\columnwidth]{Ipsum}\label{fig:ipsum}} \\
-%\subfloat[Mountain landscape.]{\includegraphics[width=.45\columnwidth]{Dolor}} \quad
-%\subfloat[A tile decoration.]{\includegraphics[width=.45\columnwidth]{Sit}}
-%\caption[A number of pictures.]{A number of pictures with no common theme.} % The text in the square bracket is the caption for the list of figures while the text in the curly brackets is the figure caption
-%\label{fig:esempio}
-%\end{figure}
+\subsection{Sampling a modified GNK value at scale}\label{sec:modified_gnk}
+
+Given the intractable nature of the GNK value for large networks, we considered a proxy inplace of the minimax optimisations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
+Particularly we considered a relaxation:
+
+\begin{align}
+\label{knvalue22}
+v(S) = &+ \frac{1}{2}\left(\sum_{i\in S} u_i(p_i) - \sum_{i\in N\setminus S}u_i(p_i)\right)\nonumber\\
+&\quad\quad\quad\quad\quad~\text{s.t}~ \left[\{p_i\}_{i\in N}=\argmax \left(\sum_{i\in S} u_i(p_i) + \sum_{i\in N\setminus S}\epsilon u_i(p_i)\right)\right]\nonumber\\
+&- \frac{1}{2}\left(\sum_{i\in N\setminus S}u_i(p_i) - \sum_{i\in S} u_i(p_i)\right)\nonumber\\
+&\quad\quad\quad\quad\quad~\text{s.t}~ \left[\{p_i\}_{i\in N}=\argmax \left(\sum_{i\in N\setminus S}u_i(p_i) + \sum_{i\in S} \epsilon u_i(p_i) \right)\right]
+\end{align}
+
+Where $\epsilon$ is a small positive value, and where we assume all the DC power constraints apply in both $\argmax$.
+
+Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritise their own utility and then the follower's utility is maximised secondarily, we call this proxy GNK value the `M-GNK value'.\footnote{This dynamic is evident for sufficiently small $\epsilon$ in the formula, but the same dynamic could also be achieved by a two stage optimisation process.}
+This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original expression NP-hard, as the leader is unwilling to sacrifice their utility to harm the follower's utility and vice versa.
+
+\input{figs/accuracy_graph1.tex}
+
+\input{figs/experiment_table1.tex}
+
+\section{Discussion}
+
+\begin{itemize}
+\item	LMP and VCG are nearly identical (figures \ref{fig:experiment_table_11} and \ref{fig:experiment_table_12}) while GNK is distinctly different. An explanation is that both LMP and VCG implement the same electrical outcome, and allocate payments in proportional to marginal differences about the socially optimal point. Noted in a more general settings where there are many small participants \cite{NATH2019673, 8430852}
+\item	In LMP and VCG there are no negative utility imputations, but that positive utility is allocated to those generators who are able to provide power the cheapest, and those consumers who value power the greatest (high x-value \& low y-value, and low x-value \& high y-value respectively).
+This is because the LMP creates prices for power such that the cheapest generators are scheduled to create power which is consumed by the most desiring consumers up until a marginal point where any further dispatch/consumption would be unmotivated.
+And because VCG schemes allocate non-negative utilities by their axiomatic construction (per axiom of individual rationality).
+\item	A completely different result for the M-GNK value, which imputes utility to those consumers who do not receive power, and allocates negative net utility to all but the cheapest generators, even those who generate power at the socially optimal point, and this dynamic is not particularly easy to explain. The generators get allocated negative utility is that they are targets of being forced to generate at their own deficit since power-conservation constraints must be obeyed, and this dynamic becomes a negotiating lever, in the selection of threat points.
+
+\end{itemize}
+
+This behaviour in the context of large networks was somewhat unexpected;
+
+One primary question is how much the behaviour exhibited in figure \ref{fig:experiment_table_13} is entirely the result of us using a modified characteristic function, per the M-GNK value (equation \ref{knvalue22}), over the more original characteristic function of the GNK value (equation \ref{knvalue1}).
+The error of using this modification across randomly generated networks was calculated and shown in Figure \ref{fig:performance_graph5}.
+This graph shows the cumulative probability of the difference in payments between the GNK and M-GNK - and shows for instance, that 60\% of participants could expect to receive within 10\% what they would have between GNK and M-GNK values, and that this similarity increases for larger network sizes.
+
+\input{figs/probability_comparrison1.tex}
+
+
+\begin{itemize}
+\item	It is easy to realise that the GNK value is axiomatically efficient, specifically in terms of maximising the sum of utility, by axiom (equation \ref{myeq}); and as it is efficient in this regard it is also therefore Pareto optimal.
+The way this efficiency is implemented is that the GNK designates the electrical outcome which maximises the sum of utility, and issues budget-balanced utility transfers between the players.
+Neither LMP or VCG has a similar efficiency claim, as both allocate payments between network participants are not necessarily budget balanced.
+\item	All the techniques considered (GNK, VCG and LMP, etc.) satisfy formal-equality, as they only treat different participants differently in relation to specific morally relevant characteristics --- particularly their utility preferences, and how their presence and actions can affect the utility of others.
+In the electricity context, this involves the utility of electricity and capacity to deliver/generate electricity at their location in relation to the utility of that electricity for others.
+However, whether-or-not these qualify as morally warranted bases for differential treatment is the subject of a wider discussion, particularly as differential treatment gives rise to differential incentives.
+\item	Secondly, the minimax of the zero-sum game identifies a point of maximum strategising to gain payoff advantage specifically over the opponent, irrespective of the absolute payoff to the player.
+And in this way minimax of the zero-sum game identifies a point of maximally engaged competition between the players. - and can account for altruism between players
+\item	The GNK value contrasts against other similar solutions over non-cooperative games (as briefly mentioned in section \ref{relating_to_the_old}) such von Neumann and Morgenstern's solution (per equation \ref{knvalue3}), where the characteristic function is identified as minimax payoff, not minimax payoff advantage.
+\end{itemize}
+
+
+
+
+In the development of this research it was hoped that the GNK value would ultimately be witnessed to have a similar individual rationality property as VCG.
+Particularly that no participant should be allocated less than zero utility, which might be interpreted as being what they would get if they did not participate in the mechanism.
+The ethical importance of individual rationality cannot easily be overstated, particularly as a primary notion of ethical exchange is the concept of `euvoluntary' exchange (see section \ref{sec:reference_points}) which is (at least) where every party is not left worse-off for participating.
+
+However, it is evident that GNK seems to violate this property, as it is possible for participants to be allocated with less less utility than zero.
+We would expect that his particular absence of a guarantee for participants would be a major hindrance to GNK's application in electricity systems; hence an ethical failing.
+However in our GNK application to electricity networks, the enforcement of the power conservation constraints (per equation \ref{dcopf1}) seems to have disallowed this eventuality.
+
+In these cases, it might be possible to give participants actions to guarantee themself a disagreement point which affords them a zero utility, and hence restore individual rationality to the resultant GNK value; however these investigations are a topic for future research.
+ if it was possible for players to unilaterally implement an outcome which guaranteed them a utility of zero, then they would be guaranteed a non-negative net utility.
+
+
+\section{Conclusion}
+
+At a broader level of consideration, it is interesting how perfect competition may or may not coincide with what is equal and ethical.
+The question of when and where these coincide, and particularly if they might coincide in the context of electricity networks, was part of the motivation of this research.
+Unfortunately our investigations demonstrated that the most direct application of the GNK value would be expected to fail wider social equality considerations.
+
+\section{future work}
+
+\begin{itemize}
+\item	further approximations such as player clustering (such as implemented by \cite{DBLP:journals/corr/abs-1903-10965}), or transforming the problem into a non-atomic form, similar to non-atomic Shapley Value.
+\item	solution concepts like GNK that are incentive compatible (such as presented by \cite{myerson1,Salamanca2019}) in the context of electricity networks.
+\item	It may be possible to construct a weighted GNK value to account for differential likelihoods of different coalitions forming.
+\item	The GNK value allocates the utilitarian outcome, however it is not necessarily required that utility be measured in money (even though this is the easiest interpretation).
+It is also possible to note that there exist non-transferable-utility (NTU) modifications - such as also considered by \cite{value1} - which could be modified to yield a NTU GNK value.
+\end{itemize}
+
+
+
+\section{New Concentration Inequalities for Sampling}
+
+\begin{theorem}[Chebyshev's inequality]\label{thm:chebyshevs}
+for any random variable --- in this case $\hat{\mu}$ is a random variable --- with variance $\text{Var}(\hat{\mu})$ then the error of $\hat{\mu}$ from its mean is probability bounded:
+$$ \p\left(|\hat{\mu}-\mu|\ge k\sqrt{\text{Var}(\hat{\mu})}\right)\le\frac{1}{k^2} $$
+\end{theorem}
+
+\begin{theorem}[Hoeffding's inequality]\label{Hoeffdings_inequality_proper}
+Let $X$ be a real-valued random variable that is bounded $a\le X\le b$.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
+\begin{equation}\label{eq_no2}\p(\hat{\mu}-\mu\ge t)\le \exp\left(\frac{-2nt^2}{D^2}\right)
+\end{equation}
+Alternatively by rearranging:
+\begin{equation}\label{eq_no2}\p\left(\hat{\mu}-\mu\ge \sqrt{\frac{D^2\log(1/t)}{2n}}\right)\le t
+\end{equation}
+\end{theorem}
+
+
+\begin{theorem}[\cite{Maurer50empiricalbernstein}]\label{MandPsEBB}
+Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with $D=b-a$.  Then for $x_1,x_2,\dots,x_n$ independent samples of $X$ the mean $\hat{\mu}=\frac{1}{n}\sum_{i=1}^nx_i$ and sample variance $\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(x_i-\hat{\mu})^2 $ are probability bounded by $t$ for any $t>0$:
+\begin{equation}\label{maurersbound} 
+    \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(2/t)}{n}}+\frac{7D\log(2/t)}{3(n-1)}\right)\le t
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[\cite{10.1007/978-3-540-75225-7_15}]\label{AudibertsEBB}
+In exactly the same context as in Theorem \ref{MandPsEBB}
+\begin{equation}
+    \p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(3/t)}{2n}} + \frac{3D\log(3/t)}{2n}\right) \le t.
+    \end{equation}
+\end{theorem}
+
+
+
+
+\begin{theorem}[Variance Decomposition]\label{variance1}
+For $n$ samples $x_i$, sample mean $\hat{\mu} = \frac{1}{n}\sum_ix_i$, sample variance $\hat{\sigma}^2=\frac{1}{n-1}\sum_i(x_i-\hat{\mu})^2$, and average of sample squares $\hat{\sigma}_0^2 = \frac{1}{n}\sum_ix_i^2$, the following relationship holds:
+% \begin{align*}
+% \quad\hat{\sigma}^2 
+% &=\frac{1}{n-1}\sum_i\left(x_i-\frac{1}{n}\sum_jx_j \right)^2 
+%  =\frac{1}{n-1}\left(\sum_ix_i^2-\frac{1}{n}\sum_{i,j}x_ix_j \right) % \\
+% &= \frac{n}{n-1}\left(\hat{\sigma}_0^2-\hat{\mu}^2\right)
+% \end{align*}
+% which rearranging gives:
+\[
+\hat{\sigma}_0^2=\hat{\mu}^2+\frac{n-1}{n}\hat{\sigma}^2
+\]
+\end{theorem}
+
+
+
+\begin{theorem}[Bennett's inequality]\label{hoeffdings1}
+Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$. 
+Then for $t>0$, the mean $\hat{\mu}$ of $n$ samples of $X$ is probability bounded by:
+\begin{equation}\label{eq_no2}\p(\hat{\mu}\ge t)\le H_1^n\left(\frac{\sigma^2}{b^2},\frac{t}{b}\right),
+\end{equation}
+where:
+\begin{equation*}
+H_1^n\left(\frac{\sigma^2}{b^2},\frac{t}{b}\right) =
+\left(\left(\frac{\frac{\sigma^2}{b^2}}{\frac{\sigma^2}{b^2}+\frac{t}{b}}\right)^{\frac{\sigma^2}{b^2}+\frac{t}{b}}
+\left(1-\frac{t}{b}\right)^{\frac{t}{b}-1}\right)^{\frac{n}{\frac{\sigma^2}{b^2}+1}}
+\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Sample square bound]\label{sample_squares}
+Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$, if $d=\max(b,-a)$ then for $y>0$, the mean of sample squares $\hat{\sigma}_0^2=\frac{1}{n}\sum_ix_i^2$ is probability bounded:
+\begin{equation}\label{equation_squares}\p(\sigma^2 - \hat{\sigma}_0^2> y) \le H_2^n\left(\frac{\sigma^2}{d^2},\frac{y}{d^2}\right),
+\end{equation}
+where:
+\begin{align} H_2^n\left(\frac{\sigma^2}{d^2},\frac{y}{d^2}\right) = \left(
+\left(\frac{1-\frac{\sigma^2}{d^2}}{1+\frac{y}{d^2}-\frac{\sigma^2}{d^2}}\right)^{1+\frac{y}{d^2}-\frac{\sigma^2}{d^2}}
+\left(\frac{\frac{\sigma^2}{d^2}}{\frac{\sigma^2}{d^2}-\frac{y}{d^2}}\right)^{\frac{\sigma^2}{d^2}-\frac{y}{d^2}}
+\right)^n
+\end{align}
+\end{theorem}
+
+
+
+\begin{theorem}[Martingale Bound]\label{martingale0}
+For finite data $x_1,x_2,\dots x_n$ that is bounded $a\le x_i\le b$, and has a mean of zero and variance $\sigma^2=\frac{1}{n}\sum_{i=1}^nx_i^2$, denote $X_1,X_2,\dots,X_n$ the random variables corresponding to the data sequentially drawn randomly without replacement, and $\chi_m$ the average of the first $m$ of them.
+If for any random variable $Z$ with a mean of zero such that $a\le Z\le b$ and $D=b-a$, with variance $\sigma_Z^2$ that there exists an $\alpha, \beta \ge 0$ such that for any $s>0$ that $\E[\exp(sZ)]\le\exp((\alpha D^2 +\beta \sigma_Z^2) s^2)$ then:
+\begin{align}\E[\exp(s\chi_m)]&\le\exp\left(\alpha s^2D^2\sum_{k=m}^{n-1}\frac{1}{k^2} +\beta s^2\sigma^2 \sum_{k=m}^{n-1}\frac{n}{k^2(k+1)}\right)\\ &\le \exp((\alpha D^2\bar{\Omega}_m^n +\beta\sigma^2 \bar{\Psi}_m^n)s^2)\end{align}
+where $\bar{\Omega}_m^n = \sum_{k=m}^{n-1}\frac{1}{k^2}\approx \frac{(m+1)(1-m/n)}{m^2}$ and $\bar{\Psi}_m^n = \sum_{k=m}^{n-1}\frac{n}{k^2(k+1)}\approx \frac{n+1-m}{m^2}$.
+\end{theorem}
+
+
+
+
+\begin{theorem}[Stratified Empirical Bernstein Bound (SEBB)]\label{thm:SEBM_bound}
+Assuming the context given in Definition~\ref{def:ProblemContext}.
+Then with $\Omega_{m_i}^{n_i},\Psi_{m_i}^{n_i}$ per theorem~\ref{martingale1}:
+\begin{equation}\label{big_equation}
+%\p\left(\frac{\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|}{\sqrt{\log(6/p)}}\ge \sqrt{\begin{matrix*}[l]\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_i^2\tau_i^2 \\ +\begin{pmatrix*}[l]\sqrt{\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right)} \\ +\sqrt{\begin{matrix*}[l]2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i \\ + \log(6n/p)\sum_i\tau_i^2D_i^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\ +\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right)\end{matrix*}} \end{pmatrix*}^2\end{matrix*}}\right)
+%\le p 
+%\end{equation}
+%\begin{equation}\label{big_equation_alternate}
+\pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right| 
+\ge \sqrt{\log(6/p)\left( \alpha
++ \left(\sqrt{\beta} 
++ \sqrt{\gamma}\right)^2\right) } \right)
+\le p 
+\end{equation}
+where:
+\begin{align}
+\alpha=&\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_i^2\tau_i^2 \\
+\beta=&\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right) \\
+\gamma=& 2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_i^2/m_i
++ \log(6n/p)\sum_i\tau_i^2D_i^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad~+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_i^2\right)
+\end{align}
+\end{theorem}
+
+
+However, since the Shapley value is expressible as an average over averages by Equation~\eqref{shap2}, 
+it is possible to approximate these averages via sampling techniques, and these averages are naturally stratified by coalition size.
+In previously published literature, other techniques have been used to allocate samples in this context, particularly simple sampling \cite{DBLP:journals/cor/CastroGT09}, Neyman allocation \cite{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}, and allocation to minimise Hoeffding's inequality \cite{2013arXiv1306.4265M}.
+
+We assess the benefits of using our bound by comparing its performance to the approaches above in the context of some example cooperative games, with results analysed in Section~\ref{sec:discussion}.
+The example games are described below:
+
+\begin{example_game}[Airport Game]
+An $n=15$ player game with characteristic function:
+$$v(S)=\max_{i\in S}w_i$$
+where
+$w=\{w_1,\dots,w_{15}\} %\scriptstyle\scriptsize
+=\{ 1, 1, 2, 2, 2, 3, 4, 5, 5, 5, 7, 8, 8, 8, 10\}$.
+The maximum marginal contribution is $10$, so we assign $D_i=10$ for all $i$.
+\end{example_game}
+
+\begin{example_game}[Voting Game]
+An $n=15$ player game with characteristic function:
+$$v(S)=\begin{cases}
+       1, &\quad\text{if}\quad \sum_{i\in S}w_i>\sum_{j\in N}w_j/2\\
+       0, &\quad\text{otherwise}\\
+     \end{cases}$$
+where 
+$w=\{w_1,\dots,w_{15}\} %\scriptstyle\scriptsize
+=\{ 1, 3, 3, 6, 12, 16, 17, 19, 19, 19, 21, 22, 23, 24, 29\}$.
+The maximum marginal contribution is $1$, so we assign $D_i=1$ for all $i$.
+\end{example_game}
+
+\begin{example_game}[Simple Reward Division]
+An $n=15$ player game with characteristic function:
+$$v(S)=\frac{1}{2}\left(\sum_{i\in S}\frac{w_i}{100}\right)^2$$
+where
+$w=\{w_1,\dots,w_{15}\} = \{ 45, 41, 27, 26, 25, 21, 13, 13, 12, 12, 11, 11, 10, 10, 10 \}$\\
+The maximum marginal contribution is $1.19025$, so we assign $D_i=1.19025$ for all $i$.
+\end{example_game}
+
+\begin{example_game}[Complex Reward Division]
+An $n=15$ player game with characteristic function:
+$$v(S)=\left(\sum_{i\in S}\frac{w_i}{50}\right)^2 - \floor[\Bigg]{\sum_{i\in S}\frac{w_i}{50}}^2$$
+where
+$w=\{w_1,\dots,w_{15}\} = \{ 45, 41, 27, 26, 25, 21, 13, 13, 12, 12, 11, 11, 10, 10, 10 \}$\\
+In this game, we assign $D_i=2$ for all $i$.
+\end{example_game}
+
+%\input{table-2.tex}
+
+\input{figs/shapley_table.tex}
+
+
+For each game, we compute the exact Shapley value, and then the average absolute errors in the approximated Shapley value for a given budget $m$ of marginal-contribution samples across multiple computational runs.
+The results are shown in Table \ref{Table2}, 
+where the average absolute error in the Shapley value is computed by sampling with Maleki's method \cite{2013arXiv1306.4265M} is denoted $e^{Ma}$, $e^{sim}$ is Castro's stratified simple sampling method \cite{DBLP:journals/cor/CastroGT09}, $e^{Ca}$ is Castro's Neyman sampling method \cite{CASTRO2017180}, and $e^{SEBM}$ is the error associated with our method, SEBM. 
+The results in Table~\ref{Table2} show that our method performs well across the benchmarks. 
+
+
+
+\subsection{Future Work: applications of a Multidimensional Extension}\label{sec:multi}
+
+It was noticed that our SEBB can be extended to multidimensional data by a simple modification.
+Specifically, instead of considering data that is single-valued, we consider data points that are vectors. 
+
+Formally, for $n$ strata of finite data points which are all vectors of size $M$, let $n_i$ be the number of data points in the $i$th stratum.
+Let the data in the $i$th stratum have a mean vector values $\mu_i$ (with $\mu_{i,j}$ for the $j$th component of the vector), which are value bounded within a finite width $D_{i,j}$, and have vector value variances $\sigma_{i,j}^2$.  
+Given this, let $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ (where $X_{i,k,j}$ is the $j$th component, of the $k$th vector from stratum $i$) be vector random variables corresponding to those data values randomly and sequentially drawn (with or without) replacement. 
+Denote the average of the first $m_i$ of these random variables from the $i$th stratum by $\chi_{i,m_i}= \frac{1}{m_i}\sum_{k=1}^{m_i}X_{i,k}$ (with $\chi_{i,m_i,j}$ being the $j$th component of that vector average).
+Let $\doublehat{\sigma}_{i,j}^2=\frac{i}{m_i-1}\sum_{k=1}^{m_i}(X_{i,k,j}-\chi_{i,m_i,j})^2$ be the unbiased sample variance of the first $m_i$ of these random variables in the $j$th component. 
+As before, we assume weights $\tau_i$ for each stratum. \\
+In this context we have the following theorem:
+
+\begin{theorem}[Vector SEBM bound]
+In the context above, then with $\Omega_{m_i}^{n_i},\Psi_{m_i}^{n_i}$ per Theorem~\ref{martingale1}:
+%\begin{equation}\label{big_equation2}\p\left(\begin{matrix*}[l]\sum_{j=1}^M\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2 \ge \\ \quad\quad \log(6/p)\sum_{j=1}^M\begin{pmatrix*}[l]\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\ +\begin{pmatrix*}[l]\sqrt{\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)} \\ +\sqrt{\begin{matrix*}[l]2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i \\ + \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\ +\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)\end{matrix*}} \end{pmatrix*}^2\end{pmatrix*}\end{matrix*} \right)\le Mp \end{equation}
+
+\begin{equation}\label{big_equation2}\pr\left(\begin{matrix*}[l]\sum_{j=1}^M\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2 \ge \\ \quad\quad \log(6/p)\sum_{j=1}^M\left(\alpha_{m_i,j}^{n_i} +\left(\sqrt{\beta_{m_i,j}^{n_i}} +\sqrt{\gamma_{m_i,j}^{n_i}}\right)^2\right)\end{matrix*} \right)\le Mp \end{equation}
+
+where:
+
+\begin{align}
+\alpha_{j}=&\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\
+\beta_{j}=&\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right) \\
+\gamma_{j}=&2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i
++ \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i}  \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad~~+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)
+\end{align}
+
+%$$
+%\alpha_{m_i,j}^{n_i}
+%=\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 
+%$$
+%$$
+%\beta_{m_i,j}^{n_i}
+%=\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right) 
+%$$
+%and
+%\begin{align*}
+%\gamma_{m_i,j}^{n_i}
+%= 2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i
+%&+ \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i}  \\
+%&+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)
+%\end{align*}
+
+\end{theorem}
+
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

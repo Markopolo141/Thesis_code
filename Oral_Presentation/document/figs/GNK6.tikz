@@ -1,0 +1,43 @@
+
+		\begin{tikzpicture}
+		\begin{axis}[
+		%	title={Average absolute error in sampling the GNK value},
+		%	xlabel={Generator Capacity ($-p_1^l$)},
+			%xmin=0, xmax=0.25,
+			%ymin=0.001, ymax=0.05,
+			%ymode=log,
+			xtick={0,100,200,300,400},
+			%ytick={0,20,40,60,80,100},
+			%yticklabel=$\pgfmathprintnumber{\tick}\%$,
+			legend pos=south west,
+			%ymajorgrids=true,
+			%grid style=dashed,
+			%xticklabel style={/pgf/number format/fixed}
+		]
+		\addplot[color={rgb:red,4;green,2;yellow,1}] coordinates {
+(0.1,0.17)(69.7,118.49)(70.9,113.44)(169.3,270.88)(170.5,255.75)(238.9,358.35)(240.1,336.14)(279.7,391.58)(280.9,0.0)(379.3,0.0)
+			}node[pos=0.1](endofplotsquare){} ;
+		\node [above left,color={rgb:red,4;green,2;yellow,1}] at (endofplotsquare) {\footnotesize 1};
+		\addplot[] coordinates {
+(0.1,0.0)(379.3,0.0)
+			}node[pos=0.22](endofplotsquare){} ;
+		\node [above] at (endofplotsquare) {\footnotesize 2};
+		\addplot[color=black!60!green] coordinates {
+(0.1,-0.0)(169.3,0.0)(170.5,10.0)(238.9,10.0)(240.1,20.0)(379.3,20.0)
+			}node[pos=0.9](endofplotsquare){} ;
+		\node [above, color=black!60!green] at (endofplotsquare) {\footnotesize 3};
+		\addplot[color=blue] coordinates {
+(0.1,-0.0)(379.3,0.0)
+			}node[pos=0.28](endofplotsquare){} ;
+		\node [above,color=blue] at (endofplotsquare) {\footnotesize 4};
+		\addplot[color=red] coordinates {
+(0.1,-0.0)(379.3,0.0)
+			}node[pos=0.34](endofplotsquare){} ;
+		\node [above,color=red] at (endofplotsquare) {\footnotesize 5};
+		
+		\end{axis}
+		\end{tikzpicture}
+
+
+
+
