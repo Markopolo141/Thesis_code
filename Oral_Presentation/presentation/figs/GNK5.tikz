@@ -1,0 +1,44 @@
+
+		\begin{tikzpicture}
+		\begin{axis}[
+		%	title={Average absolute error in sampling the GNK value},
+			xlabel={Generator Capacity},
+			ylabel={Monetary Transfer},
+			%xmin=0, xmax=0.25,
+			%ymin=0.001, ymax=0.05,
+			%ymode=log,
+			xtick={0,100,200,300,400},
+			%ytick={0,20,40,60,80,100},
+			%yticklabel=$\pgfmathprintnumber{\tick}\%$,
+			legend pos=south west,
+			%ymajorgrids=true,
+			%grid style=dashed,
+			%xticklabel style={/pgf/number format/fixed}
+		]
+		\addplot[color={rgb:red,4;green,2;yellow,1}] coordinates {
+(0.1,0.19)(69.7,132.43)(70.9,127.62)(169.3,304.74)(170.5,289.85)(238.9,406.13)(240.1,384.16)(279.7,447.52)(280.9,56.0)(379.3,56.0)
+			}node[pos=0.95](endofplotsquare){} ;
+		\node [above,color={rgb:red,4;green,2;yellow,1}] at (endofplotsquare) {\footnotesize 1};
+		\addplot[] coordinates {
+(0.1,-0.19)(70.9,-133.0)(379.3,-133.0)
+			}node[pos=0.3](endofplotsquare){} ;
+		\node [below left] at (endofplotsquare) {\footnotesize 2};
+		\addplot[color=black!60!green] coordinates {
+(0.1,-0.0)(69.7,-0.0)(169.3,-178.74)(170.5,-170.0)(238.9,-170.0)(240.1,-160.0)(379.3,-160.0)
+			}node[pos=0.9](endofplotsquare){} ;
+		\node [below, color=black!60!green] at (endofplotsquare) {\footnotesize 3};
+		\addplot[color=blue] coordinates {
+(0.1,-0.0)(169.3,-0.0)(240.1,-119.0)(379.3,-119.0)
+			}node[pos=0.9](endofplotsquare){} ;
+		\node [above,color=blue] at (endofplotsquare) {\footnotesize 4};
+		\addplot[color=red] coordinates {
+(0.1,-0.0)(238.9,-0.0)(240.1,-0.16)(280.9,-64.0)(379.3,-64.0)
+			}node[pos=0.9](endofplotsquare){} ;
+		\node [above,color=red] at (endofplotsquare) {\footnotesize 5};
+		
+		\end{axis}
+		\end{tikzpicture}
+
+
+
+
