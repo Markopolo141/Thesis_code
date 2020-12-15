@@ -1,84 +1,13 @@
 
-\section{Motivation}
-
-\begin{frame}
-\frametitle{Motivation - Situation}
-
-\textbf{Proliferation of renewable energy technologies}
-Between 2008-2018 the volume of renewable electricity generated on the grid increased ~10\% per year, from 7.5\% to 17\%. \cite{departmentoftheenvironmentenergy2018}
-with 90\% of solar generation currently being created by small-scale solar PV systems, with solar PV generation projected to triple by the year 2030 \cite{australianenergymarketoperatorlimited2018}.
-
-\textbf{retirement of traditional generators}
-In contrast, there is an increasing number number of coal fired power stations being retired from the grid,
-with reporting that almost a third of Australia's coal-fired power stations closed between 2012 and 2017. \cite{doi:10.1111/1467-8489.12289}
-\end{frame}
 
 
-\begin{frame}
-\frametitle{Motivation - Issues}
-\textbf{Rise in prices}
-More likely that expensive generators are setting the marginal price.
-Identified as been a part reason why price of electricity for consumers between 2008 and 2018 has increased 35\% \cite{australiancompetitionconsumercommission2018}.\\
-
-\textbf{Change in demand profile}
-Solar PV systems behind-the-meter change the amount of electricity that consumers require throughout the day.
-In the middle of the day where the abundance of solar energy offsets household electricity requirements and creates severe decrease in grid demand (the infamous `duck-curve') \\
-
-\textbf{Increased frequency instability}
-As solar output is linked to weather there is potential for large swings of localised solar power output, and anticipated stability issues related to frequency and voltage control. \cite{australianenergymarketoperatorlimited2018}
-Compounded by the retirement of coal generation with stabilising inertia.
-\end{frame}
-
-\begin{frame}
-\frametitle{Motivation - Opportunites}
-\begin{itemize}
-\item	Batteries (large \& small)
-\item	Electric Vehicles
-\item	Smart Devices
-\end{itemize}
-\textbf{Batteries \& Electric Vehicles}
-eg.
-predictions ranging upto 4.5 million EVs on Australian roads by 2040. \cite{australianenergymarketoperatorlimited2019}\\
-Hornsdale Power Reserve was the largest battery installation in the world (until August) ~130MWh, due to be expanded ~65MWh, purportedly saved SA consumers \$150 million
-\end{frame}
 
 
-\begin{frame}
-\frametitle{Motivation - Future visions}
-Competing future visions.
-
-\textbf{Demand Response}
-
-\textbf{Virtual Power Plants}
-
-\textbf{P2P energy trading}
-
-All difficult.
-\end{frame}
 
 \section{the Answer}
 
-\begin{frame}
-Or, to ask our research question with more granularity:
-\begin{block}{Research Question}
-when the possible power-flows on an electricity network are valued and influenced by participants differently, 
-what is a reasonable electrical outcome for the network and what monetary transactions \textit{should} occur between the participants?
-\end{block}
-Particularly we investigate alternatives to Locational Marginal Pricing (LMP)
-\end{frame}
 
 
-\begin{frame}
-Ideally:
-\begin{itemize}
-\item	morally relevent - corresponding with (atleast some) peoples ideas of fairness
-\item	technically flexible - able to account and handle any technicalities and range of application
-\item	economic focus - prescribes consistent and stable outcomes
-\item	implementable and feasible - able to be implemented and computed
-\item	elegent / simple - able to be understood and/or axiomatic, rigorous
-\end{itemize}
-We explore, by developing and analysing a new solution called the \textit{Generalised Neyman \& Kohlberg Value} (or GNK value).
-\end{frame}
 
 \begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp1} \end{center} We have a set of any possible outcomes \end{figure} \end{frame}
 \begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp2} \end{center} Which result from actions \end{figure} \end{frame}
@@ -101,9 +30,35 @@ We consider \textit{generalized non-cooperative game} in which:
 \item	$A\subseteq \prod_{i\in N}A^i$ is a set of all possible joint strategies, where $A^i$ denotes the set of strategies available to player $i\in N$.
 \item	$\{u_i(a) : A\rightarrow \mathbb{R}\}_{i\in N}$ is a set of functions of each player's payoff/utility when joint strategy $a\in A$ is executed.
 \end{itemize}
-
-In this context, we wish to describe the payoff `threat' or `advantage' $v(S)$ of a coalition $S\subseteq N$.
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Some Motivation}
+\begin{itemize}
+\item	replacement of fossil fuel generators by intermittant solar and renewable energy sources.
+\item	Increased volumes of Distributed Energy Resources (DERs) for a future smart grid.
+\end{itemize}
+Creating problems surrounding affordability, stability, availability of power.
+However there currently does not exist any agreed apon market structure for the participation of DERs in future electricity grids.\\
+
+Demand Response? Virtual Power Plants? P2P energy trading?\\
+All hinge on valuation of resources
+\end{frame}
+
+\begin{frame}
+Ideally:
+\begin{itemize}
+\item	morally relevent - corresponding with (atleast some) peoples ideas of fairness
+\item	technically flexible - able to account and handle any technicalities and range of application
+\item	economic focus - prescribes reasonable, consistent and stable outcomes
+\item	implementable and feasible - able to be implemented and computed
+\item	elegent / simple - able to be understood and/or axiomatic, rigorous
+\end{itemize}
+%We explore, by developing and analysing a new solution called the \textit{Generalised Neyman \& Kohlberg Value} (or GNK value).
+\end{frame}
+
+
 
 
 
@@ -118,8 +73,6 @@ In this context, we wish to describe the payoff `threat' or `advantage' $v(S)$ o
 \begin{frame} \frametitle{The GNK value - visual concept part 2} \begin{figure} \begin{center} \includegraphics[height=7cm]{figs/pa7} \end{center} what is the guaranteed payoff advantage if one goes first \end{figure} \end{frame}
 \begin{frame} \frametitle{The GNK value - visual concept part 2} \begin{figure} \begin{center} \includegraphics[height=7cm]{figs/pa8} \end{center} what is the guaranteed payoff advantage if the other goes first \end{figure} \end{frame}
 \begin{frame} \frametitle{The GNK value - visual concept part 2} \begin{figure} \begin{center} \includegraphics[height=7cm]{figs/pa9} \end{center} average these minimax payoff advantages \end{figure} \end{frame}
-
-
 
 
 
@@ -145,6 +98,29 @@ We wish to aggregate these payoff advantages, or `threat', via axioms.
 \end{frame}
 
 
+
+\begin{frame}
+\frametitle{Okay... Why threats?}
+
+Links directly to well established game theory literature on bargaining:
+\begin{itemize}
+\item	John Nash \cite{nash1,nash2}
+\item	John Harsanyi \cite{values3}
+\item	Kalai \& Kalai \cite{kalai1,Kalai2010,shap_lectures}
+\item	Neyman \& Kohlberg \cite{value2,KOHLBERG2018139}
+\end{itemize}
+Directly adjacent to other historic formulations
+\begin{itemize}
+\item	Aumann's $\alpha$ and $\beta$ core solution concepts \cite{aumann1961core}
+\item	von Neuman \& Mortgenstein solution \cite{1944}
+\end{itemize}
+
+%Historic Game-Theory pioneers discussing how to superimpose the Shapley Value over non-cooperative games 
+\end{frame}
+
+
+
+
 \begin{frame}
 \frametitle{The GNK value}
 It is proven that if $\mathbb{D}$ is the set of all such games, then there exists a unique mapping $\varphi:\mathbb{D}\rightarrow\mathbb{R}^n$ that satisfies Shapley style axioms:
@@ -166,27 +142,6 @@ Letting agent $i$'s element of $\varphi$ be denoted by $\varphi_i$, this mapping
 
 
 
-\begin{frame}
-\frametitle{Okay... that is nice}
-Why do it this way?
-
-Links directly to well established literature on bargaining:
-\begin{itemize}
-\item	John Nash \cite{nash1,nash2}
-\item	John Harsanyi \cite{values3}
-\item	Kalai \& Kalai \cite{kalai1,Kalai2010,shap_lectures}
-\item	Neyman \& Kohlberg \cite{value2,KOHLBERG2018139}
-\end{itemize}
-Directly adjacent to other historic formulations
-\begin{itemize}
-\item	Aumann's $\alpha$ and $\beta$ core solution concepts \cite{aumann1961core}
-\item	von Neumann \& Mortgenstein solution \cite{1944}
-\end{itemize}
-
-Historic Game-Theory pioneers discussing how to superimpose the Shapley Value over non-cooperative games 
-\end{frame}
-
-
 
 \begin{frame}
 \frametitle{Okay... that is nice}
@@ -202,23 +157,23 @@ Why do it this way?
 \end{frame}
 
 
-\begin{frame}
-\frametitle{The GNK value}
-For any game of threats $\langle N,v\rangle$ there is a classic cooperative game $\langle N,v'\rangle$ where the Shapley Value is the GNK value.
-It is possible to map a game of threats $v$ to a cooperative game $v'$ via relation:
-\begin{equation}\label{convert1}
-v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
-\end{equation}
-
-And then we have the Shapley Value in different expressions: As the average over stratified marginal contributions:
-\begin{equation}\label{shap1_X}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
-
-Or as the average contribution across all possible join orderings:
-If $\pi(N)$ is the set of permutations of the player, denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the Shapley value can be expressed as:
-\begin{equation}\label{shapley_value3}
-    \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
-\end{equation}
-\end{frame}
+%\begin{frame}
+%\frametitle{The GNK value}
+%For any game of threats $\langle N,v\rangle$ there is a classic cooperative game $\langle N,v'\rangle$ where the Shapley Value is the GNK value.
+%It is possible to map a game of threats $v$ to a cooperative game $v'$ via relation:
+%\begin{equation}\label{convert1}
+%v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
+%\end{equation}
+%
+%And then we have the Shapley Value in different expressions: As the average over stratified marginal contributions:
+%\begin{equation}\label{shap1_X}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
+%
+%Or as the average contribution across all possible join orderings:
+%If $\pi(N)$ is the set of permutations of the player, denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the Shapley value can be expressed as:
+%\begin{equation}\label{shapley_value3}
+%    \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
+%\end{equation}
+%\end{frame}
 
 
 
@@ -228,20 +183,18 @@ If $\pi(N)$ is the set of permutations of the player, denote $Pre^i(O)$ as the s
 \frametitle{Application to Electricity network}
 We consider an electricity network under DC approximation:
 \begin{itemize}
-    \item A set of buses $B$ with, for all $i\in B$:
+    \item A set of buses $B$
     \begin{itemize} 
-        \item Power consumption at each bus $p_i$, and 
+        \item Power consumption at each bus $p_i$ 
         \item A bus voltage phase-angle $\theta_i$,
     \end{itemize}
-    \item Lines $C\subseteq B\times B$, with, for all $(i,j)\in C$: 
+    \item Lines $C\subseteq B\times B$: 
         \begin{itemize} 
         \item Line susceptance $b_{i,j}$, and 
-        \item Power flow $p_{i,j}$ (power from bus $i$ to $j$), with $p_{i,j}=-p_{j,i}$. 
+        \item Power flow $p_{i,j}$. 
     \end{itemize}
 \end{itemize}
-
-One player per bus (i.e.~$N=B$), and the power consumption of that bus is the player's strategy space (i.e.\ $A_i=[p_i^l,p_i^u]$).
-And a linear utility associated with the power consumption of each player, $u_i(p_i)$
+One player per bus, and the power consumption of that bus is the player's strategy space with a linear utility.
 \end{frame}
 
 \begin{frame}
@@ -290,50 +243,50 @@ LMP transfers for Example network
 \end{frame}
 
 
-\begin{frame}
-\begin{figure}[]
-\includegraphics[width=0.55\linewidth,height=0.5\linewidth]{figs/GNK8.tikz}%
-\resizebox*{0.35\linewidth} {!} {
-    \begin {tikzpicture}
-		\draw[line width=3pt] (0,0) -- (4,0);
-		\draw[line width=3pt] (-2,-3) -- (2,-3);
-		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (-1,-3) -- (-1,-4);
-		\draw[line width=3pt] (1,-4) -- (5,-4);
-		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (2,-4) -- (2,-5);
-		\draw[line width=3pt] (4,-5) -- (8,-5);
-		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (5,-5) -- (5,-6);
-		\draw[line width=3pt] (2,-7) -- (6,-7);
-		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (3,-7) -- (3,-8);
-
-		\draw[line width=1pt] (1,0) -- (1,-1);
-		\draw[line width=1pt] (1,-1) -- (0,-2);
-		\draw[line width=1pt] (0,-2) -- (0,-3);
-
-		\draw[line width=1pt] (2,0) -- (2,-1);
-		\draw[line width=1pt] (2,-1) -- (3,-2);
-		\draw[line width=1pt] (3,-2) -- (3,-4);
-
-		\draw[line width=1pt] (3,0) -- (3,-1);
-		\draw[line width=1pt] (3,-1) -- (6,-2);
-		\draw[line width=1pt] (6,-2) -- (6,-5);
-		
-		
-		\draw[line width=1pt] (3.5,-4) -- (3.5,-7);
-
-		\draw[line width=1pt] (2.2,0) -- (2.2,1);
-		\draw (2.2,1.5) circle (0.5);
-		\draw (1.9,1.5) .. controls (1.9+0.2,1.5+0.7) and (2.5-0.2,1.5-0.7) .. (2.5,1.5);
-
-		\node (text) at (4.1,0+0.4) {\scalebox{1.9}{1}};
-		\node (text) at (2.1,-3+0.4) {\scalebox{1.9}{2}};
-		\node (text) at (5.1,-4+0.4) {\scalebox{1.9}{3}};
-		\node (text) at (8.1,-5+0.4) {\scalebox{1.9}{4}};
-		\node (text) at (6.1,-7+0.4) {\scalebox{1.9}{5}};
-    \end {tikzpicture}
-}
-\end{figure}
-VCG transfers for Example network
-\end{frame}
+%\begin{frame}
+%\begin{figure}[]
+%\includegraphics[width=0.55\linewidth,height=0.5\linewidth]{figs/GNK8.tikz}%
+%\resizebox*{0.35\linewidth} {!} {
+%    \begin {tikzpicture}
+%		\draw[line width=3pt] (0,0) -- (4,0);
+%		\draw[line width=3pt] (-2,-3) -- (2,-3);
+%		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (-1,-3) -- (-1,-4);
+%		\draw[line width=3pt] (1,-4) -- (5,-4);
+%		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (2,-4) -- (2,-5);
+%		\draw[line width=3pt] (4,-5) -- (8,-5);
+%		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (5,-5) -- (5,-6);
+%		\draw[line width=3pt] (2,-7) -- (6,-7);
+%		\draw[-{Latex[length=5mm, width=4mm]},line width=3pt] (3,-7) -- (3,-8);
+%
+%		\draw[line width=1pt] (1,0) -- (1,-1);
+%		\draw[line width=1pt] (1,-1) -- (0,-2);
+%		\draw[line width=1pt] (0,-2) -- (0,-3);
+%
+%		\draw[line width=1pt] (2,0) -- (2,-1);
+%		\draw[line width=1pt] (2,-1) -- (3,-2);
+%		\draw[line width=1pt] (3,-2) -- (3,-4);
+%
+%		\draw[line width=1pt] (3,0) -- (3,-1);
+%		\draw[line width=1pt] (3,-1) -- (6,-2);
+%		\draw[line width=1pt] (6,-2) -- (6,-5);
+%		
+%		
+%		\draw[line width=1pt] (3.5,-4) -- (3.5,-7);
+%
+%		\draw[line width=1pt] (2.2,0) -- (2.2,1);
+%		\draw (2.2,1.5) circle (0.5);
+%		\draw (1.9,1.5) .. controls (1.9+0.2,1.5+0.7) and (2.5-0.2,1.5-0.7) .. (2.5,1.5);
+%
+%		\node (text) at (4.1,0+0.4) {\scalebox{1.9}{1}};
+%		\node (text) at (2.1,-3+0.4) {\scalebox{1.9}{2}};
+%		\node (text) at (5.1,-4+0.4) {\scalebox{1.9}{3}};
+%		\node (text) at (8.1,-5+0.4) {\scalebox{1.9}{4}};
+%		\node (text) at (6.1,-7+0.4) {\scalebox{1.9}{5}};
+%    \end {tikzpicture}
+%}
+%\end{figure}
+%VCG transfers for Example network
+%\end{frame}
 
 
 \begin{frame}
@@ -383,16 +336,10 @@ GNK transfers for example network
 
 \begin{frame}
 \frametitle{Qualities of GNK}
-pros:
 \begin{itemize}
 \item	The GNK value is continuous in the parameters of the network
 \item	The GNK payments are always budget balanced
 \item	The GNK value can offset those that do not receive or generate power
-\end{itemize}
-cons:
-\begin{itemize}
-\item	The GNK value is not incentive compatible
-\item	The GNK value is computationally difficult
 \end{itemize}
 \end{frame}
 
@@ -448,17 +395,14 @@ Is the expected payoff advantage where the leader chooses the powerflows that pr
 \begin{frame}
 \input{figs/accuracy_graph1.tex}
 \end{frame}
-\begin{frame}
-\input{figs/probability_comparrison1.tex}
-\end{frame}
 
 
 \begin{frame}
 \input{figs/experiment_table13.tex}
 \end{frame}
-\begin{frame}
-\input{figs/experiment_table11.tex}
-\end{frame}
+%\begin{frame}
+%\input{figs/experiment_table11.tex}
+%\end{frame}
 \begin{frame}
 \input{figs/experiment_table12.tex}
 \end{frame}

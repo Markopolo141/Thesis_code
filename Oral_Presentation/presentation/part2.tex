@@ -123,10 +123,10 @@ Let $X$ be a real-valued random variable that is bounded $a\le X\le b$.  Then fo
 \begin{equation}\label{eq_no2}\p(\hat{\mu}-\mu\ge t)\le \exp\left(\frac{-2nt^2}{D^2}\right)
 \end{equation}
 \end{theorem}
-\begin{lemma}[Hoeffding's Lemma]\label{Hoeffdings_lemma_lemma}
-Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero, then for $D=b-a$ and any $s>0$:
-$$\E[\exp(sX)] \le \exp\left(\frac{1}{8}s^2D^2 \right)$$
-\end{lemma}
+%\begin{lemma}[Hoeffding's Lemma]\label{Hoeffdings_lemma_lemma}
+%Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero, then for $D=b-a$ and any $s>0$:
+%$$\E[\exp(sX)] \le \exp\left(\frac{1}{8}s^2D^2 \right)$$
+%\end{lemma}
 \end{frame}
 
 \begin{frame}
@@ -141,17 +141,17 @@ Then for $t>0$, the mean $\hat{\mu}$ of $n$ samples of $X$ is probability bounde
 \end{theorem}
 \end{frame}
 
-\begin{frame}
-Or simplify and turn into a handy-dandy lemma:
-\begin{lemma}\label{expectation1}
-For a random variable $X$ that is bounded on an interval $a\le X\le b$ with $D=b-a$ and variance $\sigma^2$, and any $s>0$:
-\[
-\E\left[\exp(s(X-\E[x]))\right] 
-\le\exp\left(\left(\frac{D^2}{17}+\frac{\sigma^2}{2}\right)s^2\right)
-\nonumber
-\]
-\end{lemma}
-\end{frame}
+%\begin{frame}
+%Or simplify and turn into a handy-dandy lemma:
+%\begin{lemma}\label{expectation1}
+%For a random variable $X$ that is bounded on an interval $a\le X\le b$ with $D=b-a$ and variance $\sigma^2$, and any $s>0$:
+%\[
+%\E\left[\exp(s(X-\E[x]))\right] 
+%\le\exp\left(\left(\frac{D^2}{17}+\frac{\sigma^2}{2}\right)s^2\right)
+%\nonumber
+%\]
+%\end{lemma}
+%\end{frame}
 
 \begin{frame}
 If we consider $X^2$ and then fit a parabola over a gaussian
@@ -166,13 +166,13 @@ Let $X$ be a real-valued random variable with a mean of zero and variance $\sigm
 \end{lemma}
 \end{frame}
 
-\begin{frame}
-Equally turnable into a handy-dandy lemma
-\begin{lemma}\label{expectation2}
-Let $X$ be a random variable of finite support on an interval $a\le X\le b$, with $D=b-a$ and variance $\sigma^2 = \E[(X-\E[x])^2] = \E[X^2]-\E[X]^2$. Then for any $q>0$:
-$$\E[\exp(q(\sigma^2-(X-\E[X])^2))] \le \exp\left(\frac{1}{2}\sigma^2q^2D^2\right)$$
-\end{lemma}
-\end{frame}
+%\begin{frame}
+%Equally turnable into a handy-dandy lemma
+%\begin{lemma}\label{expectation2}
+%Let $X$ be a random variable of finite support on an interval $a\le X\le b$, with $D=b-a$ and variance $\sigma^2 = \E[(X-\E[x])^2] = \E[X^2]-\E[X]^2$. Then for any $q>0$:
+%$$\E[\exp(q(\sigma^2-(X-\E[X])^2))] \le \exp\left(\frac{1}{2}\sigma^2q^2D^2\right)$$
+%\end{lemma}
+%\end{frame}
 
 
 
