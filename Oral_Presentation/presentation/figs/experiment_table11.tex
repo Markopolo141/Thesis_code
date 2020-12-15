@@ -1,0 +1,33 @@
+
+
+
+\begin{figure}[p]
+    \centering
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm, height=8cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+colorbar,
+xlabel=x,
+ylabel=y,
+%zlabel=z,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/lmp_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\caption[Utility payments under LMP for 90 bus network]{Post payment utility under LMP against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
+\label{fig:experiment_table_11}
+\end{figure}
+
+
+
+
+
+
+
+
+
+

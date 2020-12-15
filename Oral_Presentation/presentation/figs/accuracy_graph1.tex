@@ -5,7 +5,7 @@
 		\begin{axis}[
 			title={Accuracy estimating the M-GNK value for network size and runtime},
 			xlabel={Network Size},
-			ylabel={Average relative error among estimates},
+			ylabel={Average error},
 			%xmin=0, xmax=0.25,
 			ymin=0.0001, ymax=1.0,
 			ymode=log,
@@ -16,8 +16,8 @@
 			ymajorgrids=true,
 			grid style=dashed,
 			xticklabel style={/pgf/number format/fixed},
-			width = 300,
-			height = 300
+			width = 220,
+			height = 220
 		]
 	%	\addplot [domain=5:15,dotted] {20+exp(exp(x/6.2))};
 		\addplot[color=orange,only marks,mark=diamond] coordinates {
@@ -316,7 +316,7 @@
 		\end{axis}
 		\end{tikzpicture}
 		%\vspace{-18pt}
-		\caption[Accuracy obtained in approximating the M-GNK value by sampling]{Average magnitude of error relative to the magnitude of the estimated M-GNK value between 8 independent simultaneous estimations on randomly generated networks of different sizes, for 3 and 10 minutes runtime on a desktop computer.}
+		\caption{Accuracy obtained in approximating the M-GNK value by sampling}
 		\label{fig:performance_graph4}
     \end{figure}
 

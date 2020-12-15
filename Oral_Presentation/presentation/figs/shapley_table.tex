@@ -1,0 +1,38 @@
+
+
+
+
+\begin{table}[]
+    \centering 
+    \begin{minipage}[]{0.8\textwidth}
+        \centering
+        \caption{Airport Game Average Errors}\label{tab1}
+			\begin{tabular}{llllll}
+			\hline
+			$\nicefrac{m}{n^2}$ & $10$ & $50$ & $100$ & $500$ & $1000$ \\
+			\hline
+			$e^{Ma}$   & 298.4 & 133.1 & 99.64 & 41.96 & 29.26 \\
+			$e^{sim}$  & 357.8 & 146.1 & 106.2 & 44.55 & 36.33 \\
+			$e^{Ca}$   & 325.7 & 115.8 & 75.85 & 31.01 & 22.12 \\
+			$e^{SEBM}$ & 259.2 & 73.8 & 54.76 & 7.71 & 1.30  \\
+			\hline
+			\end{tabular}
+    \end{minipage}
+	\\\vspace{4mm}
+    \begin{minipage}[]{0.8\textwidth}
+        \centering
+        \caption{Voting Game Average Errors}\label{tab2}
+			\begin{tabular}{llllll}
+			\hline
+			$\nicefrac{m}{n^2}$ & $10$ & $50$ & $100$ & $500$ & $1000$ \\
+			\hline
+			$e^{Ma}$    & 131.0 & 57.78 & 41.52 & 18.66 & 13.18 \\
+			$e^{sim}$   & 145.7 & 59.72 & 40.31 & 17.56 & 12.84 \\
+			$e^{Ca}$    & 142.1 & 47.35 & 31.05 & 14.08 & 9.800 \\
+			$e^{SEBM}$  & 122.8 & 47.44 & 33.18 & 8.55 & 1.995  \\
+			\hline
+			\end{tabular}
+    \end{minipage}
+    \caption[Average errors approximating the Shapley Value across games and methods]{Average absolute errors in the Shapley value calculation across all players in the four cooperative games (units in $10^{-4}$), for the different sampling schemes with different sampling budgets $m$ per number of strata (with $n^2=15^2$ for all).}
+    \label{Table2}
+\end{table}
