@@ -18,7 +18,7 @@
 \begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp7} \end{center} individuals value outcomes differently \end{figure} \end{frame}
 \begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp8} \end{center} individuals value outcomes differently \end{figure} \end{frame}
 \begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp9} \end{center} yeilding a socially optimal outcome \end{figure} \end{frame}
-\begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp9} \end{center} yeilding a socially optimal outcome \\ but how much should each pay? \end{figure} \end{frame}
+\begin{frame} \frametitle{The GNK value - visual concept} \begin{figure} \begin{center} \includegraphics[height=6cm]{figs/pp10} \end{center} but how much should each pay? \end{figure} \end{frame}
 
 
 
@@ -44,6 +44,8 @@ However there currently does not exist any agreed apon market structure for the 
 
 Demand Response? Virtual Power Plants? P2P energy trading?\\
 All hinge on valuation of resources
+
+$\qquad\qquad\qquad\qquad\qquad\qquad\qquad$\includegraphics[height=6cm]{figs/network.png}
 \end{frame}
 
 \begin{frame}
@@ -80,18 +82,15 @@ Ideally:
 
 \begin{frame}
 \frametitle{The GNK value}
-Denoting $(x,y)\in A$ as a partition of a joint action between two coalitions $S$ and $N\setminus S$, 
-the characteristic function for the game of threats with generalised action spaces is given by:
+Two coalitions $S$ and $N\setminus S$:
 \begin{align}
 \label{knvalue1}
 v(S) = &
-\frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}} 
-\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}}
-	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)\nonumber\\
-+&
-\frac{1}{2}\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
-\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}}
-	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S} u_i(x,y) \right)
+\frac{1}{2} \overwrite[blue]{\min_{y\in A^{N\setminus S}} \max_{x\in A^S}}{minimax}
+	\overwrite{\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)}{advantage}\nonumber\\
++ &
+\frac{1}{2} \overwrite[orange]{\max_{x\in A^S} \min_{y\in A^{N\setminus S}}}{reverse\\minimax}
+	\overwrite{\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)}{advantage}
 \end{align}
 
 We wish to aggregate these payoff advantages, or `threat', via axioms.
@@ -112,7 +111,7 @@ Links directly to well established game theory literature on bargaining:
 Directly adjacent to other historic formulations
 \begin{itemize}
 \item	Aumann's $\alpha$ and $\beta$ core solution concepts \cite{aumann1961core}
-\item	von Neuman \& Mortgenstein solution \cite{1944}
+\item	von Neumann \& Morgenstern solution \cite{1944}
 \end{itemize}
 
 %Historic Game-Theory pioneers discussing how to superimpose the Shapley Value over non-cooperative games 
@@ -416,29 +415,14 @@ Is the expected payoff advantage where the leader chooses the powerflows that pr
 Experimentaiton indicates negative allocation stems from payoff difference and power conservation constraint.
 \begin{align}
 v(S) = &
-\frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}\exists x,(x,y)\in A}} 
-\max_{\substack{x\in A^S \\ \text{s.t.}(x,y)\in A}}
-	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)\nonumber\\
-+&
-\frac{1}{2}\max_{\substack{x\in A^S \\ \text{s.t.}\exists y,(x,y)\in A}}
-\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}}
-	\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S} u_i(x,y) \right)
+\frac{1}{2} \min_{y\in A^{N\setminus S}} \max_{x\in A^S}
+	\overwrite{\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)}{advantage}\nonumber\\
++ &
+\frac{1}{2} \max_{x\in A^S} \min_{y\in A^{N\setminus S}}
+	\overwrite{\left(\sum_{i\in S} u_i(x,y) - \sum_{i\in N\setminus S}u_i(x,y)\right)}{advantage}
 \end{align}
 \end{frame}
 
 
 
-\begin{frame}
-\frametitle{Conclusion \& future work}
-The GNK value was developed and evaluated as a novel method of valuing electricity, unfortunately failed invidual rationality on large scale.
-\begin{itemize}
-\item	further approximations such as player clustering (such as implemented by \cite{DBLP:journals/corr/abs-1903-10965}), or transforming the problem into a non-atomic form, similar to non-atomic Shapley Value.
-\item	solution concepts like GNK that are incentive compatible (such as presented by \cite{myerson1,Salamanca2019}) in the context of electricity networks.
-\item	It may be possible to construct a weighted GNK value to account for differential likelihoods of different coalitions forming.
-\item	The GNK value allocates the utilitarian outcome, however it is not necessarily required that utility be measured in money (even though this is the easiest interpretation).
-It is also possible to note that there exist non-transferable-utility (NTU) modifications - such as also considered by \cite{value1} - which could be modified to yield a NTU GNK value.
-\item	exploration of other ideas that make the GNK individually rational
-\end{itemize}
-
-\end{frame}
 

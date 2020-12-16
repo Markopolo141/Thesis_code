@@ -9,25 +9,23 @@
 
 \begin{frame}
 \frametitle{Sampling \& Concentration Inequalities}
-
 \begin{block}{Research Question}
 How can we select samples in Stratified Sampling \& Shapley Value Approximation better?
 \end{block}
-
 Orthodox answer, is that you select samples in proportion to the size \& variance of the strata.
-\begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
-For strata of sizes $N_i$, with variance $\sigma_i^2$ for a sample budget $n$ the $n_i$ which minimises the variance of our population estimate $\mu$ is:
-$$n_i = n\frac{N_i\sigma_i}{\sum_jN_j\sigma_j}$$
-\end{theorem}
-\end{frame}
-
-
-\begin{frame}
 \begin{figure}
 \includegraphics[width=0.45\linewidth,height=0.25\linewidth]{figs/sheep.png}%
 $~~~~~$
 \includegraphics[width=0.45\linewidth,height=0.25\linewidth]{figs/sheep2.jpg}%
 \end{figure}
+\end{frame}
+
+
+\begin{frame}
+\begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
+For strata of sizes $N_i$, with variance $\sigma_i^2$ for a sample budget $n$ the $n_i$ which minimises the variance of our population estimate $\mu$ is:
+$$n_i = n\frac{N_i\sigma_i}{\sum_jN_j\sigma_j}$$
+\end{theorem}
 Sampling in proportion to strata variance$\times$size is intuitive, extends from Chebyshev's inequality:
 \begin{theorem}[Chebyshev's inequality]\label{thm:chebyshevs}
 for any random variable $\hat{\mu}$ with variance $\text{Var}(\hat{\mu})$ then the error of $\hat{\mu}$ from its mean is probability bounded:
@@ -214,19 +212,6 @@ Let $X$ be a real-valued random variable with a mean of zero and variance $\sigm
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Shapley Value sampling}
-
-We test out how effective sampling to minimise this new bound is against other Shapley Value sampling methods:
-
-\begin{enumerate}
-\item	particularly simple sampling \cite{DBLP:journals/cor/CastroGT09}
-\item	Neyman allocation \cite{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}
-\item	allocation to minimise Hoeffding's inequality \cite{2013arXiv1306.4265M}.
-\end{enumerate}
-
-\end{frame}
-
 
 
 
@@ -254,13 +239,24 @@ where:
 \end{frame}
 
 
-\begin{frame}
 
+\begin{frame}
+\frametitle{Shapley Value sampling}
+We test out how effective sampling to minimise this new bound is against other Shapley Value sampling methods:
+\begin{enumerate}
+\item	particularly simple sampling \cite{DBLP:journals/cor/CastroGT09}
+\item	Neyman allocation \cite{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}
+\item	allocation to minimise Hoeffding's inequality \cite{2013arXiv1306.4265M}.
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
 \input{figs/shapley_table.tex}
 \end{frame}
 
 \begin{frame}
-
 \input{figs/shapley_table2.tex}
 \end{frame}
 

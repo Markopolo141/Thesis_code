@@ -123,6 +123,25 @@
     \hat{\vphantom{\rule{1pt}{\dhatheight}}%
     \smash{\hat{#1}}}}
 
+
+
+\newlength{\overwritelength}
+\newlength{\minimumoverwritelength}
+\setlength{\minimumoverwritelength}{1cm}
+\newcommand{\overwrite}[3][red]{%
+  \settowidth{\overwritelength}{$#2$}%
+  \ifdim\overwritelength<\minimumoverwritelength%
+    \setlength{\overwritelength}{\minimumoverwritelength}\fi%
+  \stackrel
+    {%
+      \begin{minipage}{\overwritelength}%
+        \color{#1}\centering\small #3\\%
+        \rule{1pt}{9pt}%
+      \end{minipage}}
+    {\colorbox{#1!50}{\color{black}$\displaystyle#2$}}}
+
+
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -149,6 +168,25 @@ Australian National University \\ % Your institution for the title page
 %\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 %\end{frame}
 
+\begin{frame}
+\frametitle{Acknowledgements}
+Supervisors
+\begin{itemize}
+\item	Sylvie Thi\'{e}baux
+\item	Paul Scott
+\item	Archie Chapman
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Papers}
+\begin{itemize}
+\item	``The Generalized N\&K Value: An Axiomatic Mechanism for Electricity Trading'' (AAMAS 2018)\\ \href{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}
+\item	``An Engineered Empirical Bernstein Bound'' (ECML-PKDD 2019)\\ \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf}
+\item	``Stratified Finite Empirical Bernstein Sampling'' (Preprints.org 2019)\\ \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2}
+\end{itemize}
+\end{frame}
+
 
 \section{Introduction}
 
@@ -172,14 +210,59 @@ How \textit{should} electrical energy be traded?
 \item	Background and motivation
 \item	What the Answer looks like
 \item	Extensions to bigger networks
+\item	Development of new sampling methods
 \item	Summary
-\item	Sampling
 \end{enumerate}
 \end{frame}
 
 
-%\input{part1.tex}
+\input{part1.tex}
 \input{part2.tex}
+
+
+\begin{frame}
+\frametitle{Conclusion}
+The GNK value was developed
+\begin{itemize}
+\item	Extention of game theory (bargaining and cooperative) to generalized games
+\item	Was evaluated by sampling methods and with a proxy to ~100 bus networks
+\item	was found lacking specifically in electricity context
+\end{itemize}
+Novel Sampling methods were discovered
+\begin{itemize}
+\item	Extending empirical concentration inequalities to novel context
+\item	powerfull technique
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Future work}
+\begin{itemize}
+\item	Player clustering (such as implemented by \cite{DBLP:journals/corr/abs-1903-10965}), or transforming the problem into a non-atomic form.
+\item	Solution concepts like GNK that are incentive compatible (such as presented by \cite{myerson1,Salamanca2019}) in the context of electricity networks.
+\item	Non-transferable-utility (NTU) modifications - such as also considered by \cite{value1}.
+\item	Exploration other ideas that make the GNK individually rational
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Multi-Dimensional Stratified Sampling Concentration Inequality}
+with ${\Omega}_m^n = {\Psi}_m^n = \frac{1}{m}$
+%\begin{equation}\label{big_equation2}\p\left(\begin{matrix*}[l]\sum_{j=1}^M\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2 \ge \\ \quad\quad \log(6/p)\sum_{j=1}^M\begin{pmatrix*}[l]\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\ +\begin{pmatrix*}[l]\sqrt{\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)} \\ +\sqrt{\begin{matrix*}[l]2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i \\ + \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i} \\ +\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)\end{matrix*}} \end{pmatrix*}^2\end{pmatrix*}\end{matrix*} \right)\le Mp \end{equation}
+
+\begin{equation}\label{big_equation2}\pr\left(\begin{matrix*}[l]\sum_{j=1}^M\left(\sum_{i=1}^n\tau_i(\chi_{i,m_i,j}-\mu_{i,j})\right)^2 \ge \\ \quad\quad \log(6/p)\sum_{j=1}^M\left(\alpha_{m_i,j}^{n_i} +\left(\sqrt{\beta_{m_i,j}^{n_i}} +\sqrt{\gamma_{m_i,j}^{n_i}}\right)^2\right)\end{matrix*} \right)\le Mp \end{equation}
+where:
+\begin{align*}
+\alpha_{j}=&\sum_{i=1}^n\frac{4}{17}\Omega_{m_i}^{n_i}D_{i,j}^2\tau_i^2 \\
+\beta_{j}=&\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right) \\
+\gamma_{j}=&2\sum_{i=1}^n\tau_i^2\Psi_{m_i}^{n_i}(m_i-1)\doublehat{\sigma}_{i,j}^2/m_i
++ \log(6n/p)\sum_i\tau_i^2D_{i,j}^2\Omega_{m_i}^{n_i}\Psi_{m_i}^{n_i}  \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad~~+\log(3/p)\left(\max_i\tau_i^2{\Psi_{m_i}^{n_i}}^2D_{i,j}^2\right)
+\end{align*}
+
+\end{frame}
 
 %----------------------------------------------------------------------------------------
 %	PRESENTATION SLIDES
@@ -187,18 +270,14 @@ How \textit{should} electrical energy be traded?
 
 
 \begin{frame}
-\Huge{\centerline{The End}}
+\Huge{\centerline{Thankyou!}}
 \end{frame}
 
-\begin{frame}
+
+\begin{frame}[t, allowframebreaks]
 \frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
-\end{thebibliography}
-}
+\bibliographystyle{amsalpha}
+\bibliography{thesis}
 \end{frame}
 
 %------------------------------------------------
