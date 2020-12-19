@@ -103,31 +103,30 @@ And the result that $\varphi_i^2 \ge \varphi_i^1$ follows by monotonicity (theor
 
 
 
-\section{Some associated concentration inequalities}\label{Appendix:more_concentration}
+%\section{Some associated concentration inequalities}\label{Appendix:more_concentration}
 
-\begin{theorem}\label{hoeffdings_inequality22}
-Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
-\begin{equation}\p(\hat{\mu}-\mu\ge t)\le \left( \frac{b}{b-a}\left(\frac{b(a-t)}{a(b-t)}\right)^{\frac{a-t}{b-a}} -\frac{a}{b-a}\left(\frac{b(a-t)}{a(b-t)}\right)^{\frac{b-t}{b-a}}  \right)^n
-\end{equation}
-\end{theorem}
-\begin{proof}
-Similar to the proof in Theorem \ref{hoeffdings_inequality} we follow the same steps except do not apply Equation \ref{Hoeffdings_lemma}, leading to:
-$$ \p(\hat{\mu}\ge t) \le \left(\frac{b\exp(sa) - a\exp(sb)}{\exp(st)(b-a)}\right)^n $$
-And minimising with respect to $s$ 
-%occurs at, which 
-yields the required result.
-%$$ s = \frac{1}{b-a}\log\left(\frac{b(a - t)}{a(b - t)}\right) $$
-\end{proof}
-This concentration inequality is more powerful but more ugly and difficult to manipulate, it is also more commonly stated for variable $X$ with non-zero mean and bounded $0<X<1$:
+%\begin{theorem}\label{hoeffdings_inequality22}
+%Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
+%\begin{equation}\p(\hat{\mu}-\mu\ge t)\le \left( \frac{b}{b-a}\left(\frac{b(a-t)}{a(b-t)}\right)^{\frac{a-t}{b-a}} -\frac{a}{b-a}\left(\frac{b(a-t)}{a(b-t)}\right)^{\frac{b-t}{b-a}}  \right)^n
+%\end{equation}
+%\end{theorem}
+%\begin{proof}
+%Similar to the proof in Theorem \ref{hoeffdings_inequality} we follow the same steps except do not apply Equation \ref{Hoeffdings_lemma}, leading to:
+%$$ \p(\hat{\mu}\ge t) \le \left(\frac{b\exp(sa) - a\exp(sb)}{\exp(st)(b-a)}\right)^n $$
+%And minimising with respect to $s$ 
+%yields the required result.
+%%$$ s = \frac{1}{b-a}\log\left(\frac{b(a - t)}{a(b - t)}\right) $$
+%\end{proof}
+%This concentration inequality is more powerful but more ugly and difficult to manipulate, it is also more commonly stated for variable $X$ with non-zero mean and bounded $0<X<1$:
 
-\begin{theorem}[Also called Hoeffding's inequality]\label{hoeffdings_inequality23}
-Let $X$ be a real-valued random variable that is bounded $0\le X\le 1$, with mean $\mu$. Then for $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
-\begin{equation}\p(\hat{\mu}-\mu\ge t)\le \left[\left(\frac{1-\mu}{1-t-\mu}\right)^{1-t-\mu}  \left(\frac{\mu}{t+\mu}\right)^{t+\mu}\right]^n
-\end{equation}
-\end{theorem}
-Which follows directly from the substitution $a=-\mu$ and $b=1-\mu$.
+%\begin{theorem}[Also called Hoeffding's inequality]\label{hoeffdings_inequality23}
+%Let $X$ be a real-valued random variable that is bounded $0\le X\le 1$, with mean $\mu$. Then for $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
+%\begin{equation}\p(\hat{\mu}-\mu\ge t)\le \left[\left(\frac{1-\mu}{1-t-\mu}\right)^{1-t-\mu}  \left(\frac{\mu}{t+\mu}\right)^{t+\mu}\right]^n
+%\end{equation}
+%\end{theorem}
+%Which follows directly from the substitution $a=-\mu$ and $b=1-\mu$.
 
-Theorems \ref{hoeffdings_inequality22} and \ref{hoeffdings_inequality23} will not be used for further derivation, but to illustrate the point that 
+%Theorems \ref{hoeffdings_inequality22} and \ref{hoeffdings_inequality23} will not be used for further derivation, but to illustrate the point that 
 
 
 

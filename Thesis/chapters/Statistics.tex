@@ -97,7 +97,7 @@ and the result follows by multiplying by $\exp(q\sigma^2)$.
 The inequalities above, Lemmas \ref{expectation1} and \ref{expectation2}, as well as Lemma \ref{Hoeffdings_lemma_lemma}, are used in the derivation of our stratified sampling concentration inequality in Section~\ref{sec:constructing}. One of the primary reasons for utilising these weakened bounds on the moment generating function is that they make the subsequent mathematics far more tractable.
 However in order to use these moment generating functions we need to explicitly describe the difference between the moment generating functions of individual random variables (which these are) and the moment generating function of the sample mean of them.
 
-\subsubsection{Some bounds on the Moment Generating Function of sample means}\label{sec:without_replacement}
+\subsubsection{Some bounds on the moment generating function of sample means}\label{sec:without_replacement}
 
 In order to use the previous bonds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
 To do this we state two further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second (Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
@@ -418,7 +418,7 @@ And afterwards, in the next section \ref{section:statistics_results} we will com
 
 
 
-\subsection{Sequential sampling using the Stratified Empirical Bernstein Method} \label{sec:SEBMalgorithm}
+\subsection{Sequential sampling using the stratified empirical bernstein method (SEBM)} \label{sec:SEBMalgorithm}
 
 %To evaluate the effectiveness of the process of sequentially minimising the probability bounds on the error of the sample estimated stratified mean, we need a little development of those algorithms before proceeding to give details on the process of testing them in the context of synthetic data.
 %It is necessary to consider the way in which the concentration inequality of the previous section (Theorem \ref{thm:SEBM_bound}) should be iteratively minimised; and this process is expounded as Algorithm \ref{alg2}.
