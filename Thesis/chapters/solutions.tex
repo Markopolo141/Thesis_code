@@ -1,22 +1,22 @@
 \chapter{Existing solutions}
 \label{cha:solutions}
 
-In the previous chapter we discussed some of the philosophy surrounding distributive justice, and in this chapter we discuss some of the various ways those ideas can be made quantitatively precise.
+In the previous chapter we discussed some of the philosophy surrounding distributive justice, and in this chapter we discuss some of the various ways those ideas have been made quantitatively precise.
 
-In this chapter we consider some of the relevant formulations of the way that moral ideas about distribution can be mathemetised, primarily because our later developments extends from them and also ultimately contrasts against them.
+In this chapter we consider some of the relevant formulations of the ways in which moral ideas about distribution have been mathemetised, primarily because our later developments extends from them and also ultimately contrasts against them.
 
 We consider the following formulations:
 \begin{itemize}
-\item in section \ref{sec:solutions_VCG} we consider the Vickrey-Clarke-Groves (VCG) mechanism,
-\item in section \ref{sec:solutions_LMP} we consider Locational Marginal Pricing (LMP),
-\item in section \ref{sec:cooperative_game_theory_part} we consider cooperative game theory solution concepts including the Core and Shapley Value,
-\item and in section \ref{sec:solutions_bargaining} we consider Nash's bargaining solution concepts.
+\item in section \ref{sec:solutions_VCG}, we consider the Vickrey-Clarke-Groves (VCG) mechanism,
+\item in section \ref{sec:solutions_LMP}, we consider Locational Marginal Pricing (LMP),
+\item in section \ref{sec:cooperative_game_theory_part}, we consider the Core and the Shapley Value,
+\item in section \ref{sec:solutions_bargaining}, we consider Nash's bargaining solution concepts.
 \end{itemize}
 
 %These different approaches stem from different moral considerations, %and primarily reward participants with respect to different reference points that are briefly addressed in section \ref{sec:reference_points}.
 %All of them tacitly respect formal equality (per section \ref{sec:formal_equality}), with bargaining and cooperative game theory concepts satisfying absolute efficiency requirements (per section \ref{sec:philosophy_efficiency}), and LMP often does so.
 
-These different approaches stem from different moral considerations and has specific context and unique properties; we will introduce and discuss each of them in turn.
+These different approaches stem from different moral considerations and have specific context and unique properties; we will introduce and discuss each of them in turn.
 In the next chapter \ref{cha:new_solution} we attempt a new synthesis which brings many of these conceptual elements together.\\
 Let us begin with the VCG mechanism.
 
@@ -35,9 +35,9 @@ We assume that every agent $i$ has a valuation (or utility) $v_i$ for any outcom
 $$ v_i~:~X\rightarrow \mathbb{R}_{\ge 0} $$
 The VCG bidding process asks every agent $i$ for their valuations and calculates the outcome that maximises the sum of the reported valuations:
 $$ x^* = \argmax_{x\in X}\sum_{i=1}^{n}v_i(x) $$
-This outcome is implemented and the bidding process pays each agent $i$ the utility value $d_i$ (which may be positive or negative):
+This outcome is implemented and the process pays each agent $i$ the utility value $d_i$ (which may be positive or negative):
 \begin{equation}\label{eq:VCG_payment_rule} d_i(v)=\sum_{j\ne i}v_j(x^*) - \max_{x'\in X}\sum_{j\ne i}v_j(x') \end{equation}
-And this value $d_i$ is the value that the player's presence adds to the utility of others minus the sum of the other player's utility which would have been obtained in the player's absence - ie. the player's externality.
+This value $d_i$ is the value that the player's presence adds to the utility of others minus the sum of the other player's utility which would have been obtained in the player's absence - ie. the player's externality.
 In this equation the sum of other player's utility which would have been obtained in the player's absence $\max_{x'\in X}\sum_{j\ne i}v_j(x')$ is a special term called the 'Clark pivot', and in section \ref{subsubsection:groves_mechanisms} we discuss alternatives to this term.
 
 \begin{example}
@@ -45,7 +45,7 @@ Consider a set of outcomes $X = \{A,B,C\}$ and three agents with valuations
 $$\begin{matrix}v_1(A) = 2\\v_1(B) = 4\\v_1(C) = 3\end{matrix}\quad\quad
 \begin{matrix}v_2(A) = 4.5\\v_2(B) = 2\\v_2(C) = 1\end{matrix}\quad\quad
 \begin{matrix}v_3(A) = 2\\v_3(B) = 1\\v_3(C) = 5\end{matrix}$$
-In this context $x^* = C$ is implemented (as $\sum_{i=1}^nv_i(C)=9$ is the biggest)\\And:
+In this context $x^* = C$ is implemented (as $\sum_{i=1}^nv_i(C)=9$ is the largest)\\And:
 $\quad d_1 = 6-6.5 = -0.5 \quad\quad d_2 = 8-8 = 0\quad\quad d_3 = 4-6.5 = -2.5 $
 \end{example}
 
@@ -61,15 +61,15 @@ An agent's utility is quasilinear if their utility is equal to their valuation o
 $$ u_i = d_i(v)+v_i $$
 And thus if incentive compatibility induces the players not to bid strategically, then it reduces a potential overhead of their participation in the system, and also potentially eliminates a source of instability in the resulting system.
 
-Another interesting property is called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. Particularly if the utility of zero is regarded as the utility of non-participation, then individually rational means that everybody is left being better-off by participating than they would be otherwise. Hence individual rationality is a possible of ethical euvolentary negotiation (see chapter \ref{sec:reference_points}).
+Another interesting property is called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. Particularly if the utility of zero is regarded as the utility of non-participation, then individually rational means that everybody is left being better-off (or atleast not worse-off) by participating than they would be otherwise. Hence individual rationality is a possible articulation of ethical euvolentary negotiation (see chapter \ref{sec:reference_points}).
 
 It is also worth noting that VCG mechanisms are also \textit{efficient} in the sense that the process actualises the utilitarian socially optimal solution $x^*(v) \in X$.
 
-However, more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible for the amount of utility that is transferred between the players might not sum to zero.
+However, more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible that the amount of utility that is transferred between the players might not sum to zero.
 Because of this an implementation of VCG might require regular budget injection to maintain and/or produce a budget surplus, hence sapping money from between the participants (see example).
-Because VCG may produce a budget surplus from between the participants it is hence easy to note that the maximum amount of utility is not being given to the participants, and hence VCG is not efficient in the sense of maximising utility for the participants (see section \ref{sec:philosophy_efficiency}).
+As VCG may produce a budget surplus it is thus easy to note that the maximum amount of utility is not being given to the participants, and hence VCG is not efficient in the sense of maximising utility for the participants (see section \ref{sec:philosophy_efficiency}).
 Although VCG is incentive compatible for individual strategisers it has some additional drawbacks, such as considered by \cite{ShohamLeytonBrown09}: as is potentially vulnerable to strategising coalitions, its implementation may involve imposing a lack of privacy for participants, and also (depending on context) may also have higher computational complexity than other mechanisms.
-As such the disadvantages of VCG have made it notably seldom implemented in practice, including in the context of electricity networks \citep{Rothkopf07, Ausubel2006}.
+These disadvantages of VCG have led it to be seldom implemented in practice, including in the context of electricity networks \citep{Rothkopf07, Ausubel2006}.
 
 As VCG has positive and negative features, it is possible to ask if there are similar mechanisms which avoid some of the negative features.
 But it is unfortunate, that some of these properties (incentive compatible, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
