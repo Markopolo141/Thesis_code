@@ -99,7 +99,7 @@ However in order to use these moment generating functions we need to explicitly 
 
 \subsubsection{Some bounds on the moment generating function of sample means}\label{sec:without_replacement}
 
-In order to use the previous bonds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
+In order to use the previous bounds on the moment generating function we need a relationship between the moment generating function of a random variable, and the moment generating function of the average of samples of that random variable.
 To do this we state two further inequalities, where the first one (Lemma~\ref{martingale1}) is most appropriate for sampling average is taken with replacement, and the second (Lemma~\ref{martingale0}) can optionally be used in the context that the sampling average is without replacement - and may (or may not) give a tighter result.
 
 We first state a lemma that is essentially is a formalisation of the process we are familiar with in the last section (see Lemma \ref{chernoff1}):
@@ -176,7 +176,7 @@ Before this, we begin by precisely defining the context of our derivations, to w
 
 \begin{definition}[Problem context]\label{def:ProblemContext}\hspace{1cm}\\
 \begin{itemize}
-    \item Let a population consist of $n$ number of strata of finite data points,
+    \item Let a population consist of $n$ number of strata,
     \item where $n_i$ is the total number of data points in the $i$th stratum.
     \item All values in a stratum are bound within a finite support of width $D_i$.
     \item the mean of the $i$th stratum is $\mu_i$, and its variance $\sigma_i^2$.

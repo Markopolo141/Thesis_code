@@ -1,17 +1,18 @@
 
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
-The minimisation of inequalities such as EBBs cannot be directly be used as a method of choosing samples in stratified sampling.
-Since the aggregated population mean estimate does not itself have a sample variance, but only that the strata have means and sample variances.
-An EBB can be a bound for the mean of a stratum, but an EBB cannot bind the aggregated mean estimate of all the strata.
+The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling.
+Since the aggregated population mean estimate does not itself have a sample variance, but only the strata have means and sample variances.
+Such EBBs can be applied as a bound for the mean of an individual stratum, but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
 
-However in this section, we show that EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate which can then be minimised to create new stratified sampling methodologies.
+In this section, we show that these EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
 The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
-Hence these new sampling methodologies will be variance sensitive and also possible to conduct in a single step, rather than two steps - as is necessary in Neyman sampling.
+And thus the resulting sampling methodologies will implicitly be sensitive to the variances of the strata but not requiring foreknowledge of them - unlike Neyman sampling.
+%And thus it will be possible to conduct such sampling in a single step, rather than in two steps - as is necessary in Neyman sampling.
 
 \subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
 
-To create a bound for the error of a stratified mean estimator from EBBs it is necessary to use probability unions to bind them together.
+To create a bound on the error in stratified sampling from EBBs, it is necessary to use probability unions to bind the EBBs together.
 the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} give derivations on the error, and the absolute error, of the stratified mean estimator.
 
 \begin{theorem}\label{triangle_theorem1}
@@ -71,16 +72,15 @@ The strata that gives the most reduction of its EBB for a prospective additional
 \caption[Stratified Error bound reduction algorithm by unionised EBBs]{Stratified Error bound reduction algorithm by unionised EBBs - by Theorem \ref{triangle_theorem2}}
 \label{alg3}
 \begin{algorithmic}[1]
-    \REQUIRE probability $t$, strata number $N$, stratum sizes $n_i$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, weights $\tau_i$, widths $D_i$, maximum sample budget $B$.
-    We assume an Empirical Bernstein Bound $Z$ as per the following form:
-$\quad \p(\hat{\mu}_i-\mu_i \ge Z(m_i,D_i,\hat{\sigma}^2_i,t)) \le t $
-    \WHILE{$\sum_i{m_i}<B$}
+    \REQUIRE probability $t$, number of strata $N$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, widths $D_i$, maximum sample budget $B$,
+    for an EBB per the following form: $\p(\hat{\mu}_i-\mu_i \ge Z(m_i,D_i,\hat{\sigma}^2_i,t)) \le t $
+    \WHILE{$\sum_k{m_k}<B$}
         \STATE $beststrata \leftarrow -1$
         \STATE $bestimprovement \leftarrow 0$
-    	\FOR{$k=0$ to $N$}
+    	\FOR{$i=1$ to $N$}
     		\STATE $improvement \leftarrow \frac{n_i}{\sum_kn_k}\left(Z(m_i,D_i,\hat{\sigma}^2_i,t) - Z(m_i+1,D_i,\hat{\sigma}^2_i,t)\right)$
     	    \IF{$improvement > bestimprovement$}
-    	        \STATE $beststrata \leftarrow k$
+    	        \STATE $beststrata \leftarrow i$
     	        \STATE $bestimprovement \leftarrow improvement$
     	    \ENDIF
     	\ENDFOR
@@ -184,7 +184,7 @@ Minimizing with respect to $f$ occurs at $f=\frac{-z}{b}$ and gives the result.
 
 The derivation of Bennett's inequality is separated into two parts as the above Lemma \ref{thm:parabola} will also be reused to derive a weaker but more mathematically manipulatable inequality later (as Lemma \ref{expectation1}).
 
-The essential difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a line over the exponential function.
+The essential difference between Bennett's inequality and Hoeffding's inequality is the fitting of a parabola instead of a linear term over the exponential function.
 And this second order parabolic term makes Bennett's inequality sensitive to the variance of the distribution whereas Hoeffding's inequality is not.
 Bennett's inequality provides a probability bound for the difference of the sample mean from the true mean given the variance, however the true variance is not often known in practice.
 
@@ -323,11 +323,13 @@ In this process care was taken in applying this theorem that all the assumptions
 
 \subsection{Numerical determination}\label{numerical-implementation}
 
-The Empirical Bernstein Bound described in the previous subsection \ref{subsection:general_ebb_creation} consiting of the inversions and compositions of functions $H_1$ and $H_3$ from theorems \ref{hoeffdings1} and \ref{variance2} was identified as challenging analytically, however much possible numerically.
-And this process that was used for calculating this numerical EBB consisted of three primary parts:
-(i) the computation of function $f(\sigma^2,w)=H_3^n(a,b,y,\sigma^2)$;
-(ii) verifying that the assumptions of Theorem \ref{ebb1} hold for $h(\sigma^2,t)=H_1$ and $f(\sigma^2,w)=H_3$, and;
-(iii) calculating the subsequent result of Theorem \ref{ebb1}.
+The Empirical Bernstein Bound described in the previous subsection \ref{subsection:general_ebb_creation} consists of inversions and compositions of functions $H_1$ and $H_3$ from theorems \ref{hoeffdings1} and \ref{variance2}, is identified to be challenging to analytically determine but much more possible to numerically determine.
+Calculating this EBB numericaly consisted of three primary parts:
+\begin{enumerate}
+\item  Computating function $f(\sigma^2,w)=H_3^n(a,b,y,\sigma^2)$
+\item  Verifying the assumptions of Theorem \ref{ebb1} hold for $h(\sigma^2,t)=H_1$ and $f(\sigma^2,w)=H_3$
+\item  Calculating the subsequent result of Theorem \ref{ebb1}
+\end{enumerate}
 
 First, the function $f(\sigma^2,w)=H_3^n(a,b,w,\sigma^2)$ (per Theorem \ref{variance2}) was identified as the solution to an optimisation problem that solves for the minima of an objective function subject to constraint $\phi\in[0,1]$.
 Despite its complexity, solutions of this sort can be found quickly using a single variable parameter sweep.
@@ -344,12 +346,12 @@ Third, to numerically calculate the result of Theorem \ref{ebb1} the functions $
 $h^{-(2)}(z^{-(1)}(\hat{\sigma}^2,y-x),x)$ - which was the inner part of the expression of the new EBB parameterised by $x$ explicitly and also $a,b$ implicitly.
 %
 However we typically don't know the values of $a$ and $b$, but instead know the mean is somewhere within a finite interval of width $D=b-a$, in this context was taken the worst case values of $a$ and $b$ consistent with a given $D$, 
-and then took the best $x\in[0,y]$ subject to all other bounds.
-In short, the numerical process involved a series of coordinate manipulations to conduct inversions and some mundane parameter searches.\footnote{sourcecode available at:\\\url{https://github.com/Markopolo141/Engineered-Empirical-Bernstein-Bound}}
+and then the best $x\in[0,y]$ was taken subject to all other bounds.
 
 
-For the ease of this application of our EBB we hand-tuned a function approximating our EBB's numerical probability 0.5 bound,
-The process of creating the expression involved plotting the numerical data, and manually fitting an approximate symbolic expression:
+Throughout this three stage process the new EBB was numerically determined by a series of coordinate manipulations and mundane parameter searches.\footnote{sourcecode available at:\\\url{https://github.com/Markopolo141/Engineered-Empirical-Bernstein-Bound}}
+For the ease of this application of our EBB, we hand-tuned an envelope of our EBB's probability 0.5 bound,
+where the process of creating such an expression involved plotting the numerical data, and manually fitting a symbolic expression above the data:
 \begin{equation}\label{eq:prob_bound} \p\left(\mu-\hat{\mu}\ge \frac{D}{\sqrt{n}}\; \min\left[ \sqrt{2\log 2},
 \footnotesize
 \left(\begin{matrix*}[c]

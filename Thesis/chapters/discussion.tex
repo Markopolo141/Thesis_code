@@ -40,8 +40,8 @@ In this way (although the results are loose) we can witness that our EBB provide
 The purpose of developing a stronger EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value) over other EBBs.
 It was expected that the better and more tight the EBBs used, the more likely it would be that iteratively choosing samples to minimise such a bound would produce better sample choices and thus yield better estimate of the population mean.
 
-And while it is evident that the EBB we produced was tighter than Maurer and Pontil's EBB, the actual resulting performance difference between (as seen between \textsc{EEBB} and \textsc{Maurer} in Table \ref{Table1}) is surprisingly marginal; so marginal infact it is comparable against the performance of using unioned Hoeffding bounds - as \textsc{Hoeffding} method.
-We continue discussion of this surprising result in the context of all the other methods in section \ref{subsection:main_discussion}.
+And while it is evident that the EBB we produced was tighter than Maurer and Pontil's EBB, the actual resulting performance difference in selecting samples (as seen between \textsc{EEBB} and \textsc{Maurer} in Table \ref{Table1}) is surprisingly marginal; so marginal infact, it was comparable to the performance of using unioned Hoeffding bounds - the \textsc{Hoeffding} method.
+We continue discussion of this surprising result in the context of all the other methods in the next section \ref{subsection:main_discussion}.
 
 
 
@@ -129,7 +129,7 @@ Also comparing this Figure \ref{fig:bounds_widths}, with Figures \ref{Table1},\r
 
 \subsection{Discussion of Shapley Value results}\label{subsection:discussion_shapley}
 
-In considering the comparison of approaches to approximating the Shapley value, our sampling method (SEBM, with error $e^{SEBM}$) shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
+In considering the comparison of approaches to approximating the Shapley Value, our sampling method (SEBM, with error $e^{SEBM}$) shows improved performance on almost all accounts, as shown in Table~\ref{Table2}.
 This was particularly the case in the context of large sample budgets, as our method sampled without replacement, while the other methods sampled with replacement.
 And we also note that our method's performance could potentially be further improved by selecting more refined $D_i$ values in the context of our example games.
 
@@ -217,22 +217,7 @@ Taking a series of union bounds (Lemma~\ref{prob_union}) over $j$ gives result.
 
 The left hand side of the inequality in \eqref{big_equation2} is the square Euclidean distance between our weighted stratified sample vector estimate $\sum_{i=1}^n\tau_i\chi_{i,m_i}$ and the true mean stratified vector $\sum_{i=1}^n\tau_i\mu_{i}$.
 In this context, an example sampling process might consist of sampling to maximally minimise the right hand side of the inequality (similar to our SEBM process, described in Section~\ref{sec:SEBMalgorithm}).
-This formulation can be applied to more involved computational tasks that involve sampling data with multiple features or auxiliary variables.
-
-
-A potential use of this multi-dimensional stratified sampling method is in improving the performance of \textit{stochastic gradient decent} (SGD) methods for training neural networks \citep{2016arXiv160904747R}.
-Neural networks are trained by iteratively refining their parameters --- the weights and biases of the network --- against a cost function of the network's performance against training data.
-One common method of training neural networks is gradient decent (GD).
-In each iteration of GD, the derivative of how much a change in any parameter would influence the average performance of the network across the training data is calculated as a gradient vector.
-Once this vector is calculated, each network parameter takes a small step in the direction of this gradient, to incrementally increase the performance of the network, 
-and through many of these steps the network becomes trained.
-
-However in many cases, the entire corpus of training data is not used in each iteration but only a fraction of the corpus is sampled (as a `batch' or `minibatch'), and the average gradient vector of improved performance across the samples of the batch is calculated as an approximation of the true gradient vector. 
-This iterative process has been called SGD, where one of the hyperparameters is the size of the batches, see \cite{DBLP:journals/corr/KeskarMNST16}.
-In the context of supervised learning, each element of the training data is labelled with the desired output of the neural network for it, and these labels can serve to naturally stratify the training data; or the data can be stratified by other means too \citep{DBLP:journals/corr/ZhangKM17,DBLP:journals/corr/abs-1804-02772,2014arXiv1405.3080Z}.
-In this setting, Equation~\ref{big_equation2} may be used to choose between samples of labelled training data, in order to sample batches that estimate of the performance gradient more efficiently, and hence improve the efficiency of neural network training procedure.
-This idea of `smart sampling' for neural network training is not particularly new, and our method is potentially compatible with other performance-enhancing techniques in the literature on neural networks \citep{10.1007/978-3-319-24486-0_21,article123123131}.
-
+This formulation can be applied to more involved computational tasks that involve approximating averages over large sets of data with multiple features or auxiliary variables.
 
 
 

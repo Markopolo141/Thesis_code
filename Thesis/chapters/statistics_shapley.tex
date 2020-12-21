@@ -1,7 +1,7 @@
 
 \section{Shapley Value approximation}\label{sec:shapley}
 
-The Shapley value is a cornerstone measure in cooperative game theory (introduced in section \ref{subsec:the_shapley_value}). 
+The Shapley Value is a cornerstone measure in cooperative game theory (introduced in section \ref{subsec:the_shapley_value}). 
 It is an axiomatic approach to allocating a divisible reward or cost between participants where there is a clearly defined notion of how much surplus or profit a coalition of participants could achieve by themselves.
 It has many applications, 
 including analysing the power of voting blocks in weighted voting games \citep{Bachrach2009ApproximatingPI}, 
@@ -33,9 +33,10 @@ But primarily, is useful to us as a method of allocating financial payments in e
 %\end{equation}
 %then the Shapley value can be expressed as an average:
 %\begin{equation}\label{shap2_X} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}v_{i,k} \end{equation}
-Though the Shapley value is conceptually simple, its use is hampered by the fact that its total expression involves exponentially many evaluations of the characteristic function (there are $n\times 2^{n-1}$ possible marginal contributions between $n$ players).
 
-However, since the Shapley value is expressible as an average over averages by Equation~\eqref{shap2}, 
+Though the Shapley Value is conceptually simple, its use is hampered by the fact that its total expression involves exponentially many evaluations of the characteristic function (there are $n\times 2^{n-1}$ possible marginal contributions between $n$ players).
+
+However, since the Shapley Value is expressible as an average over averages by Equation~\eqref{shap2}, 
 it is possible to approximate these averages via sampling techniques, and these averages are naturally stratified by coalition size.
 In previously published literature, other techniques have been used to allocate samples in this context, particularly simple sampling \citep{DBLP:journals/cor/CastroGT09}, Neyman allocation \citep{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}, and allocation to minimise Hoeffding's inequality \citep{2013arXiv1306.4265M}.
 
@@ -73,7 +74,7 @@ The maximum marginal contribution is $1.19025$, so we assign $D_i=1.19025$ for a
 
 \begin{example_game}[Complex Reward Division]
 An $n=15$ player game with characteristic function:
-$$v(S)=\left(\sum_{i\in S}\frac{w_i}{50}\right)^2 - \floor[\Bigg]{\sum_{i\in S}\frac{w_i}{50}}^2$$
+$$v(S)=\left(\sum_{i\in S}\frac{w_i}{50}\right)^2 - \floor[\Bigg]{\left(\sum_{i\in S}\frac{w_i}{50}\right)^2}$$
 where
 $w=\{w_1,\dots,w_{15}\} = \{ 45, 41, 27, 26, 25, 21, 13, 13, 12, 12, 11, 11, 10, 10, 10 \}$\\
 In this game, we assign $D_i=2$ for all $i$.
@@ -84,9 +85,9 @@ In this game, we assign $D_i=2$ for all $i$.
 \input{figs/shapley_table.tex}
 
 
-For each game, we compute the exact Shapley value, and then the average absolute errors in the approximated Shapley value for a given budget $m$ of marginal-contribution samples across multiple computational runs.
+For each game, we compute the exact Shapley Value, and then the average absolute errors in the approximated Shapley Value for a given budget $m$ of marginal-contribution samples across multiple computational runs.
 The results are shown in Table \ref{Table2}, 
-where the average absolute error in the Shapley value is computed by sampling with Maleki's method \citep{2013arXiv1306.4265M} is denoted $e^{Ma}$, $e^{sim}$ is Castro's stratified simple sampling method \citep{DBLP:journals/cor/CastroGT09}, $e^{Ca}$ is Castro's Neyman sampling method \citep{CASTRO2017180}, and $e^{SEBM}$ is the error associated with our method, SEBM. 
+where the average absolute error in the Shapley Value is computed by sampling with Maleki's method \citep{2013arXiv1306.4265M} is denoted $e^{Ma}$, $e^{sim}$ is Castro's stratified simple sampling method \citep{DBLP:journals/cor/CastroGT09}, $e^{Ca}$ is Castro's Neyman sampling method \citep{CASTRO2017180}, and $e^{SEBM}$ is the error associated with our method, SEBM. 
 The results in Table~\ref{Table2} show that our method performs well across the benchmarks. 
 A discussion of all of the results is considered in the next section. 
 

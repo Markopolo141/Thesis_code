@@ -8,7 +8,7 @@ The original research question was:\\
 \-\hspace{1cm}How \textit{should} electricity and electrical resources be valued?\\
 
 Unfortunately such a question is not easy to answer and has strong ethical undertones, making a comprehensivively demonstrable answer impossible in principle, but an object of important investigation notwithstanding.
-To investigate, we covered some of the existing solution concepts such as Nash's axiomatic bargaining, Cooperative game theory topics such as the core and Shapley value, the VCG mechanism from mechanism design and marginal pricing theory.
+To investigate, we covered some of the existing solution concepts such as Nash's axiomatic bargaining, Cooperative game theory topics such as the core and Shapley Value, the VCG mechanism from mechanism design and marginal pricing theory.
 And with this investigation we attempted to take the best features of these concepts and synthesise a genuinely novel solution for the pricing of electrical resources on electricity networks.
 
 Our new GNK solution was essentially rooted in bargaining perspective, rewarding participants for the advantage they might have in competition with all others, 
@@ -20,7 +20,7 @@ In this way we hoped it would ascribe economic value to electricity resources in
 %This particular dynamic was fundamentally a result of the way that the intereaction between the participants was modelled.
 
 The GNK value extends from the Shapley Value axioms, and as such it inherits the NP-hard computational difficulty associated with the Shapley Value.
-However through investigation into sampling techniques and in utilising a particular proxy for the minimax-optimisations we were able to extend the GNK value from being intractable for $\sim 14$ bus nodal networks, to being computable to about $80-100$ bus nodal networks.
+However through investigation into sampling techniques and in utilising a particular proxy for the minimax-optimisations, we were able to extend the GNK value from being intractable for $\sim 14$ bus nodal networks, to being computable to about $80-100$ bus nodal networks.
 This was seen as an accomplishment as if the GNK value were calculated exactly for a 100 sized nodal network it would involve $\sim 2^{100}$ optimisation terms.
 
 Through the process of considering the different ways that the GNK value could be sampled, we developed some of our own complicated techniques which proved to be competitive against methods for sampling the Shapley Value in literature (particularly per Table \ref{Table2}).
@@ -36,7 +36,7 @@ In considering the different ways in which stratified sampling could be conducte
 \label{sec:future}
 
 The primary issue identified with the application GNK value is that it does not respect individual rationality property, and thus potentially allocates participants with negative utility. For this, there are a range of potential avenues of investigation, as briefly considered in section \ref{sec:wider_equality_gnk}.
-From experimentation the violation seems primarily to extend from the GNK's being an average over payoff advantages rather than payoffs in the context of the power conservation constraint.
+From experimentation, the violation seems primarily to extend from the GNK's being an average over payoff advantages rather than payoffs in the context of the power conservation constraint.
 And thus there are two possible avenues of averting this result:
 
 \begin{itemize}
@@ -45,21 +45,21 @@ And thus there are two possible avenues of averting this result:
 \end{itemize}
 
 
-The GNK value (with its proxy) is difficult to calculate for networks even using sampling for networks over $\sim 100$ on an ordinary computer, and different techniques such as clustering (as mentioned in section \ref{sec:GNK_extensions_discussion}) may be possible to approximate it yet still for greater sized networks.
-Additionally it might be possible to convert the GNK value to a non-atomic form in a similar way as there is a non-atomic Shapley Value.
+Even though the GNK value (with its proxy) is computable for networks of about $100$ nodes on an ordinary computer, different techniques such as clustering (as mentioned in section \ref{sec:GNK_extensions_discussion}) may enable calculation for greater sized networks.
+Additionally it might be possible to convert the GNK value to a non-atomic form in a similar way to the non-atomic Shapley Value.
 The non-atomic Shapley Value considers each participant as marginal contributor, and instead the summations of marginal differences is instead rendered as an integral. Potentially a non-atomic Shapley/GNK value could be more tractable for larger networks.
 
-Additionally there are avenues of possible improvements to our SEBM sampling method:
+Additionally there are investigative avenues towards possible improvements to our SEBM sampling method:
 \begin{itemize}
 \item	in the investigation of ways to minimise the computational overhead of the method.
 \item	it may be possible to modify the method to take advantage of join order process in Shapley Value sampling.
 \item	it might be possible to further tighten the concentration inequality (SEBB) in the sampling process.
 \end{itemize}
 
-In the derivation of the SEBB we primarily utilised Chernoff bounds, however it is stronger bounds can potentially be derived.
+In the derivation of the SEBB we primarily utilised Chernoff bounds, however it is possible that stronger bounds can potentially be derived.
 Particularly the assertion of optimal uncertainty quantification (OUQ) can result in perfectly tight bounds on concentration, directly by solving for the worst case scenario directly, we are skeptical about how this could be made to apply to stratified sampling particularly, but potentially it is worth investigation.\citep{OUQ1,doi:10.1137/13094712X}
 
-Additionally the application of our multi-dimensional extension of the SEBB (per section \ref{sec:multi}) to such tasks as neural network minibatch smart sampling, could be quite rewarding.
+Additionally the application of our multi-dimensional extension of the SEBB (per section \ref{sec:multi}) to such potentially tasks as neural network minibatch smart sampling, could be quite rewarding.
 
 
 

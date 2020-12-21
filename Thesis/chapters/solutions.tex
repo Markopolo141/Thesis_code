@@ -349,34 +349,34 @@ And in this context the Core is not the only solution concept worth considering.
 
 \subsection{The Shapley Value}\label{subsec:the_shapley_value}
 
-The \textit{Shapley value} is another specific and well known solution concept in cooperative game theory.
-Particularly the Shapley value allocates to each individual the average contribution they would add across the possible coalitions to which they could join.
+The \textit{Shapley Value} is another specific and well known solution concept in cooperative game theory.
+Particularly the Shapley Value allocates to each individual the average contribution they would add across the possible coalitions to which they could join.
 
 Particularly, for any coalition $S$ which does not include a player $i$, then player $i$'s marginal contribution is $v(S\cup\{i\}) - v(S)$. If we average such contributions for coalitions of size $k$:
 \begin{equation}\label{eq:shapley_value2}
 \hat{v}_{i,k} = \frac{1}{\binom{n-1}{k}}\sum_{S\subseteq N\setminus \{ i\} , |S|=k} %\frac{(n-|S|-1)!\,|S|!}{(n-1)!}
 (v(S\cup\{i\})-v(S))
 \end{equation}
-Then we have the average marginal contribution of player $i$ to coalitions of size $k$, and if we average this over coalitions of different size, we get the Shapley value:
+Then we have the average marginal contribution of player $i$ to coalitions of size $k$, and if we average this over coalitions of different size, we get the Shapley Value:
 \begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
 Or more directly as:
 \begin{equation}\label{shap1_X}\varphi_i(\langle N,v\rangle) = \sum_{S\subset N, i\notin S}\frac{(n-|S|-1)!\,|S|!}{n!}(v(S\cup\{i\})-v(S))\end{equation}
-The Shapley value is an averaging over a players marginal contributions, which is thus a unique allocation for any cooperative game.
+The Shapley Value is an averaging over a players marginal contributions, which is thus a unique allocation for any cooperative game.
 
-The Shapley value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
-So for instance, if we let $\pi(N)$ denote the set of all ordered permutations of the player set $N$ and if we denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the Shapley value can be expressed as the average marginal contribution across orderings, see \cite{weber_1988}:
+The Shapley Value for a player can also be formulated as being the expected marginal contribution across all join ordering processes.
+So for instance, if we let $\pi(N)$ denote the set of all ordered permutations of the player set $N$ and if we denote $Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$. Then the Shapley Value can be expressed as the average marginal contribution across orderings, see \cite{weber_1988}:
 \begin{equation}\label{shapley_value3}
     \varphi_i(\langle N,v\rangle) = \frac{1}{n!}\sum_{O\in\pi(N)}v(Pre^i(O)\cup\{i\})-v(Pre^i(O))
 \end{equation}
 
-In this way the Shapley value for a player can be directly expressed as the average marginal contribution across possible join order processes.
+In this way the Shapley Value for a player can be directly expressed as the average marginal contribution across possible join order processes.
 %Or alternatively,
 %\begin{equation}\label{eq:shapley_value}
 %    \varphi_i(\langle N,v\rangle)= \frac{1}{n}\sum_{S\subseteq N\setminus\{i\}} \binom{n-1}{|S|}^{-1} \left(v'(S\cup\{i\})-v'(S)\right) 
 %\end{equation}
 
-The Shapley value has perhaps some moral intuition behind it - rewarding each person in proportion to what they would add across any ordering that the coalition could form.
-But more than that, the Shapley value has been derived from different sets of quite intuitive axioms.
+The Shapley Value has perhaps some moral intuition behind it - rewarding each person in proportion to what they would add across any ordering that the coalition could form.
+But more than that, the Shapley Value has been derived from different sets of quite intuitive axioms.
 For instance:
 
 \begin{itemize}
@@ -386,10 +386,10 @@ For instance:
 \item	\textbf{Additivity}: That for any two games, the imputation for the two together is the sum of the imputations in each, for any $v_1$ and $v_2$, $\varphi(\langle N,v_1+v_2\rangle)=\varphi(\langle N,v_1 \rangle) + \varphi(\langle N,v_2\rangle)$
 \end{itemize}
 
-These axioms might seem pretty reasonable and they lead uniquely to the Shapley value allocation - per \cite{Shapley1953a}; additionally there are other possible sets of axioms which also lead to the Shapley Value aswell.
+These axioms might seem pretty reasonable and they lead uniquely to the Shapley Value allocation - per \cite{Shapley1953a}; additionally there are other possible sets of axioms which also lead to the Shapley Value aswell.
 These axioms (particularly Efficiency and Symmetry axioms) relate directly to morally relevant points raised in the philosophy chapter \ref{sec:philosophy} (Efficiency and formal equality conditions respectively).
 
-In considering the Shapley value, there is the additional question of when the Shapley value is in the Core - and thus has that particular stability that would disincentivise any subgroup from leaving.
+In considering the Shapley Value, there is the additional question of when the Shapley Value is in the Core - and thus has that particular stability that would disincentivise any subgroup from leaving.
 One example case where the Shapley Value is always in the Core is the case of Convex cooperative games, see \cite[Chapter 6]{RePEc:cup:cbooks:9781107691322}:
 A cooperative game is \textit{convex} if the value that two coalitions together has is greater than the value of their parts minus the value of their intersection, ie. iff:
 \begin{equation}
@@ -401,11 +401,11 @@ We consider an example:
 \begin{example}
 Consider player set $N=\{1,2,3\}$ with characteristic function:\\
 $v(S)=\left(\prod_{i\in S}i\right)-1$ (ie. the multiplication of their player numbers minus one).\footnote{We are assuming that the product over an empty set is one.}\\
-Solve for the shapley value, and show that it is efficient and also in the core.
+Solve for the Shapley Value, and show that it is efficient and also in the core.
 \end{example}
 
 \begin{solution}
-To calculate the shapley value for player $C$, we consider the marginal contributions it can make to other coalitions:\\
+To calculate the Shapley Value for player $C$, we consider the marginal contributions it can make to other coalitions:\\
 $ v(\{C\})-v(\emptyset) = 2-0 = 2, \quad\quad\quad v(\{C,A\})-v(\{A\}) = 2-0 = 2$\\
 $ v(\{C,B\})-v(\{B\}) = 5-1 = 4, \quad v(\{C,A,B\})-v(\{A,B\}) = 5-1 = 4  $\\
 Thus the Shapley Value for player $C$ is:
@@ -428,16 +428,6 @@ Indeed the Shapley Value has been considered as a potential mechanism for pricin
 Such as: demand response participation \citep{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \citep{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \citep{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \citep{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \citep{WU2017384} and allocating costs in distribution and embedded networks \citep{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
 In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
-%In any advocacy of the shapley value for an application, is tacitly advocacy of to each individual by the marginal contribution that they could add in a coalition formation process.
-%Which may or may-not coincide with the Core and its coalitional stability property.
-%In Chapter \ref{} we compare an application of the Shapley value applied to electricity systems against other allocation methods.
-
-%Shapley value concepts are increasingly being considered as mechanisms for pricing and cost allocation in various facets of electricity system operation.
-%Example include: demand response participation \cite{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}; 
-%compensation for the aggregation of power \cite{Perez-Diaz:2018:CEV:3237383.3237484,6520960};
-%allocating transmission costs and losses \cite{ip-gtd_20020005,SHARMA201733}; allocating profits for retailers and \cite{ACUNA2018161,WANG201972}; 
-%allocating surplus and savings in microgrids \cite{WU2017384} and; 
-%allocating costs in distribution and embedded networks \cite{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
 Just like in LMP and VCG, the Shapley Value is also evidently a marginal approach, as it is expressible the an average marginal contribution across possible groups (by equations \ref{shap2} or \ref{shapley_value3})
 

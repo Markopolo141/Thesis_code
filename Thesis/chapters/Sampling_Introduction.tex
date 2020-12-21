@@ -91,7 +91,7 @@ $$ \p\left(|\hat{\mu}-\mu|\ge k\sqrt{\text{Var}(\hat{\mu})}\right)\le\frac{1}{k^
 
 Thus if $\mu$ is the true population mean, then the error in our stratified estimate of the population mean $\hat{\mu}$ is probability bounded by the variance of it.
 So, for instance, Chebyshev's inequality guarantees that there will always be less than a 25\% chance that the error in our estimate of the population mean will be more than twice the square root of its variance.
-In this context, Chebyshev's is an example of a \textit{concentration inequality}, as it can be used to provides probability bounds on the concentration of the estimate around its mean value.
+In this context, Chebyshev's is an example of a \textit{concentration inequality}, as it provides probability bounds on the concentration of the estimate around its mean value.
 
 An additional and perhaps more intuitive angle by which Neyman allocation may be seen to be appropriate, is that if sufficiently large numbers of samples have been taken then the sample means of the strata will tend to be Gaussian distributed by the Central Limit Theorem.
 In this context the strata means have a distribution that is entirely characterised by their mean and variance, and hence so too therefore is the population mean.
@@ -110,9 +110,9 @@ It is therefore suitable to ask if there are alternative concentration inequalit
 
 \subsection{Concentration inequalities and Chernoff bounds}
 
-In order to consider what alternative concentration inequalities exist which apply in the case of stratified sampling and also do not depend on known variances, we need to turn to the space of concentration inequalities generally. 
+In order to consider what alternative concentration inequalities exist, we need to turn to the space of concentration inequalities generally. 
 
-Neyman allocation implicitly minimises Chebyshev's inequality, but Chebyshev's inequality is one example of many \textit{concentration inequalities}.
+Neyman allocation implicitly minimises Chebyshev's inequality, but Chebyshev's inequality is one example of many concentration inequalities.
 Concentration inequalities are applied in a range of data science contexts for a variety of prediction, machine learning and hypothesis testing tasks, including:
 change detection \citep{KiferShaiGehrke2004,8000571} 
 and classification \citep{Zia-UrRehman2012} in data streams;
@@ -146,11 +146,15 @@ In exactly the same context as in Theorem \ref{MandPsEBB}
     \end{equation}
 \end{theorem}
 
-In later section \ref{section:unionising_ebbs} we will show how these types of inequalities can be modified and subsequently minimised to create new methods of sample selection in stratified random sampling.
+The derivation of these EBBs are of interest, because they illustrate how it is possible to derive concentration inequalities which involve variance information but do not depend directly on the variance itself, and which might be extended to develop alternative methods of stratified sampling.
 Unfortunately these EBBs cannot directly be used to minimise the error in the aggregated population estimate, as the aggregated population estimate does not itself have a sample variance.
+But in later section \ref{section:unionising_ebbs} we will show how these types of inequalities can be modified and subsequently minimised to create new methods of sample selection in stratified random sampling.
 
-In section \ref{derivation} we show how it is possible to derive stronger EBBs, thus we introduce some of the components used in the process of deriving EBBs.
-One of the more famous Concentration Inequalities is \textit{Hoeffding's Inequality} which is one of a class of concentration inequalities called \textit{Chernoff bounds}.
+In section \ref{derivation} we will also show how it is possible to derive stronger EBBs, thus we introduce some of the components used in the process of deriving EBBs.
+
+\subsection{Components of concentration inequality derivations}
+
+One of the more famous concentration inequalities is \textit{Hoeffding's Inequality} which is one of a class of concentration inequalities called \textit{Chernoff bounds}.
 
 \begin{lemma}[Chernoff Bound]\label{chernoff1}
 If $\hat{\mu}$ is sample mean of $n$ independent and identically distributed samples of random variable $X$ then for any $s>0$ and $t$:
@@ -189,7 +193,7 @@ $$ \p(\hat{\mu}\ge t) \le \exp\left(\frac{1}{8}s^2(b-a)^2 n-snt\right) $$
 And minimising with respect to $s$ yields the required result.
 \end{proof}
 
-The most limiting feature of the derivation is the requirement that the mean is zero however this is immaterial and is used to simplify the derivation, as any statistic can be shifted such that its expectation value becomes zero. hence:
+The most limiting feature of the derivation is the requirement that the mean is zero however this is immaterial and is used to simplify the derivation, as any statistic can be shifted such that its expectation value becomes zero, hence:
 
 \begin{theorem}[Hoeffding's inequality]\label{Hoeffdings_inequality_proper}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
@@ -206,8 +210,9 @@ Alternatively by rearranging:
 %And further that these inequalities can be seen as being largely a consequence of chosen assumptions.
 %These assumptions may be based on prior information, expert opinion, or determined from the characteristics of the system under observation.
 
-It is also worth noting that Hoeffding's inequality is a rather friendly result that states that the concentration of sample mean is probability bounded by a Gaussian function, which might be seen as an intuitive corollary of the Central Limit Theorem. 
-We give its derivation to illustrate the technique of deriving a Chernoff bound, additionally we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma:%\footnote{It is also worth noting that this lemma is actually unnecessary in the derivation of Hoeffding's inequality, and failing to incorporate it ultimately results in a stronger but uglier bound - see Appendix \ref{Appendix:more_concentration}}:
+In this way Hoeffding's inequality is a rather friendly result that states that the concentration of sample mean is probability bounded by a Gaussian function, and this might be seen as an intuitive corollary of the Central Limit Theorem. 
+We provide the derivation of Hoeffding's inequality to illustrate the technique of deriving Chernoff bounds.
+Additionally we will utilise Equation \ref{hoeffdings_lemma_eq} in further derivations - also called Hoeffding's Lemma:
 
 \begin{lemma}[Hoeffding's Lemma]\label{Hoeffdings_lemma_lemma}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero, then for $D=b-a$ and any $s>0$:
@@ -239,7 +244,7 @@ Using the continuous and convex function $f(x)=\exp(sx)$ it can be seen via the 
 
 \subsection{Other general probability lemmas}
 
-There are further Lemmas that are necessary for the further derivations for this Chapter.
+There are further lemmas that are necessary for the further derivations for this chapter.
 The first lemma is an often-used and rather weak result used to fuse simple statements of probability:
 \begin{lemma}[Probability Union]\label{prob_union}
 For any random variables $a,b$ and $c$:
@@ -276,6 +281,9 @@ By expanding $\hat{\sigma}^2$ into parts:\\
 $$\quad\hat{\sigma}^2=\frac{1}{n-1}\sum_i\left(x_i-\frac{1}{n}\sum_jx_j \right)^2 
 =\frac{1}{n-1}\left(\sum_ix_i^2-\frac{1}{n}\sum_{i,j}x_ix_j \right) = \frac{n}{n-1}\left(\hat{\sigma}_0^2-\hat{\mu}^2\right)$$
 \end{proof}
+
+This lemma will prove to be important to us, as we will use it as a means of constructing probability bounds on the error of the sample variance $\hat{\sigma}^2$ in terms of the error of the mean squared $\hat{\mu}^2$ and error of the average sample squares $\hat{\sigma}^2_0$.
+Once constructed, integrating these probability bounds then allows us to eliminate the variance $\sigma^2$ from our equations, which is an essential part of deriving our new EBBs (such as per equations \ref{eq_no44} and \ref{eq2}).
 
 %And we will eventually use this result to create bounds for the sample variance from bounds on the sample squares about the mean and the mean squared.
 
