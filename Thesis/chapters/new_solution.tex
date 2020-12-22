@@ -680,13 +680,11 @@ Particularly in figures \ref{fig:experiment_table_11}-\ref{fig:experiment_table_
 From this exercise we are able to see some of the distinct features of these techniques when applied to a large number of players.
 
 The most immediate result is that LMP and VCG are nearly identical (figures \ref{fig:experiment_table_11} and \ref{fig:experiment_table_12}) while GNK is distinctly different (\ref{fig:experiment_table_13}).
-The similarity between VCG and LMP can be explained by a variety of means.
-But a most informal explanation is that both LMP and VCG implement the same electrical outcome, and allocate payments in proportional to marginal differences about the socially optimal point.
+The similarity between VCG and LMP can be explained by a variety of means, but a most informal explanation is that both LMP and VCG implement the same electrical outcome, and allocate payments in proportional to marginal differences about the socially optimal point.
 The confluence between VCG and LMP is not only witnessed by us, but also has been noted in a more general settings where there are many small participants \citep{NATH2019673, 8430852} (see section \ref{subsec:summary_discussion_VCG}).%\ref{subsec:summary_discussion_VCG}
 
 In figure \ref{fig:experiment_table_11} and \ref{fig:experiment_table_12} we see that there are no negative utility imputations, but that positive utility is allocated to those generators who are able to provide power the cheapest, and those consumers who value power the greatest (high x-value \& low y-value, and low x-value \& high y-value respectively).
-This is because the LMP creates prices for power such that the cheapest generators are scheduled to create power which is consumed by the most desiring consumers up until a marginal point where any further dispatch/consumption would be unmotivated.
-And because VCG schemes allocate non-negative utilities by their axiomatic construction (per axiom of individual rationality).
+This is because the LMP creates prices for power such that the cheapest generators are scheduled to create power which is consumed by the most desiring consumers up until a marginal point where any further dispatch/consumption would be unmotivated, and because VCG schemes allocate non-negative utilities by their axiomatic construction (per axiom of individual rationality).
 From these graphs we straightforwardly identify those consumers/generators which generate/receive power as they are rewarded with positive utility.
 
 Conversely we notice in figure \ref{fig:experiment_table_13} a completely different result for the M-GNK value, particularly that the M-GNK imputes utility to those consumers who do not receive power (as already noted in section \ref{sec:features}), but furthermore, it allocates negative net utility to all but the cheapest generators, even those who generate power at the socially optimal point (as identified by the previous paragraph as those generators who have positive imputation under LMP, in figure \ref{fig:experiment_table_11}), and this dynamic is not particularly easy to explain.
@@ -706,7 +704,7 @@ One primary question is how much the behaviour exhibited in figure \ref{fig:expe
 In order to investigate this question, the error of using this modification across randomly generated networks was calculated and shown in Figure \ref{fig:performance_graph5}.
 This graph shows the cumulative probability of the difference in payments between the GNK and M-GNK - and shows for instance, that 60\% of participants could expect to receive within 10\% what they would have between GNK and M-GNK values, and that this similarity increases for larger network sizes.
 
-From this graph it is noticed that the GNK and M-GNK values feature similarity which seems to increase with the size of the network under consideration --- although for computational reasons, it is increasingly difficult to confirm for networks with a size greater than 13.
+From this graph it is noticed that the GNK and M-GNK values feature similarity which seems to increase with the size of the network under consideration --- although for computational reasons, it is increasingly difficult to confirm for networks with a size greater than 13 nodes.
 This limited observation coincides with expectations that the possible strategic counter-considerations that are discarded by using equation \ref{knvalue22} over equation \ref{knvalue1} become less relevant in the context of larger networks.
 
 Another observation, is that while the GNK remains soluble for networks of less than 13 nodes and the M-GNK value remains soluble for up to 80 node networks (to about 1\% accuracy, as per figure \ref{fig:performance_graph4}), however these numbers might still be regarded as being too small for real-world electrical network modelling.
@@ -807,11 +805,9 @@ For instance, under GNK value in the context of our generalised game modelling D
 It is very possible that alterations to the GNK value, and similar types of Shapley Value structures over non-cooperative game solutions could be made to amend this issue.
 
 It may be possible, for instance, to reconsider the electrical interaction between participants, perhaps by allowing player's action space to be selection of voltage level at their location, rather than directly their power input/output; however in this context power line limits would be manifest as non-linear constraints on the optimisation problem, subsequently making computation more difficult.
-It might also be possible to implement blackout costs to participants to curtail the possibility of unrealistic bargaining manoeuvres in the GNK value logic.
+Alternatively, it might also be possible to implement blackout costs to participants to curtail the possibility of unrealistic bargaining manoeuvres in the GNK value logic.
 
-In these cases, it might be possible to give participants actions to guarantee themself a disagreement point which affords them a zero utility, and hence restore individual rationality to the resultant GNK value; however these investigations are a topic for future research.
-
-%However ultimately its formulation encodes a specific type of extortionate principle which makes it ethically untenuous.
+In these cases, it might be possible to give participants actions to guarantee themself a disagreement point which affords them a zero utility, and hence potentially restore individual rationality to the resultant GNK value; however these investigations are a topic for future research.
 
 At a broader level of consideration, it is interesting how perfect competition may or may not coincide with what is equal and ethical.
 The question of when and where these coincide, and particularly if they might coincide in the context of electricity networks, was part of the motivation of this research.
