@@ -12,15 +12,22 @@ By this comparison it is seen that the different solution concepts give differen
 The material from this chapter extends from work which was originally submitted to AAMAS, and was accepted as an extended abstract: \\
 \-\hspace{5mm}``The Generalized N\&K Value: An Axiomatic Mechanism for Electricity Trading''\\ International Conference on Autonomous Agents and Multiagent Systems\\ (AAMAS) 2018 (accessible: \href{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf})
 
+Within this chapter we consider:
+\begin{itemize}
+\item	in sections \ref{sec:prelude_gnk},\ref{sec:introduction_gnk_sec},\ref{the_value_def2}, We introduce and define the GNK value at a conceptual and mathematical level, relating it to historical roots and similar solution concepts.
+\item	in sections \ref{more_involved} we consider how the GNK value can be applied to derive financial and electrical transactions on a small example electricity network, and outlay the procedures for its computation alongside LMP and VCG in this context.
+\item	in section \ref{sec:features} we point-by-point discuss the features GNK, LMP and VCG as they are expressed in the context of the small example DC electricity network. particularly we pay attention to the fact that the GNK value is computationally difficult to compute for larger networks.
+\item	in section \ref{sec:scaling} we address the possible ways of remedying the GNK value for computation in larger network contexts, particularly via the use of sampling to approximate its value, and by the adoption of a proxy for the GNK inner optimisation (which we denote as the M-GNK).
+\item	in section \ref{sec:results_and_evaluation_of_GNK}, we detail computation and the efficiency of computation of the sampled M-GNK value for larger networks, and discuss its shortcommings for an example computed larger network.
+\item	in section \ref{sec:GNK_extensions_discussion} and the concluding section \ref{sec:GNK_value_discussion}, we discuss possible extensions to the GNK concept and compare it point-by-point with ethical qualities.
+\end{itemize}
 
-\section{Prelude to the GNK value}
+\section{Prelude to the GNK value}\label{sec:prelude_gnk}
 
 In the previous chapter we introduced several different solution concepts, each stemming from different ethical principles and perspectives.
 
 In this section we detail a new approach that combines some of the features of the solution concepts outlaid in the previous chapter.
 The primary motivation for this new solution, is to attempt to distil the intuition behind the Nash bargaining solution concepts (per section \ref{sec:solutions_bargaining}) into a description of total allocation that is suitable for arbitrary number of players - rather than just two.
-
-
 
 In the Nash bargaining solution concept, the minimax payoff advantage between two parties is considered as a measure of bargaining strength between them, and so in our new solution we consider the minimax payoff advantages that could occur in bargaining between all possible coalitions of players.
 Our new solution then allocates power and utility to players directly in proportion to these bargaining strengths using Shapley Value axioms.
@@ -37,7 +44,7 @@ Our approach straightforwardly relates to many of the concepts of the previous s
 
 Let us begin.
 
-\section{Introduction to the GNK value}
+\section{Introduction to the GNK value}\label{sec:introduction_gnk_sec}
 
 How should we model ideal competition? In the two player case, existing bargaining solutions (such as Nash's) seem rather difficult to surpass as they describe a singular and axiomatic outcome that is both cooperatively pareto-optimal and also accounts for anti-cooperative strategising.
 
@@ -127,6 +134,7 @@ v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
 %\begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
 %These multiple formulations of the Shapley value will be useful to us in Section \ref{} where we use these expressions in different methods of sampling the GNK value.
 
+A central question in \cite{KOHLBERG2018139}'s coalitional game of threats, is what the `threat' of a coalition of players $v(S)$ should be (such as on an electricity network), and one way of considering this is in relation to the actions that the coalition could exert and their consequences (positive and negative) over other players; such as may be described in non-cooperative game theory.
 
 \subsection{Threats in games with general action spaces}\label{the_value_def3}
 
@@ -199,6 +207,8 @@ while in the 2-player context, it is identical to \cite{kalai1,Kalai2010}'s \tex
 and also identical to \cite{nash2}'s bargaining solution in the context of transferable utility (see \cite{value2}, or section \ref{subsec:nash_bargaining_endogenous}).
 It also shares a conceptual similarity with \cite{aumann1961core}'s $\alpha$ and $\beta$ core solution concepts, and \cite{1944}'s historic formulation :
 \begin{equation}\label{knvalue3}v_m(S) = \max_{x\in A^S}\min_{y\in A^{N\setminus S}} \sum_{i\in S} u_i(x,y).\end{equation}
+In this way the GNK value can be seen as a conceptual continuation of historic solution concepts, and can be judged according to how well it derives outcomes in application contexts.
+In the folowing section we describe the setup for an application and evaluation of the GNK value in the context of DC-approximated electrical networks.
 
 
 \section{GNK value applied to DC powerflows}\label{more_involved}
@@ -394,7 +404,7 @@ v(S) =
 
 This reformulation renders the LBP into a mixed integer program which is directly amenable for calculation by optimisation solvers, and the SCIP optimisation suite was used in our case.
 
-Using the SCIP optimisation suite, the GNK transfers we calculated, and in Figures \ref{fig:1d} and \ref{fig:1c} show the utility transfers and the post-transfer utilities under GNK; we discuss these figures next.
+Using the SCIP optimisation suite the GNK transfers we calculated, and in Figures \ref{fig:1d} and \ref{fig:1c} show the utility transfers and the post-transfer utilities under GNK; we discuss these figures in the next section.
 
 
 \section{Some features of GNK}\label{sec:features}
@@ -503,10 +513,11 @@ In section \ref{sec:GNK_extensions_discussion} we continue discussion about this
 The GNK value is more difficult than VCG and significantly more difficult than LMP, to compute.
 This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions $S$, and each calculation of $v(s)$ is an NP-hard bilevel optimisation problem.
 This computational difficulty is reflected in a later Figure \ref{fig:performance_graph2} where it is seen that even using sampling to approximate the GNK value is double-exponentially complex. 
-This difficulty contrasts against the ease of computing LMP which requires only solving one OPF optimisation, and VCG which requires $n+1$ OPF optimisations.
+This difficulty contrasts against the ease of computing LMP which requires only solving one OPF optimisation, and VCG which requires $n+1$ OPF optimisations.\\
 
-In light of this difficulty, we consider different ways of mitigating the issue so that the GNK value can be applied to larger networks.
-
+Now that we have compared the GNK against LMP and VCG and their features on a small example network, we consider the means by which we can extend the discussion to larger networks.
+Particularly we need to consider the ways in which the computational difficultly of calculating the GNK value on larger networks can be ameliorated.
+The two primary techniques to ameliorate this difficulty are principally by sampling and by the adoption of a proxy. We discuss these to directins in the next section \ref{sec:scaling} before actually applying these techniques for an application of GNK to larger network in section \ref{sec:results_and_evaluation_of_GNK} and then discuss in section \ref{sec:GNK_value_discussion}.
 
 \section{Scaling the GNK value}\label{sec:scaling}
 
@@ -533,7 +544,7 @@ The second of these two approaches is more complicated, since it involves conver
 Some of the possible techniques include: Neyman Sampling (`\textsc{Neyman}') \citep{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \citep{2013arXiv1306.4265M}, as well as a random stratified join-order sampling method (`\textsc{Join}') \citep{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \citep{DBLP:journals/cor/CastroGT09}.
 We consider these alongside our own developed method, the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (as developed in Section \ref{section:SEBB}).
 
-We will compare the performance of these sampling approaches in section \ref{section:performance}, but first we will summarise some of the differences between Shapley Value sampling techniques first.
+We compare the performance of these sampling approaches in section \ref{section:performance}, but first we will summarise some of the differences between Shapley Value sampling techniques first.
 
 \subsection{Differences in sampling approaches}
 
