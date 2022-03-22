@@ -11,6 +11,7 @@ We consider the following formulations:
 \item in section \ref{sec:solutions_LMP}, we consider Locational Marginal Pricing (LMP),
 \item in section \ref{sec:cooperative_game_theory_part}, we consider the Core and the Shapley Value,
 \item in section \ref{sec:solutions_bargaining}, we consider Nash's bargaining solution concepts.
+\item in section \ref{sec:envy_free_solutions}, we consider mathematical considerations associated with the concept of envy-freeness.
 \end{itemize}
 
 %These different approaches stem from different moral considerations, %and primarily reward participants with respect to different reference points that are briefly addressed in section \ref{sec:reference_points}.
@@ -593,11 +594,41 @@ In the following Chapter \ref{cha:new_solution} we explore this question by deve
 %It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
 
 
+\section{Envy-Free systems}\label{sec:envy_free_systems}\label{sec:envy_free_solutions}
+
+In Section \ref{The concept of envy-freeness} we introduced the concept of Envy-freeness at a conceptual level; Envy freeness is a general condition of allocation where every person prefers their own bundle of allocated resources to that allocated to everyone else.
+However there are multiple questions in-practice in allocating resources in an Envy-free manner, and one of the primary questions is what the bundles of resources are.
+
+In the most simple case, that of the simple divisible homogeneous good that is valued monotonically by all players, the only envy-free allocation is an equal allocation of the good between all particiants, which is not nessiarily an outcome that maximises utilitarian efficiency, but potentially straightforward to implement and has an obvious egalitarian appeal. \cite{FEIGE2014305}
+Adding transferrable utility transactions to the bundles allows envy-free allocation of equal utilities to all participants.
+
+For practical purposes, the bundles of resources can include more interesting elements, for instance, in the context of the supply of homogenious Electricity to conumers, adding uncertainty over the supply creates more complex case, where \textit{ex-ante} envy-freeness can be considered.\cite{DBLP:conf/atal/BurmannGR20}
+Or as another example the authors of \cite{7377110} consider envy free allocations in the context of selling homogeneous electricity surplus, together with a convex pressure to sell parameter $\alpha$ per player.
+Another electricity example application of envy-free concepts is in the allocation and evaluation of load-shedding algorithms \cite{10.1007/s10458-019-09428-8} where maximum envy difference is considered as a target for minimisation and a metric of evaluating performance.
+In these contexts optimising for envy-freeness can impart utilitarian social cost, the so called `price of envy-freeness' \cite{DBLP:journals/ior/BertsimasFT11}.
+
+In these these and other electricity contexts, the envy-freeness condition can act as a constraint on possible allocations reducing them to a set of consitent possibilities, Then there is a secondary question about which of these is most appropriate to be implemented. Such as (per previous examples) may be pareto efficient, utility maximising, or maximising the wellbeing of the worst off; particularly, there is an extant body of literature examining pareto-efficient envy-free allocation (PEEF) \cite{WELLER19855,COLE2021105207,VARIAN197463},
+
+Another dimension of envy-free allocation in practice, is the degree to which the respective envy-free allocation is truthfull or \textit{incentive compatable} for the participants.
+The consideration of true strategy-proof envy-freeness was first considered in the context of cake-cutting \cite{CHEN2013284}, but further investigation has established several restricted impossibility proofs surrounding the concept under various conditions \cite{10.5555/3172077.3172396,10.1007/978-3-319-13129-0_1,10.5555/2891460.2891537}
+A secondary question is thus, how likely are envy-free allocation mechanisms likely to perform under strategising agents, and then in such conditions as may be present in electricity contexts.
+
+Another dimension is which specific conceptiion of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{The concept of envy-freeness}), or how should envy-relations be considered between resource bundles and consumer which cannot feasibly consume them (perhaps motiving consideration of `meta envy-freeness' \cite{10.1007/978-3-642-15155-2_44}), should measures be envy-free or only envy-minimising, and at what cost to social or utilitarian efficiency.
+In this way there is a range of social possibilities in designing envy-free systems in practice.
+
+
+%However the primary issue with envy freeness in this thesis, is that envy-freeness is a condition which is sometimes less than inspiring in its application.
+%Particularly consider, if the bundle of goods under consideration is simply the volume of electricity consumed, and all participants value more electricity positively, then the only envy-free allocation, is that everyone recieves the same volume.
+%Alternatively, if the money that is transacted is part of the bundle, such that electricity\&money are considered together then there are a range of envy-free allocations, such as the participant which values the electricity the most recieving it and paying money equal to the value of the next most desiring - a result which could easily be established by an auction anyway.
+
+%Additionally, and most notably determental for its treatment in this thesis, is that envy free allocations over divisible resources which are valued positively, result in uniform distributions.
+
+
 \section{Comparison \& summary}
 
-In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features and encode different moral perspectives.
+In this chapter we have explored five different ways in which ethical ideas about distribution can be mathematised, and each of them have different features and encode different moral perspectives.
 
-Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locational Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts.
+Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locational Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts, and envy-free applications.
 Each of the ideas embody different rules and respect different moral reference points.
 
 And as identified by the philosophy of the previous chapter, none of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are potentially more suitable than others.

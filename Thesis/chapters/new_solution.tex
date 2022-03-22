@@ -22,6 +22,8 @@ Within this chapter we consider:
 \item	in section \ref{sec:GNK_extensions_discussion} and the concluding section \ref{sec:GNK_value_discussion}, we discuss possible extensions to the GNK concept and compare it point-by-point with ethical qualities.
 \end{itemize}
 
+Following this chapter, the next Chapter \ref{chap:stratified_sampling_chapter} details our investigation into novel sampling methods which are evaluated therein and also in section \ref{sec:scaling} for scaling and approximating the GNK value.
+
 \section{Prelude to the GNK value}\label{sec:prelude_gnk}
 
 In the previous chapter we introduced several different solution concepts, each stemming from different ethical principles and perspectives.
@@ -542,7 +544,7 @@ and then approximating $v_{i,k}$ by averaging the appropriate $v(S)$, which are 
 
 The second of these two approaches is more complicated, since it involves converting the problem into a cooperative game and then a selecting a technique to sample the Shapley Value.
 Some of the possible techniques include: Neyman Sampling (`\textsc{Neyman}') \citep{CASTRO2017180,1938.10503378}, sampling to minimize a Hoeffding-type inequality (`\textsc{Hoeffding}') \citep{2013arXiv1306.4265M}, as well as a random stratified join-order sampling method (`\textsc{Join}') \citep{CASTRO2017180}, and unstratified random join-order sampling `ApproShapley' (`\textsc{Appro}') \citep{DBLP:journals/cor/CastroGT09}.
-We consider these alongside our own developed method, the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (as developed in Section \ref{section:SEBB}).
+We consider these alongside our own developed method, the Stratified Finite Empirical Bernstein Sampling method (`SEBM') (as developed in Section \ref{section:SEBB} of Chapter \ref{chap:stratified_sampling_chapter}).
 
 We compare the performance of these sampling approaches in section \ref{section:performance}, but first we will summarise some of the differences between Shapley Value sampling techniques first.
 
@@ -624,15 +626,17 @@ From the Figure \ref{fig:performance_graph1} we witnessed that \textsc{Join} was
 The reason for this superiority is the additional power of sampling with stratification and by join-orders.
 As already stated, by using join orders, it is possible to calculate $n$ marginal contributions using $n+1$ evaluations of $v(S)$ as opposed to taking two evaluations of $v(S)$ for one marginal contribution sample point.
 This simple factor outweighed the advantage of the extra sophistication associated with \textsc{SEBM} and \textsc{Neyman} methods, which did not use join-order sampling - even though SEBM was seen to be more performant for larger sample budgets.
+We note that the \textsc{SEBM} method is developed in Section \ref{section:SEBB} of subsequent Chapter \ref{chap:stratified_sampling_chapter}.
+
 Another advantage that was witnessed in utilising the \textsc{Join} method was that it didn't have the computational overhead of using the formulas present in the \textsc{SEBM} method, and additionally the join-order sampling allowed each new optimisation that was called to be warm-started by the previous one as each new addition to the coalition would yield an optimisation similar to the previous one.
 These factors made \textsc{Join} appear as simpler and more effective method for our purposes.
 
 To evaluate the performance of the \textsc{Join} method in approximating the GNK value for larger networks, we generated random networks of different sizes and estimated the GNK value using 8 simultaneous estimations, and timed how long it took for the average magnitude of error between these estimations to reach an one percent of each other.
 A scatter plot of the run-time performance of \textsc{Join} in approximating the GNK value for variously sized random networks by this process was generated and the results are shown in Figure \ref{fig:performance_graph2}.
 
+
 From this figure it is witnessed that the GNK value appears to be doubly exponentially complex to approximate by sampling and quickly becomes intractable for networks consisting of more than $16$ busses.
 This double-exponential complexity was somewhat expected as solving the GNK value exactly is identified as a calculation that involves exponentially many NP-hard computations.
-
 In light of this realisation we sought to make simplifications to the GNK value itself to ease its intractability.
 Specifically we considered a polynomial-time computable proxy inplace of the minimax optimisations in the characteristic function \eqref{knvalue1} of the GNK value.
 
@@ -824,7 +828,8 @@ At a broader level of consideration, it is interesting how perfect competition m
 The question of when and where these coincide, and particularly if they might coincide in the context of electricity networks, was part of the motivation of this research.
 Unfortunately our investigations demonstrated that the most direct application of the GNK value would be expected to fail wider social equality considerations.
 
-In the next chapter we delve into the details of the sampling techniques that were developed and tested throughout this research, and we provide a final conclusion to our research in Chapter \ref{cha:conc}. 
+In the next chapter we delve into the details of the sampling techniques that were developed and tested throughout this research, particularly the \textsc{SEBM} method in Section \ref{section:SEBB}, which was evaluated as a method to sample the GNK value (alongside others) in Section \ref{sec:scaling}.
+Additionally we provide a final conclusion to our research in Chapter \ref{cha:conc}. 
 
 
 

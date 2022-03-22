@@ -281,12 +281,35 @@ It is also worth noting that these decisions about normative reference points ca
 ``... an allocation is equitable if and only if each person in the society prefers his consumption bundle to the consumption bundle of every other person in the society.'' \cite[Chapter 4]{foley_thesis}
 \end{displayquote}
 
-Although it will be of lesser relevance to the developments in this thisis, it would be remiss of us to neglect a discussion of the concept of envy-freeness.
-Simply put, as introduced by \cite{foley_thesis} and stated in this section's quote, an allocation is `envy-free' iff every person prefers their allocation of resources which they recieve to that of everyone else.
-There has been significant work into the concept of envy freeness and how it extends to different circumstances, particularly notable qualities of envy freeness, is that it does not nessisarily select a unique outcome, and also may not select any outcome at all. \cite{DBLP:conf/aaai/ManurangsiS19}
-Additionally, and most notably determental for its treatment in this thesis, is that envy free allocations over divisible resources which are valued positively, result in uniform distributions.
+Although it will be of lesser relevance to the developments in this thesis, it would be remiss of us to neglect a discussion of the concept of envy-freeness as a significant concept in the discussion of distributive justice.
+As introduced by \cite{foley_thesis} and stated in this section's quote, an allocation is `envy-free' iff every person prefers their allocation of resources which they recieve to that recieved by everyone else.
+There has been significant research examining the contexts in which envy-free allocations of resource bundles exist and can be computed, and the development of similar/substitute qualities where they cannot.
+
+The first and most notable notable quality of the envy-freeness condition is that it has a genuinely straightforward ethical appeal, particularly the transparent envy-free allocation of resources could be expected to minimise a certain kind of social discontent defined by interpersonal comparrisons.
+Additionally, the minimising of social discontent may overlap and/or motivate other ethical measures, for instance, an equal or egalitarian allocation may also be envy-free and/or efficient.
 
 
+However, the envy-free critereon my not nessisarily select a unique outcome or indeed nessisarily any outcome at all, and even insofar as envy-free allocations are known to exist, they may be time-prohibitive to compute.
+Envy free allocations may exist or not depending on many conditions, such as whether the resources are divisible and/or indivisible. The case of indivisible goods envy-free allocations may not exist (consider a single item and two agents) \cite{DBLP:conf/aaai/ManurangsiS19}, and even when such allocations do exist they may be NP-hard to compute, as even the case of identical valuations of indivisible goods between two agents is directly equivalent to the classic NP-hard \textsc{partition} problem.\cite{NGUYEN201454}
+However even in the continuous case, although pareto-efficient and envy-free are guaranteed to exist in some circumstances \cite{WELLER19855,COLE2021105207}, they may be prohibitive to compute, see for instance the problem of envy free cake cutting for discontinuous slices and for arbitrary number of players was solved by Aziz et.al \cite{DBLP:conf/focs/AzizM16} requiring as many as $n^{n^{n^{n^{n^n}}}}$ operations.
+There are also situations with mixed divisible and indivisible goods which are not nessisarily more simple.\cite{BEI2021103436}
+In recourse to these problems, some alternative measures have been adopted and investigated, such as the various conceptions of envy-minimisation,
+in these conceptions some aggreagate envy criterion is selected, for instance: 
+\begin{itemize}
+\item the number of envious individuals, 
+\item the number of envy-relations, 
+\item the maximum envy-difference $\max_{i,j}\{\max\{0,u_i(\pi_j)-u_i(\pi_i)\}\}$ \cite{10.1145/3219166.3219179,10.1145/988772.988792}
+\item or in terms of maximum envy-ratio defined by how much a player values the allocation of another over their own $\max_{i,j}\{1,\frac{u_i(\pi_j)}{u_i(\pi_i)}\}$, \cite{NGUYEN201454}
+\end{itemize}
+Since allocating nothing to every player (if possible) is straightforwardly envy-free, there is a secondary question about what efficiency measure should also be optimised in this context.
+examples include: egalitarian social welfare (ie. maximizing the utility of the worst-off agent) or utilitarian social welfare (ie. maximizing the sum of all agents' utilities) or satisfying Pareto efficiency, or Nash social welfare (see also Section \ref{sec:solutions_bargaining}) \cite{NGUYEN201454}.
+
+The notion of envy-freeness relies on comparisons between agents and the bundles of resources which they could gain, however there is some flexibility about how the agents and bundle comparrisons are defined.
+For instance, a similar and more expansive notions of envy-freeness such as applied to groups ('group envy freeness') are even more restrictive and difficult to compute; Group envy freeness was first introduced by \cite{BERLIANT1992201} for equally sized groups, and for hetrodgenously sized groups by \cite{DBLP:conf/aaai/ConitzerF0V19}.
+Or conversely, there are other paths to more relaxed envy-free conditions, such as include constructions where there is envy-freeness only between specific pairs of individuals, such as specified on a group or graph structure (see \cite{FLAMMINI20191}) sometimes called 'social/local/network envy-freeness'.
+Another more relaxed notion is that of envy-freeness prior to a random assignment, or envy-freeness in expectation ie. `ex-ante' envy-freeness - contrasing `ex-post' envy-freeness.
+
+We will consider the application and implications of the concept of envy-freeness in the context of electricity markets in Section \ref{sec:envy_free_systems}.
 
 
 \section{A summary on our philosophy of distributive justice}
@@ -299,7 +322,7 @@ Moral considerations are at the heart of the question of how electricity and mon
 Unfortunately questions such as these do not have analytically demonstrable answers, but we can make judgements by considering the various flavours of moral ideas which people might assert.
 Particularly we summarise some of the various conceptions of Equality, Formal Equality, and Equality concerned with social freedoms.
 Additionally we frame some of the concepts of Efficiency particularly as it is contrast against Equality.
-And highlight the ways in which morality can be defined in relation to various normative reference points.
+And highlight the ways in which morality can be defined in relation to various normative reference points, with consideration of the concept of envy minimisation.
 
 We focus particularly on these factors as our further developments relate directly to them.
 Ultimately our solution obeys formal equality principles, maximises efficiency, and is formalised by reference to normative reference points defined by idealised competition -- see chapter \ref{cha:new_solution}.
