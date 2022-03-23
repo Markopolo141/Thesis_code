@@ -17,7 +17,7 @@ This section contains discussion of all the parts of this chapter, particularly 
 In section \ref{section:new_EBB} we went through the process of deriving an EBB using complex components, thus yielding a requirement for its numerical determination.
 The resulting numerical EBB was then fitted with a symbolic envelope for ease of use - per equation \ref{eq:prob_bound}.
 
-It is interesting to compare the strength of the new EBB against other EBBs, particularly we considered that most of the elements in our new EBB were improvements apon the process used in the derivation of Maurer and Pontil's EBB.
+It is interesting to compare the strength of the new EBB against other EBBs, particularly we considered that most of the elements in our new EBB were improvements upon the process used in the derivation of Maurer and Pontil's EBB.
 
 And so we compared our EBB directly with \cite{Maurer50empiricalbernstein}'s EBB given by theorem \ref{MandPsEBB} as:
 $$\p\left(\mu-\hat{\mu}\ge\sqrt{\frac{2\hat{\sigma}^2\log(2/t)}{n}}+\frac{7D\log(2/t)}{3(n-1)}\right)\le t$$
@@ -40,7 +40,7 @@ In this way (although the results are loose) we can witness that our EBB provide
 The purpose of developing a stronger EBB was to see if it could be used to improve the selection of samples in the context of stratified sampling (particularly of the Shapley Value) over other EBBs.
 It was expected that the better and more tight the EBBs used, the more likely it would be that iteratively choosing samples to minimise such a bound would produce better sample choices and thus yield better estimate of the population mean.
 
-And while it is evident that the EBB we produced was tighter than Maurer and Pontil's EBB, the actual resulting performance difference in selecting samples (as seen between \textsc{EEBB} and \textsc{Maurer} in Table \ref{Table1}) is surprisingly marginal; so marginal infact, it was comparable to the performance of using unioned Hoeffding bounds - the \textsc{Hoeffding} method.
+And while it is evident that the EBB we produced was tighter than Maurer and Pontil's EBB, the actual resulting performance difference in selecting samples (as seen between \textsc{EEBB} and \textsc{Maurer} in Table \ref{Table1}) is surprisingly marginal; so marginal in fact, it was comparable to the performance of using unioned Hoeffding bounds - the \textsc{Hoeffding} method.
 We continue discussion of this surprising result in the context of all the other methods in the next section \ref{subsection:main_discussion}.
 
 

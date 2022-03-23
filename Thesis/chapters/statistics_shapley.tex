@@ -35,10 +35,12 @@ But primarily, is useful to us as a method of allocating financial payments in e
 %\begin{equation}\label{shap2_X} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}v_{i,k} \end{equation}
 
 Though the Shapley Value is conceptually simple, its use is hampered by the fact that its total expression involves exponentially many evaluations of the characteristic function (there are $n\times 2^{n-1}$ possible marginal contributions between $n$ players).
-
 However, since the Shapley Value is expressible as an average over averages by Equation~\eqref{shap2}, 
-it is possible to approximate these averages via sampling techniques, and these averages are naturally stratified by coalition size.
-In previously published literature, other techniques have been used to allocate samples in this context, particularly simple sampling \citep{DBLP:journals/cor/CastroGT09}, Neyman allocation \citep{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}, and allocation to minimise Hoeffding's inequality \citep{2013arXiv1306.4265M}.
+it is possible to approximate these inner averages via sampling techniques, and then these averages are naturally stratified by coalition size, forming an instance of stratified sampling.
+For a given inner average in the Shapley Value expression, we approximate such an average by randomly selecting marginal contributions, calculating the sample average.
+Thus the question then becomes how many samples should we compute for each strata to attain the best estimate of the Shapley Value.
+
+In previously published literature, other techniques have been used to allocate samples in this context of Shapley Value sampling approximation, particularly simple sampling \citep{DBLP:journals/cor/CastroGT09}, Neyman allocation \citep{CASTRO2017180,DBLP:journals/tsg/OBrienGR15}, and allocation to minimise Hoeffding's inequality \citep{2013arXiv1306.4265M}.
 
 We assess the benefits of using our bound by comparing its performance to the approaches above in the context of some example cooperative games, with results analysed in Section~\ref{sec:discussion}.
 The example games are described below:

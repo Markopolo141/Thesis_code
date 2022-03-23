@@ -6,9 +6,9 @@ In the previous section we considered different possible EBBs as a way of boundi
 This process of using EBBs involved binding EBBs applied to different strata together using union bounds to create a bound on the stratified sample mean error (via with Theorem \ref{triangle_theorem1}).
 
 What is worth noting is that this process of binding EBBs together by probability unions is expected to result in a rather weak bound and that this weakness is expected to increase with larger numbers of strata as there are more probability unions needed to bind it together.
-It is noted that the triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} the bound for the error is developed effectively assuming all the errors of the estimates of the strata are additive - which is positively the worst case.
+It is noted that the triangle equality $|A+B|\le |A|+|B|$, is only an equality in the event that the elements $A$ and $B$ are of the same sign, and in the context of theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} the bound for the error is developed by effectively assuming all the errors of the estimates of the strata are additive - which is the worst case.
 Whereas by assumption, the errors in the strata estimates are independent of each other and hence a overestimation in one stratum estimate is likely to be somewhat countered by an underestimation in another.
-Using this knowledge, stronger bounds are possible - and in this section is created an empirical (ie. depending on sample variances) concentration inequality specifically for stratified random sampling; and which then can be used to serve as a basis for choosing samples in the next section.
+By using this knowledge stronger bounds can be created, and in this section we do just that. We have created an empirical (ie. depending on sample variances) concentration inequality specifically for stratified random sampling.
 
 The resulting concentration inequality gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
 
@@ -68,8 +68,7 @@ Thus letting $\kappa=\frac{\sigma^2}{D^2}$ and $x=s(D+\sigma^2/D)$ if follows th
 \end{equation}
 \end{proof}
 
-We note that this process of fitting a parabola over the exponential function is exactly the same process as used to derive Bennett's inequality (Theorem \ref{hoeffdings1}).
-But that this form of the bound on the moment generating function is a weakened result of that same approach.
+We note that this process of fitting a parabola over the exponential function is exactly the same process as used to derive Bennett's inequality (Theorem \ref{hoeffdings1}), but that we derive a weakened result from that same approach.
 
 The next lemma that we present, is similar to the former, however this time we consider the random variable $X^2$ instead of $X$, and present a weakened bound on the moment generating function of it via a similar process as was used to derive Theorem \ref{sample_squares}: 
 
@@ -213,7 +212,7 @@ Assuming the context given in Definition~\ref{def:ProblemContext}, and let $\Ome
 \begin{equation}\label{eq1} \pr\left(\left|\sum_{i=1}^n\tau_i(\chi_{i,m_i}-\mu_i)\right|\ge \sqrt{4\log(2/t)\sum_{i=1}^n\left(\frac{1}{17}D_i^2\Omega_{m_i}^{n_i}+\frac{1}{2}\sigma_i^2\Psi_{m_i}^{n_i}\right)\tau_i^2}\right)\le t \end{equation}
 \end{theorem}
 \begin{proof}
-In a similar was as per Lemma~\ref{chernoff1} we consider a bound for the weighted mean by the moment generating function of the stratum means:
+In a similar way as Lemma~\ref{chernoff1} we consider a bound for the weighted mean by the moment generating function of the stratum means:
 \begin{align*} \pr\left(\sum_{i=1}^n\tau_i\chi_{i,m_i}-\sum_{i=1}^n\tau_i\mu_i\ge t\right)
 &\le\E\left[\exp\left(\sum_{i=1}^n\tau_is\left(\chi_{i,m_i}-\mu_i\right)\right)\right]\exp(-st)\\
 &= \prod_{i=1}^n\E\left[\exp\left(\tau_is\left(\chi_{i,m_i}-\mu_i\right)\right)\right]\exp(-st) 

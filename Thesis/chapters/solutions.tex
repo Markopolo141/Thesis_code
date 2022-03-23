@@ -82,8 +82,8 @@ But generally, Mechanism Design conducts the analysis of systems which select so
 
 One of the features of Mechanism Design that the VCG mechanism illustrates, is the potential for considering and apprehending the way in which a system is likely to behave between rational individually strategising agents.
 This possibility extends beyond VCG, as it has been discovered that any system which is implemented between strategising agents can be altered such as to make it incentive compatible for them; this is called the revelation principle - see \cite{RePEc:ecm:emetrp:v:41:y:1973:i:4:p:587-601} \cite[Chapter~2.3]{37377}.
-The revelation principle has various formulations, but generally, for any system there will some Nash-equilibria in the interaction between the agents, and consequently an incentive compatible mechanism can be constructed by asking the agents for their true valuations and then implementing the corresponding Nash-equilibria directly.
-Unfortunately, it is sometimes the case that the Nash-equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always a Nash-equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
+The revelation principle has various formulations, but generally, for any system there will some Nash equilibria in the interaction between the agents, and consequently an incentive compatible mechanism can be constructed by asking the agents for their true valuations and then implementing the corresponding Nash equilibria directly.
+Unfortunately, it is sometimes the case that the Nash equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always a Nash-equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
 
 Some of the primary historic impossibility proofs in Mechanism Design concern voting and social choice systems, and notably include Arrow's impossibility theorem, and the Gibbard-Satterthwaite theorem.
 But the difficulty does not necessarily recede even if monetary compensations between parties are included into consideration, such as per the Myerson-Satterthwaite theorem.
@@ -118,8 +118,7 @@ For this purpose there has been significant discussion about deriving these $C_{
 
 One of the first to propose such a rule was \cite{Cavallo:2006:ODM:1160633.1160790}, who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be naturally assumed that any party has a utility of zero if they do not recieve the physical object.
 This redistribution was possible primarily because there exists a simple constraint on player valuations - ie. not receiving the object has utility of zero.
-
-Similarly in other situations where there are restrictions on the players valuation over the outcomes, there is the potential for deriving VCG redistribution rules.
+Similarly in other situations where there are restrictions on the players' valuation over the outcomes, there is the potential for deriving different VCG redistribution rules.
 
 However there are some difficulties with this approach, particularly it is known that even with VCG redistribution rules there will almost always be some remaining budget surplus, and even then the process of deriving optimal redistribution rules can be a difficult task --- even to the point where neural networks have been employed to approximate such functions (see \cite{DBLP:conf/atal/ManishaJG18}).
 
@@ -171,8 +170,8 @@ There is potentially no greater framework for describing nominal market pricing 
 
 The idea that normal market trading should have any relation to moral trading was seen in John Locke's short essay Venditio where it is argued that a fair price for something is simply its normal market price at its location.\footnote{``... the market price at the place where he sells. Whosoever keeps to that in whatever he sells I think is free from cheat, extortion and oppression, ...'' \citep{locke2003locke}}
 John Locke argues for this thesis, by considering that negotiating above market price for a good would be unethical primarily because any transaction would be taking advantage of ignorance or special circumstances of the buyer.
-Conversely, negotiating below market price for a good would only incentivise reselling and allow others to profit at the original seller's loss.
-Additionally, that selling below market price only to those who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same nominal market price for everybody.
+Conversely, negotiating below market price for a good would only incentivise reselling and allow others to profit at the original seller's loss, or alternatively, that selling below market price only to those who are needy is certainly a charity and hence cannot be required by justice.
+By these considerations, justice only requires offering no more than the same nominal market price for everybody.
 
 While John Locke's arguments may or may not be convincing, it is useful to consider the transactions and pricing that would occur under idealised or normative euvoluntary trading as these prices might be considered moral in-themself (by Locke's argument), or provide a back-drop for the framing of more moral trading.
 In section \ref{sec:solutions_bargaining} we consider mathematical schemas used to describe idealised normative bargaining between small numbers of participants, but in this section we describe some economic theory that has been used to describe normalised trading between large numbers of market participants.
@@ -236,7 +235,7 @@ This kind of marginal analysis is a short sketch of the analysis and treatment i
 This marginalist analysis is also widely regarded to resolve the water-diamond paradox, in that water is cheap because its marginal unit is cheap to produce.
 
 Over time the marginalist synthesis was developed more comprehensively in the presence of many discussions and criticisms.
-Particular criticisms attack the academic assertion that market participants are psychologically driven by rational utility maximisation (such as \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307})\footnote{individual traders may be partially driven by irrationality such as fear, ignorance, gambling}, and the more pragmatic assertion that markets are approximately ideal and tend towards the stability of equilibrium (such as \cite{nla.cat-vn5739105})\footnote{as might be witnessed in markets where is inherent uncertainty, notably in speculative markets such as stocks, housing and crypto-currency}.
+Particular criticisms attack the academic assertion that market participants are psychologically driven by rational utility maximisation (such as \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307})\footnote{individual traders may be partially driven by irrationality such as fear, ignorance, gambling}, and the more pragmatic assertion that markets are approximately ideal and tend towards the stability of equilibrium (such as \cite{nla.cat-vn5739105})\footnote{as might be most directly witnessed in markets where is inherent uncertainty, notably in speculative markets such as stocks, housing and crypto-currency}.
 
 \input{figs/demand_supply.tex}
 
@@ -441,10 +440,11 @@ Particularly we describe bargaining solution concepts.
 
 \section{Bargaining solution concepts}\label{sec:solutions_bargaining}
 
-In discussing Locational Marginal Pricing (in section \ref{sec:solutions_LMP}), we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants where their individual strategic options are relevant.
+In our discussion of Locational Marginal Pricing in section \ref{sec:solutions_LMP}, we considered one way of describing normalised pricing in large markets.
+However in this section we consider some of the various ways of describing normalised pricing among a small number of market participants where their individual strategic options are relevant.
 
 Particularly, we consider the situation where there are a small numbers of market participants negotiating over a set of possible outcomes.
-In this context, we consider the question about the likely outcome of their bargaining process.
+In this context we consider the question about what the likely outcome of an idealised bargaining process would be.
 
 %In the first section of this chapter (section \ref{sec:solutions_VCG}) we considered the VCG solution, which allocates utility to a participant with respect to their contribution above their absense.
 %And in the previous section (section \ref{sec:solutions_LMP}) we considered Marginal Pricing, which allocates utility to participants in proportion to their marginal absense.
@@ -458,7 +458,7 @@ We begin with one of the most historic classes of bargaining solution concepts, 
 
 %This space of possible agreements may be over any variety of factors such as monetary transactions and electrical power flows etc, and hence it can be directly be made applicable for electricity networks.
 
-A bargaining solution concept applies in a situation where there are a number of parties (or agents, or market participants) and a space of possible outcomes which those agents can reach by bargaining; and which each of them may value differently.
+A bargaining solution concept applies in a situation where there are a number of parties (or agents, or market participants) and a space of possible outcomes which those agents can reach by bargaining and which each of them may value differently.
 In this context, a bargaining solution concept identifies an outcome, which may be interpreted as one which the agents `will' (or `should') reach.
 Perhaps the most famous bargaining solution concept is called the Nash-bargaining solution concept.
 
@@ -470,7 +470,7 @@ Additionally there is a privileged outcome called the `disagreement' outcome $d$
 Nash identified that in this case there is a unique solution satisfying some very intuitive axioms:
 \begin{itemize}
 \item \textit{Invariant to affine transformations}: that the solution should not change if the utilities of any of the players are scaled (by some positive factor) or offset, ie that they are invariant under the set of affine transformations% that might also represent their relative preferences.
-\item \textit{Pareto optimality}: That the solution will not be inferior to any other point in the preferences of all players.
+\item \textit{Pareto optimality}: That there will not exist another solution point that is weakly better than the solution for all players, and strongly better for atleast one player.
 \item \textit{Independence of irrelevant alternatives} (IIA): If any subset of potential outcomes does not feature the solution point or the disagreement point, then it could be removed from consideration without affecting the solution.
 \item \textit{Symmetry}: The solution is invariant with regards to the ordering of the players.
 \end{itemize}
@@ -611,9 +611,9 @@ In these these and other electricity contexts, the envy-freeness condition can a
 
 Another dimension of envy-free allocation in practice, is the degree to which the respective envy-free allocation is truthfull or \textit{incentive compatable} for the participants.
 The consideration of true strategy-proof envy-freeness was first considered in the context of cake-cutting \cite{CHEN2013284}, but further investigation has established several restricted impossibility proofs surrounding the concept under various conditions \cite{10.5555/3172077.3172396,10.1007/978-3-319-13129-0_1,10.5555/2891460.2891537}
-A secondary question is thus, how likely are envy-free allocation mechanisms likely to perform under strategising agents, and then in such conditions as may be present in electricity contexts.
+A secondary question is thus, how likely are envy-free allocation mechanisms likely to perform under strategising agents, and then specifically in such conditions as may be present in electricity contexts.
 
-Another dimension is which specific conceptiion of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{The concept of envy-freeness}), or how should envy-relations be considered between resource bundles and consumer which cannot feasibly consume them (perhaps motiving consideration of `meta envy-freeness' \cite{10.1007/978-3-642-15155-2_44}), should measures be envy-free or only envy-minimising, and at what cost to social or utilitarian efficiency.
+Another dimension is which specific conceptiion of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{The concept of envy-freeness}), or how should envy-relations be considered between resource bundles and consumer which by happenstance cannot feasibly consume them, should measures be envy-free or only envy-minimising and if-so at what cost to social or utilitarian efficiency.
 In this way there is a range of social possibilities in designing envy-free systems in practice.
 
 

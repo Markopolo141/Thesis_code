@@ -170,9 +170,8 @@ using Markov's inequality and the i.i.d of the samples, respectively.
 Here we have given the general form of Chernoff bounds for the sample mean of random variable, parameterised by a choice of $s>0$ and $t$.
 Using this kind of lemma, many well-known examples of Chernoff bounds follow from the derivation of upper bounds for $\E\left[\exp(sX)\right]$, also known as the \textit{moment generating function}.
 
-For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality.
-And thus, a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
-Hoeffding's inequality \citep{hoeffding1} is an illustrative example of this process of deriving a Chernoff bound:
+For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality; in this way a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
+Hoeffding's inequality \citep{hoeffding1} is an illustrative example of this process of deriving a Chernoff bound, and we give a short refactored proof of this process:
 
 \begin{theorem}[Hoeffding's inequality for mean zero]\label{hoeffdings_inequality}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:

@@ -1,9 +1,8 @@
 
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
-The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling.
-Since the aggregated population mean estimate does not itself have a sample variance, but only the strata have means and sample variances.
-Such EBBs can be applied as a bound for the mean of an individual stratum, but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
+The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling, since the aggregated population mean estimate does not itself have a sample variance but only the strata have means and sample variances.
+Such EBBs can be applied as a bound for the mean of an individual stratum but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
 
 In this section, we show that these EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
 The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
@@ -13,7 +12,7 @@ And thus the resulting sampling methodologies will implicitly be sensitive to th
 \subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
 
 To create a bound on the error in stratified sampling from EBBs, it is necessary to use probability unions to bind the EBBs together.
-the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} give derivations on the error, and the absolute error, of the stratified mean estimator.
+We derive the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} that give derivations on the error, and the absolute error, of the stratified mean estimator.
 
 \begin{theorem}\label{triangle_theorem1}
 If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
@@ -40,8 +39,8 @@ $$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\s
 And scaling $t$ gives result.
 \end{proof}
 
-The result of this proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata.
-If instead of the error, we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then by a similar procedure (utilising the triangle inequality)\footnote{inspired by \cite{2013arXiv1306.4265M}} we can derive a similar probability bound.
+The result of this novel proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata.
+If instead of the error, we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then by a similar procedure (inspired by the utilisation of the triangle inequality in the proofs of \cite{2013arXiv1306.4265M}) we can derive a similar probability bound:
 
 \begin{theorem}\label{triangle_theorem2}
 In the same context of the statement of theorem \ref{triangle_theorem1} the absolute error of the stratified estimation is probability bounded:
@@ -104,7 +103,7 @@ In the next section we derive and numerically generate a stronger EBB for applic
 \newpage
 \section{The derivation of a stronger EBB}\label{section:new_EBB}\label{derivation}
 
-There are various EBBs which place variance-sensitive bounds on the mean, and it remains an outstanding task is to see how much these EBBs can be sharpened; we take inspiration from the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
+There are various EBBs which place variance-sensitive bounds on the mean, and it remains an outstanding task is to see how much these EBBs can be improved; we take inspiration from the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
 However, due to its analytic intractability, we complete the derivation by discussing how to numerically determine the bound.
 
 %The evaluations in section \ref{} show that our EBB significantly tightens existing bounds. 
@@ -127,7 +126,7 @@ Within this section there are multiple parts:
 
 Our first part of the derivation of our new EBB is a Chernoff bound on the sample mean called \textit{Bennett's inequality}. 
 This bound is not new and was derived by \cite{hoeffding1} and \cite{10.2307/2282438} and has subsequently been a subject of discussion and many further developments; it is known to be quite strong \citep{Bentkus08boundsfor,Pinelis2014,zbMATH00812598}; 
-We state the theorem \ref{hoeffdings1} whose proof involves the use of an intermediate theorem \ref{thm:parabola}.
+We derive and present a refactored summary proof of Bennett's inequality as the theorem \ref{hoeffdings1}, whose proof involves the use of an intermediate theorem \ref{thm:parabola}.
 
 \begin{theorem}[Bennett's inequality]\label{hoeffdings1}
 Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$. 
@@ -193,7 +192,7 @@ Bennett's inequality provides a probability bound for the difference of the samp
 
 As already stated, the variance is often unknown in practice, but can only be estimated via the sample variance statistic.
 In order to derive a bound for the error between the sample variance and the variance we derived a concentration inequality for the sample squares to use in conjunction with the variance decomposition Lemma \ref{variance1}.
-The following concentration inequality was derived (which we note, appears to be novel):
+The following novel concentration inequality was derived:
 
 \begin{lemma}[Sample square bound]\label{sample_squares}
 Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$, if $d=\max(b,-a)$ then for $y>0$, the mean of sample squares $\hat{\sigma}_0^2=\frac{1}{n}\sum_ix_i^2$ is probability bounded:
@@ -226,7 +225,7 @@ Note that the application of this inequality (and thence the domain of function 
 
 \subsection{A new bound on the sample variance}\label{subsection:sample_variance_bound}
 
-By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares. it is possible to create a bound on the sample variance using lemma \ref{variance1}, as follows.
+By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares, and from these it is possible to create novel a bound on the sample variance using lemma \ref{variance1}, as follows:
 
 
 \begin{theorem}[Sample Variance Bound]\label{variance2}
@@ -266,7 +265,7 @@ The use of this Theorem \ref{variance2} (and thus implicitly the domain of funct
 \subsection{Generalised EBB creation process}\label{subsection:general_ebb_creation}
 
 Theorem \ref{hoeffdings1} presents a bound for the sample mean given the variance, and Theorem \ref{variance2} presents a probability bound for the error of the sample variance from the variance. The task remaining is to create a new EBB by binding these two together.
-To combine these two theorems to create a bound for the sample mean given the sample variance, we give a theorem that embodies a process slightly improved from that followed by \cite{Maurer50empiricalbernstein}.
+To combine these two theorems to create a bound for the sample mean given the sample variance, we give a theorem that is representative of a slightly improved derivation process than that followed by \cite{Maurer50empiricalbernstein}.
 
 Before beginning this theorem, we need to introduce some notation to ease presentation.
 For a function $f$ with ordered inputs, we denote the inverse of $f$ with respect to its $i${th} input (counting from one) as $f^{-(i)}$, assuming it exists.
@@ -275,7 +274,8 @@ $\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\
 And note that functions $h$ and $f$ may have additional arguments not limited to $\sigma^2$ and $t$, and $\sigma^2$ and $w$, respectively; but that these are not considered in the theorem and proof for brevity.
 
 \begin{theorem}[Essential EBB]\label{ebb1} 
-Assume $f^{-(2)}$ and $h^{-(2)}$ both exist, and also if $h^{-(2)}$ is monotonically increasing in its first argument, so that we can define:
+For probability bounds $\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\sigma^2,w)$,
+if $f^{-(2)}$ and $h^{-(2)}$ both exist, and also if $h^{-(2)}$ is monotonically increasing in its first argument, so that we can define:
 \[
 z(\sigma^2,w) = \sigma^2-f^{-(2)}\left(\sigma^2,w\right)
 \]
@@ -287,7 +287,7 @@ If $z^{-(1)}$ exists and is monotonic increasing in its first argument, then for
 \end{theorem}
 %
 \begin{proof}
-Substituting $w$ for $f^{-2}(\sigma^2,w)$ gives:
+Substituting $w$ for $f^{-(2)}(\sigma^2,w)$ gives:
 %$\p(\sigma^2-\hat{\sigma}^2>f^{-2}(\sigma^2,w))\le w$\\
 %$\p(z(\sigma^2,w)>\hat{\sigma}^2)\le w$\\
 %$\p(\sigma^2>z^{-1}(\hat{\sigma}^2,w))\le w$\\
