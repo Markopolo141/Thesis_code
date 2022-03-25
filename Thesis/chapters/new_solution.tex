@@ -223,6 +223,9 @@ In this way the GNK value can be seen as a conceptual continuation of historic s
 In the folowing section we describe the setup for an application and evaluation of the GNK value in the context of DC-approximated electrical networks.
 
 
+%TODO: link directly with Nash bargaining.
+
+
 \section{GNK value computation on DC powerflows}\label{more_involved}
 
 Because of its flexibility the GNK value has the potential to be used in a large range of different contexts,
@@ -446,7 +449,7 @@ It is seen that LMP features discontinuous changes in financial transfers and th
 This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the utilities under the GNK value (Figure \ref{fig:1c}) and VCG  (Figure \ref{fig:1g}) feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
 which is one known cause of the volatility experienced in electricity markets - see \cite{RePEc:aen:journl:2006v27-02-a09}. 
-In contrast, the post-payment utilities under the GNK value and VCG are almost always continuous with network parameters.
+In contrast, the post-payment utilities under the GNK value and VCG are always continuous with network parameters.
 
 
 %In the electrical context, 
@@ -510,13 +513,13 @@ This difficulty contrasts against the ease of computing LMP which requires only 
 
 \section{Summary}
 
-In this section we have given the details and %TODO:
+In this Chapter we have introduced the GNK value from its axioms and we have considered its conceptual inheritance from other solution concepts.
+In order to apply the GNK value to the pricing of immediate power generation and consumption in small DC networks we formally introduced the elements of the DC network and have detailed a computation methodology for the GNK value in that context.
+We then compared the GNK against LMP and VCG on a small example network to examine their features, particularly we identified that the GNK value has some nice budget-balance and continuity properties, however we also realised that the GNK is not incentive compatable and that it is difficult to calculate for larger electricity networks.
 
-Now that we have compared the GNK against LMP and VCG and their features on a small example network, we consider the means by which we can extend the discussion to larger networks.
-Particularly we need to consider the ways in which the computational difficultly of calculating the GNK value on larger networks can be ameliorated.
-The two primary techniques to ameliorate this difficulty are principally by sampling and by the adoption of a proxy. We discuss these to directins in the next section \ref{sec:scaling} before actually applying these techniques for an application of GNK to larger network in section \ref{sec:results_and_evaluation_of_GNK} and then discuss in section \ref{sec:GNK_value_discussion}.
-
-
+In the next chapter we consider the ways in which the computational difficultly of calculating the GNK value on larger networks can be ameliorated.
+The two primary techniques to ameliorate this difficulty are principally by sampling, and also by the adoption of a proxy for the inner optimisations.
+We discuss these to directions in the next chapter \ref{sec:scaling} before actually applying these techniques for an application of GNK to larger network in section \ref{sec:results_and_evaluation_of_GNK} where we discuss in section \ref{sec:GNK_value_discussion}.
 
 
 

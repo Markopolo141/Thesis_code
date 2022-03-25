@@ -1,69 +1,8 @@
 
 
-
 \begin{figure}[p]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-
-\begin{tikzpicture}
-\begin{axis}[width=7cm, height=8cm, view={30}{30},
-%colormap/viridis,
-point meta min=-1.0, point meta max=9.0,
-%colorbar,
-xlabel=x,
-ylabel=y,
-%zlabel=z,
-grid=major]
-\addplot3[only marks, scatter]
-table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/lmp_out_csv.csv};
-\end{axis}
-\end{tikzpicture}
-
-\caption[Utility payments under LMP for 90 bus network]{Post payment utility under LMP against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
-\label{fig:experiment_table_11}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-
-\begin{tikzpicture}
-\begin{axis}[width=7cm, height=8cm, view={30}{30},
-%colormap/viridis,
-point meta min=-1.0, point meta max=9.0,
-colorbar,
-xlabel=x,
-ylabel=y,
-%zlabel=z,
-grid=major]
-\addplot3[only marks, scatter]
-table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/vcg_out_csv.csv};
-\end{axis}
-\end{tikzpicture}
-
-\caption[Utility payments under VCG for 90 bus network]{Post payment utility under VCG against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
-\label{fig:experiment_table_12}
-    \end{minipage}\vspace{10mm}
-    \begin{minipage}{0.48\textwidth}
-        \centering
-
-\begin{tikzpicture}
-\begin{axis}[width=7cm, height=8cm, view={30}{30},
-%colormap/viridis,
-point meta min=-1.0, point meta max=9.0,
-%colorbar,
-xlabel=x,
-ylabel=y,
-%zlabel=z,
-grid=major]
-\addplot3[only marks, scatter]
-table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/gnk_out_csv.csv};
-\end{axis}
-\end{tikzpicture}
-
-\caption[Utility payments under M-GNK for 90 bus network]{Post payment utility under proxy GNK against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
-\label{fig:experiment_table_13}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
+    \begin{minipage}{0.78\textwidth}
         \centering
 
 \resizebox*{1.0\columnwidth} {!} {
@@ -294,7 +233,110 @@ table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/gnk_out
 }
 \caption[Node-line diagram for 90 bus network]{Node-line diagram for the example randomly generated 90-bus system, showing a 50-50 mix of small generators (black) and consumers (white)}
 \label{fig:experiment_table_14}
+    \end{minipage}
+\end{figure}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}[p]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm, height=8cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+%colorbar,
+xlabel=x,
+ylabel=y,
+%zlabel=z,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/lmp_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\caption[Utility payments under LMP for 90 bus network]{Post payment utility under LMP against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
+\label{fig:experiment_table_11}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm, height=8cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+colorbar,
+xlabel=x,
+ylabel=y,
+%zlabel=z,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/vcg_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\caption[Utility payments under VCG for 90 bus network]{Post payment utility under VCG against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
+\label{fig:experiment_table_12}
+    \end{minipage}\vspace{10mm}
+    \begin{minipage}{0.48\textwidth}
+        \centering
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm, height=8cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+%colorbar,
+xlabel=x,
+ylabel=y,
+%zlabel=z,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/gnk_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\caption[Utility payments under M-GNK for 90 bus network]{Post payment utility under proxy GNK against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
+\label{fig:experiment_table_13}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm, height=8cm, view={30}{30},
+%colormap/viridis,
+point meta min=-1.0, point meta max=9.0,
+%colorbar,
+xlabel=x,
+ylabel=y,
+%zlabel=z,
+grid=major]
+\addplot3[only marks, scatter]
+table[x index=0, y index=1, z index=2, point meta=z, col sep=comma]{data/shap_out_csv.csv};
+\end{axis}
+\end{tikzpicture}
+
+\caption[Utility payments under Shapley Value for 90 bus network]{Post payment utility under Shapley Value against generation/consumption capacity (x, positive being generation) with per-unit utility (y)}
+\label{fig:experiment_table_15}
     \end{minipage}
 \end{figure}
 
