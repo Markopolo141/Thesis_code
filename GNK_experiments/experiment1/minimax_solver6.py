@@ -11,10 +11,10 @@ from tqdm import tqdm
 
 def create_model(debug=False):
 	if debug:
-		print "from pyscipopt import Model"
-		print "import pyscipopt"
-		print "model=Model()"
-		print "model.setPresolve(pyscipopt.SCIP_PARAMSETTING.OFF)"
+		print("from pyscipopt import Model")
+		print("import pyscipopt")
+		print("model=Model()")
+		print("model.setPresolve(pyscipopt.SCIP_PARAMSETTING.OFF)")
 		#print "model.disablePropagation()"
 	model = Model()
 	#model.setPresolve(pyscipopt.SCIP_PARAMSETTING.OFF)
@@ -24,7 +24,7 @@ def create_model(debug=False):
 def add_constraint(model, expression, model_variables, debug=False):
 	c = model.addCons(eval(str(expression),model_variables))
 	if debug:
-		print "model.addCons({})".format(str(expression))
+		print("model.addCons({})".format(str(expression)))
 	return c
 
 def load_variable(model, name, lb=None,ub=None,  debug=False):
@@ -33,26 +33,26 @@ def load_variable(model, name, lb=None,ub=None,  debug=False):
 		if lb is not None:
 			v = model.addVar(name=name, lb=lb, ub=ub, vtype="C")
 			if debug:
-				print "{0} = model.addVar(\"{0}\", lb={1}, ub={2}, vtype=\"C\")".format(name, lb, ub)
+				print("{0} = model.addVar(\"{0}\", lb={1}, ub={2}, vtype=\"C\")".format(name, lb, ub))
 		else:
 			v = model.addVar(name=name, ub=ub, vtype="C")
 			if debug:
-				print "{0} = model.addVar(\"{0}\", ub={1}, vtype=\"C\")".format(name, ub)
+				print("{0} = model.addVar(\"{0}\", ub={1}, vtype=\"C\")".format(name, ub))
 	else:
 		if lb is not None:
 			v = model.addVar(name=name, lb=lb, vtype="C")
 			if debug:
-				print "{0} = model.addVar(\"{0}\", lb={1}, vtype=\"C\")".format(name, lb)
+				print("{0} = model.addVar(\"{0}\", lb={1}, vtype=\"C\")".format(name, lb))
 		else:
 			v = model.addVar(name=name, vtype="C")
 			if debug:
-				print "{0} = model.addVar(\"{0}\", vtype=\"C\")".format(name)
+				print("{0} = model.addVar(\"{0}\", vtype=\"C\")".format(name))
 	return v
 
 def load_binary_variable(model, name, debug=False):
 	v = model.addVar(name, vtype = 'B')
 	if debug:
-		print "{0} = model.addVar(\"{0}\", vtype = 'B')".format(name)
+		print("{0} = model.addVar(\"{0}\", vtype = 'B')".format(name))
 	return v
 
 def set_objective(model, expression, variables, debug=False):
@@ -60,9 +60,9 @@ def set_objective(model, expression, variables, debug=False):
 	model.setObjective(c, "minimize")
 	model.addCons(eval(str(expression), variables) <= c)
 	if debug:
-		print "c = model.addVar(\"c\", lb=-1e20, vtype = 'C')"
-		print "model.setObjective(c, \"minimize\")"
-		print "model.addCons({} <= c)".format(str(expression))
+		print("c = model.addVar(\"c\", lb=-1e20, vtype = 'C')")
+		print("model.setObjective(c, \"minimize\")")
+		print("model.addCons({} <= c)".format(str(expression)))
 	return c
 	#if debug:
 	#	print 'model.setObjective({}, "minimize")'.format(str(expression))
@@ -70,16 +70,16 @@ def set_objective(model, expression, variables, debug=False):
 
 def model_optimise(model,maximizing=False,debug=False):
 	if debug:
-		print "model.optimize()"
-		print "sols = model.getSols()"
-		print "extreme_sol = sols[0]"
-		print "for sol in sols:"
+		print("model.optimize()")
+		print("sols = model.getSols()")
+		print("extreme_sol = sols[0]")
+		print("for sol in sols:")
 		if maximizing:
-			print "\tif model.getSolObjVal(sol) > model.getSolObjVal(extreme_sol):"
+			print("\tif model.getSolObjVal(sol) > model.getSolObjVal(extreme_sol):")
 		else:
-			print "\tif model.getSolObjVal(sol) < model.getSolObjVal(extreme_sol):"
-		print "\t\textreme_sol = sol"
-		print "return extreme_sol"
+			print("\tif model.getSolObjVal(sol) < model.getSolObjVal(extreme_sol):")
+		print("\t\textreme_sol = sol")
+		print("return extreme_sol")
 	model.optimize()
 	status = model.getStatus()
 	if status == "optimal" or status == "bestsollimit":
@@ -92,7 +92,7 @@ def model_optimise(model,maximizing=False,debug=False):
 				extreme_sol = sol
 		return extreme_sol
 	else:
-		raise Exception('bam')
+		raise Exception('bam {}'.format(status))
 
 
 def float_gcd(doubles, pseudo_zero, inverting=True):
@@ -250,21 +250,21 @@ def calc_LMP(ppc, debug=False):
 		constraints.append(add_constraint(model, "{}==0".format(str(g)), model_variables, debug=debug))
 	sol = model_optimise(model,debug=debug,maximizing=False)
 	del model_variables['__builtins__']
-	model_variables_sympy = {symbols(name):model.getSolVal(sol,value) for name,value in model_variables.iteritems()}
+	model_variables_sympy = {symbols(name):model.getSolVal(sol,value) for name,value in model_variables.items()}
 	substituted_costs = [c.subs(model_variables_sympy) for c in costs]
 	if debug:
 		k = model_variables.keys()
 		k = sorted(k)
 		for key in k:
-			print key, round(model.getSolVal(sol,model_variables[key]),5)
-		print model.getSolObjVal(sol), substituted_costs
+			print(key, round(model.getSolVal(sol,model_variables[key]),5))
+		print(model.getSolObjVal(sol), substituted_costs)
 		for i,c in enumerate(power_constraints + angle_constraints):
-			print c,"\n\t", model.getDualsolLinear(constraints[i])
+			print(c,"\n\t", model.getDualsolLinear(constraints[i]))
 	power_names = [p['name'] for p in defs if p['name'][0]=='p' and '_' not in p['name']]
 	dual_variables = [model.getDualsolLinear(constraints[i]) for i in range(len(power_constraints))]
 	power_variables = [model.getSolVal(sol,model_variables[p]) for p in power_names]
 	dollar_values = [dual_variables[i]*power_variables[i] for i in range(len(dual_variables))]
-	return dual_variables, dollar_values, substituted_costs
+	return dual_variables, dollar_values, substituted_costs, model.getObjVal()
 
 def calc_maxmin_minmax(ppc, inds, debug=False, bignum=99999):
 	constraints,tight_constraints = get_matrix_inverse(ppc['branch'],ppc['bus'])
@@ -315,14 +315,14 @@ def calc_maxmin_minmax(ppc, inds, debug=False, bignum=99999):
 		sol = model_optimise(model,debug=debug,maximizing=False)
 		
 		del model_variables['__builtins__']
-		model_variables_sympy = {symbols(name):model.getSolVal(sol,value) for name,value in model_variables.iteritems()}
+		model_variables_sympy = {symbols(name):model.getSolVal(sol,value) for name,value in model_variables.items()}
 		substituted_costs = [float(c.subs(model_variables_sympy)) for c in costs]
 		if debug:
 			k = model_variables.keys()
 			k = sorted(k)
 			for key in k:
-				print key, round(model.getSolVal(sol,model_variables[key]),5)
-			print model.getSolObjVal(sol)*positive, substituted_costs
+				print(key, round(model.getSolVal(sol,model_variables[key]),5))
+			print(model.getSolObjVal(sol)*positive, substituted_costs)
 		power_dictionary = {p:round(model.getSolVal(sol,model_variables[p]),5) for p in power_expressions}
 		return model.getSolObjVal(sol)*positive, substituted_costs, power_dictionary
 	if 1 not in inds:
@@ -367,7 +367,7 @@ def calculate_value(ppc, debug=False, tqdm_show=True, bignum=99999):
 	for i in range(nss):
 		for d in datas:
 			if d[0][i]==1:
-				index = (sum(d[0])+nss)/2 - 1
+				index = int((sum(d[0])+nss)/2 - 1)
 				coalition_values[index][0] += d[1]
 				coalition_values[index][1] += 1
 		values[i] = sum([c[0]/c[1] if c[1]>0 else 0 for c in coalition_values])/nss
@@ -391,7 +391,7 @@ def calculate_value_predef_inds(ppc, inds, debug=False, tqdm_show=False, bignum=
 			max_payoffs = payoffs[:]
 			max_powers = (powers1,powers2)
 	for d in datas:
-		print d
+		print(d)
 	pdb.set_trace()
 	values = [0 for i in range(nss)]
 	coalition_values = [[0,0] for i in range(nss)]
@@ -410,7 +410,7 @@ if __name__ == "__main__":
 	#print a,b
 	#print sum([a[i]*b[i] for i in range(len(a))])
 	from pypower.case6www import case6www
-	print calculate_value(case6www(), debug=True, tqdm_show=True, bignum=9999)
+	print(calculate_value(case6www(), debug=True, tqdm_show=True, bignum=9999))
 
 
 

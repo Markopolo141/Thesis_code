@@ -59,12 +59,16 @@ data = [[[],[],[],[],[],[],[],[]] for a in range(len(ppc['bus']))]
 ppc['gen'] = ppc['gen'].astype(float)
 
 
+
 def simulate(ppc):
-	print ppc['gen'][0][8],ppc['excluded']
+	print(ppc['gen'][0][8],ppc['excluded'])
 	if ppc['excluded']==-1:
-		return calculate_value(ppc, debug=False, tqdm_show=False, bignum=999999), calc_LMP(ppc, debug=False)
+		lmp = calc_LMP(ppc, debug=True)
+		value = calculate_value(ppc, debug=True, tqdm_show=False, bignum=999999) 
+		return value, lmp
 	else:
-		return None, calc_LMP(ppc, debug=False)
+		lmp = calc_LMP(ppc, debug=True)
+		return None, lmp
 
 if __name__ == "__main__":
 	ppcs = []
@@ -77,7 +81,8 @@ if __name__ == "__main__":
 				ppcs[-1]['gen'][j][8] = 0
 				ppcs[-1]['gen'][j][9] = 0
 		xticks.append(i)
-	raw_data = list(futures.map(simulate, ppcs))
+	#raw_data = list(futures.map(simulate, ppcs))
+	raw_data = map(simulate, ppcs)
 	for i,r in enumerate(raw_data):
 		results, results2 = r
 		if ppcs[i]['excluded']==-1:

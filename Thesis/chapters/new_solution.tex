@@ -78,8 +78,6 @@ The remedy is to take the expected outcome on a coin-flip on who chooses actions
 The resulting outcome we call the \textit{Generalized Neyman and Kohlberg Value} or the \textit{GNK value} for short, 
 as Harsanyi's solution was also axiomatically derived by \cite{value2,KOHLBERG2018139}.
 This solution concept is shown to apply for all transferable utility (TU) generalised non-cooperative games, and directly equivalent to the Nash bargaining with endogenous disagreement point under transferrable utility (TU) between two players (such as per section \ref{sec:nash_bargaining_exogenous}, as in the example in that section).
-%As in the two player context there is 
-%TODO:
 
 The GNK value is thus flexible enough to extend to many contexts, but we focus particularly on the specific case of allocating monetary payments over Optimal Power Flow (OPF) instances under the DC approximation - as we will explain.
 
@@ -220,11 +218,22 @@ and also identical to \cite{nash2}'s bargaining solution in the context of trans
 It also shares a conceptual similarity with \cite{aumann1961core}'s $\alpha$ and $\beta$ core solution concepts, and \cite{1944}'s historic formulation :
 \begin{equation}\label{knvalue3}v_m(S) = \max_{x\in A^S}\min_{y\in A^{N\setminus S}} \sum_{i\in S} u_i(x,y).\end{equation}
 In this way the GNK value can be seen as a conceptual continuation of historic solution concepts, and can be judged according to how well it derives outcomes in application contexts.
+
+As a simple example demonstration, it is possible to see how the GNK value is identical to Nash bargaining in the context of transferrable utility games (such as in the example matrix game \ref{eq:example_game1} of section \ref{subsec:nash_bargaining_endogenous}), we calculate all the terms $v(S)$ for coalitions of players $1$ and $2$, particularly:
+
+\begin{align*}
+v(\{1,2\})=&\max\max\begin{bmatrix}3 & -3\\ -3 & 3\end{bmatrix}=3\\
+v(\{1\})=&\frac{1}{2}\min\max\begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix}+\frac{1}{2}\max\min\begin{bmatrix}1 & -1\\ 1 & -1\end{bmatrix}=1\\
+v(\{2\})=&\frac{1}{2}\min\max\begin{bmatrix}1 & -1\\ 1 & -1\end{bmatrix}+\frac{1}{2}\max\min\begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix}=-1\\
+v(\emptyset)=&-\max\max\begin{bmatrix}3 & -3\\ -3 & 3\end{bmatrix}=-3\\
+\end{align*}
+From this:
+$$ \varphi_1(\langle N,v\rangle)=\frac{1}{2}(v(\{1,2\})+v(\{1\}))=\frac{1}{2}(3+1)=2 $$
+$$ \varphi_2(\langle N,v\rangle)=\frac{1}{2}(v(\{1,2\})+v(\{2\}))=\frac{1}{2}(3-1)=1 $$
+Which matches exactly the result in section \ref{subsec:nash_bargaining_endogenous}. In section \ref{subsec:nash_bargaining_endogenous} we considered that the minimax in the payoff advantage matrix (ie. $d$ in that section) was the nash equilibrium point of threat in bargaining between the players in choosing a subsequent point on the pareto frontier (see Figure \ref{fig:graph1_utilities}) that divides the maximum possible sum revenue (ie $s$ in that section).
+The GNK value also directly encodes this same logic as $v(\{1\})=-v(\{2\})$ is the minimax in the payoff advantage between the player (in this ungeneralised game), and $v(\{1,2\})$ is the maximum sum revenue which is split. This result is the same as we would get by the \textit{coco-value}, and working with Neyman and Kohlberg's value (equation \ref{knvalue2}).
+
 In the folowing section we describe the setup for an application and evaluation of the GNK value in the context of DC-approximated electrical networks.
-
-
-%TODO: link directly with Nash bargaining.
-
 
 \section{GNK value computation on DC powerflows}\label{more_involved}
 
