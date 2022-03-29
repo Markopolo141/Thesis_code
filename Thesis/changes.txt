@@ -1,0 +1,7 @@
+
+Added shapley value data to both parts in GNK section, with some discussion of the differences and comparrison
+
+Added an example directly drawing out the identity between the GNK value and the Nash bargaining solution on two person games with Transferrable Utility.
+
+
+
