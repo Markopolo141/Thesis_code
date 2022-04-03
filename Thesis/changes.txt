@@ -3,5 +3,8 @@ Added shapley value data to both parts in GNK section, with some discussion of t
 
 Added an example directly drawing out the identity between the GNK value and the Nash bargaining solution on two person games with Transferrable Utility.
 
+rephrased definition of Pareto optimality in solutions chapter and in philosophy chapter
+
+Added more information about objectios to utilitarianism, particularly that it can be measured or compared between people.
 
 
