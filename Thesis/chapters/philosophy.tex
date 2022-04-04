@@ -297,15 +297,15 @@ Envy free allocations may exist or not depending on many conditions, such as whe
 However even in the continuous case, although pareto-efficient and envy-free are guaranteed to exist in some circumstances \cite{WELLER19855,COLE2021105207}, they may be prohibitive to compute, see for instance the problem of envy free cake cutting for discontinuous slices and for arbitrary number of players was solved by Aziz et.al \cite{DBLP:conf/focs/AzizM16} requiring as many as $n^{n^{n^{n^{n^n}}}}$ operations.
 There are also situations with mixed divisible and indivisible goods which are not nessisarily more simple.\cite{BEI2021103436}
 In recourse to these problems, some alternative measures have been adopted and investigated, such as the various conceptions of envy-minimisation,
-in these conceptions some aggreagate envy criterion is selected, for instance: 
+in these conceptions some aggreagate envy criteria are possible \cite{10.1145/3219166.3219179,10.1145/988772.988792,NGUYEN201454}, for instance: 
 \begin{itemize}
 \item the number of envious individuals, 
 \item the number of envy-relations, 
-\item the maximum envy-difference $\max_{i,j}\{\max\{0,u_i(\pi_j)-u_i(\pi_i)\}\}$ \cite{10.1145/3219166.3219179,10.1145/988772.988792}
-\item or in terms of maximum envy-ratio defined by how much a player values the allocation of another over their own $\max_{i,j}\{1,\frac{u_i(\pi_j)}{u_i(\pi_i)}\}$, \cite{NGUYEN201454}
+\item the maximum envy-difference $\max_{i,j}\{\max\{0,u_i(\pi_j)-u_i(\pi_i)\}\}$ 
+\item the maximum envy-ratio defined by how much a player values the allocation of another over their own $\max_{i,j}\{1,\frac{u_i(\pi_j)}{u_i(\pi_i)}\}$
 \end{itemize}
 Since allocating nothing to every player (if possible) is straightforwardly envy-free, there is a secondary question about what efficiency measure should also be optimised in this context.
-examples include: egalitarian social welfare (ie. maximizing the utility of the worst-off agent) or utilitarian social welfare (ie. maximizing the sum of all agents' utilities) or satisfying Pareto efficiency, or Nash social welfare (see also Section \ref{sec:solutions_bargaining}) \cite{NGUYEN201454}.
+Examples include: egalitarian social welfare (ie. maximizing the utility of the worst-off agent) or utilitarian social welfare (ie. maximizing the sum of all agents' utilities) or satisfying Pareto efficiency, or Nash social welfare (see also Section \ref{sec:solutions_bargaining}) \cite{NGUYEN201454}.
 
 The notion of envy-freeness relies on comparisons between agents and the bundles of resources which they could gain, however there is some flexibility about how the agents and bundle comparrisons are defined.
 For instance, a similar and more expansive notions of envy-freeness such as applied to groups ('group envy freeness') are even more restrictive and difficult to compute; Group envy freeness was first introduced by \cite{BERLIANT1992201} for equally sized groups, and for hetrodgenously sized groups by \cite{DBLP:conf/aaai/ConitzerF0V19}.
