@@ -180,7 +180,7 @@ Thus VCG has been considered as a mechanism for allocating physical and monetary
 
 In this way there are many possible context of VCG's application, however there are also some interesting innovations on VCG in the electricity context, such as:
 VCG qualities can be improved is by considering mechanisms where VCG (or approximately VCG) payments are also in the Core (see Section \ref{sec:the_core_definition}) thus offering increased robustness properties against coalition strategising \citep{SESSA2017189,DBLP:journals/corr/abs-2012-05047,8264596}.
-Additionally there is specific VCG redistribution mechanisms discussed in the electricity context, particularly: such as using deep-learngin to derive VCG redistribution rules in the context of EV bidding into a local energy market, as considered by \cite{9615367}, or as a means of redistribution to minimise budget imbalance, such as described by \cite{8651383}.
+Additionally there is specific VCG redistribution mechanisms discussed in the electricity context, particularly: such as using deep-learning to derive VCG redistribution rules in the context of EV bidding into a local energy market, as considered by \cite{9615367}, or as a means of redistribution to minimise budget imbalance, such as described by \cite{8651383}.
 
 
 
@@ -336,7 +336,7 @@ Financial Transmission Rights are financial instruments which ISOs offers to gen
 \end{itemize}
 
 These considerations extend primarily from there being factors (discontinuous, diachronic, probabilistic, etc.) that are outside of the Marginal Pricing calculus that cannot (or are not often, or easily) incorporated, thus adding to the complexity of LMP in real-world markets.
-Notwithstanding these considerations, LMP has particular advantages such as its ability to be computed and its linkage to economically relevant rationale, that means that it is actually implemented over other schemes in practice. \citep{zonal}
+Notwithstanding these considerations, LMP has particular advantages such as its ability to be computed and its linkage to economically relevant rationale, that means that it is actually implemented over other schemes in practice \citep{zonal}, and serves us as a benchmark to compare other schemes against. 
 
 
 \subsection{Summary and discussion of Locational Marginal Pricing}
@@ -503,13 +503,17 @@ Indeed the Shapley Value has been considered as a potential mechanism for pricin
 
 In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
 
-Just like in LMP and VCG, the Shapley Value is also evidently a marginal approach, as it is expressible the an average marginal contribution across possible groups (by equations \ref{shap2} or \ref{shapley_value3})
+The Shapley Value has notable strengths and weaknesses, particularly the simplicity of its axioms have obvious appeal, and similar to LMP and VCG it is a more expansive marginalist approach (as it is expressible the an average over a larger range of marginal contributions by equations \ref{shap2} or \ref{shapley_value3}).
+However a primary drawback of the Shapley Value in practice is the difficulty of computing it as calculating all of the marginal contributions of all players to the $2^n-1$ possible coalitions is identified as being rapidly difficult to scale to sizes of participants on realistic networks.
+This drawback has attracted attention and attempts at remediation, such as employing techniques of sample-bassed approximations (see citations in Section \ref{sec:shapley}) or approaches that employ techniques like player clustering \cite{DBLP:journals/corr/abs-1903-10965}.
 
 %Informally the difference between VCG, LMP and the Shapley Value can be seen as a difference between the allocation of reward: equal to contribution to the grand coalition, in-proportional to marginal contribution to the grand coalition, or equal to contribution not just to the grand coalition.
 
-There there is much more which could be said about cooperative game theory, but as identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}, cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
+Shapley Value approaches may or may-not suffer other disadvantages depending on context, such as being incentive incompatable, privacy preserving, or having envy-freeness, however the primary weakness of the Shapley Value approach is that it only applies when there is a coherent conception of a characteristic function.
+That is, (as identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}) cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
+Unfortunately in a meshed electricity network with a confluence of electricity details and a range of strategies available to each of the participants, such a notion of `worth' may not be very obvious.
 Thus in the next section \ref{sec:solutions_bargaining} we consider some solution concepts which apply in circumstances where it is not easy to describe the `worth' or `value' of a coalition of players; where strategic considerations between them are important and it is not easy to make sense of a characteristic function.
-Particularly we describe bargaining solution concepts.
+Particularly, we describe bargaining solution concepts.
 
 
 \section{Bargaining solution concepts}\label{sec:solutions_bargaining}
@@ -690,6 +694,8 @@ A secondary question is thus, how likely are envy-free allocation mechanisms lik
 Another dimension is which specific conceptiion of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{The concept of envy-freeness}), or how should envy-relations be considered between resource bundles and consumer which by happenstance cannot feasibly consume them, should measures be envy-free or only envy-minimising and if-so at what cost to social or utilitarian efficiency.
 In this way there is a range of social possibilities in designing envy-free systems in practice.
 
+Unfortunately, at this stage, there is no well established singular way of trading resources such as electrical energy that is envy-free, quite as much as envy-freeness is a desirable property sometimes witness in various mechanisms that are sometimes discussed in an electricity context.
+An implementation of the envy-free condition in electricity systems may or may not have other advantages and drawbacks, such as incentive compatability, budget-balance, Pareto-efficiency, and may or may not be computable and scalable to the sizes of realistic networks (particularly as computation difficulty is potential drawback, as identified in section \ref{sec:envy_free_philosophy}).
 
 %However the primary issue with envy freeness in this thesis, is that envy-freeness is a condition which is sometimes less than inspiring in its application.
 %Particularly consider, if the bundle of goods under consideration is simply the volume of electricity consumed, and all participants value more electricity positively, then the only envy-free allocation, is that everyone recieves the same volume.

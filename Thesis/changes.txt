@@ -7,4 +7,12 @@ rephrased definition of Pareto optimality in solutions chapter and in philosophy
 
 Added more information about objectios to utilitarianism, particularly that it can be measured or compared between people.
 
+changed the introduction to repeatedly draw attention to the central research question 'how should electricty be traded'
 
+merged the conclusion chapter into the two parts of the these GKN & Sampling with respective conclusions therein
+
+
+
+
+reorganising:
+sec:GNK_extensions_discussion

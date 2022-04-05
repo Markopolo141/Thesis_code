@@ -70,7 +70,7 @@ The fundamental idea behind our approach was first detailed by \cite{values3}.
 So far as we know, Harsanyi's solution concepts have never been applied to electricity networks, as there exists a particular problem in doing so, particularly that Harsanyi's solution concepts apply to non-cooperative games but cannot apply to generalised non-cooperative games.
 The details of this problem and our novel remedy are given in following section \ref{the_value_def3}.
 
-But briefly, in electricity network contexts the mutual interactions of participants can be limited by physical constraints.
+But briefly, in electricity network contexts the mutual interactions of participants can be limited by the physical constraint of the network, for instance: network participants cannot simply draw or push power to/from the network without restraint, as doing so would lead to damage to the network.
 And these limitations on the space of possible mutual actions is best modelled by a generalised non-cooperative game, and unfortunately in the context of such a generalised game there is no unique minimax point between two players.
 Our principle and novel development in this chapter is the provision of a remedy, such that Harsanyi's solution can then be applied.
 The remedy is to take the expected outcome on a coin-flip on who chooses actions first in the minimax strategies - and as we shall see - this turns out to be a unique value that satisfies all required properties, and thus leads to a coherent outcome.
@@ -397,7 +397,7 @@ We utilised the SCIP optimisation suite\footnote{development reported by \cite{M
 From section \ref{sec:solutions_VCG} the VCG payment that a participant makes is the difference between the sum of other's utility at the social optimum point $x^*$, and the utility that others would have if the participant were not present and the optimisation were only over the remaining participants, as seen in equation \ref{eq:VCG_payment_rule}.
 
 In this way the socially optimum value $x^*$ needs to be computed, and then additionally an additional optimisation problem for each player - where we assume that the excluded participant has power zero $p_i=0$. Thus in our context, equation \ref{eq:VCG_payment_rule} becomes:
-\begin{equation}\label{eq:VCG_calculation_DC} d_i(v)=\argmax_{\sum_{j} u_j(p_j)}\sum_{j\ne i}u_j(p_j) - \argmax_{\sum_{j\ne i} u_j(p_j), p_i=0}\sum_{j\ne i}u_j(p_j)\end{equation}
+\begin{equation}\label{eq:VCG_calculation_DC} d_i=\argmax_{\sum_{j} u_j(p_j)}\sum_{j\ne i}u_j(p_j) - \argmax_{\sum_{j\ne i} u_j(p_j), p_i=0}\sum_{j\ne i}u_j(p_j)\end{equation}
 
 The first term in this equation is the sum of utilities at the point which maximises the sum of utilities minus the player $i$.
 The second term in this equation is the sum of other's utilities (ie. excluding player $i$) at the point which maximises the sum of other's utilities in the context that the players power is zero.
@@ -474,7 +474,8 @@ This continuity property is proven in the Appendix \ref{appendix:continuity_of_G
 This continuity is similarly witnessed in VCG imputations, but notably not in the context of LMP payments.
 
 It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1f}, where the payments received by generator 1 drop sharply with increasing generator capacity.
-This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the utilities under the GNK value (Figure \ref{fig:1c}), VCG (Figure \ref{fig:1g}) and Shapley Value (Figure \ref{fig:1i}) which feature no such drops or discontinuities.
+This happens because the change in generator capacity is changing the parameters of the network itself and its feasibility region, which yields discontinuous changes in network operaating point, and thus marginal prices.
+This dynamic under LMP might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the utilities under the GNK value (Figure \ref{fig:1c}), VCG (Figure \ref{fig:1g}) and Shapley Value (Figure \ref{fig:1i}) which feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
 which is one known cause of the volatility experienced in electricity markets - see \cite{RePEc:aen:journl:2006v27-02-a09}. 
 In contrast, the post-payment utilities under the GNK value and VCG are always continuous with network parameters.
@@ -492,7 +493,7 @@ The transactions under LMP and VCG are not necessarily budget-balanced and can y
 This is an outcome of the GNK value's axiomatic derivation, as given by equation \eqref{myeq}, which is reflective of the Shapley Value axioms, per section \ref{subsec:the_shapley_value}.
 Under LMP, each participant is credited or debited at the effective rate of supply for their location but there is no guarantees that the total payments should add to zero.
 This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1f}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
-The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called ``congestion-rents'' that are usually collected by owners of transmission lines (and which are often also the owners of the utility-scale generation assets in vertically-integrated systems - see \cite{lmp2}).
+The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called `congestion-rents'.
 Additionally VCG payments are known not to be budget balanced generally and may yield a surplus or deficit depending on various conditions, as considered in section \ref{sec:solutions_VCG}.
 
 %In a power systems context, budget-balancedness of payments is desirable in that any revenue/deficit collected is independent of the network operating conditions.

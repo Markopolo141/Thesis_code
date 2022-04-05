@@ -97,7 +97,7 @@ We used a known process of generating pseudo random meshed networks of buses and
 \end{algorithm}
 
 Using this algorithm we considered networks which were randomly generated to have 10 nodes with 12 lines between them, which was sufficiently small enough for it to be possible to solve the GNK value exactly.
-In each of these randomly generated networks, each line had randomly generated line limits (uniformly between $20$ and $300$kW) and each node was randomly assigned to be either a generator or consumer of electricity (probability of being a consumer begin $80\%$) with a randomly generated linear utility function (uniformly between $0.1$ and $2.1$ units per kW) with randomly generated consumption/generation limits (uniformly between $10$ and $200$kW).\footnote{All sourcecode for these experiments found at: \href{https://github.com/Markopolo141/Thesis\_code}{https://github.com/Markopolo141/Thesis\_code}}
+In each of these randomly generated networks, each line had randomly generated line limits (uniformly between $20$ and $300$kW) and each node was randomly assigned to be either a generator or consumer of electricity (probability of being a consumer begin $80\%$) with a randomly generated linear utility function (uniformly between $0.1$ and $2.1$ \$ per kW) with randomly generated consumption/generation limits (uniformly between $10$ and $200$kW).\footnote{All sourcecode for these experiments found at: \href{https://github.com/Markopolo141/Thesis\_code}{https://github.com/Markopolo141/Thesis\_code}}
 
 By computing the exact GNK value for these networks we were then able to compute the average absolute error achieved by each of the different sampling methods for different sample budgets.
 For a given budget, all the algorithms called for the computation of different numbers of the bilevel optimisations $v(S)$ (per equation \ref{knvalue1}).
@@ -149,14 +149,14 @@ Particularly we considered a relaxation:
 \begin{align}
 \label{knvalue22}
 v(S) = &+ \frac{1}{2}\left(\sum_{i\in S} u_i(p_i) - \sum_{i\in N\setminus S}u_i(p_i)\right)\nonumber\\
-&\quad\quad\quad\quad\quad~\text{s.t}~ \left[\{p_i\}_{i\in N}=\argmax \left(\sum_{i\in S} u_i(p_i) + \sum_{i\in N\setminus S}\epsilon u_i(p_i)\right)\right]\nonumber\\
+&\quad\quad\quad\quad\quad~\text{s.t}~ \left[\{p_i\}_{i\in N}=\argmax_{p\in A} \left(\sum_{i\in S} u_i(p_i) + \sum_{i\in N\setminus S}\epsilon u_i(p_i)\right)\right]\nonumber\\
 &- \frac{1}{2}\left(\sum_{i\in N\setminus S}u_i(p_i) - \sum_{i\in S} u_i(p_i)\right)\nonumber\\
-&\quad\quad\quad\quad\quad~\text{s.t}~ \left[\{p_i\}_{i\in N}=\argmax \left(\sum_{i\in N\setminus S}u_i(p_i) + \sum_{i\in S} \epsilon u_i(p_i) \right)\right]
+&\quad\quad\quad\quad\quad~\text{s.t}~ \left[\{p_i\}_{i\in N}=\argmax_{p\in A} \left(\sum_{i\in N\setminus S}u_i(p_i) + \sum_{i\in S} \epsilon u_i(p_i) \right)\right]
 \end{align}
 
-Where $\epsilon$ is a sufficiently small positive value, and where we assume all the DC power constraints apply in both $\argmax$.
+Where $\epsilon$ is a sufficiently small positive value, and where all the DC power constraints noted to apply in both $\argmax$.\footnote{using such an $\epsilon$ forces the optimiser to optimise one factor in the objective function strictly over the other, if the $\epsilon$ is too large in its context then the optimiser will likely do this imperfectly, and if the $\epsilon$ is too small then rounding issues can potentially occur in optimiser software, $\epsilon$ should be chosen to be as small as not to induce rounding issues in the solver}
 
-Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritise their own utility and then the follower's utility is maximised secondarily, we call this proxy GNK value the `M-GNK value'.\footnote{This dynamic is evident for sufficiently small $\epsilon$ in the formula, but the same dynamic could also be achieved by a two stage optimisation process.}
+Rather than equation \eqref{knvalue1}, this equation \eqref{knvalue22} encapsulates the expected payoff advantage of the coalition under a 50:50 coinflip of who goes first, where in each case the leader chooses the powerflows that strictly prioritise their own utility and then the follower's utility is maximised secondarily, we call this proxy GNK value the `M-GNK value'.\footnote{This dynamic is evident for sufficiently small $\epsilon$ in the formula, but the same dynamic could also be achieved more directly by a two stage optimisation process.}
 This expression encodes much of the same dynamic as the original expression (equation \ref{knvalue1}) but avoids much of the adversarial strategic counter-considerations that make the original expression NP-hard, as the leader is unwilling to sacrifice their utility to harm the follower's utility and vice versa.
 
 This proxy replaces the two-part NP-hard bilevel problems of equation \ref{knvalue1}, into two-part single-level linear programming problems.
@@ -183,7 +183,7 @@ Using this ability to calculate the M-GNK value for larger networks, we can now 
 
 In this section we consider and discuss some of the behaviour exhibited by the M-GNK value against VCG, LMP and Shapley Value for randomly generated larger networks.
 Particularly in Figures \ref{fig:experiment_table_14}, and \ref{fig:experiment_table_11}-\ref{fig:experiment_table_15} we show the results of these techniques applied to an example 90 bus network (generated by algorithm \ref{alg1}), consisting of a 50-50 split of small consumers and small generators of electricity.
-In in this randomly generated networks (given by algorithm in section \ref{section:performance}), there was no constriction on power line limits, and each node has a randomly generated linear utility function (uniformly between $0.1$ and $2.1$ units per kW) with randomly generated consumption/generation limits (uniformly between $1$ and $15$kW).
+In in this randomly generated networks (given by algorithm in section \ref{section:performance}), there was no constriction on power line limits, and each node has a randomly generated linear utility function (uniformly between $0.1$ and $2.1$ \$ per kW) with randomly generated consumption/generation limits (uniformly between $1$ and $15$kW).
 For this randomly generated network we were able to calculate the GNK value, as well as LMP and VCG, and from these calculations we were able to see some of the distinct features of these techniques when applied to a large number of players.\footnote{All sourcecode for these experiments found at: \href{https://github.com/Markopolo141/Thesis\_code}{https://github.com/Markopolo141/Thesis\_code}}
 
 The most immediate result is that LMP and VCG are nearly identical (Figures \ref{fig:experiment_table_11} and \ref{fig:experiment_table_12}) while it is noticed that the Shapley Value exhibits a very similar but slightly offset shape (see axes of Figure \ref{fig:experiment_table_15}) and the GNK is distinctly different (\ref{fig:experiment_table_13}).
@@ -205,25 +205,6 @@ Or more succinctly, the way in which the generators get allocated negative utili
 This consideration works reversely for consumers, who can only consume at a positive utility to them, thus they are at a bargaining advantage which is then reflected in the positive utility they are rewarded with under M-GNK.
 
 This behaviour in the context of large networks was somewhat unexpected; and we summarise the consequences in the following section \ref{sec:GNK_value_discussion}.
-
-\subsection{Possible extensions}\label{sec:GNK_extensions_discussion}
-
-One primary question is how much the behaviour exhibited in Figure \ref{fig:experiment_table_13} is entirely the result of us using a modified characteristic function, per the M-GNK value (equation \ref{knvalue22}), over the more original characteristic function of the GNK value (equation \ref{knvalue1}).
-In order to investigate this question, the error of using this modification across randomly generated networks was calculated and shown in Figure \ref{fig:performance_graph5}.
-This graph shows the cumulative probability of the difference in payments between the GNK and M-GNK - and shows for instance, that 60\% of participants could expect to receive within 10\% what they would have between GNK and M-GNK values, and that this similarity increases for larger network sizes.
-
-From this graph it is noticed that the GNK and M-GNK values feature similarity which seems to increase with the size of the network under consideration --- although for computational reasons, it is increasingly difficult to confirm for networks with a size greater than 13 nodes.
-This limited observation coincides with expectations that the possible strategic counter-considerations that are discarded by using equation \ref{knvalue22} over equation \ref{knvalue1} become less relevant in the context of larger networks.
-
-Another observation, is that while the GNK remains soluble for networks of less than 13 nodes and the M-GNK value remains soluble for up to 80 node networks (to about 1\% accuracy, as per Figure \ref{fig:performance_graph4}), however these numbers might still be regarded as being too small for real-world electrical network modelling.
-Larger networks are expected to be tractable for the M-GNK value with more computing power and/or execution time, however further methodological improvements may be necessary to make the GNK value (or anything similar to it) capable of bearing on larger and real world networks.
-Some possible avenues of investigation include employing further approximations such as player clustering (such as implemented by \cite{DBLP:journals/corr/abs-1903-10965}), or transforming the problem into a non-atomic form, similar to non-atomic Shapley Value.
-However, these technical considerations are secondary to the ethical considerations about the desirability of GNK-type solutions, which we consider in the following section \ref{sec:GNK_value_discussion}.
-
-Another outstanding question, is what the likely outcome would be, under GNK, in the context of strategising network participants.
-So, while VCG has some explicit consideration of the strategising of individual agents, and LMP is identified to be largely identical to it in the context of large numbers of small players, the consequences of agents strategising under GNK is not considered here.
-As the GNK is not incentive incompatible and also quite complex, this issue constitutes both a major consideration and a difficult question.
-While there does exist some work on similar (but more complex) solution concepts like GNK that are incentive compatible (such as presented by \cite{myerson1,Salamanca2019}) their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
 
 
 %\iffigures
@@ -332,8 +313,63 @@ At a broader level of consideration, it is interesting how perfect competition m
 The question of when and where these coincide, and particularly if they might coincide in the context of electricity networks, was part of the motivation of this research.
 Unfortunately our investigations demonstrated that the most direct application of the GNK value would be expected to fail wider social equality considerations.
 
+
+
+\subsection{Future work and possible extensions}\label{sec:GNK_extensions_discussion}
+
+One primary question is how much the behaviour exhibited in Figure \ref{fig:experiment_table_13} is entirely the result of us using a modified characteristic function, per the M-GNK value (equation \ref{knvalue22}), over the more original characteristic function of the GNK value (equation \ref{knvalue1}).
+In order to investigate this question, the error of using this modification across randomly generated networks was calculated and shown in Figure \ref{fig:performance_graph5}.
+This graph shows the cumulative probability of the difference in payments between the GNK and M-GNK - and shows for instance, that 60\% of participants could expect to receive within 10\% what they would have between GNK and M-GNK values, and that this similarity increases for larger network sizes.
+
+From this graph it is noticed that the GNK and M-GNK values feature similarity which seems to increase with the size of the network under consideration --- although for computational reasons, it is increasingly difficult to confirm for networks with a size greater than 13 nodes.
+This limited observation coincides with expectations that the possible strategic counter-considerations that are discarded by using equation \ref{knvalue22} over equation \ref{knvalue1} become less relevant in the context of larger networks; but such a claim warrants further investigation
+
+Another observation, is that while the GNK remains soluble for networks of less than 13 nodes and the M-GNK value remains soluble for up to 80 node networks (to about 1\% accuracy, as per Figure \ref{fig:performance_graph4}), however these numbers might still be regarded as being too small for real-world electrical network modelling.
+Larger networks are expected to be tractable for the M-GNK value with more computing power and/or execution time, however further methodological improvements may be necessary to make the GNK value (or anything similar to it) capable of bearing on larger and real world networks.
+Some possible avenues of investigation include employing further approximations such as player clustering (such as implemented by \cite{DBLP:journals/corr/abs-1903-10965}), or transforming the problem into a non-atomic form, similar to non-atomic Shapley Value.
+%However, these technical considerations are secondary to the ethical considerations about the desirability of GNK-type solutions, which we consider in the following section \ref{sec:GNK_value_discussion}.
+
+Another outstanding question, is what the likely outcome would be, under GNK, in the context of strategising network participants.
+So, while VCG has some explicit consideration of the strategising of individual agents, and LMP is identified to be largely identical to it in the context of large numbers of small players, the consequences of agents strategising under GNK is not considered here.
+As the GNK is not incentive incompatible and also quite complex, this issue constitutes both a major consideration and a difficult question.
+While there does exist some work on similar (but more complex) solution concepts like GNK that are incentive compatible (such as presented by \cite{myerson1,Salamanca2019}) their investigation and evaluation in the context of electricity networks remain a topic for further investigation.
+
+
+
+\subsection{Conclusion}
+\label{cha:conc}
+
+Throughout this research program we have undertaken an investigation into the space of possible mechanisms for valuing electricity.
+Most particularly, we investigted the space of possible mechanisms which can be bring into account all the possible confluences of electrical system details, as well as all the possible leverages and counter considerations which could play in an idealised negotiation between all parties about such an electricity system.
+A mechanism which considered the unrestricted span of possible considerations and counterconsiderations between electrical system participants and the system, was seen to be an important quality as it is understood that the future smart grid will encompass a host of differing electrical situations with a range of smart devices, and the way in which the value of these devices and the electricity they consume/generate will be determined is in need of an answer.\\
+\\\noindent
+The original research question was:\\
+\-\hspace{1cm}How \textit{should} electricity be valued and traded?\\
+
+We have identified (in Chapter \ref{sec:philosophy}) that such a question is not easy to answer and has strong ethical undertones, making a comprehensively demonstrable answer impossible in principle, but an object of important investigation notwithstanding.
+To investigate, we covered some existing solution concepts (in Chapter \ref{cha:solutions}) such as Nash's axiomatic bargaining, Cooperative game theory topics such as the core and Shapley Value, the VCG mechanism from mechanism design and marginal pricing theory.
+And from this investigation we attempted to take the best features of these concepts and synthesise a genuinely novel solution for the pricing of electrical resources on electricity networks, in Chapter \ref{cha:new_solution}, which we then evaluated at scale in this chapter.
+
+Our new GNK solution is essentially rooted in bargaining perspective, rewarding participants for the advantage they might have in competition with all others, 
+and it was hoped that an idealised bargaining solution like this, would yield the kinds of arrangements that people with divergent interests would freely and naturally negotiate towards.
+In this way, we hoped it would ascribe economic value to electricity resources in the most natural way; however this process ultimately yielded a disappointing result.
+
+% the minimax nature of the bargaining game was only one of a possible ways of modelling the competition between divergent interests, and the result that was obtained violated the principles of euoluntary exchange anyways.
+%In principle, the negative utility imputed under the GNK value was seen to come from the way that the game was modeled, in that if everybody is unilatterally able to choose their power, and if power conservation constraints must be obeyed, then it acts a a lever in gargaining others below utility of zero.
+%This particular dynamic was fundamentally a result of the way that the intereaction between the participants was modelled.
+
+The GNK value extended from the Shapley Value axioms, and as such it inherits the NP-hard computational difficulty associated with the Shapley Value.
+However, through investigation into sampling techniques and in utilising a particular proxy for the minimax-optimisations, we were able to extend the GNK value from being intractable for $\sim 14$ bus nodal networks to being computable for about $80-100$ bus nodal networks, for a desktop computer.
+This was seen as an accomplishment, particularly as if the GNK value were calculated exactly for a 100 sized nodal network it would involve $\sim 2^{100}$ optimisation terms.
+
+Through the process of considering the different ways that the GNK value could be sampled we developed some of our own complicated techniques which proved to be competitive against existing methods for sampling the Shapley Value and hence the GNK value.
+This novel method extended from a consideration of of possible concentration inequality which which could be developed specifically for stratified sampling.
+We developed novel and taylored concentration inequalities for stratefied sampling, and this formed the basis of our new method.
+The development of this new concentration inequality (SEBB) and sampling methodology (SEBM) is detailed in the next chapter.
 In the next chapter we delve into the details of the sampling techniques that were developed and tested throughout this research, particularly the \textsc{SEBM} method in Section \ref{section:SEBB}, which was evaluated as a method to sample the GNK value (alongside others) in Section \ref{sec:scaling}.
-Additionally we provide a final conclusion to our research in Chapter \ref{cha:conc}. 
+
+
+
 
 
 

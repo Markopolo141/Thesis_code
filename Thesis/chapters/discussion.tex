@@ -7,7 +7,7 @@ This section contains discussion of all the parts of this chapter, particularly 
 \item	in subsection \ref{subsection:discussion_EBB} we discuss the nature and effectiveness of our derived EBB from section \ref{section:new_EBB}.
 \item	in subsection \ref{subsection:main_discussion} we discuss the performance of our new SEBM method, in the context of synthetic data
 \item	in subsection \ref{subsection:discussion_shapley} we discuss the performance of our SEBM method in the context of sampling the Shapley Value.
-\item	in subsection \ref{sec:multi} we give indication of future work regarding the extension of SEBB to multidimensional data.
+\item	in subsection \ref{sec:multi} we give indication of future work regarding the extension of SEBB to multidimensional data, and conclude.
 \end{itemize}
 
 
@@ -156,7 +156,7 @@ Conversely, it might also be advisable to run our method with an underestimate o
 
 
 
-\subsection{Future Work: applications of a multidimensional extension}\label{sec:multi}
+\section{Conclusion and Future Work: applications of a multidimensional extension}\label{sec:multi}
 
 It was noticed that our SEBB can be extended to multidimensional data by a simple modification.
 Specifically, instead of considering data that is single-valued, we consider data points that are vectors. 
@@ -219,6 +219,60 @@ The left hand side of the inequality in \eqref{big_equation2} is the square Eucl
 In this context, an example sampling process might consist of sampling to maximally minimise the right hand side of the inequality (similar to our SEBM process, described in Section~\ref{sec:SEBMalgorithm}).
 This formulation can be applied to more involved computational tasks that involve approximating averages over large sets of data with multiple features or auxiliary variables.
 
+Potentially the application of our multi-dimensional extension of the SEBB to a range of tasks (such as neural network minibatch smart sampling) could be quite rewarding.
+
+
+\subsection{Conclusion}
+
+Stratified sampling is a well known example of a statistical process of estimating a population mean by breaking it into strata, and then sampling the mean of each of the strata.
+Our primary investigative question of this chapter was how best to choose samples from the strata to get most accuracy in the final population estimate.
+To do this investigation we considered different means of estimating the error in the final population estimate - these took the form of analytically derived concentration inequalities.
+These concentration inequalities were developed and then the process of sampling to minimise them formed a sampling methodology, which was evaluated.
+
+In the first part of this chapter, Section \ref{sec:sampling_background}, we introduced the problem of stratified sampling, and a few statistical lemmas.
+Afterwards we considered different possible EBBs as a way of bounding the error in the context of stratified random sampling, and for this purpose developed a new EBB, in Sections \ref{section:old_statistics} and \ref{section:new_EBB}.
+This process of using EBBs involved binding EBBs applied to different strata together using union bounds to create a bound on the stratified sample mean error (via Theorems \ref{triangle_theorem1} or \ref{triangle_theorem2}).
+
+From this investigation we learned that it was possible to create stronger bounds for stratified sampling (which dont use as many union bounds as there are strata), which in the next part of this chapter we developed, in Section \ref{section:SEBB}.
+These sampling methodologies were then evaluated on synthetic data sets in Section \ref{section:statistics_results}, and discussed in Section \ref{sec:discussion}.
+
+There are potential future improvements to our concentration inequality and resulting sampling method (SEBB \& SEBM - developed in Section \ref{section:SEBB}), such as potentially:
+\begin{itemize}
+\item	Investigating ways to minimise the computational overhead of the method.
+\item	Possibly modify the method to take advantage of join order process in Shapley Value sampling.
+\item	Or to use more complicated algebra, and less simplification to further tighten the concentration inequality.
+\end{itemize}
+
+Notwithstanding, our concentration inequality (SEBB) gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
+It is complex and taylored specifically to stratified sampling, and performs well in the sampling of synthetic data sets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%In the derivation of the SEBB we primarily utilised Chernoff bounds, however it is possible that stronger bounds can potentially be derived.
+%Particularly optimal uncertainty quantification (OUQ) can result in perfectly tight bounds on concentration, directly by solving for the worst case scenario directly, we are skeptical about how this could be made to apply to stratified sampling particularly, but potentially it is worth investigation.\citep{OUQ1,doi:10.1137/13094712X}
+
+
+
+
+
+%The derivation of our inequality extends from consideration of Chernoff bounds and probability unions in a similar vein to other EBB derivations \citep{Maurer50empiricalbernstein,bardenet2015}.
+%, however we do not argue that our particular concentration inequality is ideal.
+%However, the bounds on the moment generating functions that we developed in Section~\ref{sec:components} use loosening approximations, and hence stronger and/or more representative bounds could be developed at the cost of greater mathematical complexity.
+%Alternatively, an approach utilizing entropic \citep{Boucheron_concentrationinequalities} or Efron-Stein inequalities \citep{efron1981} could result in different and potentially tighter results.
+
+% Full exploration of the potential applications are beyond the scope of this document.
+% However, at present, we are pleased to present our analytic concentration inequality (Equation \ref{big_equation}) as an immediately computable expression and practical method for choosing samples from strata.
 
 
 

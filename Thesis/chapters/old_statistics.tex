@@ -18,7 +18,7 @@ We derive the following two theorems \ref{triangle_theorem1} and \ref{triangle_t
 If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
 If the error in the sample mean of a stratum is bounded by an Empirical Bernstein Bound:
 $\quad \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t $\\
-Then the error in our stratified estimation is probability bounded:
+Then the error in our stratified estimation of the population mean itself is probability bounded:
 $$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/m)\right)\le t $$
 \end{theorem}
 \begin{proof}
@@ -27,14 +27,16 @@ $$ \hat{\mu} = \sum_{i=1}^m\frac{N_i}{\sum_kN_k} \hat{\mu}_i ~~~~~~~\text{and th
 Thence because we can scale (by positive factor) the inside of the EBB inequality (for any $j\in\{1,\dots, m\}$):
 \begin{equation}\label{equation_partial_union1} \p\left(\frac{N_j}{\sum_kN_k}(\hat{\mu}_j-\mu_j) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\right) \le t \end{equation}
 adding identical terms to both sides of the inner inequality gives:
-\begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
+\begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
 now since equation \ref{equation_partial_union1} also holds for any $l\in\{1,\dots, m\}$ other $j$ then:
 $$ \p\left(\frac{N_l}{\sum_kN_k}(\hat{\mu}_l-\mu_l) \ge \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t)\right) \le t $$
 hence by adding terms to both sides of the inner inequality:
-\begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
+\begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
 Applying probability union (lemma \ref{prob_union}) to equations \ref{equation_partial_union2} and \ref{equation_partial_union3} gives:
-$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
-Repeating this process of taking equation \ref{equation_partial_union1} for a new index, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, ultimately gives:
+$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
+We can repeat this process of taking equation \ref{equation_partial_union1} for a new index $q\ne j\ne l$, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, gives:
+$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_q}{\sum_kN_k}Z(n_q,D_q,\hat{\sigma}^2_q,t) +\\\frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l\\i\ne q}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 3t $$
+and so on, and ultimately gives:
 $$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le mt $$
 And scaling $t$ gives result.
 \end{proof}

@@ -40,9 +40,10 @@ An initial sample of two data points from each strata is used to initialise the 
 \item \textsc{EEBB} (Unionised EBBs with our Engineered EBB): The method of sampling to \textit{with} replacement to minimise the probability bound of Theorem \ref{triangle_theorem2} applied with our fitted EBB (Equation \ref{eq:prob_bound})
 \item \textsc{Random} (stratified sampling with random samples from strata): The process of stratified sampling \textit{with} replacement, choosing random numbers of samples from each of the strata.
 \end{itemize}
-Note that the last three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) assume and utilise prior perfect knowledge of the variance of each of the strata, and that for all other methods (where appropriate) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
+We consider that the three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) are built apon the assumption of known variances for the strata, which are supplied to them, so that they may serve as a comparrison with the performance which would be possible for various methods which such information.
+Additionally we note that for all other methods (where appropriate) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
 
-Also note that these methods provide comparisons of different algorithm factors, such as the dynamics of sampling: with and without replacement; with stratification and without; between our method and Neyman sampling, and; with and without perfect knowledge of stratum variances. 
+The differences between these methods provide comparisons of different algorithmic factors, such as the dynamics of sampling: with and without replacement; with stratification and without; between our method and Neyman sampling, and; with and without perfect knowledge of stratum variances. 
 For these methods, we consider the effectiveness of sampling Beta distributed data and for a case of uniform-and-Bernoulli data.
 % Detailed analysis of the results is left to Section~\ref{sec:discussion}.
 

@@ -16,7 +16,22 @@ The moral and ethical side of our question is associated with a branch of moral 
 We begin by acknowledging the ambiguous nature of moral knowledge, and the approach that we take notwithstanding, before addressing some different categories of moral intuitions surrounding the nature of distributive justice.
 Particularly we give brief surveys about ideas of: formal equality, social equality, efficiency, proportionality, and envy-freeness.
 
-\section{A philosophical prelude}
+\begin{itemize}
+\item	in section \ref{sec:philosophical_prelude} we introduce the context of our approach to discussing these philosophical topics
+\item	in section \ref{sec:introducing_moral_factors} we introduce a series of moral factors that may bear relevance to a solution, particularly:
+\begin{itemize}
+\item	in subsection \ref{sec_philosophy_moral_equality} we introduce and talk about the different ideas about moral equality before considering two specific formulations
+\item	in subsection \ref{sec:formal_equality} we consider the notion of formal equality, that of identical or equal treatment
+\item	in subsection \ref{sec:philosophy_social_freedoms} we consider the articulation of equality with respect to social freedoms in a broad sense
+\item	in subsection \ref{sec:philosophy_efficiency} we contrast against the ideas of equality by considering differing ideas about utilitarian efficiency
+\item	in subsection \ref{sec:reference_points} we consider the ideas of fairness by proportionality with respect to various possible normative reference points
+\item	in subsection \ref{sec:envy_free_philosophy} we consider the idea of justice defined by envy-freeness in society
+\item	in subsection \ref{sec:philosophy_environmentalism} we briefly consider some philosophical considerations of import regarding climate change and other environmental priorities
+\end{itemize}
+\item	in section \ref{sec:philosophy_conclusion} we conclude and summarise the discussion before introducing the next chapter where these ideas are rendered in mathematics.
+\end{itemize}
+
+\section{A philosophical prelude}\label{sec:philosophical_prelude}
 
 We begin by noting there is a long history of philosophical scepticism about the nature of moral knowledge and judgements, and Distributive Justice is not exceptional in this regard.
 
@@ -43,7 +58,7 @@ While we must acknowledge the moral ambiguity inherent in the question of electr
 
 Let us begin.
 
-\section{Introducing moral factors about distributive justice}
+\section{Introducing moral factors about distributive justice}\label{sec:introducing_moral_factors}
 
 The choice of centralised market structures and processes can be seen as a choice between methods of allocating resources between multiple parties in a system based on the parties interaction within it.
 In this context the choice of the market structures and also the resultant likely distribution of resources can be viewed as being morally/socially desirable or undesirable based on a number of factors.
@@ -53,7 +68,7 @@ What constitutes a desirable distribution of resources?
 
 Throughout time there have been an array of philosophers who have discussed ideas surrounding the moral distribution of resources and capital; and one of the major ideas surrounding the ethics of distribution is \textit{Equality}.
 
-\subsection{Moral equality}
+\subsection{Moral equality}\label{sec_philosophy_moral_equality}
 
 \begin{displayquote}
 ``A common characteristic of virtually all the approaches to the ethics of social arrangements that have stood the test of time is to want equality of \textit{something}... They are all `egalitarians' in some essential way ... To see the battle as one between those `in favour of' and those `against' equality (as the problem is often posed in the literature) is to miss something central to the subject."\cite[Chapter 1]{18084} 
@@ -139,7 +154,7 @@ Notwithstanding, formal equality can be seen as a basic doctrine that ascribes v
 
 In all developments in this thesis, the principle of formal equality - that individuals are treated equally but-for specific factors - is assumed.
 
-\subsection{Equalities of social freedoms}
+\subsection{Equalities of social freedoms}\label{sec:philosophy_social_freedoms}
 
 \begin{displayquote}
 ``I want to emphasise what is, on my view, the most important object of egalitarian distribution, and that is \textit{power}. Of course power is not something which can be parcelled up and shared out like a commodity but we can properly talk of `the distribution of power' and this is, more than anything, the determinant of whether a community is authentically cooperative.'' \citep{TheSocialBasisofEquality:1998}
@@ -278,7 +293,7 @@ It is also worth noting that these decisions about normative reference points ca
 %It is also sometimes witnessed that what people morally think should/ought happen is associated with what they \textit{will} to be.\cite{doi:10.1080/13869795.2016.1212395, sep-moral-motivation, LITZ2009695}
 
 
-\section{The concept of envy-freeness}
+\subsection{The concept of envy-freeness}\label{sec:envy_free_philosophy}
 
 \begin{displayquote}
 ``... an allocation is equitable if and only if each person in the society prefers his consumption bundle to the consumption bundle of every other person in the society.'' \cite[Chapter 4]{foley_thesis}
@@ -297,10 +312,10 @@ Envy free allocations may exist or not depending on many conditions, such as whe
 However even in the continuous case, although pareto-efficient and envy-free are guaranteed to exist in some circumstances \cite{WELLER19855,COLE2021105207}, they may be prohibitive to compute, see for instance the problem of envy free cake cutting for discontinuous slices and for arbitrary number of players was solved by Aziz et.al \cite{DBLP:conf/focs/AzizM16} requiring as many as $n^{n^{n^{n^{n^n}}}}$ operations.
 There are also situations with mixed divisible and indivisible goods which are not nessisarily more simple.\cite{BEI2021103436}
 In recourse to these problems, some alternative measures have been adopted and investigated, such as the various conceptions of envy-minimisation,
-in these conceptions some aggreagate envy criteria are possible \cite{10.1145/3219166.3219179,10.1145/988772.988792,NGUYEN201454}, for instance: 
+in these conceptions some aggreagate envy criteria are possible \cite{10.1145/3219166.3219179,10.1145/988772.988792,NGUYEN201454}, for instance if $u_i(\pi_j)$ is the utility player $i$ would recieve from recieving player $j$'s resource bundle, and if $I$ is the indicator function then: 
 \begin{itemize}
-\item the number of envious individuals, 
-\item the number of envy-relations, 
+\item the number of envious individuals, $\sum_iI[\sum_jI[u_i(\pi_j)>u_i(\pi_i)]>0]$
+\item the number of envy-relations, $\sum_{i,j\ne i}I[u_i(\pi_j)>u_i(\pi_i)]$
 \item the maximum envy-difference $\max_{i,j}\{\max\{0,u_i(\pi_j)-u_i(\pi_i)\}\}$ 
 \item the maximum envy-ratio defined by how much a player values the allocation of another over their own $\max_{i,j}\{1,\frac{u_i(\pi_j)}{u_i(\pi_i)}\}$
 \end{itemize}
@@ -315,7 +330,37 @@ Another more relaxed notion is that of envy-freeness prior to a random assignmen
 We will consider the application and implications of the concept of envy-freeness in the context of electricity markets in Section \ref{sec:envy_free_systems}.
 
 
-\section{A summary on our philosophy of distributive justice}
+
+\subsection{Broader environmental considerations}\label{sec:philosophy_environmentalism}
+Additional to the topics thus far considered in this chapter, there is a broader context and special considerations regarding environmentalism and how it intersects with energy systems and policy.
+Environmental considerations focus on the externalities of decisions and interractions on third parties, particularly of importance in the energy context, is the production and emission of greenhouse gasses (GHG) into the atmosphere causing anthropogenic climate change, which is expected to cause harm to human life and property in the comming decades.\citep{ipcc_report_2022}
+
+The emission of GHG causing harm to the environment and damage to the lives of others, is an example of an externality in the context of the electricity system, and there is the question of how and-or if such externalities should be accounted for in an electricity context.
+
+There is, for instance, the question about how (and how much) the wellbeing of future generations be accounted and considered relative to the wellbeing of thoes presently living. \citep{sep-justice-intergenerational} Or how should international effort and compensation costs be divided between nation states today. \citep{10.1086/382247} 
+However more specific energy considerations exist, particularly if electricity market structures are the best place for such externalities to be accounted for.
+Particularly, a uniform tax or trading system on GHG polution across industries and sectors would be more consistent with handling the externality holistically.
+Contrastingly, there are some who have considered that the policies of `resource neutrality' evident in energy systems may also an issue. \citep{climate_change1}
+
+As an example, Australia's National Energy Objective (NEO) is part of Australia's National electricity law (NEL) is an example of a resource neutral policy in that it does not prioritise particular forms of generation or consumption over others, as stated: ``to promote efficient investment in, and efficient operation and use of, electricity services for the long term interests of consumers of electricity with respect to: price, quality, safety and reliability and security of supply of electricity; and the reliability, safety and security of the national electricity system.''
+
+At issue is that the long-term interests of consumers may be broader than simply reliable and cheap electricity, and that such policy directives have the potential to focus attention on mitigating shorter term risks to energy reliability (such as may be produced by the integration of renewables) rather than focus on the actual interests of people in the longer term (such as energy consequences, as may be brought about by GHG driven climate change and its political rammifications).
+
+The question is to what extent should electricity market systems prioritise, by design, renewable generation over GHG emitting technologies.
+By considering this question, we see that ideally a comprehensive answer to the question of how electricity should be valued and traded (our research question) would hopefully be adaptive and tunable to such politically relevent priorities.
+As considered in the introductory chapter, Sections \ref{sec:intro_part1}-\ref{sec:intro_summary}, we outlay the circumstance that existing renewable integration has potential to create issues with electricity affordability and reliable access.
+From this, rethinking electricity market systems to ammeliorate these issues is certaintly consistent with resource-neutral energy directives, however it is also of interest to consider systems which prioritise renewable generation (and compensation for renewable generation) atleast as much as on a neutral basis.
+Furthermore, considering the design systems to support renewable generation without sacrificing other qualities (such as reliability and safety, etc) is of interest anyway, particularly as the intermittancy of renewable generation is a primary objection against action on climate change anyway. \citep{climate_change2}
+
+There is much that could be further said about Climate Change and energy policy that is genuinely worth saying and beyond our current scope of investigation.
+This is true, as our focus is on the more abstract and generative question about how electricity should be valued and traded, on a broad level, as might flexibly incorporate these and other relevent political factors.
+
+
+
+
+
+
+\section{A summary on our philosophy of distributive justice}\label{sec:philosophy_conclusion}
 
 
 There is wide range of perspectives on distributive justice which we can only begin to survey in this chapter.
