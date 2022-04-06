@@ -59,7 +59,7 @@ The fact that the variances of the strata are the only parameters determining th
 However this mode of explanation is perhaps the underlying reason for the similarity in performance of many of the other methods as well, particularly that after sufficiently many samples have been taken the sample means of all of the strata become Gaussian distributed and the performance of the methods then depend primarily on how effectively they estimate the variances of the strata and then allocate accordingly.
 Perhaps in our Beta synthetic data there was not sufficient spread of data variances for it to make significant difference how effectively this variance estimation and allocation was done.
 
-%One of the most remarkable inferences from the data is just how very readily Central Limit Theorem dynamics emerges, from Figure \ref{fig:central_limit_theorem} we can see that the sample error of uniformly distributed data converges almost perfectly to a gaussian distribution even in just 4 samples.
+%One of the most remarkable inferences from the data is just how very readily Central Limit Theorem dynamics emerges, from Figure \ref{fig:central_limit_theorem} we can see that the sample error of uniformly distributed data converges almost perfectly to a Gaussian distribution even in just 4 samples.
 
 Conversely the Bernoulli-uniform synthetic data was specifically designed to create a significant spread in variance between the strata.
 And the results (plotted in \ref{biggraph3}) reveal the design to amplify the detriment in stratified sampling that uncertainty about the variances would yield.
@@ -244,7 +244,7 @@ There are potential future improvements to our concentration inequality and resu
 \end{itemize}
 
 Notwithstanding, our concentration inequality (SEBB) gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
-It is complex and taylored specifically to stratified sampling, and performs well in the sampling of synthetic data sets.
+It is complex and tailored specifically to stratified sampling, and performs well in the sampling of synthetic data sets.
 
 
 

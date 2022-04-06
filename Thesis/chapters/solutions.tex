@@ -51,7 +51,7 @@ $\quad d_1 = 6-6.5 = -0.5 \quad\quad d_2 = 8-8 = 0\quad\quad d_3 = 4-6.5 = -2.5 
 \end{example}
 
 \subsection{Discussion about VCG}
-The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are positively compensated, and if a player's influence detracts from the utility of others then they are peanalised in proportion.
+The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are positively compensated, and if a player's influence detracts from the utility of others then they are penalised in proportion.
 Since the set of possible outcomes $X$ are arbitrary it is possible to consider the application of the VCG mechanism in a wide variety of contexts.
 However VCG has some particular advantages and disadvantages.
 The first and most notable property is that VCG mechanisms have been demonstrated by \cite{roberts1979characterization, Lavi2008} to be \textit{truthful} or \textit{incentive compatible}, in the sense that that no single player can positively gain by misreporting their valuations in the event that all other players are truthfully reporting their valuations, and in the event that the utility of the agents is \textit{quasilinear}.
@@ -71,14 +71,14 @@ Although VCG has a very positive property by being incentive compatible, it has 
 \begin{itemize}
 \item	The fact that VCG's truthfull equilibrium is a weak-equilibrium, and a player can misreport their valuations to harm others
 \item	If generating or submitting a valuation in a VCG mechanism incurs some cost, over not participating, then it is no longer individually rational
-\item	If the externalities and social optima $x^*$ are not solved exactly, but only aproximately, then this will destroy the truthfullness property of VCG.
-\item	If any players are budget-constrained (eg. they cannot afford to pay their true valuations for particular outcomes), then the truthfullness property is destroyed.
+\item	If the externalities and social optima $x^*$ are not solved exactly, but only approximately, then this will destroy the truthfulness property of VCG.
+\item	If any players are budget-constrained (eg. they cannot afford to pay their true valuations for particular outcomes), then the truthfulness property is destroyed.
 \item	If VCG mechanism does succeed in incentivising players to submit their true valuations, this is potentially has privacy and information disclosure issues.
-\item	VCG is not completely immune from the possibility of cheating: by groups of players, by players submitting multiple bids under many names, or players who know that strategies in a series of VCG auctions may not be incentive compatable. etc.
+\item	VCG is not completely immune from the possibility of cheating: by groups of players, by players submitting multiple bids under many names, or players who know that strategies in a series of VCG auctions may not be incentive compatible. etc.
 \item	VCG may (depending on context) also have higher computational complexity than other mechanisms.
 \end{itemize}
 
-Though some of these drawbacks and criticisms can be ammeliorated, the VCG mechanism is widely discussed as potential mechanism in various real-world contexts, as we consider in section \ref{sec:vcg_real_world1}.
+Though some of these drawbacks and criticisms can be ameliorated, the VCG mechanism is widely discussed as potential mechanism in various real-world contexts, as we consider in section \ref{sec:vcg_real_world1}.
 
 As VCG has positive and negative features, it is possible to ask if there are similar mechanisms which avoid some of the negative features.
 But it is unfortunate, that some of these properties (incentive compatible, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
@@ -121,10 +121,10 @@ where $C_{-i}$ is some function that is independent of $i$'s reported preference
 In this context it is notable that the VCG mechanism is a special case of a Groves mechanism \citep{10.2307/1914085} where $C_{-i}= \max_{x'\in X}\sum_{j\ne i}v_j(x')$.
 Groves mechanisms are a class of mechanisms which include VCG, and are categorically incentive compatible. 
 
-The challenge therefore is to derive optimal functions $C_{-i}$ which minimise the budget surplus/defecit while maintaining individual rationality in the context of restricted player valuations.
+The challenge therefore is to derive optimal functions $C_{-i}$ which minimise the budget surplus/deficit while maintaining individual rationality in the context of restricted player valuations.
 For this purpose there has been significant discussion about deriving these $C_{-i}$ functions, also known as `VCG redistribution' rules.
 
-One of the first to propose such a rule was \cite{Cavallo:2006:ODM:1160633.1160790}, who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be naturally assumed that any party has a utility of zero if they do not recieve the physical object.
+One of the first to propose such a rule was \cite{Cavallo:2006:ODM:1160633.1160790}, who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be naturally assumed that any party has a utility of zero if they do not receive the physical object.
 This redistribution was possible primarily because there exists a simple constraint on player valuations - ie. not receiving the object has utility of zero.
 Similarly in other situations where there are restrictions on the players' valuation over the outcomes, there is the potential for deriving different VCG redistribution rules.
 
@@ -134,12 +134,12 @@ However there are some difficulties with this approach, particularly it is known
 
 Another avenue of averting the impossibility result is to sacrifice efficiency of outcome selection.
 One of the simplest such schemes is given by \cite{Faltings2004b, Boi_faltings_patent}
-who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups.
+who proceeds about the process of designing a non-Pareto optimal VCG mechanism by splitting the population into two groups.
 In this scheme, the VCG outcome from the first group is selected irrespective of the preferences in the second group and where the second group (the `sink') receives the budget surplus from the VCG mechanism applied to the first group.
 This mechanism constitutes a budget balanced VCG-type mechanism which can be made more regular (suggested by \cite{10.1007/978-3-642-25510-6_14}) by randomly selecting an individual as the `sink', and splitting the budget surplus between the parties evenly without knowledge of who will be selected.
 
-This kind of method of developing non-pareto optimal VCG mechanisms has been the subject of investigation by \cite{NATH2019673}, and the process is proven to necessarily need a `sink', although this such a sink can be randomly selected.
-Notwithstanding it is expected that such a mechanism of randomly assigning a sacrificial `sink' could potentially be ethically dangerous; potentially falling afoul of Formal Equality ideas (see section \ref{sec:formal_equality}) as one member (or group of members) would be randomly singled out to equalise the budget surplus/defecit.
+This kind of method of developing non-Pareto optimal VCG mechanisms has been the subject of investigation by \cite{NATH2019673}, and the process is proven to necessarily need a `sink', although this such a sink can be randomly selected.
+Notwithstanding it is expected that such a mechanism of randomly assigning a sacrificial `sink' could potentially be ethically dangerous; potentially falling afoul of Formal Equality ideas (see section \ref{sec:formal_equality}) as one member (or group of members) would be randomly singled out to equalise the budget surplus/deficit.
 
 
 %\subsubsection{switching to Baysean incentive compatability}
@@ -158,8 +158,8 @@ Notwithstanding it is expected that such a mechanism of randomly assigning a sac
 
 \subsection{Applications of VCG to electricity systems}\label{sec:vcg_real_world1}
 
-VCG has properties that make it attractive from from a theoretical standpoint, particularly its incentive compatability property brings the promise of alleviating the cost and potential system instability inherant between strategising agents that can be manifest in cases of market collapse.
-Additionally it has a straightforward ethical interpertation, that is, as a policy of compensation for externality.
+VCG has properties that make it attractive from from a theoretical standpoint, particularly its incentive compatability property brings the promise of alleviating the cost and potential system instability inherent between strategising agents that can be manifest in cases of market collapse.
+Additionally it has a straightforward ethical interpretation, that is, as a policy of compensation for externality.
 These advantages have led VCG to be often discussed, but its weaknesses have led to its being reportedly seldom implemented in practice, including in the context of electricity networks \citep{Ausubel2006,FABRA200272}.
 
 In these discussions the primary difference between proposals of VCG application is the context of the events\&bids to which it is applied.
@@ -196,7 +196,7 @@ Notwithstanding it is a possible scheme for the trading of electricity and elect
 One of the most central features about VCG, is that it is one of the most direct expressions of marginal payments - in that each participant is payed the marginal difference their presence causes to the well-being of the other participants in a utility maximising process.
 This marginal difference consideration is shared by two other solutions of this chapter, particularly Locational Marginal Pricing (LMP) (section \ref{sec:solutions_LMP}) and Shapley Value (section \ref{subsec:the_shapley_value}).
 
-One of the most notable qualities of VCG is that when it is scaled up to large numbers of participants (and no specific participants are particularly influential) then VCG often limits to another solution concept called Locatinal Marginal Pricing, which often is budget balanced --- see \cite{NATH2019673, 8430852}.
+One of the most notable qualities of VCG is that when it is scaled up to large numbers of participants (and no specific participants are particularly influential) then VCG often limits to another solution concept called Locational Marginal Pricing, which often is budget balanced --- see \cite{NATH2019673, 8430852}.
 
 
 \section{Locational marginal pricing}\label{sec:solutions_LMP}
@@ -221,7 +221,7 @@ However, the way in which these factors have been seen to influence (or define) 
 
 In the history of economic thought, there was some general idea that the economic value of something (and hence its normal market price) should, in some way, be related to its usefulness in fulfilling human needs (however fickle or not) as things which are utterly useless seldom fetch any price.
 %Even so far as to categorising into numbered classes different goods depending on their relation to satisficing needs (eg. \cite[Chapter 1]{mengerprinciples}).
-%Such as where different needs (eg. hunger) require first-order goods (eg. bread) to satisfy them, and thoes require second-order goods to provide (eg. flour to make bread), and so on. 
+%Such as where different needs (eg. hunger) require first-order goods (eg. bread) to satisfy them, and those require second-order goods to provide (eg. flour to make bread), and so on. 
 But, above this, there was a difficulty explaining how it was that things which were most useful to satisfying needs often had little economic value, and things which were more useless were sometimes most economically valuable. This apparent contradiction is known as the water-diamond paradox, best put by Adam Smith:
 
 %\begin{displayquote}
@@ -315,24 +315,24 @@ And that although LMP is like VCG in that it is ultimately not budget balanced, 
 
 In the historical context of power systems, one of contested and contrasted options in electricity market structure was Discriminatory/Pay-As-Bid-Pricing and Uniform/Marginal Pricing.\citep{wolfram1999electricity,comparrison1,HAGHIGHAT2012350,griffin2009electricity,su13063429,FABRA200272}
 In the electricity market context, generator companies `bid' into a system an offer consisting of what amount of power/s they can supply and at what amount they expect to be paid for the respective dispatch.
-This can occur in a day-ahead market structure, where a central and Independant System Operator (ISO) collects bids and accepts them to meet anticipated demand the following day.
+This can occur in a day-ahead market structure, where a central and Independent System Operator (ISO) collects bids and accepts them to meet anticipated demand the following day.
 The primary question between Pay-As-Bid and Marginal Pricing is if the generator companies who's bids are accepted should simply be paid their monetary bid amount, or should directly be paid the cost of the marginal unit of power dispatched.
 
 While it may initially seem as if Pay-As-Bid pricing would be most reasonable, it is demonstrated that strategic equilibrium in the bidding of generator companies should ideally yield the respective Marginal Pricing values anyway (as already indicated in section \ref{subsec:marginal_price_sketch} and demonstrated in \cite{klemperer1999auction}).
 In this way, the question between Pay-As-Bid and Marginal Pricing is if the market operator should shortcut the strategising of generator companies, and thus afford the marginal prices directly.
 
-This discussion between Pay-As-Bid-Pricing and Marginal Pricing was mostly discussed throughout the deregulation process of electricity networks that occured in many countries throughout the 80's to the 2000's \citep{deregulation}, and was also reconsidered in the aftermath of the california electricity crisis. \citep{california1,KAHN200170}
+This discussion between Pay-As-Bid-Pricing and Marginal Pricing was mostly discussed throughout the deregulation process of electricity networks that occurred in many countries throughout the 80's to the 2000's \citep{deregulation}, and was also reconsidered in the aftermath of the California electricity crisis. \citep{california1,KAHN200170}
 However, in real terms, Marginal Pricing of some sort is more the commonly implemented rule, as opposed to Pay-As-Bid, and a centralised Marginal Pricing rule is a direct precursor to a locationally variant Marginal Pricing rule - that is, Locational Marginal Pricing (LMP).
 
 However with the implementation of LMP, there are additional factors that may need to be addressed in practical settings, such as:
 \begin{itemize}
 \item	 LMP schemes can be considered to various levels of refinement, such as between zonal and nodal levels \citep{WANG2015695,zonal} where the degree of refinement and the boarders between zones potentially have practical and social consequences, and influence computational difficulty in the calculation.
-\item	LMP is inherantly built apon an electrical network optimisation scheme which potentially includes various elements of complexity. For instance, LMP prices can be built apon a DC approximation model of electricity flow (it computationally the more simple), but in principle various AC models (and their relaxations) are possible candidates. \citep{Wang1}
-\item	LMP method does not directly incorporate or account for discontinuous variables. This fator is most notable in the Unit Commitment (UC) stage of generators scheduling to meet demand, as generator state cannot always be continuous (such as on/off state). For these discontinous parametes, LMP prices can be suplimented by side payment methods to support the dispatch of power. There exists discussions about different  schemes to calculate and organise these sidepayments. \citep{8871218,johnson1997equity}
+\item	LMP is inherently built upon an electrical network optimisation scheme which potentially includes various elements of complexity. For instance, LMP prices can be built upon a DC approximation model of electricity flow (it computationally the more simple), but in principle various AC models (and their relaxations) are possible candidates. \citep{Wang1}
+\item	LMP method does not directly incorporate or account for discontinuous variables. This factor is most notable in the Unit Commitment (UC) stage of generators scheduling to meet demand, as generator state cannot always be continuous (such as on/off state). For these discontinuous parameters, LMP prices can be supplemented by side payment methods to support the dispatch of power. There exists discussions about different  schemes to calculate and organise these side-payments. \citep{8871218,johnson1997equity}
 \item	Locational Marginal Prices vary over time and between zones/nodes of the network which are subject to congestion and whereby congestion rents are extracted. These congestion rents need to be redistributed and secondary markets may be implemented for these as a consequence, notably Financial Transmission Rights (FTR) auction processes. 
 Financial Transmission Rights are financial instruments which ISOs offers to generator companies to hedge against LMP volatility \citep{ftr_article1}, these FTRs then alter the pricing landscape in electricity network context which then has potential secondary effects. \citep{WU2022121893}
-\item	LMP is static for a single timeframe and is not completely incentive compatable, and these factors yield real world strategising in electricity markets \citep{hu2005empirical,dungey2018strategic}, and this is most notably true around the mechanism of revising bids or `rebidding', over a finite time horizon \citep{8054716}.
-\item	LMP is tacitly bassed on full and static information, and although there is some attempt to integrate uncertainty into the marginal price mechanism itself \cite{9299487,8910409}, there is a broader discussion about different ways to accommodate uncertainty from historical data into the design and operation of electricity systems generally \citep{en15030825}. In-practice the value of short-term demand/supply uncertainty and imbalance is not reflected in Locational Marginal Prices, but can be addressed via secondary ancillary support markets - such as providing frequency stability.\citep{ELA201651}
+\item	LMP is static for a single timeframe and is not completely incentive compatible, and these factors yield real world strategising in electricity markets \citep{hu2005empirical,dungey2018strategic}, and this is most notably true around the mechanism of revising bids or `rebidding', over a finite time horizon \citep{8054716}.
+\item	LMP is tacitly based on full and static information, and although there is some attempt to integrate uncertainty into the marginal price mechanism itself \cite{9299487,8910409}, there is a broader discussion about different ways to accommodate uncertainty from historical data into the design and operation of electricity systems generally \citep{en15030825}. In-practice the value of short-term demand/supply uncertainty and imbalance is not reflected in Locational Marginal Prices, but can be addressed via secondary ancillary support markets - such as providing frequency stability.\citep{ELA201651}
 \end{itemize}
 
 These considerations extend primarily from there being factors (discontinuous, diachronic, probabilistic, etc.) that are outside of the Marginal Pricing calculus that cannot (or are not often, or easily) incorporated, thus adding to the complexity of LMP in real-world markets.
@@ -672,36 +672,34 @@ In the following Chapter \ref{cha:new_solution} we explore this question by deve
 %It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
 
 
+
+
 \section{Envy-Free systems}\label{sec:envy_free_systems}\label{sec:envy_free_solutions}
 
-In Section \ref{The concept of envy-freeness} we introduced the concept of Envy-freeness at a conceptual level; Envy freeness is a general condition of allocation where every person prefers their own bundle of allocated resources to that allocated to everyone else.
-However there are multiple questions in-practice in allocating resources in an Envy-free manner, and one of the primary questions is what the bundles of resources are.
+In Section \ref{The concept of envy-freeness} we introduced the concept of envy-freeness at a conceptual level; envy-freeness is a general condition of allocation where every person prefers their own bundle of allocated resources to that allocated to everyone else.
+However there are multiple questions in-practice in allocating resources in an envy-free manner, and one of the primary questions is what the bundles of resources are.
 
-In the most simple case, that of the simple divisible homogeneous good that is valued monotonically by all players, the only envy-free allocation is an equal allocation of the good between all particiants, which is not nessiarily an outcome that maximises utilitarian efficiency, but potentially straightforward to implement and has an obvious egalitarian appeal. \cite{FEIGE2014305}
-Adding transferrable utility transactions to the bundles allows envy-free allocation of equal utilities to all participants.
+In the most simple case, that of the simple divisible homogeneous good that is valued monotonically by all players, the only envy-free allocation is an equal allocation of the good between all participants, which is not neurally an outcome that maximises utilitarian efficiency, but potentially straightforward to implement and has an obvious egalitarian appeal. \cite{FEIGE2014305}
+Adding transferable utility transactions to the bundles allows envy-free allocation of equal utilities to all participants.
 
-For practical purposes, the bundles of resources can include more interesting elements, for instance, in the context of the supply of homogenious Electricity to conumers, adding uncertainty over the supply creates more complex case, where \textit{ex-ante} envy-freeness can be considered.\cite{DBLP:conf/atal/BurmannGR20}
+For practical purposes, the bundles of resources can include more interesting elements, for instance, in the context of the supply of homogeneous Electricity to consumers, adding uncertainty over the supply creates more complex case, where \textit{ex-ante} envy-freeness can be considered.\cite{DBLP:conf/atal/BurmannGR20}
 Or as another example the authors of \cite{7377110} consider envy free allocations in the context of selling homogeneous electricity surplus, together with a convex pressure to sell parameter $\alpha$ per player.
 Another electricity example application of envy-free concepts is in the allocation and evaluation of load-shedding algorithms \cite{10.1007/s10458-019-09428-8} where maximum envy difference is considered as a target for minimisation and a metric of evaluating performance.
 In these contexts optimising for envy-freeness can impart utilitarian social cost, the so called `price of envy-freeness' \cite{DBLP:journals/ior/BertsimasFT11}.
 
-In these these and other electricity contexts, the envy-freeness condition can act as a constraint on possible allocations reducing them to a set of consitent possibilities, Then there is a secondary question about which of these is most appropriate to be implemented. Such as (per previous examples) may be pareto efficient, utility maximising, or maximising the wellbeing of the worst off; particularly, there is an extant body of literature examining pareto-efficient envy-free allocation (PEEF) \cite{WELLER19855,COLE2021105207,VARIAN197463},
+In these these and other electricity contexts, the envy-freeness condition can act as a constraint on possible allocations reducing them to a set of consistent possibilities, Then there is a secondary question about which of these is most appropriate to be implemented. Such as (per previous examples) may be Pareto efficient, utility maximising, or maximising the wellbeing of the worst off; particularly, there is an extant body of literature examining Pareto-efficient envy-free allocation (PEEF) \cite{WELLER19855,COLE2021105207,VARIAN197463},
 
-Another dimension of envy-free allocation in practice, is the degree to which the respective envy-free allocation is truthfull or \textit{incentive compatable} for the participants.
+Another dimension of envy-free allocation in practice, is the degree to which the respective envy-free allocation is truthful or \textit{incentive compatible} for the participants.
 The consideration of true strategy-proof envy-freeness was first considered in the context of cake-cutting \cite{CHEN2013284}, but further investigation has established several restricted impossibility proofs surrounding the concept under various conditions \cite{10.5555/3172077.3172396,10.1007/978-3-319-13129-0_1,10.5555/2891460.2891537}
 A secondary question is thus, how likely are envy-free allocation mechanisms likely to perform under strategising agents, and then specifically in such conditions as may be present in electricity contexts.
 
-Another dimension is which specific conceptiion of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{The concept of envy-freeness}), or how should envy-relations be considered between resource bundles and consumer which by happenstance cannot feasibly consume them, should measures be envy-free or only envy-minimising and if-so at what cost to social or utilitarian efficiency.
+Another dimension is which specific conception of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{The concept of envy-freeness}), or how should envy-relations be considered between resource bundles and consumer which by happenstance cannot feasibly consume them, should measures be envy-free or only envy-minimising and if-so at what cost to social or utilitarian efficiency.
 In this way there is a range of social possibilities in designing envy-free systems in practice.
 
 Unfortunately, at this stage, there is no well established singular way of trading resources such as electrical energy that is envy-free, quite as much as envy-freeness is a desirable property sometimes witness in various mechanisms that are sometimes discussed in an electricity context.
-An implementation of the envy-free condition in electricity systems may or may not have other advantages and drawbacks, such as incentive compatability, budget-balance, Pareto-efficiency, and may or may not be computable and scalable to the sizes of realistic networks (particularly as computation difficulty is potential drawback, as identified in section \ref{sec:envy_free_philosophy}).
+An implementation of the envy-free condition in electricity systems may or may not have other advantages and drawbacks, such as incentive compatibility, budget-balance, Pareto-efficiency, and may or may not be computable and scalable to the sizes of realistic networks (particularly as computation difficulty is potential drawback, as identified in section \ref{sec:envy_free_philosophy}).
 
-%However the primary issue with envy freeness in this thesis, is that envy-freeness is a condition which is sometimes less than inspiring in its application.
-%Particularly consider, if the bundle of goods under consideration is simply the volume of electricity consumed, and all participants value more electricity positively, then the only envy-free allocation, is that everyone recieves the same volume.
-%Alternatively, if the money that is transacted is part of the bundle, such that electricity\&money are considered together then there are a range of envy-free allocations, such as the participant which values the electricity the most recieving it and paying money equal to the value of the next most desiring - a result which could easily be established by an auction anyway.
 
-%Additionally, and most notably determental for its treatment in this thesis, is that envy free allocations over divisible resources which are valued positively, result in uniform distributions.
 
 
 \section{Comparison \& summary}

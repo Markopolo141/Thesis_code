@@ -77,7 +77,7 @@ The remedy is to take the expected outcome on a coin-flip on who chooses actions
 
 The resulting outcome we call the \textit{Generalized Neyman and Kohlberg Value} or the \textit{GNK value} for short, 
 as Harsanyi's solution was also axiomatically derived by \cite{value2,KOHLBERG2018139}.
-This solution concept is shown to apply for all transferable utility (TU) generalised non-cooperative games, and directly equivalent to the Nash bargaining with endogenous disagreement point under transferrable utility (TU) between two players (such as per section \ref{sec:nash_bargaining_exogenous}, as in the example in that section).
+This solution concept is shown to apply for all transferable utility (TU) generalised non-cooperative games, and directly equivalent to the Nash bargaining with endogenous disagreement point under transferable utility (TU) between two players (such as per section \ref{sec:nash_bargaining_exogenous}, as in the example in that section).
 
 The GNK value is thus flexible enough to extend to many contexts, but we focus particularly on the specific case of allocating monetary payments over Optimal Power Flow (OPF) instances under the DC approximation - as we will explain.
 
@@ -219,7 +219,7 @@ It also shares a conceptual similarity with \cite{aumann1961core}'s $\alpha$ and
 \begin{equation}\label{knvalue3}v_m(S) = \max_{x\in A^S}\min_{y\in A^{N\setminus S}} \sum_{i\in S} u_i(x,y).\end{equation}
 In this way the GNK value can be seen as a conceptual continuation of historic solution concepts, and can be judged according to how well it derives outcomes in application contexts.
 
-As a simple example demonstration, it is possible to see how the GNK value is identical to Nash bargaining in the context of transferrable utility games (such as in the example matrix game \ref{eq:example_game1} of section \ref{subsec:nash_bargaining_endogenous}), we calculate all the terms $v(S)$ for coalitions of players $1$ and $2$, particularly:
+As a simple example demonstration, it is possible to see how the GNK value is identical to Nash bargaining in the context of transferable utility games (such as in the example matrix game \ref{eq:example_game1} of section \ref{subsec:nash_bargaining_endogenous}), we calculate all the terms $v(S)$ for coalitions of players $1$ and $2$, particularly:
 
 \begin{align*}
 v(\{1,2\})=&\max\max\begin{bmatrix}3 & -3\\ -3 & 3\end{bmatrix}=3\\
@@ -230,15 +230,15 @@ v(\emptyset)=&-\max\max\begin{bmatrix}3 & -3\\ -3 & 3\end{bmatrix}=-3\\
 From this:
 $$ \varphi_1(\langle N,v\rangle)=\frac{1}{2}(v(\{1,2\})+v(\{1\}))=\frac{1}{2}(3+1)=2 $$
 $$ \varphi_2(\langle N,v\rangle)=\frac{1}{2}(v(\{1,2\})+v(\{2\}))=\frac{1}{2}(3-1)=1 $$
-Which matches exactly the result in section \ref{subsec:nash_bargaining_endogenous}. In section \ref{subsec:nash_bargaining_endogenous} we considered that the minimax in the payoff advantage matrix (ie. $d$ in that section) was the nash equilibrium point of threat in bargaining between the players in choosing a subsequent point on the pareto frontier (see Figure \ref{fig:graph1_utilities}) that divides the maximum possible sum revenue (ie $s$ in that section).
+Which matches exactly the result in section \ref{subsec:nash_bargaining_endogenous}. In section \ref{subsec:nash_bargaining_endogenous} we considered that the minimax in the payoff advantage matrix (ie. $d$ in that section) was the nash equilibrium point of threat in bargaining between the players in choosing a subsequent point on the Pareto frontier (see Figure \ref{fig:graph1_utilities}) that divides the maximum possible sum revenue (ie $s$ in that section).
 The GNK value also directly encodes this same logic as $v(\{1\})=-v(\{2\})$ is the minimax in the payoff advantage between the player (in this ungeneralised game), and $v(\{1,2\})$ is the maximum sum revenue which is split. This result is the same as we would get by the \textit{coco-value}, and working with Neyman and Kohlberg's value (equation \ref{knvalue2}).
 
-In the folowing section we describe the setup for an application and evaluation of the GNK value in the context of DC-approximated electrical networks.
+In the following section we describe the setup for an application and evaluation of the GNK value in the context of DC-approximated electrical networks.
 
 \section{GNK value computation on DC powerflows}\label{more_involved}
 
 Because of its flexibility the GNK value has the potential to be used in a large range of different contexts,
-however in this section we focus solely on the development of a simple case --- the pricing of the immeditate consumption and generation of power on a meshed network under DC approximation, where all participants have linear utilities over their own power.
+however in this section we focus solely on the development of a simple case --- the pricing of the immediate consumption and generation of power on a meshed network under DC approximation, where all participants have linear utilities over their own power.
 Although this construction simplifies away some key technical problems in power networks, it allows us to clarify the analysis of the GNK value and its features.
 
 In this section, we consider the DC network model, discuss how to calculate the GNK value as well as LMP and VCG for it, before in the next section \ref{sec:features} we discuss the features of these mechanisms with an example.
@@ -312,7 +312,7 @@ One well known way of addressing LBPs involves converting the inner optimisation
 In this way, a bilevel program is converted into a mixed integer linear program, which is then directly amenable to standard optimisation software.
 This method was chosen, and the SCIP Optimisation Suite was employed to compute the GNK value for an example network as described in the next section \ref{sec:example_network}.
 
-KKT conditions are a well known set of algebraic tests which imply that the function under consideration is locally optimal (maximal or alternatively minimal) with respect to its variables under a set of constraint functions (with some regularity assumptions on thoes functions).
+KKT conditions are a well known set of algebraic tests which imply that the function under consideration is locally optimal (maximal or alternatively minimal) with respect to its variables under a set of constraint functions (with some regularity assumptions on those functions).
 KKT are well documented, and extend the method of Lagrange multipliers.
 
 Specifically for maximising an objective function $f(\mathbf{x})$ subject to multiple constraints:
@@ -357,7 +357,7 @@ It was also realised that a binary reformulation of the complementary slackness 
 Specifically, for each complementary slackness condition $\lambda_kg_k(p_{i\in B}) = 0$ we introduced a binary variable $Z_k$ to indicate whether $\lambda_k$ or $g_k(p_{i\in B})$ was zero and then introduced large numbers $\bar{\lambda}_k$ and $ \underline{g_k} $ such as to make the complementary slackness condition equivalent to: $(1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0$ and $\underline{g_k}Z_k\le g_k(p_{i\in B})\le 0$.
 Where $\bar{\lambda}_k$ and $\underline{g_k}$ are the estimated upper and lower bounds on the KKT multipliers and constraint functions respectively.
 
-the resulting KKT conditions for maximising and objective function $f(p_{i\in B})$ under this complementary slcakness conditions are as follows:
+the resulting KKT conditions for maximising and objective function $f(p_{i\in B})$ under this complementary slackness conditions are as follows:
 
 \begin{equation}\forall i~~\frac{\partial f}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\end{equation}
 \begin{equation}\forall j~~ h_j(p_{i\in B})=0\end{equation}
@@ -407,15 +407,14 @@ The SCIP optimisation suite was used solving these optimisation problems.
 
 \subsection{Computing the Shapley Value imputations}\label{subsec:Shap_compute1}
 
-From section \ref{subsec:the_shapley_value} the Shapley Value utility imputations that a participant recieves is the average marginal contribution that it adds to a characteristic function under ambiguity of the join ordering.
+From section \ref{subsec:the_shapley_value} the Shapley Value utility imputations that a participant receives is the average marginal contribution that it adds to a characteristic function under ambiguity of the join ordering.
 In this way we need to consider a characteristic function in the context of DC networks:
 \begin{equation*}v_{shap}(S) = \max\sum_{j}u_j(p_j)~~~~\text{s.t.}~~\forall i\notin S~~p_i=0\end{equation*}
-This characteristic function describes the utility that a coalition could achieve by themselves, absent any consumption/generation from thoes not in the coalition - it is one possible way of creating a characteristic function for DC networks.
+This characteristic function describes the utility that a coalition could achieve by themselves, absent any consumption/generation from those not in the coalition - it is one possible way of creating a characteristic function for DC networks.
 
 The utilities under the Shapley Value (by efficiency axiom) sum to give the value of the grand coalition $v_{shap}(N)$ which occurs at the optimal operating point $x^*$.
 Thus the Shapley Value can be implementing by enacting electrical outcomes described by $x^*$ and conducting budget balanced utility transfers between participants.
 To calculate the Shapley Value imputations, the maximal sum of utilities under OPF for all the possible $2^n-1$ coalitions need computed, and the SCIP optimisation suite was used for these calculations.
-
 
 
 
@@ -456,8 +455,8 @@ VCG takes into account the marginal effect that each of the player's participati
 In contrast VCG and LMP, the GNK value takes into account the full bargaining position of each agent and also every possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
 The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1d}.
 
-In contrast to VCG, LMP and GNK, the Shapley Value exhibits character traits that are similar to LMP and VCG, particularly as the Shapley value is composed of many more marginal contributions than thoes ones inherant to VCG, which is in turn proportional to the marginalism inherant in LMP.
-Furthermore it has a superficial similarity to the GNK value as they both extend from the same axioms - either exhibited in section \ref{the_value_def}, or by conversion to shapley value by equation \ref{convert1} thus having exactly the same axioms as in section \ref{subsec:the_shapley_value}.
+In contrast to VCG, LMP and GNK, the Shapley Value exhibits character traits that are similar to LMP and VCG, particularly as the Shapley value is composed of many more marginal contributions than those ones inherent to VCG, which is in turn proportional to the marginalism inherent in LMP.
+Furthermore it has a superficial similarity to the GNK value as they both extend from the same axioms - either exhibited in section \ref{the_value_def}, or by conversion to Shapley value by equation \ref{convert1} thus having exactly the same axioms as in section \ref{subsec:the_Shapley_value}.
 The Shapley Value results are plotted against $p_1^l$ for our example in Figure~\ref{fig:1i}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1j}.
 
 
@@ -474,7 +473,7 @@ This continuity property is proven in the Appendix \ref{appendix:continuity_of_G
 This continuity is similarly witnessed in VCG imputations, but notably not in the context of LMP payments.
 
 It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1f}, where the payments received by generator 1 drop sharply with increasing generator capacity.
-This happens because the change in generator capacity is changing the parameters of the network itself and its feasibility region, which yields discontinuous changes in network operaating point, and thus marginal prices.
+This happens because the change in generator capacity is changing the parameters of the network itself and its feasibility region, which yields discontinuous changes in network operating point, and thus marginal prices.
 This dynamic under LMP might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the utilities under the GNK value (Figure \ref{fig:1c}), VCG (Figure \ref{fig:1g}) and Shapley Value (Figure \ref{fig:1i}) which feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
 which is one known cause of the volatility experienced in electricity markets - see \cite{RePEc:aen:journl:2006v27-02-a09}. 
@@ -517,7 +516,7 @@ times of high-supply/low-demand, particularly at the feeder extremities.
 In these settings, the inverters of PV owners at the bottom are unable to inject their power into the network and also typically get no compensation for essentially a forced curtailment of their electricity generation.
 
 In this context under LMP, curtailed generators that dont inject their power get no reward, and under VCG curtailed generators will only be allocated utility if their presence or absence would make a difference to the network operating point, which is not assured.
-Under Shapley Value, it is witnessed that there is some rather small offset for thoes that do not recieve power, though this is mostly determined by marginal coalitional considerations that exclude most other consumers.
+Under Shapley Value, it is witnessed that there is some rather small offset for those that do not receive power, though this is mostly determined by marginal coalitional considerations that exclude most other consumers.
 
 % \begin{itemize}
 % \item the GNK value is not incentive compatible
@@ -536,8 +535,8 @@ In section \ref{sec:GNK_extensions_discussion} we continue discussion about this
 \subsubsection*{The GNK value and Shapley Value are computationally difficult}
 The GNK value is more difficult than the Shapley Value, which is more difficult than VCG, which is more difficult than LMP, to compute.
 This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions $S$, and each calculation of $v(s)$ is an NP-hard bilevel optimisation problem.
-The Shapley Value also requires calculating $v_{shape}(S)$ for all the $2^n-1$ possible coalitions $S$, but the calculation of $v_{shape}(S)$ is not nessisarily NP-hard problem, as DC OPF problem can be a linear optimisation.
-Conversely VCG calculation for $n$ agents requires $n+1$ OPF optimisations (which are potentially linear in the DC case) per equation \ref{eq:VCG_calculation_DC}, wherease LMP calculation requires exactly one OPF optimisation (as identified in section \ref{subsec:LMP_compute1}).
+The Shapley Value also requires calculating $v_{shape}(S)$ for all the $2^n-1$ possible coalitions $S$, but the calculation of $v_{shape}(S)$ is not necessarily NP-hard problem, as DC OPF problem can be a linear optimisation.
+Conversely VCG calculation for $n$ agents requires $n+1$ OPF optimisations (which are potentially linear in the DC case) per equation \ref{eq:VCG_calculation_DC}, where as LMP calculation requires exactly one OPF optimisation (as identified in section \ref{subsec:LMP_compute1}).
 
 The computational difficulty of the GNK value is reflected in a later Figure \ref{fig:performance_graph2} where it is seen that even using sampling to approximate the GNK value to sufficient accuracy is witnessed to be a double-exponentially complex process. 
 
@@ -551,6 +550,12 @@ We then compared the GNK against LMP, VCG and Shapley Value on a small example n
 In the next chapter we consider the ways in which the computational difficultly of calculating the GNK value on larger networks can be ameliorated.
 The two primary techniques to ameliorate this difficulty are principally by sampling, and also by the adoption of a proxy for the inner optimisations.
 We discuss these to directions in the next chapter \ref{sec:scaling} before actually applying these techniques for an application of GNK to larger network in section \ref{sec:results_and_evaluation_of_GNK} where we discuss in section \ref{sec:GNK_value_discussion}.
+
+
+
+
+
+
 
 
 

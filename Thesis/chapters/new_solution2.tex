@@ -5,9 +5,9 @@
 \chapter{Evaluating the GNK value at scale}\label{sec:scaling}
 
 In the previous chapter we introduced the GNK value and detailed a procedure to calculate it for the context of small DC networks.
-However it was quickly idetinified to be quite difficult to calculate for larger networks with many players.
+However it was quickly identified to be quite difficult to calculate for larger networks with many players.
 In this chapter we address this weakness by outlaying two specific ways to remedy this problem.
-Firstly, we consider possible sampling processes to approximate the summation of the many terms inherant to the GNK value (particularly the summation over all exponentially many coalitions in equation \ref{da_value_eq}).
+Firstly, we consider possible sampling processes to approximate the summation of the many terms inherent to the GNK value (particularly the summation over all exponentially many coalitions in equation \ref{da_value_eq}).
 Secondly, we consider a proxy inplace of the minimax optimisations at the heart of the GNK value (per equation \ref{knvalue1}).
 
 Using these two remedies it is seen that it is possible to calculate the GNK value on networks upto size of about $100$ nodes within $10$ minutes of runtime on a desktop PC.
@@ -68,7 +68,7 @@ Method & Stratified & Join-Order & Sampling Choice \\ \hline
 \end{table}
 
 The full details about each of the methods can be found in their respective source documents \citep{CASTRO2017180,2013arXiv1306.4265M,DBLP:journals/cor/CastroGT09} (and Chapter \ref{chap:stratified_sampling_chapter}).
-We note that the methods that use join order sampling exploit the specific marginal nature of the Shapley Value, and hence are not compared against other methods of stratefied sampling in Section \ref{section:statistics_results}.
+We note that the methods that use join order sampling exploit the specific marginal nature of the Shapley Value, and hence are not compared against other methods of stratified sampling in Section \ref{section:statistics_results}.
 The performance of using these different methods is evaluated in the next section \ref{section:performance}.
 
 \subsection{Sampling the GNK value at scale}\label{section:performance}
@@ -109,7 +109,7 @@ And particularly that the \textsc{Join} method, which utilises stratification an
 On this graph, the sampling methods which utilised stratification were warm-started with a budget of 200 samples (two from each strata), as methods like \textsc{Neyman} required atleast two samples per stratum minimum (totalling 200) for a bias-free estimate of the variances which they run on.
 Conversely \textsc{Simple} and \textsc{Appro} were able to be run with a smaller sample budget.
 It is noted that the methods \textsc{Hoeffding}, \textsc{Neyman}, \textsc{SEBM} and \textsc{Join} perform exactly the same at 200 samples, as they each have two samples per stratum and no extra budget for any difference in logic to operate on.
-It was also recognised that because of our 10 bus networks, there are only 1024 unique optimsations $v(S)$ that can be called, and hence the x-axis stops at 1024.
+It was also recognised that because of our 10 bus networks, there are only 1024 unique optimisations $v(S)$ that can be called, and hence the x-axis stops at 1024.
 Each of the methods were run multiple times with increasing sample budget allowances, up until a point where the computation time became prohibitive, particularly some of the methods which used sampling without replacement would only call a stochastic number of unique optimisations, and hence it became time-prohibitive to sample to perfect accuracy utilising them.
 
 \subsection{Selection of sampling method}\label{subsection:selection_of_sampling_method}
@@ -243,10 +243,10 @@ However, whetherornot these qualify as morally warranted bases for differential 
 For instance, the idea of people being afforded different effective prices for electricity depending on the location of their electrical influence may be regarded as being ethically unfair to some people (especially perhaps between close neighbours whose grid connections are electrically different), however a negation of this also destroy any incentive for people to install additional generation capacity in electrically advantageous locations.
 
 Differential treatment can be seen as the mirror image of differential incentives, and a comprehensive reflection of the incentives that would be given under LMP against VCG and GNK are beyond the scope of our consideration.
-However we can speculate that there exists a primary difference between VCG and LMP (which give similar results) and GNK, in that LMP and VCG incentivse behaviour that could affect the network operating point; particularly affecting only those generators/consumers which would (or do) generate or consume power at the network operating point.
+However we can speculate that there exists a primary difference between VCG and LMP (which give similar results) and GNK, in that LMP and VCG incentivise behaviour that could affect the network operating point; particularly affecting only those generators/consumers which would (or do) generate or consume power at the network operating point.
 Wherease GNK is more comprehensive in its consideration, as it affords utility for every possible way that the network could degenerate into adversarial competition; thus we might speculate that the GNK value (or something similar to it) might incentives robustness in the network.
 
-\subsection{Hetrogeny of normative points}
+\subsection{Heterogeneity of normative points}
 
 The essential feature of the GNK value is that it is an extension of bargaining solution concepts to multiple players over the restricted strategy space of a generalised non-cooperative games.
 %And it inherits the underlying idea that the disagreement point in the non-cooperative game between two parties is the normative reference point from which the cooperative bargaining result is determined.
@@ -262,14 +262,14 @@ Against this consideration, it is good to note, that while the GNK (and Nash bar
 
 However this might not be sufficient, and the GNK value contrasts against other similar solutions over non-cooperative games (as briefly mentioned in section \ref{relating_to_the_old}) such von Neumann and Morgenstern's solution (per equation \ref{knvalue3}), where the characteristic function is identified as minimax payoff, not minimax payoff advantage.
 In this way von Neumann and Morgenstern's characteristic function can be considered as descriptive of a point of less totally engaged competition between coalitions - which might be more appropriate or pertinent for electricity networks.
-Von Neumann and Morgenstern's characteristic function is not the only alternative way that the characteristic function could be constructed, but unfortunately these alternative constructions would not nessisarily yield Nash bargaining solution in the two player case.
+Von Neumann and Morgenstern's characteristic function is not the only alternative way that the characteristic function could be constructed, but unfortunately these alternative constructions would not necessarily yield Nash bargaining solution in the two player case.
 
 
 
 %And the question outstanding is, should resources be distributed above the point of such a specific description of perfect competition?
 
 %From this perspective the GNK contrasts against other solutions (such as LMP and VCG) in regards to the reference point which they build upon.
-%The VCG solution builds upon the idea that the value of a player should be in reference to their 'absence' only at the solution point of the grand coalition, and therefore cannot allocate resources to thoes who do not interact with such a solution point; and a similar dynamic is present in LMP, in terms of marginal interaction.
+%The VCG solution builds upon the idea that the value of a player should be in reference to their 'absence' only at the solution point of the grand coalition, and therefore cannot allocate resources to those who do not interact with such a solution point; and a similar dynamic is present in LMP, in terms of marginal interaction.
 
 %Between the various solutions (LMP, VCG, GNK and possible variants thereof) there are different choices of reference point from which the dynamic occurs, and the question which is pertinent, realistic and morally justified is still ultimately unaddressed.
 %However, one particularly important reference point, which is axiomatic to VCG is the reference point of the utility of zero.
@@ -340,7 +340,7 @@ While there does exist some work on similar (but more complex) solution concepts
 \label{cha:conc}
 
 Throughout this research program we have undertaken an investigation into the space of possible mechanisms for valuing electricity.
-Most particularly, we investigted the space of possible mechanisms which can be bring into account all the possible confluences of electrical system details, as well as all the possible leverages and counter considerations which could play in an idealised negotiation between all parties about such an electricity system.
+Most particularly, we investigated the space of possible mechanisms which can be bring into account all the possible confluences of electrical system details, as well as all the possible leverages and counter considerations which could play in an idealised negotiation between all parties about such an electricity system.
 A mechanism which considered the unrestricted span of possible considerations and counterconsiderations between electrical system participants and the system, was seen to be an important quality as it is understood that the future smart grid will encompass a host of differing electrical situations with a range of smart devices, and the way in which the value of these devices and the electricity they consume/generate will be determined is in need of an answer.\\
 \\\noindent
 The original research question was:\\
@@ -364,7 +364,7 @@ This was seen as an accomplishment, particularly as if the GNK value were calcul
 
 Through the process of considering the different ways that the GNK value could be sampled we developed some of our own complicated techniques which proved to be competitive against existing methods for sampling the Shapley Value and hence the GNK value.
 This novel method extended from a consideration of of possible concentration inequality which which could be developed specifically for stratified sampling.
-We developed novel and taylored concentration inequalities for stratefied sampling, and this formed the basis of our new method.
+We developed novel and tailored concentration inequalities for stratified sampling, and this formed the basis of our new method.
 The development of this new concentration inequality (SEBB) and sampling methodology (SEBM) is detailed in the next chapter.
 In the next chapter we delve into the details of the sampling techniques that were developed and tested throughout this research, particularly the \textsc{SEBM} method in Section \ref{section:SEBB}, which was evaluated as a method to sample the GNK value (alongside others) in Section \ref{sec:scaling}.
 
