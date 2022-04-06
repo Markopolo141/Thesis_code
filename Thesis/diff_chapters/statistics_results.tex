@@ -1,0 +1,111 @@
+
+
+\newpage
+\section{Results and evaluation of methods}\label{section:statistics_results}
+
+
+In this section, different schemes of sampling in the context of Stratified sampling are compared in the context of synthetic data, primarily in the context of Beta-distributed data, and also in a more specific Bernoulli-uniform data set.
+In the next subsection \ref{sec:shapley} we consider the effectiveness of these different methods of sampling specifically to approximate the Shapley Value in the context of various cooperative games.
+The results and analysis of these methods are discussed in the following discussion section \ref{sec:discussion}.\footnote{
+Sourcecode for all the experiments in this paper are available at:\\ \href{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling}{https://github.com/Markopolo141/Stratified\_Empirical\_Bernstein\_Sampling
+}}
+
+\subsection{Benchmarks algorithms}
+We outline a range of benchmark algorithms used to evaluate the performance of various methods in the context of synthetic data sets.
+Then Section~\ref{ssec:SyntheticDists} describes two synthetic data sets and reports on the resulting distribution of errors under our benchmarks algorithms.
+
+In the numerical evaluations for synthetic data, we compare the following sampling methods:
+\begin{itemize}
+\item 
+\textsc{SEBM} (Stratified empirical Bernstein method, without replacement):
+our SEBM method (per Algorithm \ref{alg2}) of iteratively choosing samples from strata to minimise the SEBB, given in Equation~\eqref{big_equation}. 
+An initial sample of two data points from each strata is used to initialise the sample variances of each, with additional samples made to maximally minimise the inequality at each step. All samples are drawn \textit{without} replacement.
+\item 
+\textsc{SEBM-W} (Stratified empirical Bernstein method with replacement): 
+as above, with the exception that all samples are drawn \textit{with} replacement, and consequently the inequality does not utilise the martingale inequality given in Lemma~\ref{martingale0}.
+\item 
+\textsc{Simple} (Simple random sampling, without replacement): simple random sampling from the population irrespective of strata \textit{without} replacement.
+\item 
+\textsc{Simple-W} (Simple random sampling with replacement): 
+simple random sampling from the population irrespective of strata \textit{with} replacement.
+\item \textsc{Ney} (Neyman sampling, without replacement): the method of maximally choosing samples \textit{without} replacement from strata proportional to the strata variance (via Theorem \ref{thm:neyman_selection}).
+\item \textsc{Ney-W} (Neyman sampling with replacement): the method of choosing samples \textit{with} replacement proportional to the strata variance (via Theorem \ref{thm:neyman_selection}).
+\item \textsc{SEBM*} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{without} replacement from strata to minimise Equation~\eqref{eq1}, utilizing martingale Lemma~\ref{martingale0}.
+\item \textsc{SEBM*-W} (Stratified empirical Bernstein method with variance assistance): the method of iteratively choosing samples \textit{with} replacement from strata to minimise Equation~\eqref{eq1}.
+\item \textsc{SECM} (Stratified empirical Chernoff method): the method of iteratively choosing samples from strata \textit{without} replacement to minimize the SECB, given in Equation~\eqref{another_big_equation}. 
+An initial sample of two data points from each strata is used to initialise the sample variances of each, with additional samples made to maximally minimize the inequality at each step. All samples are drawn \textit{without} replacement.
+\item \textsc{Hoeffding} (Unionised EBBs with Hoeffding's inequality): The method of sampling \textit{with} replacement to minimise probability bound of Theorem \ref{triangle_theorem2} applied with Hoeffding's inequality (Theorem \ref{Hoeffdings_inequality_proper})
+\item \textsc{Audibert} (Unionised EBBs with Audibert et.al's EBB): The method of sampling \textit{with} replacement to minimise probability bound of Theorem \ref{triangle_theorem2} applied with Audibert et.al's EBB (Theorem \ref{AudibertsEBB})
+\item \textsc{Maurer} (Unionised EBBs with Maurer \& Pontil's EBB): The method of sampling \textit{with} replacement to minimise probability bound of Theorem \ref{triangle_theorem2} applied with Maurer \& Pontil's EBB (Theorem \ref{MandPsEBB})
+\item \textsc{EEBB} (Unionised EBBs with our Engineered EBB): The method of sampling to \textit{with} replacement to minimise the probability bound of Theorem \ref{triangle_theorem2} applied with our fitted EBB (Equation \ref{eq:prob_bound})
+\item \textsc{Random} (stratified sampling with random samples from strata): The process of stratified sampling \textit{with} replacement, choosing random numbers of samples from each of the strata.
+\end{itemize}
+\DIFdelbegin \DIFdel{Note that the last }\DIFdelend \DIFaddbegin \DIFadd{We consider that the }\DIFaddend three methods (\textsc{Ney},\textsc{Ney-W} and SEBM*) \DIFdelbegin \DIFdel{assume and utilise prior perfect knowledge of the variance of each of }\DIFdelend \DIFaddbegin \DIFadd{are built apon the assumption of known variances for }\DIFaddend the strata, \DIFdelbegin \DIFdel{and }\DIFdelend \DIFaddbegin \DIFadd{which are supplied to them, so that they may serve as a comparrison with the performance which would be possible for various methods which such information.
+Additionally we note }\DIFaddend that for all other methods (where appropriate) we selected for minimising a 50\% confidence interval (i.e. constant $p=0.5$ and $t=0.5$).
+
+\DIFdelbegin \DIFdel{Also note that }\DIFdelend \DIFaddbegin \DIFadd{The differences between }\DIFaddend these methods provide comparisons of different \DIFdelbegin \DIFdel{algorithm }\DIFdelend \DIFaddbegin \DIFadd{algorithmic }\DIFaddend factors, such as the dynamics of sampling: with and without replacement; with stratification and without; between our method and Neyman sampling, and; with and without perfect knowledge of stratum variances. 
+For these methods, we consider the effectiveness of sampling Beta distributed data and for a case of uniform-and-Bernoulli data.
+% Detailed analysis of the results is left to Section~\ref{sec:discussion}.
+
+\subsection{Synthetic data}
+\label{ssec:SyntheticDists}
+The most immediate way to compare the effectiveness of our method(s) is to generate sets of synthetic data, and then numerically examine the distribution of errors generated by the different methods of choosing samples.
+In this section, we describe two types of synthetic data sets used in this evaluation, namely:
+\begin{enumerate}
+\item Beta distributed stratum data, which are intended reflect possible real-world data, and 
+\item a particular form of uniform and Bernoulli distributed stratum data, where our sampling method (SEBM) was expected to perform poorly.
+\end{enumerate}
+
+\subsubsection{Beta-distributed data}\label{sec:beta_distributed_data}
+The first pool of synthetic data % sets are intended to be representative of potential real-world data.
+% These sets 
+have between 5 and 21 strata, with the number of strata drawn with uniform probability, 
+and each strata sub-population has sizes ranging from 10 to 201, also drawn uniformly.
+The data values in each strata are drawn from Beta distributions, with classic probability density function:
+$$\phi(x)_{\{\alpha,\beta\}}
+=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}     
+    x^{\alpha-1}(1-x)^{\beta-1} $$
+with $\alpha$ and $\beta$ parameters drawn uniformly between 0 and 4 for each stratum, and $\Gamma$ is \DIFaddbegin \DIFadd{the }\DIFaddend gamma function.
+
+
+
+\input{figs/big_table1.tex}
+
+\input{figs/big_table2.tex}
+
+
+Figures \ref{Table1} and \ref{Table111} compare the distribution of absolute errors achieved by each of the sampling methods over 5000 rounds of these data sets.
+Each panel presents the results that the methods achieve for a given budget of samples, 
+expressed as a multiple of the number of strata (noting that data sets where the sampling budget exceeded the volume of data were excluded).
+From the plots in Figures \ref{Table1} and \ref{Table111}, we can see that our sampling technique (SEBM and SEBM-W) performs comparably to
+% competitive-to and sometimes better-than 
+Neyman sampling (\textsc{Ney} and \textsc{Ney-W}) despite not having access to knowledge of stratum variances.
+Also, there is a notable similarity between SEBM* and SEBM.
+As expected, sampling without replacement always performs better than sampling with replacement for the same method, and this difference is magnified as the number of samples grows large in comparison to the population size. 
+Finally, simple random sampling almost always performs worst, because it fails to take advantage of any variance information.
+These results and their interpretation are discussed and detailed in Section~\ref{sec:discussion} along with results from the other test cases discussed below.
+
+
+
+\subsubsection{A uniform and Bernoulli distribution}
+\label{sec:dataset2}
+We also to examine data distributions in which our sampling method (SEBM) performs poorly, particularly compared to Neyman sampling (\textsc{Ney}).
+For this purpose, a data-set with two strata is generated, with each stratum containing $1000$ points. 
+The data in the first stratum is uniform continuous data in range $[0,1]$, while the data in the second is Bernoulli distributed, with all zeros except for a specified small number $a$ of data points, with value 1.
+For this problem, we conduct stratified random sampling with a budget of $300$ samples, comparing the SEBM*, SEBM and \textsc{Ney} methods.
+The average error returned by the methods across 20,000 realisations of this problem, plotted against the number of successes $a$, are shown as a graph in Figure \ref{biggraph3}.
+This figure demonstrates that SEBM and SEBM* perform poorly when $a$ is small.
+This under-performance is not simply a result of the SEBM method oversampling in a process of learning the stratum variances (which was the intended demonstration), but the under-performance was present in SEBM* as well.
+The reasons for this under-performance are discussed in in more detail in Section~\ref{subsection:main_discussion}.
+But before this discussion, we also considered the approximation of the Shapley Value as an example application of our stratified sampling method.
+
+\input{figs/bernoulli_table.tex}
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,9 @@
 
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
-The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling, since the aggregated population mean estimate does not itself have a sample variance but only the strata have means and sample variances.
-Such EBBs can be applied as a bound for the mean of an individual stratum but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
+The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling\DIFdelbegin \DIFdel{.
+Since }\DIFdelend \DIFaddbegin \DIFadd{, since }\DIFaddend the aggregated population mean estimate does not itself have a sample variance \DIFdelbegin \DIFdel{, }\DIFdelend but only the strata have means and sample variances.
+Such EBBs can be applied as a bound for the mean of an individual stratum \DIFdelbegin \DIFdel{, }\DIFdelend but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
 
 In this section, we show that these EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
 The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
@@ -12,13 +13,13 @@ And thus the resulting sampling methodologies will implicitly be sensitive to th
 \subsection{Stratified sampling via EBBs and sequential unions}\label{section:unionising_ebbs}
 
 To create a bound on the error in stratified sampling from EBBs, it is necessary to use probability unions to bind the EBBs together.
-We derive the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} that give derivations on the error, and the absolute error, of the stratified mean estimator.
+\DIFaddbegin \DIFadd{We derive }\DIFaddend the following two theorems \ref{triangle_theorem1} and \ref{triangle_theorem2} \DIFaddbegin \DIFadd{that }\DIFaddend give derivations on the error, and the absolute error, of the stratified mean estimator.
 
 \begin{theorem}\label{triangle_theorem1}
 If we have $m$ strata of sizes $N_i$. If we have taken $n_i$ samples $X_{i,1},X_{i,2},\dots,X_{i,n_i}$ from each stratum, resulting in a stratum sample mean $\hat{\mu}_i = \frac{1}{n_i}\sum_{j=1}^{n_i}X_{i,j}$ and stratum sample variance $\hat{\sigma}_i^2=\frac{1}{n_i}\sum_{j=1}^{n_i}(X_{i,j}-\hat{\mu}_i)^2 $.
 If the error in the sample mean of a stratum is bounded by an Empirical Bernstein Bound:
 $\quad \p(\hat{\mu}_i-\mu_i \ge Z(n_i,D_i,\hat{\sigma}^2_i,t)) \le t $\\
-Then the error in our stratified estimation of the population mean itself is probability bounded:
+Then the error in our stratified estimation \DIFaddbegin \DIFadd{of the population mean itself }\DIFaddend is probability bounded:
 $$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t/m)\right)\le t $$
 \end{theorem}
 
@@ -30,22 +31,34 @@ $$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\s
 %Thence because we can scale (by positive factor) the inside of the EBB inequality (for any $j\in\{1,\dots, m\}$):
 %\begin{equation}\label{equation_partial_union1} \p\left(\frac{N_j}{\sum_kN_k}(\hat{\mu}_j-\mu_j) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\right) \le t \end{equation}
 %adding identical terms to both sides of the inner inequality gives:
-%\begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
+%DIF < \begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
+%DIF > \begin{equation}\label{equation_partial_union2} \p\left(\sum_{i=1}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i) \ge \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\right) \le t \end{equation}
 %now since equation \ref{equation_partial_union1} also holds for any $l\in\{1,\dots, m\}$ other $j$ then:
 %$$ \p\left(\frac{N_l}{\sum_kN_k}(\hat{\mu}_l-\mu_l) \ge \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t)\right) \le t $$
 %hence by adding terms to both sides of the inner inequality:
-%\begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
+%DIF < \begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
+%DIF > \begin{equation}\label{equation_partial_union3} \p\left(\begin{matrix*}\frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t)\\ + \sum_{\substack{i=1 \\ i\ne j}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*} \ge \begin{matrix*} \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le t \end{equation}
 %Applying probability union (lemma \ref{prob_union}) to equations \ref{equation_partial_union2} and \ref{equation_partial_union3} gives:
-%$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
-%We can repeat this process of taking equation \ref{equation_partial_union1} for a new index $q\ne j\ne l$, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, gives:
-%$$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_q}{\sum_kN_k}Z(n_q,D_q,\hat{\sigma}^2_q,t) +\\\frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l\\i\ne q}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 3t $$
-%and so on, and ultimately gives:
+%DIF < $$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_i}{\sum_kN_k}Z(n_k,D_k,\hat{\sigma}^2_k,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
+%DIF < Repeating this process of taking equation \ref{equation_partial_union1} for a new index, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, ultimately gives:
+%DIF > $$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 2t $$
+%DIF > We can repeat this process of taking equation \ref{equation_partial_union1} for a new index $q\ne j\ne l$, adding appropriate terms to the inner inequality and using probability union lemma \ref{prob_union}, gives:
+%DIF > $$ \p\left(\hat{\mu}-\mu \ge \begin{matrix*} \frac{N_q}{\sum_kN_k}Z(n_q,D_q,\hat{\sigma}^2_q,t) +\\\frac{N_j}{\sum_kN_k}Z(n_j,D_j,\hat{\sigma}^2_j,t) +\\ \frac{N_l}{\sum_kN_k}Z(n_l,D_l,\hat{\sigma}^2_l,t) +\\ \sum_{\substack{i=1 \\ i\ne j\\i\ne l\\i\ne q}}^m\frac{N_i}{\sum_kN_k}(\hat{\mu}_i-\mu_i)\end{matrix*}\right) \le 3t $$
+%DIF > and so on, and ultimately gives:
 %$$ \p\left(\hat{\mu}-\mu \ge \sum_{i=1}^m\frac{N_i}{\sum_kN_k} Z(n_i,D_i,\hat{\sigma}^2_i,t)\right)\le mt $$
 %And scaling $t$ gives result.
 %\end{proof}
 
-The result of this novel proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata.
-If instead of the error, we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then by a similar procedure (inspired by the utilisation of the triangle inequality in the proofs of \cite{2013arXiv1306.4265M}) we can derive a similar probability bound:
+The result of this \DIFaddbegin \DIFadd{novel }\DIFaddend proof is an inequality bounding the error of the stratified mean estimate by the number of samples and the width and sample variance of each of the strata.
+If instead of the error, we are concerned about the absolute error of the stratified estimate $|\hat{\mu}-\mu|$ then by a similar procedure (\DIFdelbegin \DIFdel{utilising }\DIFdelend \DIFaddbegin \DIFadd{inspired by the utilisation of }\DIFaddend the triangle inequality \DIFdelbegin \DIFdel{)}\footnote{\DIFdel{inspired by \mbox{%DIFAUXCMD
+\cite{2013arXiv1306.4265M}}\hspace{0pt}%DIFAUXCMD
+}} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{in the proofs of \mbox{%DIFAUXCMD
+\cite{2013arXiv1306.4265M}}\hspace{0pt}%DIFAUXCMD
+) }\DIFaddend we can derive a similar probability bound\DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{:
+}\DIFaddend 
 
 \begin{theorem}\label{triangle_theorem2}
 In the same context of the statement of theorem \ref{triangle_theorem1} the absolute error of the stratified estimation is probability bounded:
@@ -66,7 +79,7 @@ And the result follows by scaling $t$.
 These two theorems make clear that sampling to minimise either the error or the absolute error, essentially amounts to minimising the same target.
 It is possible to apply these theorems with a choice of EBB to create a bound for the stratified mean error, which can then be minimised by choosing appropriate sample numbers.
 
-This method is made clear in pseudocode in technically-novel algorithm \ref{alg3}.
+This method is made clear in pseudocode in \DIFaddbegin \DIFadd{technically-novel }\DIFaddend algorithm \ref{alg3}.
 Where a scan is conducted over the possible strata in lines 4-10, and the improvement that would be offered by taking an additional sample from the stratum's respective EBB is calculated.
 The strata that gives the most reduction of its EBB for a prospective additional sample is chosen to have an additional sample taken, and its sample variance is recalculated in lines 11-13; this process repeats until the sample budget is exhausted.
 %This algorithm \ref{alg3} is much more simple than algorithm \ref{alg2} primarily because the scan through the strata only needs to consider the change in the EBB associated with that stratum.
@@ -76,7 +89,7 @@ The strata that gives the most reduction of its EBB for a prospective additional
 \caption[Stratified Error bound reduction algorithm by unionised EBBs]{Stratified Error bound reduction algorithm by unionised EBBs - by Theorem \ref{triangle_theorem2}}
 \label{alg3}
 \begin{algorithmic}[1]
-    \REQUIRE probability $t$, number of strata $N$, initial sample numbers $m_i$, initial stratum sample variances $\hat{\sigma}_i^2$, widths $D_i$, maximum sample budget $B$,
+    \REQUIRE probability $t$, number of strata $N$, initial sample numbers $m_i$, initial stratum sample variances \DIFdelbegin \DIFdel{$\doublehat{\sigma}_i^2$}\DIFdelend \DIFaddbegin \DIFadd{$\hat{\sigma}_i^2$}\DIFaddend , widths $D_i$, maximum sample budget $B$,
     for an EBB per the following form: $\p(\hat{\mu}_i-\mu_i \ge Z(m_i,D_i,\hat{\sigma}^2_i,t)) \le t $
     \WHILE{$\sum_k{m_k}<B$}
         \STATE $beststrata \leftarrow -1$
@@ -90,8 +103,9 @@ The strata that gives the most reduction of its EBB for a prospective additional
     	\ENDFOR
     	\STATE take an extra sample from strata: $beststrata$
 	    \STATE $m_{beststrata} \leftarrow m_{beststrata} + 1$
-    	\STATE recalculate $\hat{\sigma}_{beststrata}^2$
-    \ENDWHILE
+    	\STATE recalculate \DIFdelbegin \DIFdel{$\doublehat{\sigma}_{beststrata}^2$
+    }\DIFdelend \DIFaddbegin \DIFadd{$\hat{\sigma}_{beststrata}^2$
+    }\DIFaddend \ENDWHILE
 \end{algorithmic}
 \end{algorithm}
 
@@ -108,7 +122,7 @@ In the next section we derive and numerically generate a stronger EBB for applic
 \newpage
 \section{The derivation of a stronger EBB}\label{section:new_EBB}\label{derivation}
 
-There are various EBBs which place variance-sensitive bounds on the mean, and it remains an outstanding task is to see how much these EBBs can be improved; we take inspiration from the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
+There are various EBBs which place variance-sensitive bounds on the mean, and it remains an outstanding task is to see how much these EBBs can be \DIFdelbegin \DIFdel{sharpened}\DIFdelend \DIFaddbegin \DIFadd{improved}\DIFaddend ; we take inspiration from the work of \cite{Maurer50empiricalbernstein} to develop a new and stronger EBB.
 However, due to its analytic intractability, we complete the derivation by discussing how to numerically determine the bound.
 
 %The evaluations in section \ref{} show that our EBB significantly tightens existing bounds. 
@@ -131,8 +145,9 @@ Within this section there are multiple parts:
 
 Our first part of the derivation of our new EBB is a Chernoff bound on the sample mean called \textit{Bennett's inequality}. 
 This bound is not new and was derived by \cite{hoeffding1} and \cite{10.2307/2282438} and has subsequently been a subject of discussion and many further developments; it is known to be quite strong \citep{Bentkus08boundsfor,Pinelis2014,zbMATH00812598}; 
-We derive and present a refactored summary proof of Bennett's inequality as the theorem \ref{hoeffdings1}, whose proof involves the use of an intermediate theorem \ref{thm:parabola}.
-We present it here in a way conducive to the manipulation we will subsequently perform with it (modifying it into proof of Theorem \ref{expectation1}).
+We \DIFdelbegin \DIFdel{state }\DIFdelend \DIFaddbegin \DIFadd{derive and present a refactored summary proof of Bennett's inequality as }\DIFaddend the theorem \ref{hoeffdings1}\DIFaddbegin \DIFadd{, }\DIFaddend whose proof involves the use of an intermediate theorem \ref{thm:parabola}.
+\DIFaddbegin \DIFadd{We present it here in a way conducive to the manipulation we will subsequently perform with it (modifying it into proof of Theorem \ref{expectation1}).
+}\DIFaddend 
 
 \begin{theorem}[Bennett's inequality]\label{hoeffdings1}
 Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$. 
@@ -198,7 +213,7 @@ Bennett's inequality provides a probability bound for the difference of the samp
 
 As already stated, the variance is often unknown in practice, but can only be estimated via the sample variance statistic.
 In order to derive a bound for the error between the sample variance and the variance we derived a concentration inequality for the sample squares to use in conjunction with the variance decomposition Lemma \ref{variance1}.
-The following novel concentration inequality was derived:
+The following \DIFaddbegin \DIFadd{novel }\DIFaddend concentration inequality was derived\DIFdelbegin \DIFdel{(which we note, appears to be novel)}\DIFdelend :
 
 \begin{lemma}[Sample square bound]\label{sample_squares}
 Let $X$ be a real-valued random variable with a mean of zero and variance $\sigma^2$, that is bounded $a\le X\le b$, if $d=\max(b,-a)$ then for $y>0$, the mean of sample squares $\hat{\sigma}_0^2=\frac{1}{n}\sum_ix_i^2$ is probability bounded:
@@ -231,7 +246,9 @@ Note that the application of this inequality (and thence the domain of function 
 
 \subsection{A new bound on the sample variance}\label{subsection:sample_variance_bound}
 
-By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares, and from these it is possible to create novel a bound on the sample variance using lemma \ref{variance1}, as follows:
+By Theorem \ref{hoeffdings1} and Lemma \ref{sample_squares} we have a probability bound on the mean squared and a probability bound on the sample squares\DIFdelbegin \DIFdel{. }\DIFdelend \DIFaddbegin \DIFadd{, and from these }\DIFaddend it is possible to create \DIFaddbegin \DIFadd{novel }\DIFaddend a bound on the sample variance using lemma \ref{variance1}, as follows\DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{:
+}\DIFaddend 
 
 
 \begin{theorem}[Sample Variance Bound]\label{variance2}
@@ -271,7 +288,7 @@ The use of this Theorem \ref{variance2} (and thus implicitly the domain of funct
 \subsection{Generalised EBB creation process}\label{subsection:general_ebb_creation}
 
 Theorem \ref{hoeffdings1} presents a bound for the sample mean given the variance, and Theorem \ref{variance2} presents a probability bound for the error of the sample variance from the variance. The task remaining is to create a new EBB by binding these two together.
-To combine these two theorems to create a bound for the sample mean given the sample variance, we give a theorem that is representative of a slightly improved derivation process than that followed by \cite{Maurer50empiricalbernstein}, where they use this process to create their EBB.
+To combine these two theorems to create a bound for the sample mean given the sample variance, we give a theorem that \DIFdelbegin \DIFdel{embodies a process slightly improved from }\DIFdelend \DIFaddbegin \DIFadd{is representative of a slightly improved derivation process than }\DIFaddend that followed by \cite{Maurer50empiricalbernstein}\DIFaddbegin \DIFadd{, where they use this process to create their EBB}\DIFaddend .
 
 Before beginning this theorem, we need to introduce some notation to ease presentation.
 For a function $f$ with ordered inputs, we denote the inverse of $f$ with respect to its $i${th} input (counting from one) as $f^{-(i)}$, assuming it exists.
@@ -280,8 +297,8 @@ $\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\
 And note that functions $h$ and $f$ may have additional arguments not limited to $\sigma^2$ and $t$, and $\sigma^2$ and $w$, respectively; but that these are not considered in the theorem and proof for brevity.
 
 \begin{theorem}[Essential EBB]\label{ebb1} 
-For probability bounds $\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\sigma^2,w)$,
-if $f^{-(2)}$ and $h^{-(2)}$ both exist, and also if $h^{-(2)}$ is monotonically increasing in its first argument, so that we can define:
+\DIFdelbegin \DIFdel{Assume }\DIFdelend \DIFaddbegin \DIFadd{For probability bounds $\p(\hat{\mu}-\mu>t)\le h(\sigma^2,t)$ and $\p(\sigma^2-\hat{\sigma}^2>w)\le f(\sigma^2,w)$,
+if }\DIFaddend $f^{-(2)}$ and $h^{-(2)}$ both exist, and also if $h^{-(2)}$ is monotonically increasing in its first argument, so that we can define:
 \[
 z(\sigma^2,w) = \sigma^2-f^{-(2)}\left(\sigma^2,w\right)
 \]
@@ -293,7 +310,7 @@ If $z^{-(1)}$ exists and is monotonic increasing in its first argument, then for
 \end{theorem}
 %
 \begin{proof}
-Substituting $w$ for $f^{-(2)}(\sigma^2,w)$ gives:
+Substituting $w$ for \DIFdelbegin \DIFdel{$f^{-2}(\sigma^2,w)$ }\DIFdelend \DIFaddbegin \DIFadd{$f^{-(2)}(\sigma^2,w)$ }\DIFaddend gives:
 %$\p(\sigma^2-\hat{\sigma}^2>f^{-2}(\sigma^2,w))\le w$\\
 %$\p(z(\sigma^2,w)>\hat{\sigma}^2)\le w$\\
 %$\p(\sigma^2>z^{-1}(\hat{\sigma}^2,w))\le w$\\

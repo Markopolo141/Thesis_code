@@ -11,7 +11,6 @@ We consider the following formulations:
 \item in section \ref{sec:solutions_LMP}, we consider Locational Marginal Pricing (LMP),
 \item in section \ref{sec:cooperative_game_theory_part}, we consider the Core and the Shapley Value,
 \item in section \ref{sec:solutions_bargaining}, we consider Nash's bargaining solution concepts.
-\item in section \ref{sec:envy_free_solutions}, we consider mathematical considerations associated with the concept of envy-freeness.
 \end{itemize}
 
 %These different approaches stem from different moral considerations, %and primarily reward participants with respect to different reference points that are briefly addressed in section \ref{sec:reference_points}.
@@ -51,13 +50,16 @@ $\quad d_1 = 6-6.5 = -0.5 \quad\quad d_2 = 8-8 = 0\quad\quad d_3 = 4-6.5 = -2.5 
 \end{example}
 
 \subsection{Discussion about VCG}
-The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are positively compensated, and if a player's influence detracts from the utility of others then they are penalised in proportion.
-Since the set of possible outcomes $X$ are arbitrary it is possible to consider the application of the VCG mechanism in a wide variety of contexts.
+The VCG mechanism with Clark pivot might be seen as an straightforward way of assigning an outcome and allocating ethical payments; if a player's presence adds to the utility of others then they are positively compensated, and if a player's influence detracts from the utility of others then they are negatively compensated.
+
+Since the set of possible outcomes $X$ are arbitrary it is possible to consider the application of the VCG mechanism in a variety of contexts.	
+For instance, VCG has been considered as a mechanism for allocating physical and monetary outcomes in various contexts within electricity networks by various authors (such as \citep{FABRA200272, SESSA2017189, 8264596, 7512339}), such as in auctions for bulk electricity generation, buying and selling energy storage products, and in procuring ancillary services.
+
 However VCG has some particular advantages and disadvantages.
-The first and most notable property is that VCG mechanisms have been demonstrated by \cite{roberts1979characterization, Lavi2008} to be \textit{truthful} or \textit{incentive compatible}, in the sense that that no single player can positively gain by misreporting their valuations in the event that all other players are truthfully reporting their valuations, and in the event that the utility of the agents is \textit{quasilinear}.
+The first and most notable property is that VCG mechanisms have been demonstrated by \cite{roberts1979characterization, Lavi2008} to be \textit{truthful} or \textit{incentive compatible}, in that no single player can possibly gain by misreporting their valuations in the event that the utility of the agents is \textit{quasilinear}.
 An agent's utility is quasilinear if their utility is equal to their valuation of the outcome plus any transfers they receive, and hence their utility $u_i$ has form:
 $$ u_i = d_i(v)+v_i $$
-In this way if VCG's incentive compatibility induces the players not to bid strategically then it can reduce a potential overhead of their participation, and potentially eliminates a source of instability in the resulting system.
+And thus if incentive compatibility induces the players not to bid strategically, then it reduces a potential overhead of their participation in the system, and also potentially eliminates a source of instability in the resulting system.
 
 Another interesting property is called \textit{individual rationality}, in that no agent (assuming quasilinear utility) will ever be left with a net negative utility. Particularly if the utility of zero is regarded as the utility of non-participation, then individually rational means that everybody is left being better-off (or atleast not worse-off) by participating than they would be otherwise. Hence individual rationality is a possible articulation of ethical euvolentary negotiation (see chapter \ref{sec:reference_points}).
 
@@ -66,32 +68,21 @@ It is also worth noting that VCG mechanisms are also \textit{efficient} in the s
 However, more negative features of VCG exist, one primary drawback of this mechanism is that it is not \textit{budget balanced}, in that it is possible that the amount of utility that is transferred between the players might not sum to zero.
 Because of this an implementation of VCG might require regular budget injection to maintain and/or produce a budget surplus, hence sapping money from between the participants (see example).
 As VCG may produce a budget surplus it is thus easy to note that the maximum amount of utility is not being given to the participants, and hence VCG is not efficient in the sense of maximising utility for the participants (see section \ref{sec:philosophy_efficiency}).
-
-Although VCG has a very positive property by being incentive compatible, it has some additional drawbacks and criticisms as noted by various authors \citep{ShohamLeytonBrown09,Rothkopf07}, particularly:
-\begin{itemize}
-\item	The fact that VCG's truthfull equilibrium is a weak-equilibrium, and a player can misreport their valuations to harm others
-\item	If generating or submitting a valuation in a VCG mechanism incurs some cost, over not participating, then it is no longer individually rational
-\item	If the externalities and social optima $x^*$ are not solved exactly, but only approximately, then this will destroy the truthfulness property of VCG.
-\item	If any players are budget-constrained (eg. they cannot afford to pay their true valuations for particular outcomes), then the truthfulness property is destroyed.
-\item	If VCG mechanism does succeed in incentivising players to submit their true valuations, this is potentially has privacy and information disclosure issues.
-\item	VCG is not completely immune from the possibility of cheating: by groups of players, by players submitting multiple bids under many names, or players who know that strategies in a series of VCG auctions may not be incentive compatible. etc.
-\item	VCG may (depending on context) also have higher computational complexity than other mechanisms.
-\end{itemize}
-
-Though some of these drawbacks and criticisms can be ameliorated, the VCG mechanism is widely discussed as potential mechanism in various real-world contexts, as we consider in section \ref{sec:vcg_real_world1}.
+Although VCG is incentive compatible for individual strategisers it has some additional drawbacks, such as considered by \cite{ShohamLeytonBrown09}: as is potentially vulnerable to strategising coalitions, its implementation may involve imposing a lack of privacy for participants, and also (depending on context) may also have higher computational complexity than other mechanisms.
+These disadvantages of VCG have led it to be seldom implemented in practice, including in the context of electricity networks \citep{Rothkopf07, Ausubel2006}.
 
 As VCG has positive and negative features, it is possible to ask if there are similar mechanisms which avoid some of the negative features.
 But it is unfortunate, that some of these properties (incentive compatible, individually rational, budget balanced, and efficiency) are known to be impossible to combine in the general case (where there are a plurality of outcomes and the valuations are unrestricted), and these impossibility theorems are a feature in the study of \textit{Mechanism Design}.%(find a good source, of, myerson satterthwaite theorem)
 
 \subsection{Mechanism Design, is there a better VCG?}
 
-The VCG mechanism is a cornerstone example in the field of Mechanism Design, and there exist many good sources giving extended discussions on the field - such as \cite{37377}.
+The VCG mechanism is a cornerstone component in the field of Mechanism Design, and there exist many good sources giving extended discussions on the field - such as \cite{37377}.
 But generally, Mechanism Design conducts the analysis of systems which select social outcomes based upon the result of strategic interactions of multiple parties with divergent interests.% and where each party has actual preferences over the possible outcomes, and also reported preferences over the outcomes.
 
 One of the features of Mechanism Design that the VCG mechanism illustrates, is the potential for considering and apprehending the way in which a system is likely to behave between rational individually strategising agents.
 This possibility extends beyond VCG, as it has been discovered that any system which is implemented between strategising agents can be altered such as to make it incentive compatible for them; this is called the revelation principle - see \cite{RePEc:ecm:emetrp:v:41:y:1973:i:4:p:587-601} \cite[Chapter~2.3]{37377}.
-The revelation principle has various formulations, but generally, for any system there will some Nash equilibria in the interaction between the agents, and consequently an incentive compatible mechanism can be constructed by asking the agents for their true valuations and then implementing the corresponding Nash equilibria directly.
-Unfortunately, it is sometimes the case that the Nash equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always a Nash equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
+The revelation principle has various formulations, but generally, for any system there will some Nash-equilibria in the interaction between the agents, and consequently an incentive compatible mechanism can be constructed by asking the agents for their true valuations and then implementing the corresponding Nash-equilibria directly.
+Unfortunately, it is sometimes the case that the Nash-equilibria between strategising agents may not coincide with what is socially optimal for them; and the general difficulty of designing systems where the socially optimal outcome is always a Nash-equilibrium is rendered in some of the famous impossibility theorems in Mechanism Design. %And so, there are a series of strong impossibility proofs in mechanism design.
 
 Some of the primary historic impossibility proofs in Mechanism Design concern voting and social choice systems, and notably include Arrow's impossibility theorem, and the Gibbard-Satterthwaite theorem.
 But the difficulty does not necessarily recede even if monetary compensations between parties are included into consideration, such as per the Myerson-Satterthwaite theorem.
@@ -121,12 +112,13 @@ where $C_{-i}$ is some function that is independent of $i$'s reported preference
 In this context it is notable that the VCG mechanism is a special case of a Groves mechanism \citep{10.2307/1914085} where $C_{-i}= \max_{x'\in X}\sum_{j\ne i}v_j(x')$.
 Groves mechanisms are a class of mechanisms which include VCG, and are categorically incentive compatible. 
 
-The challenge therefore is to derive optimal functions $C_{-i}$ which minimise the budget surplus/deficit while maintaining individual rationality in the context of restricted player valuations.
+The challenge therefore is to derive optimal functions $C_{-i}$ which minimise the budget surplus/defecit while maintaining individual rationality in the context of restricted player valuations.
 For this purpose there has been significant discussion about deriving these $C_{-i}$ functions, also known as `VCG redistribution' rules.
 
-One of the first to propose such a rule was \cite{Cavallo:2006:ODM:1160633.1160790}, who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be naturally assumed that any party has a utility of zero if they do not receive the physical object.
+One of the first to propose such a rule was \cite{Cavallo:2006:ODM:1160633.1160790}, who showed that much of the VCG surplus can be redistributed in a process of allocating a single physical object exclusively to one party (called `All-Or-Nothing' games), where it can be naturally assumed that any party has a utility of zero if they do not recieve the physical object.
 This redistribution was possible primarily because there exists a simple constraint on player valuations - ie. not receiving the object has utility of zero.
-Similarly in other situations where there are restrictions on the players' valuation over the outcomes, there is the potential for deriving different VCG redistribution rules.
+
+Similarly in other situations where there are restrictions on the players valuation over the outcomes, there is the potential for deriving VCG redistribution rules.
 
 However there are some difficulties with this approach, particularly it is known that even with VCG redistribution rules there will almost always be some remaining budget surplus, and even then the process of deriving optimal redistribution rules can be a difficult task --- even to the point where neural networks have been employed to approximate such functions (see \cite{DBLP:conf/atal/ManishaJG18}).
 
@@ -134,12 +126,12 @@ However there are some difficulties with this approach, particularly it is known
 
 Another avenue of averting the impossibility result is to sacrifice efficiency of outcome selection.
 One of the simplest such schemes is given by \cite{Faltings2004b, Boi_faltings_patent}
-who proceeds about the process of designing a non-Pareto optimal VCG mechanism by splitting the population into two groups.
+who proceeds about the process of designing a non-pareto optimal VCG mechanism by splitting the population into two groups.
 In this scheme, the VCG outcome from the first group is selected irrespective of the preferences in the second group and where the second group (the `sink') receives the budget surplus from the VCG mechanism applied to the first group.
 This mechanism constitutes a budget balanced VCG-type mechanism which can be made more regular (suggested by \cite{10.1007/978-3-642-25510-6_14}) by randomly selecting an individual as the `sink', and splitting the budget surplus between the parties evenly without knowledge of who will be selected.
 
-This kind of method of developing non-Pareto optimal VCG mechanisms has been the subject of investigation by \cite{NATH2019673}, and the process is proven to necessarily need a `sink', although this such a sink can be randomly selected.
-Notwithstanding it is expected that such a mechanism of randomly assigning a sacrificial `sink' could potentially be ethically dangerous; potentially falling afoul of Formal Equality ideas (see section \ref{sec:formal_equality}) as one member (or group of members) would be randomly singled out to equalise the budget surplus/deficit.
+This kind of method of developing non-pareto optimal VCG mechanisms has been the subject of investigation by \cite{NATH2019673}, and the process is proven to necessarily need a `sink', although this such a sink can be randomly selected.
+Notwithstanding it is expected that such a mechanism of randomly assigning a sacrificial `sink' could potentially be ethically dangerous; potentially falling afoul of Formal Equality ideas (see section \ref{sec:formal_equality}) as one member (or group of members) would be randomly singled out to equalise the budget surplus/defecit.
 
 
 %\subsubsection{switching to Baysean incentive compatability}
@@ -156,47 +148,18 @@ Notwithstanding it is expected that such a mechanism of randomly assigning a sac
 %Although there has been some effort in designing and analysing the occurance of coalition proof mechanisms, these remain difficult.
 
 
-\subsection{Applications of VCG to electricity systems}\label{sec:vcg_real_world1}
-
-VCG has properties that make it attractive from from a theoretical standpoint, particularly its incentive compatability property brings the promise of alleviating the cost and potential system instability inherent between strategising agents that can be manifest in cases of market collapse.
-Additionally it has a straightforward ethical interpretation, that is, as a policy of compensation for externality.
-These advantages have led VCG to be often discussed, but its weaknesses have led to its being reportedly seldom implemented in practice, including in the context of electricity networks \citep{Ausubel2006,FABRA200272}.
-
-In these discussions the primary difference between proposals of VCG application is the context of the events\&bids to which it is applied.
-Thus VCG has been considered as a mechanism for allocating physical and monetary outcomes in various contexts within electricity networks by various authors:
-\begin{itemize}
-\item	VCG-like schemes have been considered as means of extracting truthfull preferences and allocating costings for demand across electric vehicle charging stations \citep{9263469}
-\item	VCG has been considered as a mechanism to determine compensation and induce truthfull information about consumer's inconvenience functions to demand response aggregators in demand response (DR) programs \citep{6965656}
-\item	VCG has been contrasted with other auction mechanisms in auctions for demand curtailment contracts under network uncertainty \citep{HEINRICH2021112335}
-\item	VCG has been considered as a possible auction mechanism for renewable energy aggregators to purchase and reward variable renewable energy generators for providing and truthfully reporting the distribution of their energy supply \citep{6120188}
-\item	VCG has been considered as a mechanism for allocating wholesale dispatch of electricity generation and consumption across a network:
-	\begin{itemize}
-	\item	such as between multiple network nodes with AC/DC links \citep{8939413,lmp2},
-	\item	between multiple auctions for the supply of timely generation and ancillary services in a network \citep{7512339,Wang2022,SESSA2017189}
-	\item	as a means of allocating power and payments between generators and storage providers (such as EV owners) across stretches of time \citep{9483064,10.5555/2772879.2773528,7297853}
-	\item	and/or all these at once \citep{9203564}
-	\end{itemize}
-\end{itemize}
-
-In this way there are many possible context of VCG's application, however there are also some interesting innovations on VCG in the electricity context, such as:
-VCG qualities can be improved is by considering mechanisms where VCG (or approximately VCG) payments are also in the Core (see Section \ref{sec:the_core_definition}) thus offering increased robustness properties against coalition strategising \citep{SESSA2017189,DBLP:journals/corr/abs-2012-05047,8264596}.
-Additionally there is specific VCG redistribution mechanisms discussed in the electricity context, particularly: such as using deep-learning to derive VCG redistribution rules in the context of EV bidding into a local energy market, as considered by \cite{9615367}, or as a means of redistribution to minimise budget imbalance, such as described by \cite{8651383}.
-
-
-
-
 \subsection{Summary and discussion of VCG}\label{subsec:summary_discussion_VCG}
 
 The VCG mechanism frames a elegant ethical schema for distributive payments and is directly applicable to electricity systems.
 Although it is incentive compatible, the primary practical draw-back to such a system is that it is not budget-balanced.
-Unfortunately there is no easily implementable system that is like VCG which is incentive compatible and budget-balanced without forcing participants to potentially trade at a loss.
+Unfortunately there is no easily implementable system that is like VCG that is incentive compatible and is budget-balanced without forcing participants to potentially trade at a loss.
 
 Notwithstanding it is a possible scheme for the trading of electricity and electric resources, and in the following chapter we will compare the allocations of power/money in randomly generated networks under VCG against other schemes.
 
-One of the most central features about VCG, is that it is one of the most direct expressions of marginal payments - in that each participant is payed the marginal difference their presence causes to the well-being of the other participants in a utility maximising process.
-This marginal difference consideration is shared by two other solutions of this chapter, particularly Locational Marginal Pricing (LMP) (section \ref{sec:solutions_LMP}) and Shapley Value (section \ref{subsec:the_shapley_value}).
+One of the most features about VCG, is that it is one of the most direct expressions of marginal payments - in that each participant is payed the marginal difference their presence causes to the well-being of the other participants.
+This marginal quality is shared by two other solutions of this chapter, particularly Locational Marginal Pricing (LMP) (section \ref{sec:solutions_LMP}) and Shapley Value (section \ref{subsec:the_shapley_value}).
 
-One of the most notable qualities of VCG is that when it is scaled up to large numbers of participants (and no specific participants are particularly influential) then VCG often limits to another solution concept called Locational Marginal Pricing, which often is budget balanced --- see \cite{NATH2019673, 8430852}.
+One of the most notable qualities of VCG is that when it is scaled up to large numbers of participants (and no specific participants are particularly influential) then VCG often limits to another solution concept called Locatinal Marginal Pricing, which often is budget balanced --- see \cite{NATH2019673, 8430852}.
 
 
 \section{Locational marginal pricing}\label{sec:solutions_LMP}
@@ -207,8 +170,8 @@ There is potentially no greater framework for describing nominal market pricing 
 
 The idea that normal market trading should have any relation to moral trading was seen in John Locke's short essay Venditio where it is argued that a fair price for something is simply its normal market price at its location.\footnote{``... the market price at the place where he sells. Whosoever keeps to that in whatever he sells I think is free from cheat, extortion and oppression, ...'' \citep{locke2003locke}}
 John Locke argues for this thesis, by considering that negotiating above market price for a good would be unethical primarily because any transaction would be taking advantage of ignorance or special circumstances of the buyer.
-Conversely, negotiating below market price for a good would only incentivise reselling and allow others to profit at the original seller's loss, or alternatively, that selling below market price only to those who are needy is certainly a charity and hence cannot be required by justice.
-By these considerations, justice only requires offering no more than the same nominal market price for everybody.
+Conversely, negotiating below market price for a good would only incentivise reselling and allow others to profit at the original seller's loss.
+Additionally, that selling below market price only to those who are needy is certainly a charity and hence cannot be required by justice, but that justice only requires offering no more than the same nominal market price for everybody.
 
 While John Locke's arguments may or may not be convincing, it is useful to consider the transactions and pricing that would occur under idealised or normative euvoluntary trading as these prices might be considered moral in-themself (by Locke's argument), or provide a back-drop for the framing of more moral trading.
 In section \ref{sec:solutions_bargaining} we consider mathematical schemas used to describe idealised normative bargaining between small numbers of participants, but in this section we describe some economic theory that has been used to describe normalised trading between large numbers of market participants.
@@ -221,7 +184,7 @@ However, the way in which these factors have been seen to influence (or define) 
 
 In the history of economic thought, there was some general idea that the economic value of something (and hence its normal market price) should, in some way, be related to its usefulness in fulfilling human needs (however fickle or not) as things which are utterly useless seldom fetch any price.
 %Even so far as to categorising into numbered classes different goods depending on their relation to satisficing needs (eg. \cite[Chapter 1]{mengerprinciples}).
-%Such as where different needs (eg. hunger) require first-order goods (eg. bread) to satisfy them, and those require second-order goods to provide (eg. flour to make bread), and so on. 
+%Such as where different needs (eg. hunger) require first-order goods (eg. bread) to satisfy them, and thoes require second-order goods to provide (eg. flour to make bread), and so on. 
 But, above this, there was a difficulty explaining how it was that things which were most useful to satisfying needs often had little economic value, and things which were more useless were sometimes most economically valuable. This apparent contradiction is known as the water-diamond paradox, best put by Adam Smith:
 
 %\begin{displayquote}
@@ -272,7 +235,7 @@ This kind of marginal analysis is a short sketch of the analysis and treatment i
 This marginalist analysis is also widely regarded to resolve the water-diamond paradox, in that water is cheap because its marginal unit is cheap to produce.
 
 Over time the marginalist synthesis was developed more comprehensively in the presence of many discussions and criticisms.
-Particular criticisms attack the academic assertion that market participants are psychologically driven by rational utility maximisation (such as \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307})\footnote{individual traders may be partially driven by irrationality such as fear, ignorance, gambling}, and the more pragmatic assertion that markets are approximately ideal and tend towards the stability of equilibrium (such as \cite{nla.cat-vn5739105})\footnote{as might be most directly witnessed in markets where is inherent uncertainty, notably in speculative markets such as stocks, housing and crypto-currency}.
+Particular criticisms attack the academic assertion that market participants are psychologically driven by rational utility maximisation (such as \cite{RePEc:ucp:jpolec:v:58:y:1950:p:307})\footnote{individual traders may be partially driven by irrationality such as fear, ignorance, gambling}, and the more pragmatic assertion that markets are approximately ideal and tend towards the stability of equilibrium (such as \cite{nla.cat-vn5739105})\footnote{as might be witnessed in markets where is inherent uncertainty, notably in speculative markets such as stocks, housing and crypto-currency}.
 
 \input{figs/demand_supply.tex}
 
@@ -301,7 +264,7 @@ The general development of the mathematics is slightly beyond our scope here, bu
 \item Form an optimisation problem for utility maximisation with appropriate conservation constraints
 \item Solve the optimisation problem, and record the Lagrange multipliers of the conservation constraints as shadow prices.
 \end{enumerate}
-This process, of using calculus to determine nominal prices has been proposed in the electricity space - such as by \cite{lmp1, lmp2, lmp4, game3}.
+This process, of using calculus to determine nominal prices has been proposed in the electricity space in recent years - such as by \cite{lmp1, lmp2, lmp4, game3}.
 Particularly as the process of maximising utility on an electricity grid is a well known problem called the `Optimal Power Flow' problem (OPF), where the power conservation constraint at each bus of the network, identifies the marginal price of electrical power on that bus.
 This particular scheme is called `Locational Marginal Pricing' (LMP); and we will investigate and compare against it against other solutions in section \ref{sec:features}.
 
@@ -309,37 +272,7 @@ Particularly, we note that LMP has been implemented for real-time-pricing of tra
 And that although LMP is like VCG in that it is ultimately not budget balanced, unlike VCG there are specifically identifiable cases where budget imbalance occurs, particularly in the context of network \textit{congestion} - see \cite{lmp2}.
 
 
-
-
-\subsection{Applications of Locational Marginal Pricing to electricity systems}
-
-In the historical context of power systems, one of contested and contrasted options in electricity market structure was Discriminatory/Pay-As-Bid-Pricing and Uniform/Marginal Pricing.\citep{wolfram1999electricity,comparrison1,HAGHIGHAT2012350,griffin2009electricity,su13063429,FABRA200272}
-In the electricity market context, generator companies `bid' into a system an offer consisting of what amount of power/s they can supply and at what amount they expect to be paid for the respective dispatch.
-This can occur in a day-ahead market structure, where a central and Independent System Operator (ISO) collects bids and accepts them to meet anticipated demand the following day.
-The primary question between Pay-As-Bid and Marginal Pricing is if the generator companies who's bids are accepted should simply be paid their monetary bid amount, or should directly be paid the cost of the marginal unit of power dispatched.
-
-While it may initially seem as if Pay-As-Bid pricing would be most reasonable, it is demonstrated that strategic equilibrium in the bidding of generator companies should ideally yield the respective Marginal Pricing values anyway (as already indicated in section \ref{subsec:marginal_price_sketch} and demonstrated in \cite{klemperer1999auction}).
-In this way, the question between Pay-As-Bid and Marginal Pricing is if the market operator should shortcut the strategising of generator companies, and thus afford the marginal prices directly.
-
-This discussion between Pay-As-Bid-Pricing and Marginal Pricing was mostly discussed throughout the deregulation process of electricity networks that occurred in many countries throughout the 80's to the 2000's \citep{deregulation}, and was also reconsidered in the aftermath of the California electricity crisis. \citep{california1,KAHN200170}
-However, in real terms, Marginal Pricing of some sort is more the commonly implemented rule, as opposed to Pay-As-Bid, and a centralised Marginal Pricing rule is a direct precursor to a locationally variant Marginal Pricing rule - that is, Locational Marginal Pricing (LMP).
-
-However with the implementation of LMP, there are additional factors that may need to be addressed in practical settings, such as:
-\begin{itemize}
-\item	 LMP schemes can be considered to various levels of refinement, such as between zonal and nodal levels \citep{WANG2015695,zonal} where the degree of refinement and the boarders between zones potentially have practical and social consequences, and influence computational difficulty in the calculation.
-\item	LMP is inherently built upon an electrical network optimisation scheme which potentially includes various elements of complexity. For instance, LMP prices can be built upon a DC approximation model of electricity flow (it computationally the more simple), but in principle various AC models (and their relaxations) are possible candidates. \citep{Wang1}
-\item	LMP method does not directly incorporate or account for discontinuous variables. This factor is most notable in the Unit Commitment (UC) stage of generators scheduling to meet demand, as generator state cannot always be continuous (such as on/off state). For these discontinuous parameters, LMP prices can be supplemented by side payment methods to support the dispatch of power. There exists discussions about different  schemes to calculate and organise these side-payments. \citep{8871218,johnson1997equity}
-\item	Locational Marginal Prices vary over time and between zones/nodes of the network which are subject to congestion and whereby congestion rents are extracted. These congestion rents need to be redistributed and secondary markets may be implemented for these as a consequence, notably Financial Transmission Rights (FTR) auction processes. 
-Financial Transmission Rights are financial instruments which ISOs offers to generator companies to hedge against LMP volatility \citep{ftr_article1}, these FTRs then alter the pricing landscape in electricity network context which then has potential secondary effects. \citep{WU2022121893}
-\item	LMP is static for a single timeframe and is not completely incentive compatible, and these factors yield real world strategising in electricity markets \citep{hu2005empirical,dungey2018strategic}, and this is most notably true around the mechanism of revising bids or `rebidding', over a finite time horizon \citep{8054716}.
-\item	LMP is tacitly based on full and static information, and although there is some attempt to integrate uncertainty into the marginal price mechanism itself \cite{9299487,8910409}, there is a broader discussion about different ways to accommodate uncertainty from historical data into the design and operation of electricity systems generally \citep{en15030825}. In-practice the value of short-term demand/supply uncertainty and imbalance is not reflected in Locational Marginal Prices, but can be addressed via secondary ancillary support markets - such as providing frequency stability.\citep{ELA201651}
-\end{itemize}
-
-These considerations extend primarily from there being factors (discontinuous, diachronic, probabilistic, etc.) that are outside of the Marginal Pricing calculus that cannot (or are not often, or easily) incorporated, thus adding to the complexity of LMP in real-world markets.
-Notwithstanding these considerations, LMP has particular advantages such as its ability to be computed and its linkage to economically relevant rationale, that means that it is actually implemented over other schemes in practice \citep{zonal}, and serves us as a benchmark to compare other schemes against. 
-
-
-\subsection{Summary and discussion of Locational Marginal Pricing}
+\subsection{Summary and discussion of locational marginal pricing}
 
 Locational Marginal Pricing is a historic example of an economic framework of integrating market conditions (supply and demand information) to give equilibrium price points.
 It can be seen to provide a description of normal trading value, and thence (perhaps) moral trading value.
@@ -391,7 +324,7 @@ In these cases, if everybody works together to achieve some maximal sum of money
 One of the most natural divisions is that every subgroup should be given at least more than they could feasibly achieve by working for by themself as a group.
 And this is an allocation most naturally described by the \textit{Core}.
 
-\subsection{The Core}\label{sec:the_core_definition}
+\subsection{The Core}
 
 The Core is an example solution concept for cooperative games, in that for any set of players $N=\{1,2,\dots n\}$ and any characteristic function $v: S\subseteq N \rightarrow \mathbb{R}$ with $v(\emptyset)=0$, the Core is a set of possible payoff allocations to each of the players $C(v)$ in which each subgroup is given at least the value of the characteristic function for that subgroup:
 
@@ -491,38 +424,26 @@ It is also simple enough to verify that the cooperative game is convex.
 
 Cooperative game theory concepts centre on the consideration of groups and how reward or surplus utility should be divided among members, and particularly the Shapley Value is most famous.
 
-Indeed the Shapley Value has been considered as a potential mechanism for pricing in the various facets of electricity system operation. Such as: 
-\begin{itemize}
-\item	Credits in demand response participation \citep{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}
-\item	Compensation for the aggregation of power \citep{Perez-Diaz:2018:CEV:3237383.3237484,6520960}
-\item	Allocating transmission costs and losses \citep{ip-gtd_20020005,SHARMA201733}
-\item	Dividing profits for retailers and \citep{ACUNA2018161,WANG201972}
-\item	Allocating surplus and savings in microgrids \citep{WU2017384,LOPRETE2016524}
-\item	Sharing costs in distribution and embedded networks \citep{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}
-\end{itemize}
+Indeed the Shapley Value has been considered as a potential mechanism for pricing in the various facets of electricity system operation.
+Such as: demand response participation \citep{DBLP:journals/tsg/OBrienGR15,electronics8010048,WANG201972}, compensation for the aggregation of power \citep{Perez-Diaz:2018:CEV:3237383.3237484,6520960}, allocating transmission costs and losses \citep{ip-gtd_20020005,SHARMA201733}, allocating profits for retailers and \citep{ACUNA2018161,WANG201972}, allocating surplus and savings in microgrids \citep{WU2017384} and allocating costs in distribution and embedded networks \citep{archie_paper1,8226810,10.1007/978-3-642-40776-5_19,6840296,DBLP:journals/corr/abs-1903-10965,AzuatalamCV_PowerTech2019}.
 
 In each of these cases, the primary difference is the context of application and the specific way in which the characteristic function is constructed.
 
-The Shapley Value has notable strengths and weaknesses, particularly the simplicity of its axioms have obvious appeal, and similar to LMP and VCG it is a more expansive marginalist approach (as it is expressible the an average over a larger range of marginal contributions by equations \ref{shap2} or \ref{shapley_value3}).
-However a primary drawback of the Shapley Value in practice is the difficulty of computing it as calculating all of the marginal contributions of all players to the $2^n-1$ possible coalitions is identified as being rapidly difficult to scale to sizes of participants on realistic networks.
-This drawback has attracted attention and attempts at remediation, such as employing techniques of sample-bassed approximations (see citations in Section \ref{sec:shapley}) or approaches that employ techniques like player clustering \cite{DBLP:journals/corr/abs-1903-10965}.
+Just like in LMP and VCG, the Shapley Value is also evidently a marginal approach, as it is expressible the an average marginal contribution across possible groups (by equations \ref{shap2} or \ref{shapley_value3})
 
 %Informally the difference between VCG, LMP and the Shapley Value can be seen as a difference between the allocation of reward: equal to contribution to the grand coalition, in-proportional to marginal contribution to the grand coalition, or equal to contribution not just to the grand coalition.
 
-Shapley Value approaches may or may-not suffer other disadvantages depending on context, such as being incentive incompatable, privacy preserving, or having envy-freeness, however the primary weakness of the Shapley Value approach is that it only applies when there is a coherent conception of a characteristic function.
-That is, (as identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}) cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
-Unfortunately in a meshed electricity network with a confluence of electricity details and a range of strategies available to each of the participants, such a notion of `worth' may not be very obvious.
+There there is much more which could be said about cooperative game theory, but as identified in the quote by Lloyd Shapley at the beginning of this section \ref{sec:cooperative_game_theory_part}, cooperative game theory is most applicable when the `worth' or `value' of a coalition is unambiguous, and when specific strategic considerations between the coalitions are unimportant (or are otherwise accounted for).
 Thus in the next section \ref{sec:solutions_bargaining} we consider some solution concepts which apply in circumstances where it is not easy to describe the `worth' or `value' of a coalition of players; where strategic considerations between them are important and it is not easy to make sense of a characteristic function.
-Particularly, we describe bargaining solution concepts.
+Particularly we describe bargaining solution concepts.
 
 
 \section{Bargaining solution concepts}\label{sec:solutions_bargaining}
 
-In our discussion of Locational Marginal Pricing in section \ref{sec:solutions_LMP}, we considered one way of describing normalised pricing in large markets.
-However in this section we consider some of the various ways of describing normalised pricing among a small number of market participants where their individual strategic options are relevant.
+In discussing Locational Marginal Pricing (in section \ref{sec:solutions_LMP}), we considered a way of describing normalised pricing in large markets, however in this section we consider some of the various ways of describing normalised pricing among a small number of market participants where their individual strategic options are relevant.
 
 Particularly, we consider the situation where there are a small numbers of market participants negotiating over a set of possible outcomes.
-In this context we consider the question about what the likely outcome of an idealised bargaining process would be.
+In this context, we consider the question about the likely outcome of their bargaining process.
 
 %In the first section of this chapter (section \ref{sec:solutions_VCG}) we considered the VCG solution, which allocates utility to a participant with respect to their contribution above their absense.
 %And in the previous section (section \ref{sec:solutions_LMP}) we considered Marginal Pricing, which allocates utility to participants in proportion to their marginal absense.
@@ -536,7 +457,7 @@ We begin with one of the most historic classes of bargaining solution concepts, 
 
 %This space of possible agreements may be over any variety of factors such as monetary transactions and electrical power flows etc, and hence it can be directly be made applicable for electricity networks.
 
-A bargaining solution concept applies in a situation where there are a number of parties (or agents, or market participants) and a space of possible outcomes which those agents can reach by bargaining and which each of them may value differently.
+A bargaining solution concept applies in a situation where there are a number of parties (or agents, or market participants) and a space of possible outcomes which those agents can reach by bargaining; and which each of them may value differently.
 In this context, a bargaining solution concept identifies an outcome, which may be interpreted as one which the agents `will' (or `should') reach.
 Perhaps the most famous bargaining solution concept is called the Nash-bargaining solution concept.
 
@@ -548,7 +469,7 @@ Additionally there is a privileged outcome called the `disagreement' outcome $d$
 Nash identified that in this case there is a unique solution satisfying some very intuitive axioms:
 \begin{itemize}
 \item \textit{Invariant to affine transformations}: that the solution should not change if the utilities of any of the players are scaled (by some positive factor) or offset, ie that they are invariant under the set of affine transformations% that might also represent their relative preferences.
-\item \textit{Pareto optimality}: That there will not exist another solution point that is weakly better than the solution for all players, and strongly better for atleast one player.
+\item \textit{Pareto optimality}: That the solution will not be inferior to any other point in the preferences of all players.
 \item \textit{Independence of irrelevant alternatives} (IIA): If any subset of potential outcomes does not feature the solution point or the disagreement point, then it could be removed from consideration without affecting the solution.
 \item \textit{Symmetry}: The solution is invariant with regards to the ordering of the players.
 \end{itemize}
@@ -616,7 +537,7 @@ We consider the space of possible payoffs between the players in the game for mi
 %We observe that a point within the shaded region will be chosen by the players as a threat point.
 %And then we ask what threat point will be a nash equilibrium between the players if they subsequently get the payoff given by the nash product (equation \ref{nash-product}).
 and note that if the pure strategy payoff $(-1,-2)$ within the shaded region was chosen as the threat point by the players (highlighted by a black point; corresponding to the payoff in game row 1 \& column 2), then the subsequent payoff to the players would be $(2,1)$, since it is the point within the shaded region that maximises the product of utilities above $(-1,-2)$ (per equation \ref{nash-product}).
-We also observe that the $(-1,-2)$ is a Nash equilibrium as a choice of threat point, as if the column player chose the alternate column 1 instead, then the threat point would be $(2,1)$ which would effect the same outcome, and if the row player chose the alternate row 2 then the threat point would be $(1,2)$ which would be worse for the row player.
+We also observe that the $(-1,-2)$ is a Nash-equilibrium as a choice of threat point, as if the column player chose the alternate column 1 instead, then the threat point would be $(2,1)$ which would effect the same outcome, and if the row player chose the alternate row 2 then the threat point would be $(1,2)$ which would be worse for the row player.
 In this way it is seen that $(2,1)$ is the Nash bargaining solution for this game.
 \end{solution}
 \vspace{2mm}
@@ -672,51 +593,19 @@ In the following Chapter \ref{cha:new_solution} we explore this question by deve
 %It is also good to note that Nash's threat point is unique only in the two player context, for three or more players there can exist multiple Nash equilibrium in the selection of threats.\cite{10.2307/43616981}\\
 
 
-
-
-\section{Envy-Free systems}\label{sec:envy_free_systems}\label{sec:envy_free_solutions}
-
-In Section \ref{sec:envy_free_philosophy} we introduced the concept of envy-freeness at a conceptual level; envy-freeness is a general condition of allocation where every person prefers their own bundle of allocated resources to that allocated to everyone else.
-However there are multiple questions in-practice in allocating resources in an envy-free manner, and one of the primary questions is what the bundles of resources are.
-
-In the most simple case, that of the simple divisible homogeneous good that is valued monotonically by all players, the only envy-free allocation is an equal allocation of the good between all participants, which is not neurally an outcome that maximises utilitarian efficiency, but potentially straightforward to implement and has an obvious egalitarian appeal. \cite{FEIGE2014305}
-Adding transferable utility transactions to the bundles allows envy-free allocation of equal utilities to all participants.
-
-For practical purposes, the bundles of resources can include more interesting elements, for instance, in the context of the supply of homogeneous Electricity to consumers, adding uncertainty over the supply creates more complex case, where \textit{ex-ante} envy-freeness can be considered.\cite{DBLP:conf/atal/BurmannGR20}
-Or as another example the authors of \cite{7377110} consider envy free allocations in the context of selling homogeneous electricity surplus, together with a convex pressure to sell parameter $\alpha$ per player.
-Another electricity example application of envy-free concepts is in the allocation and evaluation of load-shedding algorithms \cite{10.1007/s10458-019-09428-8} where maximum envy difference is considered as a target for minimisation and a metric of evaluating performance.
-In these contexts optimising for envy-freeness can impart utilitarian social cost, the so called `price of envy-freeness' \cite{DBLP:journals/ior/BertsimasFT11}.
-
-In these these and other electricity contexts, the envy-freeness condition can act as a constraint on possible allocations reducing them to a set of consistent possibilities, Then there is a secondary question about which of these is most appropriate to be implemented. Such as (per previous examples) may be Pareto efficient, utility maximising, or maximising the wellbeing of the worst off; particularly, there is an extant body of literature examining Pareto-efficient envy-free allocation (PEEF) \cite{WELLER19855,COLE2021105207,VARIAN197463},
-
-Another dimension of envy-free allocation in practice, is the degree to which the respective envy-free allocation is truthful or \textit{incentive compatible} for the participants.
-The consideration of true strategy-proof envy-freeness was first considered in the context of cake-cutting \cite{CHEN2013284}, but further investigation has established several restricted impossibility proofs surrounding the concept under various conditions \cite{10.5555/3172077.3172396,10.1007/978-3-319-13129-0_1,10.5555/2891460.2891537}
-A secondary question is thus, how likely are envy-free allocation mechanisms likely to perform under strategising agents, and then specifically in such conditions as may be present in electricity contexts.
-
-Another dimension is which specific conception of envy-freeness is most appropriate in practice. So for instance, should allocation optimise envy-relations between all consumers or between local consumers (such as graph envy-free conditions - see Section \ref{sec:envy_free_philosophy}), or how should envy-relations be considered between resource bundles and consumer which by happenstance cannot feasibly consume them, should measures be envy-free or only envy-minimising and if-so at what cost to social or utilitarian efficiency.
-In this way there is a range of social possibilities in designing envy-free systems in practice.
-
-Unfortunately, at this stage, there is no well established singular way of trading resources such as electrical energy that is envy-free, quite as much as envy-freeness is a desirable property sometimes witness in various mechanisms that are sometimes discussed in an electricity context.
-An implementation of the envy-free condition in electricity systems may or may not have other advantages and drawbacks, such as incentive compatibility, budget-balance, Pareto-efficiency, and may or may not be computable and scalable to the sizes of realistic networks (particularly as computation difficulty is potential drawback, as identified in section \ref{sec:envy_free_philosophy}).
-
-
-
-
 \section{Comparison \& summary}
 
-In this chapter we have explored five different ways in which ethical ideas about distribution can be mathematised, and each of them have different features and encode different moral perspectives.
+In this chapter we have explored four different ways in which ethical ideas about distribution can be mathematised, and each of them have different features and encode different moral perspectives.
 
-Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locational Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts, and envy-free applications.
+Specifically we have introduced and illustrated the Vickrey-Clarke-Groves (VCG) mechanism, Locational Marginal Pricing (LMP), the Shapley Value, and Nash bargaining solution concepts.
 Each of the ideas embody different rules and respect different moral reference points.
 
 And as identified by the philosophy of the previous chapter, none of these solutions are simply right or wrong per sei; but each have their features and limitations, and hence have arenas where they are potentially more suitable than others.
-We note that the approaches discussed in this chapter can encode different ways of valuing resources in their context.
-Because these different approaches are defined in a generalised context and thus can apply to many different contexts within electricity network systems.
-Additionally, because of these approaches beging defined in a generalised context, each of them can be adaptable to any relevent set of quirks or facets of the system to which they are applied, and thus sensitive to any confluence of elctrical system considerations.
-The broad issues facing real-world electricity systems (such as detailed in Chapter \ref{cha:intro}) may or may not be reduced or exacurbated by any of approaches applied to particular electrical system subproblem. However in the next chapter we attempt to create a entirely new approach to the valuation of resources such as may be relevent to electricity systems.
 
 One particularly interesting feature of the Nash-bargaining solution is that it considers the minimax payoff advantage as a measure of competitive strength between participants, and it allocates utility accordingly.
 However the Nash bargaining solution is limited to two players, as for three (or more) players there may not exist a unique zero-sum minimax value.
-In the following chapter \ref{cha:new_solution} we construct an extension of Nash bargaining solution called the GNK value, that is built around Shapley Value axioms; and compare it to LMP and VCG in the context of the immediate generation/consumption of electrical power on electricity networks.
+In the following chapter \ref{cha:new_solution} we construct an extension of Nash bargaining solution called the GNK value, that is built around Shapley Value axioms; and compare it to LMP and VCG in the context of electricity networks.
+
+
 
 

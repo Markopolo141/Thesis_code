@@ -1,87 +1,70 @@
 \chapter{The GNK value: A new solution}
 \label{cha:new_solution}
 
-In the previous chapter we introduced several different solution concepts, each stemming from different ethical principles and perspectives.
-In this chapter we detail a new approach that combines some of the features of the solution concepts outlaid in the previous chapter.
-The primary motivation for this new solution, is to attempt to distil the intuition behind the Nash bargaining solution concepts (per section \ref{sec:solutions_bargaining}) into a description of total allocation that is suitable for arbitrary number of players - rather than just two.
-Our solution extends the work of others to the space of generalised non-cooperative games, which are then suitable for application in various electrical network contexts.
+In the last chapter we introduced several different mathematical approaches to the problem of allocation and in this chapter we introduce a new solution that builds upon some elements of the previous solutions.
 
-Our solution relates to many of the concepts of the previous chapter: where we have a fundamentally coalitional scheme (per Coalitional Game Theory), that rewards based upon disagreement points (Bargaining Theory), which is partially informed by how much individual's participation influences the group's wellbeing (reminiscent of VCG), and attempts to describe normative trading between large numbers of participants (Marginalism).
+Particularly we develop a solution concept that extends Nash bargaining with endogenous disagreement point (from section \ref{sec:solutions_bargaining}) to a solution concept accommodating arbitrary numbers of players.
+Our solution extends the work of others to the space of generalised non-cooperative games, which are then suitable for describing various electrical network contexts.
 
-We call our new solution concept the \textit{Generalized Neyman and Kohlberg Value} or \textit{GNK value} for short, and is computed and directly compared against other solutions concepts of the previous chapter in the context of electricity allocation.
+We call our new solution concept the \textit{Generalized Neyman and Kohlberg Value} or \textit{GNK value} for short, and is computed and compared against other solutions concepts of the previous chapter in the context of electricity allocation.
 By this comparison it is seen that the different solution concepts give different outcomes, and we discuss these differences in light of our ethical considerations (from Chapter \ref{cha:background}).
 
 The material from this chapter extends from work which was originally submitted to AAMAS, and was accepted as an extended abstract: \\
 \-\hspace{5mm}``The Generalized N\&K Value: An Axiomatic Mechanism for Electricity Trading''\\ International Conference on Autonomous Agents and Multiagent Systems\\ (AAMAS) 2018 (accessible: \href{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf})
 
-This chapter consists of the following parts:
 
-\begin{itemize}
-\item	In sections \ref{sec:prelude_gnk} and \ref{the_value_def2}, we introduce and define the GNK value, relating it to historical roots and similar solution concepts.
-\item	In section \ref{more_involved}, we consider how the GNK value can be computed to derive financial and electrical outcomes on a DC electricity network, against LMP and VCG.
-\item	In section \ref{sec:features}, we point-by-point discuss the features GNK, LMP and VCG as they are expressed in the context of an example electricity network.
-%\item	in section \ref{sec:scaling} we address the possible ways of remedying the GNK value for computation in larger network contexts, particularly via the use of sampling to approximate its value, and by the adoption of a proxy for the GNK inner optimisation (which we denote as the M-GNK).
-%\item	in section \ref{sec:results_and_evaluation_of_GNK}, we detail computation and the efficiency of computation of the sampled M-GNK value for larger networks, and discuss its shortcommings for an example computed larger network.
-%\item	in section \ref{sec:GNK_extensions_discussion} and the concluding section \ref{sec:GNK_value_discussion}, we discuss possible extensions to the GNK concept and compare it point-by-point with ethical qualities.
-\end{itemize}
+\section{Prelude to the GNK value}
 
-We identify that the GNK value is difficult to compute for large numbers of players, and so in the next chapter \ref{sec:scaling} we address and consider the GNK value at scale against ethical criteria.
+In the previous chapter we introduced several different solution concepts, each stemming from different ethical principles and perspectives.
 
-%\begin{itemize}
-%\item Derive the GNK value (section \ref{the_value_def2})
-%\item Apply it to DC networks (section \ref{more_involved})
-%\item We discuss some of its qualities (section \ref{sec:features})
-%\item Before discussing techniques to scale it (section \ref{sec:scaling})
-%\item Then evaluating it at scale (section \ref{sec:results_and_evaluation_of_GNK})
-%\item And then conclude with an ethical evaluation (section \ref{sec:GNK_extensions_discussion})
-%\end{itemize}
+In this section we detail a new approach that combines some of the features of the solution concepts outlaid in the previous chapter.
+The primary motivation for this new solution, is to attempt to distil the intuition behind the Nash bargaining solution concepts (per section \ref{sec:solutions_bargaining}) into a description of total allocation that is suitable for arbitrary number of players - rather than just two.
 
 
-%derive the GNK value (section \ref{the_value_def2}) before applying it to DC networks (section \ref{more_involved}), we discuss its qualities (section \ref{sec:features}), before discussing techniques to scale it (section \ref{sec:scaling}), before evaluating it at scale (section \ref{sec:results_and_evaluation_of_GNK}) and concluding with ethical evaluation (section \ref{sec:GNK_extensions_discussion})
 
+In the Nash bargaining solution concept, the minimax payoff advantage between two parties is considered as a measure of bargaining strength between them, and so in our new solution we consider the minimax payoff advantages that could occur in bargaining between all possible coalitions of players.
+Our new solution then allocates power and utility to players directly in proportion to these bargaining strengths using Shapley Value axioms.
+In this way our new solution allocates utility in proportion to the leverage that all the individuals - and groups of individuals - could hypothetically posses in bargaining for outcomes they desire.
 
-%Particularly:
-%\begin{itemize}
-%\item	in sections \ref{sec:prelude_gnk},\ref{sec:introduction_gnk_sec},\ref{the_value_def2}, We introduce and define the GNK value at a conceptual and mathematical level, relating it to historical roots and similar solution concepts.
-%\item	in sections \ref{more_involved} we consider how the GNK value can be applied to derive financial and electrical transactions on a small example electricity network, and outlay the procedures for its computation alongside LMP and VCG in this context.
-%\item	in section \ref{sec:features} we point-by-point discuss the features GNK, LMP and VCG as they are expressed in the context of the small example DC electricity network. particularly we pay attention to the fact that the GNK value is computationally difficult to compute for larger networks.
-%\item	in section \ref{sec:scaling} we address the possible ways of remedying the GNK value for computation in larger network contexts, particularly via the use of sampling to approximate its value, and by the adoption of a proxy for the GNK inner optimisation (which we denote as the M-GNK).
-%\item	in section \ref{sec:results_and_evaluation_of_GNK}, we detail computation and the efficiency of computation of the sampled M-GNK value for larger networks, and discuss its shortcommings for an example computed larger network.
-%\item	in section \ref{sec:GNK_extensions_discussion} and the concluding section \ref{sec:GNK_value_discussion}, we discuss possible extensions to the GNK concept and compare it point-by-point with ethical qualities.
-%\end{itemize}
+Our approach straightforwardly relates to many of the concepts of the previous section: where we have a fundamentally coalitional scheme (per Coalitional Game Theory), that rewards based upon disagreement points (Bargaining Theory), which is partially informed by how much individual's participation influences the group's wellbeing (reminiscent of VCG), and attempts to describe normative trading between large numbers of participants (Marginalism).
 
-%After this chapter, the next Chapter \ref{chap:stratified_sampling_chapter} details our investigation into novel sampling methods which are which are used to scale the GNK value in section \ref{sec:scaling}.
+%much more than they are necessarily prescriptive outcomes of an idealised ethics.
+%Though the two (ideal competitive outcomes and ethical outcomes) may be related, or even identical in certain contexts - such as where no particular ethical principles apply or the purpose of the engagement is the competition (such as in sports).
+%And it is in this same way that the Marginalism outlined in Section \ref{} is often primarily treated usually begin descriptive than prescriptive.
 
-\section{Introduction to the GNK value}\label{sec:prelude_gnk}\label{sec:introduction_gnk_sec}
+%However there is a line of ethical thinking that idealises competition as being associated-with or determining appropriate ethics; as we consider in Section \ref{}, and for those inclined to think that way then our solution is all the more relevant.
+%In anycase, the process of crafting better (or different) descriptions of competitive outcomes is not to be feared, as it may be usefull for describing situations as they might occur under free competition, or as a starting point for implementation in arenas without or prior-to relevant ethical concerns.
 
+Let us begin.
 
-How should we model ideal competition? In the two player case, existing bargaining solutions (such as Nash's) seem rather difficult to surpass as they describe a singular and axiomatic outcome that is both cooperatively Pareto optimal and also accounts for anti-cooperative strategising.
+\section{Introduction to the GNK value}
+
+How should we model ideal competition? In the two player case, existing bargaining solutions (such as Nash's) seem rather difficult to surpass as they describe a singular and axiomatic outcome that is both cooperatively pareto-optimal and also accounts for anti-cooperative strategising.
 
 In the context of Nash bargaining with endogenous disagreement point (per section \ref{subsec:nash_bargaining_endogenous}), the disagreement point was interpreted as a unique point defined by a minimax equilibrium in the payoff-advantage of strategies.
-However there exists a problem extending this scheme directly to three or more players, as there may not exist a unique minimax equilibrium in payoff-advantages for strategies in a game of more than two players.
+However there exists a problem extending this scheme directly to three or more players, as there may not exist a unique minimax equilibrium in payoff-advantages for strategies in a game of three-or-more players.
 The question then is how to logically and consistently extend Nash's bargaining solution with endogenous disagreement point to an arbitrary number of players.
 
 While it may be possible to arbitrarily choose one of those possible minimax equilibria in a 3+ person game as the disagreement point, 
 instead we consider all the possible divisions of players between two groups and then consider all the two-player minimax payoff advantages between them. We then integrate this information via Shapley Value axioms to form a unique outcome, that does not depend on any arbitrary choice.
-In this way our new solution allocates outcomes in proportion to the aggregate leverage that all the individuals - and groups of individuals - could hypothetically posses in bargaining for outcomes they desire.
 In the following sections of this chapter (sections \ref{the_value_def2} to \ref{more_involved}) we give all the details of this process.% Particularly we note that this process of how to reasonably extend Nash's bargaining solution to multiple players has a history.
 
 The fundamental idea behind our approach was first detailed by \cite{values3}.
 So far as we know, Harsanyi's solution concepts have never been applied to electricity networks, as there exists a particular problem in doing so, particularly that Harsanyi's solution concepts apply to non-cooperative games but cannot apply to generalised non-cooperative games.
-The details of this problem and our novel remedy are given in following section \ref{the_value_def3}.
+The details of this problem and our novel remedy are given in following sections.
 
-But briefly, in electricity network contexts the mutual interactions of participants can be limited by the physical constraint of the network, for instance: network participants cannot simply draw or push power to/from the network without restraint, as doing so would lead to damage to the network.
+But briefly, in electricity network contexts the mutual interactions of participants can be limited.
 And these limitations on the space of possible mutual actions is best modelled by a generalised non-cooperative game, and unfortunately in the context of such a generalised game there is no unique minimax point between two players.
 Our principle and novel development in this chapter is the provision of a remedy, such that Harsanyi's solution can then be applied.
+
 The remedy is to take the expected outcome on a coin-flip on who chooses actions first in the minimax strategies - and as we shall see - this turns out to be a unique value that satisfies all required properties, and thus leads to a coherent outcome.
 
 The resulting outcome we call the \textit{Generalized Neyman and Kohlberg Value} or the \textit{GNK value} for short, 
 as Harsanyi's solution was also axiomatically derived by \cite{value2,KOHLBERG2018139}.
-This solution concept is shown to apply for all transferable utility (TU) generalised non-cooperative games, and directly equivalent to the Nash bargaining with endogenous disagreement point under transferable utility (TU) between two players (such as per section \ref{sec:nash_bargaining_exogenous}, as in the example in that section).
-
+This solution concept is shown to apply for all transferable utility (TU) generalised non-cooperative games.
 The GNK value is thus flexible enough to extend to many contexts, but we focus particularly on the specific case of allocating monetary payments over Optimal Power Flow (OPF) instances under the DC approximation - as we will explain.
 
-Let us derive the GNK value (in section \ref{the_value_def2}) before giving details of its application to DC networks (in section \ref{more_involved}), discussing it (section \ref{sec:features}) and scaling it (section \ref{sec:scaling}).
+Let us derive the GNK value before giving details of its application.
 
 \section{Deriving the GNK value}\label{the_value_def2}
 
@@ -144,9 +127,8 @@ v'(S)=\frac{1}{2}v(S)+\frac{1}{2}v(N)
 %\begin{equation}\label{shap2} \varphi_i(\langle N,v\rangle) = \frac{1}{n}\sum_{k=0}^{n-1}\hat{v}_{i,k} \end{equation}
 %These multiple formulations of the Shapley value will be useful to us in Section \ref{} where we use these expressions in different methods of sampling the GNK value.
 
-A central question in \cite{KOHLBERG2018139}'s coalitional game of threats, is what the `threat' of a coalition of players $v(S)$ should be (such as on an electricity network), and one way of considering this is in relation to the actions that the coalition could exert and their consequences (positive and negative) over other players; such as may be described in non-cooperative game theory.
 
-\subsection{Defining threats in games with general action spaces}\label{the_value_def3}
+\subsection{Threats in games with general action spaces}\label{the_value_def3}
 
 In this subsection we define the characteristic function $v(S)$, in the context of a \textit{generalized non-cooperative game}.
 A generalised non-cooperative game is a game where the strategies available to one player may be restricted by the strategy choice of others.
@@ -217,31 +199,15 @@ while in the 2-player context, it is identical to \cite{kalai1,Kalai2010}'s \tex
 and also identical to \cite{nash2}'s bargaining solution in the context of transferable utility (see \cite{value2}, or section \ref{subsec:nash_bargaining_endogenous}).
 It also shares a conceptual similarity with \cite{aumann1961core}'s $\alpha$ and $\beta$ core solution concepts, and \cite{1944}'s historic formulation :
 \begin{equation}\label{knvalue3}v_m(S) = \max_{x\in A^S}\min_{y\in A^{N\setminus S}} \sum_{i\in S} u_i(x,y).\end{equation}
-In this way the GNK value can be seen as a conceptual continuation of historic solution concepts, and can be judged according to how well it derives outcomes in application contexts.
 
-As a simple example demonstration, it is possible to see how the GNK value is identical to Nash bargaining in the context of transferable utility games (such as in the example matrix game \ref{eq:example_game1} of section \ref{subsec:nash_bargaining_endogenous}), we calculate all the terms $v(S)$ for coalitions of players $1$ and $2$, particularly:
 
-\begin{align*}
-v(\{1,2\})=&\max\max\begin{bmatrix}3 & -3\\ -3 & 3\end{bmatrix}=3\\
-v(\{1\})=&\frac{1}{2}\min\max\begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix}+\frac{1}{2}\max\min\begin{bmatrix}1 & -1\\ 1 & -1\end{bmatrix}=1\\
-v(\{2\})=&\frac{1}{2}\min\max\begin{bmatrix}1 & -1\\ 1 & -1\end{bmatrix}+\frac{1}{2}\max\min\begin{bmatrix}1 & 1\\ -1 & -1\end{bmatrix}=-1\\
-v(\emptyset)=&-\max\max\begin{bmatrix}3 & -3\\ -3 & 3\end{bmatrix}=-3\\
-\end{align*}
-From this:
-$$ \varphi_1(\langle N,v\rangle)=\frac{1}{2}(v(\{1,2\})+v(\{1\}))=\frac{1}{2}(3+1)=2 $$
-$$ \varphi_2(\langle N,v\rangle)=\frac{1}{2}(v(\{1,2\})+v(\{2\}))=\frac{1}{2}(3-1)=1 $$
-Which matches exactly the result in section \ref{subsec:nash_bargaining_endogenous}. In section \ref{subsec:nash_bargaining_endogenous} we considered that the minimax in the payoff advantage matrix (ie. $d$ in that section) was the nash equilibrium point of threat in bargaining between the players in choosing a subsequent point on the Pareto frontier (see Figure \ref{fig:graph1_utilities}) that divides the maximum possible sum revenue (ie $s$ in that section).
-The GNK value also directly encodes this same logic as $v(\{1\})=-v(\{2\})$ is the minimax in the payoff advantage between the player (in this ungeneralised game), and $v(\{1,2\})$ is the maximum sum revenue which is split. This result is the same as we would get by the \textit{coco-value}, and working with Neyman and Kohlberg's value (equation \ref{knvalue2}).
-
-In the following section we describe the setup for an application and evaluation of the GNK value in the context of DC-approximated electrical networks.
-
-\section{GNK value computation on DC powerflows}\label{more_involved}
+\section{GNK value applied to DC powerflows}\label{more_involved}
 
 Because of its flexibility the GNK value has the potential to be used in a large range of different contexts,
-however in this section we focus solely on the development of a simple case --- the pricing of the immediate consumption and generation of power on a meshed network under DC approximation, where all participants have linear utilities over their own power.
+however in this section we focus solely on the development of a simple case --- the pricing the immeditate consumption and generation of power on a meshed network under DC approximation, where all participants have linear utilities over their own power.
 Although this construction simplifies away some key technical problems in power networks, it allows us to clarify the analysis of the GNK value and its features.
 
-In this section, we consider the DC network model, discuss how to calculate the GNK value as well as LMP and VCG for it, before in the next section \ref{sec:features} we discuss the features of these mechanisms with an example.
+In this section, we consider an example electricity network under DC approximation and show how the electrical consumption/generation of network participants can be modelled as a generalised game. And then give some details of a computational methods which can be used to compute the GNK value in this context.
 
 \subsection{Network model}\label{sec:the_setup}
 
@@ -289,12 +255,56 @@ In this DC powerflow network the participants on each bus are treated as players
 For simplicity, we have one player per bus (i.e.~$N=B$), and the power consumption of that bus is the respective player's strategy space (i.e.\ $A_i=[p_i^l,p_i^u]$).
 Then the DC constraints define the space of jointly executable strategies --- forming the generalised strategy space $A$.
 
-We further assume that there is a linear utility (or payoff) associated with the power consumption of each player, denoted $u_i(p_i)$ for player $i$, which makes all the components of a generalised game.\footnote{the Linear utility assumption simplifies the mathematics, as it makes the objective function linear, intuitively consumers should value consuming more power more, and generators cost producing more power more with some gradient.}
-We now consider how to calculate the GNK value against LMP and VCG for such a generalised game.
+We further assume that there is a linear utility (or payoff) associated with the power consumption of each player, denoted $u_i(p_i)$ for player $i$, which is all the components of a generalised game.
+In the next subsection \ref{sec:example_network} we give a simple example of such a game.
 
 
 
+\subsection{An example problem}\label{sec:example_network}
 
+As an example instance, we consider the toy 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}.
+From this example it is possible to calculate and subsequently consider the features of the GNK value against LMP and VCG.
+
+To this end, in sections \ref{subsec:LMP_compute1}, \ref{subsec:VCG_compute1} and \ref{subsec:gnk_compute1} we outlay procedures used to calculate the financial payments and dispatched powers under the GNK value, LMP and VCG respectively, against parameter $p_1^l$ (the generator capacity in the network).
+As a result of this calculation the financial payments are plotted against $p_1^l$ in Figures \ref{fig:1d}, \ref{fig:1f} and \ref{fig:1h} respectively. Which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1c}, \ref{fig:1e} and \ref{fig:1g} respectively.
+Subsequently, the features of all these plots are discussed in Section \ref{sec:features}.
+
+We begin by describing the process of calculating the LMP values for this example network before considering VCG and then GNK calculation methodologies; in the order of complexity.
+
+\input{figs/Electro_table.tex}
+
+
+
+\subsection{Computing the LMP transfers}\label{subsec:LMP_compute1}
+
+To compute the Locational Marginal Price (LMP) transfers for our example network, we follow a process described in various literature - such as by \cite{lmp1,lmp2}.
+Particularly we set up an optimisation problem of maximising the sum of utility subject to the power-flow constraints and then the Locational Marginal Prices are then identified as the Lagrange multipliers associated with the power conservation constraints on each bus.
+This process is just an application of the more general marginal price calculation procedure discussed previously in section \ref{subsec:marginal_price_sketch}.
+
+We consider maximising the sum of utility: $\sum_{i\in B} u_i(p_i)$ subject to the DC powerflow constraints in equations \ref{dcopf1}.
+In this context the power conservation constraints on each bus are the constraints $p_j = \sum_{(i,j)\in C}p_{i,j}$, and the lagrange multipliers associated with these constraints are the marginal prices for power on each of the respective busses.
+
+What is most notable about Locational Marginal Pricing, as witnessed here and elsewhere, is that it is computationally easier than other schemes as only one optimisation problem is needed to be solved.
+Because of this, there are many optimisation solvers which able to handle these optimisation problems, which also give the Lagrange multipliers of all of the constraints as a byproduct.
+
+The SCIP optimisation suite\footnote{development reported by \cite{MaherFischerGallyetal.2017}} was employed for the optimisation of our example network, and the results of the calculation are shown in Figures \ref{fig:1f} and \ref{fig:1e}.
+These figures show the utility transfers under LMP which each participant makes, and the net utility which each participant has after transfers are made under LMP respectively; the discussion and comparrison of these figures is given in section \ref{sec:features}.
+
+\subsection{Computing the VCG imputations}\label{subsec:VCG_compute1}
+
+Unlike LMP, calculating VCG payments for our example network involves solving multiple optimisation problems.
+From section \ref{sec:solutions_VCG} we see that the utility payment that each participant makes is their externality, where the externality is the difference that the participant's presence makes on the welfare of other participants.
+More specifically, the VCG payment that a participant makes is the difference between the sum of other's utility at the social optimum point $x^*$, and the utility that others would have if the participant were not present and the optimisation were only over the remaining participants, as seen in equation \ref{eq:VCG_payment_rule}.
+
+In this way the socially optimum value $x^*$ needs to be computed, and then additionally an additional optimisation problem for each player - where we assume that the excluded participant has power zero $p_i=0$. Thus in our context, equation \ref{eq:VCG_payment_rule} becomes:
+\begin{equation*} d_i(v)=\argmax_{\sum_{j} u_j(p_j)}\sum_{j\ne i}u_j(p_j) - \argmax_{\sum_{j\ne i} u_j(p_j), p_i=0}\sum_{j\ne i}u_j(p_j)\end{equation*}
+
+The first term in this equation is the sum of utilities at the point which maximises the sum of utilities minus the player $i$.
+The second term in this equation is the sum of other's utilities (ie. excluding player $i$) at the point which maximises the sum of other's utilities in the context that the players power is zero.
+The first part of the equation is common to all player's contributions $d_i$, but the second negative part is unique for each.
+In this way, if there are $n$ participants, there are $n+1$ comparable OPF optimisation problems which need to be solved to calculate VCG payments.
+The SCIP optimisation suite was used solving these optimisation problems (as similar to section \ref{subsec:LMP_compute1}), and the resulting utility payments, and post-payment utilities under VCG are shown in Figures \ref{fig:1h} and \ref{fig:1g}.
+The discussion and comparison of these figures is given in section \ref{sec:features}.
 
 
 \subsection{Computing the GNK value}\label{subsec:gnk_compute1}
@@ -310,9 +320,9 @@ and approximating algorithms \citep{Pineda2018,rnnlbp1,genetic_algirthm_blp}.
 
 One well known way of addressing LBPs involves converting the inner optimisation constraints into KKT conditions (introduced by \cite{kuhn1951nonlinear}), and then converting the complementarity conditions into disjunctive constraints with binary variables - see \cite{Fortuny-Amat1981,Pineda2018}.
 In this way, a bilevel program is converted into a mixed integer linear program, which is then directly amenable to standard optimisation software.
-This method was chosen, and the SCIP Optimisation Suite was employed to compute the GNK value for an example network as described in the next section \ref{sec:example_network}.
+This method was chosen, and the SCIP Optimisation Suite was employed to compute the GNK value for our example network as described in the previous section \ref{sec:example_network}.
 
-KKT conditions are a well known set of algebraic tests which imply that the function under consideration is locally optimal (maximal or alternatively minimal) with respect to its variables under a set of constraint functions (with some regularity assumptions on those functions).
+KKT conditions are a well known set of algebraic tests which imply that the function under consideration is locally optimal (maximal or alternatively minimal) with respect to its variables under a set of constraint functions (with some regularity assumptions on thoes functions).
 KKT are well documented, and extend the method of Lagrange multipliers.
 
 Specifically for maximising an objective function $f(\mathbf{x})$ subject to multiple constraints:
@@ -334,6 +344,9 @@ Hence the reformulation of our LBPs in equation \ref{knvalue1} involves transfor
 The sets of variable values which satisfy the KKT conditions are called KKT points, if we denote the set of values of an maximised objective function $f(p_{i\in B})$ at the KKT points as $\mathcal{KKT}(f(p_{i\in B}))$.
 Then reformulation of the inner part of \eqref{knvalue1} to involve KKT conditions is as follows:
 
+
+
+
 \begin{equation}
 \label{kkt_optimization1}
 \begin{aligned}
@@ -352,12 +365,12 @@ As the constraints under DC-approximation are linear and hence define a convex p
 and as the functions $u_i(p_i)$ are linear (per the assumption of linear utility in section \ref{sec:the_setup}), then there will only be a single maximum/minimum value of these inner minimisations/maximisations - which will be the global maximum/minimum value.\footnote{as linear optimisation problem has a unique solution, although there may be multiple points which attain this maximum/minimum value}
 In this way the inner maximisation (minimisation) over the KKT points can be ignored.
 
-It was also realised that a binary reformulation of the complementary slackness conditions (equation \ref{eq:complementarity_constraint_KKT}) would increase computational efficiency, and so we transformed these complementarity constraints into disjunctive binary constraints.
+It was also realised that a binary reformulation of the complementary slackness conditions (equation \ref{eq:complementarity_constraint_KKT}) would increase computational efficiency, and so we transformed these complementarity constraints into disjunnctive binary constraints.
 
 Specifically, for each complementary slackness condition $\lambda_kg_k(p_{i\in B}) = 0$ we introduced a binary variable $Z_k$ to indicate whether $\lambda_k$ or $g_k(p_{i\in B})$ was zero and then introduced large numbers $\bar{\lambda}_k$ and $ \underline{g_k} $ such as to make the complementary slackness condition equivalent to: $(1-Z_k)\bar{\lambda}_k \ge \lambda_k \ge 0$ and $\underline{g_k}Z_k\le g_k(p_{i\in B})\le 0$.
 Where $\bar{\lambda}_k$ and $\underline{g_k}$ are the estimated upper and lower bounds on the KKT multipliers and constraint functions respectively.
 
-the resulting KKT conditions for maximising and objective function $f(p_{i\in B})$ under this complementary slackness conditions are as follows:
+the resulting KKT conditions for maximising and objective function $f(p_{i\in B})$ under this complementary slcakness conditions are as follows:
 
 \begin{equation}\forall i~~\frac{\partial f}{\partial p_i}(p_{i\in B})=\sum_j\mu_j\frac{\partial h_j}{\partial p_i}(p_{i\in B}) + \sum_k\lambda_k\frac{\partial g_k}{\partial p_i}(p_{i\in B})\end{equation}
 \begin{equation}\forall j~~ h_j(p_{i\in B})=0\end{equation}
@@ -380,60 +393,16 @@ v(S) =
 \end{equation}
 
 This reformulation renders the LBP into a mixed integer program which is directly amenable for calculation by optimisation solvers, and the SCIP optimisation suite was used in our case.
-%Using the SCIP optimisation suite the GNK transfers were calculated for an example DC network in the next section \ref{sec:example_network} particularly as shown in Figures \ref{fig:1d} and \ref{fig:1c} show the utility transfers and the post-transfer utilities under GNK.
+
+Using the SCIP optimisation suite, the GNK transfers we calculated, and in Figures \ref{fig:1d} and \ref{fig:1c} show the utility transfers and the post-transfer utilities under GNK; we discuss these figures next.
 
 
-\subsection{Computing the LMP transfers}\label{subsec:LMP_compute1}
+\section{Some features of GNK}\label{sec:features}
 
-Computing the Locational Marginal Price (LMP) transfers for DC electricity networks is a process described in various literature - such as by \cite{lmp1,lmp2}.
+In this section we discuss the characteristics of the GNK value, against LMP and VCG, for the example 5-bus network (from Figure~\ref{fig:example1}).
 
-Particularly we consider optimising the sum of utility: $\sum_{i\in B} u_i(p_i)$ subject to the DC powerflow constraints in equations \ref{dcopf1}.
-In this context the power conservation constraints on each bus are the constraints $p_j = \sum_{(i,j)\in C}p_{i,j}$, and the lagrange multipliers associated with these constraints are the marginal prices for power on each of the respective busses.
-This process is an application of the more general marginal price calculation procedure discussed previously in section \ref{subsec:marginal_price_sketch}.
-We utilised the SCIP optimisation suite\footnote{development reported by \cite{MaherFischerGallyetal.2017}}.
-
-\subsection{Computing the VCG imputations}\label{subsec:VCG_compute1}
-
-From section \ref{sec:solutions_VCG} the VCG payment that a participant makes is the difference between the sum of other's utility at the social optimum point $x^*$, and the utility that others would have if the participant were not present and the optimisation were only over the remaining participants, as seen in equation \ref{eq:VCG_payment_rule}.
-
-In this way the socially optimum value $x^*$ needs to be computed, and then additionally an additional optimisation problem for each player - where we assume that the excluded participant has power zero $p_i=0$. Thus in our context, equation \ref{eq:VCG_payment_rule} becomes:
-\begin{equation}\label{eq:VCG_calculation_DC} d_i=\argmax_{\sum_{j} u_j(p_j)}\sum_{j\ne i}u_j(p_j) - \argmax_{\sum_{j\ne i} u_j(p_j), p_i=0}\sum_{j\ne i}u_j(p_j)\end{equation}
-
-The first term in this equation is the sum of utilities at the point which maximises the sum of utilities minus the player $i$.
-The second term in this equation is the sum of other's utilities (ie. excluding player $i$) at the point which maximises the sum of other's utilities in the context that the players power is zero.
-The first part of the equation is common to all player's contributions $d_i$, but the second negative part is unique for each.
-In this way, if there are $n$ participants, there are $n+1$ comparable OPF optimisation problems which need to be solved to calculate VCG payments.
-The SCIP optimisation suite was used solving these optimisation problems.
-
-\subsection{Computing the Shapley Value imputations}\label{subsec:Shap_compute1}
-
-From section \ref{subsec:the_shapley_value} the Shapley Value utility imputations that a participant receives is the average marginal contribution that it adds to a characteristic function under ambiguity of the join ordering.
-In this way we need to consider a characteristic function in the context of DC networks:
-\begin{equation*}v_{shap}(S) = \max\sum_{j}u_j(p_j)~~~~\text{s.t.}~~\forall i\notin S~~p_i=0\end{equation*}
-This characteristic function describes the utility that a coalition could achieve by themselves, absent any consumption/generation from those not in the coalition - it is one possible way of creating a characteristic function for DC networks.
-
-The utilities under the Shapley Value (by efficiency axiom) sum to give the value of the grand coalition $v_{shap}(N)$ which occurs at the optimal operating point $x^*$.
-Thus the Shapley Value can be implementing by enacting electrical outcomes described by $x^*$ and conducting budget balanced utility transfers between participants.
-To calculate the Shapley Value imputations, the maximal sum of utilities under OPF for all the possible $2^n-1$ coalitions need computed, and the SCIP optimisation suite was used for these calculations.
-
-
-
-
-\section{Some features of GNK, in context of an example}\label{sec:features}\label{sec:example_network}
-
-In the previous section \ref{more_involved} we detailed a procedure to calculate the financial payments and dispatched powers under the GNK value as well as LMP, VCG and Shapley Value, so that now we can compute and compare them with an example.
-In this section we are thus able to witness and discuss the characteristics of the GNK value, in the context of an example 5-bus network shown in Figure \ref{fig:example1}, with parameters given in Table~\ref{tab:example1}.
-In this example we calculate and subsequently consider the features of the GNK value against LMP, VCG and Shapley Value against parameter $p_1^l$ (the generator capacity in the network).
-The results of these calculations of the financial payments are plotted against $p_1^l$ in Figures \ref{fig:1d}, \ref{fig:1f}, \ref{fig:1h} and \ref{fig:1j} for GNK, LMP, VCG and Shapley Value respectively. Which in addition to the utilities derived from power consumption/generation (Figure \ref{fig:1b}) form the post payment utility imputations as Figures \ref{fig:1c}, \ref{fig:1e}, \ref{fig:1g} and \ref{fig:1i}.
-
-%For GNK, LMP and VCG, the power allocations and the utilities associated with these power allocations are plotted against $p_1^l$ (the generator capacity in the network) and are shown in Figures \ref{fig:1a} and \ref{fig:1b}.
-%And through subsequent pairs of figures we can see how the different mechanisms allocate payments and utilities in the context of constrained resources - Figures \ref{fig:1c}, \ref{fig:1d} for GNK, Figures \ref{fig:1e}, \ref{fig:1f} for LMP, Figures \ref{fig:1g}, \ref{fig:1h} for VCG.
-
-
-\input{figs/Electro_table.tex}
-
-
-
+For GNK, LMP and VCG, the power allocations and the utilities associated with these power allocations are plotted against $p_1^l$ (the generator capacity in the network) and are shown in Figures \ref{fig:1a} and \ref{fig:1b}.
+And through subsequent pairs of figures we can see how the different mechanisms allocate payments and utilities in the context of constrained resources - Figures \ref{fig:1c}, \ref{fig:1d} for GNK, Figures \ref{fig:1e}, \ref{fig:1f} for LMP, Figures \ref{fig:1g}, \ref{fig:1h} for VCG.
 
 \iffigures
 % \input{graph0.tex}
@@ -450,34 +419,33 @@ More generally, the full set of the LMP transfers plotted in Figure~\ref{fig:1f}
 
 Additionally, the VCG payments are plotted against $p_1^l$ in Figures \ref{fig:1h} and resulting utilities in Figure \ref{fig:1g}.
 The VCG payments are similar to the LMP payments, except that instead of payment proportional to the marginal unit of electricity, each player is compensated at his/her marginal cost of their participation.
-VCG takes into account the marginal effect that each of the player's participation has upon each other at the social optimum
+VCG takes into account the marginal effect that each of the player's participation has apon each other at the social optimum
 
 In contrast VCG and LMP, the GNK value takes into account the full bargaining position of each agent and also every possible coalition of agents when determining transfers, which are based on the utilities (or costs, in the case of the generator) of all agents in the system, and not just the marginal value of participation or electrical supply.
 The GNK value is plotted against $p_1^l$ for our example in Figure~\ref{fig:1c}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1d}.
 
-In contrast to VCG, LMP and GNK, the Shapley Value exhibits character traits that are similar to LMP and VCG, particularly as the Shapley value is composed of many more marginal contributions than those ones inherent to VCG, which is in turn proportional to the marginalism inherent in LMP.
-Furthermore it has a superficial similarity to the GNK value as they both extend from the same axioms - either exhibited in section \ref{the_value_def}, or by conversion to Shapley value by equation \ref{convert1} thus having exactly the same axioms as in section \ref{subsec:the_shapley_value}.
-The Shapley Value results are plotted against $p_1^l$ for our example in Figure~\ref{fig:1i}, and the resulting transfers (GNK value less utility) are plotted in Figure~\ref{fig:1j}.
+From these graphs we can witness some of the qualities of the GNK value against LMP and VCG.
 
+\subsection{Specific features of the GNK value}
 
-From these graphs we can witness some of the qualities of the GNK value against LMP and VCG and the Shapley Value:
+From these graphs we can witness that LMP, VCG and GNK values feature a range of different dynamics,
+but some particularly notable qualities of the GNK value include:
 
 % \begin{itemize}
 % \item GNK is continuous in the parameters of the network
 % \end{itemize}
 
-\subsubsection*{The GNK value, VCG and Shapley Value imputations are continuous in the parameters of the network}
+\subsubsection*{The GNK value and VCG imputations are continuous in the parameters of the network}
 The GNK value has some evident continuity properties, as can be seen from equation \ref{knvalue1}, in which the minimax characteristic function, $v(S)$, always changes continuously with the utility functions $u$.
 This continuity property is proven in the Appendix \ref{appendix:continuity_of_GNK}, together with some associated monotonicity properties.
 %, and are generally continuous with continuous deformations of the strategy space $A$.
 This continuity is similarly witnessed in VCG imputations, but notably not in the context of LMP payments.
 
 It is seen that LMP features discontinuous changes in financial transfers and this can clearly be seen from the jagged edges in Figure \ref{fig:1f}, where the payments received by generator 1 drop sharply with increasing generator capacity.
-This happens because the change in generator capacity is changing the parameters of the network itself and its feasibility region, which yields discontinuous changes in network operating point, and thus marginal prices.
-This dynamic under LMP might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the utilities under the GNK value (Figure \ref{fig:1c}), VCG (Figure \ref{fig:1g}) and Shapley Value (Figure \ref{fig:1i}) which feature no such drops or discontinuities.
+This might be seen to lead to a somewhat perverse incentive to produce less power than what is socially optimal, and in contrast, the utilities under the GNK value (Figure \ref{fig:1c}) and VCG  (Figure \ref{fig:1g}) feature no such drops or discontinuities.
 In a power systems context under LMP, these discontinuities are known to occur precisely in the event of network \emph{congestion}
 which is one known cause of the volatility experienced in electricity markets - see \cite{RePEc:aen:journl:2006v27-02-a09}. 
-In contrast, the post-payment utilities under the GNK value and VCG are always continuous with network parameters.
+In contrast, the post-payment utilities under the GNK value and VCG are almost always continuous with network parameters.
 
 
 %In the electrical context, 
@@ -487,14 +455,13 @@ In contrast, the post-payment utilities under the GNK value and VCG are always c
 % \begin{itemize}
 % \item the GNK value is always budget balanced
 % \end{itemize}
-\subsubsection*{The GNK and Shapley Value payments are always budget balanced}
-The transactions under VCG are not necessarily budget-balanced and can yield a surplus or deficit, and transactions under LMP can yield a budget surplus (they are weakly budget balanced \cite{Wu1996}[Fact 4]), whereas payments under the GNK value and Shapley Value are strongly budget-balanced and result in no surplus or deficit.
-This is an outcome of the GNK value's axiomatic derivation, as given by equation \eqref{myeq}, which is reflective of the Shapley Value axioms, per section \ref{subsec:the_shapley_value}.
+\subsubsection*{The GNK payments are always budget balanced}
+The transactions under LMP and VCG are not necessarily budget-balanced and can yield a surplus or deficit, whereas payments under the GNK value are necessarily budget-balanced and result in no surplus or deficit.
+This is an outcome of the GNK value's axiomatic derivation, as given by equation \eqref{myeq}.
 Under LMP, each participant is credited or debited at the effective rate of supply for their location but there is no guarantees that the total payments should add to zero.
 This can be seen by inspecting the region $x>300$ in Figure~\ref{fig:1f}, where generator 1 is credited $\$56$ while the consumers are debited at $\$133.0$, $\$160.0$, $\$119.0$, and $\$64.0$ respectively, leading to a budget surplus of $\$420$.
-The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called `congestion-rents'.
+The surplus of $\$420$ comes particularly from the existence of congestion in the example network which is well known to introduce so-called ``congestion-rents'' that are usually collected by owners of transmission lines (and which are often also the owners of the utility-scale generation assets in vertically-integrated systems - see \cite{lmp2}).
 Additionally VCG payments are known not to be budget balanced generally and may yield a surplus or deficit depending on various conditions, as considered in section \ref{sec:solutions_VCG}.
-
 
 %In a power systems context, budget-balancedness of payments is desirable in that any revenue/deficit collected is independent of the network operating conditions.
 
@@ -517,52 +484,27 @@ times of high-supply/low-demand, particularly at the feeder extremities.
 In these settings, the inverters of PV owners at the bottom are unable to inject their power into the network and also typically get no compensation for essentially a forced curtailment of their electricity generation.
 
 In this context under LMP, curtailed generators that dont inject their power get no reward, and under VCG curtailed generators will only be allocated utility if their presence or absence would make a difference to the network operating point, which is not assured.
-Under Shapley Value, it is witnessed that there is some rather small offset for those that do not receive power, though this is mostly determined by marginal coalitional considerations that exclude most other consumers.
 
 % \begin{itemize}
 % \item the GNK value is not incentive compatible
 % \end{itemize}
 \subsubsection*{The GNK value is not incentive compatible}
-Unlike VCG, the GNK value, LMP and Shapley Value are not \emph{incentive compatible} in the sense that is often referred-to in Mechanism Design (see Section \ref{sec:solutions_VCG}).
+Unlike VCG, the GNK value and LMP are not \emph{incentive compatible} in the sense that is often referred-to in Mechanism Design (see Section \ref{sec:solutions_VCG}).
 Specifically, the payments between parties are potentially subject to strategic manipulation if the agents are freely able to report their utility.
-In the GNK value this can be seen in \eqref{knvalue1}, or more easily in its reduced form, \eqref{knvalue2}, where the payoff advantage of a coalition $v(S)$ is based on its reported utilities in minimax strategies which may not be actualised; the same consideration holds for the Shapley Value.
-Because of this consideration, misreporting the utilities of these unactualised events may change the $v(S)$ and hence the GNK value itself.
+In the GNK value this can be seen in \eqref{knvalue1}, or more easily in its reduced form, \eqref{knvalue2}, where the payoff advantage of a coalition $v(S)$ is based on its reported utilities in minimax strategies which may not be actualised.
+And hence, misreporting these utilities may change the $v(S)$ and hence the GNK value itself.
 Additionally, LMP is known not to be incentive compatible, and there is further work to understand exactly how consequential this would likely be - such as by \cite{8054716}.
 In section \ref{sec:GNK_extensions_discussion} we continue discussion about this point.
 
 % \begin{itemize}
 % \item the GNK value is computationally difficult
 % \end{itemize}
-\subsubsection*{The GNK value and Shapley Value are computationally difficult}
-The GNK value is more difficult than the Shapley Value, which is more difficult than VCG, which is more difficult than LMP, to compute.
+\subsubsection*{The GNK value is computationally difficult}
+The GNK value is more difficult than VCG and significantly more difficult than LMP, to compute.
 This can be seen via \eqref{da_value_eq} where calculating the GNK value exactly requires calculating $v(S)$ for all the $2^n-1$ possible coalitions $S$, and each calculation of $v(s)$ is an NP-hard bilevel optimisation problem.
-The Shapley Value also requires calculating $v_{shape}(S)$ for all the $2^n-1$ possible coalitions $S$, but the calculation of $v_{shape}(S)$ is not necessarily NP-hard problem, as DC OPF problem can be a linear optimisation.
-Conversely VCG calculation for $n$ agents requires $n+1$ OPF optimisations (which are potentially linear in the DC case) per equation \ref{eq:VCG_calculation_DC}, where as LMP calculation requires exactly one OPF optimisation (as identified in section \ref{subsec:LMP_compute1}).
+This computational difficulty is reflected in a later Figure \ref{fig:performance_graph2} where it is seen that even using sampling to approximate the GNK value is double-exponentially complex. 
+This difficulty contrasts against the ease of computing LMP which requires only solving one OPF optimisation, and VCG which requires $n+1$ OPF optimisations.
 
-The computational difficulty of the GNK value is reflected in a later Figure \ref{fig:performance_graph2} where it is seen that even using sampling to approximate the GNK value to sufficient accuracy is witnessed to be a double-exponentially complex process. 
-
-
-\section{Summary}
-
-In this Chapter we have introduced the GNK value from its axioms and we have considered its conceptual inheritance from other solution concepts.
-In order to apply the GNK value to the pricing of immediate power generation and consumption in small DC networks we formally introduced the elements of the DC network and have detailed a computation methodology for the GNK value in that context.
-We then compared the GNK against LMP, VCG and Shapley Value on a small example network to examine their features, particularly we identified that the GNK value has some nice budget-balance and continuity properties, however we also realised that the GNK is not incentive compatable and that it is difficult to calculate for larger electricity networks.
-
-In the next chapter we consider the ways in which the computational difficultly of calculating the GNK value on larger networks can be ameliorated.
-The two primary techniques to ameliorate this difficulty are principally by sampling, and also by the adoption of a proxy for the inner optimisations.
-We discuss these to directions in the next chapter \ref{sec:scaling} before actually applying these techniques for an application of GNK to larger network in section \ref{sec:results_and_evaluation_of_GNK} where we discuss in section \ref{sec:GNK_value_discussion}.
-
-
-
-
-
-
-
-
-
-
-
-
-
+In light of this difficulty, we consider different ways of mitigating the issue so that the GNK value can be applied to larger networks.
 
 

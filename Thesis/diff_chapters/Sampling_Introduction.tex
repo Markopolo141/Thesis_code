@@ -15,13 +15,14 @@ The structure of this Chapter is as follows:
 \item	In section \ref{section:SEBB}, we provide multi-part derivations of complicated concentration inequalities specifically tailored for the purposes of stratified sampling, and give an algorithm for choosing samples to minimise these inequalities.
 \item	In section \ref{section:statistics_results}, we give the performance results of various methods of stratified sampling in the context of synthetic data sets, and in the application of approximating the Shapley Value.
 \item	In section \ref{sec:discussion} we give discussion to the derivations and results, 
-\item	in section \ref{sec:multi} and talk briefly about future work about a multidimensional stratified sampling EBB, and conclude.
+\DIFaddbegin \item	\DIFadd{in section \ref{sec:multi} }\DIFaddend and talk briefly about future work about a multidimensional stratified sampling EBB\DIFaddbegin \DIFadd{, and conclude}\DIFaddend .
 \end{enumerate}
 
 
 The work and development from the second and third section most directly reflects published material: ``An Engineered Empirical Bernstein Bound'',\\ European Conference on Machine Learning (ECML-PKDD) 2019\\(accessible: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
-The work and development from the fourth and fifth section most directly reflect published material: ``Approximating the Shapley Value Using Stratified Empirical Bernstein Sampling'', IJCAI 2021\\
-(accessible: \href{https://www.ijcai.org/proceedings/2021/0011.pdf}{ijcai.org/proceedings/2021/0011.pdf})\\
+The work and development from the fourth and fifth section most directly reflect \DIFdelbegin \DIFdel{unpublished }\DIFdelend \DIFaddbegin \DIFadd{published }\DIFaddend material: ``\DIFdelbegin \DIFdel{Stratified Finite }\DIFdelend \DIFaddbegin \DIFadd{Approximating the Shapley Value Using Stratified }\DIFaddend Empirical Bernstein Sampling'', \DIFdelbegin \DIFdel{Preprints 2019}\DIFdelend \DIFaddbegin \DIFadd{IJCAI 2021}\DIFaddend \\
+(accessible: \DIFdelbegin %DIFDELCMD < \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2}%%%
+\DIFdelend \DIFaddbegin \href{https://www.ijcai.org/proceedings/2021/0011.pdf}{ijcai.org/proceedings/2021/0011.pdf}\DIFaddend )\\
 
 
 
@@ -65,8 +66,8 @@ The principle of Neyman sampling is that it seeks the minimise the weighted vari
 
 \subsection{Neyman allocation}\label{sec:neyman_sampling}
 
-Neyman allocation identifies that in order to minimise the variance in the final estimate of the population, that sampling should be directly in proportion to the stratum variances multiplied by their sizes.
-We present Neyman allocation rule with its proof to illustrate the connection with allocation rule with a concentration inequality:
+Neyman allocation identifies that in order to minimise the variance in the final estimate of the population, that sampling should be directly in proportion to the stratum variances multiplied by their sizes\DIFaddbegin \DIFadd{.
+We present Neyman allocation rule with its proof to illustrate the connection with allocation rule with a concentration inequality}\DIFaddend :
 
 \begin{theorem}[Neyman allocation]\label{thm:neyman_selection}
 For $m$ strata, of sizes $N_i$, with variance $\sigma_i^2$. For a sample budget $n$, and there is a choice how much to sample from each strata $n_i$, in which sampling is done with replacement (ie. all samples are independent and identically distributed)
@@ -172,8 +173,9 @@ using Markov's inequality and the i.i.d of the samples, respectively.
 Here we have given the general form of Chernoff bounds for the sample mean of random variable, parameterised by a choice of $s>0$ and $t$.
 Using this kind of lemma, many well-known examples of Chernoff bounds follow from the derivation of upper bounds for $\E\left[\exp(sX)\right]$, also known as the \textit{moment generating function}.
 
-For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality; in this way a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
-Hoeffding's inequality \citep{hoeffding1} is an illustrative example of this process of deriving a Chernoff bound (which we will do in many times in this chapter), and we give a short refactored proof of this process:
+For any upper bound $\E[\exp(sX)]\le g(s)$ then $\p(\hat{\mu}>t)\le g^n(s)\exp(-snt)$ is an upper bound for the deviation of the sample mean, which can then be subsequently minimised with $s$, forming a concentration inequality\DIFdelbegin \DIFdel{.
+And thus, }\DIFdelend \DIFaddbegin \DIFadd{; in this way }\DIFaddend a Chernoff concentration inequality can be deduced from a bound on the moment-generating-function.
+Hoeffding's inequality \citep{hoeffding1} is an illustrative example of this process of deriving a Chernoff bound \DIFaddbegin \DIFadd{(which we will do in many times in this chapter), and we give a short refactored proof of this process}\DIFaddend :
 
 \begin{theorem}[Hoeffding's inequality for mean zero]\label{hoeffdings_inequality}
 Let $X$ be a real-valued random variable that is bounded $a\le X\le b$, with a mean $\mu$ of zero.  Then for $D=b-a$ and any $t>0$, the mean $\hat{\mu}$ of $n$ independent samples of $X$ is probability bounded by:
@@ -246,7 +248,7 @@ Using the continuous and convex function $f(x)=\exp(sx)$ it can be seen via the 
 \subsection{Other general probability lemmas}
 
 There are further lemmas that are necessary for the further derivations for this chapter.
-The first lemma is an often-used and rather weak result used to fuse simple statements of probability (provided with proof for completeness of information):
+The first lemma is an often-used and rather weak result used to fuse simple statements of probability \DIFaddbegin \DIFadd{(provided with proof for completeness of information)}\DIFaddend :
 \begin{lemma}[Probability Union]\label{prob_union}
 For any random variables $a,b$ and $c$:
 \[\p(a>c) \; \le \; \p(a>b) + \p(b>c)\]
@@ -263,7 +265,7 @@ Although this relationship is quite useful, it is known to be a very weak relati
 
 Note also, that the same proof method for probability union also works straightforwardly for various substitutions of the $\ge$ symbol for the $>$ in the inner inequalities, with the exception that: $\p(a\ge c) \; \le \; \p(a>b) + \p(b>c)$ may be false.\footnote{ie. In the context of lemma \ref{prob_union} the following inequalities can be proven by much the same logic $\p(a>c)\le\p(a\ge c)\le\p(a\ge b)+\p(b>c)$ and $\p(a>c)\le\p(a\ge c)\le\p(a\ge b)+\p(b\ge c)$, however care must be taken because $\p(a\ge c)\le\p(a>b)+\p(b>c)$ may not be true}
 
-A second Lemma is a straightforward and commonly known result of algebra that relates the sample squares about the mean and the mean squared, to the sample variance (provided with proof for completeness of information).
+A second Lemma is a straightforward \DIFaddbegin \DIFadd{and commonly known }\DIFaddend result of algebra that relates the sample squares about the mean and the mean squared, to the sample variance \DIFaddbegin \DIFadd{(provided with proof for completeness of information)}\DIFaddend .
 \begin{lemma}[Variance Decomposition]\label{variance1}
 For $n$ samples $x_i$, sample mean $\hat{\mu} = \frac{1}{n}\sum_ix_i$, sample variance $\hat{\sigma}^2=\frac{1}{n-1}\sum_i(x_i-\hat{\mu})^2$, and average of sample squares $\hat{\sigma}_0^2 = \frac{1}{n}\sum_ix_i^2$, the following relationship holds:
 % \begin{align*}

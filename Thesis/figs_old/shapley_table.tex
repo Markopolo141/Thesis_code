@@ -1,0 +1,70 @@
+
+
+
+
+\begin{table*}[]
+    \centering 
+    \begin{minipage}[]{0.8\textwidth}
+        \centering
+        \caption{Airport Game Average Errors}\label{tab1}
+			\begin{tabular}{llllll}
+			\hline
+			$\nicefrac{m}{n^2}$ & $10$ & $50$ & $100$ & $500$ & $1000$ \\
+			\hline
+			$e^{Ma}$   & 298.4 & 133.1 & 99.64 & 41.96 & 29.26 \\
+			$e^{sim}$  & 357.8 & 146.1 & 106.2 & 44.55 & 36.33 \\
+			$e^{Ca}$   & 325.7 & 115.8 & 75.85 & 31.01 & 22.12 \\
+			$e^{SEBM}$ & \textbf{259.2} & \textbf{73.8} & \textbf{54.76} & \textbf{7.71} & \textbf{1.30}  \\
+			\hline
+			\end{tabular}
+    \end{minipage}
+	\\\vspace{4mm}
+    \begin{minipage}[]{0.8\textwidth}
+        \centering
+        \caption{Voting Game Average Errors}\label{tab2}
+			\begin{tabular}{llllll}
+			\hline
+			$\nicefrac{m}{n^2}$ & $10$ & $50$ & $100$ & $500$ & $1000$ \\
+			\hline
+			$e^{Ma}$    & 131.0 & 57.78 & 41.52 & 18.66 & 13.18 \\
+			$e^{sim}$   & 145.7 & 59.72 & 40.31 & 17.56 & 12.84 \\
+			$e^{Ca}$    & 142.1 & \textbf{47.35} & \textbf{31.05} & 14.08 & 9.800 \\
+			$e^{SEBM}$  & \textbf{122.8} & 47.44 & 33.18 & \textbf{8.55} & \textbf{1.995}  \\
+			\hline
+			\end{tabular}
+    \end{minipage}
+	\\\vspace{4mm}
+    \begin{minipage}[]{0.8\textwidth}
+        \centering
+        \caption{Simple Reward Division Game average errors}\label{tab3}
+			\begin{tabular}{llllll}
+			\hline
+			$\nicefrac{m}{n^2}$ & $10$ & $50$ & $100$ & $500$ & $1000$ \\
+			\hline
+			$e^{Ma}$    & 25.68 & 11.62 & 7.792 & 3.481 & 2.290 \\
+			$e^{sim}$   & 22.10 & 9.045 & 6.218 & 2.642 & 1.938 \\
+			$e^{Ca}$    & 22.37 & 8.925 & 6.692 & 2.727 & 1.940 \\
+			$e^{SEBM}$  & \textbf{19.25} & \textbf{7.044} & \textbf{5.158} & \textbf{1.183} & \textbf{0.2817}  \\
+			\hline
+			\end{tabular}
+    \end{minipage}
+	\\\vspace{4mm}
+    \begin{minipage}[]{0.8\textwidth}
+        \centering
+        \caption{Complex Reward Division Game average errors}\label{tab4}
+			\centering
+			\begin{tabular}{llllll}
+			\hline
+			$\nicefrac{m}{n^2}$ & $10$ & $50$ & $100$ & $500$ & $1000$ \\
+			\hline
+			$e^{Ma}$   & 276.1 & 118.9 & 87.00 & 40.15 & 27.44 \\
+			$e^{sim}$  & 251.4 & 108.0 & 78.63 & 34.64 & 26.82 \\
+			$e^{Ca}$   & 290.5 & 116.5 & 81.82 & 35.70 & 26.50 \\
+			$e^{SEBM}$ & \textbf{214.2} & \textbf{78.47} & \textbf{54.10} & \textbf{12.45} & \textbf{2.711}  \\
+			\hline
+			\end{tabular}
+    \end{minipage}
+    \vspace{3mm}
+    \caption[Average errors approximating the Shapley Value across games and methods]{Average absolute errors in the Shapley Value calculation across all players in the four cooperative games (units in $10^{-4}$), for the different sampling schemes with different sampling budgets $m$ per number of strata (with $n^2=15^2$ for all). lowest error results are boldened.}
+    \label{Table2}
+\end{table*}

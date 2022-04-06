@@ -1,7 +1,7 @@
 
 
 
-\chapter{Some continuity and monotonicity properties of the GNK value}\label{appendix:continuity_of_GNK}
+\section{Some continuity and monotonicity properties of the GNK value}\label{appendix:continuity_of_GNK}
 
 From inspection of equations \ref{knvalue1} and \ref{da_value_eq} it defined that the GNK value is a summation over maximum of minimum terms and it should be rather evident that there is present some nice continuity properties:
 
@@ -20,10 +20,7 @@ Which is the difference in the GNK value for an individual $i$ between the pertu
 Thus for any prospective utility perturbation $\Delta$ with a magnitude $d$ there is a $\delta$ ($=n\epsilon d$) such that there exists a perturbation factor $\epsilon$, such that if the utility functions are $\epsilon$ perturbed then the GNK value is $\delta$ bounded.
 \end{proof}
 
-This continuity property for utilities is potentially nice in that participants in a system under GNK, can be be assured that regardless of their bids, that small difference in their utility bids will not yield large differences in their utility payoff, this adds regularity and predictability to the system.
-Conversely for a potential operator of such a hypothetical GNK system, that this continuity property may add to the predictability of the system.
-
-The GNK also has elementary monotonicity properties that are partially inherited from its relation to the Shapley Value.
+The monotonicity properties that the GNK value has are partially inherited from its relation to the Shapley Value.
 
 \begin{theorem}[GNK is monotonic]\label{thm:monotonicity}
 If we consider advantage functions $v$ and $v'$ and the GNK value with those advantage function $\varphi^v_i$ and $\varphi^{v'}_i$.
@@ -33,19 +30,14 @@ Then for any individual $i\in N$, if all coalitions $S$ such that $i\in S$ it is
 $$\varphi^v_i = \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v(S) \le \frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\ |S|=k}}v'(S) =\varphi^{v'}_i$$
 \end{proof}
 
-This monotonicity property ensures that individuals which have uniformly higher payoff advantages are afforded more utility under the GNK, which is a basic regularity reminiscent of the logic of the GNK value itself.
-Particularly, as the GNK value is an articulation of a bargaining solution concept, then individuals who have greater leverage in negotiation will (or should) have an outcome more favourable to them.
-Conversely, we could imagine the potential absurdity of a system opposite were true, in that individuals with greater leverage in bargaining would be afforded less. 
+The question then becomes about what changes in utility functions and network constraints bring about this kind of monotonicity. The most direct case is shift invariance, which is inherited from Nash bargaining roots \cite{nash2} and directly stated as an axiom in the case of the `coco' value \cite{kalai1}.
 
-
-In considering this monotonicity property, we can ask what changes in strategies and/or utility functions and network constraints yield this kind of monotonicity condition. The most direct case is shift invariance, which is inherited from Nash bargaining roots \cite{nash2} and directly stated as an axiom in the case of the `coco' value \cite{kalai1}.
-
-\begin{theorem}[GNK is shift invariant]\label{thm:appendix_shift_invariant}
+\begin{theorem}[GNK is shift invariant]
 For any two utility profiles $u^1_i(x,y)$ and $u^2_i(x,y)$, and GNK defined by these utility profiles $\varphi_i^1$ and $\varphi_i^2$.
 Then for any individual $i\in N$, if $u_i^2(x,y) = u_i^1(x,y)+c$ for some constant $c$, and for all $j\neq i$ that $u^2_i(x,y) = u^1_i(x,y)$, then $\varphi_i^2 = \varphi_i^1+c$ 
 \end{theorem}
 \begin{proof}
-If we consider advantage functions $v_1$ and $v_2$ defined by utility functions $u^1_i(x,y)$ and $u^2_i(x,y)$ then for any coalition $S$ including individual $i$:
+If we consider advantage functions $v_1$ and $v_2$ defined by utility functions $u_i(x,y)^1$ and $u_i(x,y)^2$ then for any coalition $S$ including individual $i$:
 \begin{align}
 v_2(S) = &
 \frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}} \left[
@@ -65,19 +57,15 @@ $$\frac{1}{n}\sum_{k=1}^n \frac{1}{\binom{n-1}{k-1}} \sum_{\substack{S:i\in S \\
 which is to say that $\varphi_i^2 = \varphi_i^2+c$.
 \end{proof}
 
-Shift invariance is important but not particularly interesting property. It more-or-less identifies that a participant who affords a higher utility should be rewarded with a GNK value which is that same degree higher.
-This Shift invariance relation is essentially consistent with the idea that utility functions are invariant to affine transformation, more particularly translation.
-If a participant modifies his/her utility function by an offset, this GNK value will afford that individual with exactly the same physical outcomes and utility transfers to give them a net utility that is that same extent offset.
-This shift invariance property is good sanity check on a minimally sufficient bargaining solution concept.
-
+Shift invariance is important but not particularly interesting property.
 So instead we also consider a very similar monotonicity property with regards to any utility perturbation that non-decreases a player's utility.
 
-\begin{theorem}[GNK is monotonic with increasing player utility]\label{thm:appendix_monotone2}
+\begin{theorem}[GNK is monotonic with increasing player utility]
 For any two utility profiles $u^1_i(x,y)$ and $u^2_i(x,y)$, and GNK values defined by these utility profiles: $\varphi_i^1$ and $\varphi_i^2$.
 Then for any individual $i\in N$, if $u_i^2(x,y) = u_i^1(x,y)+f(x,y)$ for some non-negative function $f$, and for all $j\neq i$ that $u^2_j(x,y) = u^1_j(x,y)$, then $\varphi_i^2 \ge \varphi_i^1$ 
 \end{theorem}
 \begin{proof}
-If we consider advantage functions $v_1$ and $v_2$ defined by utility functions $u^1_i(x,y)$ and $u^2_i(x,y)$ then for any coalition $S$ including individual $i$:
+If we consider advantage functions $v_1$ and $v_2$ defined by utility functions $u_i(x,y)^1$ and $u_i(x,y)^2$ then for any coalition $S$ including individual $i$:
 \begin{align}
 v_2(S) = &
 \frac{1}{2}\min_{\substack{y\in A^{N\setminus S} \\ \text{s.t.}(x,y)\in A}} \left[
@@ -113,9 +101,7 @@ and $$v_2(S) \ge v_1(S)$$
 And the result that $\varphi_i^2 \ge \varphi_i^1$ follows by monotonicity (theorem \ref{thm:monotonicity}).
 \end{proof}
 
-This monotonicity property in Theorem \ref{thm:appendix_monotone2} most directly encodes the idea that the GNK value is monotone with player utilities, particularly if a players utility by some arbitrary non-negative function then their GNK value should also. it is more general in its application than the shift invariance established by Theorem \ref{thm:appendix_shift_invariant}.
-and is most directly relevant to the logic of the GNK value, that players with a greater payoff advantage will be afforded more utility, and thus if a players utility increases in some way, so too should the GNK value.
-Contrastingly we could imagine a system where the opposite is true, in that if a player has a higher utility for a specific outcome that the system would afford them less, would be less intuitive.
+
 
 %\section{Some associated concentration inequalities}\label{Appendix:more_concentration}
 

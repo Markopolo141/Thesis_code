@@ -1,0 +1,203 @@
+
+\documentclass[11pt, a4paper]{book}
+\usepackage{svn-multi}
+\svnid{$Id$}
+%\usepackage{prelim2e}
+%\renewcommand{\PrelimWords}{Draft Copy \svnkw{Id}}
+%%\newcommand*{\mysvnrev}{\svnrev}
+\usepackage[hyperindex=true,
+			bookmarks=true,
+            pdftitle={}, pdfauthor={Xi Yang},
+            colorlinks=false,
+            pdfborder=0,
+            pagebackref=false,
+            citecolor=blue,
+            plainpages=false,
+            pdfpagelabels,
+            pagebackref=true,
+            hyperfootnotes=false]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage[palatino]{style/anuthesis}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{style/thesis}
+\usepackage[square]{natbib}
+%\usepackage[square, numbers]{natbib}
+\usepackage[normalem]{ulem}
+\usepackage[table]{xcolor}
+\usepackage{makeidx}
+%\usepackage[centerlast]{caption2}
+\usepackage{float}
+\urlstyle{sf}
+\renewcommand{\sfdefault}{uop}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+\usepackage{multirow}
+
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 %
+    %
+  \or
+    (cited on page #2)%
+  \else
+    (cited on pages #2)%
+  \fi
+}
+
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{csquotes}
+\usepackage{cleveref}
+
+\usepackage{accents}
+\usepackage{units}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{hyperref}
+%\usepackage{floatrow}
+%\usepackage[x11names, svgnames, rgb]{xcolor}
+
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usepackage{stmaryrd}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepgfplotslibrary{statistics}
+\usetikzlibrary{snakes,arrows,shapes}
+\usetikzlibrary{arrows.meta}
+
+\newcommand{\STAB}[1]{\begin{tabular}{@{}c@{}}#1\end{tabular}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{example_game}{Example Game}
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\pgfplotsset{
+    colormap={blackwhite}{[5pt]
+        rgb255(0pt)=(255, 0, 0);
+        rgb255(90pt)=(255, 0, 0);
+        rgb255(100pt)=(0, 0, 100);
+        rgb255(300pt)=(0, 80, 130);
+        rgb255(500pt)=(0, 200, 130);
+        rgb255(1000pt)=(255, 255, 100)
+    },
+}
+
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\p}{\mathbb{P}}
+\DeclareMathOperator{\pr}{\mathbb{P}}
+\newlength{\dhatheight}
+\newcommand{\doublehat}[1]{%
+    \settoheight{\dhatheight}{\ensuremath{\hat{#1}}}%
+    \addtolength{\dhatheight}{-0.15ex}%
+    \hat{\vphantom{\rule{1pt}{\dhatheight}}%
+    \smash{\hat{#1}}}}
+
+
+\newif\iffigures
+\figurestrue
+%\figuresfalse
+
+%\usetikzlibrary{external}
+%\tikzexternalize[prefix=tikz/]
+
+\input{style/macros.tex}            
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Preamble
+\title{Investigation of Market Mechanisms for Distribution Level Energy Managment}
+\author{Mark A Burgess}
+\date{\today}
+
+\renewcommand{\thepage}{\roman{page}}
+
+\makeindex
+\begin{document}
+%\doparttoc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Title page
+\pagestyle{empty}
+\thispagestyle{empty}
+\input{appendages/titlepage.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here begin the preliminaries
+\input{appendages/frontmatter.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Dedication
+%\cleardoublepage
+%\pagestyle{empty}
+%\input{appendages/dedication.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Acknowledgements
+\cleardoublepage
+\pagestyle{empty}
+\input{appendages/ack.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abstract
+\cleardoublepage
+\pagestyle{headings}
+\input{appendages/abstract.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table of contents
+\cleardoublepage
+\pagestyle{headings}
+\markboth{Contents}{Contents}
+\tableofcontents
+\listoffigures
+\listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here begins the main text
+\mainmatter
+
+%% Introduction
+\input{chapters/intro.tex}
+\input{chapters/philosophy.tex}
+\input{chapters/solutions.tex}
+\input{chapters/new_solution.tex}
+\input{chapters/Sampling_Introduction.tex}
+\input{chapters/old_statistics.tex}
+\input{chapters/Statistics.tex}
+\input{chapters/statistics_results.tex}
+\input{chapters/statistics_shapley.tex}
+\input{chapters/discussion.tex}
+\input{chapters/conclusion.tex}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here begins the end matter
+\appendix
+\input{chapters/appendix1.tex}
+%\input{chapters/appendix2.tex}
+
+\backmatter
+
+%\bibliographystyle{style/anuthesis}
+\bibliographystyle{style/anuthesis}
+\bibliography{thesis}
+
+\printindex
+
+\end{document}

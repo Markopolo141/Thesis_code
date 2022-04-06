@@ -1,0 +1,674 @@
+\documentclass{article}
+
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\newsavebox\ideabox
+\newenvironment{idea}
+  {\begin{equation}
+   \begin{lrbox}{\ideabox}
+   \begin{minipage}{\dimexpr\columnwidth-2\leftmargini}
+   \setlength{\leftmargini}{0pt}%
+   \begin{quote}}
+  {\end{quote}
+   \end{minipage}
+   \end{lrbox}\makebox[0pt]{\usebox{\ideabox}}
+   \end{equation}}
+
+
+\begin{document}
+\section{Response to Reviewer 1}
+
+Examination Report\\
+Candidate: Mark A. Burgess\\
+Title: Investigation of Market Mechanisms for Distribution Level Energy Managment
+
+\paragraph{Summary}
+
+The thesis consists of 2 main technical contributions. The first part, presented in Chapter 4, is a novel
+approach for computing the disagreement point in cooperative games which is termed GNK value. It
+is an extension of an existing approach but for settings where the action space is restricted and
+depends on the actions on other players. This approach for computing the “value” is then applied to
+compute payments in a DC powerflow market. However, the computation of the GNK value proves
+to be a major obstacle in applying this in practice. Hence the author has come up with several
+modifications to make it computationally more tractable. One approach is sampling. Another
+approach is to change the problem from its initial two-stage min-max optimisation like in a
+Stackelberg game, to a "flattened" version. The approaches are compared to others payments such
+as VCG and LMP. In addition, different sampling approaches are compared. It is shown that JOIN
+outperforms or is similar to other methods, including SEBM which is the approach produced by the
+author. GNK is shown to have some good properties. However, it turns out it violates one of the
+main properties which is individual rationality.
+
+The second technical contribution is a novel approach for stratified sampling which is covered in
+Chapter 5. New theoretical bounds are derived for this approach, and it is also evaluated empirically
+both on distributions and for approximating the Shapley Value, which is the part of the GNK value
+from the prior chapter. Empirical results show that the new sampling approach outperforms the
+other approaches compared to for several different games. In addition, the bounds are also tighter
+compared to many other approaches.
+
+\paragraph{Comments}
+
+The thesis covers a breadth of topics, from mechanism design and energy markets, to cooperative
+games and stratified sampling. This shows an excellent and impressive knowledge of the domain. In
+terms of contributions, I found Chapters 2 and 3 did not seem to contain any novel contributions and
+gave the required background needed for the remainder of the thesis and to frame the discussion
+around fairness of allocations. The main contributions are chapter 3 and 4. I will comment on each
+chapter separately in more detail.
+
+\paragraph{Chapter 2} This chapter is very much philosophical and presents some of the early arguments around
+fairness and equality. While interesting I did not really see that much benefit of this chapter to the
+narrative of the rest of the thesis. First of all, important contemporary concepts around fairness that
+are discussed in the social choice literature were missing from this. I’m referring mainly to the
+concept of envy freeness, which is very relevant to the discussion since it is about how to fairly
+allocate resources. This is not mentioned and seems to be an obvious omission. 
+
+\begin{idea}
+\color{blue}
+Chapter 2 is revised with an additional section dedicated to the concept of Envy-freeness from a computational\&philosophical perspective.
+Additionally a section is added to Chapter 3, which considers the differing ways in which Envy-freeness has been considered in the context of electricity systems.
+\end{idea}
+
+
+Another issue is
+that, in the end, it runs out that the allocation of resources is decided by using the utilitarian social
+welfare approach (i.e. maximising the social welfare or sum of utilities). This has many issues
+especially when utilities cannot be directly compared/transfered. This should probably need some
+discussion in this chapter.
+
+
+\begin{idea}
+\color{blue}
+The Chapter 2 section on utilitarianism and utility-maximisation is updated to reflect this point, indeed the incomparability and potential transferability of utility is indeed a valid criticism of that philosophy. The changes made to that section now highlight this difficulty together with utilitarianism's potential dehumanising demeanour.
+While utility may not be compared between people generally, in an electricity context utility may be better represented by monetary values, which are comparable, and transferable.
+Units of utility throughout the thesis have been updated to be in dollars (as a proxy value) and note is made in this chapter of the weakness of this approach.
+Note however, that considering that utility may not be transferable was noted in original Thesis submission as a potential weakness in sections 6.1 and 4.8.1, and therein was noted how the GNK value could potentially extended to the non-transferable utility (NTU) case, as future work.
+\end{idea}
+
+\paragraph{Chapter 3} This chapter gives an excellent introductory background to the concepts needed to
+understand the remainder of the thesis, and shows very good knowledge of the topics. However,
+what is missing is a proper and thorough review of the related work and gap analysis. Although
+relevant work is cited in Chapter 4 and 5, even in those chapters there is no sense that a proper
+literature review has been conducted. Novelty claims are made in Chapters 4 and 5, but because
+there is no literature review and gap analysis, this has not been properly situated within the existing
+literature, and so the significance of the results is not clear. This is not something that necessarily
+should be addressed in Chapter 3, and might be better placed to address in Chapter 4 or 5.
+
+
+\begin{idea}
+\color{blue}
+Chapter 3 has been substantially expanded to reference and evaluate a greater range of literature particularly focusing on the applications of the identified approaches (Shapley Value, LMP and VCG) to electricity systems, and the strengths and drawbacks in that space. Additional attention is paid to the facets and weaknesses of these other approaches both in their theoretical capacity to perform, and in relation to the consequences of their application, which provides some further motivation for the development of a new solution - as promised in Chapter 4.
+Some of the approaches - VCG and Shapley Value are very flexible and can be applied to a span of electricity system scenarios (which the literature samples) - whereas LMP is much more concretely applied in practice, and hence we are able to be much more specific about its weaknesses in practice.
+\end{idea}
+
+
+\paragraph{Chapter 4} This chapter is the first technical contribution chapter and contains many interesting
+results. However, there are several issues. First, the structure is confusing and is presented using a
+“story telling” approach where the reader is unprepared for what comes next. Everything is a
+surprise. Whereas a chapter in a scientific thesis needs introductory paragraphs which describe how
+the chapter is structured so there are no surprises and the reader knows what to expect at every
+turn. This is especially an issue here since a lot of ground is being covered with many diverse topics.
+Perhaps even splitting this into multiple chapters might be better. There are also many issues with
+punctuation and capitalisation (more details below).
+
+\begin{idea}
+\color{blue}
+Following the reviewer's advice, the chapter has been broken up into two chapters with much more distinct focus, with the first introducing the GNK value and comparing it against LMP and VCG, and the second dealing with the issue of scaling the GNK value to larger electricity networks.
+Section introductions have been expanded with section-by-section breakdown, and the textual links between the sections have been strengthened. Hopefully these measures should make this chapter more logical in their structure and also readable. 
+\end{idea}
+
+
+On the more fundamental level, by the end of the chapter I was left confused by how the notion of
+Nash bargaining solution (NBS) is actually relevant here. In the thesis, the GNK value has been
+presented as an extension of the NBS and particular for the computation of the disagreement point.
+However, in the DC powerflows application the NBS is not used at all. Instead the allocation is
+determined by maximising the sum of utilities (i.e. the social welfare) whereas in NBS the product of
+utilities minus disagreement value is maximised. The GNK is instead used to compute the payment,
+not the allocation, and so at this point the connection between NBS and the energy application
+seems lost. 
+
+\begin{idea}
+\color{blue}
+The identity between the NBS (with endogenous disagreement point) and the GNK value in the two player context was originally to be seen by comparing the construction of the GNK value with the transferable utility case considered at the end of section 3.4.2.
+In the transferable utility context, the maximum of the product of utilities (NBS) occurs on the Pareto frontier of possible balanced utility transfers (Figure 4.2), in this way the NBS maximises the sum of utilities as well as their product (above the disagreement point).
+In the revised thesis, the identity between the GNK value and NBS is further demonstrated by the full working of an example with both techniques, demonstrating that both approaches give the same answer - as provided now in section 4.2.4
+\end{idea}
+
+This is not to say that the GNK is not, on its own accord, a viable solution for the NBS.
+However, it then does beg the question whether such a complex solution is actually required to
+merely compute the payments when there are many equally good or even better solutions with
+similar if not more theoretical properties. In particular it turns out that the NBS is not individually
+rational, which is quite a significant negative result since individual rationality is an important
+property. If individual rationality can be sacrificed then there are budget balanced (BB) Groves
+mechanisms which could be used instead, since they at least have BB+Incentive compatibility (IC),
+whereas GNK is not even IC. Another thought is why the candidate did not apply Shapley value
+directly to compute the payment. This would be budget balanced if scaled properly. How would it
+compare to NBS?
+
+\begin{idea}
+\color{blue}
+In truth, we acknowledge that there would have been better and more fruitful approaches to the research question in hindsight.
+However we must note that the research direction was an attempt to discover a mechanism to axiomatically integrate all possible considerations and counter-considerations in an idealised bargaining solution that would mirror the arrangements that people with divergent interests would ideally come to anyway. not just simply to create a mechanism with desirable properties.
+The criticism here is valid.
+
+The comparison with Shapley Value is now added in all experiments, in now Chapters 4 and 5 (per figure 4.4 and figure 5.8).
+\end{idea}
+
+
+
+The chapter is largely empirical but there are some theoretical properties. However, these are
+hidden in the appendix and not really discussed in the chapter itself. The ones that are discussed,
+either the significance is not clear (e.g. continuity, why is this important) or trivial (e.g. the fact that
+GNK is not IC).
+
+\begin{idea}
+\color{blue}
+The purpose of section 4.5 (now section 4.4) is to briefly survey some of the properties of the GNK value against LMP and VCG, the more total critique of GNK is provided in section 4.8 (now section 5.4). The class of perturbations against which the GNK can be proven to be continuous, and the set of monotonicity properties which the GNK has, are theoretical nice-to-haves, and the GNK is not derived from these or uniquely possesses them; and they dont play almost any role in the argument of the chapter; and are still relegated to the appendix.
+Perhaps solution concepts like the GNK should be ideally be uniquely derived from sets of these kinds of properties, at which point they would play centre stage (Kalai\&Kalai's coco-value attempted to do a similar thing); however we must report on the state of the research as it is. 
+\end{idea}
+
+
+Unfortunately, another issue with this chapter is that the empirical evaluation is not reproducible.
+The description of the setting is incomplete. For example, on p.66, the paragraph “Using this
+algorithm we considered..with randomly generated consumption/generation limits.”. None of the
+parameters for e.g. the graph generation or the distributions are given, making it impossible to
+reproduce. The essence of science is reproducibility. For the settings that are given, these are
+scattered between explaining the algorithm and the results, and are hard to find. For someone
+wishing to reproduce this, it would be difficult to find and it would be better to present he settings in
+a table.
+
+
+\begin{idea}
+\color{blue}
+The point is taken, and extra text providing specific values to aid reproducible has been added to the body of the thesis at these points.
+Unlike the experimental parameters exhibited in table 4.1, in the experiments in the latter half of Chapter 4 the parameters of the network are randomly generated and not tabular per sei.
+\end{idea}
+
+
+The structure of providing a model and algorithms, results, more models, more results, another
+model and more results, makes it very difficult to keep up. It would be much better to put the results
+together, or split the contributions across different chapters. The 3d graphs in section 4.7 don’t
+seem to add much. It would be better to have clearer, 2d graphs, comparing different methods.
+
+\begin{idea}
+\color{blue}
+As noted, the chapters are now split, such that new chapters 4 and 5 introduce methods and then compute and compare their own results. which hopefully is more clear in purpose.
+3D graphs are kept, as they highlight the specific shape of utility transfer (z axis) between methods to consumers depending on their capacity (x-axis) and utility for power (y axis) for a particular randomly generated network, that same information is not easily converted into 2D graphs.
+\end{idea}
+
+
+\paragraph{Chapter 5}. After reading chapter 4 I got quite worried about the contribution. Luckily then for
+chapter 5. This seems to be in much better shape in terms of structure and writing, and also has a
+clearer purpose and contributions. The results seem significant. Even so, there is still no proper
+literature review and gap analysis. Some works are discussed, but there is no sense whether this is
+all related work, or just a subset, and whether works are missing. In some cases it’s also not clear
+what is a new contribution, and what is from others. For example, is Algorithm 2 new? In some
+cases, e.g. Theorem 9, proofs are provided for existing theorems. This seems highly unusual. Is the
+proof different from the original? Is there another reason for including it? If so, it might be good to
+add a brief sentence saying “Proof has been restated here to..”. The comment in the para of section
+5.3.2 “which, we note, appears to be novel” is simply not convincing without a proper lit review.
+Anything can appear novel if you have not done a proper literature search (I am not saying here that
+this was the case, but there is simply no evidence of this). Overall, however, the approach seems
+solid and the results significant.
+
+\begin{idea}\label{response_statistics_reviewer1}
+\color{blue}
+The information in Chapter 5 is now published with IJCAI-2021, and thus we feel more confident in outright stating its novelty at this point.
+
+Some of the various proofs and partial theorems in the chapter, although technically novel, were not highlighted as such because they weren't materially so (such as Algorithm 2, Theorem 8 and 11).
+The revised version of the thesis has the theorems and proofs in the chapter that are technically novel, now noted as such.
+Other theorems (such as Theorems 9) which are noted not to be novel are presented with proofs largely for completeness of information, but also to present them in a way which is more congenial to our manipulation and analysis (such as in Theorem 11), and where they might otherwise be difficult to identify them with their presentation in wider literature.
+The rationale for these theorems and their proofs has been added to the revised thesis.
+
+Empirical concentration inequalities (those that are parameterised by sample variance) are relative new (since Maurer \& Pontill, Audibert et.al), and developing a variant of them tailored to something as complicated and old as stratified sampling is definitely novel, there isn't a whole lot of literature in this space.
+\end{idea}
+
+\paragraph{Some minor issue:}
+\begin{itemize}
+\item	In Section 5.4.2, one of the assumptions is that each stratum has a mean and variance. How
+does this apply in the cases of the games described in Section 5.6 or the energy setting from
+Chapter 4? These seem to be deterministic settings.
+
+\begin{idea}
+\color{blue}
+Computing the Shapley Value is deterministic, unless you are using random sampling to approximate the averaging terms in its calculation - which we are doing... relatively clearly.
+\end{idea}
+
+\item	In Section 5.5.1, why is JOIN not included as part of the benchmarks? This one seemed to
+perform the best in the preceding chapter.
+
+\begin{idea}
+\color{blue}
+JOIN method specific method for approximating Shapley Value, using join order process (such as via equation 3.6) where individuals join the coalition in turn making marginal contributions. In section 5.5.1 we aren't approximating the Shapley Value, and the sampling process cannot be structured in that way. sentence added in 5.1.1 to this effect.
+\end{idea}
+\end{itemize}
+To summarise, there are very solid contributions but parts of the thesis seem to have been rushed
+and don’t come together completely, especially in chapter 4. I recommend some changes are made
+before submitting the final version. In particular:
+
+\paragraph{Chapter 2:}\begin{itemize}
+\item	Consider whether envy freeness would be appropriate to discuss here \textcolor{blue}{-- Done, new section added}
+\item	Consider whether you would want to discuss the issues with maximising the collective utility
+function, especially when the utility is not an “objective” measure but can be sensitive to
+affine transformations \textcolor{blue}{-- Done, expanded section to consider these issues}
+\end{itemize}
+\paragraph{Chapter 3:}\begin{itemize}
+\item	P. 40. Unusual definition of Pareto optimality. Consider revising.\textcolor{blue}{-- Good point, Done}
+\end{itemize}
+\paragraph{Chapter 4:}\begin{itemize}
+\item	Give overview of how chapter is organised. Consider reorganising. \textcolor{blue}{-- Done, overview given and chapter split}
+\item	Consider adding more of a lit review \textcolor{blue}{-- lit review expanded in chapter 3}
+\item	Clarify relevance of the NBS, make clear this is somehow separate (i.e. can be used for NBS
+but also to compute payments), or remove the reference to it- \textcolor{blue}{-- connection declared more fully and clarified with an example}
+\item	4.2/4.3 Explain why restricted games are important to consider. Give examples of restricted
+games.\textcolor{blue}{-- added a quick example in a sentance in section 4.1}
+\item	Section 4.4: not clear what DC approximation is. Can’t assume reader is familiar with DC
+powerflows. E.g. what is “Line susceptance” \textcolor{blue}{-- direct reference citation from Wang et.al featured in original thesis...}
+\item	4.4.1: linear power consumption assumption not motivated \textcolor{blue}{-- it is unmotivated, but so too everything about the chapter model is simplifying assumption, added a footnote explaining}
+\item	Provide table with overview of the settings \textcolor{blue}{-- table 4.1 meets this point for small-scale experiment, further text added to larger experiments to aid reproducibility is added}
+\item	Discuss theoretical results from appendix. Clarify why some of these properties are
+significant \textcolor{blue}{-- they are not critical to any argument in the argument, but are only nice to have, additional statements of their relevance have been added to them in the appendix}
+\item	4.6.2: first time that “stratified sampling” is mentioned here. Needs more explaining of what
+it is, with forward referencing to Ch 5.\textcolor{blue}{-- Good point, Done}
+\item	4.6: Provide enough detail of the settings to reproduce experimental results
+Consider adding vanilla Shapley value as another payment mechanism (or explain why this is
+not trivial/unnecessary)\textcolor{blue}{-- Done, added detail and added vanilla Shapley Value mechanism and results}
+\item	4.7: “50-50 split of small consumers and small generators of electricity”. Again needs more
+detail to allow reproducibility. Parameters could go to appendix if it makes the chapter too
+long.\textcolor{blue}{-- added more detail in text to provide reproducibility information}
+\end{itemize}
+
+\paragraph{Chapter 5:}\begin{itemize}
+\item	Consider adding a proper literature review \textcolor{blue}{-- see response \eqref{response_statistics_reviewer1}}
+\item	Clarify where proofs are reproduced/restated from another paper and why \textcolor{blue}{-- additional notes made to identify novel theorems and proofs, with motivation for thoes that are restated from elsewhere with motivation}
+\item	Clarify if Alg 2 is novel \textcolor{blue}{-- it is technically, but not materially novel, now noted as such}
+\item	See “minor issues” comments above
+\item	5.6 first para seems to have some repetition from Chapter 4. Instead use referencing \textcolor{blue}{-- chapter 4 is referenced, we dont feel that rehashing a sentence or two is vicious here}
+\end{itemize}
+
+\paragraph{Textual errors}
+There are many instances where punctuation is incorrect and other issues. Please check the
+grammar rules on hyphens and commas. Some examples (incomplete):
+\begin{itemize}
+\item	Typo in the title: “managment”\textcolor{blue}{-- Fixed}
+\item	P 7: “begin applicable” $\rightarrow$ “being”?\textcolor{blue}{-- Fixed}
+\item	P. 20. Walk-away $\rightarrow$ Walk away (no hypen)\textcolor{blue}{-- Fixed}
+\item	P. 26 Mechanism Design – don’t capitalise. Only names should have capitals\textcolor{blue}{-- we object, Mechanism Design is the name of a field of study, capitalisation helps distinguish it as such}
+\item	P. 26 Nash-equilibria $\rightarrow$ Nash equilibria (several occurrences)\textcolor{blue}{-- Fixed}
+\item	P 27 players valuation $\rightarrow$ players’ valuation\textcolor{blue}{-- Fixed}
+\item	P28 One of the most features $\rightarrow$ most notable features??\textcolor{blue}{-- cant seem to find this error anymore...}
+\item	P. 29: “Additionally, that selling” not a complete sentence\textcolor{blue}{-- Fixed}
+\item	P. 38: Shapley Value $\rightarrow$ Shapley value\textcolor{blue}{-- we have recieved contradicting advice about this, whether shapley value is proper noun deserving of capitalisation, unfixed for now}
+\item	P 39. “markets, however” $\rightarrow$ “markets. However,” same mistake occurs many times \textcolor{blue}{-- instance is Fixed, most other uses of word 'however' is new sentance if introducing a new discussion point, or in-sentance if introducing a new clause with modifying information, not sure how to fix this further}
+\item	P. 48: pareto-optimal $\rightarrow$ Pareto optimal\textcolor{blue}{-- Fixed}
+\item	P. 48: three-or-more $\rightarrow$ three or more\textcolor{blue}{-- Fixed}
+\item	P. 52: sentence “the pricing the immeditate” needs fixing\textcolor{blue}{-- Fixed}
+\item	P. 52: “And then give”. Needs fixing\textcolor{blue}{-- Fixed}
+\item	P. 58: disjunnctive\textcolor{blue}{-- Fixed}
+\item	P. 76 “whether-or-not” $\rightarrow$ remove hyphens\textcolor{blue}{-- Fixed}
+\item	P. 78 “less less”-\textcolor{blue}{-- Fixed}
+\item	P. 89: “Since the aggregated..” not a complete sentence\textcolor{blue}{-- Fixed}
+\item	P. 93: “sharpened” $\rightarrow$ “improved”\textcolor{blue}{-- Changed}
+\item	P. 100 “- and in this section is created an empirical (“ consider rephrasing\textcolor{blue}{-- Fixed}
+\item	P. 102 “But that this form..” subsentence used as new sentence\textcolor{blue}{-- Fixed}
+\item	P. 106 Proof of Theorem 12 “In a similar was as per” fix\textcolor{blue}{-- Fixed}
+\item	P. 117 is gamma function $\rightarrow$ is the gamma function\textcolor{blue}{-- Fixed}
+\item	P. 122: “apon”\textcolor{blue}{-- Fixed}
+\item	P. 124 “infact” should be 2 words\textcolor{blue}{-- Fixed}
+\end{itemize}
+
+
+
+\section{Response to Reviewer 2}
+
+Examination Report for the thesis “Investigation of Market Mechanisms for Distribution Level Energy Management” by Mark A. Burgess
+
+This PhD thesis investigates market mechanisms for energy management at the distribution
+level. The focus is on electricity grid. The candidate has been working toward the PhD at the
+ANU College of Engineering and Computer Science.
+
+The main question the thesis aims to answer is “what market structures should be
+implemented?” within the context of electricity distribution and modern Distributed Energy
+Resources. The thesis uses game theory and mechanism design as main methods to answer
+this question, in addition to presenting some results on sampling methods. The main
+contributions of the thesis are 1) introduction of GNK (Generalized Neyman and Kohlberg)
+value as an axiomatic extension of classical Nash bargaining, 2) application of GNK to
+electricity distribution models, 3) new concentration inequalities in the context of stratified
+sampling.
+
+The novel contributions of the thesis were published in two conference articles in prominent
+computer science conferences. Overall, the research questions the thesis investigated, and
+contributions are worthwhile and interesting. However, the thesis in its current form has
+room for improvement and some issues should be addressed before publication.
+
+\subsubsection*{Specific Comments}
+\paragraph{Chapter 1}
+The chapter gives a nice overview of the research questions and contributions. However, it
+assumes that the reader has familiarity with the ongoing transformation of electricity
+systems, especially in Australia. An important issue here is the lack of background information
+on technical aspects of the application domain, namely the electricity generation and
+distribution systems.
+
+\begin{idea}
+\color{blue}
+The purpose of the introduction was to motivate the research question, that is towards a general rethink about the way that energy is valued and traded.
+This direction is motivated by considering (at a broad level) how multiple current issues (using Australia as a case study) serve to beg this question.
+The introduction is potentially not the best place for very much information on technical aspects of the application domain.
+In the revised thesis, the introduction has changed to more directly highlight the research question through each of the issues briefly considered therein.
+\end{idea}
+
+\paragraph{Chapter 2}
+Although this chapter touches important and deep topics, in my opinion it creates a
+distraction in a technical PhD thesis at the College of Engineering and Computer Science. The
+contributions of the thesis are not dependent on the philosophical speculations. They stand
+on their own as axiomatic and computational results. Therefore, I recommend moving this
+chapter to the end of the thesis, where it can provide a valuable philosophical context and
+discussion.
+
+
+\begin{idea}
+\color{blue}
+Surely the contributions of the thesis should not depend on philosophical speculations, nor is it intended as such.
+Whether moral and ethical considerations should serve a purpose as motivating beforehand or contemplated afterwards, would seem to be a matter of priority.
+Originally, we intended investigation of possible future electricity market systems to be motivated by considerations such as fairness/equality/proportionality/etc.
+To introduce utility before considering utility maximising algorithms (LMP,Shapley Value,etc.).
+From a more pragmatic/industrial perspective, these things could fairly be said to be a irrelevant distraction; however our thesis reviewer 3 seems to want greater ethical discussion about energy poverty, energy justice and climate change. It is difficult to go both ways on this one.
+\end{idea}
+
+\paragraph{Chapter 3}
+This chapter presents a very nice overview of existing methods from mechanism design
+literature. Therefore, it serves as a good background chapter in that specific aspect. However,
+it also highlights the two very important issues with the thesis: 1) there is no discussion onhow the technical aspects of the problem, i.e., electricity systems constraint or affect such
+mechanisms. In relation to this, there is no proper background information provided about
+technical underpinnings of the systems the thesis claiming to investigate, 2) the thesis does
+not contain a proper literature review of the many works that apply market-based and game-
+theoretic methods to the exact same problems addressed in the thesis. This naturally makes
+it impossible to put its contributions into proper context and appreciate them fully.
+
+\begin{idea}
+\color{blue}
+We take it as a fair point that a more detailed and technical literature review has been needed, and the revised thesis includes reference and discussion of greater range of more technical literature about electricity systems application of the various ideas and techniques presented in Chapter 3.
+\end{idea}
+
+
+\paragraph{Chapter 4}
+This is the main contribution chapter of the thesis where a novel GNK value is introduced and
+applied to a basic electricity distribution model. The results presented are interesting and
+promising. It is one of the best chapters in the thesis.
+
+\paragraph{Chapter 5}
+This chapter suddenly jumps to the topic of stratified sampling, without properly clarifying
+the context other than referring to a subsection in Chapter 4. The literature review is well
+done and relevant background information on sampling is provided. This chapter contains
+very interesting results on sampling and good theoretical contributions. However, it feels
+totally disconnected from the rest of the thesis. The connection between the results in
+Chapter 5 and the problem solved in Chapter 4 is easy to miss and is not highlighted enough.
+
+\begin{idea}
+\color{blue}\label{reviewer2_chapter_4_5}
+The revised thesis has more statements and sentences linking Chapters 4 and 5 together and highlighting the relevance of the sampling theory to chapter 4.
+\end{idea}
+
+
+\paragraph{Chapter 6}
+The discussion in this chapter is too short. The opportunity should be used to establish the
+nice connections between axiomatic contribution of GNK value, theoretical results on
+sampling that contribute to computation of GNK, and their applications to distribution grids.
+I believe this has priority over philosophical discussions for clarifying the valuable
+contributions of this thesis.
+
+\begin{idea}
+\color{blue}
+The revised thesis has this conclusion rolled into the discussion of results and ethical evaluation of (what was) Chapter 4.
+The axiomatic contribution of the GNK value, with its theoretical results and philosophical considerations is conceptually distinct from the sampling methodologies developed to approximate it.
+the updated thesis reflects this separation by not having a single conclusion chapter.
+\end{idea}
+
+
+\subsubsection*{Recommended Changes}
+\begin{itemize}
+\item The thesis should contain substantial new material reviewing relevant literature,
+focusing on the fields of energy economics, especially works that combine
+technical/computational aspects of the problem with game-theoretic methods. This is
+necessary to put the contributions of the thesis into context.
+The literature mentioned in the thesis focuses too much on fundamentals of
+mechanism design methods from mid-20 th century and almost totally disregards vast
+literature on energy and electricity applications. A specific starting point, for example,
+could be works by Ben Hobbs, https://hobbsgroup.johnshopkins.edu/ and references
+therein. VCG and variants have been applied to electricity markets and energy
+management by tens of papers, see e.g. online resources such as Google Scholar with
+keywords ‘vcg electricity markets’
+
+\begin{idea}
+\color{blue}\label{reviewer2_new_material}
+New material has been added, focusing on game-theoretic models in the electricity context.
+references and summary discussions are introduced on some of the work of Ben Hobbs and collaborators, and many tens of references from the respective (and other) google searches are present.
+Chapter 3 has a greater emphasis on applications and discussion about physical electricity systems.
+\end{idea}
+
+
+\item The thesis should provide more background on electricity distribution systems it
+targets and emphasise the effects of these technical systems on the mechanism design
+problems.
+
+\begin{idea}
+\color{blue}
+see response \eqref{reviewer2_new_material}
+\end{idea}
+
+\item The connection between Chapters 4 and 5 should be strengthened, and how the
+results of Chapter 5 play an important role in the overall theme of the thesis should
+be clarified.
+
+\begin{idea}
+\color{blue}
+see response \eqref{reviewer2_chapter_4_5}
+\end{idea}
+
+\item An extended discussion should be included at the end of the thesis, providing the
+connections between the individual contributions of the thesis, the application
+domain, and their value within the context of the broader literature.
+
+\begin{idea}
+\color{blue}
+The intention of the early Chapter 3 is in providing the application domain, the literature and the context for which the principle contributions in Chapter 4 can be seen to have value.
+It is difficult to see why we would want to be establish the value of what we are trying to do at the end of the thesis.
+
+Some reflective considerations and summarising statements are added at the end of the last two chapters in revised version of thesis.
+\end{idea}
+
+\end{itemize}
+
+
+\section{Response to Reviewer 3}
+
+Anonymous examination report for candidate, Mark Burgess, u4517355, 9070XPHD - PhD Engineering \& Comp Sc
+
+\paragraph{Examination report}
+The GNK value proposed by thesis and the new methods for stratified sampling are
+rigorously developed and of theoretical interest. These contributions are well
+presented with very good reviews of the relevant technical literature. My main
+concern is that although these contributions are interesting from a theoretical
+perspective, the practical benefits of the work, and the link to the current challenges
+facing power systems described in the Introduction, are not clearly articulated.
+However, I do believe the thesis represents a substantial and original contribution to
+knowledge and opens interesting avenues for future research.
+The revisions are detailed below and are divided into “main corrections” and “minor
+corrections”.
+
+Main Corrections:
+\begin{itemize}
+\item	In Chapter 1, sections 1.1 to 1.4 describe important changes which power
+systems are undergoing and associated challenges. However, it is not clear
+how these motivate the research question and the problem approach
+described in Section 1.5. In particular, it is needs to be made more clear how
+the new electricity market mechanisms proposed by the thesis address
+specific challenges identified in Sections 1.1 to 1.4.
+
+\begin{idea}
+\color{blue}
+The purpose of the introduction was to motivate the research question, that is towards a general rethink about the way that energy is valued and traded.
+This direction is motivated by considering (at a broad level) how multiple current issues serve to beg this question.
+In the revised thesis, the introduction has changed to more directly highlight how the research question is motivated through each of the issues briefly considered therein, rather than a plan to address thoes issues with granularity. Which has been added to future work section in revised thesis.
+\end{idea}
+
+\item Related to this, the title of the thesis “Investigation of Market Mechanisms for
+Distribution Level Energy Management” does not seem very well matched to
+the main research question and contributions. In particular, technical issues
+associated with distribution networks are not addressed, such as voltage
+constraints, reactive power flows, unbalanced lines, the need for large-scale
+coordination of distributed energy resources and the interactions between
+transmission and distribution. The title and introduction should be edited to
+address this mismatch.
+
+
+\begin{idea}
+\color{blue}
+A valid point, although our investigation seeks to make headway on mechanisms which could easily be adapted to the detail of distribution energy networks, it is not nearly as focused on this aspect as it could be.
+We will seek to change the title of the Thesis to better describe its contents.
+\end{idea}
+
+\item	Chapter 2: “Some Background on Philosophy on Distributive Justice” has
+some significant areas omissions which need to be reviewed in detail.
+\begin{enumerate}
+\item The unique properties of electricity markets imposed by physical
+realities associated with electrical power transmission.
+\item The significant literature on “energy justice”, which includes distributive
+justice as a component (see e.g. Jenkins, K., McCauley, D., Heffron,
+R., Stephan, H., and Rehner, R. (2016). Energy justice: A conceptual
+review. Energy Res. Soc. Sci. 11, 174–182.)
+\item The literature on energy poverty.
+\item Societal costs of greenhouse gas emissions.
+\end{enumerate}
+
+
+\begin{idea}
+\color{blue}
+While we do not wish to expand the motivating ethical and moral discussion too much (as thesis reviewer 2 questioned the relevance of such things) we have expanded and added a new section to Chapter 2 to pay some direct acknowledgement of climate change and energy justice as it may be relevant to the design of electricity market mechanisms.
+
+Additionally, the revised Chapter 3 has a larger literature review on physical electricity systems and applications
+\end{idea}
+
+
+\item	At the start of Chapter 4, the motivation for the GNK value in the context of
+power systems needs to be clarified. Although it is explained that the GNK
+includes aspects of the different solution concepts described in Chapter 3, it
+needs to be clarified why the GNK is expected to address the challenges
+associated with how electricity markets are changing.
+
+
+\begin{idea}
+\color{blue}
+The issues associated with how electricity markets are changing in Chapter 1, are just used to motivate the research question (a link which has been highlighted further in revised version of thesis), that of broadly reconsidering how electricity should be valued.
+The resultant GNK (because of its generality of application) can potentially be applied in those contexts, however the details of making such connections is more and different research.
+Which has been added to future work section.
+\end{idea}
+
+\item	In Chapter 4 Section 4.5.1 it is mentioned that “The transactions under LMP
+and VCG are not necessarily budget-balanced and can yield a surplus or
+deficit”. For LMPs only the situation where a budget surplus occurs is
+discussed, and in Karaca, O., and Kamgarpour, M. (2020). Core-Selecting
+Mechanisms in Electricity Markets. IEEE Trans. Smart Grid 11, 2604–2614 it
+is stated “under DC-OPF exchange problems, the LMP mechanism is budget-
+balanced”.
+
+
+\begin{idea}
+\color{blue}
+Okay, this is potential confusion, the same author in the same paper (section 4.3) gives example of LMP returning surplus.
+``The LMP mechanism also results in a positive budget since the limits $C_{3,1}$ and $C_{3,2}$ are tight at the optimal solution"
+The author seems to cite both ways, by citing facts 5\&6 from “Folk theorems on transmission access: Proofs and
+counterexamples,” Journal of Regulatory Economics, vol. 10, no. 1, pp. 5–23, 1996, by Felix Wu, Pravin Varaiya, Pablo Spiller, Shmuel Oren.
+which more directly states ``if at the economic dispatch no flow is constrained, ... MS [the budget surplus] = 0" - ie. if there is no congestion, then the budget surplus is zero, otherwise it can be positive (fact 4 therein).
+\end{idea}
+
+
+
+\item	In Chapter 4, Section 4.5.1 it is mentioned that “The GNK value (but not VCG
+or LMP) can offset those that do not receive or generate power”. A negative
+aspect which is not discussed is that this could incentivise the construction of
+generation in locations where it is not valuable due to congestion.
+
+
+
+\begin{idea}
+\color{blue}
+So compensation for not receiving power is identified to extend from counterfactual considerations in the GNK logic, in the sense that `those players are being rewarded because they \textit{could} have provided value to the network'. Indeed this is essentially the same kind of logic behind electricity capacity markets.
+Whether this consideration is indeed actually a negative aspect or a positive one, is not so clear, and is a potentially interesting investigation.
+\end{idea}
+
+
+\item	It is unclear why the M-GNK would be a good approximator of the GNK value.
+As mentioned, the concept of threat is central to the GNK but is not present in
+the M-GNK. The extent to which the values are similar is not very clear from
+Figure 4.11 where there are significant discrepancies for certain players.
+Moreover, Fig. 4.9 shows that the M-GNK results in negative post payment
+utility for generators, whereas this type of behaviour is not seen for the GNK
+in Fig. 4.2(c) (although this may be due to the number of participants). I
+believe additional analysis is required to justify why the M-GNK could be
+treated as a proxy for the GNK. This could be theoretical analysis, or empirical
+examples showing the extent to which the GNK and M-GNK exhibit similar
+behaviour.
+
+
+\begin{idea}
+\color{blue}
+So figure 4.11 numerically shows the result that the M-GNK and GNK value become more similar for more players, the more players there are. which is a difficult graph to communicate.
+Further investigation is definitely warranted, and is now pointed out in future work section in chapter 5.
+Indeed, M-GNK features genuinely less notion of threat, which is central, and further investigation would reveal if the GNK would afford negative utilities post payment.
+valid points.
+\end{idea}
+
+
+\item	It is mentioned that the epsilon within the M-GNK equation in (4.25) should be
+a small positive value. However, it is unclear how a suitable value can be
+found, and how this value affects the M-GNK calculation if it is too high or too
+low.
+
+
+\begin{idea}
+\color{blue}
+Extra sentences have been added (together with a footnote) clarifying the effect the size of $\epsilon$ on the optimisation problem and its influence on solving software.
+\end{idea}
+
+\end{itemize}
+
+Minor Corrections:
+\begin{itemize}
+\item	The thesis should present the candidate’s individual contributions. Therefore,
+in Section 1.5.1 the contributions should be rephrased from using “we” to “I”.
+Throughout the thesis, “I” should be used instead of “we”, with contributions
+from others clearly identified. \textcolor{blue}{-- A statement to the introduction (using 'I') as been added describing the contributions of specific people}
+\item	“Managment” in title should be “Management”.\textcolor{blue}{-- Fixed}
+\item	A Nomenclature section should be added with definitions for all symbols.\textcolor{blue}{-- Added}
+\item	It seems like the subsection starting on page 134 should be 6.2 (currently
+“.1”).\textcolor{blue}{-- Fixed, made into 'Appendix A'}
+\item	In the introduction it is mentioned “one limitation of traditional generating
+technologies is that they are often unable to respond quickly to assist in the
+maintaining of system frequency”. I believe this statement is overly broad and
+requires additional clarification with reference to synchronous generator
+speed control.\textcolor{blue}{-- Added more clarification}
+\item	A reference should be included for the definition of the term Prosumers when
+first introduced.\textcolor{blue}{-- Fixed by linking to reference to Nature Energy article}
+\item	The discussion on LMP budget-balance in section 3.2.2 (page 32) should
+distinguish between strong and weak budget balance.\textcolor{blue}{-- Fixed, those terms have been added with a reference supporting their use}
+\item	In Chapter 4 Section 4.5.1 it is mentioned that the discontinuities associated
+with the LMPs “might be seen to lead to a somewhat perverse incentive to
+produce less power than what is socially optimal”. Some additional discussion
+on this point is warranted since the LMPs will incentivise socially optimal
+supply if generators are price-taking.\textcolor{blue}{-- If generators are price-taking (ie. their bidding does not affect the network operating point, eg. no congestion) then perverse condition does not arise, however, in the example, the generator isnt price taking, and the perversity does arise in the case of congestion, which is identified}
+\item	Figure 4.5 requires additional explanation, particularly why there are different
+numbers of points at different network scales and what the trend line is
+showing.\textcolor{blue}{-- The figure's caption has been changed to be a bit more descriptive}
+\item	4.7 to 4.9 require x, y and z axis labels with units. It also needs to be made
+clear what quantity the colour bar is associated with.\textcolor{blue}{-- Fixed, units are appended and captions expanded to be more descriptive}
+\item	Under (4.25) it is mentioned “here we assume all the DC power constraints
+apply in both argmax”. However, this information should be made clear within
+(4.25) e.g. using suitable subscripts.\textcolor{blue}{-- Fixed, added subscript and additional sentence in the text}
+\item	Please check the k and j subscripts in equation (5.12).\textcolor{blue}{-- Fixed, good attention}
+\item	Revise sentence: “Note that the last three methods (Ney,Ney-W and
+SEBM*)…” in Setion 5.5 based on the list order.\textcolor{blue}{-- Fixed, now in list order}
+\end{itemize}
+
+\end{document}
