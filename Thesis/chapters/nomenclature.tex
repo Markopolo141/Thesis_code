@@ -29,6 +29,7 @@
 \item	P2P -- peer-to-peer electricity trading
 \item	PEEF -- pareto-efficient envy-free allocation
 \item	PV -- solar photovoltaic system
+\item	RHS -- right hand side
 \item	SEBB -- Stratified Empirical Bernstein Bound
 \item	SEBM -- Stratified Empirical Bernstein Method
 \item	SEBM* -- Stratified empirical Bernstein method with variance assistance
@@ -40,93 +41,137 @@
 \item	VPP -- virtual power plant
 \end{itemize}
 
-%\section*{Symbols}
+\section*{Symbols}
 
-%\paragraph{Chapter \ref{sec:philosophy}}
-%\begin{itemize}
-%\item	$I$ indicator function
-%\item	$u_i(\cdot)$ utility of player $i$
-%\item	$\pi_i$ resource bundle of player $i$
-%\end{itemize}
+\paragraph{Chapter \ref{sec:philosophy}}
+\begin{itemize}
+\item	$I$ indicator function
+\item	$u_i(\cdot)$ utility of player $i$
+\item	$\pi_i$ resource bundle of player $i$
+\end{itemize}
 
-%\paragraph{Chapter \ref{cha:solutions}}
-%\begin{itemize}
-%\item	$X$ set of physical outcomes
-%\item	$n$ number of agents
-%\item	$v_i$ valuation over physical outcomes for player $i$
-%\item	$x^*$ socially optimal physical outcome
-%\item	$d_i(v)$ VCG payment for player $i$, given valuation set $v$
-%\item	$u_i$ utility of player $i$
-%\item	$C_{-i}$ a pivot rule in groves mechanism
-%\item	$D(x)$ demand curve in marginal pricing game
-%\item	$S(x)$ supply curve in marginal pricing game
-%\item	$U_d(x)$ buyers total utility in marginal pricing game
-%\item	$U_s(x)$ sellers total utility in marginal pricing game
-%\item	$L(a,b,\lambda)$ lagrangian function, for amount bought $a$ and amount sold $b$, with lagrange multiplier $\lambda$
-%\item	$N$ is set of players $1$ to $n$
-%\item	$v: S\subseteq N \rightarrow \mathbb{R}$ is a characteristic function
-%\item	$C(v)$ the Core of a cooperative game with characteristic function $v$
-%\item	$C_\epsilon(v)$ the strong epsilon Core of a cooperative game with characteristic function $v$
-%\item	$\hat{v}_{i,k}$ average marginal contribution of player $i$ across coalitions of size $k$ in a cooperative game with characteristic function $v$
-%\item	$\varphi_i(\langle N,v\rangle)$ the Shapley Value for player $i$, for a coaltional game with player set $N$ and characteristic function $v$
-%\item	$\pi(N)$ the permutations of join orderings of the player set $N$
-%\item	$Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$
-%\item	$F$ is a set of potential outcomes
-%\item	$P=\{p_1,p_2,\dots\}$ is set of players
-%\item	$u_{p\in P}(f)$ for $f\in F$ is utility of outcome $f$ for player $p$
-%\item	$d$ is the disagreement outcome
-%\item	$\text{nash}(F,d)$ is the nash bargaining solution
-%\item	$S_i$ strategy set for player $i$
-%\item	$p_1(s_1,s_2)$ and $p_2(s_1,s_2)$ for $s_1\in S_1$ and $s_2\in S_2$ is payoffs for players 1 and 2 for playing strategies $s_1$ adn $s_2$
-%\item	$B$ set of cooperative strategies
-%\item	$d_i$ demand of player $i$
-%\item	$t_i$ threat of player $i$
-%\end{itemize}
+\paragraph{Chapter \ref{cha:solutions}}
+\begin{itemize}
+\item	$X$ set of physical outcomes
+\item	$n$ number of agents
+\item	$v_i$ valuation over physical outcomes for player $i$
+\item	$x^*$ socially optimal physical outcome
+\item	$d_i(v)$ VCG payment for player $i$, given valuation set $v$
+\item	$u_i$ utility of player $i$
+\item	$C_{-i}$ a pivot rule in groves mechanism
+\item	$D(x)$ demand curve in marginal pricing game
+\item	$S(x)$ supply curve in marginal pricing game
+\item	$U_d(x)$ buyers total utility in marginal pricing game
+\item	$U_s(x)$ sellers total utility in marginal pricing game
+\item	$L(a,b,\lambda)$ lagrangian function, for amount bought $a$ and amount sold $b$, with lagrange multiplier $\lambda$
+\item	$N$ is set of players $1$ to $n$
+\item	$v: S\subseteq N \rightarrow \mathbb{R}$ is a characteristic function
+\item	$C(v)$ the Core of a cooperative game with characteristic function $v$
+\item	$C_\epsilon(v)$ the strong epsilon Core of a cooperative game with characteristic function $v$
+\item	$\hat{v}_{i,k}$ average marginal contribution of player $i$ across coalitions of size $k$ in a cooperative game with characteristic function $v$
+\item	$\varphi_i(\langle N,v\rangle)$ the Shapley Value for player $i$, for a coaltional game with player set $N$ and characteristic function $v$
+\item	$\pi(N)$ the permutations of join orderings of the player set $N$
+\item	$Pre^i(O)$ as the set of predecessors of player $i$'s addition in that ordering $O\in \pi(N)$
+\item	$F$ is a set of potential outcomes
+\item	$P=\{p_1,p_2,\dots\}$ is set of players
+\item	$u_{p\in P}(f)$ for $f\in F$ is utility of outcome $f$ for player $p$
+\item	$d$ is the disagreement outcome
+\item	$\text{nash}(F,d)$ is the nash bargaining solution
+\item	$S_i$ strategy set for player $i$
+\item	$p_1(s_1,s_2)$ and $p_2(s_1,s_2)$ for $s_1\in S_1$ and $s_2\in S_2$ is payoffs for players 1 and 2 for playing strategies $s_1$ adn $s_2$
+\item	$B$ set of cooperative strategies
+\item	$d_i$ demand of player $i$
+\item	$t_i$ threat of player $i$
+\end{itemize}
 
 
 
-%\paragraph{Chapter \ref{cha:new_solution}}
-%\begin{itemize}
-%\item	$N$ is a finite set of $n$ players
-%\item	$v:2^N\rightarrow \mathbb{R}$ is characteristic function
-%\item	$\mathbb{D}$ the set of all games of threats
-%\item	$\varphi_i(\langle N,v\rangle)$ the GNK value for player $i$ of player set $N$ for characteristic function $v$
-%\item	$A\subseteq \prod_{i\in N}A^i$ is a set of all possible joint strategies, where $A^i$ denotes the set of strategies available to player $i\in N$
-%\item	$u_i(a)$ is player $i$'s payoff/utility when joint strategy $a\in A$ is executed
-%\item	$v_o(S)$ Neymann \& Kohlberg's original value function
-%\item	$v_m(S)$ von Neumann and Morgenstern's historic value function
-%\item	$B$ set of busses in a network
-%\item	$p_i$ power consumption/generation at bus $i$
-%\item	$\theta_i$ phase angle at bus $i$
-%\item	$C\subseteq B\times B$ set of lines in network
-%\item	$b_{i,j}$ susceptance of the line between busses $i$ and $j$
-%\item	$p_{i,j}$ power flow from bus $i$ to $j$
-%\item	$h_j$ and $g_k$ (for indices $j,k$) are shorthand for equality and inequality constraints in DC OPF
-%\item	$u_i(p_i)$ utility for players at bus $i$ for power consumption at bus $i$, $p_i$
-%\item	$\mathcal{KKT}[\cdot]$ set of KKT points to the optimisation problem
-%\item	$\lambda_k$ is $k$th lagrange multiplier
-%\item	$Z_k$ activation binary variable for $k$th complementary slackness constraint
-%\item	$\mathbb{KKT}(\cdot)$ set of KKT points for optimisation problem under binary relaxation of complementary slackness constraint
-%\item	$d_i$ VCG payment to player $i$
-%\item	$v_{shap}(S)$ characteristic function for Shapley Value formulation of network 
-%\end{itemize}
+\paragraph{Chapter \ref{cha:new_solution}}
+\begin{itemize}
+\item	$N$ is a finite set of $n$ players
+\item	$v:2^N\rightarrow \mathbb{R}$ is characteristic function
+\item	$\mathbb{D}$ the set of all games of threats
+\item	$\varphi_i(\langle N,v\rangle)$ the GNK value for player $i$ of player set $N$ for characteristic function $v$
+\item	$A\subseteq \prod_{i\in N}A^i$ is a set of all possible joint strategies, where $A^i$ denotes the set of strategies available to player $i\in N$
+\item	$u_i(a)$ is player $i$'s payoff/utility when joint strategy $a\in A$ is executed
+\item	$v_o(S)$ Neymann \& Kohlberg's original value function
+\item	$v_m(S)$ von Neumann and Morgenstern's historic value function
+\item	$B$ set of busses in a network
+\item	$p_i$ power consumption/generation at bus $i$
+\item	$\theta_i$ phase angle at bus $i$
+\item	$C\subseteq B\times B$ set of lines in network
+\item	$b_{i,j}$ susceptance of the line between busses $i$ and $j$
+\item	$p_{i,j}$ power flow from bus $i$ to $j$
+\item	$h_j$ and $g_k$ (for indices $j,k$) are shorthand for equality and inequality constraints in DC OPF
+\item	$u_i(p_i)$ utility for players at bus $i$ for power consumption at bus $i$, $p_i$
+\item	$\mathcal{KKT}[\cdot]$ set of KKT points to the optimisation problem
+\item	$\lambda_k$ is $k$th lagrange multiplier
+\item	$Z_k$ activation binary variable for $k$th complementary slackness constraint
+\item	$\mathbb{KKT}(\cdot)$ set of KKT points for optimisation problem under binary relaxation of complementary slackness constraint
+\item	$d_i$ VCG payment to player $i$
+\item	$v_{shap}(S)$ characteristic function for Shapley Value formulation of network 
+\end{itemize}
 
-%\paragraph{Chapter \ref{chap:stratified_sampling_chapter}}
-%\begin{itemize}
-%\item	basdsf
-%\end{itemize}
+\paragraph{Chapter \ref{chap:stratified_sampling_chapter}}
+\begin{itemize}
+\item	$N_i$ the size of strata $i$
+\item	$n_i$/$m_i$ the number of samples taken from strata $i$
+\item	$\sigma_i^2$ the variance of data in strata $i$
+\item	$\mu$ the mean of the population
+\item	$\hat{\mu}$ the estimate of the population mean using stratified sampling
+\item	$a$ the data lower bound
+\item	$b$ the data upper bound
+\item	$D$ the data bound width $=b-a$
+\item	$\mathbb{E}[\cdot]$ the expecation operator
+\item	$\hat{\sigma}^2$ the sample variance estimator
+\item	$\hat{\sigma}_0^2$ the average of sample squares
+\item	$X$ a random variable
+\item	$X_1,\dots,X_n$ random samples of $X$
+\item	$Y_1,\dots,Y_n$ random samples of $X$ drawn without replacement
+\item	$D_i$ data bound width of strata $i$
+\item	$\hat{\sigma}^2_i$ the sample variance of strata $i$
+\item	$X_{i,j}$ the $j$th random sample taken from strata $i$
+\item	$H_1^n$ the RHS of Bennett's inequality, Theorem \ref{hoeffdings1}
+\item	$H_2^n$ the RHS of our sample squares bound, Theorem \ref{sample_squares}
+\item	$H_3^n$ the RHS of a variance bound \ref{variance2}
+\item	$h$ placeholder function in Theorem \ref{ebb1}
+\item	$f$ placeholder functions in Theorems \ref{ebb1} and \ref{hoeffdings_reduction}
+\item	$z$ placeholder function in Theorem \ref{ebb1}
+\item	$\kappa$ placeholder real variable
+\item	$s$ placeholder real variable
+\item	$t$ placeholder real variable
+\item	$x$ placeholder real variable
+\item	$y$ placeholder real variable
+\item	$q$ placeholder real variable
+\item	$\alpha$ placeholder parameter/variable
+\item	$\beta$ placeholder parameter/variable
+\item	$\gamma$ placeholder parameter/variable
+\item	$x_1,x_2\dots$ population of finite data points
+\item	${\Omega}_m^n$ parameters from Theorem \ref{martingale1}
+\item	${\Psi}_m^n$ parameters from Theorem \ref{martingale1}
+\item	$\bar{\Omega}_m^n$ parameters from Theorem \ref{martingale0}
+\item	$\bar{\Psi}_m^n$ parameters from Theorem \ref{martingale0}
+\item	$\chi_{i,m_i}$ the sample mean of strata $i$, after taking $m_i$ samples
+\item	$\hat{\sigma}^2_i$ the biased sample variance estimator of statum $i$
+\item	$\doublehat{\sigma}^2_i$ the unbiased sample variance estimator of statum $i$
+\item	$\tau_i$ the weight of data in stratum $i$
+\item	$\theta_i$ temporary variable for stratum $i$
+\item	$\Gamma$ the gamma function
+\item	$\phi(x)_{\{\alpha,\beta\}}$ the probabiliyt density function for Beta distributed data
+\item	$v(S)$ characetistic function for coalition $S$
+\item	$w_i$ the weight of player $i$ in coatlitional game
+\item	$e^{Ma}$ the error in Maleki's method from section \ref{sec:shapley}
+\item	$e^{sim}$ the error in Castro's simple sampling method from section \ref{sec:shapley}
+\item	$e^{Ca}$ the error in Castro's Neyman sampling method from section \ref{sec:shapley}
+\item	$e^{SEBM}$ the error in our SEBM sampling method in section \ref{sec:shapley}
+\item	$\mu_{i,j}$ is the $j$th component of the mean vector from the $i$th stratum
+\item	$D_{i,j}$ is the data bound width of the $j$th vector component of the $i$th stratum
+\item	$\sigma_{i,j}^2$ the variance of the $j$th vector component of the $i$th stratum
+\item	$X_{i,k,j}$ is the $j$th component, of the $k$th vector from stratum $i$
+\item	$\chi_{i,m_i,j}$ being the $j$th component of the average of $m_i$ sampled vectors from the $i$th stratum
+\item	$\doublehat{\sigma}_{i,j}^2=\frac{i}{m_i-1}\sum_{k=1}^{m_i}(X_{i,k,j}-\chi_{i,m_i,j})^2$ be the unbiased sample variance of the first $m_i$ of these random variables in the $j$th component  of the $i$th stratum.
+\item	$\alpha_j$ placeholder parameter/variable with index $j$
+\item	$\beta_j$ placeholder parameter/variable with index $j$
+\item	$\gamma_j$ placeholder parameter/variable with index $j$
+\end{itemize}
 
-%\paragraph{Chapter x}
-%\begin{itemize}
-%\item	basdsf
-%\end{itemize}
-
-%\paragraph{Chapter x}
-%\begin{itemize}
-%\item	basdsf
-%\end{itemize}
-
-%\paragraph{Chapter x}
-%\begin{itemize}
-%\item	basdsf
-%\end{itemize}

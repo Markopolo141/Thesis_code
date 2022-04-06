@@ -73,7 +73,7 @@ The strata that gives the most reduction of its EBB for a prospective additional
 \caption[Stratified Error bound reduction algorithm by unionised EBBs]{Stratified Error bound reduction algorithm by unionised EBBs - by Theorem \ref{triangle_theorem2}}
 \label{alg3}
 \begin{algorithmic}[1]
-    \REQUIRE probability $t$, number of strata $N$, initial sample numbers $m_i$, initial stratum sample variances $\doublehat{\sigma}_i^2$, widths $D_i$, maximum sample budget $B$,
+    \REQUIRE probability $t$, number of strata $N$, initial sample numbers $m_i$, initial stratum sample variances $\hat{\sigma}_i^2$, widths $D_i$, maximum sample budget $B$,
     for an EBB per the following form: $\p(\hat{\mu}_i-\mu_i \ge Z(m_i,D_i,\hat{\sigma}^2_i,t)) \le t $
     \WHILE{$\sum_k{m_k}<B$}
         \STATE $beststrata \leftarrow -1$
@@ -87,7 +87,7 @@ The strata that gives the most reduction of its EBB for a prospective additional
     	\ENDFOR
     	\STATE take an extra sample from strata: $beststrata$
 	    \STATE $m_{beststrata} \leftarrow m_{beststrata} + 1$
-    	\STATE recalculate $\doublehat{\sigma}_{beststrata}^2$
+    	\STATE recalculate $\hat{\sigma}_{beststrata}^2$
     \ENDWHILE
 \end{algorithmic}
 \end{algorithm}
