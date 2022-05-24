@@ -1,0 +1,90 @@
+
+\chapter{Conclusion}
+
+%* reiterate the design desirata that any new considerations be flexible to account for any electricity system detail. X
+%* account for specific things addressed in the introduction - such as frequency shift values and the value of inertia -or- effective inertia X
+%* value of something by integrated counterfactuals (what would happen if such and such were absent) directly linking to reasonable value ideas X
+%* integration of the idea of storage (future work of diachronic value of electricity - not just instantaneous) X
+%* mention the hetrodgeny of devices and different operating modes - eg. when do you charge your car, and what is the expected value to yourself vs others.
+%* mention uncertainty in supply and demand, islanding and future time predictions and valuation over uncertainty
+%
+%remention ethical critieria:
+%* the idea of a level playing field and equality of participation / equalitiy of opportunity
+%* reconsider the ideas of utilitarianism embodied in the GNK value, acknowledge equality deficit tradeoff. supply possibility of meta-utility corrections
+%
+%* mention core failing of freedoms, ensuring individual rationality and why it is important
+%* mention not addressing strategising and potential consequences
+%* mention the difficulty in extending the GNK value (and similar shapley value) to larger networks and reflect on the accomplishments put forward in the stratified sampling chapter.
+
+
+
+Throughout this thesis we have considered the research question: `how \textit{should} electricity be valued and traded?' which we introduced in Chapter \ref{cha:intro}.
+We introduced this question by way of considering the various ways in which the changing nature of electricity supply and demand is provoking a discussion different possible market structures to address emerging problems.
+In that chapter we considered particular problems that are emerging and the different possible market structures proposed to address them, particularly:
+\begin{itemize}
+\item	How the integration of intermittant renewable generation is making it more likely that more expensive generators set the marginal price points in the network, and how demand response aggregators could introduce mitigate this issue by making demand more elastic. (section \ref{sec:intro_part1})
+\item	We considered how intermittant renewable generators are replacing traditional power generators with frequency-stabilising inertia, and how DERs such as batteries and EVs may provide rapid response storage of electricity to offset this issue, possibly aggregated as VPPs bidding into capacity markets. (section \ref{sec:intro_part12})
+\item	We also mentioned how DERs are making consumers more less dependant on the grid itself, which may manifest in an untapped capability of consumers (as `prosumers') supporting each other on distribution level energy networks in possible P2P energy management scheme. (section \ref{sec:intro_part13})
+\end{itemize}
+
+We introduced these examples as to highlight the importance of the research question with its generality.
+Particularly, The first point raises the question of how should demand-elasticity be valued, traded and/or aggregated; this dynamic in electricity markets that is not often implemented in other markets for other goods; where there is recognisable value attached to -not- consuming a respective good in order to avert changes in the marginal price point/s of the system.
+
+This consideration is further highlighted in the second point where stochastic intermittancy in supply and demand creates value for capacity (for generation and/or consumption and/or the lack thereof) for frequency correction across small time-scales and to address this the addition of DERs such as EVs into the network also incorporates additional complexity in coordination and value.
+Electric vehicles (EVs) have constraints across-time on their consumption or generation capacity, subject to user needs and battery capacity, and this intersects with uncertain needs of the network including other EVs and their charging requirements and availability; how should electricity supply/demand from resources be traded in a stochastic environment with diachronic constraints on resource availability?
+
+In our third point it is seen that electricity supply and consumption is also increasingly going to be (or potentially, effectively be) on distribution level energy networks between prosumers, and such interractions will have to be constrained by the requirements of thoes networks. Such local network requirments include such factors as line-voltage limits that may depending on network topology and connection point, real and reactive power supply and balancing, and considerations on stochastic and anticipated local demands and supply.
+
+Between these considerations the question `how \textit{should} electricity be valued and traded?' - especially if such a question is considered holistically, becomes quite difficult to answer.
+Currently, the Australian system consists of a patchwork of markets, such as: spot, day-ahead, and ancillary markets, and these address the current requirements of electricity supply to consumers.
+However, the upcomming changes are anticipated to stretch the current system, and such pressures may be solved by further patching the current system, such as by including additional market structures (eg. introducing a two-sided market structure), or changing/reforming thoes existing ones (eg. passing regulations treating DER aggregators as if they were generators). see section \ref{sec:intro_part1}.
+
+However there is the potential to approach the problem more holistically, and attempt a more general answer that incorporates all possible factors and electrical system details and constraints, to determine the operating point and transactions between all the parties of the system.
+
+In this thesis, we considered a background of general approaches to allocation, in Chapter \ref{cha:solutions} we considered VCG, LMP, Shapley Value, Bargaining theory and Envy-freeness rules.
+What is notable about these approaches is that they have varying levels of flexibility in the systems in which they can be made to apply to.
+We considered them as they may be extensible to give different and general answers to account for electricity system considerations that may be relevent in application, and we gave some detail about how they have been proposed as such.
+
+Each of these approaches have features, quirks and problems, and are situated within a wider discussion and academic context. However we saw one of the more common features between them was the broad notion of marginal differences.
+Most articulated in LMP, the marginalism principle accords participants in proportion to the marginal difference they make to the operating point of the system; conversely in VCG, the princple accords participants according to the difference they make to the operating point of the system, which is also often marginal.
+In the Shapley Value principle accords particpants in proportion to the difference they make to the operating point of the system under uncertainty of the contribution of others.
+This marginal difference is defined with reference to what would otherwise happen, most directly associated with the `threat' point in bargaining theory.
+
+From these approaches in Chapter \ref{cha:solutions} we can trace an idea that the value of an electrical resource sould be -in some way- related to the value difference that its presence could make in the presence of other resources.
+We attempted to rarify this notion by extending Nash Bargaining theory with Shapley Value axioms to many players, resulting in the development of the GNK value, presented in Chapter \ref{cha:new_solution}.
+
+The GNK value was developed as an extension of Nash Bargaining solution concept to many players, taking into consideration the leverage in zero-sum bargaining between all possible pairs of coalitions, and in this way aggregate all the possible strategic considerations and counter-considerations in ideal competition between all parties.
+The GNK was designed to be extensible to a generalised strategy space, and thus applicable to any context where there is discernable strategies, agents and known valuations over strategic outcomes. 
+In Chapter \ref{cha:new_solution} we introduced the GNK value by its setting and axioms, and gave an example application to small electricity networks under DC approximation.
+We compared the GNK value against LMP, VCG and Shapley Value in a small-scale electricity context and witnessed the differences in the outcome between them, which we articulated on a point-by-point basis.
+We identified that one primary obstacle in the application of the GNK value and Shapley Value to electricity networks was the computation complexity involved in their calculation.
+and the next Chapter \ref{sec:scaling} was intending to address.
+In Chapter \ref{sec:scaling} we considered two different techniques which could scale the GNK to larger sized networks, particularly using sampling techniques and a proxy inplace of the GNK's inner terms.
+We compared different sampling techniques, and developed our own novel sampling technique for sample-approximating the GNK and Shapley Values called the Stratified Empirical Bernstein Method (SEBM) in Chapter \ref{chap:stratified_sampling_chapter}.
+We also provided a discussion of the merits of the GNK value against ethical criteria identified in our philosophy Chapter \ref{sec:philosophy} against the results computed of the GNK value on larger randomly generated electricity networks.
+
+From our discussion in section \ref{sec:GNK_value_discussion} we discussed the central failing of the GNK value, that of not preserving the ideal of individual rationality, meaning that in practice the GNK value can leave individuals at a loss for participating.
+This quality was identified as being axiomatic in the derivation of the VCG mechanism, but was not part of the derivation of the GNK value in favor of other characteristics, particularly continuum with the Nash bargaining solution, and the posession of Shapley Value axioms.
+It was hoped that the GNK would be witnessed to posess individual rationality at scale, but this was not witnessed.
+
+In chapter \ref{sec:philosophy} we began by introducing the philosophy surrounding distributive justice. We began by acknowledging the vageries surrounding ethics itself, and the inherant ethical nature of the research question: `how \textit{should} electricity be valued and traded?'.
+We considered different ethical notions and ideals that exist in the minds of people and are discussed in literature in relation to electricity systems, including: Equality, Equity, Efficiency, Freedom, Proportionality, the minimisation of Envy, and environmental concern.
+Ultimately we feel that thoes vague ideals were not truly satisfied by the GNK value, and our research result serves as a negative result of a particular kind of approach to answer this hard social problem.
+While it may be possible to contend that if we had started off on a better footing with more defined and concrete goals we would have arrived at a more satisfying conclusion; to this there is validity.
+However it is also to be said that the true question of how electricity should be traded has a degree inherant vaguess, and there are many ways to miss a vague target:
+
+\begin{displayquote}
+``Far better an approximate answer to the \textit{right} question, which is often vague, than an \textit{exact} answer to the wrong question, which can always be made precise.'' \cite{10.2307/2237638}
+\end{displayquote}
+
+
+
+
+
+
+
+
+
+
+
+
