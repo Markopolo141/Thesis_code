@@ -102,6 +102,11 @@ We used a known process of generating pseudo random meshed networks of buses and
 \end{algorithmic}
 \end{algorithm}
 
+
+\iffigures
+\input{figs/absolute_error1.tex}
+\fi
+
 Using this algorithm we considered networks which were randomly generated to have 10 nodes with 12 lines between them, which was sufficiently small enough for it to be possible to solve the GNK value exactly.
 In each of these randomly generated networks, each line had randomly generated line limits (uniformly between $20$ and $300$kW) and each node was randomly assigned to be either a generator or consumer of electricity (probability of being a consumer begin $80\%$) with a randomly generated linear utility function (uniformly between $0.1$ and $2.1$ \$ per kW) with randomly generated consumption/generation limits (uniformly between $10$ and $200$kW).\footnote{All sourcecode for these experiments found at: \href{https://github.com/Markopolo141/Thesis\_code}{https://github.com/Markopolo141/Thesis\_code}}
 
@@ -138,15 +143,12 @@ This double-exponential complexity was somewhat expected as solving the GNK valu
 In light of this realisation we sought to make simplifications to the GNK value's inner optimisations (equation \ref{knvalue1}) to ease this intractability.
 Specifically we considered a polynomial-time computable proxy inplace of the minimax optimisations in the characteristic function \eqref{knvalue1} of the GNK value.
 
-\iffigures
-\input{figs/absolute_error1.tex}
-\fi
 
 \iffigures
 \input{figs/approximating_times1.tex}
 \fi
 
-\pagebreak
+%\pagebreak
 \section{Sampling a modified GNK value (M-GNK) at scale}\label{sec:modified_gnk}
 
 Given the intractable nature of the GNK value for large networks, we considered a proxy inplace of the minimax optimisations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
@@ -212,10 +214,6 @@ This consideration works reversely for consumers, who can only consume at a posi
 
 This behaviour in the context of large networks was somewhat unexpected; and we summarise the consequences in the following section \ref{sec:GNK_value_discussion}.
 
-
-%\iffigures
-\input{figs/probability_comparrison1.tex}
-%\fi
 
 \section{Discussion and conclusion}\label{sec:GNK_value_discussion}
 
@@ -293,6 +291,10 @@ Von Neumann and Morgenstern's characteristic function is not the only alternativ
 %In principle the only envy-free system in this context would be one that allocates equal utility to every participant, and hence no participant would have any 
 
 
+
+%\iffigures
+\input{figs/probability_comparrison1.tex}
+%\fi
 
 \subsection{Wider equality}\label{sec:wider_equality_gnk}
 

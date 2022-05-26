@@ -99,9 +99,9 @@ In concluding this research there are still outstanding questions which could pr
 \item	The extension of computational techniques to the GNK/Shapley Value measures to make them computable to even larger electricity networks, Some possible avenues of investigation include employing further approximations such as player clustering (such as implemented by \cite{DBLP:journals/corr/abs-1903-10965}), or transforming the problem into a non-atomic form, similar to non-atomic Shapley Value.
 \item	Improvement and experimentation on the concentration inequalities for stratified random sampling methodology. The bounds on the moment generating functions that we developed in Section~\ref{section:SEBB} use various loosening approximations, and hence stronger and/or more representative bounds could be developed at the cost of greater mathematical complexity.
 Alternatively, an approach utilising entropic \citep{Boucheron_concentrationinequalities} or Efron-Stein inequalities \citep{efron1981} could yield different and potentially tighter results.
+\item	The Stratified Empirical Bernstein Method (SEBM) has a significant computation overhead - as noted in section \ref{subsection:discussion_shapley} which may be minimised by simplifications to the the algorithm and/or the mathematics to make it more usefull.
+\item	In section \ref{subsection:selection_of_sampling_method} the \textsc{Join} method outperformed because of the advantage in leveraging join-orders to minimise the number of optimisations that needed to be performed for a datapoint in the stratified sampling scheme, potentially SEBM could be modified to take advantage of this aswell.
 \item	Extension of the Stratified Empirical Bernstein Bound (SEBB) to even more practical situations. Particularly the concentration inequality was derived on the assumption of given and known strata and strata sizes, which does not necessarily correspond to situations encountered by practising statisticians, where the sizes of strata may in some cases only estimated and/or where the strata divisions are flexible and/or constructed from preliminary surveys.
 \end{itemize}
-
-
 
 

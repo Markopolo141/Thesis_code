@@ -112,7 +112,12 @@ We used a known process of generating pseudo random meshed networks of buses and
 \end{algorithmic}
 \end{algorithm}
 
-Using this algorithm we considered networks which were randomly generated to have 10 nodes with 12 lines between them, \DIFdelbegin \DIFdel{and thus }\DIFdelend \DIFaddbegin \DIFadd{which was sufficiently }\DIFaddend small enough for it to be possible to solve the GNK value exactly.
+
+\DIFaddbegin \iffigures
+\input{figs/absolute_error1.tex}
+\fi
+
+\DIFaddend Using this algorithm we considered networks which were randomly generated to have 10 nodes with 12 lines between them, \DIFdelbegin \DIFdel{and thus }\DIFdelend \DIFaddbegin \DIFadd{which was sufficiently }\DIFaddend small enough for it to be possible to solve the GNK value exactly.
 \DIFdelbegin \DIFdel{And in }\DIFdelend \DIFaddbegin \DIFadd{In }\DIFaddend each of these \DIFdelbegin \DIFdel{networks }\DIFdelend \DIFaddbegin \DIFadd{randomly generated networks, }\DIFaddend each line had randomly generated line limits \DIFaddbegin \DIFadd{(uniformly between $20$ and $300$kW) }\DIFaddend and each node was \DIFaddbegin \DIFadd{randomly }\DIFaddend assigned to be either a generator or consumer of electricity \DIFdelbegin \DIFdel{randomly }\DIFdelend \DIFaddbegin \DIFadd{(probability of being a consumer begin $80\%$) }\DIFaddend with a randomly generated linear utility function \DIFaddbegin \DIFadd{(uniformly between $0.1$ and $2.1$ \$ per kW) }\DIFaddend with randomly generated consumption/generation limits \DIFdelbegin \DIFdel{.
 }\DIFdelend \DIFaddbegin \DIFadd{(uniformly between $10$ and $200$kW).}\footnote{\DIFadd{All sourcecode for these experiments found at: }\href{https://github.com/Markopolo141/Thesis\_code}{https://github.com/Markopolo141/Thesis\_code}}
 \DIFaddend 
@@ -155,18 +160,21 @@ This double-exponential complexity was somewhat expected as solving the GNK valu
 }\DIFaddend In light of this realisation we sought to make simplifications to the GNK value\DIFdelbegin \DIFdel{itself to ease its }\DIFdelend \DIFaddbegin \DIFadd{'s inner optimisations (equation \ref{knvalue1}) to ease this }\DIFaddend intractability.
 Specifically we considered a polynomial-time computable proxy inplace of the minimax optimisations in the characteristic function \eqref{knvalue1} of the GNK value.
 
-\iffigures
-\input{figs/absolute_error1.tex}
-\fi
 
 \iffigures
-\input{figs/approximating_times1.tex}
+\DIFdelbegin %DIFDELCMD < \input{figs/absolute_error1.tex}
+%DIFDELCMD < \fi
+%DIFDELCMD < 
+
+%DIFDELCMD < \iffigures
+%DIFDELCMD < %%%
+\DIFdelend \input{figs/approximating_times1.tex}
 \fi
 
 \DIFdelbegin \subsection{\DIFdel{Sampling a modified GNK value (M-GNK) at scale}}%DIFAUXCMD
 \addtocounter{subsection}{-1}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \pagebreak
-\section{\DIFadd{Sampling a modified GNK value (M-GNK) at scale}}\DIFaddend \label{sec:modified_gnk}
+\DIFdelend %DIF > \pagebreak
+\DIFaddbegin \section{\DIFadd{Sampling a modified GNK value (M-GNK) at scale}}\DIFaddend \label{sec:modified_gnk}
 
 Given the intractable nature of the GNK value for large networks, we considered a proxy inplace of the minimax optimisations of the characteristic function that define the GNK value (equation \ref{knvalue1}).
 Particularly we considered a relaxation:
@@ -270,11 +278,14 @@ While there does exist some work on similar (but more complex) solution concepts
 }%DIFDELCMD < 
 
 %DIFDELCMD < %%%
-\DIFdelend %\iffigures
-\input{figs/probability_comparrison1.tex}
-%\fi
+%DIF < \iffigures
+%DIFDELCMD < \input{figs/probability_comparrison1.tex}
+%DIFDELCMD < %%%
+%DIF < \fi
+%DIFDELCMD < 
 
-\section{Discussion and conclusion}\label{sec:GNK_value_discussion}
+%DIFDELCMD < %%%
+\DIFdelend \section{Discussion and conclusion}\label{sec:GNK_value_discussion}
 
 To consider the social and ethical value of the GNK value we must loop back to consider some of the topics explored in Chapter \ref{cha:background}.
 Particularly we briefly considered some moral elements about the distribution of resources, including Equality, Efficiency, and the various normative reference points which may be pertinent.
@@ -353,6 +364,10 @@ Von Neumann and Morgenstern's characteristic function is not the only alternativ
 
 
 
+%DIF > \iffigures
+\input{figs/probability_comparrison1.tex}
+%DIF > \fi
+
 \DIFaddend \subsection{Wider equality}\label{sec:wider_equality_gnk}
 
 In the development of this research it was hoped that the GNK value would ultimately be witnessed to have a similar individual rationality property as VCG.
@@ -413,7 +428,7 @@ The actual details of their application in those spaces, is potentially valuable
 }
 
 
-\subsection{\DIFadd{Conclusion}}
+\subsection{\DIFadd{Summary Outcome}}
 \label{cha:conc}
 
 \DIFadd{Throughout this research program we have undertaken an investigation into the space of possible mechanisms for valuing electricity.

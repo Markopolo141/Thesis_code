@@ -1,9 +1,7 @@
 
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
-The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling, since the aggregated population mean estimate does not itself have a sample variance but only the strata have means and sample variances.
-Such EBBs can be applied as a bound for the mean of an individual stratum but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
-
+The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling, since the population mean estimate does not have a sample variance but only the strata have sample variances. Such EBBs can be applied as a bound for the mean of an individual stratum but cannot bind the aggregation of the mean estimates of all the strata.
 In this section, we show that these EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
 The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
 And thus the resulting sampling methodologies will implicitly be sensitive to the variances of the strata but not requiring foreknowledge of them - unlike Neyman sampling.

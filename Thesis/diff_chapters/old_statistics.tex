@@ -2,10 +2,11 @@
 \section{Stratified sampling by union of unstratified probability bounds}\label{section:old_statistics}
 
 The minimisation of existing EBBs (such as Theorems \ref{MandPsEBB} and \ref{AudibertsEBB}) cannot be directly be used as a method of choosing samples in stratified sampling\DIFdelbegin \DIFdel{.
-Since }\DIFdelend \DIFaddbegin \DIFadd{, since }\DIFaddend the aggregated population mean estimate does not itself have a sample variance \DIFdelbegin \DIFdel{, }\DIFdelend but only the strata have means and sample variances.
-Such EBBs can be applied as a bound for the mean of an individual stratum \DIFdelbegin \DIFdel{, }\DIFdelend but such an EBB cannot bind the aggregation of the mean estimates of all the strata.
+Since the aggregated }\DIFdelend \DIFaddbegin \DIFadd{, since the }\DIFaddend population mean estimate does not \DIFdelbegin \DIFdel{itself }\DIFdelend have a sample variance \DIFdelbegin \DIFdel{, }\DIFdelend but only the strata have \DIFdelbegin \DIFdel{means and }\DIFdelend sample variances. Such EBBs can be applied as a bound for the mean of an individual stratum \DIFdelbegin \DIFdel{, but such an EBB }\DIFdelend \DIFaddbegin \DIFadd{but }\DIFaddend cannot bind the aggregation of the mean estimates of all the strata.
+\DIFdelbegin %DIFDELCMD < 
 
-In this section, we show that these EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
+%DIFDELCMD < %%%
+\DIFdelend In this section, we show that these EBBs can be combined by probability unions to create a bound for the error of the stratified mean estimate, which can then be minimised to create new stratified sampling methodologies.
 The combined probability bound will not depend on the variance of the strata, but only depend on the sample variances of the strata.
 And thus the resulting sampling methodologies will implicitly be sensitive to the variances of the strata but not requiring foreknowledge of them - unlike Neyman sampling.
 %And thus it will be possible to conduct such sampling in a single step, rather than in two steps - as is necessary in Neyman sampling.

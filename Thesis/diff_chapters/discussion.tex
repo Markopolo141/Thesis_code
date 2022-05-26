@@ -159,7 +159,7 @@ Conversely, it might also be advisable to run our method with an underestimate o
 
 \DIFdelbegin \subsection{\DIFdel{Future Work: applications of a multidimensional extension}}%DIFAUXCMD
 \addtocounter{subsection}{-1}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \section{\DIFadd{Conclusion and Future Work: applications of a multidimensional extension}}\DIFaddend \label{sec:multi}
+\DIFdelend \DIFaddbegin \section{\DIFadd{Conclusion and Summary: applications of a multidimensional extension}}\DIFaddend \label{sec:multi}
 
 It was noticed that our SEBB can be extended to multidimensional data by a simple modification.
 Specifically, instead of considering data that is single-valued, we consider data points that are vectors. 
@@ -227,7 +227,7 @@ This formulation can be applied to more involved computational tasks that involv
 }
 
 
-\subsection{\DIFadd{Conclusion}}
+\subsection{\DIFadd{Chapter Summary}}
 
 \DIFadd{Stratified sampling is a well known example of a statistical process of estimating a population mean by breaking it into strata, and then sampling the mean of each of the strata.
 Our primary investigative question of this chapter was how best to choose samples from the strata to get most accuracy in the final population estimate.
@@ -244,14 +244,7 @@ This process of using EBBs involved binding EBBs applied to different strata tog
 These sampling methodologies were then evaluated on synthetic data sets in Section \ref{section:statistics_results}, and discussed in Section \ref{sec:discussion}.
 }
 
-\DIFadd{There are potential future improvements to our concentration inequality and resulting sampling method (SEBB \& SEBM - developed in Section \ref{section:SEBB}), such as potentially:
-}\begin{itemize}
-\item	\DIFadd{Investigating ways to minimise the computational overhead of the method.
-}\item	\DIFadd{Possibly modify the method to take advantage of join order process in Shapley Value sampling.
-}\item	\DIFadd{Or to use more complicated algebra, and less simplification to further tighten the concentration inequality.
-}\end{itemize}
-
-\DIFadd{Notwithstanding, our concentration inequality (SEBB) gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
+\DIFadd{Our resulting concentration inequality (SEBB) gives an analytic bound on the error of the stratified mean and explicitly considers the sample variances, data widths, sample numbers, and any additional weights on the strata; and includes factors specifically for strata sampled with and/or without replacement.
 It is complex and tailored specifically to stratified sampling, and performs well in the sampling of synthetic data sets.
 }
 

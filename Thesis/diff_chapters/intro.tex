@@ -45,7 +45,8 @@ This is one example of a potential future market system which may become necessa
 \noindent \DIFadd{And this reflects the broader question: ``how should electricity be valued and traded?'' 
 }
 
-\DIFaddend \section{Increasingly variable supply, and the potential of battery storage}
+\DIFaddend \section{Increasingly variable supply, and the potential of battery storage}\DIFaddbegin \label{sec:intro_part12}
+\DIFaddend 
 
 %in addition to small solar PV system installations  there was an array of medium and large scale solar installations.
 %DIF < In the same time additional household batteries are increasingly being installed (with 22,661 household battery installations in the 2019 year) taking australias household battery storage to 1GW. with an addtional 15 large scale battery projects scheduled for completion in the 2019 year ranging between 1 and 150MW capacity.
@@ -91,22 +92,26 @@ One current avenue being explored to create such infrastructure is the creation 
 
 %DIFDELCMD < %%%
 \DIFdelend In this way, VPPs are another example of market structure that potentially could emerge in response to current technological trends.
-
-%DIF > Another avenue currently being ivestigated is contracting strategic reserve power for grid stability. which are currently being formalised into the Reliability and Emergency Reserve Trader (RERT) rules.
-\DIFaddbegin 
-
-\DIFadd{With the consideration of the various ways of trading, valuing and integrating storage in providing diachronic arbitrage of electrical energy to offset frequency deviations, the question is how the storage and time-sensitive rapid injection/consumption of electricity be traded and valued? Because an answer to this should be a consequence of an answer to the broader and more general question: ``how should electricity be valued and traded?''
+\DIFaddbegin \DIFadd{Another avenue currently being ivestigated is the contracting strategic reserve power specifically for grid stability. which are currently being formalised into the Reliability and Emergency Reserve Trader (RERT) rules.
 }
 
+\DIFadd{With the consideration of the various ways of trading, valuing and integrating storage in providing diachronic arbitrage of electrical energy to offset frequency deviations, the question is how the storage and time-sensitive rapid injection/consumption of electricity be traded and valued? Because an answer to this should be a consequence of an answer to the broader and more general question: ``how should electricity be valued and traded?''
+}\DIFaddend 
 
-\DIFaddend \section{DERs and the potential for a prosumer era}
+
+\section{DERs and the potential for a prosumer era}\DIFaddbegin \label{sec:intro_part13}
+\DIFaddend 
 
 Another change that is happening, is that increasingly not only are consumers generating their own electricity via solar panels, but they are also expected to be increasingly storing that energy as well; leading to an increasing level of consumer energy independence and the potential attractiveness of going `off-grid'.
 However, there may be future role for electricity consumers \DIFdelbegin \DIFdel{(or so called `prosumers') }\DIFdelend not only to participate in network support and have access to market structures; but also ideas that might induce consumers to create more social benefits, such as directly sharing their electricity with each other.
 Particularly, there is an idea that the grid might be able to support consumers selling their excess power and storage capacity to each other, as a peer-to-peer electricity trading (P2P) system.
 
 There are many different visions of what the structure the future electricity system might have, and what features it might have to support trading between \DIFdelbegin \DIFdel{prosumers}\DIFdelend \DIFaddbegin \DIFadd{producer-consumers, or so-called `prosumers'}\DIFaddend , such as \DIFdelbegin \DIFdel{sketched }\DIFdelend \DIFaddbegin \DIFadd{considered }\DIFaddend out by \cite{Parag2016}.
-These future visions describe ideas about how prosumers might trade directly or indirectly between themself and the wider grid; such as perhaps between P2P trading and/or aggregation into many larger virtual power plants (VPPs) or via localised community storage \cite{Morstyn2018}.
+These future visions describe ideas about how prosumers might trade directly or indirectly between themself and the wider grid; such as perhaps between P2P trading and/or aggregation into many larger virtual power plants (VPPs) or via localised community storage\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Morstyn2018}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{. \mbox{%DIFAUXCMD
+\citep{Morstyn2018}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 However the vision of incorporating prosumers into the national electricity market poses a range of gains and challenges, particularly with regards to the voltage and frequency management on distribution networks.
 \cite{BELL2018765} enumerates some of the challenges, such as: providing grid stability by securing timely reactive and real power supply to stabilise voltages and frequency, grid robustness such as blackout protection and islanding, improving system efficiency by minimising long-distance transmission costs, and facilitating the advent of a green electricity network, by fairly and equitably managing the interaction between prosumer's devices while preserving their privacy, in a scalable way while minimising the complexity of the management of such devices.
@@ -114,7 +119,7 @@ However the vision of incorporating prosumers into the national electricity mark
 \DIFdelbegin \DIFdel{The continued proliferation of DERs is a technological change that is expected to create investigation into these future visions of the grid}\DIFdelend %DIF > The continued proliferation of DERs is a technological change that is expected to create investigation into these future visions of the grid.
 \DIFaddbegin 
 
-\DIFadd{With the consideration of the various ways of facilitating the fair trading of energy between heterogeneous devices on distribution networks between consumers, the question is how to integrate these various factors in a flexible and equitable way}\DIFaddend .
+\DIFadd{With the consideration of the various ways of facilitating the fair trading of energy between heterogeneous devices on distribution networks between consumers, the relevant question is how to integrate these various factors in a flexible and equitable way}\DIFaddend .
 
 \DIFaddbegin \noindent \DIFadd{And this reflects the broader question: ``how should electricity be valued and traded?''
 }
@@ -163,11 +168,20 @@ In this context, there are many potentially important engineering considerations
 
 Potential future markets are subject to many requirements, outside of simply delivering a reliable and cheap electricity service to consumers, and sometimes they are even directly quoted as subject to ethical design considerations, such as implementing a ``Level playing field'' where:
 
-"all competitors, irrespective of their size or financial strength, get equal opportunity to compete. It is not enough if all players play by the same rules. The rules must accommodate the needs of all, whether small or large, so the market is free of impediments to smaller players." \cite{australianenergymarketoperatorlimited2018}
+\DIFdelbegin \DIFdel{"}\DIFdelend \DIFaddbegin \begin{displayquote}
+\DIFadd{``...}\DIFaddend all competitors, irrespective of their size or financial strength, get equal opportunity to compete. It is not enough if all players play by the same rules. The rules must accommodate the needs of all, whether small or large, so the market is free of impediments to smaller players.\DIFdelbegin \DIFdel{" \mbox{%DIFAUXCMD
+\cite{australianenergymarketoperatorlimited2018}
+}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{''
+}\\\DIFadd{\mbox{%DIFAUXCMD
+\citep{australianenergymarketoperatorlimited2018}
+}\hspace{0pt}%DIFAUXCMD
+}\end{displayquote}
+\DIFaddend 
 
 Ethical criteria such as this, as well as wider political and social implications \DIFdelbegin \DIFdel{bring philosophy and ethics into our research question}\DIFdelend \DIFaddbegin \DIFadd{bear on this discussion}\DIFaddend . 
 Thus our investigation is to explore and evaluate the research question of what \DIFdelbegin \DIFdel{market structures }\textit{\DIFdel{should}} %DIFAUXCMD
-\DIFdelend \DIFaddbegin \DIFadd{kinds of market structures should }\DIFaddend be implemented in \DIFdelbegin \DIFdel{this }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend new world.
+\DIFdelend \DIFaddbegin \DIFadd{kinds of market structures should }\DIFaddend be implemented in \DIFdelbegin \DIFdel{this new world}\DIFdelend \DIFaddbegin \DIFadd{the future}\DIFaddend .
 %In the past, it was held that inducing competition among generation companies was desirable, however it is important to ask if inducing competition among electrically generating prosumers is equally a good idea.
 %A part of the answer comes in the likely result: would a competitive system induce outcomes which are socially desirable and/or serve to promote social equality?
 %A major component of this question lies in the formulation of the arena in which the competition takes place; which is the primary design question.
@@ -231,32 +245,38 @@ Within \DIFdelbegin \DIFdel{our research our primary contributions }\DIFdelend \
 \noindent The contributions in this thesis are also partially given in the following works:\\
 
 \noindent``The Generalized N\&K Value: An Axiomatic Mechanism for Electricity Trading'' \DIFaddbegin \DIFadd{by Mark Burgess, Archie Chapman and Paul Scott}\DIFaddend \\ International Conference on Autonomous Agents and Multiagent Systems\\ (AAMAS) 2018\\
-(accessible: \href{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf})\\
+(accessible: \DIFdelbegin %DIFDELCMD < \href{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}{ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}%%%
+\DIFdelend \DIFaddbegin \href{https://ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}{https://ifaamas.org/Proceedings/aamas2018/pdfs/p1883.pdf}\DIFaddend )\\
 
 
 \noindent``An Engineered Empirical Bernstein Bound'' \DIFdelbegin \DIFdel{,}\DIFdelend \DIFaddbegin \DIFadd{by Mark Burgess, Archie Chapman and Paul Scott}\DIFaddend \\ European Conference on Machine Learning (ECML-PKDD) 2019\\
-(accessible: \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf})\\
+(accessible: \DIFdelbegin %DIFDELCMD < \href{http://ecmlpkdd2019.org/downloads/paper/435.pdf}{ecmlpkdd2019.org/downloads/paper/435.pdf}%%%
+\DIFdelend \DIFaddbegin \href{https://ecmlpkdd2019.org/downloads/paper/435.pdf}{https://ecmlpkdd2019.org/downloads/paper/435.pdf}\DIFaddend )\\
 
 
 \noindent``\DIFdelbegin \DIFdel{Stratified Finite }\DIFdelend \DIFaddbegin \DIFadd{Approximating the Shapley Value Using Stratified }\DIFaddend Empirical Bernstein Sampling'' \DIFdelbegin \DIFdel{, Preprints 2019}\DIFdelend \DIFaddbegin \DIFadd{by Mark Burgess and Archie Chapman}\\ \DIFadd{International Joint Conference on Artificial Intelligence (IJCAI-2021)}\DIFaddend \\
 (accessible: \DIFdelbegin %DIFDELCMD < \href{preprints.org/manuscript/201901.0202/v2}{preprints.org/manuscript/201901.0202/v2}%%%
-\DIFdelend \DIFaddbegin \href{https://www.ijcai.org/proceedings/2021/0011.pdf}{https://www.ijcai.org/proceedings/2021/0011.pdf}\DIFaddend )
+\DIFdel{)}\DIFdelend \DIFaddbegin \href{https://www.ijcai.org/proceedings/2021/0011.pdf}{https://www.ijcai.org/proceedings/2021/0011.pdf}\DIFadd{)}\\
 
 
-\DIFaddbegin \DIFadd{Particularly, we would like to make note some specific contributions: that Archie Chapman provided the idea of using Empirical Bernstein Bounds to derive novel method of sampling the Shapley Value.
+\DIFadd{Particularly, we would like to make note some specific contributions: that Archie Chapman provided the idea of using Empirical Bernstein Bounds to derive novel method of sampling the Shapley Value.
 That Paul Scott encouraged the use of complementary slackness conditions in solving the KKT conditions to allow the solving the bilevel optimisations in GNK value on electricity network examples.
 I would like to claim for myself specific contributions of developing the mathematics for Stratified Empirical Bernstein Method \& Method, and the idea behind extending Neyman \& Kohlberg's value formulation into generalised games, and for developing software and techniques for scaling the GNK computation.
-Additionally both Paul Scott and Arhcie Chapman is directly credited with providing direction, guidance in the production of this research and its publications.
-}
+Additionally both Sylvie Thi\'{e}baux, Paul Scott and Arhcie Chapman is credited with providing assisting direction and guidance in the production of this research and its publications.
+}\DIFaddend 
 
 
-\DIFaddend \section{Thesis outline}
+\section{Thesis outline}
 The thesis is arranged into the following chapters:
 \begin{enumerate}
-\item in Chapter \ref{sec:philosophy}, we give a series of brief philosophical points to provide ethical background for the underlying question of `how \textit{should} electrical energy be traded?'. In this section, we refer to the diversity of conceptions about social Equality, the different ways in which systems can be considered better/worse apart from equality (particularly by notions of Efficiency), and by ethical rules and guidance in proportion to various norms and reference points. 
+\item in Chapter \ref{sec:philosophy}, we give a series of brief philosophical points to provide ethical background for the underlying question of `how \textit{should} electrical energy be traded?'. In this section, we refer to the diversity of conceptions about social Equality, the different ways in which systems can be considered better/worse apart from equality (particularly by notions of Efficiency), and by ethical rules and guidance in proportion to various norms and reference points\DIFaddbegin \DIFadd{, introducing notions of envy-freeness, in a broader environmental context}\DIFaddend . 
 \item in Chapter \ref{cha:solutions}, we provide a presentation of some of the core ideas and background of already developed and/or applied solutions to electricity networks, particularly each of these ideas mathematically embody different ideas about distributive ethics. The particular ideas we briefly present, are the Vickrey-Clarke-Groves (VCG) mechanism, the Locational Marginal Pricing (LMP) method, cooperative game theory solutions such as the Shapley Value and The Core, and the approach of bargaining solution concepts such as Nash bargaining. 
-\item in Chapter \ref{cha:new_solution}, we develop and explore a new solution concept called the GNK value, that is derived from Shapley Value axioms and relates directly to Nash bargaining, and we compare it against LMP and VCG results in the context of simulated electricity networks. Particularly the advantages and disadvantages of the new approach are discussed and related back to the ethical \DIFdelbegin \DIFdel{desirata }\DIFdelend \DIFaddbegin \DIFadd{qualities }\DIFaddend established in Chapter \ref{cha:background}. The particular difficulty of computing this new GNK value is addressed and overcome by utilising sampling techniques in the presence of a proxy.
-\item in Chapter \ref{chap:stratified_sampling_chapter}, we investigate a range of stratified sampling techniques which were developed for computing the new GNK value. this investigation covered different techniques of conducting stratified sampling by minimising concentration inequalities, and a new technique was resolved called the stratified empirical Bernstein method (SEBM).
+\item in Chapter \ref{cha:new_solution}, we develop and explore a new solution concept called the GNK value, that is derived from Shapley Value axioms and relates directly to Nash bargaining, and we compare it against LMP and VCG results in the context of \DIFdelbegin \DIFdel{simulated electricity networks. Particularly the }\DIFdelend \DIFaddbegin \DIFadd{a small-scale simulated electricity network, we make observations about its qualities point-by-point and consider the difficulty in computing it for larger networks.
+}\item \DIFadd{in Chapter \ref{sec:scaling} We address the difficulty in computing the GNK value by exploring two approaches to approximate it, particularly the use of sampling schemes, and the use of a proxy for the inner terms of the GNK value. The }\DIFaddend advantages and disadvantages of the new approach are discussed \DIFdelbegin \DIFdel{and related back to the ethical desirata established in Chapter \ref{cha:background}.
+The particular difficulty of computing this new }\DIFdelend \DIFaddbegin \DIFadd{in relation to its computed result on a larger electricity network.
+The }\DIFaddend GNK value is \DIFdelbegin \DIFdel{addressed and overcome by utilising sampling techniques in the presence of a proxy}\DIFdelend \DIFaddbegin \DIFadd{discussed with regard to the ethical qualities established in Chapter \ref{cha:background}}\DIFaddend .
+\item in Chapter \ref{chap:stratified_sampling_chapter}, we investigate a range of stratified sampling techniques which were developed for computing the new GNK value. this investigation covered different techniques of conducting stratified sampling by minimising concentration inequalities, and a new technique was resolved called the stratified empirical Bernstein method (SEBM)\DIFaddbegin \DIFadd{.
+}\item \DIFadd{in Chapter \ref{sec:the_thesis_conclusion} we conclude the thesis by providing reflections of the approach against the situations highlighted in this chapter, as well as outline future work and summarising major accomplishments}\DIFaddend .
 \end{enumerate}
 
 

@@ -1,113 +1,198 @@
-\DIFdelbegin \chapter{\DIFdel{Conclusion}}
-%DIFAUXCMD
-\addtocounter{chapter}{-1}%DIFAUXCMD
-%DIFDELCMD < \label{cha:conc}
-%DIFDELCMD < 
 
+\chapter{Conclusion}\DIFdelbegin %DIFDELCMD < \label{cha:conc}
 %DIFDELCMD < %%%
-\DIFdel{Throughout this research program we have undertaken an investigation into the space of possible mechanisms for valuing electricity - particularly the space of mechanisms which can be bring into account all the possible confluences of electrical system details.
-This was seen to be an important quality as it is understood that the future smart grid will encompass differing electrical situations with a range of smart devices, and the way in which the value of these devices and the electricity they consume/generate will be determined needs a answer.}%DIFDELCMD < \\
+\DIFdelend \DIFaddbegin \label{sec:the_thesis_conclusion}
+
+%DIF > * reiterate the design desiderata that any new considerations be flexible to account for any electricity system detail. X
+%DIF > * account for specific things addressed in the introduction - such as frequency shift values and the value of inertia -or- effective inertia X
+%DIF > * value of something by integrated counterfactual (what would happen if such and such were absent) directly linking to reasonable value ideas X
+%DIF > * integration of the idea of storage (future work of diachronic value of electricity - not just instantaneous) X
+%DIF > * mention the hetrodgeny of devices and different operating modes - eg. when do you charge your car, and what is the expected value to yourself vs others.
+%DIF > * mention uncertainty in supply and demand, islanding and future time predictions and valuation over uncertainty
+%DIF > 
+%DIF > remention ethical critieria:
+%DIF > * the idea of a level playing field and equality of participation / equalitiy of opportunity
+%DIF > * reconsider the ideas of utilitarianism embodied in the GNK value, acknowledge equality deficit tradeoff. supply possibility of meta-utility corrections
+%DIF > 
+%DIF > * mention core failing of freedoms, ensuring individual rationality and why it is important
+%DIF > * mention not addressing strategising and potential consequences
+%DIF > * mention the difficulty in extending the GNK value (and similar shapley value) to larger networks and reflect on the accomplishments put forward in the stratified sampling chapter.
+\DIFaddend 
+
+
+
+Throughout this \DIFdelbegin \DIFdel{research program we have undertaken an investigation into the space of possible mechanisms for valuing electricity - particularly the space of mechanisms which can be bring into account all the possible confluences of electrical system details. This was seen to be an important quality as it is understood that the future smart grid will encompass differing electrical situations with a range of smart devices, and }\DIFdelend \DIFaddbegin \DIFadd{thesis we have considered the research question: `how }\textit{\DIFadd{should}} \DIFadd{electricity be valued and traded?' which we introduced in Chapter \ref{cha:intro}.
+We introduced this question by considering the various ways in which }\DIFaddend the \DIFdelbegin \DIFdel{way in which the value of these devices and }\DIFdelend \DIFaddbegin \DIFadd{changing nature of electricity supply and demand is provoking a discussion of different possible market structures to address emerging problems.
+In that chapter we considered particular problems that are emerging and the different possible market structures proposed to address them, particularly:
+}\begin{enumerate}
+\item	\DIFadd{How the integration of intermittent renewable generation is making it more likely that more expensive generators set the marginal price points in the network, and how demand response aggregators could mitigate this issue by making demand more elastic. (section \ref{sec:intro_part1})
+}\item	\DIFadd{We considered how intermittent renewable generators are replacing traditional power generators with frequency-stabilising inertia, and how DERs such as batteries and EVs may provide rapid response storage of electricity to offset this issue, possibly aggregated as VPPs bidding into capacity markets. (section \ref{sec:intro_part12})
+}\item	\DIFadd{We also mentioned how DERs are making consumers less dependant on the grid itself, which may manifest in an untapped capability of consumers (as `prosumers') to support each other and the grid on distribution level energy networks, such as in a possible P2P energy management scheme. (section \ref{sec:intro_part13})
+}\end{enumerate}
+
+\DIFadd{We introduced these examples as to highlight the importance of the research question with its generality.
+Particularly, The first point raises the question of how demand-elasticity should be valued, traded and/or aggregated. This dynamic in electricity markets is not often seen in other markets for other goods; where there is recognisable value attached to -not- consuming a respective good in order to avert changes in the marginal price point/s of the market.
+}
+
+\DIFadd{This consideration is further highlighted in }\DIFaddend the \DIFdelbegin \DIFdel{electricity they consume}\DIFdelend \DIFaddbegin \DIFadd{second point where stochastic intermittency in supply and demand creates value for capacity (for generation and}\DIFaddend /\DIFdelbegin \DIFdel{generate will be determined needs a answer. }%DIFDELCMD < \\
 %DIFDELCMD < \\\noindent
 %DIFDELCMD < %%%
 \DIFdel{The original research question was:}%DIFDELCMD < \\
 %DIFDELCMD < %%%
-\DIFdel{\-\hspace{1cm}How }\textit{\DIFdel{should}} %DIFAUXCMD
-\DIFdel{electricity be valued and traded?}%DIFDELCMD < \\
+\DIFdel{\-\hspace{1cm}How }\DIFdelend \DIFaddbegin \DIFadd{or consumption and/or the lack thereof) for frequency correction across small timescales.
+One of the proposed mechanisms to address this issue is the addition of DERs such as EVs into the network, however this can also potentially incorporate additional complexity in coordination and value.
+Electric vehicles (EVs) have constraints across-time on their consumption or generation capacity, subject to user needs and battery capacity, and this intersects with uncertain needs of the network including other EVs and their charging requirements and availability; how should electricity supply/demand from resources be traded in a stochastic environment with diachronic constraints on resource availability?
+}
+
+\DIFadd{In our third point it is seen that electricity supply and consumption is also increasingly going to be (or potentially, effectively be) on distribution level energy networks between prosumers, and such interactions will have to be constrained by the requirements of those networks. Such local network requirements include such factors as line-voltage limits that may depending on network topology and connection point, real and reactive power supply and balancing, and considerations on stochastic and anticipated local demands and supply.
+}
+
+\DIFadd{Between these considerations the question `how }\DIFaddend \textit{should} electricity be valued and traded?\DIFdelbegin %DIFDELCMD < \\
 %DIFDELCMD < 
 
 %DIFDELCMD < %%%
-\DIFdel{Unfortunately such a question is not easy to answer and has strong ethical undertones, making a comprehensively demonstrable answer impossible in principle, but an object of important investigation notwithstanding.
+\DIFdel{Unfortunately }\DIFdelend \DIFaddbegin \DIFadd{' - especially if }\DIFaddend such a question is \DIFdelbegin \DIFdel{not easy to answerand has strong ethical undertones, making a comprehensively demonstrable answer impossible in principle, but an object of important investigation notwithstanding.
 To investigate, we covered some existing solution concepts such as Nash's axiomatic bargaining, Cooperative game theory topics such as the core and Shapley Value, the VCG mechanism from mechanism design and marginal pricing theory.
 And from this investigation we attempted to take the best features of these concepts and synthesise a genuinely novel solution for the pricing of electrical resources on electricity networks.
-}%DIFDELCMD < 
+}\DIFdelend \DIFaddbegin \DIFadd{considered holistically, becomes quite difficult to answer.
+Currently, the Australian system consists of a patchwork of markets, such as: spot, day-ahead, and ancillary markets, and these address the current requirements of electricity supply to consumers.
+However, the upcoming changes are anticipated to stretch the current system, and such pressures may be solved by further patching the current system, such as by including additional market structures (eg. introducing a two-sided market structure), or changing/reforming those existing ones (eg. passing regulations treating DER aggregators as if they were generators) - see references in section \ref{sec:intro_part1}.
+}\DIFaddend 
 
-%DIFDELCMD < %%%
-\DIFdel{Our new GNK solution was essentially rooted in bargaining perspective, rewarding participants for the advantage they might have in competition with all others, 
-and it was hoped that an idealised bargaining solution like this would yield the kinds of arrangements that people with divergent interests would freely and naturally negotiate towards.
-In this way, we hoped it would ascribe economic value to electricity resources in the most natural way; however this process ultimately yielded a disappointing result.
-}%DIFDELCMD < 
+\DIFdelbegin \DIFdel{Our new GNK solution was essentially rooted in bargaining perspective, rewarding participants for the advantage they might have in competition with all others, and it was hoped that an idealised bargaining solution like this would yield the kinds of arrangements that people with divergent interests would freely and naturally negotiate towards.
+In this way, we hoped it would ascribe economic value to electricity resources in }\DIFdelend \DIFaddbegin \DIFadd{However there is the potential to approach the problem more holistically, and attempt a more general answer that incorporates all possible factors and electrical system details and constraints, to determine the operating point and transactions between all the parties of the system.
+}
 
-%DIFDELCMD < %%%
+\DIFadd{In this thesis, we considered a background of general approaches to allocation, in Chapter \ref{cha:solutions} we considered VCG, LMP, Shapley Value, Bargaining theory and Envy-freeness rules.
+What is notable about these approaches is that they have varying levels of flexibility in the systems in which they can be made to apply to.
+We considered them as they may be extensible to give different and general answers to account for electricity system considerations that may be relevant in application, and we gave some detail about how they have been proposed as such.
+}
+
+\DIFadd{Each of these approaches have features, quirks and problems, and are situated within a wider discussion and academic context. However we saw one of the more common features between them was the broad notion of marginal differences.
+Most articulated in LMP, the marginalism principle accords participants in proportion to the marginal difference they make to the operating point of the system; conversely in VCG, }\DIFaddend the \DIFdelbegin \DIFdel{most natural way; however this process ultimately yielded a disappointing result}\DIFdelend \DIFaddbegin \DIFadd{principle accords participants according to the difference they make to the operating point of the system, which is also often marginal.
+The Shapley Value principle accords participants in proportion to the difference they make to the operating point of the system in expectation under uncertainty of the contribution of others.
+This marginal difference is defined with reference to what would otherwise happen, most directly associated with the `threat' point in bargaining theory}\DIFaddend .
+
 %DIF <  the minimax nature of the bargaining game was only one of a possible ways of modelling the competition between divergent interests, and the result that was obtained violated the principles of euoluntary exchange anyways.
 %DIF < In principle, the negative utility imputed under the GNK value was seen to come from the way that the game was modeled, in that if everybody is unilatterally able to choose their power, and if power conservation constraints must be obeyed, then it acts a a lever in gargaining others below utility of zero.
 %DIF < This particular dynamic was fundamentally a result of the way that the intereaction between the participants was modelled.
-%DIFDELCMD < 
+\DIFdelbegin %DIFDELCMD < 
 
 %DIFDELCMD < %%%
-\DIFdel{The GNK value extends from the Shapley Value axioms, and as such it inherits the NP-hard computational difficulty associated with the Shapley Value.
-However, through investigation into sampling techniques and in utilising a particular proxy for the minimax-optimisations, we were able to extend the GNK value from being intractable for $\sim 14$ bus nodal networks to being computable for about $80-100$ bus nodal networks, for a desktop computer.
-This was seen as an accomplishment, particularly as if the GNK value were calculated exactly for a 100 sized nodal network it would involve $\sim 2^{100}$ optimisation terms.
+\DIFdel{The GNK value extends from the }\DIFdelend \DIFaddbegin \DIFadd{From these approaches in Chapter \ref{cha:solutions} we can trace an idea that the value of an electrical resource should be -in some way- related to the value difference that its presence could make in the presence of other resources.
+We attempted to distil this notion by extending Nash Bargaining theory with }\DIFaddend Shapley Value axioms \DIFdelbegin \DIFdel{, and as such it inherits the NP-hard computational difficulty associated with the Shapley Value.
+However, through investigation into sampling techniques and in utilising a particular proxy for the minimax-optimisations, we were able to extend }\DIFdelend \DIFaddbegin \DIFadd{to many players, resulting in the development of the GNK value, presented in Chapter \ref{cha:new_solution}.
+}
+
+\DIFadd{The GNK value was developed as an extension of Nash Bargaining solution concept to many players, taking into consideration the leverage in zero-sum bargaining between all possible pairs of coalitions and the difference the inclusion of a specific resource would make in that context.
+In this way the GNK value aggregates all the possible strategic considerations and counter-considerations of marginal differences an the context of ideal competition between all parties.
+The GNK was designed to be extensible to a generalised strategy space, and thus applicable to any context where there is discernible strategies, agents and known valuations over strategic outcomes. 
+In Chapter \ref{cha:new_solution} we introduced }\DIFaddend the GNK value \DIFdelbegin \DIFdel{from being intractable for $\sim 14$ bus nodal networks to being computable for about $80-100$ bus nodal networks , for a desktop computer.
+This was seen as an accomplishment, particularly as if }\DIFdelend \DIFaddbegin \DIFadd{by its setting and axioms, and gave an example application to small electricity networks under DC approximation.
+We compared }\DIFaddend the GNK value \DIFdelbegin \DIFdel{were calculated exactly for a 100 sized nodal network it would involve $\sim 2^{100}$ optimisation terms.
 }%DIFDELCMD < 
 
 %DIFDELCMD < %%%
-\DIFdel{Through the process of considering the different ways that the GNK value could be sampled we developed some of our own complicated techniques which proved to be competitive against existing methods for sampling the Shapley Value (particularly per Table \ref{Table2}).
-In considering the different ways in which stratified sampling could be conducted, we were able to develop a new concentration inequality which was developed specifically for stratified sampling.
-}%DIFDELCMD < 
+\DIFdel{Through the process of considering the different ways that }\DIFdelend \DIFaddbegin \DIFadd{against LMP, VCG and Shapley Value in a small-scale electricity context and witnessed the differences in the outcome between them, which we articulated on a point-by-point basis.
+We identified that one primary obstacle in the application of }\DIFaddend the GNK value \DIFdelbegin \DIFdel{could be sampled we developed some of our own complicated techniques which proved to be competitive against existing methods for sampling the Shapley Value (particularly per Table \ref{Table2}) }\DIFdelend \DIFaddbegin \DIFadd{and Shapley Value to electricity networks was the computational complexity involved in their calculation, which the next Chapter \ref{sec:scaling} was intending to address.
+In Chapter \ref{sec:scaling} we considered two different techniques which could scale the GNK to larger sized networks, particularly using sampling techniques and a proxy inplace of the GNK's inner terms.
+We compared different sampling techniques, and developed our own novel sampling technique for sample-approximating the GNK and Shapley Values called the Stratified Empirical Bernstein Method (SEBM) in Chapter \ref{chap:stratified_sampling_chapter}.
+We also provided a discussion of the merits of the GNK value against ethical criteria identified in our philosophy Chapter \ref{sec:philosophy} against the results witnessed on a larger randomly generated network}\DIFaddend .
+\DIFdelbegin \DIFdel{In considering the different ways in which stratified sampling could be conducted, we were able to develop a new concentration inequality which was developed specifically for stratified sampling}\DIFdelend \DIFaddbegin 
 
-%DIFDELCMD < %%%
+\DIFadd{From our discussion in section \ref{sec:GNK_value_discussion} we considered the central failing of the GNK value, that of not preserving the ideal of `individual rationality', meaning that the GNK value can leave individuals at a loss for their participation.
+This quality was identified as being axiomatic in the derivation of the VCG mechanism, but was not part of the derivation of the GNK value in favour of other characteristics, particularly having continuum with the Nash bargaining solution and the possession of Shapley Value axioms.
+It was hoped that the GNK would be seen to posses individual rationality at scale, but unfortunately this was not witnessed.
+}
+
+\DIFadd{In chapter \ref{sec:philosophy} we began by introducing the philosophy surrounding distributive justice in which we acknowledged the vagaries surrounding ethics itself, and the inherent ethical nature of the research question: `how }\textit{\DIFadd{should}} \DIFadd{electricity be valued and traded?'}\DIFaddend .
+\DIFaddbegin \DIFadd{We considered different ethical notions and ideals that are discussed in literature in relation to electricity systems, including: Equality, Equity, Efficiency, Freedom, Proportionality, the minimisation of Envy, and the context of environmentalism.
+Ultimately we feel that the GNK value did not satisfy many of those ideals, and our research serves as a negative result of a particular kind of approach to this hard social problem.
+It is possible to contend that if we had started with a better footing defined with more concrete aim and goals we would have arrived at a more satisfying conclusion.
+However the proper question of how electricity should be traded has inherent vagueness, and there are many possible ways to miss a vague target:
+}\DIFaddend 
+
 %DIF < Ultimately, we don't feel that we succeeded in bringing a new and satisfying solution for electricity systems to light, primarily as the GNK's violation of individual rationality (ie assigning negative utilities) was seen to be a significant ethical issue.
-%DIFDELCMD < 
+\DIFaddbegin \begin{displayquote}
+\DIFadd{``Far better an approximate answer to the }\textit{\DIFadd{right}} \DIFadd{question, which is often vague, than an }\textit{\DIFadd{exact}} \DIFadd{answer to the wrong question, which can always be made precise.'' \mbox{%DIFAUXCMD
+\cite{10.2307/2237638}
+}\hspace{0pt}%DIFAUXCMD
+}\end{displayquote}
+\DIFaddend 
 
-%DIFDELCMD < %%%
 %DIF < Additionally it is good to note that the computational difficultyies in the shapley value, seem to make it quite difficult to apply.
 %DIF < In retrospect, the confluence between VCG and LMP that was witnessed lends credence to the suitability of the LMP solutions.
-%DIFDELCMD < 
+\DIFaddbegin \DIFadd{In considering our approach at a broader level, it is interesting how perfect and idealised competition may or may not coincide with what is equal and ethical.
+The question of when and where these coincide, and particularly if they might coincide in the context of electricity networks, was a primary motivation of our research.
+}\DIFaddend 
 
-%DIFDELCMD < %%%
-\section{\DIFdel{Future work}}
+\DIFdelbegin \section{\DIFdel{Future work}}
 %DIFAUXCMD
 \addtocounter{section}{-1}%DIFAUXCMD
 %DIFDELCMD < \label{sec:future}
-%DIFDELCMD < 
-
 %DIFDELCMD < %%%
-\DIFdel{The primary issue identified with the application GNK value is that it does not respect individual rationality property, and thus it potentially allocates participants with negative utility. There are a range of potential avenues of investigation to address this shortcoming, as briefly considered in section \ref{sec:wider_equality_gnk}.
-From experimentation, the violation seems primarily to extend from the GNK's being an average over payoff advantages rather than payoffs in the context of the power conservation constraint.
-And thus there are two possible avenues of averting this flaw:
-}%DIFDELCMD < 
+\DIFdelend \DIFaddbegin \DIFadd{The GNK value is not only an extension of Nash bargaining solution concepts, developed and extended in game-theory literature from von Neumann to Neyman \& Kohlberg, but also extends this work to the space of generalised games, such as may exist in the context of applied electricity networks.
+In this way we make a contribution to game-theory generally.
+}\DIFaddend 
 
-%DIFDELCMD < \begin{itemize}
-\begin{itemize}%DIFAUXCMD
-%DIFDELCMD < \item	%%%
+\DIFdelbegin \DIFdel{The primary issue identified with the application GNK valueis that it does not respect individual rationalityproperty, and thus it potentially allocates participants with negative utility. There are a range of potential avenues of investigation to address this shortcoming, as briefly considered in section \ref{sec:wider_equality_gnk}.
+From experimentation, the violation seems primarily to extend from the GNK 's being an average over payoff advantages rather than payoffs in the context of }\DIFdelend \DIFaddbegin \DIFadd{Furthermore, the statistics we develop in Chapter \ref{chap:stratified_sampling_chapter} genuinely extends knowledge about (and the use of) empirical concentration inequalities, which are quite recently discussed and applied in various spheres. However it als extends it from the realm of simple random sampling to that of stratified random sampling and this new domain involves more complexity and structure.
+In this domain the Stratified Empirical Bernstein Bound (SEBB) is unique, it is an empirically guided concentration inequality tailored to the historic and familiar Stratified Sampling domain.
+}
+
+\DIFadd{Through our work we have provided a unique interpretation of the Shapley Value axioms in the electricity domain, and }\DIFaddend the \DIFdelbegin \DIFdel{power conservation constraint.
+And thus there are two possible avenues of averting this flaw:
+}\DIFdelend \DIFaddbegin \DIFadd{techniques employed in Chapter \ref{sec:scaling} demonstrate the potential of computing with these axioms to larger networks. As already stated, we view it as an accomplishment that it is possible to reasonably approximate the GNK value for 100-bus nodal networks,
+whereas if it were to be calculated exactly would involve a prohibitive $\sim 2^{100}$ optimisation terms.
+}\DIFaddend 
+
+\DIFaddbegin \DIFadd{In concluding this research there are still outstanding questions which could prove to be fruitful future research directions, these include:
+}\DIFaddend \begin{itemize}
+\DIFdelbegin %DIFDELCMD < \item	%%%
 \item%DIFAUXCMD
 \DIFdel{It is possible to consider different structures over non-cooperative games that do not consider payoff advantages, such as von Neumann and Morgenstern's solution (per equation \ref{knvalue3}).
-}%DIFDELCMD < \item	%%%
-\item%DIFAUXCMD
-\DIFdel{And it is possible to reformulate the action space of individuals to remove the relevance of the hard power conservation constraint on action spaces, perhaps by allowing player's action space to be the selection of voltage level at their location, rather than directly their power input/output. Additionally it might also be possible to implement blackout costs to participants to curtail the possibility of unrealistic bargaining manoeuvres in the GNK value logic.
-}
-\end{itemize}%DIFAUXCMD
-%DIFDELCMD < \end{itemize}
+}\DIFdelend \item	\DIFdelbegin \DIFdel{And it is possible to reformulate the action space of individuals to remove the relevance of }\DIFdelend \DIFaddbegin \DIFadd{Considering game-theoretic measures (VCG, GNK, Shapley Value, Bargaining, etc.) to more directly address real-world situations such as those alluded to in Chapter 1, such as involving the coordination of EV in networks with stochastic demand and network and frequency constraints, and the evaluation of them in such contexts.
+}\item	\DIFadd{Further analysis could be conducted analysing how all the different mechanisms for financial valuation of electricity resources would potentially yield incentives to change the structure of the electricity network itself (and hence the value of the resources therein) - particularly if such measures that only compensate resources that can impact the network operating point (ie. LMP and VCG) would create network fragility, whereas those which reward resources that do not, might further lead to network changes overly reinforce robustness.
+}\item	\DIFadd{The further examination of the relationship between GNK and M-GNK values, and/or the substitution of other measures of `threat' between parties on an electricity network context. Particularly to see if such measures can be established to restore the `individual rationality' property.
+}\item	\DIFadd{The evaluation and extension of measures such as the GNK value to situations involving strategising agents. Particularly modifications which would give `incentive compatability' property, such as surrounding the existing extensions and discussion of \mbox{%DIFAUXCMD
+\cite{myerson1,Salamanca2019}}\hspace{0pt}%DIFAUXCMD
+.
+}\item	\DIFadd{The extension of computational techniques to }\DIFaddend the \DIFdelbegin \DIFdel{hard power conservation constraint on action spaces, perhaps by allowing player's action space to be the selection of voltage level at their location, rather than directly their power input}\DIFdelend \DIFaddbegin \DIFadd{GNK}\DIFaddend /\DIFdelbegin \DIFdel{output.
+Additionally it might also be possible to implement blackout costs to participants to curtail the possibility of unrealistic bargaining manoeuvres in the GNK value logic.
+}%DIFDELCMD < \end{itemize}
 %DIFDELCMD < 
 
 %DIFDELCMD < %%%
 \DIFdel{Even though the GNK value (with its proxy) is computable for networks of about $100$ nodes on an ordinary computer, different techniques such as clustering (as mentioned in section \ref{sec:GNK_extensions_discussion}) may enable calculation for greater sized networks.
-Additionally it might be possible to convert the GNK value to a non-atomic form in a similar way to the non-atomic Shapley Value.
-The non-atomic Shapley Value considers each participant as marginal contributor, and instead the summations of marginal differences is instead rendered as an integral, and thus a non-atomic Shapley/GNK value could potentially be more tractable for even larger networks.
-Additionally it might be possible to investigate incentive compatable corrections to these GNK/Shapley Value solutions in the context of electricity networks (such as approaches presented by \mbox{%DIFAUXCMD
+Additionally it might be possible to convert the GNK value to a non-atomic form in a similar way to the }\DIFdelend \DIFaddbegin \DIFadd{Shapley Value measures to make them computable to even larger electricity networks, Some possible avenues of investigation include employing further approximations such as player clustering (such as implemented by \mbox{%DIFAUXCMD
+\cite{DBLP:journals/corr/abs-1903-10965}}\hspace{0pt}%DIFAUXCMD
+), or transforming the problem into a }\DIFaddend non-atomic \DIFdelbegin \DIFdel{Shapley Value.
+The }\DIFdelend \DIFaddbegin \DIFadd{form, similar to }\DIFaddend non-atomic Shapley Value\DIFdelbegin \DIFdel{considers each participant as marginal contributor, and instead the summations of marginal differences is instead rendered as an integral, and thus a non-atomic Shapley/GNK value could potentially be more tractable for even larger networks.
+Additionally it might be possible to investigate incentive compatable corrections to these GNK/Shapley Valuesolutions in the context of electricity networks (such as approaches presented by \mbox{%DIFAUXCMD
 \cite{myerson1,Salamanca2019}}\hspace{0pt}%DIFAUXCMD
 ).
 Or alternatively investigate NTU corrections to these methods, which might be made to yeild more egalitarian outcomes by incorporating a decreasing marginal utility for money itself (NTU solutions are explored in \mbox{%DIFAUXCMD
 \cite{value1}}\hspace{0pt}%DIFAUXCMD
-).
-}%DIFDELCMD < 
+) }\DIFdelend .
+\DIFdelbegin %DIFDELCMD < 
 
 %DIFDELCMD < %%%
-\DIFdel{However, aside from GNK/Shapley value improvements, there are possible avenues of investigation that might improve our SEBM sampling method:
+\DIFdel{However, aside from GNK}\DIFdelend \DIFaddbegin \item	\DIFadd{Improvement and experimentation on the concentration inequalities for stratified random sampling methodology. The bounds on the moment generating functions that we developed in Section~\ref{section:SEBB} use various loosening approximations, and hence stronger and}\DIFaddend /\DIFdelbegin \DIFdel{Shapley value improvements, there are possible avenues of investigation that might improve our SEBM sampling method:
 }%DIFDELCMD < \begin{itemize}
-\begin{itemize}%DIFAUXCMD
-%DIFDELCMD < \item	%%%
-\item%DIFAUXCMD
-\DIFdel{the investigation of ways to minimise the computational overhead of the method.
-}%DIFDELCMD < \item	%%%
-\item%DIFAUXCMD
-\DIFdel{it may be possible to modify the method to take advantage of join order process in Shapley Value sampling.
-}%DIFDELCMD < \item	%%%
-\item%DIFAUXCMD
-\DIFdel{it might be possible to further tighten the concentration inequality (SEBB) in the sampling process.
-}
-\end{itemize}%DIFAUXCMD
-%DIFDELCMD < \end{itemize}
-%DIFDELCMD < 
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{or more representative bounds could be developed at the cost of greater mathematical complexity.
+Alternatively, an approach utilising entropic \mbox{%DIFAUXCMD
+\citep{Boucheron_concentrationinequalities} }\hspace{0pt}%DIFAUXCMD
+or Efron-Stein inequalities \mbox{%DIFAUXCMD
+\citep{efron1981} }\hspace{0pt}%DIFAUXCMD
+could yield different and potentially tighter results.
+}\DIFaddend \item	\DIFdelbegin \DIFdel{the investigation of ways to minimise the computational overhead of the method.
+}\DIFdelend \DIFaddbegin \DIFadd{The Stratified Empirical Bernstein Method (SEBM) has a significant computation overhead - as noted in section \ref{subsection:discussion_shapley} which may be minimised by simplifications to the the algorithm and/or the mathematics to make it more usefull.
+}\DIFaddend \item	\DIFdelbegin \DIFdel{it may be possible to modify the method to take advantage of join order process in Shapley Valuesampling.
+}\DIFdelend \DIFaddbegin \DIFadd{In section \ref{subsection:selection_of_sampling_method} the }\textsc{\DIFadd{Join}} \DIFadd{method outperformed because of the advantage in leveraging join-orders to minimise the number of optimisations that needed to be performed for a datapoint in the stratified sampling scheme, potentially SEBM could be modified to take advantage of this aswell.
+}\DIFaddend \item	\DIFdelbegin \DIFdel{it might be possible to further tighten the concentration inequality (SEBB) in the sampling process. }\DIFdelend \DIFaddbegin \DIFadd{Extension of the Stratified Empirical Bernstein Bound (SEBB) to even more practical situations. Particularly the concentration inequality was derived on the assumption of given and known strata and strata sizes, which does not necessarily correspond to situations encountered by practising statisticians, where the sizes of strata may in some cases only estimated and/or where the strata divisions are flexible and/or constructed from preliminary surveys.
+}\DIFaddend \end{itemize}
+\DIFdelbegin %DIFDELCMD < 
 
 %DIFDELCMD < %%%
 \DIFdel{In the derivation of the SEBB we primarily utilised Chernoff bounds, however it is possible that stronger bounds can potentially be derived.
@@ -130,7 +215,6 @@ Particularly optimal uncertainty quantification (OUQ) can result in perfectly ti
 %DIFDELCMD < %%%
 %DIF <  Full exploration of the potential applications are beyond the scope of this document.
 %DIF <  However, at present, we are pleased to present our analytic concentration inequality (Equation \ref{big_equation}) as an immediately computable expression and practical method for choosing samples from strata.
-%DIFDELCMD < 
-
-%DIFDELCMD <  %%%
 \DIFdelend 
+
+
